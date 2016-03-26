@@ -1,0 +1,111 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'install' ]
+2 info using npm@2.14.20
+3 info using node@v4.4.0
+4 verbose readDependencies loading dependencies from /home/brandon/development/Minion_client/package.json
+5 verbose install where, deps [ '/home/brandon/development/Minion_client',
+5 verbose install   [ 'bower',
+5 verbose install     'http-server',
+5 verbose install     'jasmine-core',
+5 verbose install     'karma',
+5 verbose install     'karma-chrome-launcher',
+5 verbose install     'karma-firefox-launcher',
+5 verbose install     'karma-jasmine',
+5 verbose install     'karma-junit-reporter',
+5 verbose install     'protractor',
+5 verbose install     'shelljs' ] ]
+6 verbose install where, peers [ '/home/brandon/development/Minion_client', [] ]
+7 verbose installManyTop reading for lifecycle /home/brandon/development/Minion_client/package.json
+8 info preinstall angular-seed@0.0.0
+9 verbose installManyTop reading scoped package data from /home/brandon/development/Minion_client/node_modules/bower/package.json
+10 verbose installManyTop reading scoped package data from /home/brandon/development/Minion_client/node_modules/http-server/package.json
+11 verbose installManyTop reading scoped package data from /home/brandon/development/Minion_client/node_modules/jasmine-core/package.json
+12 verbose installManyTop reading scoped package data from /home/brandon/development/Minion_client/node_modules/karma/package.json
+13 verbose installManyTop reading scoped package data from /home/brandon/development/Minion_client/node_modules/karma-chrome-launcher/package.json
+14 verbose installManyTop reading scoped package data from /home/brandon/development/Minion_client/node_modules/karma-firefox-launcher/package.json
+15 verbose installManyTop reading scoped package data from /home/brandon/development/Minion_client/node_modules/karma-jasmine/package.json
+16 verbose installManyTop reading scoped package data from /home/brandon/development/Minion_client/node_modules/karma-junit-reporter/package.json
+17 verbose installManyTop reading scoped package data from /home/brandon/development/Minion_client/node_modules/protractor/package.json
+18 verbose installManyTop reading scoped package data from /home/brandon/development/Minion_client/node_modules/shelljs/package.json
+19 info package.json http-server@0.6.1 No license field.
+20 info package.json shelljs@0.2.6 No license field.
+21 verbose readDependencies loading dependencies from /home/brandon/development/Minion_client/package.json
+22 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/bower/package.json
+23 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/http-server/package.json
+24 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/jasmine-core/package.json
+25 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/karma/package.json
+26 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/karma-chrome-launcher/package.json
+27 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/karma-firefox-launcher/package.json
+28 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/karma-jasmine/package.json
+29 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/karma-junit-reporter/package.json
+30 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/protractor/package.json
+31 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/shelljs/package.json
+32 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/.bin/bower/package.json
+33 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/.bin/http-server/package.json
+34 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/.bin/karma/package.json
+35 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/.bin/protractor/package.json
+36 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/.bin/shjs/package.json
+37 verbose targetResolver reading package data from /home/brandon/development/Minion_client/node_modules/.bin/webdriver-manager/package.json
+38 verbose already installed skipping karma-chrome-launcher@^0.1.12 /home/brandon/development/Minion_client
+39 verbose already installed skipping karma-firefox-launcher@^0.1.6 /home/brandon/development/Minion_client
+40 verbose already installed skipping karma-jasmine@^0.3.5 /home/brandon/development/Minion_client
+41 verbose already installed skipping karma-junit-reporter@^0.2.2 /home/brandon/development/Minion_client
+42 verbose already installed skipping protractor@^2.1.0 /home/brandon/development/Minion_client
+43 verbose already installed skipping shelljs@^0.2.6 /home/brandon/development/Minion_client
+44 verbose already installed skipping bower@^1.3.1 /home/brandon/development/Minion_client
+45 verbose already installed skipping http-server@^0.6.1 /home/brandon/development/Minion_client
+46 verbose already installed skipping jasmine-core@^2.3.4 /home/brandon/development/Minion_client
+47 verbose already installed skipping karma@~0.12 /home/brandon/development/Minion_client
+48 silly install resolved []
+49 info build /home/brandon/development/Minion_client
+50 info linkStuff angular-seed@0.0.0
+51 silly linkStuff angular-seed@0.0.0 has /home/brandon/development as its parent node_modules
+52 verbose linkBins angular-seed@0.0.0
+53 verbose linkMans angular-seed@0.0.0
+54 verbose rebuildBundles angular-seed@0.0.0
+55 verbose rebuildBundles [ '.bin',
+55 verbose rebuildBundles   'bower',
+55 verbose rebuildBundles   'http-server',
+55 verbose rebuildBundles   'jasmine-core',
+55 verbose rebuildBundles   'karma',
+55 verbose rebuildBundles   'karma-chrome-launcher',
+55 verbose rebuildBundles   'karma-firefox-launcher',
+55 verbose rebuildBundles   'karma-jasmine',
+55 verbose rebuildBundles   'karma-junit-reporter',
+55 verbose rebuildBundles   'protractor',
+55 verbose rebuildBundles   'shelljs' ]
+56 info install angular-seed@0.0.0
+57 info postinstall angular-seed@0.0.0
+58 verbose unsafe-perm in lifecycle true
+59 info angular-seed@0.0.0 Failed to exec postinstall script
+60 verbose stack Error: angular-seed@0.0.0 postinstall: `bower install`
+60 verbose stack Exit status 126
+60 verbose stack     at EventEmitter.<anonymous> (/usr/lib/node_modules/npm/lib/utils/lifecycle.js:214:16)
+60 verbose stack     at emitTwo (events.js:87:13)
+60 verbose stack     at EventEmitter.emit (events.js:172:7)
+60 verbose stack     at ChildProcess.<anonymous> (/usr/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+60 verbose stack     at emitTwo (events.js:87:13)
+60 verbose stack     at ChildProcess.emit (events.js:172:7)
+60 verbose stack     at maybeClose (internal/child_process.js:827:16)
+60 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+61 verbose pkgid angular-seed@0.0.0
+62 verbose cwd /home/brandon/development/Minion_client
+63 error Linux 3.16.0-67-generic
+64 error argv "/usr/bin/nodejs" "/usr/bin/npm" "install"
+65 error node v4.4.0
+66 error npm  v2.14.20
+67 error code ELIFECYCLE
+68 error angular-seed@0.0.0 postinstall: `bower install`
+68 error Exit status 126
+69 error Failed at the angular-seed@0.0.0 postinstall script 'bower install'.
+69 error This is most likely a problem with the angular-seed package,
+69 error not with npm itself.
+69 error Tell the author that this fails on your system:
+69 error     bower install
+69 error You can get information on how to open an issue for this project with:
+69 error     npm bugs angular-seed
+69 error Or if that isn't available, you can get their info via:
+69 error
+69 error     npm owner ls angular-seed
+69 error There is likely additional logging output above.
+70 verbose exit [ 1, true ]

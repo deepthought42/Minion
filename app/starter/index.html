@@ -1,0 +1,10 @@
+<p>This is the partial for view 1.</p>
+<form ng-submit="startMappingProcess(workAllocation)"
+      enctype="multipart/form-data"
+      ng-init="workAllocation = {}"
+      novalidate>
+  <input type="text"
+         ng-model="workAllocation.url"
+         placeholder="URL (eg. http://localhost:8080)" />
+  <button type="submit">Start Crawl</button>
+</form>

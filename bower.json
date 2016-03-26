@@ -1,0 +1,21 @@
+{
+  "name": "Minion",
+  "description": "A starter project for AngularJS",
+  "version": "0.0.1",
+  "homepage": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-ui-router": "~0.2.15",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "html5-boilerplate": "~5.2.0",
+    "ngstorage": "0.3.4",
+    "angular-resource": "latest",
+    "angular-nvd3": "latest"
+  },
+  "resolutions": {
+    "angular": "^1.4.9"
+  }
+}
