@@ -13,7 +13,9 @@
     "html5-boilerplate": "~5.2.0",
     "ngstorage": "0.3.4",
     "angular-resource": "latest",
-    "angular-nvd3": "latest"
+    "angular-nvd3": "latest",
+    "angular-sockjs": "latest",
+    "stomp-websocket": "2.3.4"
   },
   "resolutions": {
     "angular": "^1.4.9"
