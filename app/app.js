@@ -7,7 +7,6 @@ angular.module('Minion', [
   'Minion.dashboard',
   'Minion.tester',
   'Minion.d3visualization',
-  'bd.sockjs',
   'Minion.version'
 ]).
 config(['$urlRouterProvider', function($urlRouterProvider) {

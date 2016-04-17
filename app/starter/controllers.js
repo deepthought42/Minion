@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService'])
+angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', 'Minion.PathRealtimeService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('starter', {
@@ -10,9 +10,23 @@ angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService'])
   });
 }])
 
-.controller('StarterIndexCtrl', ['$scope', 'WorkAllocation', function($scope, WorkAllocation) {
-  $scope.startMappingProcess = function(workAllocation){
-    console.log("Starting mapping process : " + workAllocation.url );
-    WorkAllocation.query({url: $scope.workAllocation.url});
+.controller('StarterIndexCtrl', ['$scope', 'WorkAllocation', 'PathRealtimeService',
+  function($scope, WorkAllocation, PathRealtimeService) {
+    this._init = function(){
+      $scope.paths = [];
+    }
+
+    $scope.startMappingProcess = function(workAllocation){
+      console.log("Starting mapping process : " + workAllocation.url );
+      WorkAllocation.query({url: $scope.workAllocation.url});
+
+      PathRealtimeService.connect("/streamPathExperience", function(message) {
+        console.log("Recieved message from server " + message + " :: " + Object.keys(message));
+        $scope.paths.push(JSON.parse(message.data));
+        $scope.$apply();
+      });
+    }
+
+    this._init();
   }
-}]);
+]);
