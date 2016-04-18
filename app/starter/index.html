@@ -10,5 +10,24 @@
 </form>
 
 <div>
-  {{paths}}
+  <div ng-repeat="path in paths">
+    <div style="background:green" ng-if="path.useful">
+      Success
+      <div ng-repeat="node in path.vertexPath">
+        <i class="fa fa-mouse-pointer" ng-show="node.name=='click'" ></i>
+
+        <i class="fa fa-globe" ng-show="node.url" ></i>
+        N:  {{node.name || node.xpath || node.url}}
+      </div>
+    </div>
+    <div style="background:red" ng-if="!path.useful">
+      Failure
+      <div ng-repeat="node in path.vertexPath">
+        <i class="fa fa-mouse-pointer" ng-show="node.name=='click'" ></i>
+
+        <i class="fa fa-globe" ng-show="node.url" ></i>
+        N:  {{node.name || node.xpath || node.url}}
+      </div>
+    </div>
+  </div>
 </div>
