@@ -11,23 +11,41 @@
 
 <div>
   <div ng-repeat="path in paths">
-    <div style="background:green" ng-if="path.useful">
-      Success
+    <div style="{{path.useful ? 'background:green' : 'background:red'}}">
+      <div ng-show="path.useful">Success</div>
+      <div ng-show="!path.useful">Failure</div>
       <div ng-repeat="node in path.vertexPath">
-        <i class="fa fa-mouse-pointer" ng-show="node.name=='click'" ></i>
+        <i class="fa fa-globe" ng-show="node.url" uib-tooltip="{{node.url}}"></i>
+        <div>
+          <i class="fa fa-list-alt" ng-show="node.xpath" uib-tooltip="node.xpath"></i>
+          <i class="fa fa-mouse-pointer" ng-show="node.xpath" uib-tooltip="click"></i>
+        </div>
+      </div>
 
-        <i class="fa fa-globe" ng-show="node.url" ></i>
-        N:  {{node.name || node.xpath || node.url}}
+      Correct?
+      <i class="fa fa-check" ></i>
+      <i class="fa fa-circle" ></i>
+
+    </div>
+    <div >
+      ELEMENT
+      <div>
+        xpath : {{path.path[1].xpath}}
+      </div>
+      css :
+      <div ng-repeat="(key, value) in path.path[1].cssProperties">
+          {{key}} :           {{value}}
+      </div>
+      <div>
+        attributes
+        <div ng-repeat="(key, value) in path.path[1].attributes">
+          {{key}} :           {{value}}
+        </div>
       </div>
     </div>
-    <div style="background:red" ng-if="!path.useful">
-      Failure
-      <div ng-repeat="node in path.vertexPath">
-        <i class="fa fa-mouse-pointer" ng-show="node.name=='click'" ></i>
-
-        <i class="fa fa-globe" ng-show="node.url" ></i>
-        N:  {{node.name || node.xpath || node.url}}
-      </div>
+    <div >
+      URL : {{path.path[0].url}}
+      <img ng-src="path[0].screenshot"/>
     </div>
   </div>
 </div>
