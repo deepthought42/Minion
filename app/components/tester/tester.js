@@ -5,7 +5,7 @@ angular.module('Minion.tester', ['Minion.TesterService'])
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('tester', {
     url: '/tester',
-    templateUrl: 'components/tester/index.html',
+    templateUrl: 'tester/index.html',
     controller: 'TesterIndexCtrl'
   });
 }])

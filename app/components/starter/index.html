@@ -16,9 +16,14 @@
       <div ng-show="!path.useful">Failure</div>
       <div ng-repeat="node in path.vertexPath">
         <i class="fa fa-globe" ng-show="node.url" uib-tooltip="{{node.url}}"></i>
-        <div>
-          <i class="fa fa-list-alt" ng-show="node.xpath" uib-tooltip="node.xpath"></i>
-          <i class="fa fa-mouse-pointer" ng-show="node.xpath" uib-tooltip="click"></i>
+
+        <div class="elementActionContainer col-sm-1" ng-show="node.xpath">
+          <div class="elementBubble col-sm-8">
+            <i class="fa fa-list-alt" uib-tooltip="node.xpath"></i>
+          </div>
+          <div class="actionBubble  pull-right">
+            <i class="fa fa-mouse-pointer" uib-tooltip="click"></i>
+          </div>
         </div>
       </div>
 

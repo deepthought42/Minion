@@ -13,6 +13,9 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="styles/errorPanel.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN" crossorigin="anonymous">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -48,17 +51,20 @@
   <script src="app.js"></script>
 
   <!-- DIRECTIVES -->
-  <script src="directives/d3visualization.js"></script>
+  <script src="components/directives/d3visualization.js"></script>
 
   <!-- SERVICES -->
-  <script src="services/workAllocationService.js"></script>
-  <script src="services/PastPathService.js"></script>
-  <script src="services/PathRealtimeService.js"></script>
-  <script src="services/TesterService.js"></script>
+  <script src="components/services/workAllocationService.js"></script>
+  <script src="components/services/PastPathService.js"></script>
+  <script src="components/services/PathRealtimeService.js"></script>
+  <script src="components/services/TesterService.js"></script>
 
-  <script src="dashboard/dashboard.js"></script>
-  <script src="tester/tester.js"></script>
-  <script src="starter/controllers.js"></script>
+  <!-- TEST SERVICES -->
+  <script src="test/TestPathRealtimeService.js"></script>
+
+  <script src="components/dashboard/dashboard.js"></script>
+  <script src="components/tester/tester.js"></script>
+  <script src="components/starter/controllers.js"></script>
 
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
