@@ -5,6 +5,7 @@
 }
 
 .elementBubble {
+  position : relative;
   border-radius : 100em;
   border-width : 10px;
   border-color : gray;
@@ -13,14 +14,26 @@
   height: 4em;
 }
 
+.elementBubble .icon {
+  position: absolute;
+  left : .2em;
+  top : .2em;
+}
+
 .actionBubble {
   position: absolute;
   top: -1.2em;
-  right : 1.7em;
+  right : 1.1em;
   border-radius : 100em;
   border-width : 7px;
   border-color : gray;
   border-style : solid;
   width: 2.5em;
   height: 2.5em;
+}
+
+.actionBubble .icon {
+  position : absolute;
+  top: .3em;
+  left: .5em;
 }
