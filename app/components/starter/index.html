@@ -1,4 +1,3 @@
-<p>This is the partial for view 1.</p>
 <form ng-submit="startMappingProcess(workAllocation)"
       enctype="multipart/form-data"
       ng-init="workAllocation = {}"
@@ -10,15 +9,16 @@
 </form>
 
 <div>
-  <div ng-repeat="path in paths">
-    <div style="{{path.useful ? 'background:green' : 'background:red'}}">
+  <div ng-repeat="path in paths" style="border:3px gray solid">
+    <div class="col-sm-12" style="background-color:white;">
       <div ng-show="path.useful">Success</div>
       <div ng-show="!path.useful">Failure</div>
-      <div ng-repeat="node in path.vertexPath">
-        <i class="fa fa-globe" ng-show="node.url" uib-tooltip="{{node.url}}"></i>
 
-        <div class="elementActionContainer col-sm-1" ng-show="node.xpath">
-          <div class="elementBubble col-sm-8">
+      <div ng-repeat="node in path.vertexPath" class="col-sm-1" >
+        <i class="fa fa-arrow-right pull-left"></i>
+        <i class="fa fa-wpforms fa-3x col-sm-11" ng-show="node.url" uib-tooltip="{{node.url}}"></i>
+        <div class="col-sm-11" ng-show="node.xpath">
+          <div class="elementBubble">
             <i class="fa fa-list-alt fa-2x icon" uib-tooltip="node.xpath"></i>
           </div>
           <div class="actionBubble pull-right">
@@ -27,30 +27,34 @@
         </div>
       </div>
 
-      Correct?
-      <i class="fa fa-check" ></i>
-      <i class="fa fa-circle" ></i>
-
+      <div class="pull-right col-sm-3">
+        <i class="fa fa-times fa-4x col-sm-4" style="{{!path.useful ? 'color:red' : 'color:#bfbfbf'}}"></i>
+        <i class="fa fa-check fa-4x col-sm-4" style="{{path.useful ? 'color:green' : 'color:#bfbfbf'}}"></i>
+        <i class="fa fa-angle-down fa-4x col-sm-4"></i>
+      </div>
     </div>
-    <div >
-      ELEMENT
+
+    <div ng-show="false">
       <div>
-        xpath : {{path.path[1].xpath}}
-      </div>
-      css :
-      <div ng-repeat="(key, value) in path.path[1].cssProperties">
-          {{key}} :           {{value}}
-      </div>
-      <div>
-        attributes
-        <div ng-repeat="(key, value) in path.path[1].attributes">
-          {{key}} :           {{value}}
+        ELEMENT
+        <div>
+          xpath : {{path.path[1].xpath}}
+        </div>
+        css :
+        <div ng-repeat="(key, value) in path.path[1].cssProperties">
+            {{key}} :           {{value}}
+        </div>
+        <div>
+          attributes
+          <div ng-repeat="(key, value) in path.path[1].attributes">
+            {{key}} :           {{value}}
+          </div>
         </div>
       </div>
-    </div>
-    <div >
-      URL : {{path.path[0].url}}
-      <img ng-src="path[0].screenshot"/>
+      <div >
+        URL : {{path.path[0].url}}
+        <img ng-src="path[0].screenshot"/>
+      </div>
     </div>
   </div>
 </div>

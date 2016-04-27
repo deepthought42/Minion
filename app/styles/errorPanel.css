@@ -1,32 +1,26 @@
-.elementActionContainer {
-  display: inline;
-  position : relative;
-
-}
-
 .elementBubble {
-  position : relative;
+  position : absolute;
   border-radius : 100em;
   border-width : 10px;
-  border-color : gray;
+  border-color : #bfbfbf;
   border-style : solid;
-  width: .5em;
-  height: 4em;
+  width: 4.5em;
+  height: 4.5em;
 }
 
 .elementBubble .icon {
   position: absolute;
-  left : .2em;
-  top : .2em;
+  left : .3em;
+  top : .3em;
 }
 
 .actionBubble {
   position: absolute;
-  top: -1.2em;
-  right : 1.1em;
+  top: -1.3em;
+  left : 4em;
   border-radius : 100em;
   border-width : 7px;
-  border-color : gray;
+  border-color : #bfbfbf;
   border-style : solid;
   width: 2.5em;
   height: 2.5em;
