@@ -6,11 +6,13 @@ angular.module('Minion', [
   'Minion.starter',
   'Minion.dashboard',
   'Minion.tester',
+  'Minion.main',
+  'Minion.auth',
   'Minion.d3visualization',
   'stormpath',
   'stormpath.templates',
   'Minion.version'
 ]).
 config(['$urlRouterProvider', function($urlRouterProvider) {
-  $urlRouterProvider.otherwise('/starter');
+  $urlRouterProvider.otherwise('/');
 }]);

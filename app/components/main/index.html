@@ -1,0 +1,14 @@
+<div>
+  <ul class="menu">
+    <li><a href="#/starter">Starter</a></li>
+    <li><a href="#/dashboard">Dashboard</a></li>
+    <li><a href="#/tester">Tester</a></li>
+  </ul>
+  <div class="pull-right">
+    <i class="fa fa-user fa-2x"></i>
+    <i class="fa fa-square fa-2x"></i>
+    <a ui-sref="main.starter" sp-logout if-user>Logout</a>
+    <a ui-sref="main.login" if-not-user>Login</a>
+  </div>
+</div>
+<div ui-view></div>

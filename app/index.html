@@ -20,17 +20,7 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/starter">Starter</a></li>
-    <li><a href="#/dashboard">Dashboard</a></li>
-    <li><a href="#/tester">Tester</a></li>
-  </ul>
-  <div class="pull-right">
-    <i class="fa fa-user fa-2x"></i>
-    <i class="fa fa-square fa-2x"></i>
-    <a ui-sref="starter" sp-logout if-user>Logout</a>
-    <a ui-sref="login" if-not-user>Login</a>
-  </div>
+
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -49,6 +39,8 @@
   <script src="bower_components/stomp-websocket/lib/stomp.min.js" type="text/javascript"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="bower_components/stormpath-sdk-angularjs/dist/stormpath-sdk-angularjs.min.js"></script>
+  <script src="bower_components/stormpath-sdk-angularjs/dist/stormpath-sdk-angularjs.tpls.min.js"></script>
 
   <script src="app.js"></script>
 
@@ -67,13 +59,14 @@
   <script src="components/dashboard/dashboard.js"></script>
   <script src="components/tester/tester.js"></script>
   <script src="components/starter/controllers.js"></script>
+  <script src="components/main/controller.js"></script>
+  <script src="components/auth/loginController.js"></script>
 
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
 
   <script src="serviceConfig.js"></script>
-  <script src="stormpath-sdk-angularjs.min.js"></script>
-  <script src="stormpath-sdk-angularjs.tpls.min.js"></script>
+
 </body>
 </html>

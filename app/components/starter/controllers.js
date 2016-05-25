@@ -3,7 +3,7 @@
 angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', 'Minion.PathRealtimeService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('starter', {
+  $stateProvider.state('main.starter', {
     url: "/starter",
     templateUrl: 'components/starter/index.html',
     controller: 'StarterIndexCtrl',
