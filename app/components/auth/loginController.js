@@ -10,7 +10,7 @@ angular.module('Minion.auth', ['ui.router'])
   });
 }])
 
-.controller('LoginCtrl', function ($scope) {
+.controller('LoginCtrl', function ($scope, $auth) {
   $scope.errorMessage = null;
   $scope.formData = {
     username: '',         // Expose to user as email/username field
@@ -22,7 +22,7 @@ angular.module('Minion.auth', ['ui.router'])
     $auth.authenticate(formData)
      .then(function(){
        console.log('login success');
-       $state.go('home');
+       $state.go('main');
      })
      .catch(function(err){
        $scope.errorMessage = err.message;

@@ -13,6 +13,7 @@ angular.module('Minion', [
   'stormpath.templates',
   'Minion.version'
 ]).
-config(['$urlRouterProvider', function($urlRouterProvider) {
+config(['$urlRouterProvider', 'STORMPATH_CONFIG', function($urlRouterProvider, STORMPATH_CONFIG) {
+  STORMPATH_CONFIG.ENDPOINT_PREFIX = 'http://localhost:8080';
   $urlRouterProvider.otherwise('/');
 }]);

@@ -6,7 +6,7 @@
     </div>
   </div>
   <div>
-    <form ng-submit="login(formData)"
+    <form ng-submit="register(formData)"
           enctype="multipart/form-data"
           novalidate>
       <div>
@@ -17,7 +17,11 @@
         <label for="password">Password</label>
         <input type='text' id="password" ng-model="formData.password"/>
       </div>
-      <button type="submit">Login</button>
+      <div>
+        <label for="confirm_password">Confirm Password</label>
+        <input type='text' id="password" ng-model="formData.confirm_password"/>
+      </div>
+      <button type="submit">Sign Up</button>
     </form>
   </div>
 </div>
