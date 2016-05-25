@@ -12,7 +12,7 @@ angular.module('Minion.auth', ['ui.router'])
 
 .controller('RegistrationCtrl', function ($scope, $user) {
   $scope.errorMessage = null;
-  $scope.formData = {
+  $scope.accountData = {
     username: '',         // Expose to user as email/username field
     password: '',
   };
