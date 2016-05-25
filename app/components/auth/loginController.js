@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('Minion.auth', ['ui.router'])
 
 .config(['$stateProvider', function($stateProvider) {
@@ -8,7 +10,6 @@ angular.module('Minion.auth', ['ui.router'])
   });
 }])
 
-.controller('LoginCtrl', ['$scope',
-  function($scope) {
-  }
-]);
+.controller('LoginCtrl', function ($scope) {
+  $scope.message = 'Hello';
+});

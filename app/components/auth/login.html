@@ -1,20 +1,9 @@
-<form id="loginForm"
-      name="loginForm"
-      ng-submit="login()"
-      enctype="multipart/form-data"
-      novalidate>
-      
-  <label for="username">Username</label>
-  <input id="username"
-         name="username"
-         type="text"
-         class="form-control"
-         ng-model="username"/>
-
-  <label for="username">Password</label>
-  <input id="password"
-         name="password"
-         type="password"
-         class="form-control"
-         ng-model="password"/>
-</form>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>Login</h3>
+      <hr>
+    </div>
+  </div>
+  <div sp-login-form></div>
+</div>

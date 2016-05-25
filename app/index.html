@@ -28,6 +28,8 @@
   <div class="pull-right">
     <i class="fa fa-user fa-2x"></i>
     <i class="fa fa-square fa-2x"></i>
+    <a ui-sref="starter" sp-logout if-user>Logout</a>
+    <a ui-sref="login" if-not-user>Login</a>
   </div>
 
   <!--[if lt IE 7]>
@@ -71,6 +73,7 @@
   <script src="components/version/interpolate-filter.js"></script>
 
   <script src="serviceConfig.js"></script>
-
+  <script src="stormpath-sdk-angularjs.min.js"></script>
+  <script src="stormpath-sdk-angularjs.tpls.min.js"></script>
 </body>
 </html>

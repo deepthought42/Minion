@@ -6,7 +6,10 @@ angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', '
   $stateProvider.state('starter', {
     url: "/starter",
     templateUrl: 'components/starter/index.html',
-    controller: 'StarterIndexCtrl'
+    controller: 'StarterIndexCtrl',
+    sp: {
+      authenticate: true
+    }
   });
 }])
 
