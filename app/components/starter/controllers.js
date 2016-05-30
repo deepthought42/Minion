@@ -17,12 +17,16 @@ angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', '
   function($scope, WorkAllocation, PathRealtimeService) {
     this._init = function(){
       $scope.paths = [];
+      $scope.isStarted = false;
       //$scope.paths = PathRealtimeService;
     }
 
     $scope.startMappingProcess = function(workAllocation){
       console.log("Starting mapping process : " + workAllocation.url );
-      WorkAllocation.query({url: $scope.workAllocation.url, account_key: "account_key_here"});
+      WorkAllocation.query({url: $scope.workAllocation.url, account_key: "account_key_here"})
+        .$promise.then(function(value){
+          $scope.isStarted = true;
+        });
 
       PathRealtimeService.connect("/streamPathExperience", "account_key_here",function(message) {
         console.log("Recieved message from server " + message + " :: " + Object.keys(message));
@@ -33,6 +37,9 @@ angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', '
 
     $scope.stopMappingProcess = function(account_key){
       WorkAllocation.stopWork({account_key: "account_key_here"})
+        .$promise.then(function(){
+          $scope.isStarted = false;
+        })
     }
 
     /**

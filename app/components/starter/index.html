@@ -1,13 +1,19 @@
 <form ng-submit="startMappingProcess(workAllocation)"
       enctype="multipart/form-data"
+      ng-show="!isStarted"
       ng-init="workAllocation = {}"
       novalidate>
-  <input type="text"
+  <input class="col-sm-4"
+         type="text"
          ng-model="workAllocation.url"
-         placeholder="URL (eg. http://localhost:8080)" />
-  <button type="submit">Start Crawl</button>
+         placeholder="URL (eg. http://localhost:8080)"
+         value="http://localhost:3000" />
+  <button type="submit" class="btn btn-primary">Start Crawl</button>
 </form>
-<button class='btn btn-danger' ng-click="stopMappingProcess('account_key_here')">STOP!</button>
+
+<button ng-show="isStarted"
+        class='btn btn-danger'
+        ng-click="stopMappingProcess('account_key_here')">Stop!</button>
 
 <div>
   <div ng-repeat="pathWrapper in paths">
@@ -20,14 +26,14 @@
             <i class="fa fa-list-alt fa-2x icon" uib-tooltip="node.xpath"></i>
           </div>
           <div class="actionBubble pull-right">
-            <i class="fa fa-mouse-pointer icon" uib-tooltip="click"></i>
+            <i class="fa fa-mouse-pointer icon" uib-tooltip="node.name"></i>
           </div>
         </div>
       </div>
 
       <div class="pull-right col-sm-3">
-        <i class="fa fa-times fa-3x col-sm-4" style="{{!path.useful ? 'color:red' : 'color:#bfbfbf'}}" ng-click="path.useful=!path.useful"></i>
-        <i class="fa fa-check fa-3x col-sm-4" style="{{path.useful ? 'color:green' : 'color:#bfbfbf'}}" ng-click="path.useful=!path.useful"></i>
+        <i class="fa fa-times fa-3x col-sm-4" style="{{!pathWrapper.useful ? 'color:red' : 'color:#bfbfbf'}}" ng-click="pathWrapper.useful=!pathWrapper.useful"></i>
+        <i class="fa fa-check fa-3x col-sm-4" style="{{pathWrapper.useful ? 'color:green' : 'color:#bfbfbf'}}" ng-click="pathWrapper.useful=!pathWrapper.useful"></i>
         <i class="fa fa-angle-down fa-3x col-sm-4"></i>
       </div>
     </div>
