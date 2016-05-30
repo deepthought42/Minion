@@ -7,11 +7,12 @@
          placeholder="URL (eg. http://localhost:8080)" />
   <button type="submit">Start Crawl</button>
 </form>
+<button class='btn btn-danger' ng-click="stopMappingProcess('account_key_here')">STOP!</button>
 
 <div>
-  <div ng-repeat="path in paths">
+  <div ng-repeat="pathWrapper in paths">
     <div class="col-sm-12" style="background-color:white;">
-      <div ng-repeat="node in path.vertexPath" class="col-sm-1" >
+      <div ng-repeat="node in pathWrapper.path" class="col-sm-1" >
         <i class="fa fa-arrow-right pull-left"></i>
         <i class="fa fa-wpforms fa-3x col-sm-11" ng-show="node.url" uib-tooltip="{{node.url}}"></i>
         <div class="col-sm-11" ng-show="node.xpath">

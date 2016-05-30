@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Minion.auth', ['ui.router'])
+angular.module('Minion.register', ['ui.router'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.register', {

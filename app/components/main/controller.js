@@ -6,14 +6,10 @@ angular.module('Minion.main', ['ui.router'])
     url: "",
     abstract: true,
     templateUrl: 'components/main/index.html',
-    controller: 'MainCtrl',
-    sp: {
-      authenticate: true
-    }
+    controller: 'MainCtrl'
   });
 }])
 
 .controller('MainCtrl', ['$scope', function ($scope) {
-    $scope.message = 'Hello';
   }
 ]);
