@@ -20,6 +20,9 @@
     <div class="col-sm-12" style="background-color:white;">
       <div ng-repeat="node in pathWrapper.path" class="col-sm-1" >
         <i class="fa fa-arrow-right pull-left"></i>
+        <iframe ng-show="node.src">
+          {{node.src}}
+        </iframe>
         <i class="fa fa-wpforms fa-3x col-sm-11" ng-show="node.url" uib-tooltip="{{node.url}}"></i>
         <div class="col-sm-11" ng-show="node.xpath">
           <div class="elementBubble">
