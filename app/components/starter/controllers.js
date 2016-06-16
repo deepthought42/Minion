@@ -23,7 +23,7 @@ angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', '
 
     $scope.startMappingProcess = function(workAllocation){
       console.log("Starting mapping process : " + workAllocation.url );
-      WorkAllocation.query({url: $scope.workAllocation.url, account_key: "account_key_here"})
+      WorkAllocation.query({url:  $scope.workAllocation.urlProtocol+"://"+$scope.workAllocation.url, account_key: "account_key_here"})
         .$promise.then(function(value){
           $scope.isStarted = true;
         });
