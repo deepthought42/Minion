@@ -1,25 +1,6 @@
-<button ng-show="isStarted"
-        class='btn btn-danger col-sm-12'
-        ng-click="stopMappingProcess('account_key_here')">Stop!</button>
 
-<div class="col-sm-6">
-  <form ng-submit="startMappingProcess(workAllocation)"
-        enctype="multipart/form-data"
-        ng-show="!isStarted"
-        ng-init="workAllocation = {}"
-        novalidate>
-    <input class="col-sm-2" ng-model="workAllocation.urlProtocol" placeholder="http | https" />
-    <span class="col-xs-1">://</span>
-    <input class="col-sm-7"
-           type="text"
-           ng-model="workAllocation.url"
-           placeholder="URL (eg. localhost:8080)"
-           value="localhost:3000" />
-    <div class="col-sm-2">
-      <button type="submit" class="btn btn-primary">Start Crawl</button>
-    </div>
-  </form>
-</div>
+
+
 <div>
   <div ng-repeat="pathWrapper in paths">
     <div class="col-sm-12" style="background-color:white;">
