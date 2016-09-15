@@ -14,6 +14,7 @@ angular.module('Minion.main', ['ui.router'])
     this._init = function(){
       $scope.displayUserDropDown = false;
       $scope.auth = auth;
+	  $scope.menuToggled = false;
     }
 
     this._init();
