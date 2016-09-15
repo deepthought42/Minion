@@ -14,7 +14,7 @@
     "ngstorage": "0.3.4",
     "angular-resource": "latest",
     "angular-nvd3": "latest",
-    "stormpath-sdk-angularjs": "latest"
+    "a0-angular-storage": "latest"
   },
   "resolutions": {
     "angular": "^1.4.9"

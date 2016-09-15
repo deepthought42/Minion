@@ -10,9 +10,10 @@ angular.module('Minion.main', ['ui.router'])
   });
 }])
 
-.controller('MainCtrl', ['$scope', function ($scope) {
+.controller('MainCtrl', ['$scope', 'auth', function ($scope, auth) {
     this._init = function(){
       $scope.displayUserDropDown = false;
+      $scope.auth = auth;
     }
 
     this._init();

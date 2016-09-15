@@ -8,6 +8,10 @@
         ng-show="!isStarted"
         ng-init="workAllocation = {}"
         novalidate>
+    <select class="col-sm-2" ng-model="workAllocaiton.urlProtocol">
+      <option value="http">http</option>
+      <option value="https">https</option>
+    </select>
     <input class="col-sm-2" ng-model="workAllocation.urlProtocol" placeholder="http | https" />
     <span class="col-xs-1">://</span>
     <input class="col-sm-7"
@@ -37,8 +41,14 @@
       </div>
 
       <div class="pull-right col-sm-3">
-        <i class="fa fa-times fa-3x col-sm-4" style="{{!pathWrapper.useful ? 'color:red' : 'color:#bfbfbf'}}" ng-click="pathWrapper.useful=!pathWrapper.useful"></i>
-        <i class="fa fa-check fa-3x col-sm-4" style="{{pathWrapper.useful ? 'color:green' : 'color:#bfbfbf'}}" ng-click="pathWrapper.useful=!pathWrapper.useful"></i>
+        <i  class="fa fa-times fa-3x col-sm-4"
+            style="{{!pathWrapper.useful ? 'color:red' : 'color:#bfbfbf'}}"
+            ng-click="pathWrapper.useful=!pathWrapper.useful"></i>
+
+        <i class="fa fa-check fa-3x col-sm-4"
+           style="{{pathWrapper.useful ? 'color:green' : 'color:#bfbfbf'}}"
+           ng-click="pathWrapper.useful=!pathWrapper.useful"></i>
+
         <i class="fa fa-angle-down fa-3x col-sm-4"></i>
       </div>
     </div>
