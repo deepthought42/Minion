@@ -11,10 +11,15 @@
     "angular-loader": "~1.4.0",
     "angular-mocks": "~1.4.0",
     "html5-boilerplate": "~5.2.0",
-    "ngstorage": "0.3.4",
     "angular-resource": "latest",
     "angular-nvd3": "latest",
-    "a0-angular-storage": "latest"
+    "auth0-lock": "latest",
+    "auth0-angular": "latest",
+    "angular-lock": "latest",
+    "angular-jwt": "latest",
+    "a0-angular-storage": "latest",
+    "sockjs": "~0.3.4",
+    "stomp-websocket": "~2.3.4"
   },
   "resolutions": {
     "angular": "^1.4.9"

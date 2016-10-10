@@ -6,21 +6,38 @@ angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', '
   $stateProvider.state('main.starter', {
     url: "/starter",
     templateUrl: 'components/starter/index.html',
-    controller: 'StarterIndexCtrl',
+    controller: 'WorkManagementCtrl',
     sp: {
       authenticate: true
     }
   });
 }])
 
-.controller('StarterIndexCtrl', ['$scope', 'WorkAllocation', 'PathRealtimeService',
-  function($scope, WorkAllocation, PathRealtimeService) {
+.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService',
+  function($rootScope, $scope, WorkAllocation, PathRealtimeService) {
     this._init = function(){
       $scope.paths = [];
       $scope.isStarted = false;
       //$scope.paths = PathRealtimeService;
+      $scope.paths= [];
     }
 
+    $rootScope.$on("openPathStream", function(){
+      console.log("OPENING PATH STREAM");
+
+      /**We use an event source for sse over websockets because websockets are overkill for the current usage */
+      $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here", function(message) {
+        console.log("Recieved message from server " + message + " :: " + Object.keys(message));
+        $scope.paths.push(JSON.parse(message.data));
+        $scope.$apply();
+      });
+    });
+
+    $rootScope.$on("closePathStream", function(){
+      console.log("Closing Event Source");
+      $scope.eventSource.close();
+
+    })
     $scope.startMappingProcess = function(workAllocation){
       console.log("Starting mapping process : " + workAllocation.url );
       WorkAllocation.query({url:  $scope.workAllocation.urlProtocol+"://"+$scope.workAllocation.url, account_key: "account_key_here"})
@@ -28,7 +45,7 @@ angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', '
           $scope.isStarted = true;
         });
 
-      PathRealtimeService.connect("/streamPathExperience", "account_key_here",function(message) {
+      $scope.eventSource = PathRealtimeService.connect("/streamPathExperience", "account_key_here",function(message) {
         console.log("Recieved message from server " + message + " :: " + Object.keys(message));
         $scope.paths.push(JSON.parse(message.data));
         $scope.$apply();
@@ -39,7 +56,9 @@ angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', '
       WorkAllocation.stopWork({account_key: "account_key_here"})
         .$promise.then(function(){
           $scope.isStarted = false;
-        })
+        });
+
+
     }
 
     /**

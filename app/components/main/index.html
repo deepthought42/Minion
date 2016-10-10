@@ -5,12 +5,15 @@
 
         <div class="sidebar-brand-container">
         	<div class="sidebar-brand">
-                      <a href="#">
-                          Minion v<span app-version></span>
-                      </a>
-            </div>
-            <div class="toggleleft" ng-click="menuToggled = !menuToggled" id="menu-toggle"><a href=""><i class="fa fa-chevron-circle-left" aria-label="Toggle Menu Left"></i></a>
-            </div>
+            <a href="#">
+                Minion v<span app-version></span>
+            </a>
+          </div>
+          <div class="toggleleft" ng-click="menuToggled = !menuToggled" id="menu-toggle">
+            <a href="">
+              <i class="fa fa-chevron-circle-left" aria-label="Toggle Menu Left"></i>
+            </a>
+          </div>
         </div>
 
 
@@ -18,7 +21,16 @@
           <ul class="sidebar-nav">
                <li class="divider"></li>
               <li>
-                  <a href="#/starter"><i class="fa fa-bars sidebar-nav-icons" aria-hidden="true"></i> Tester</a>
+                <a href="#/starter">
+                  <i class="fa fa-bars sidebar-nav-icons" aria-hidden="true"></i>
+                  Tester Finder
+                </a>
+              </li>
+              <li>
+                <a href="#/tester">
+                  <i class="fa fa-bars sidebar-nav-icons" aria-hidden="true"></i>
+                  Tester Runner
+                </a>
               </li>
               <li>
                   <a href="#/dashboard"><i class="fa fa-tachometer sidebar-nav-icons" aria-hidden="true"></i> Dashboard</a>
@@ -44,13 +56,18 @@
             <div id="main-nav" class="row">
                 <div class="col-lg-12">
 
-                    <div class="col-sm-1 toggleright" ng-click="menuToggled = !menuToggled"  id="menu-toggle"><a href=""><i class="fa fa-chevron-circle-right " aria-label="Toggle Menu Right"></i></a>
-                   	 </div>
+                    <div class="col-sm-1 toggleright" ng-click="menuToggled = !menuToggled"  id="menu-toggle">
+                      <a href="">
+                        <i class="fa fa-chevron-circle-right " aria-label="Toggle Menu Right"></i>
+                      </a>
+                 	  </div>
 
-                    <div class="col-sm-5">
+                    <div class="col-sm-5" controller="WorkManagementCtrl">
                       <button ng-show="isStarted"
                               class="btn btn-danger col-sm-12"
-                              ng-click="stopMappingProcess('account_key_here')">Stop!</button>
+                              ng-click="stopMappingProcess('account_key_here')">
+                          Stop!
+                      </button>
 
                       <div class="col-sm-12">
                         <form ng-submit="startMappingProcess(workAllocation)"
@@ -58,15 +75,10 @@
                               ng-show="!isStarted"
                               ng-init="workAllocation = {}"
                               novalidate>
-
                           <div class="col-sm-3">
-                          <select  >
-                            <option>http</option>
-                            <option>https</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                          </select>
+                            <select ng-model="workAllocation.urlProtocol" ng-options="protocol as protocol for protocol in protocols">
+
+                            </select>
                             <span >://</span>
                           </div>
 
@@ -86,10 +98,10 @@
 
                      <div class="col-sm-2">
                        <input class="col-sm-8"
-                                     type="text"
-                             ng-model=""
-                             placeholder="Page, Element, Action"
-                             value="" />
+                               type="text"
+                               ng-model="workAllocation.search"
+                               placeholder="Page, Element, Action"
+                               value="" />
                        <div class="col-sm-4">
                          <div class="row">
                           <button type="submit" class="btn btn-right btn-navigation">
@@ -99,147 +111,158 @@
                       </div>
                     </div>
 
-
                     <div class="col-sm-4">
                     	<ul class="navbar-top-links navbar-right">
 
-                          <li><a ui-sref="main.login"><i class="fa fa-sign-in fa-fw"></i> Login</a>
-                            </li>
-                          <li><a ui-sref="main.register">Sign Up</a>
-                            </li>
-                            |
-                            <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <strong>John Smith</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <strong>John Smith</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <strong>John Smith</strong>
-                                        <span class="pull-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#">
-                                    <strong>Read All Messages</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-messages -->
-                    </li>
-                    <!-- /.dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="/app/#/starter">
-                            <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts" role="menu" aria-labelledby="dLabel">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-comment fa-fw"></i> New Comment
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                        <span class="pull-right text-muted small">12 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-tasks fa-fw"></i> New Task
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-alerts -->
-                    </li>
-                    <!-- /.dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a ui-sref="main.starter"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-user -->
-                    </li>
-                    <!-- /.dropdown -->
-                  </ul>
+                          <li controller="LoginCtrl">
+                            <a ng-show="!isAuthenticated" href="#/" ng-click="authService.signin()"><i class="fa fa-sign-in fa-fw"></i>
+                               Login
+                            </a>
+                            <a ng-show="isAuthenticated" href="#/" ng-click="authService.logout()"><i class="fa fa-sign-out fa-fw"></i>
+                               Logout
+                            </a>
+                          </li>
+
+<!--
+                          <li>
+                            <a href="#/" ng-click="authService.register">Sign Up</a>
+                          </li>
+                        -->
+                          |
+                          <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-messages">
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                                <em>Yesterday</em>
+                                            </span>
+                                        </div>
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                                <em>Yesterday</em>
+                                            </span>
+                                        </div>
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                                <em>Yesterday</em>
+                                            </span>
+                                        </div>
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="text-center" href="#">
+                                        <strong>Read All Messages</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-messages -->
+                        </li>
+                      <!-- /.dropdown -->
+                      <li class="dropdown">
+                          <a class="dropdown-toggle" data-toggle="dropdown" href="/app/#/starter">
+                              <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                          </a>
+                          <ul class="dropdown-menu dropdown-alerts" role="menu" aria-labelledby="dLabel">
+                              <li>
+                                  <a href="#">
+                                      <div>
+                                          <i class="fa fa-comment fa-fw"></i> New Comment
+                                          <span class="pull-right text-muted small">4 minutes ago</span>
+                                      </div>
+                                  </a>
+                              </li>
+
+                              <li class="divider"></li>
+                              <li>
+                                  <a href="#">
+                                      <div>
+                                          <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                          <span class="pull-right text-muted small">12 minutes ago</span>
+                                      </div>
+                                  </a>
+                              </li>
+
+                              <li class="divider"></li>
+                              <li>
+                                  <a href="#">
+                                      <div>
+                                          <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                          <span class="pull-right text-muted small">4 minutes ago</span>
+                                      </div>
+                                  </a>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                  <a href="#">
+                                      <div>
+                                          <i class="fa fa-tasks fa-fw"></i> New Task
+                                          <span class="pull-right text-muted small">4 minutes ago</span>
+                                      </div>
+                                  </a>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                  <a href="#">
+                                      <div>
+                                          <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                          <span class="pull-right text-muted small">4 minutes ago</span>
+                                      </div>
+                                  </a>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                  <a class="text-center" href="#">
+                                      <strong>See All Alerts</strong>
+                                      <i class="fa fa-angle-right"></i>
+                                  </a>
+                              </li>
+                          </ul>
+                          <!-- /.dropdown-alerts -->
+                      </li>
+                      <!-- /.dropdown -->
+                      <li class="dropdown">
+                          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                              <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                          </a>
+                          <ul class="dropdown-menu dropdown-user">
+                              <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                              </li>
+                              <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                              </li>
+                              <li class="divider"></li>
+                              <li><a ui-sref="main.starter"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                              </li>
+                          </ul>
+                          <!-- /.dropdown-user -->
+                      </li>
+                      <!-- /.dropdown -->
+                    </ul>
                  </div>
               </div>
             </div>
-            
+
             <div id="view-frame" class="row">
             	<div ui-view class="col-sm-12"></div>
             </div>

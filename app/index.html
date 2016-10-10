@@ -18,7 +18,10 @@
     <link rel="stylesheet" href="styles/errorPanel.css">
     <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
+          rel="stylesheet"
+          integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN"
+          crossorigin="anonymous">
 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -43,20 +46,18 @@
   <script src="http://d3js.org/d3.v2.js"></script>
 
   <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/stomp-websocket/lib/stomp.min.js" type="text/javascript"></script>
+  <script src="bower_components/ng-stomp/dist/ng-stomp.standalone.min.js" type="text/javascript"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="bower_components/angular-resource/angular-resource.min.js"></script>
 
-  <!-- Auth0's lock widget library -->
-  <script type="text/javascript" src="https://cdn.auth0.com/js/lock-9.min.js"></script>
-  <!-- Angular cookie wrapper library for client cookies -->
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-cookies.js"></script>
-  <!-- Auth0's Angular SDK Library -->
+  <!--  <script type="text/javascript" src="https://cdn.auth0.com/js/lock-7.js"></script> -->
   <script type="text/javascript" src="https://cdn.auth0.com/w2/auth0-angular-4.js"></script>
+  <script type="text/javascript" src="bower_components/auth0.js/build/auth0.min.js"></script>
+  <script src="bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-cookies.js"></script>
   <!-- Angular wrapper for localStorage and sessionStorage. Defaults to ng-cookies if not available -->
   <script src="http://cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js" type="text/javascript"> </script>
-  <!-- Angular wrapper library for JWT-->
-  <script src="http://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js" type="text/javascript"> </script>
 
   <!-- Viewport settings-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -76,11 +77,12 @@
   <script src="test/TestPathRealtimeService.js"></script>
 
   <script src="components/dashboard/dashboard.js"></script>
-  <script src="components/tester/tester.js"></script>
+  <script src="components/tester/controller.js"></script>
   <script src="components/starter/controllers.js"></script>
   <script src="components/main/controller.js"></script>
   <script src="components/auth/loginController.js"></script>
   <script src="components/auth/registrationController.js"></script>
+  <script src="components/auth/authInterceptor.js"></script>
 
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>

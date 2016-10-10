@@ -8,26 +8,33 @@ angular.module('Minion.login', ['ui.router'])
     templateUrl: 'components/auth/login.html',
     controller: 'LoginCtrl'
   });
+
 }])
 
-.controller('LoginCtrl', ['$scope', 'auth', function ($scope, auth) {
+.controller('LoginCtrl', ['$scope', 'authService', '$state', function ($scope, authService, $state) {
   $scope.errorMessage = null;
   $scope.formData = {
     username: '',         // Expose to user as email/username field
     password: '',
   };
 
-  $scope.auth = auth;
+  // Put the authService on $scope to access
+  // the login method in the view
+  $scope.authService = authService;
 
-  // Use this method with ng-submit on your form
-  $scope.login = function login(formData){
-    $auth.authenticate(formData)
-     .then(function(){
-       console.log('login success');
-       $state.go('main.starter');
-     })
-     .catch(function(err){
-       $scope.errorMessage = err.message;
-     });
+
+  $scope.login = function() {
+    console.log("SHOWING LOGIN FORM");
+    authService.signin({
+      authParams: {
+        scope: 'openid profile' // This is if you want the full JWT
+      }
+    }, function(profile, idToken, accessToken, state, refreshToken) {
+      console.log("successful sign in")
+      $state.path('/user-info')
+    }, function(err) {
+      console.log("Sign in Error :(", err);
+    });
   }
+
 }]);
