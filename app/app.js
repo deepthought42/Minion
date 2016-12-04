@@ -28,7 +28,9 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
     storeProvider.setStore("sessionStorage");
     authProvider.init({
       clientID: 'HBqtsV4ZHZPzzptfZTsaCkqTjQKadLT8',
-      domain: 'hypedrive.auth0.com'
+      domain: 'hypedrive.auth0.com',
+      loginUrl: '/login',
+      callbackUrl: location.href,
     });
 
     authProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
@@ -41,18 +43,21 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
           // sessionStorage.set('token', idToken);
           console.log("profile token :: "+profile);
         });
-        $location.go('/');
       });
 
       authProvider.on('authenticated', function($location) {
-        console.log("hmmm");
         // This is after a refresh of the page
         // If the user is still authenticated, you get this event
       });
 
       authProvider.on('loginFailure', function($location, error) {
-        console.log("ERROR !!")
+        console.log("ERROR !!");
 
+      });
+
+      authProvider.on('forbidden', function($location, error){
+        console.log("forbidden request");
+        //$location.go('/login');
       });
 
     jwtOptionsProvider.config({
@@ -66,7 +71,6 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       });
 
 jwtInterceptorProvider.tokenGetter = function (store, auth) {
-  console.log("meh");
   if (DELEGATION_ENABLED) {
     // does Auth0 delegation lookup
     var fetchDelegationTokenFromAuth0 = function () {
@@ -100,52 +104,44 @@ jwtInterceptorProvider.tokenGetter = function (store, auth) {
   }
 
 }
-
-    /**  jwtInterceptorProvider.tokenGetter = function (store, config, auth, jwtHelper) {
-            if (DELEGATION_ENABLED && config.url.indexOf(API_SERVER_URL) === 0) {
-              // does Auth0 delegation lookup
-              var fetchDelegationTokenFromAuth0 = function () {
-                return auth.getToken({
-                  targetClientId: targetClientId,
-                  scope: 'openid roles',
-                  api_type: 'app'
-                }).then(function (delegation) {
-                  store.set('delegationToken', delegation.id_token);
-                  return delegation.id_token;
-                });
-              };
-              var targetClientId = API_SERVER_CLIENT_ID;
-              var delegationToken = store.get('delegationToken');
-              if (delegationToken && !jwtHelper.isTokenExpired(delegationToken)) {
-                // use cached delegation token
-                return delegationToken;
-              } else {
-                return fetchDelegationTokenFromAuth0();
-              }
-            } else {
-              // just obtain authentication token for this Client App
-              return store.get('token');
-            }
-          };
-*/
-    $httpProvider.interceptors.push('jwtInterceptor');
+  $httpProvider.interceptors.push('jwtInterceptor');
 
   }])
 .run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', function($rootScope, auth, store, jwtHelper, $state){
   $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
-      var token = store.get('token');
-      console.log("token :: "+token);
-      if (token) {
-        if (!jwtHelper.isTokenExpired(store.get('token'))) {
-          if (!auth.isAuthenticated) {
-            auth.authenticate(store.get('profile'), token);
+     var requireLogin = toState.data.requireLogin;
+     if (requireLogin && !auth.isAuthenticated) {
+       event.preventDefault();
+       // get me a login modal!
+       console.log("going back to signin")
+       auth.signin({
+         authParams: {
+           scope: 'openid profile' // This is if you want the full JWT
+         }
+       }, function(profile, idToken, accessToken, state, refreshToken) {
+         console.log("successful sign in")
+         $state.path('/user-info')
+       }, function(err) {
+         console.log("Sign in Error :(", err);
+       });
+     }
+    });
+
+    $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
+        console.log("403 forbidden");
+
+        auth.signin({
+          authParams: {
+            scope: 'openid profile' // This is if you want the full JWT
           }
-        } else {
-          $state.go('main.login');
-        }
-      }
+        }, function(profile, idToken, accessToken, state, refreshToken) {
+          console.log("successful sign in")
+          $state.path('/user-info')
+        }, function(err) {
+          console.log("Sign in Error :(", err);
+        });
     });
   // Put the authService on $rootScope so its methods
   // can be accessed from the nav bar
-  //auth.hookEvents();
+  auth.hookEvents();
 }]);

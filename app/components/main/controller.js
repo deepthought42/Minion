@@ -6,7 +6,10 @@ angular.module('Minion.main', ['ui.router'])
     url: "",
     abstract: true,
     templateUrl: 'components/main/index.html',
-    controller: 'MainCtrl'
+    controller: 'MainCtrl',
+    data: {
+      requireLogin: true
+    }
   });
 }])
 
@@ -21,7 +24,7 @@ angular.module('Minion.main', ['ui.router'])
       $scope.paths = [];
       $scope.isStarted = false;
 
-      $scope.protocols = ["http", "https"];
+      $scope.protocols = ["http", "https", "file"];
       $scope.workAllocation = {};
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
       console.log($scope.workAllocation.urlProtocol);

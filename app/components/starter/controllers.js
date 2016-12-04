@@ -7,8 +7,8 @@ angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', '
     url: "/starter",
     templateUrl: 'components/starter/index.html',
     controller: 'WorkManagementCtrl',
-    sp: {
-      authenticate: true
+    data: {
+      requiresLogin: true
     }
   });
 }])
@@ -18,7 +18,8 @@ angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', '
     this._init = function(){
       $scope.paths = [];
       $scope.isStarted = false;
-      //$scope.paths = PathRealtimeService;
+      $scope.current_node_image = "";
+      $scope.current_node = null;
       $scope.paths= [];
     }
 
@@ -42,6 +43,7 @@ angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', '
       console.log("Starting mapping process : " + workAllocation.url );
       WorkAllocation.query({url:  $scope.workAllocation.urlProtocol+"://"+$scope.workAllocation.url, account_key: "account_key_here"})
         .$promise.then(function(value){
+          //console.log("VALUE : "+value);
           $scope.isStarted = true;
         });
 

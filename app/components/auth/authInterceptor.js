@@ -32,7 +32,7 @@ auth.factory('AuthInterceptor', ['$q', '$rootScope', function($q, $rootScope) {
 
     // optional method
    'responseError': function(rejection) {
-      if(rejection.status === 401){
+      if(rejection.status === 403){
         $rootScope.$broadcast("auth:unauthorized");
       }
       return $q.reject(rejection);
