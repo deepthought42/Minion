@@ -42,7 +42,12 @@
         </div>
       </div>
     </div>
-
+    <div class="col-sm-12">
+      <label>Groups: </label>
+      <div ng-repeat="group in test.groups">{{group}}</div>
+      <input ng-model="new_group" />
+      <i class="fa fa-plus" ng-click="addGroup(new_group)"></i>
+    </div>
     <div class="pull-right col-sm-3">
       <i class="fa fa-check fa-3x col-sm-4"
          style="{{pathWrapper.useful ? 'color:green' : 'color:#red'}}"></i>
@@ -65,12 +70,6 @@
       <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
     </div>
     <div class="col-sm-3">
-      <div class="col-sm-12">
-        <label>Groups: </label>
-        <div ng-repeat="group in test.groups">{{group}}</div>
-        <input ng-model="new_group" />
-        <i class="fa fa-plus" ng-click="addGroup(new_group)"></i>
-      </div>
       <div class="col-sm-12">
         <label>Landable:</label> <span>{{current_node.landable}}</span>
         <label>URL:</label> <span>{{current_node.url}}</span>
