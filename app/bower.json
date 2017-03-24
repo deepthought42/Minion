@@ -20,7 +20,8 @@
     "a0-angular-storage": "latest",
     "sockjs": "~0.3.4",
     "stomp-websocket": "~2.3.4",
-    "ng-stomp": "~0.3.0"
+    "ng-stomp": "~0.3.0",
+    "stormpath-sdk-angularjs": "latest"
   },
   "resolutions": {
     "angular": "^1.4.9"

@@ -12,7 +12,9 @@ auth.factory('AuthInterceptor', ['$q', '$rootScope', function($q, $rootScope) {
   return {
     // optional method
     'request': function(config) {
-      // do something on success
+      config.headers = config.headers || {};
+      var encodedString = btoa("priya:priya");
+      //config.headers.Authorization = 'Basic '+encodedString;
       return config;
     },
 
@@ -32,9 +34,15 @@ auth.factory('AuthInterceptor', ['$q', '$rootScope', function($q, $rootScope) {
 
     // optional method
    'responseError': function(rejection) {
+      console.log("REJECTED :: "+rejection.status);
+
       if(rejection.status === 403){
+        $rootScope.$broadcast("auth:forbidden");
+      }
+      else if(rejection.status = 401){
         $rootScope.$broadcast("auth:unauthorized");
       }
+
       return $q.reject(rejection);
     }
   };

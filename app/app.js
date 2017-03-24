@@ -1,6 +1,6 @@
 'use strict';
-var AUTH0_DOMAIN='hypedrive.auth0.com';
-var AUTH0_CLIENT_ID='HBqtsV4ZHZPzzptfZTsaCkqTjQKadLT8';
+var AUTH0_DOMAIN='qanairy.auth0.com';
+var AUTH0_CLIENT_ID='wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV';
 var API_SERVER_URL='http://localhost:8080';  // default server url for Java Spring Security API sample
 var DELEGATION_ENABLED=false;
 var API_SERVER_CLIENT_ID='';  // set to '' if DELEGATION_ENABLED=false
@@ -27,8 +27,8 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
 
     storeProvider.setStore("sessionStorage");
     authProvider.init({
-      clientID: 'HBqtsV4ZHZPzzptfZTsaCkqTjQKadLT8',
-      domain: 'hypedrive.auth0.com',
+      clientID: 'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV',
+      domain: 'qanairy.auth0.com',
       loginUrl: '/login',
       callbackUrl: location.href,
     });

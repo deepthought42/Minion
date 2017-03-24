@@ -6,10 +6,7 @@ angular.module('Minion.main', ['ui.router'])
     url: "",
     abstract: true,
     templateUrl: 'components/main/index.html',
-    controller: 'MainCtrl',
-    data: {
-      requireLogin: true
-    }
+    controller: 'MainCtrl'
   });
 }])
 

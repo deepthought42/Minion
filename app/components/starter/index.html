@@ -1,5 +1,7 @@
 <div>
   <div ng-repeat="pathWrapper in paths">
+LENGTH::     {{pathWrapper.path.path.length}}
+
     <div class="col-sm-12" style="background-color:white;">
 
       <div ng-repeat="node in pathWrapper.path.path" class="col-sm-1" ng-click="current_node=node">
@@ -18,7 +20,6 @@
           </div>
         </div>
       </div>
-
       <div class="pull-right col-sm-3">
         <i class="fa fa-check fa-3x col-sm-4"
            style="{{pathWrapper.useful ? 'color:green' : 'color:#red'}}"></i>
