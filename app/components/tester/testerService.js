@@ -1,8 +1,8 @@
 'use strict';
 
-var testerService = angular.module('Minion.TesterService', ['ngResource', 'Minion.serviceConfig']);
+var testerService = angular.module('Minion.TesterService', ['ngResource', 'Qanairy.serviceConfig']);
 
-testerService.factory('Tester', ['$resource', 'Minion.serviceConfig', function ($resource, config) {
+testerService.factory('Tester', ['$resource', 'Qanairy.serviceConfig', function ($resource, config) {
   return $resource(config.basePath + '/tester', {key: '@key'}, {
     update: { method: 'PUT'},
     findByName: {url : config.basePath + '/tester/name', method: 'GET', isArray: true},

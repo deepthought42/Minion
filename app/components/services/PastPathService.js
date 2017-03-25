@@ -1,8 +1,8 @@
 'use strict';
 
-var pastPathService = angular.module('Minion.PastPathService', ['ngResource', 'Minion.serviceConfig']);
+var pastPathService = angular.module('Minion.PastPathService', ['ngResource', 'Qanairy.serviceConfig']);
 
-pastPathService.factory('PastPath', ['$resource', 'Minion.serviceConfig', function ($resource, config) {
+pastPathService.factory('PastPath', ['$resource', 'Qanairy.serviceConfig', function ($resource, config) {
   return $resource(config.basePath + '/pastPaths', {id: '@id'}, {
     update: { method: 'PUT'}
   });

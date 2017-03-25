@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.domain', ['ui.router'])
+angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.domain', {
@@ -13,10 +13,10 @@ angular.module('Qanairy.domain', ['ui.router'])
   });
 }])
 
-.controller('DomainCtrl', ['$rootScope', '$scope',
-  function($rootScope, $scope) {
+.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',
+  function($rootScope, $scope, Domain) {
     this._init = function(){
-      $scope.domain = [];
+      //$scope.domain = Domain.query();
     }
 
     this._init();
