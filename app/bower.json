@@ -11,8 +11,7 @@
     "angular-loader": "~1.4.0",
     "angular-mocks": "~1.4.0",
     "html5-boilerplate": "~5.2.0",
-    "angular-resource": "latest",
-    "angular-nvd3": "latest",
+    "angular-resource": "1.5.8",
     "auth0-lock": "latest",
     "auth0-angular": "latest",
     "angular-lock": "latest",
@@ -20,8 +19,7 @@
     "a0-angular-storage": "latest",
     "sockjs": "~0.3.4",
     "stomp-websocket": "~2.3.4",
-    "ng-stomp": "~0.3.0",
-    "stormpath-sdk-angularjs": "latest"
+    "ng-stomp": "~0.3.0"
   },
   "resolutions": {
     "angular": "^1.4.9"

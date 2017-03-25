@@ -2,51 +2,66 @@
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
-
-        <div class="sidebar-brand-container">
-        	<div class="sidebar-brand">
-            <a href="#">
-                Minion v<span app-version></span>
-            </a>
-          </div>
-          <div class="toggleleft" ng-click="menuToggled = !menuToggled" id="menu-toggle">
-            <a href="">
-              <i class="fa fa-chevron-circle-left" aria-label="Toggle Menu Left"></i>
-            </a>
-          </div>
+      <div class="sidebar-brand-container">
+      	<div class="sidebar-brand">
+          <a href="#">
+              Minion v<span app-version></span>
+          </a>
         </div>
-
-
-        <div>
-          <ul class="sidebar-nav">
-               <li class="divider"></li>
-              <li>
-                <a href="#/starter">
-                  <i class="fa fa-bars sidebar-nav-icons" aria-hidden="true"></i>
-                  Tester Finder
-                </a>
-              </li>
-              <li>
-                <a href="#/tester">
-                  <i class="fa fa-bars sidebar-nav-icons" aria-hidden="true"></i>
-                  Tester Runner
-                </a>
-              </li>
-              <li>
-                  <a href="#/dashboard"><i class="fa fa-tachometer sidebar-nav-icons" aria-hidden="true"></i> Dashboard</a>
-              </li>
-              <li>
-                  <a href="#"><i class="fa fa-sitemap sidebar-nav-icons" aria-hidden="true"></i> Site Map</a>
-              </li>
-              <li>
-                  <a href="#"><i class="fa fa-question-circle sidebar-nav-icons" aria-hidden="true"></i> About</a>
-              </li>
-              <li>
-                  <a href="#"><i class="fa fa-phone sidebar-nav-icons" aria-hidden="true"></i> Contact</a>
-              </li>
-          </ul>
+        <div class="toggleleft" ng-click="menuToggled = !menuToggled" id="menu-toggle">
+          <a href="">
+            <i class="fa fa-chevron-circle-left" aria-label="Toggle Menu Left"></i>
+          </a>
         </div>
+      </div>
 
+      <div>
+        <ul class="sidebar-nav">
+          <li class="divider"></li>
+          <li>
+            <a href="#/dashboard">
+              <i class="fa fa-tachometer sidebar-nav-icons" aria-hidden="true"></i>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="#/tester">
+              <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
+              Tests
+            </a>
+          </li>
+          <li>
+            <a href="#/dashboard">
+              <i class="fa fa-link sidebar-nav-icons" aria-hidden="true"></i>
+              Test Suites
+            </a>
+          </li>
+          <li>
+              <a href="#">
+                <i class="fa fa-map-o sidebar-nav-icons" aria-hidden="true"></i>
+                Discovery
+              </a>
+          </li>
+          <li>
+              <a href="#">
+                <i class="fa fa-check sidebar-nav-icons" aria-hidden="true"></i>
+                Results
+              </a>
+          </li>
+          <li>
+              <a href="#">
+                <i class="fa fa-sitemap sidebar-nav-icons" aria-hidden="true"></i>
+                Site Map
+              </a>
+          </li>
+          <li>
+              <a href="#">
+                <i class="fa fa-question sidebar-nav-icons" aria-hidden="true"></i>
+                About
+              </a>
+          </li>
+        </ul>
+      </div>
     </div>
     <!-- /#sidebar-wrapper -->
 
@@ -128,119 +143,7 @@
                             <a href="#/" ng-click="authService.register">Sign Up</a>
                           </li>
                         -->
-                          |
-                          <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <strong>John Smith</strong>
-                                            <span class="pull-right text-muted">
-                                                <em>Yesterday</em>
-                                            </span>
-                                        </div>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <strong>John Smith</strong>
-                                            <span class="pull-right text-muted">
-                                                <em>Yesterday</em>
-                                            </span>
-                                        </div>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                            <strong>John Smith</strong>
-                                            <span class="pull-right text-muted">
-                                                <em>Yesterday</em>
-                                            </span>
-                                        </div>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a class="text-center" href="#">
-                                        <strong>Read All Messages</strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- /.dropdown-messages -->
-                        </li>
-                      <!-- /.dropdown -->
-                      <li class="dropdown">
-                          <a class="dropdown-toggle" data-toggle="dropdown" href="/app/#/starter">
-                              <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                          </a>
-                          <ul class="dropdown-menu dropdown-alerts" role="menu" aria-labelledby="dLabel">
-                              <li>
-                                  <a href="#">
-                                      <div>
-                                          <i class="fa fa-comment fa-fw"></i> New Comment
-                                          <span class="pull-right text-muted small">4 minutes ago</span>
-                                      </div>
-                                  </a>
-                              </li>
 
-                              <li class="divider"></li>
-                              <li>
-                                  <a href="#">
-                                      <div>
-                                          <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                          <span class="pull-right text-muted small">12 minutes ago</span>
-                                      </div>
-                                  </a>
-                              </li>
-
-                              <li class="divider"></li>
-                              <li>
-                                  <a href="#">
-                                      <div>
-                                          <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                          <span class="pull-right text-muted small">4 minutes ago</span>
-                                      </div>
-                                  </a>
-                              </li>
-                              <li class="divider"></li>
-                              <li>
-                                  <a href="#">
-                                      <div>
-                                          <i class="fa fa-tasks fa-fw"></i> New Task
-                                          <span class="pull-right text-muted small">4 minutes ago</span>
-                                      </div>
-                                  </a>
-                              </li>
-                              <li class="divider"></li>
-                              <li>
-                                  <a href="#">
-                                      <div>
-                                          <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                          <span class="pull-right text-muted small">4 minutes ago</span>
-                                      </div>
-                                  </a>
-                              </li>
-                              <li class="divider"></li>
-                              <li>
-                                  <a class="text-center" href="#">
-                                      <strong>See All Alerts</strong>
-                                      <i class="fa fa-angle-right"></i>
-                                  </a>
-                              </li>
-                          </ul>
-                          <!-- /.dropdown-alerts -->
-                      </li>
                       <!-- /.dropdown -->
                       <li class="dropdown">
                           <a class="dropdown-toggle" data-toggle="dropdown" href="#">

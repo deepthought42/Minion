@@ -5,15 +5,15 @@ var API_SERVER_URL='http://localhost:8080';  // default server url for Java Spri
 var DELEGATION_ENABLED=false;
 var API_SERVER_CLIENT_ID='';  // set to '' if DELEGATION_ENABLED=false
 // Declare app level module which depends on views, and components
-angular.module('Minion', [
+angular.module('Qanairy', [
   'ui.router',
   'Minion.starter',
-  'Minion.dashboard',
+  'Qanairy.dashboard',
+  'Qanairy.domain',
   'Minion.tester',
   'Minion.main',
   'Minion.register',
   'Minion.login',
-  'Minion.d3visualization',
   'auth0',
   'angular-jwt',
   'angular-storage',
@@ -109,7 +109,7 @@ jwtInterceptorProvider.tokenGetter = function (store, auth) {
   }])
 .run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', function($rootScope, auth, store, jwtHelper, $state){
   $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
-     var requireLogin = toState.data.requireLogin;
+     /**var requireLogin = toState.data.requireLogin;
      if (requireLogin && !auth.isAuthenticated) {
        event.preventDefault();
        // get me a login modal!
@@ -120,11 +120,11 @@ jwtInterceptorProvider.tokenGetter = function (store, auth) {
          }
        }, function(profile, idToken, accessToken, state, refreshToken) {
          console.log("successful sign in")
-         $state.path('/user-info')
+         //$state.go('/user-info')
        }, function(err) {
          console.log("Sign in Error :(", err);
        });
-     }
+     }*/
     });
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
@@ -136,7 +136,7 @@ jwtInterceptorProvider.tokenGetter = function (store, auth) {
           }
         }, function(profile, idToken, accessToken, state, refreshToken) {
           console.log("successful sign in")
-          $state.path('/user-info')
+          //$state.go('/user-info')
         }, function(err) {
           console.log("Sign in Error :(", err);
         });
