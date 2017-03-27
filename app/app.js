@@ -109,8 +109,8 @@ jwtInterceptorProvider.tokenGetter = function (store, auth) {
   }])
 .run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', function($rootScope, auth, store, jwtHelper, $state){
   $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
-     //var requireLogin = toState.data.requireLogin;
-     if (/*requireLogin && */ !auth.isAuthenticated) {
+     var requireLogin = toState.data.requireLogin || false;
+     if (requireLogin && !auth.isAuthenticated) {
        event.preventDefault();
        // get me a login modal!
        console.log("going back to signin")

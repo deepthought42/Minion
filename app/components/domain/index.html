@@ -1,6 +1,17 @@
 <div>
-  <i class="fa fa-plus" ng-click="createDomain()"></i>
+  <i class="fa fa-plus" ng-click="openCreateDomainDialog()"></i>
 </div>
 <div ng-repeat="domain in domains">
   Domain :: {{domain}}
+</div>
+<div>
+  <div>
+    Start a new project by adding a domain.
+  </div>
+  <div>
+    <input id="domain_input" ng-model="domain_url" class="" placeholder="yourdomain.com" />
+  </div>
+  <div>
+    <button id="create_domain_button" ng-click="createDomain()" class="btn">Create Project</button>
+  </div>
 </div>

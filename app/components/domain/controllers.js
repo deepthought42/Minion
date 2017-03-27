@@ -17,10 +17,11 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   function($rootScope, $scope, Domain) {
     this._init = function(){
       $scope.domain = Domain.query();
+      $scope.domain_url = "";
     }
 
-    $scope.createDomain = function(){
-      $scope.newDomain = {name: "localhost:8001"};
+    $scope.createDomain = function(url){
+      $scope.newDomain = {"url": url};
       Domain.save($scope.newDomain);
       alert("creating domain ");
     }
