@@ -1,10 +1,17 @@
-<div>
-  <i class="fa fa-plus" ng-click="openCreateDomainDialog()"></i>
+
+<div class="col-md-12">
+  <div class="col-md-3">
+    <i class="fa fa-plus" ng-click="openCreateDomainDialog()"></i>
+  </div>
+  <div ng-repeat="domain in domains" class="col-md-3">
+    {{domain.url}}
+  </div>
 </div>
-<div ng-repeat="domain in domains">
-  Domain :: {{domain}}
-</div>
-<div>
+
+<md-button class="md-primary md-raised" ng-click="showCustom($event)"  flex="100"  flex-gt-md="auto">
+   Custom
+</md-button>
+<!--<div>
   <div>
     Start a new project by adding a domain.
   </div>
@@ -12,6 +19,7 @@
     <input id="domain_input" ng-model="domain_url" class="" placeholder="yourdomain.com" />
   </div>
   <div>
-    <button id="create_domain_button" ng-click="createDomain()" class="btn">Create Project</button>
+    <button id="create_domain_button" ng-click="createDomain(domain_url)" class="btn">Create Project</button>
   </div>
 </div>
+-->

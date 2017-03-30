@@ -18,6 +18,7 @@ angular.module('Qanairy', [
   'angular-jwt',
   'angular-storage',
   'ngStomp',
+  'ngMaterial',
   'Minion.version',
   'AuthInterceptor'
 ]).

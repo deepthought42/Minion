@@ -13,7 +13,7 @@ angular.module('Minion.tester', ['Minion.TesterService'])
   });
 }])
 
-.controller('TesterIndexCtrl', ['$scope','$interval', 'Tester',
+.controller('TesterIndexCtrl', ['$scope', '$interval', 'Tester',
   function($scope, $interval, Tester) {
     $scope.tester = {};
     $scope.groups = [];
@@ -49,7 +49,6 @@ angular.module('Minion.tester', ['Minion.TesterService'])
     }
 
     $scope.runGroupTests = function(url, group){
-
       Tester.runTestsByGroup({url: url, group: group});
     }
 

@@ -13,18 +13,42 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   });
 }])
 
-.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',
-  function($rootScope, $scope, Domain) {
+.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog',
+  function($rootScope, $scope, Domain,  $mdDialog) {
     this._init = function(){
-      $scope.domain = Domain.query();
+      $scope.domains = Domain.query();
       $scope.domain_url = "";
     }
 
-    $scope.createDomain = function(url){
-      $scope.newDomain = {"url": url};
-      Domain.save($scope.newDomain);
+    $scope.createDomain = function(domain_url){
+      Domain.save(domain_url);
       alert("creating domain ");
     }
+
+    $scope.showCustom = function(event) {
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          template: '<md-dialog>' +
+                      '  <md-dialog-content>' +
+                      '     Start a new project by adding a domain.' +
+                      '  </md-dialog-content>' +
+                      '  <md-dialog-content>' +
+                      '    <input id="domain_input" ng-model="domain_url" class="" placeholder="yourdomain.com" />' +
+                      '  </md-dialog-content>' +
+                      '  <md-dialog-content>' +
+                      '    <button id="create_domain_button" ng-click="createDomain(domain_url)" class="btn">Create Project</button>' +
+                      '  </md-dialog-content>' +
+                      '</md-dialog>',
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
+
     this._init();
   }
 ]);
