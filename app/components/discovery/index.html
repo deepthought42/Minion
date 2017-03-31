@@ -1,0 +1,31 @@
+<div class="col-sm-5" controller="WorkManagementCtrl">
+  <button ng-show="isStarted"
+          class="btn btn-danger col-sm-12"
+          ng-click="stopMappingProcess('account_key_here')">
+      Stop!
+  </button>
+
+  <div class="col-sm-12">
+    <form ng-submit="startMappingProcess(workAllocation)"
+          enctype="multipart/form-data"
+          ng-show="!isStarted"
+          ng-init="workAllocation = {}"
+          novalidate>
+      <div class="col-sm-3">
+        <select ng-model="workAllocation.urlProtocol" ng-options="protocol as protocol for protocol in protocols"></select>
+        <span >://</span>
+      </div>
+
+      <input class="col-sm-7"
+             type="text"
+             ng-model="workAllocation.url"
+             placeholder="URL (eg. localhost:8080)"
+             value="localhost:3000" />
+      <div class="col-sm-2">
+        <div class="row">
+          <button type="submit" class="btn btn-success">Start Crawl</button>
+        </div>
+    </div>
+    </form>
+  </div>
+</div>

@@ -1,177 +1,148 @@
 <div id="wrapper" ng-class="menuToggled ? 'toggled' : ''">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <div class="sidebar-brand-container">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-      <div class="sidebar-brand-container">
-      	<div class="sidebar-brand">
-          <a href="#">
-              Minion v<span app-version></span>
-          </a>
-        </div>
-        <div class="toggleleft" ng-click="menuToggled = !menuToggled" id="menu-toggle">
-          <a href="">
-            <i class="fa fa-chevron-circle-left" aria-label="Toggle Menu Left"></i>
-          </a>
-        </div>
+      <div class="toggleleft" ng-click="menuToggled = !menuToggled" id="menu-toggle">
+        <a href="">
+          <i class="fa fa-chevron-circle-left" aria-label="Toggle Menu Left"></i>
+        </a>
       </div>
-
-      <div>
-        <ul class="sidebar-nav">
-          <li class="divider"></li>
-          <li>
-            <a href="#/dashboard">
-              <i class="fa fa-tachometer sidebar-nav-icons" aria-hidden="true"></i>
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a href="#/tester">
-              <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
-              Tests
-            </a>
-          </li>
-          <li>
-            <a href="#/dashboard">
-              <i class="fa fa-link sidebar-nav-icons" aria-hidden="true"></i>
-              Test Suites
-            </a>
-          </li>
-          <li>
-              <a href="#">
-                <i class="fa fa-map-o sidebar-nav-icons" aria-hidden="true"></i>
-                Discovery
-              </a>
-          </li>
-          <li>
-              <a href="#">
-                <i class="fa fa-check sidebar-nav-icons" aria-hidden="true"></i>
-                Results
-              </a>
-          </li>
-          <li>
-              <a href="#">
-                <i class="fa fa-sitemap sidebar-nav-icons" aria-hidden="true"></i>
-                Site Map
-              </a>
-          </li>
-          <li>
-              <a href="#">
-                <i class="fa fa-question sidebar-nav-icons" aria-hidden="true"></i>
-                About
-              </a>
-          </li>
-        </ul>
+    	<div class="sidebar-brand">
+        <a href="#">
+            Qanairy <span app-version></span>
+        </a>
       </div>
     </div>
-    <!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div id="main-nav" class="row">
-                <div class="col-lg-12">
+    <div>
+      <ul class="sidebar-nav">
+        <li class="divider"></li>
+        <li>
+          <a href="#/dashboard">
+            <i class="fa fa-tachometer sidebar-nav-icons" aria-hidden="true"></i>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="#/tests">
+            <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
+            Tests
+          </a>
+        </li>
+        <li>
+          <a href="#/testsuites">
+            <i class="fa fa-link sidebar-nav-icons" aria-hidden="true"></i>
+            Test Suites
+          </a>
+        </li>
+        <li>
+          <a href="#/discovery">
+            <i class="fa fa-map-o sidebar-nav-icons" aria-hidden="true"></i>
+            Discovery
+          </a>
+        </li>
+        <li>
+          <a href="#/results">
+            <i class="fa fa-check sidebar-nav-icons" aria-hidden="true"></i>
+            Results
+          </a>
+        </li>
+        <li>
+          <a href="#/sitemap">
+            <i class="fa fa-sitemap sidebar-nav-icons" aria-hidden="true"></i>
+            Site Map
+          </a>
+        </li>
+        <li>
+          <a href="#/about">
+            <i class="fa fa-question sidebar-nav-icons" aria-hidden="true"></i>
+            About
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
 
-                    <div class="col-sm-1 toggleright" ng-click="menuToggled = !menuToggled"  id="menu-toggle">
-                      <a href="">
-                        <i class="fa fa-chevron-circle-right " aria-label="Toggle Menu Right"></i>
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div id="view-frame" class="row">
+          <div class="col-sm-6">
+            <span ng-show="!isAuthenticated">
+              Hi {Name goes here}, you have {###} failed tests.
+              <a href="#/results" >Review?</a>
+            </span>
+          </div>
+          <div class="col-sm-2">
+
+          </div>
+          <div class="col-sm-4">
+            <span class="col-sm-8 pull-left">
+              Domain: {domain goes here}
+              <a ui-sref="main.domain">Change?</a>
+            </span>
+            <span class="col-sm-4 pull-left" controller="LoginCtrl">
+              <a ng-show="!isAuthenticated" href="#/" ng-click="authService.signin()">
+                <i class="fa fa-sign-in fa-fw"></i>
+                 Login
+              </a>
+              <a ng-show="isAuthenticated" href="#/" ng-click="authService.logout()">
+                <i class="fa fa-sign-out fa-fw"></i>
+                 Logout
+              </a>
+            </span>
+            <div class="navbar-top-links navbar-right">
+              <!-- /.dropdown -->
+              <li class="dropdown" ng-show="isAuthenticated">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i>
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                      <a ui-sref="main.starter">
+                        <i class="fa fa-sign-out fa-fw"></i>
+                        Logout
                       </a>
-                 	  </div>
-
-                    <div class="col-sm-5" controller="WorkManagementCtrl">
-                      <button ng-show="isStarted"
-                              class="btn btn-danger col-sm-12"
-                              ng-click="stopMappingProcess('account_key_here')">
-                          Stop!
-                      </button>
-
-                      <div class="col-sm-12">
-                        <form ng-submit="startMappingProcess(workAllocation)"
-                              enctype="multipart/form-data"
-                              ng-show="!isStarted"
-                              ng-init="workAllocation = {}"
-                              novalidate>
-                          <div class="col-sm-3">
-                            <select ng-model="workAllocation.urlProtocol" ng-options="protocol as protocol for protocol in protocols">
-
-                            </select>
-                            <span >://</span>
-                          </div>
-
-                          <input class="col-sm-7"
-                                 type="text"
-                                 ng-model="workAllocation.url"
-                                 placeholder="URL (eg. localhost:8080)"
-                                 value="localhost:3000" />
-                          <div class="col-sm-2">
-                              <div class="row">
-                                <button type="submit" class="btn btn-success">Start Crawl</button>
-                              </div>
-                     	  </div>
-                        </form>
-                      </div>
-                    </div>
-
-                     <div class="col-sm-2">
-                       <input class="col-sm-8"
-                               type="text"
-                               ng-model="workAllocation.search"
-                               placeholder="Page, Element, Action"
-                               value="" />
-                       <div class="col-sm-4">
-                         <div class="row">
-                          <button type="submit" class="btn btn-right btn-navigation">
-                            <i class="fa fa-search fa-fw" aria-label="Search"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                    	<ul class="navbar-top-links navbar-right">
-
-                          <li controller="LoginCtrl">
-                            <a ng-show="!isAuthenticated" href="#/" ng-click="authService.signin()"><i class="fa fa-sign-in fa-fw"></i>
-                               Login
-                            </a>
-                            <a ng-show="isAuthenticated" href="#/" ng-click="authService.logout()"><i class="fa fa-sign-out fa-fw"></i>
-                               Logout
-                            </a>
-                          </li>
-
-<!--
-                          <li>
-                            <a href="#/" ng-click="authService.register">Sign Up</a>
-                          </li>
-                        -->
-
-                      <!-- /.dropdown -->
-                      <li class="dropdown">
-                          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                              <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                          </a>
-                          <ul class="dropdown-menu dropdown-user">
-                              <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                              </li>
-                              <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                              </li>
-                              <li class="divider"></li>
-                              <li><a ui-sref="main.starter"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                              </li>
-                          </ul>
-                          <!-- /.dropdown-user -->
-                      </li>
-                      <!-- /.dropdown -->
-                    </ul>
-                 </div>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+              </li>
+            <!-- /.dropdown -->
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5">
+            <input class="col-sm-8"
+                   type="text"
+                   ng-model="search"
+                   placeholder="Text goes here. Replace this placeholder"/>
+            <div class="col-sm-4">
+              <div class="row">
+                <button type="submit" class="btn btn-right btn-navigation">
+                  <i class="fa fa-search fa-fw" aria-label="Search"></i>
+                </button>
               </div>
             </div>
+          </div>
 
-            <div id="view-frame" class="row">
-            	<div ui-view class="col-sm-12"></div>
-            </div>
+          <div class="col-sm-7">
+          </div>
         </div>
+      </div>
+      <div id="view-frame" class="row">
+      	<div ui-view class="col-sm-12"></div>
+      </div>
     </div>
-    <!-- /#page-content-wrapper -->
+  </div>
 
 </div>
 <!-- /#wrapper -->

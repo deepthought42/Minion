@@ -58,6 +58,5 @@ angular.module("Minion.TestPathRealtimeService", ['Minion.serviceConfig'])
   "date": "9/30/16 10:35 PM",
   "url": "http://ruby-doc.org/"
 }
-}
 }];
 }]);

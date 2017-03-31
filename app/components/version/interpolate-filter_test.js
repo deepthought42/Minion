@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Minion.version module', function() {
+describe('Qanairy.version module', function() {
   beforeEach(module('myApp.version'));
 
   describe('interpolate filter', function() {

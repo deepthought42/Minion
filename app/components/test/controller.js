@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('Minion.tester', ['Minion.TesterService'])
+angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('main.tester', {
-    url: '/tester',
-    templateUrl: 'components/tester/index.html',
+  $stateProvider.state('main.tests', {
+    url: '/tests',
+    templateUrl: 'components/test/index.html',
     controller: 'TesterIndexCtrl',
     sp: {
       authenticate: true

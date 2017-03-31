@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('Minion.version', [
-  'Minion.version.interpolate-filter',
-  'Minion.version.version-directive'
+angular.module('Qanairy.version', [
+  'Qanairy.version.interpolate-filter',
+  'Qanairy.version.version-directive'
 ])
 
-.value('version', '0.1');
+.value('version', 'alpha');

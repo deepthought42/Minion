@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Minion.version.interpolate-filter', [])
+angular.module('Qanairy.version.interpolate-filter', [])
 
 .filter('interpolate', ['version', function(version) {
   return function(text) {

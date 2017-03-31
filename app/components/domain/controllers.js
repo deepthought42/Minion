@@ -4,7 +4,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.domain', {
-    url: "/domain",
+    url: "/domains",
     templateUrl: 'components/domain/index.html',
     controller: 'DomainCtrl',
     data: {
