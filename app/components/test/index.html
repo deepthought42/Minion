@@ -25,7 +25,82 @@
   </select>
   <i class="fa fa-play-circle-o fa-2x" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)"></i>
 </div>
+
+<div class="col-sm-12">
+  <div class="col-sm-2">
+    Status
+  </div>
+  <div class="col-sm-4">
+    Test Title
+  </div>
+  <div class="col-sm-2">
+    Time (seconds)
+  </div>
+  <div class="col-sm-2">
+    Date Last run
+    <i class="fa fa-arrow" />
+  </div>
+  <div class="col-sm-2">
+
+  </div>
+</div>
+<div class="col-sm-12">
+  <div class="col-sm-1">
+    <input type="checkbox" />
+  </div>
+  <div class="col-sm-1">
+    <span class="col-sm-12" ng-show="test.passing">
+      <i class="fa fa-check"/>
+    </span>
+    <span class="col-sm-12" ng-show="!test.passing">
+      <i class="fa fa-times"/>
+    </span>
+  </div>
+  <div class="col-sm-4">
+    Regression Test 1 {test.title}
+  </div>
+  <div class="col-sm-2">
+    3.07
+  </div>
+  <div class="col-sm-2">
+    3/10/17
+  </div>
+  <div class="col-sm-2">
+    <button class="btn">Run</button>
+    <button class="btn"><i class="fa fa-star-o" /></button>
+    <button class="btn"><i class="fa fa-angle-down" /></button>
+  </div>
+</div>
+
+
 <div ng-repeat="test in tests">
+  <div class="col-sm-12">
+    <div class="col-sm-1">
+      <input type="checkbox" />
+    </div>
+    <div class="col-sm-1">
+      <span class="col-sm-12" ng-show="test.passing">
+        <i class="fa fa-check"/>
+      </span>
+      <span class="col-sm-12" ng-show="!test.passing">
+        <i class="fa fa-times"/>
+      </span>
+    </div>
+    <div class="col-sm-4">
+      Regression Test 1 {test.title}
+    </div>
+    <div class="col-sm-2">
+      3.07
+    </div>
+    <div class="col-sm-2">
+      3/10/17
+    </div>
+    <div class="col-sm-2">
+      <button class="btn">Run</button>
+      <button class="btn"><i class="fa fa-star-o" /></button>
+      <button class="btn"><i class="fa fa-angle-down" /></button>
+    </div>
+  </div>
   <div class="col-sm-12" style="background-color:white;">
 
     <div ng-repeat="node in test.path.path" class="col-sm-1" ng-click="setCurrentNode(node)">

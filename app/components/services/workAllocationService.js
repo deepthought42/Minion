@@ -1,6 +1,6 @@
 'use strict';
 
-var WorkAllocationService = angular.module('Minion.WorkAllocationService', ['ngResource', 'Qanairy.serviceConfig']);
+var WorkAllocationService = angular.module('Qanairy.WorkAllocationService', ['ngResource', 'Qanairy.serviceConfig']);
 
 WorkAllocationService.factory('WorkAllocation', ['$resource', 'Qanairy.serviceConfig', function ($resource, config) {
   return $resource(config.basePath + '/work', {id: '@id'}, {

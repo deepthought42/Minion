@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('Minion.starter', ['ui.router', 'Minion.WorkAllocationService', 'Minion.PathRealtimeService'])
+angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService', 'Qanairy.PathRealtimeService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('main.starter', {
-    url: "/starter",
-    templateUrl: 'components/starter/index.html',
+  $stateProvider.state('main.discovery', {
+    url: "/discovery",
+    templateUrl: 'components/discovery/index.html',
     controller: 'WorkManagementCtrl',
     data: {
       requiresLogin: true

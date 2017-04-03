@@ -7,7 +7,7 @@ var API_SERVER_CLIENT_ID='';  // set to '' if DELEGATION_ENABLED=false
 // Declare app level module which depends on views, and components
 angular.module('Qanairy', [
   'ui.router',
-  'Minion.starter',
+  'Qanairy.discovery',
   'Qanairy.dashboard',
   'Qanairy.domain',
   'Qanairy.tests',
@@ -24,7 +24,7 @@ angular.module('Qanairy', [
 ]).
 config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',
   function($urlRouterProvider, authProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider ) {
-    $urlRouterProvider.otherwise('/starter');
+    $urlRouterProvider.otherwise('/discovery');
 
     storeProvider.setStore("sessionStorage");
     authProvider.init({

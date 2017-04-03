@@ -1,4 +1,4 @@
-angular.module("Minion.PathRealtimeService", ['Qanairy.serviceConfig'])
+angular.module("Qanairy.PathRealtimeService", ['Qanairy.serviceConfig'])
 .service("PathRealtimeService", ['$q', '$timeout', 'Qanairy.serviceConfig', function($q, $timeout, config) {
     return service = {
       connect: function(url, acct_key, callback) {
