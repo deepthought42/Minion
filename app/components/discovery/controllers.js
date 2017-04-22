@@ -39,6 +39,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.eventSource.close();
 
     })
+    
     $scope.startMappingProcess = function(workAllocation){
       console.log("Starting mapping process : " + workAllocation.url );
       WorkAllocation.query({url:  $scope.workAllocation.urlProtocol+"://"+$scope.workAllocation.url, account_key: "account_key_here"})
@@ -59,8 +60,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         .$promise.then(function(){
           $scope.isStarted = false;
         });
-
-
     }
 
     /**

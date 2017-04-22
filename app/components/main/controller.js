@@ -1,5 +1,5 @@
 
-angular.module('Minion.main', ['ui.router'])
+angular.module('Qanairy.main', ['ui.router'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main', {
@@ -20,7 +20,7 @@ angular.module('Minion.main', ['ui.router'])
       $scope.isAuthenticated = false;
       $scope.paths = [];
       $scope.isStarted = false;
-
+      $scope.auth = auth;
       $scope.protocols = ["http", "https", "file"];
       $scope.workAllocation = {};
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
@@ -35,8 +35,6 @@ angular.module('Minion.main', ['ui.router'])
         .$promise.then(function(value){
           //broadcast event to start connection
           $rootScope.$broadcast("openPathStream");
-
-          console.log("successful work request");
           $scope.isStarted = true;
         })
         .catch( function(data){

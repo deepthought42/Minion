@@ -59,12 +59,12 @@
               Domain: {domain goes here}
               <a ui-sref="main.domain">Change?</a>
             </span>
-            <span class="col-sm-4 pull-left" controller="LoginCtrl">
-              <a ng-show="!isAuthenticated" href="#/" ng-click="authService.signin()">
+            <span class="col-sm-4 pull-left">
+              <a ng-show="!auth.isAuthenticated" href="#/" ng-click="authService.signin()">
                 <i class="fa fa-sign-in fa-fw"></i>
-                 Login
+                 Login | Sign up
               </a>
-              <a ng-show="isAuthenticated" href="#/" ng-click="authService.logout()">
+              <a ng-show="auth.isAuthenticated" href="#/" ng-click="authService.signout()">
                 <i class="fa fa-sign-out fa-fw"></i>
                  Logout
               </a>
@@ -83,7 +83,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                      <a ui-sref="main.l">
+                      <a href="">
                         <i class="fa fa-sign-out fa-fw"></i>
                         Logout
                       </a>
