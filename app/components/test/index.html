@@ -1,15 +1,5 @@
 <div class="container" ng-view></div>
 
-<form ng-submit="getTestsByUrl(tester.url)"
-      enctype="multipart/form-data"
-      novalidate>
-  <input type="text"
-         ng-model="tester.url"
-         placeholder="URL (eg. http://localhost:8080)" />
-
-  <button type="submit">Find Test by URL</button>
-</form>
-
 <form ng-submit="getTestByName(tester.name)"
       enctype="multipart/form-data"
       novalidate>
