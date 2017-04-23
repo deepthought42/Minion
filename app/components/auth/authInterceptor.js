@@ -28,6 +28,8 @@ auth.factory('AuthInterceptor', ['$q', '$rootScope', function($q, $rootScope) {
 
     // optional method
     'response': function(response) {
+    console.log("updating profile");
+    
       // do something on success
       return response;
     },

@@ -1,16 +1,16 @@
 /* CSS Document */
 
-/*------------------------------------------------------------------ 
-[Table of contents] 
- 
+/*------------------------------------------------------------------
+[Table of contents]
+
 
 1. Links
 2. Text Format
 3. Buttons
-3. Main Nav 
+3. Main Nav
 4. Side Nav
 5. Body/View Frame
-6. Footer / #footer 
+6. Footer / #footer
 7. Scrap
 
 ------------------------------------------------------------------------------------------------------------------------------*/
@@ -24,25 +24,25 @@ html {
 
 
 
-/*--------------------------- [1. Links] -------------------------------------------------------------------------------------*/  
+/*--------------------------- [1. Links] -------------------------------------------------------------------------------------*/
 
 a img {border: none; }
-	a:focus { 
-    outline: none; 
+	a:focus {
+    outline: none;
 	}
 	a {
 		color: #0000ff;
 		text-align:left;
 		text-decoration:none;
-		border: none;	
+		border: none;
 	}
-	
+
 	a:link { color: #3376c6;}
-	a:visited { color: #3376c6;}	
-	a:hover { color: #999999;}	
-	
-	
-/*--------------------------- [2. Text Format] -------------------------------------------------------------------------------*/  
+	a:visited { color: #3376c6;}
+	a:hover { color: #999999;}
+
+
+/*--------------------------- [2. Text Format] -------------------------------------------------------------------------------*/
 
 	p{
 		font-family:Helvetica, Arial, sans-serif;
@@ -50,14 +50,14 @@ a img {border: none; }
 		line-height: 19px;
 		letter-spacing:.2px;
 		margin-bottom: 16px;
-		display: inline;  
+		display: inline;
 		color:#333333;
 		min-width: 300px;
 	}
 	h1{
 		font-family:Georgia, "Times New Roman", Times, serif;
 		font-size: 30px;
-		line-height: 35px;	
+		line-height: 35px;
 		letter-spacing:.4px;
 		margin-bottom: 15px;
 		font-weight:normal;
@@ -68,8 +68,8 @@ a img {border: none; }
 		font-size: 16px;
 		line-height: 26px;
 		letter-spacing:.2px;
-		margin-bottom: 18px;		
-		display: inline; 
+		margin-bottom: 18px;
+		display: inline;
 		color:#11366e;
 	}
 	h3{
@@ -78,8 +78,8 @@ a img {border: none; }
 		font-weight:normal;
 		line-height: 22px;
 		letter-spacing:.2px;
-		margin-bottom: 22px;		
-		display: inline; 
+		margin-bottom: 22px;
+		display: inline;
 		color:#999;
 	}
 
@@ -110,7 +110,7 @@ a img {border: none; }
 
 
 
-/*--------------------------- [3. Buttons] -----------------------------------------------------------------------------*/  
+/*--------------------------- [3. Buttons] -----------------------------------------------------------------------------*/
 
 .btn-right {
   display: inline-block;
@@ -233,7 +233,7 @@ button.list-group-item-navigation.active:focus {
 
 
 
-/*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/  
+/*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/
 
 #main-nav{
 	background-color:#ffffff;
@@ -258,21 +258,21 @@ button.list-group-item-navigation.active:focus {
 }
 
 
-#main-nav a:focus { 
-    outline: none; 
+#main-nav a:focus {
+    outline: none;
 	}
-	
-	
+
+
 #main-nav a {
 		color: #bdc3c7;
 		text-align:left;
 		text-decoration:none;
-		border: none;	
+		border: none;
 	}
-	
+
 #main-nav a:link { color: #bdc3c7;}
-#main-nav a:visited { color: #bdc3c7;}	
-#main-nav a:hover { color: #9ba0a3;}	
+#main-nav a:visited { color: #bdc3c7;}
+#main-nav a:hover { color: #9ba0a3;}
 #main-nav a:active { color: #9ba0a3;}
 
 #searchbar{
@@ -366,7 +366,7 @@ button.list-group-item-navigation.active:focus {
 
 
 
-/*--------------------------- [4. Side Nav] -----------------------------------------------------------------------------*/  
+/*--------------------------- [4. Side Nav] -----------------------------------------------------------------------------*/
 
 
 /*!
@@ -416,7 +416,7 @@ button.list-group-item-navigation.active:focus {
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-	background-color:#eeeeee;
+    background-color:#eeeeee;
     padding: 0px;
 }
 
@@ -434,12 +434,12 @@ button.list-group-item-navigation.active:focus {
     list-style: none;
 }
 
-.sidebar-nav a:focus { 
-    outline: none; 
+.sidebar-nav a:focus {
+    outline: none;
 	}
 
-.sidebar-nav a:visited { color: #acc2d7;}	
-.sidebar-nav a:active { color: #ffffff;}	
+.sidebar-nav a:visited { color: #acc2d7;}
+.sidebar-nav a:active { color: #ffffff;}
 
 .sidebar-nav li {
     text-indent: 10px;
@@ -495,17 +495,17 @@ button.list-group-item-navigation.active:focus {
 	float:right;
 	clear:both;
 	}
-	
+
 .toggleleft a {
 		color: #acc2d7;
 		text-align:left;
 		text-decoration:none;
-		border: none;	
+		border: none;
 	}
-	
+
 .toggleleft a:link { color: #acc2d7;}
-.toggleleft a:visited { color: #acc2d7;}	
-.toggleleft a:hover { color: #ffffff;}	
+.toggleleft a:visited { color: #acc2d7;}
+.toggleleft a:hover { color: #ffffff;}
 .toggleleft a:active { color: #ffffff;}
 
 
@@ -545,7 +545,7 @@ button.list-group-item-navigation.active:focus {
 
 
 
-/*--------------------------- [5. Body/ View Frame] --------------------------------------------------------------------------------*/  
+/*--------------------------- [5. Body/ View Frame] --------------------------------------------------------------------------------*/
 #view-frame{
 	background-color:#ffffff;
 	margin-top:94px;
@@ -557,11 +557,11 @@ button.list-group-item-navigation.active:focus {
 	}
 
 
-/*--------------------------- [6. Footer] ------------------------------------------------------------------------------*/  
+/*--------------------------- [6. Footer] ------------------------------------------------------------------------------*/
 
 
 
-/*--------------------------- [7. Path Bubbles- scrap] -----------------------------------------------------------------*/  
+/*--------------------------- [7. Path Bubbles- scrap] -----------------------------------------------------------------*/
 
 .elementBubble {
   position : absolute;

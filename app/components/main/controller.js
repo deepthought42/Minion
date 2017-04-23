@@ -17,17 +17,26 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.displayUserDropDown = false;
       $scope.authService = auth;
       $scope.menuToggled = false;
-      $scope.isAuthenticated = false;
+      $scope.isAuthenticated = auth.isAuthenticated;
       $scope.paths = [];
       $scope.isStarted = false;
       $scope.auth = auth;
       $scope.protocols = ["http", "https", "file"];
       $scope.workAllocation = {};
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
+      $scope.domain = store.get('domain');
       console.log($scope.workAllocation.urlProtocol);
     }
 
     this._init();
+
+    /**
+     * updates user profile object from auth service
+     */
+    $scope.$on("update_profile", function(){
+      $scope.profile = auth.profile;
+      $scope.isAuthenticated = auth.isAuthenticated;
+    })
 
     $scope.startMappingProcess = function(workAllocation){
       console.log("Starting mapping process : " + workAllocation.url );

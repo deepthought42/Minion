@@ -13,8 +13,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   });
 }])
 
-.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog',
-  function($rootScope, $scope, Domain,  $mdDialog) {
+.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store',
+  function($rootScope, $scope, Domain,  $mdDialog, store) {
     this._init = function(){
       $scope.domains = Domain.query();
       $scope.domain_url = "";
@@ -22,10 +22,11 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
     $scope.createDomain = function(domain_url){
       Domain.save(domain_url);
-      alert("creating domain ");
+      store.set('domain', domain_url);
+      console.log("domain data store :: "+store.get('domain'));
     }
 
-    $scope.showCustom = function(event) {
+    $scope.openCreateDomainDialog = function(event) {
        $mdDialog.show({
           clickOutsideToClose: true,
           scope: $scope,

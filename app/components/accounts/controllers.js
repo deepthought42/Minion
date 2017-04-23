@@ -13,8 +13,8 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
   });
 }])
 
-.controller('AccountCtrl', ['$rootScope', '$scope', 'Account', '$state',
-  function($rootScope, $scope, Account, $state) {
+.controller('AccountCtrl', ['$rootScope', '$scope', 'Account', '$state', 'auth',
+  function($rootScope, $scope, Account, $state, auth) {
     this._init = function(){
       $scope.paths = [];
       $scope.isStarted = false;
@@ -23,10 +23,6 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
     }
 
     this._init();
-
-    $scope.$on('new-account', function(event, args){
-      console.log("NEW ACCOUNT WOOOO!!");
-    });
 
     $scope.createAlphaAccount = function(){
       var account = {
