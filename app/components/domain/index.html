@@ -3,7 +3,7 @@
   <div class="col-md-3">
     <i class="fa fa-plus" ng-click="openCreateDomainDialog()"></i>
   </div>
-  <div ng-repeat="domain in domains" class="col-md-3">
+  <div ng-repeat="domain in domains" class="col-md-3" ng-click="selectDomain(domain)">
     {{domain.url}}
   </div>
 </div>
