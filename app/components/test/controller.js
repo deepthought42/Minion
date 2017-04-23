@@ -13,17 +13,20 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
   });
 }])
 
-.controller('TesterIndexCtrl', ['$scope', '$interval', 'Tester',
-  function($scope, $interval, Tester) {
-    $scope.tester = {};
-    $scope.groups = [];
-    $scope.node_key = "";
-    $scope.current_node = null;
-    console.log("groups : :" + $scope.groups);
+.controller('TesterIndexCtrl', ['$scope', '$interval', 'Tester', 'store',
+  function($scope, $interval, Tester, store) {
+    $scope._init= function(){
+      $scope.tester = {};
+      $scope.groups = [];
+      $scope.node_key = "";
+      $scope.current_node = null;
+      $scope.getTestsByUrl(store.get('domain').url);
+    }
 
     $scope.setCurrentNodeKey = function(key){
       $scope.node_key=key;
     }
+
     $scope.getTestsByUrl = function(url) {
       $scope.tests = Tester.query({url: url});
       $scope.groups = Tester.getGroups({url: url});
@@ -69,5 +72,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       console.log("current node being checked : "+ ($scope.current_node.type=='Page'));
       return $scope.current_node=='Page';
     }
+
+    $scope._init();
   }
 ]);
