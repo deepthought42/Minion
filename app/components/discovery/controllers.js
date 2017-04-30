@@ -16,11 +16,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 .controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService',
   function($rootScope, $scope, WorkAllocation, PathRealtimeService) {
     this._init = function(){
-      $scope.paths = [];
+      $scope.tests = [];
       $scope.isStarted = false;
       $scope.current_node_image = "";
       $scope.current_node = null;
-      $scope.paths= [];
     }
 
     $rootScope.$on("openPathStream", function(){
@@ -28,8 +27,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
       /**We use an event source for sse over websockets because websockets are overkill for the current usage */
       $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here", function(message) {
-        console.log("Recieved message from server " + message + " :: " + Object.keys(message));
-        $scope.paths.push(JSON.parse(message.data));
+        $scope.tests.push(JSON.parse(message.data));
         $scope.$apply();
       });
     });
@@ -39,18 +37,17 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.eventSource.close();
 
     })
-    
+
     $scope.startMappingProcess = function(workAllocation){
       console.log("Starting mapping process : " + workAllocation.url );
       WorkAllocation.query({url:  $scope.workAllocation.urlProtocol+"://"+$scope.workAllocation.url, account_key: "account_key_here"})
         .$promise.then(function(value){
-          //console.log("VALUE : "+value);
           $scope.isStarted = true;
         });
 
-      $scope.eventSource = PathRealtimeService.connect("/streamPathExperience", "account_key_here",function(message) {
-        console.log("Recieved message from server " + message + " :: " + Object.keys(message));
-        $scope.paths.push(JSON.parse(message.data));
+      $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here",function(message) {
+        console.log("Recieved message from server " + message.data + " :: " + Object.keys(message));
+        $scope.tests.push(message.data);
         $scope.$apply();
       });
     }
