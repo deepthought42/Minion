@@ -3,7 +3,7 @@
 angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('main.domain', {
+  $stateProvider.state('main.domains', {
     url: "/domains",
     templateUrl: 'components/domain/index.html',
     controller: 'DomainCtrl',

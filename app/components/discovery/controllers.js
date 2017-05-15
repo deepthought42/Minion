@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService', 'Qanairy.PathRealtimeService'])
+angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService', 'Qanairy.PathRealtimeService', 'Qanairy.TesterService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.discovery', {
@@ -13,10 +13,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
   });
 }])
 
-.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService',
-  function($rootScope, $scope, WorkAllocation, PathRealtimeService) {
+.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester',
+  function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester) {
     this._init = function(){
-      $scope.tests = [];
+      $scope.tests = Tester.findAllUnverified({url:"qanairy.com"});
       $scope.isStarted = false;
       $scope.current_node_image = "";
       $scope.current_node = null;
@@ -57,6 +57,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         .$promise.then(function(){
           $scope.isStarted = false;
         });
+
+        //send kill signal to server for sse
     }
 
     /**

@@ -6,6 +6,7 @@ testService.factory('Tester', ['$resource', 'Qanairy.serviceConfig', function ($
   return $resource(config.basePath + '/tests', {key: '@key'}, {
     update: { method: 'PUT'},
     findByName: {url : config.basePath + '/tests/name', method: 'GET', isArray: true},
+    findAllUnverified: {url : config.basePath + '/tests/unverified', method: 'GET', isArray: true, params: {url: '@url'}},
     updateCorrectness: {url : config.basePath + '/tests/updateCorrectness/:key', method: 'PUT', params: {key: '@key', correct: '@correct'}},
     runTest: {url : config.basePath + '/tests/runTest/:key', method: 'POST', params: {key: '@key'}},
     addGroup: {url : config.basePath + '/tests/addGroup/:group/:key', method: 'POST', params: {key: '@key', group: '@group'}},

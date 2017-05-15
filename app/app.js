@@ -25,7 +25,7 @@ angular.module('Qanairy', [
 config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',
   function($urlRouterProvider, authProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider) {
     qanairyAuthProvider = authProvider;
-    $urlRouterProvider.otherwise('/discovery');
+    $urlRouterProvider.otherwise('/domains');
 
     storeProvider.setStore("sessionStorage");
     authProvider.init({
@@ -33,8 +33,6 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       domain:  AUTH0_DOMAIN,
       callbackUrl: location.href
     });
-
-
 
       jwtOptionsProvider.config({
         /*tokenGetter: function(auth) {
@@ -84,6 +82,10 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
 .run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', function($rootScope, auth, store, jwtHelper, $state){
   qanairyAuthProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
     console.log("success token : "+idToken);
+    console.log("DOMAIN 1: "+store.get('domain'));
+    if(store.get('domain') == null){
+       $state.go('main.domains')
+    }
     store.set('token', idToken);
 
       profilePromise.then(function(profile) {
@@ -123,7 +125,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
   $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
      if (!auth.isAuthenticated) {
-       event.preventDefault();
+       e.preventDefault();
        // get me a login modal!
        console.log("going back to signin")
        auth.signin({
@@ -135,6 +137,12 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
        }, function(err) {
          console.log("Sign in Error :(", err);
        });
+     }
+     else{
+       if(toState.name != 'main.domains' && store.get('domain') == null){
+          e.preventDefault();
+          $state.go('main.domains')
+       }
      }
     });
 
