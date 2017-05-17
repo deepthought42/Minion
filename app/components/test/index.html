@@ -2,36 +2,6 @@
 
 <div class="row no-gutter">
 
-	<div class="col-sm-4">
-	<div class="input-group">
-<form ng-submit="getTestsByUrl(tester.url)"
-      enctype="multipart/form-data"
-      novalidate>
-  <input class="form-control" type="text"
-         ng-model="tester.url"
-         placeholder="URL (eg. http://localhost:8080)" />
-	<span class="input-group-btn"><button class="btn btn--gray" type="submit">Find Test by URL</button></span>
-</form>
-		</div></div>
-	
-	
-			
-			
-			
-	<div class="col-sm-4">
-	<div class="input-group">
-<form ng-submit="getTestByName(tester.name)"
-      enctype="multipart/form-data"
-      novalidate>
-  <input class="form-control" type="text"
-         ng-model="tester.name"
-         placeholder="URL (eg. http://localhost:8080)" />
-
-	<span class="input-group-btn"><button class="btn btn--gray" type="submit">Find Test By Name</button></span>
-</form>
-		</div></div>
-
-
 
 <div class="col-sm-4">
   <select ng-options="group as group for group in groups" ng-model="selectedGroup">
