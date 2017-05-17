@@ -13,8 +13,8 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
   });
 }])
 
-.controller('AccountCtrl', ['$rootScope', '$scope', 'Account',
-  function($rootScope, $scope, Account) {
+.controller('AccountCtrl', ['$rootScope', '$scope', 'Account', '$state', 'auth',
+  function($rootScope, $scope, Account, $state, auth) {
     this._init = function(){
       $scope.paths = [];
       $scope.isStarted = false;
@@ -24,16 +24,18 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
 
     this._init();
 
-    $scope.$on('new-account', function(event, args){
-      console.log("NEW ACCOUNT WOOOO!!");
-    });
-
     $scope.createAlphaAccount = function(){
       var account = {
-        service_package: "alpha",
-        users: ["test32@qanairy.com"]
+        "orgName": "temp_org_name",
+        "servicePackage": "alpha",
+        "paymentAcctNum": ""
       }
-      Account.save(account);
+      Account.save(account).$promise.then(function(){
+        $state.go('main.discovery');
+      },
+      function(){
+        console.log("Failure");
+      });
     }
   }
 ]);

@@ -88,11 +88,20 @@
 	</div>
 </div>
 
+<<<<<<< HEAD
 <div class="row test">
   <div class="col-xs-2 test__status">
    <div class="row no-gutter">
     <span class="col-xs-6">
       <i class="fa fa-check"></i><br>
+=======
+<div class="col-sm-12" ng-repeat="test in tests">
+
+  <div class="col-sm-2">
+    {{test.correct}}
+    <span class="col-sm-6">
+      <i class="fa fa-check"/>
+>>>>>>> master
       Correct
     </span>
     <span class="col-xs-6">
@@ -101,10 +110,21 @@
     </span>
 	  </div>
   </div>
+<<<<<<< HEAD
   <div class="col-xs-4 test__title">
     Regression Test 1 {test.title}
   </div>
   <div class="col-xs-2">
+=======
+  <div class="col-sm-4">
+    {{test.name}}
+
+    Regression Test 1 
+  </div>
+  <div class="col-sm-2">
+    {{test.runtime}}
+
+>>>>>>> master
     3.07
   </div>
   <div class="col-xs-2">
