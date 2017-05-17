@@ -3,7 +3,7 @@
 angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('main.domains', {
+  $stateProvider.state('main.domain', {
     url: "/domains",
     templateUrl: 'components/domain/index.html',
     controller: 'DomainCtrl',
@@ -13,38 +13,19 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   });
 }])
 
-.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state',
-  function($rootScope, $scope, Domain,  $mdDialog, store, $state) {
+.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog',
+  function($rootScope, $scope, Domain,  $mdDialog) {
     this._init = function(){
       $scope.domains = Domain.query();
       $scope.domain_url = "";
     }
 
     $scope.createDomain = function(domain_url){
-      Domain.save(domain_url).$promise.then(function(successResult){
-        domain = successResult;
-        console.log("successResult "+domain);
-        store.set('domain', domain_url);
-      },
-      function(errorResult){
-        // do something on error
-        alert("An error occurred while saving the domain");
-      });
-
-      console.log("domain data store :: "+store.get('domain'));
+      Domain.save(domain_url);
+      alert("creating domain ");
     }
 
-    /**
-     * Sets domain for session
-     */
-    $scope.selectDomain = function(domain){
-      alert("selecting domain");
-      store.set('domain', domain);
-
-      $state.go("main.tests");
-    }
-
-    $scope.openCreateDomainDialog = function(event) {
+    $scope.showCustom = function(event) {
        $mdDialog.show({
           clickOutsideToClose: true,
           scope: $scope,

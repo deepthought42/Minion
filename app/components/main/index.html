@@ -48,7 +48,6 @@
   <!-- /#sidebar-wrapper -->
 
   <!-- Page Content -->
-<<<<<<< HEAD
  
     <div class="page-wrap">
      
@@ -108,60 +107,6 @@
 			  </div>
 			 </div>
 			</div>
-=======
-  <div id="page-content-wrapper">
-    <div class="container-fluid">
-      <div id="view-frame" class="row">
-          <div class="col-sm-6">
-            <span ng-show="isAuthenticated">
-              Hi {{profile.email}}, you have {###} failed tests.
-              <a href="#/results" >Review?</a>
-            </span>
-          </div>
-          <div class="col-sm-2">
-
-          </div>
-          <div class="col-sm-4">
-            <span class="col-sm-8 pull-left">
-              Domain: {{domain.url}}
-              <a ui-sref="main.domains">Change?</a>
-            </span>
-            <span class="col-sm-4 pull-left">
-              <a ng-show="!auth.isAuthenticated" href="#/" ng-click="authService.signin()">
-                <i class="fa fa-sign-in fa-fw"></i>
-                 Login | Sign up
-              </a>
-              <a ng-show="auth.isAuthenticated" href="#/" ng-click="authService.signout()">
-                <i class="fa fa-sign-out fa-fw"></i>
-                 Logout
-              </a>
-            </span>
-            <div class="navbar-top-links navbar-right">
-              <!-- /.dropdown -->
-              <li class="dropdown" ng-show="isAuthenticated">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i>
-                    <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                      <a href="">
-                        <i class="fa fa-sign-out fa-fw"></i>
-                        Logout
-                      </a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-              </li>
-            <!-- /.dropdown -->
-            </ul>
-          </div>
->>>>>>> master
         </div>
         
         <div id="secondary-nav" class="row no-gutter">
