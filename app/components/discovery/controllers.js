@@ -13,13 +13,14 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
   });
 }])
 
-.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester',
-  function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester) {
+.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester', 'store',
+  function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester, store) {
     this._init = function(){
       $scope.tests = Tester.findAllUnverified({url:"qanairy.com"});
       $scope.isStarted = false;
       $scope.current_node_image = "";
       $scope.current_node = null;
+      $scope.discovery_url = store.get('domain').url;
     }
 
     $rootScope.$on("openPathStream", function(){
@@ -38,9 +39,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     })
 
-    $scope.startMappingProcess = function(workAllocation){
-      console.log("Starting mapping process : " + workAllocation.url );
-      WorkAllocation.query({url:  $scope.workAllocation.urlProtocol+"://"+$scope.workAllocation.url, account_key: "account_key_here"})
+    $scope.startMappingProcess = function(){
+      console.log("Starting mapping process : " + $scope.discovery_url );
+      WorkAllocation.query({url:  "http://"+$scope.discovery_url, account_key: "account_key_here"})
         .$promise.then(function(value){
           $scope.isStarted = true;
         });
@@ -67,6 +68,13 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
     */
     $scope.showInfoPanel = function(obj){
 
+    }
+
+    $scope.updateCorrectness = function(test, correctness){
+      Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
+        .then(function(data){
+          console.log("successfully updated");
+        })
     }
 
     this._init();

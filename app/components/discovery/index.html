@@ -1,32 +1,16 @@
 <div class="col-sm-12" controller="WorkManagementCtrl">
-  <button ng-show="isStarted"
+  <!--<button ng-show="isStarted"
           class="btn btn-danger col-sm-12"
           ng-click="stopMappingProcess('account_key_here')">
       Stop!
   </button>
-
+-->
   <div class="col-sm-12">
-    <form ng-submit="startMappingProcess(workAllocation)"
-          enctype="multipart/form-data"
-          ng-show="!isStarted"
-          ng-init="workAllocation = {}"
-          novalidate>
-      <div class="col-sm-3">
-        <select ng-model="workAllocation.urlProtocol" ng-options="protocol as protocol for protocol in protocols"></select>
-        <span >://</span>
+    <div class="col-sm-2">
+      <div class="row">
+        <button ng-click="startMappingProcess()" class="btn btn-success">Start Crawl</button>
       </div>
-
-      <input class="col-sm-7"
-             type="text"
-             ng-model="workAllocation.url"
-             placeholder="URL (eg. localhost:8080)"
-             value="localhost:3000" />
-      <div class="col-sm-2">
-        <div class="row">
-          <button type="submit" class="btn btn-success">Start Crawl</button>
-        </div>
     </div>
-    </form>
   </div>
 </div>
 
@@ -80,19 +64,17 @@
 
   <div class="col-sm-2">
     {{test.correct}}
-    <span class="col-sm-6">
-      <i class="fa fa-check"/>
+    <span class="col-sm-6" ng-click="updateCorrectness(test, true)">
+      <i class="fa fa-check" />
       Correct
     </span>
-    <span class="col-sm-6">
+    <span class="col-sm-6" ng-click="updateCorrectness(test, false)">
       <i class="fa fa-times"/>
       Incorrect
     </span>
   </div>
   <div class="col-sm-4">
-    {{test.name}}
-
-    Regression Test 1 
+    {{test.name || 'Temporary test name'}}
   </div>
   <div class="col-sm-2">
     {{test.runtime}}
