@@ -29,12 +29,11 @@
 				 placeholder="URL (eg. localhost:8080)"
 				 value="localhost:3000" />
 			<span class="input-group-btn">
-			  <button type="submit" class="btn btn--green">Start Crawl</button>
+			  <button type="submit" class="btn btn--green" ng-click="startMappingProcess()">Start Crawl</button>
 			</span>
 			  </div></div>
 	   </div>
-			   </form></div>
-	  
+	  </form></div>
   </div>
   <div class="col-xs-4"></div>
 </div>
@@ -91,18 +90,19 @@
 <div class="row test">
   <div class="col-xs-2 test__status">
    <div class="row no-gutter">
-    <span class="col-xs-6">
+    <span class="col-xs-6" ng-click="updateCorrectness(test, true)>
       <i class="fa fa-check"></i><br>
       Correct
     </span>
-    <span class="col-xs-6">
+    <span class="col-xs-6" ng-click="updateCorrectness(test, false)>
       <i class="fa fa-times"></i><br>
       Incorrect
     </span>
 	  </div>
   </div>
+
   <div class="col-xs-4 test__title">
-    Regression Test 1 {test.title}
+    Regression Test 1  {{test.name || '%%% TEMPORARY TEST NAME %%%'}}
   </div>
   <div class="col-xs-2">
     3.07

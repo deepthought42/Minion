@@ -116,11 +116,50 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       $httpProvider.interceptors.push('jwtInterceptor');
 
   }])
-.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', function($rootScope, auth, store, jwtHelper, $state){
+
+.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', function($rootScope, auth, store, jwtHelper, $state , $location){
+  qanairyAuthProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
+    if(store.get('domain') == null){
+       $state.go('main.domains')
+    }
+    store.set('token', idToken);
+
+    profilePromise.then(function(profile) {
+      sessionStorage.setItem('profile', profile);
+      //$rootScope.$broadcast('new-account');
+      profile.app_metadata.plan = "alpha"
+      if(profile.app_metadata && profile.app_metadata.status == "new"){
+        console.log("navigating to account index");
+        //broadcast event to trigger creating account
+        $location.path("/accounts");
+        //create account with user data
+        //do something with it
+      }
+      // sessionStorage.set('token', idToken);
+      console.log("profile token :: "+profile + " : " +profile.email);
+      console.log("app_metadata :: "+Object.keys(profile.app_metadata));
+    });
+  });
+
+    qanairyAuthProvider.on('authenticated', function($location) {
+      console.log("Authenticated ;; ")
+      // This is after a refresh of the page
+      // If the user is still authenticated, you get this event
+    });
+
+    qanairyAuthProvider.on('loginFailure', function($location, error) {
+      console.log("ERROR !!");
+
+    });
+
+    qanairyAuthProvider.on('forbidden', function($location, error){
+      console.log("forbidden request");
+      $location.go('/login');
+    });
+
   $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
      if (!auth.isAuthenticated) {
-       event.preventDefault();
        // get me a login modal!
        console.log("going back to signin")
        auth.signin({
@@ -132,6 +171,12 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
        }, function(err) {
          console.log("Sign in Error :(", err);
        });
+     }
+     else{
+       if(toState.name != 'account' && toState.name != 'main.domains' && store.get('domain') == null){
+          e.preventDefault();
+          $state.go('main.domains')
+       }
      }
     });
 
@@ -149,6 +194,12 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
           console.log("Sign in Error :(", err);
         });
     });
+
+    $rootScope.$on('account-missing', function (e){
+      console.log("account missing");
+      e.preventDefault();
+      $location.path('/accounts');
+    })
   // Put the authService on $rootScope so its methods
   // can be accessed from the nav bar
   auth.hookEvents();
