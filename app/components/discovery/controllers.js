@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService', 'Qanairy.PathRealtimeService', 'Qanairy.TesterService'])
+angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService', 'Qanairy.PathRealtimeService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.discovery', {
@@ -16,10 +16,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 .controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester', 'store',
   function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester, store) {
     this._init = function(){
-      $scope.tests = Tester.findAllUnverified({url:"qanairy.com"});
+      $scope.paths = [];
       $scope.isStarted = false;
       $scope.current_node_image = "";
       $scope.current_node = null;
+      $scope.paths= [];
       $scope.discovery_url = store.get('domain').url;
     }
 
@@ -28,7 +29,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
       /**We use an event source for sse over websockets because websockets are overkill for the current usage */
       $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here", function(message) {
-        $scope.tests.push(JSON.parse(message.data));
+        console.log("Recieved message from server " + message + " :: " + Object.keys(message));
+        $scope.paths.push(JSON.parse(message.data));
         $scope.$apply();
       });
     });
@@ -43,12 +45,13 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       console.log("Starting mapping process : " + $scope.discovery_url );
       WorkAllocation.query({url:  "http://"+$scope.discovery_url, account_key: "account_key_here"})
         .$promise.then(function(value){
+          //console.log("VALUE : "+value);
           $scope.isStarted = true;
         });
 
-      $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here",function(message) {
-        console.log("Recieved message from server " + message.data + " :: " + Object.keys(message));
-        $scope.tests.push(message.data);
+      $scope.eventSource = PathRealtimeService.connect("/streamPathExperience", "account_key_here",function(message) {
+        console.log("Recieved message from server " + message + " :: " + Object.keys(message));
+        $scope.paths.push(JSON.parse(message.data));
         $scope.$apply();
       });
     }
@@ -58,8 +61,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         .$promise.then(function(){
           $scope.isStarted = false;
         });
-
-        //send kill signal to server for sse
     }
 
     /**

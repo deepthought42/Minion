@@ -4,7 +4,6 @@ var AUTH0_CLIENT_ID='wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV';
 var API_SERVER_URL='http://localhost:8080';  // default server url for Java Spring Security API sample
 var DELEGATION_ENABLED=false;
 var API_SERVER_CLIENT_ID='';  // set to '' if DELEGATION_ENABLED=false
-var qanairyAuthProvider = null;
 // Declare app level module which depends on views, and components
 angular.module('Qanairy', [
   'ui.router',
@@ -24,15 +23,51 @@ angular.module('Qanairy', [
 ]).
 config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',
   function($urlRouterProvider, authProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider) {
-    qanairyAuthProvider = authProvider;
-    $urlRouterProvider.otherwise('/domains');
+    $urlRouterProvider.otherwise('/discovery');
 
     storeProvider.setStore("sessionStorage");
     authProvider.init({
-      clientID: AUTH0_CLIENT_ID,
-      domain:  AUTH0_DOMAIN,
+      clientID: 'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV',
+      domain: 'qanairy.auth0.com',
       callbackUrl: location.href
     });
+
+    authProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
+      console.log("success token : "+idToken);
+      store.set('token', idToken);
+
+        profilePromise.then(function(profile) {
+          sessionStorage.setItem('profile', profile);
+          //$rootScope.$broadcast('new-account');
+          profile.app_metadata.plan = "alpha"
+          if(profile.app_metadata && profile.app_metadata.status == "new"){
+            console.log("navigating to account index");
+            //broadcast event to trigger creating account
+            $location.path("/accounts");
+            //create account with user data
+            //do something with it
+          }
+          // sessionStorage.set('token', idToken);
+          console.log("profile token :: "+profile);
+          console.log("app_metadata :: "+Object.keys(profile.app_metadata));
+        });
+      });
+
+      authProvider.on('authenticated', function($location) {
+        console.log("Authenticated ;; ")
+        // This is after a refresh of the page
+        // If the user is still authenticated, you get this event
+      });
+
+      authProvider.on('loginFailure', function($location, error) {
+        console.log("ERROR !!");
+
+      });
+
+      authProvider.on('forbidden', function($location, error){
+        console.log("forbidden request");
+        $location.go('/login');
+      });
 
       jwtOptionsProvider.config({
         /*tokenGetter: function(auth) {
@@ -48,6 +83,8 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
         if (DELEGATION_ENABLED) {
           // does Auth0 delegation lookup
           var fetchDelegationTokenFromAuth0 = function () {
+            console.log("enabled : what");
+
             return auth.getToken({
               targetClientId: 'mbFktm6CPSZ7ZsAcFj11nwzkb3X64fpP',
               scope: 'openid profile app_metadata'
@@ -79,6 +116,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       $httpProvider.interceptors.push('jwtInterceptor');
 
   }])
+
 .run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', function($rootScope, auth, store, jwtHelper, $state , $location){
   qanairyAuthProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
     if(store.get('domain') == null){
