@@ -31,7 +31,11 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
     authProvider.init({
       clientID: AUTH0_CLIENT_ID,
       domain:  AUTH0_DOMAIN,
-      callbackUrl: location.href
+      callbackUrl: location.href,
+      theme: {
+        logo: 'https://s3.amazonaws.com/qanairy.com/assets/images/qanairy_logo_300.png',
+        primaryColor: '#fddc05'
+      }
     });
 
       jwtOptionsProvider.config({
@@ -135,9 +139,14 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
        });
      }
      else{
-       if(toState.name != 'account' && toState.name != 'main.domains' && store.get('domain') == null){
+       console.log("from state "+fromState.name );
+       if(toState.name!= 'about' && toState.name != 'account' && fromState.name != 'main.domains' && store.get('domain') == null){
           e.preventDefault();
-          $state.go('main.domains')
+          $state.go('main.domains');
+       }
+       else if(fromState.name == 'main.domains' && store.get('domain') == null){
+         e.preventDefault();
+         $rootScope.$broadcast('domainRequiredError');
        }
      }
     });

@@ -272,3 +272,20 @@ textarea {
         page-break-after: avoid;
     }
 }
+
+
+.a0-avatar-guest {
+  content: url('https://www.iconfinder.com/data/icons/website-icons/512/User_Avatar-512.png') !important
+}
+
+.a0-sign-up > span {
+  text-align: center !important
+}
+
+.a0-primary {
+  background-color: #fddc05 !important
+}
+
+.a0-footer {
+  display: none !important
+}

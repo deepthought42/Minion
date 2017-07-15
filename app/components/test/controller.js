@@ -13,13 +13,14 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
   });
 }])
 
-.controller('TesterIndexCtrl', ['$scope', '$interval', 'Tester', 'store',
-  function($scope, $interval, Tester, store) {
+.controller('TesterIndexCtrl', ['$scope', '$interval', 'Tester', 'store', '$state',
+  function($scope, $interval, Tester, store, $state) {
     $scope._init= function(){
       $scope.tester = {};
       $scope.groups = [];
       $scope.node_key = "";
       $scope.current_node = null;
+
       $scope.getTestsByUrl(store.get('domain').url);
     }
 

@@ -1,126 +1,62 @@
-/*(function () {
+// app/auth/auth.service.js
+
+(function () {
 
   'use strict';
 
   angular
-      .module('Qanairy.Auth')
-      .service('AuthService', authService);
+    .module('Qanairy')
+    .service('authService', authService);
 
+  authService.$inject = ['$state', 'angularAuth0', '$timeout'];
 
-  authService.$inject = ['$state', 'lock', 'authManager'];
-
-  function authService($state, lock, authManager) {
+  function authService($state, angularAuth0, $timeout) {
 
     function login() {
-      console.log("show login stuff");
-      lock.show();
+      angularAuth0.authorize();
     }
 
-    // Logging out just requires removing the user's
-    // id_token and profile
-    function logout() {
-      localStorage.removeItem('id_token');
-      authManager.unauthenticate();
-    }
-
-    // Set up the logic for when a user authenticates
-    // This method is called from app.run.js
-    function registerAuthenticationListener() {
-      lock.on('authenticated', function (authResult) {
-        localStorage.setItem('id_token', authResult.idToken);
-        authManager.authenticate();
-      });
-
-      lock.on('authorization_error', function (err) {
-        console.log(err);
-      });
-    }
-
-    return {
-      login: login,
-      logout: logout,
-      registerAuthenticationListener: registerAuthenticationListener
-    }
-  }
-})();
-*/
-
-/*
-angular
-    .module('Qanairy.Auth')
-    .service('AuthService', authService);
-
-  authService.$inject = ['$state', 'lock', 'authManager'];
-
-  function authService($state, angularAuth0, authManager) {
-
-    function login(username, password) {
-      console.log("login");
-      angularAuth0.redirect.loginWithCredentials({
-        connection: 'Username-Password-Authentication',
-        username: username,
-        password: password,
-      }, function(err) {
-        if (err) return alert(err.description);
-      },function(success){
-        console.log('success');
-      });
-    }
-
-    function signup(username, password) {
-      angularAuth0.redirect.signupAndLogin({
-        connection: 'Username-Password-Authentication',
-        email: username,
-        password: password
-      }, function(err) {
-        consol.log("error occurred while registering for service");
-        if (err) return alert(err.description);
-      },function(success){
-        console.log('success');
-      });
-    }
-
-    function loginWithGoogle() {
-      angularAuth0.authorize({
-        connection: 'google-oauth2'
-      });
-    }
-
-    function handleParseHash() {
-      angularAuth0.parseHash(
-        { _idTokenVerification: false },
-        function(err, authResult) {
-        if (err) {
+    function handleAuthentication() {
+      angularAuth0.parseHash(function(err, authResult) {
+        if (authResult && authResult.accessToken && authResult.idToken) {
+          setSession(authResult);
+          $state.go('home');
+        } else if (err) {
+          $timeout(function() {
+            $state.go('home');
+          });
           console.log(err);
         }
-        if (authResult && authResult.idToken) {
-          setUser(authResult);
-        }
       });
     }
 
-    function logout() {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('id_token');
-    }
-
-    function setUser(authResult) {
+    function setSession(authResult) {
+      // Set the time that the access token will expire at
+      let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
       localStorage.setItem('access_token', authResult.accessToken);
       localStorage.setItem('id_token', authResult.idToken);
+      localStorage.setItem('expires_at', expiresAt);
+    }
+
+    function logout() {
+      // Remove tokens and expiry time from localStorage
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('expires_at');
     }
 
     function isAuthenticated() {
-      return authManager.isAuthenticated();
+      // Check whether the current time is past the
+      // access token's expiry time
+      let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+      return new Date().getTime() < expiresAt;
     }
 
     return {
       login: login,
-      signup: signup,
-      loginWithGoogle: loginWithGoogle,
-      handleParseHash: handleParseHash,
+      handleAuthentication: handleAuthentication,
       logout: logout,
       isAuthenticated: isAuthenticated
     }
   }
 })();
-*/

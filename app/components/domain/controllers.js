@@ -18,29 +18,28 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     this._init = function(){
       $scope.domains = Domain.query();
       $scope.domain_url = "";
+      $scope.domain_error = "";
+      $scope.domain_creation_err = "An error occurred while saving the domain";
     }
 
     $scope.createDomain = function(domain_url){
       Domain.save(domain_url).$promise.then(function(successResult){
-        domain = successResult;
+        $scope.show_create_domain_err = false;
+        var domain = successResult;
         console.log("successResult "+domain);
         store.set('domain', domain_url);
       },
       function(errorResult){
-        // do something on error
-        alert("An error occurred while saving the domain");
+        $scope.show_create_domain_err = true;
       });
-
-      console.log("domain data store :: "+store.get('domain'));
     }
 
     /**
      * Sets domain for session
      */
     $scope.selectDomain = function(domain){
-      alert("selecting domain");
       store.set('domain', domain);
-
+      $rootScope.domain = domain;
       $state.go("main.tests");
     }
 
@@ -69,5 +68,12 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     };
 
     this._init();
+
+    $scope.$on('domainRequiredError', function(){
+      console.log("domain error "+$scope.domain_error);
+      $scope.domain_error = "A domain must be selected first";
+      //$scope.$apply();
+    })
+
   }
 ]);

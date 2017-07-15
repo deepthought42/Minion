@@ -24,7 +24,7 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.protocols = ["http", "https", "file"];
       $scope.workAllocation = {};
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
-      $scope.domain = store.get('domain');
+      $rootScope.domain = store.get('domain');
       console.log($scope.workAllocation.urlProtocol);
     }
 
