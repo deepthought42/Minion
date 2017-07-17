@@ -17,7 +17,7 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.displayUserDropDown = false;
       $scope.authService = auth;
       $scope.menuToggled = false;
-      $scope.isAuthenticated = auth.isAuthenticated;
+      $scope.isAuthenticated = false;
       $scope.paths = [];
       $scope.isStarted = false;
       $scope.auth = auth;
@@ -29,14 +29,6 @@ angular.module('Qanairy.main', ['ui.router'])
     }
 
     this._init();
-
-    /**
-     * updates user profile object from auth service
-     */
-    $scope.$on("update_profile", function(){
-      $scope.profile = auth.profile;
-      $scope.isAuthenticated = auth.isAuthenticated;
-    })
 
     $scope.startMappingProcess = function(workAllocation){
       console.log("Starting mapping process : " + workAllocation.url );

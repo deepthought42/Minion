@@ -27,7 +27,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     $scope.setCurrentNodeKey = function(key){
       $scope.node_key=key;
     }
-
     $scope.getTestsByUrl = function(url) {
       $scope.tests = Tester.query({url: url});
       $scope.groups = Tester.getGroups({url: url});
@@ -73,7 +72,5 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       console.log("current node being checked : "+ ($scope.current_node.type=='Page'));
       return $scope.current_node=='Page';
     }
-
-    $scope._init();
   }
 ]);

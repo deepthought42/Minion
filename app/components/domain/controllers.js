@@ -3,7 +3,7 @@
 angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('main.domains', {
+  $stateProvider.state('main.domain', {
     url: "/domains",
     templateUrl: 'components/domain/index.html',
     controller: 'DomainCtrl',
@@ -13,8 +13,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   });
 }])
 
-.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state',
-  function($rootScope, $scope, Domain,  $mdDialog, store, $state) {
+.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog',
+  function($rootScope, $scope, Domain,  $mdDialog) {
     this._init = function(){
       $scope.domains = Domain.query();
       $scope.domain_url = "";
@@ -43,7 +43,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $state.go("main.tests");
     }
 
-    $scope.openCreateDomainDialog = function(event) {
+    $scope.showCustom = function(event) {
        $mdDialog.show({
           clickOutsideToClose: true,
           scope: $scope,
