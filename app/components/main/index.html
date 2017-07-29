@@ -1,13 +1,5 @@
-
-  <!-- Sidebar -->
-
-
-
-
-     <input type="checkbox" class="main-nav-check" id="main-nav-check" />
-
-
-
+<!-- Sidebar -->
+<input type="checkbox" class="main-nav-check" id="main-nav-check" />
 
 <nav class="side-nav" id="side-nav">
     <div id="sidepanel">
@@ -52,63 +44,58 @@
   <!-- Page Content -->
 
     <div class="page-wrap">
-
-
       <div id="nav-bar" class="main-header container-fluid">
+        <div id="main-nav" class="row no-gutter">
 
-
-
-          <div id="main-nav" class="row no-gutter">
-
-			  <div id="left-main-nav" class="col-xs-6">
-				<span ng-show="!isAuthenticated">
-				  Hi {Name goes here}, you have {###} failed tests.
-				  <a href="#/results" >Review?</a>
-				</span>
-			  </div>
+    		  <div id="left-main-nav" class="col-xs-6">
+      			<span ng-show="!isAuthenticated">
+      			  Hi {Name goes here}, you have {###} failed tests.
+      			  <a href="#/results" >Review?</a>
+      			</span>
+    		  </div>
 
 
 			  <div id="right-main-nav" class="col-xs-6">
-			   <div class="row">
-				<div class="col-xs-8 pull-left" style="">
-				  Domain: {domain goes here}
-				  <a ui-sref="main.domains">Change?</a>
-				</div>
-				<div class="col-xs-4 pull-left">
-				  <a ng-show="!auth.isAuthenticated" href="#/" ng-click="authService.signin()">
-					<i class="fa fa-sign-in fa-fw"></i>
-					 Login | Sign up
-				  </a>
-				  <a ng-show="auth.isAuthenticated" href="#/" ng-click="authService.signout()">
-					<i class="fa fa-sign-out fa-fw"></i>
-					 Logout
-				  </a>
-				</div>
-				<div class="navbar-top-links navbar-right ">
-				  <!-- /.dropdown -->
-				  <li class="dropdown" ng-show="isAuthenticated">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="fa fa-user fa-fw"></i>
-						<i class="fa fa-caret-down"></i>
-					</a>
-					<ul class="dropdown-menu dropdown-user">
-						<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-						</li>
-						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-						</li>
-						<li class="divider"></li>
-						<li>
-						  <a href="">
-							<i class="fa fa-sign-out fa-fw"></i>
-							Logout
-						  </a>
-						</li>
-					</ul>
-					<!-- /.dropdown-user -->
-				  </li>
-			  </div>
-			 </div>
-			</div>
+	        <div class="row">
+    				<div class="col-xs-8 pull-left" style="">
+    				  Domain: {{domain}}
+    				  <a ui-sref="main.domains">Change?</a>
+    				</div>
+    				<div class="col-xs-4 pull-left">
+    				  <a ng-show="!auth.isAuthenticated" href="#/" ng-click="authService.signin()">
+    					<i class="fa fa-sign-in fa-fw"></i>
+    					 Login | Sign up
+    				  </a>
+    				  <a ng-show="auth.isAuthenticated" href="#/" ng-click="authService.signout()">
+    					<i class="fa fa-sign-out fa-fw"></i>
+    					 Logout
+    				  </a>
+    				</div>
+    				<div class="navbar-top-links navbar-right ">
+    				  <!-- /.dropdown -->
+    				  <li class="dropdown" ng-show="isAuthenticated">
+    					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    						<i class="fa fa-user fa-fw"></i>
+    						<i class="fa fa-caret-down"></i>
+    					</a>
+    					<ul class="dropdown-menu dropdown-user">
+    						<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+    						</li>
+    						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+    						</li>
+    						<li class="divider"></li>
+    						<li>
+    						  <a href="">
+    							<i class="fa fa-sign-out fa-fw"></i>
+    							Logout
+    						  </a>
+    						</li>
+    					</ul>
+    					<!-- /.dropdown-user -->
+    				  </li>
+    			  </div>
+    			 </div>
+    			</div>
         </div>
 
         <div id="secondary-nav" class="row no-gutter">
