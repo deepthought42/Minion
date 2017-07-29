@@ -1,9 +1,10 @@
 'use strict';
 var AUTH0_DOMAIN='qanairy.auth0.com';
 var AUTH0_CLIENT_ID='wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV';
-var API_SERVER_URL='http://localhost:8080';  // default server url for Java Spring Security API sample
+var API_SERVER_URL='api.qanairy.com:808';  // default server url for Java Spring Security API sample
 var DELEGATION_ENABLED=false;
 var API_SERVER_CLIENT_ID='';  // set to '' if DELEGATION_ENABLED=false
+var qanairyAuthProvider = null;
 // Declare app level module which depends on views, and components
 angular.module('Qanairy', [
   'ui.router',
@@ -23,7 +24,8 @@ angular.module('Qanairy', [
 ]).
 config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',
   function($urlRouterProvider, authProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider) {
-    $urlRouterProvider.otherwise('/discovery');
+    $urlRouterProvider.otherwise('/domains');
+    qanairyAuthProvider = authProvider;
 
     storeProvider.setStore("sessionStorage");
     authProvider.init({
@@ -33,10 +35,11 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       theme: {
         logo: 'https://s3.amazonaws.com/qanairy.com/assets/images/qanairy_logo_300.png',
         primaryColor: '#fddc05'
-      }    });
+      }
+    });
 
     authProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
-      console.log("success token : "+idToken);
+      console.log("success token stuff : "+idToken);
       store.set('token', idToken);
 
         profilePromise.then(function(profile) {
@@ -78,7 +81,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
 
           return sessionStorage.getItem("token"); //storeProvider.get("token");
         },*/
-        whiteListedDomains: ['localhost'],
+        whiteListedDomains: ['localhost', 'api.qanairy.com'],
       //  unauthenticatedRedirectPath: '/login'
       });
 
@@ -121,31 +124,9 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
   }])
 
 .run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', function($rootScope, auth, store, jwtHelper, $state , $location){
-  qanairyAuthProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
-    if(store.get('domain') == null){
-       $state.go('main.domains')
-    }
-    store.set('token', idToken);
-
-    profilePromise.then(function(profile) {
-      sessionStorage.setItem('profile', profile);
-      //$rootScope.$broadcast('new-account');
-      profile.app_metadata.plan = "alpha"
-      if(profile.app_metadata && profile.app_metadata.status == "new"){
-        console.log("navigating to account index");
-        //broadcast event to trigger creating account
-        $location.path("/accounts");
-        //create account with user data
-        //do something with it
-      }
-      // sessionStorage.set('token', idToken);
-      console.log("profile token :: "+profile + " : " +profile.email);
-      console.log("app_metadata :: "+Object.keys(profile.app_metadata));
-    });
-  });
 
     qanairyAuthProvider.on('authenticated', function($location) {
-      console.log("Authenticated ;; ")
+      console.log("Authenticated yo;; ")
       // This is after a refresh of the page
       // If the user is still authenticated, you get this event
     });
@@ -170,19 +151,18 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
            scope: 'openid profile email' // This is if you want the full JWT
          }
        }, function(profile, idToken, accessToken, state, refreshToken) {
-
+         console.log("signed in")
        }, function(err) {
          console.log("Sign in Error :(", err);
        });
      }
      else{
        console.log("from state "+fromState.name );
+       e.preventDefault();
        if(toState.name!= 'about' && toState.name != 'account' && fromState.name != 'main.domains' && store.get('domain') == null){
-          e.preventDefault();
           $state.go('main.domains');
        }
        else if(fromState.name == 'main.domains' && store.get('domain') == null){
-         e.preventDefault();
          $rootScope.$broadcast('domainRequiredError');
        }
      }

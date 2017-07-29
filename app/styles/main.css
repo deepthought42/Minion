@@ -92,18 +92,18 @@ textarea {
 
 
 
-/*------------------------------------------------------------------ 
-[Table of contents] 
- 
+/*------------------------------------------------------------------
+[Table of contents]
+
 
 1. Links
 2. Text Format
 3. Buttons
-3. Main Nav 
+3. Main Nav
 3. Secondary Nav
 4. Side Nav
 5. Body/View Frame
-6. Footer / #footer 
+6. Footer / #footer
 7. Scrap
 
 ------------------------------------------------------------------------------------------------------------------------------*/
@@ -125,25 +125,25 @@ html {
 
 .fa { display:inline !important; }
 
-/*--------------------------- [1. Links] -------------------------------------------------------------------------------------*/  
+/*--------------------------- [1. Links] -------------------------------------------------------------------------------------*/
 
 a img {border: none; }
-	a:focus { 
-    outline: none; 
+	a:focus {
+    outline: none;
 	}
 	a {
 		color: #0000ff;
 		text-align:left;
 		text-decoration:none;
-		border: none;	
+		border: none;
 	}
-	
+
 	a:link { color: #3376c6;}
-	a:visited { color: #3376c6;}	
-	a:hover { color: #999999;}	
-	
-	
-/*--------------------------- [2. Text Format] -------------------------------------------------------------------------------*/  
+	a:visited { color: #3376c6;}
+	a:hover { color: #999999;}
+
+
+/*--------------------------- [2. Text Format] -------------------------------------------------------------------------------*/
 
 	p{
 		font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -151,14 +151,14 @@ a img {border: none; }
 		line-height: 19px;
 		letter-spacing:.2px;
 		margin-bottom: 16px;
-		display: inline;  
+		display: inline;
 		color:#333333;
 		min-width: 300px;
 	}
 	h1{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 30px;
-		line-height: 35px;	
+		line-height: 35px;
 		letter-spacing:.4px;
 		margin-bottom: 15px;
 		font-weight:normal;
@@ -169,8 +169,8 @@ a img {border: none; }
 		font-size: 16px;
 		line-height: 26px;
 		letter-spacing:.2px;
-		margin-bottom: 18px;		
-		display: inline; 
+		margin-bottom: 18px;
+		display: inline;
 		color:#11366e;
 	}
 	h3{
@@ -179,8 +179,8 @@ a img {border: none; }
 		font-weight:normal;
 		line-height: 22px;
 		letter-spacing:.2px;
-		margin-bottom: 22px;		
-		display: inline; 
+		margin-bottom: 22px;
+		display: inline;
 		color:#999;
 	}
 
@@ -202,7 +202,7 @@ a img {border: none; }
 	}
 
 
-/*--------------------------- [3. Buttons] -----------------------------------------------------------------------------*/  
+/*--------------------------- [3. Buttons] -----------------------------------------------------------------------------*/
 
 .btn {
   display: inline-block;
@@ -290,7 +290,7 @@ a img {border: none; }
 
 
 
-/*--------------------------- [3. Nav Bar] -----------------------------------------------------------------------------*/  
+/*--------------------------- [3. Nav Bar] -----------------------------------------------------------------------------*/
 
 
 
@@ -302,22 +302,22 @@ a img {border: none; }
 	z-index: 300 !important;
 }
 
-.sidebar-nav a:focus { 
-    outline: none; 
+.sidebar-nav a:focus {
+    outline: none;
 	color: #fddb4e !important;
 	background: rgba(0,0,0,0.2) !important;
 	border-left: 5px solid #fddb4e;
 	padding-left: 15px !important;
 	}
 
-.sidebar-nav a:visited { color: #ffffff;}	
+.sidebar-nav a:visited { color: #ffffff;}
 .sidebar-nav a:active {
     color: #fddb4e;
-    }	
+    }
 
 .sidebar-nav li {
     text-indent: 10px;
-	
+
     line-height: 20px;
 }
 
@@ -406,7 +406,7 @@ background: linear-gradient(#3e3e3e, #383838);
   width: 80%;
   padding-left:0px;
   transition: width 0.3s ease;
-	
+
 }
 
 .main-nav-check {
@@ -436,7 +436,7 @@ background: linear-gradient(#3e3e3e, #383838);
 }
 
 .close-menu {
-  
+
 	display: block;
 }
 
@@ -466,7 +466,7 @@ width: calc(100% - 80px);
 }
 
 
-/*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/  
+/*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/
 
 #main-nav{
 	 background: #ffffff;
@@ -478,14 +478,14 @@ width: calc(100% - 80px);
 }
 
 #left-main-nav{
-	
+
 }
 
 #right-main-nav{
 	text-align: right;
 }
 
-/*--------------------------- [3. Secondary Nav] -----------------------------------------------------------------------------*/  
+/*--------------------------- [3. Secondary Nav] -----------------------------------------------------------------------------*/
 
 #secondary-nav{
 	 background: #ffffff;
@@ -502,14 +502,14 @@ width: calc(100% - 80px);
 
 
 
-/*--------------------------- [5. Body/ View Frame] --------------------------------------------------------------------------------*/  
+/*--------------------------- [5. Body/ View Frame] --------------------------------------------------------------------------------*/
 
 .content {
   padding: 140px 15px 15px 15px;
 	background-color: #f5f5f5;
 	}
 
-/*--------------------------- [6. Tests] --------------------------------------------------------------------------------*/  
+/*--------------------------- [6. Tests] --------------------------------------------------------------------------------*/
 
 .test__labels{
 	text-align: center !important;
@@ -526,7 +526,7 @@ width: calc(100% - 80px);
 	border-left: 1px solid #e0e0e0;
 	padding: 10px 0px 10px 0px;
 	border-top-width: 0px;
-	height: 60px;	
+	height: 60px;
 }
 
 .test__container > :first-child{
@@ -558,7 +558,7 @@ width: calc(100% - 80px);
 .test__btns > .btn-group{
 	float: right !important;
 }
-/*--------------------------- [7. Footer] ------------------------------------------------------------------------------*/  
+/*--------------------------- [7. Footer] ------------------------------------------------------------------------------*/
 
 
 
@@ -742,9 +742,7 @@ width: calc(100% - 80px);
 }
 
 
-.a0-avatar-guest {
-  content: url('https://www.iconfinder.com/data/icons/website-icons/512/User_Avatar-512.png') !important
-}
+
 
 .a0-sign-up > span {
   text-align: center !important

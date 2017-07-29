@@ -21,7 +21,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.current_node_image = "";
       $scope.current_node = null;
       $scope.paths= [];
-      $scope.discovery_url = store.get('domain').url;
+      if(store.get('domain') != null){
+        $scope.discovery_url = store.get('domain').url;
+      }
     }
 
     $rootScope.$on("openPathStream", function(){

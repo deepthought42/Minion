@@ -1,119 +1,109 @@
 <div class="row no-gutter" controller="WorkManagementCtrl">
-  <button ng-show="isStarted"
+<!--  <button ng-show="isStarted"
           class="btn btn-danger col-xs-12"
           ng-click="stopMappingProcess('account_key_here')">
       Stop!
   </button>
+-->
 
 
-	
   <div class="col-xs-8">
 	   <div class="row no-gutter">
-		<form ng-submit="startMappingProcess(workAllocation)"
-			  enctype="multipart/form-data"
-			  ng-show="!isStarted"
-			  ng-init="workAllocation = {}"
-			  novalidate>
-		 
-		  
-		   <div> 
-		<div class="col-xs-4">
-			<select ng-model="workAllocation.urlProtocol" ng-options="protocol as protocol for protocol in protocols"></select>
-			<span >://</span>
-		  </div>
-		  <div class="col-xs-8">
-		 <div class="input-group">
-		  <input class="form-control"
-				 type="text"
-				 ng-model="workAllocation.url"
-				 placeholder="URL (eg. localhost:8080)"
-				 value="localhost:3000" />
-			<span class="input-group-btn">
-			  <button type="submit" class="btn btn--green" ng-click="startMappingProcess()">Start Crawl</button>
-			</span>
-			  </div></div>
-	   </div>
-	  </form></div>
-  </div>
-  <div class="col-xs-4"></div>
-</div>
+    		<form ng-submit="startMappingProcess(workAllocation)"
+    			  enctype="multipart/form-data"
+    			  ng-show="!isStarted"
+    			  ng-init="workAllocation = {}"
+    			  novalidate>
 
-<div class="row test__labels">
-  <div class="col-xs-2">
-    Status
-  </div>
-  <div class="col-xs-4">
-    Test Title
-  </div>
-  <div class="col-xs-2">
-    Time (seconds)&nbsp;<i class="fa fa-sort"></i>
-  </div>
-  <div class="col-xs-2">
-    Date Last Run&nbsp;<i class="fa fa-sort"></i>
-  </div>
-  <div class="col-xs-2">
-
-  </div>
-</div>
-
-
-<div class="test__container">
-<div class="row test">
-  <div class="col-xs-2 test__status">
-   <div class="row no-gutter">
-    <span class="col-xs-6">
-      <i class="fa fa-check"></i><br>
-      Correct
-    </span>
-    <span class="col-xs-6">
-      <i class="fa fa-times"></i><br>
-      Incorrect
-    </span>
-	  </div>
-  </div>
-  <div class="col-xs-4 test__title">
-    Regression Test 1 {test.title}
-  </div>
-  <div class="col-xs-2">
-    3.07
-  </div>
-  <div class="col-xs-2">
-    3/10/17
-  </div>
-  <div class="col-xs-2 test__btns">
-  <div class="btn-group" role="group" aria-label="Run Favorite More">
-	  <button class="btn btn--left btn--gray">Run</button><button class="btn btn--right btn--gray"><i class="fa fa-angle-down" ></i></button>
-  </div>
-	</div>
-</div>
-
-<div class="row test">
-  <div class="col-xs-2 test__status">
-   <div class="row no-gutter">
-    <span class="col-xs-6" ng-click="updateCorrectness(test, true)>
-      <i class="fa fa-check"></i><br>
-      Correct
-    </span>
-    <span class="col-xs-6" ng-click="updateCorrectness(test, false)>
-      <i class="fa fa-times"></i><br>
-      Incorrect
-    </span>
-	  </div>
+    <div class="col-xs-8">
+  		 <div class="input-group">
+  			<span class="input-group-btn">
+  			  <button type="submit" class="btn btn--green" ng-click="startMappingProcess()">Start Crawl</button>
+  			</span>
+  			  </div></div>
+  	   </div>
+  	  </form></div>
+    </div>
+    <div class="col-xs-4"></div>
   </div>
 
-  <div class="col-xs-4 test__title">
-    Regression Test 1  {{test.name || '%%% TEMPORARY TEST NAME %%%'}}
+  <div class="row test__labels">
+    <div class="col-xs-2">
+      Status
+    </div>
+    <div class="col-xs-4">
+      Test Title
+    </div>
+    <div class="col-xs-2">
+      Time (seconds)&nbsp;<i class="fa fa-sort"></i>
+    </div>
+    <div class="col-xs-2">
+      Date Last Run&nbsp;<i class="fa fa-sort"></i>
+    </div>
+    <div class="col-xs-2">
+
+    </div>
   </div>
-  <div class="col-xs-2">
-    3.07
+
+
+  <div class="test__container">
+    <div class="row test">
+      <div class="col-xs-2 test__status">
+       <div class="row no-gutter">
+        <span class="col-xs-6">
+          <i class="fa fa-check"></i><br>
+          Correct
+        </span>
+        <span class="col-xs-6">
+          <i class="fa fa-times"></i><br>
+          Incorrect
+        </span>
+    	  </div>
+      </div>
+      <div class="col-xs-4 test__title">
+        Regression Test 1 {test.title}
+      </div>
+      <div class="col-xs-2">
+        3.07
+      </div>
+      <div class="col-xs-2">
+        3/10/17
+      </div>
+      <div class="col-xs-2 test__btns">
+        <div class="btn-group" role="group" aria-label="Run Favorite More">
+      	  <button class="btn btn--left btn--gray">Run</button><button class="btn btn--right btn--gray"><i class="fa fa-angle-down" ></i></button>
+        </div>
+    	</div>
+    </div>
+
+    <div class="row test">
+      <div class="col-xs-2 test__status">
+       <div class="row no-gutter">
+        <span class="col-xs-6" ng-click="updateCorrectness(test, true)">
+          <i class="fa fa-check"></i><br>
+          Correct
+        </span>
+        <span class="col-xs-6" ng-click="updateCorrectness(test, false)">
+          <i class="fa fa-times"></i><br>
+          Incorrect
+        </span>
+    	  </div>
+      </div>
+
+      <div class="col-xs-4 test__title">
+        Regression Test 1  {{test.name || '%%% TEMPORARY TEST NAME %%%'}}
+      </div>
+      <div class="col-xs-2">
+        3.07
+      </div>
+      <div class="col-xs-2">
+    &nbsp;
+      </div>
+      <div class="col-xs-2 test__btns">
+        <div class="btn-group" role="group" aria-label="Run Favorite More">
+         <button class="btn btn--left btn--gray">Run</button><button class="btn btn--right btn--gray"><i class="fa fa-angle-down"></i></button>
+        </div>
+    	</div>
+    </div>
   </div>
-  <div class="col-xs-2">
-&nbsp;
-  </div>
-  <div class="col-xs-2 test__btns">
-  <div class="btn-group" role="group" aria-label="Run Favorite More">
-   <button class="btn btn--left btn--gray">Run</button><button class="btn btn--right btn--gray"><i class="fa fa-angle-down"></i></button>
-  </div>
-	</div>
-</div>
 </div>

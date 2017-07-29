@@ -3,7 +3,7 @@
 angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('main.domain', {
+  $stateProvider.state('main.domains', {
     url: "/domains",
     templateUrl: 'components/domain/index.html',
     controller: 'DomainCtrl',
@@ -26,7 +26,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       Domain.save(domain_url).$promise.then(function(successResult){
         $scope.show_create_domain_err = false;
         var domain = successResult;
-        console.log("successResult "+domain);
         store.set('domain', domain_url);
       },
       function(errorResult){
