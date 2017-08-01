@@ -43,7 +43,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       store.set('token', idToken);
 
         profilePromise.then(function(profile) {
-          sessionStorage.setItem('profile', profile);
+          store.set('profile', profile);
           //$rootScope.$broadcast('new-account');
           profile.app_metadata.plan = "alpha"
           if(profile.app_metadata && profile.app_metadata.status == "new"){
@@ -54,7 +54,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
             //do something with it
           }
           // sessionStorage.set('token', idToken);
-          console.log("profile token :: "+profile);
+          console.log("profile token keys :: "+Object.keys(profile));
           console.log("app_metadata :: "+Object.keys(profile.app_metadata));
         });
       });
@@ -151,6 +151,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
            scope: 'openid profile email' // This is if you want the full JWT
          }
        }, function(profile, idToken, accessToken, state, refreshToken) {
+         store.set('profile', profile);
          console.log("signed in")
        }, function(err) {
          console.log("Sign in Error :(", err);

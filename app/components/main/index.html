@@ -49,11 +49,9 @@
 
     		  <div id="left-main-nav" class="col-xs-6">
       			<span ng-show="!isAuthenticated">
-      			  Hi {Name goes here}, you have {###} failed tests.
-      			  <a href="#/results" >Review?</a>
+      			  Hi {{user_profile.email}}, you have {###} failed tests.
       			</span>
     		  </div>
-
 
 			  <div id="right-main-nav" class="col-xs-6">
 	        <div class="row">

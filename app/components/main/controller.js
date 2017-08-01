@@ -25,7 +25,9 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.workAllocation = {};
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
       $scope.domain = store.get('domain').url;
-      console.log($scope.workAllocation.urlProtocol);
+      $scope.user_profile = store.get('profile');
+      console.log(Object.keys($scope.user_profile) + " :: "+$scope.user_profile.email);
+
     }
 
     this._init();

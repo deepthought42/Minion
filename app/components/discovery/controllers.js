@@ -27,8 +27,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
     }
 
     $rootScope.$on("openPathStream", function(){
-      console.log("OPENING PATH STREAM");
-
       /**We use an event source for sse over websockets because websockets are overkill for the current usage */
       $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here", function(message) {
         console.log("Recieved message from server " + message + " :: " + Object.keys(message));
