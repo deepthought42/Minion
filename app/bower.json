@@ -19,7 +19,8 @@
     "a0-angular-storage": "latest",
     "sockjs": "~0.3.4",
     "stomp-websocket": "~2.3.4",
-    "ng-stomp": "~0.3.0"
+    "ng-stomp": "~0.3.0",
+    "event-source-polyfill":"~0.0.8"
   },
   "resolutions": {
     "angular": "^1.4.9"

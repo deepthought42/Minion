@@ -49,7 +49,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.isStarted = true;
         });
 
-      $scope.eventSource = PathRealtimeService.connect("/streamPathExperience", "account_key_here",function(message) {
+      $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here",function(message) {
         console.log("Recieved message from server " + message + " :: " + Object.keys(message));
         $scope.paths.push(JSON.parse(message.data));
         $scope.$apply();

@@ -24,9 +24,14 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.protocols = ["http", "https", "file"];
       $scope.workAllocation = {};
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
-      $scope.domain = store.get('domain').url;
+      if(store.get('domain')){
+        $scope.domain = store.get('domain').url;
+        $scope.showDomainHeader = true;
+      }
+      else{
+        $scope.showDomainHeader = false;
+      }
       $scope.user_profile = store.get('profile');
-      console.log(Object.keys($scope.user_profile) + " :: "+$scope.user_profile.email);
 
     }
 
