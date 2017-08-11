@@ -16,8 +16,11 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 .controller('TesterIndexCtrl', ['$scope', '$interval', 'Tester', 'store', '$state',
   function($scope, $interval, Tester, store, $state) {
     $scope._init= function(){
+      $('[data-toggle="tooltip"]').tooltip()
+
       $scope.tester = {};
       $scope.groups = [];
+      $scope.group = {name: "", description: "" };
       $scope.node_key = "";
       $scope.current_node = null;
 
@@ -58,10 +61,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
     $scope.addGroup = function(test, group){
       console.log("Adding group "+group+" to test ");
-      Tester.addGroup({group: group, key: test.key}).
-        then(function(data){
-          test = data;
-        });
+
+      Tester.addGroup({name: group.name, description: group.description, key: test.key})
     }
 
     $scope.setCurrentNode = function(node){

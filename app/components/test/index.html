@@ -59,7 +59,7 @@
 
 <div ng-repeat="test in tests">
   <div class="row no-gutter">
-    
+
     <div class="col-sm-2 test__status">
       <span class="col-sm-12" ng-show="test.passing">
         <i class="fa fa-check"></i>
@@ -103,9 +103,11 @@
     </div>
     <div class="row no-gutter">
       <label>Groups: </label>
-      <div ng-repeat="group in test.groups">{{group}}</div>
-      <input ng-model="new_group" />
-      <i class="fa fa-plus" ng-click="addGroup(new_group)"></i>
+      <div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
+        {{group.name}}
+      </div>
+      <input ng-model="group.name" />
+      <i class="fa fa-plus" ng-click="addGroup(test, group)"></i>
     </div>
     <div class="pull-right col-sm-3">
       <i class="fa fa-check fa-3x col-sm-4"
