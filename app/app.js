@@ -1,7 +1,7 @@
 'use strict';
 var AUTH0_DOMAIN='qanairy.auth0.com';
 var AUTH0_CLIENT_ID='wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV';
-var API_SERVER_URL='api.qanairy.com:808';  // default server url for Java Spring Security API sample
+var API_SERVER_URL='api.qanairy.com:8080';  // default server url for Java Spring Security API sample
 var DELEGATION_ENABLED=false;
 var API_SERVER_CLIENT_ID='';  // set to '' if DELEGATION_ENABLED=false
 var qanairyAuthProvider = null;
@@ -81,7 +81,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
 
           return sessionStorage.getItem("token"); //storeProvider.get("token");
         },*/
-        whiteListedDomains: ['localhost', '*.qanairy.com'],
+        whiteListedDomains: ['localhost', 'api.qanairy.com'],
       //  unauthenticatedRedirectPath: '/login'
       });
 
