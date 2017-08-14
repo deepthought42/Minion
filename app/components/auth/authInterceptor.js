@@ -8,7 +8,6 @@ auth.factory('AuthInterceptor', ['$q', '$rootScope', '$injector', 'store', funct
     // optional method
     'request': function(config) {
       config.headers = config.headers || {};
-      console.log("Yo");
 
       config.headers['Authorization'] = "Bearer "+store.get('token');
 
