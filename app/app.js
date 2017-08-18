@@ -174,12 +174,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
        });
      }
      else{
-       console.log("from state "+fromState.name );
-       if(toState.name!= 'about' && toState.name != 'account' && fromState.name != 'main.domains' && store.get('domain') == null){
-         e.preventDefault();
-         $state.go('main.domains');
-       }
-       else if(fromState.name == 'main.domains' && store.get('domain') == null){
+       if(fromState.name == 'main.domains' && store.get('domain') == null){
          e.preventDefault();
          $rootScope.$broadcast('domainRequiredError');
        }

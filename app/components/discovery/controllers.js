@@ -13,16 +13,35 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
   });
 }])
 
-.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester', 'store',
-  function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester, store) {
+.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester', 'store', '$state',
+  function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester, store, $state) {
     this._init = function(){
-      $scope.paths = [];
+      $scope.tests = [];
       $scope.isStarted = false;
       $scope.current_node_image = "";
       $scope.current_node = null;
-      $scope.paths= [];
+
       if(store.get('domain') != null){
+
         $scope.discovery_url = store.get('domain').url;
+        $scope.tests = Tester.query({url: $scope.discovery_url});
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        $scope.pusher = new Pusher('5103e64528e1579e78e3', {
+          cluster: 'us2',
+          encrypted: true
+        });
+
+        var channel = $scope.pusher.subscribe($scope.discovery_url);
+        channel.bind('test-discovered', function(data) {
+          alert(data.message);
+          $scope.paths.push(JSON.parse(message.data));
+        });
+      }
+      else{
+        $state.go("main.domains")
       }
     }
 
@@ -48,11 +67,14 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.isStarted = true;
         });
 
+
+      /*
       $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here",function(message) {
         console.log("Recieved message from server " + message + " :: " + Object.keys(message));
         $scope.paths.push(JSON.parse(message.data));
         $scope.$apply();
-      });
+      })
+      */;
     }
 
     $scope.stopMappingProcess = function(){

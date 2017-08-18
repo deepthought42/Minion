@@ -19,12 +19,15 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $('[data-toggle="tooltip"]').tooltip()
 
       $scope.tester = {};
-      $scope.groups = [];
       $scope.group = {name: "", description: "" };
       $scope.node_key = "";
       $scope.current_node = null;
-
-      $scope.getTestsByUrl(store.get('domain').url);
+      if(store.get('domain') != null){
+        $scope.getTestsByUrl(store.get('domain').url);
+      }
+      else {
+        $state.go('main.domains');
+      }
     }
 
     $scope.setCurrentNodeKey = function(key){
@@ -33,7 +36,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
     $scope.getTestsByUrl = function(url) {
       $scope.tests = Tester.query({url: url});
-      $scope.groups = Tester.getGroups({url: url});
     };
 
     $scope.getTestByName = function(name) {
