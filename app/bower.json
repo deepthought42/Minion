@@ -17,10 +17,8 @@
     "angular-lock": "latest",
     "angular-jwt": "latest",
     "a0-angular-storage": "latest",
-    "sockjs": "~0.3.4",
-    "stomp-websocket": "~2.3.4",
-    "ng-stomp": "~0.3.0",
-    "event-source-polyfill":"~0.0.8"
+    "event-source-polyfill":"~0.0.8",
+    "angular-material": "latest"
   },
   "resolutions": {
     "angular": "^1.4.9"

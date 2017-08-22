@@ -51,11 +51,13 @@
   </div>
   <div class="col-xs-2 test__btns">
     <div class="btn-group" role="group" aria-label="Run Favorite More">
-     <button class="btn btn--left btn--gray">Run</button><button class="btn btn--right btn--gray"><i class="fa fa-angle-down"></i></button>
+     <button class="btn btn--left btn--gray">Run</button>
+     <button class="btn btn--right btn--gray">
+       <i class="fa fa-angle-down"></i>
+     </button>
     </div>
   	</div>
   </div>
-
 
   <div ng-repeat="test in tests">
     <div class="row no-gutter">
@@ -88,39 +90,53 @@
     </div>
     <div class="row no-gutter" style="background-color:white;">
 
-      <div ng-repeat="node in test.path.path" class="col-sm-1" ng-click="setCurrentNode(node)">
-        <div>
+      <div ng-repeat="node in test.path.path" class="col-sm-2" ng-click="setCurrentNode(node)">
+        <div class="col-sm-11" ng-show="node.type == 'Page'">
+          <md-tooltip md-direction="top">{{node.url}}</md-tooltip>
           <img src="{{node.screenshot}}" style="width: 100px; height:100px"
-               uib-tooltip="{{node.url}}"
                ng-show="node.screenshot"
                ng-click="current_node_image=node.screenshot"/>
         </div>
         <div class="col-sm-11" ng-show="node.type == 'PageElement'">
-          <i class="fa fa-arrow-right pull-left"></i>
-
-          <img src="{{node.screenshot}}" style="width: 100px; height:100px"
-               uib-tooltip="{{node.url}}"
-               ng-show="node.screenshot"
-               ng-click="current_node_image=node.screenshot"/>
-          <div class="elementBubble">
-            <i class="fa fa-list-alt fa-2x icon" uib-tooltip="node.xpath"></i>
+          <div>
+            <i class="fa fa-arrow-right pull-left"></i>
+          </div>
+          <div class="elementBubble pull-right">
+            <md-tooltip md-direction="top">{{node.name}}</md-tooltip>
+            <img style="width: 100px; height:100px"
+                 ng-show="node.screenshot"
+                 ng-click="current_node_image=node.screenshot"/>
+            <i class="fa fa-list-alt fa-2x icon"></i>
           </div>
         </div>
         <div  class="col-sm-11" ng-show="node.type == 'Action'">
-          <i class="fa fa-arrow-right pull-left"></i>
+          <div>
+            <i class="fa fa-arrow-right pull-left"></i>
+          </div>
 
-          <div class="actionBubble pull-right">
-            <i class="fa fa-mouse-pointer icon" uib-tooltip="node.name"></i>
+          <div class="actionBubble pull-right col-sm-9">
+            <md-tooltip md-direction="top">{{node.name}}</md-tooltip>
+
+            <i class="fa fa-mouse-pointer icon"></i>
           </div>
         </div>
       </div>
-      <div class="row no-gutter">
-        <label>Groups: </label>
-        <div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
-          {{group.name}}
+      <div class="col-sm-6">
+        <div class="col-sm-12">
+          <label>Groups: </label>
+
+          <input ng-model="group.name" />
+          <i class="fa fa-plus" ng-click="addGroup(test, group)"></i>
         </div>
-        <input ng-model="group.name" />
-        <i class="fa fa-plus" ng-click="addGroup(test, group)"></i>
+        <div class="col-sm-12">
+          <span ng-repeat="group in test.groups">
+            <md-tooltip md-direction="bottom">
+              {{group.description || "click to set"}}
+            </md-tooltip>
+
+            {{group.name}}
+          </span>
+        </div>
       </div>
       <div class="pull-right col-sm-3">
         <i class="fa fa-check fa-3x col-sm-4"
@@ -141,15 +157,21 @@
     <!-- Node Examination -->
     <div class="row no-gutter" ng-show="current_node.type=='Page'">
       <div class="col-sm-4">
-        <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
+        <md-tooltip md-direction="top">{{current_node.url}}</md-tooltip>
+        <img src="{{current_node.screenshot}}" style="width: 100px; height:100px"/>
       </div>
       <div class="col-sm-3">
         <div class="col-sm-12">
-          <label>Landable:</label> <span>{{current_node.landable}}</span>
-          <label>URL:</label> <span>{{current_node.url}}</span>
-          <label>Total Visible Elements: </label> <span>{{current_node.element_counts}}</span>
-          <label>Total Weight:</label> <span>{{current_node.total_weight}}</span>
-          <label>Page Weight:</label> <span>{{current_node.page_weight}}</span>
+          <label>Landable:</label>
+          <span>{{current_node.landable}}</span>
+          <label>URL:</label>
+          <span>{{current_node.url}}</span>
+          <label>Total Visible Elements: </label>
+          <span>{{current_node.element_counts}}</span>
+          <label>Total Weight:</label>
+          <span>{{current_node.total_weight}}</span>
+          <label>Page Weight:</label>
+          <span>{{current_node.page_weight}}</span>
         </div>
       </div>
     </div>
@@ -158,7 +180,11 @@
 
     <div class="row no-gutter" ng-show="current_node=='PageElement'">
       <div class="pull-right col-sm-2" >
-        <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
+        <md-tooltip md-direction="top">
+          {{current_node.url}}
+        </md-tooltip>
+
+        <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" />
       </div>
       <div>
         ELEMENT

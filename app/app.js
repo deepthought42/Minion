@@ -17,7 +17,6 @@ angular.module('Qanairy', [
   'auth0',
   'angular-jwt',
   'angular-storage',
-  'ngStomp',
   'ngMaterial',
   'Qanairy.version',
   'AuthInterceptor'

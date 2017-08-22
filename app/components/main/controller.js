@@ -10,8 +10,8 @@ angular.module('Qanairy.main', ['ui.router'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'auth', 'WorkAllocation', 'PathRealtimeService', '$stomp', 'store',
-  function ($rootScope, $scope, auth, WorkAllocation, PathRealtimeService, $stomp, store) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'auth', 'WorkAllocation', 'PathRealtimeService', 'store',
+  function ($rootScope, $scope, auth, WorkAllocation, PathRealtimeService, store) {
 
     this._init = function(){
       $scope.displayUserDropDown = false;

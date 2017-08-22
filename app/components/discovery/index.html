@@ -39,56 +39,33 @@
     </div>
   </div>
 
-
-  <div class="test__container">
-    <div class="row test">
-      <div class="col-xs-2 test__status">
-       <div class="row no-gutter">
-        <span class="col-xs-6">
-          <i class="fa fa-check"></i><br>
-          Correct
-        </span>
-        <span class="col-xs-6">
-          <i class="fa fa-times"></i><br>
-          Incorrect
-        </span>
-    	  </div>
-      </div>
-      <div class="col-xs-4 test__title">
-        Regression Test 1 {test.title}
-      </div>
-      <div class="col-xs-2">
-        3.07
-      </div>
-      <div class="col-xs-2">
-        3/10/17
-      </div>
-      <div class="col-xs-2 test__btns">
-        <div class="btn-group" role="group" aria-label="Run Favorite More">
-      	  <button class="btn btn--left btn--gray">Run</button><button class="btn btn--right btn--gray"><i class="fa fa-angle-down" ></i></button>
-        </div>
-    	</div>
-    </div>
+  <div class="test__container" ng-repeat="test in tests">
 
     <div class="row test">
       <div class="col-xs-2 test__status">
        <div class="row no-gutter">
         <span class="col-xs-6" ng-click="updateCorrectness(test, true)">
-          <i class="fa fa-check"></i><br>
-          Correct
+          <i class="fa fa-check"
+             style="{{pathWrapper.correct ? 'color:green' : 'color:#bfbfbf'}}"
+             ng-click="pathWrapper.correct=!pathWrapper.correct"></i>
+             <br/>
+           Correct
         </span>
         <span class="col-xs-6" ng-click="updateCorrectness(test, false)">
-          <i class="fa fa-times"></i><br>
+          <i  class="fa fa-times"
+              style="{{!pathWrapper.correct && pathWrapper.correct != null ? 'color:red' : 'color:#bfbfbf'}}"
+              ng-click="pathWrapper.correct=!pathWrapper.correct"></i>
+          <br/>
           Incorrect
         </span>
     	  </div>
       </div>
 
       <div class="col-xs-4 test__title">
-        Regression Test 1  {{test.name || '%%% TEMPORARY TEST NAME %%%'}}
+        {{test.name || "Test #"}}
       </div>
       <div class="col-xs-2">
-        3.07
+        {{test.runtime || "0 ms"}}
       </div>
       <div class="col-xs-2">
         &nbsp;
@@ -102,38 +79,6 @@
         </div>
     	</div>
     </div>
-  </div>
-
-
-  <div ng-repeat="test in tests">
-    <div class="row no-gutter">
-
-      <div class="col-sm-2 test__status">
-        <span class="col-sm-12" ng-show="test.passing">
-          <i class="fa fa-check"></i>
-        </span>
-        <span class="col-sm-12" ng-show="!test.passing">
-          <i class="fa fa-times"></i>
-        </span>
-      </div>
-      <div class="col-sm-4">
-        {{test.name || "Test #"}}
-      </div>
-      <div class="col-sm-2">
-        3.07
-      </div>
-      <div class="col-sm-2">
-        3/10/17
-      </div>
-      <div class="col-xs-2 test__btns">
-        <div class="btn-group" role="group" aria-label="Run Favorite More">
-         <button class="btn btn--left btn--gray">Run</button>
-         <button class="btn btn--right btn--gray">
-           <i class="fa fa-angle-down"></i>
-         </button>
-        </div>
-      </div>
-    </div>
     <div class="row no-gutter" style="background-color:white;">
 
       <div ng-repeat="node in test.path.path" class="col-sm-1" ng-click="setCurrentNode(node)">
@@ -142,8 +87,7 @@
              uib-tooltip="{{node.url}}"
              ng-show="node.screenshot"
              ng-click="current_node_image=node.screenshot"/>
-        <div class="col-sm-11" ng-show="node.type == 'page'">
-
+        <div class="col-sm-11" ng-show="node.type == 'PageElement'">
           <div class="elementBubble">
             <i class="fa fa-list-alt fa-2x icon" uib-tooltip="node.xpath"></i>
           </div>
@@ -162,22 +106,7 @@
         <input ng-model="group.name" />
         <i class="fa fa-plus" ng-click="addGroup(test, group)"></i>
       </div>
-      <div class="pull-right col-sm-3">
-        <i class="fa fa-check fa-3x col-sm-4"
-           style="{{pathWrapper.useful ? 'color:green' : 'color:#red'}}"></i>
-
-        <i  class="fa fa-times fa-3x col-sm-4"
-            style="{{!pathWrapper.correct ? 'color:red' : 'color:#bfbfbf'}}"
-            ng-click="pathWrapper.correct=!pathWrapper.correct"></i>
-
-        <i class="fa fa-check fa-3x col-sm-4"
-           style="{{pathWrapper.correct ? 'color:green' : 'color:#bfbfbf'}}"
-           ng-click="pathWrapper.correct=!pathWrapper.correct"></i>
-
-        <i class="fa fa-angle-down fa-3x col-sm-4"></i>
-      </div>
     </div>
-
     <!-- Node Examination -->
     <div class="row no-gutter" ng-show="current_node.type=='Page'">
       <div class="col-sm-4">
@@ -196,7 +125,7 @@
 
     {{current_node.type}}
 
-    <div class="row no-gutter" ng-show="current_node=='PageElement'">
+    <div class="row no-gutter" ng-show="current_node.type=='PageElement'">
       <div class="pull-right col-sm-2" >
         <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
       </div>
