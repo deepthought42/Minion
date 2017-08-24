@@ -77,6 +77,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       */;
     }
 
+    $scope.setCurrentNode = function(node){
+      $scope.current_node = node;
+    }
+
+    $scope.showTestData = function(test_key, node){
+      $scope.visibleTestKey = test_key;
+      $scope.current_node = node;
+    }
+
     $scope.stopMappingProcess = function(){
       WorkAllocation.stopWork()
         .$promise.then(function(){

@@ -755,3 +755,13 @@ width: calc(100% - 80px);
 .a0-footer {
   display: none !important
 }
+
+.search { position: relative; }
+.search input { text-indent: 10px; }
+.search .fa-search {
+  position: absolute;
+  top: .4em;
+  right: 2.5em;
+  font-size: 1em;
+  color: grey;
+}

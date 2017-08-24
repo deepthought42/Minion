@@ -69,9 +69,13 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
     $scope.setCurrentNode = function(node){
       $scope.current_node = node;
-      console.log("Change current node");
     }
 
+    $scope.showTestData = function(test_key, node){
+      $scope.visibleTestKey = test_key;
+      $scope.current_node = node;
+    }
+    
     $scope.isCurrentNodePage = function(){
       console.log("current node being checked : "+ ($scope.current_node.type=='Page'));
       return $scope.current_node=='Page';
