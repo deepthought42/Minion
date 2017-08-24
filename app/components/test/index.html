@@ -45,19 +45,25 @@
 
     <div class="row test" ng-click="showTestData(test.key)">
       <div class="col-xs-2 test__status">
-        <span class="col-xs-12" ng-show="pathWrapper.correct">
+        <span class="col-xs-12" ng-show="pathWrapper.passing">
           <i class="fa fa-check"
-             style="{{pathWrapper.correct ? 'color:green' : 'color:#bfbfbf'}}"
-             ng-click="pathWrapper.correct=!pathWrapper.correct"></i>
-             <br/>
+             style="color:green"></i>
+          <br/>
            Passing
         </span>
-        <span class="col-xs-12" ng-show="!pathWrapper.correct">
+        <span class="col-xs-12" ng-show="!pathWrapper.passing && pathWrapper.passing != null">
           <i  class="fa fa-times"
-              style="{{!pathWrapper.correct && pathWrapper.correct != null ? 'color:red' : 'color:#bfbfbf'}}"
-              ng-click="pathWrapper.correct=!pathWrapper.correct"></i>
+              style="color:red"></i>
           <br/>
           Failing
+        </span>
+
+
+        <span class="col-xs-12" ng-show="!pathWrapper.passing">
+          <i  class="fa fa-question"
+              style="color:orange"></i>
+          <br/>
+          Unknown
         </span>
       </div>
 
