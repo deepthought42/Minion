@@ -10,7 +10,7 @@
     <div class="col-xs-2">
       <div class="input-group">
         <span class="input-group-btn">
-          <button class="btn btn--green" ng-click="startMappingProcess()" ng-show="!isStarted">Start Crawl</button>
+          <button class="btn btn--green" ng-click="startMappingProcess()" ng-show="!isStarted">Start Test Discovery</button>
         </span>
       </div>
     </div>
@@ -102,7 +102,10 @@
                  uib-tooltip="{{node.url}}"/>
           </div>
           <div ng-show="node.type == 'PageElement'" class="path-element">
-            <i class="fa fa-square fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
+            <i class="fa fa-font fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.text"></i>
+            <i class="fa fa-paper-plane-o fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.submit"></i>
+
+            <i class="fa fa-square-o fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
           </div>
           <div ng-show="node.type == 'Action'" class="path-element">
               <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
@@ -128,7 +131,6 @@
       </div>
       <div class="row no-gutter">
         <span>
-          {{current_node.type}}
           Element CSS
         </span>
         <span>
@@ -139,45 +141,57 @@
         </span>
       </div>
       <!-- Node Examination -->
+      <!-- Node Examination -->
       <div class="row no-gutter" ng-show="current_node.type=='Page'">
         <div class="col-sm-4">
           <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
         </div>
         <div class="col-sm-3">
           <div class="col-sm-12">
-            <label>Landable:</label> <span>{{current_node.landable}}</span>
-            <label>URL:</label> <span>{{current_node.url}}</span>
-            <label>Total Visible Elements: </label> <span>{{current_node.element_counts}}</span>
-            <label>Total Weight:</label> <span>{{current_node.total_weight}}</span>
-            <label>Page Weight:</label> <span>{{current_node.page_weight}}</span>
+            <div>
+              <label>Landable -</label>
+              <span>{{current_node.landable}}</span>
+            </div>
+            <div>
+              <label>URL -</label>
+              <span>{{current_node.url}}</span>
+            </div>
+            <div>
+              <label>Visible Element counts- </label>
+              <span>{{current_node.elementCounts || "coming soon"}}</span>
+            </div>
+            <div>
+              <label>Total Weight -</label>
+              <span>{{current_node.totalWeight}}</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="row no-gutter" ng-show="current_node.type=='PageElement'">
-        <div class="pull-right col-sm-2" >
+        <div class="pull-right col-sm-2" ng-show="current_node.screenshot" >
           <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
         </div>
         <div>
           ELEMENT
           <div>
-            {{current_node.name}}
+           tag type -  {{current_node.name}}
           </div>
           <div>
-            xpath : {{current_node.xpath}}
+            xpath - {{current_node.xpath}}
           </div>
-          css :
+          css
           <div ng-repeat="(key, value) in current_node.cssProperties">
-              {{key}} :           {{value}}
+              {{key}} -           {{value}}
           </div>
           <div>
             attributes
             <div ng-repeat="(key, value) in current_node.attributes">
-              {{key}} :           {{value}}
+              {{key}} -           {{value}}
             </div>
           </div>
           <div>
-            Internal Text : {{current_node.text}}
+            Internal Text - {{current_node.text}}
           </div>
         </div>
         <div class="row no-gutter" ng-show="current_node=='Action'">

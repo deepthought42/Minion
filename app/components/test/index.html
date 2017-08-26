@@ -101,7 +101,7 @@
             <i class="fa fa-arrow-right "></i>
           </div>
         </div>
-        <div class="path-element-container">
+        <div class="path-element-container" ng-click="setCurrentNode(test.result)">
           <div  ng-show="test.result.screenshot" class="path-element">
             <img src="{{test.result.screenshot}}" class="path-node-image"
                  uib-tooltip="{{test.result.url}}"/>
@@ -134,11 +134,22 @@
         </div>
         <div class="col-sm-3">
           <div class="col-sm-12">
-            <label>Landable:</label> <span>{{current_node.landable}}</span>
-            <label>URL:</label> <span>{{current_node.url}}</span>
-            <label>Total Visible Elements: </label> <span>{{current_node.element_counts}}</span>
-            <label>Total Weight:</label> <span>{{current_node.total_weight}}</span>
-            <label>Page Weight:</label> <span>{{current_node.page_weight}}</span>
+            <div>
+              <label>Landable -</label>
+              <span>{{current_node.landable}}</span>
+            </div>
+            <div>
+              <label>URL -</label>
+              <span>{{current_node.url}}</span>
+            </div>
+            <div>
+              <label>Visible Element counts- </label>
+              <span>{{current_node.elementCounts || "coming soon"}}</span>
+            </div>
+            <div>
+              <label>Total Weight -</label>
+              <span>{{current_node.totalWeight}}</span>
+            </div>
           </div>
         </div>
       </div>
