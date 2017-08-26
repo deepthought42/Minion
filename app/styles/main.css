@@ -308,12 +308,10 @@ a img {border: none; }
 	background: rgba(0,0,0,0.2) !important;
 	border-left: 5px solid #fddb4e;
 	padding-left: 15px !important;
-	}
+}
 
 .sidebar-nav a:visited { color: #ffffff;}
-.sidebar-nav a:active {
-    color: #fddb4e;
-    }
+
 
 .sidebar-nav li {
     text-indent: 10px;
@@ -324,7 +322,7 @@ a img {border: none; }
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
-	padding: 20px;
+	  padding: 20px;
     color: #ffffff;
 }
 

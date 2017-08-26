@@ -10,8 +10,8 @@ angular.module('Qanairy.main', ['ui.router'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'auth', 'WorkAllocation', 'PathRealtimeService', 'store',
-  function ($rootScope, $scope, auth, WorkAllocation, PathRealtimeService, store) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'auth', 'WorkAllocation', 'PathRealtimeService', 'store', '$location',
+  function ($rootScope, $scope, auth, WorkAllocation, PathRealtimeService, store, $location) {
 
     this._init = function(){
       $scope.displayUserDropDown = false;
@@ -31,35 +31,12 @@ angular.module('Qanairy.main', ['ui.router'])
       else{
         $scope.showDomainHeader = false;
       }
+      $scope.$location = $location;
+      $scope.current_path = $location.path();
       $scope.user_profile = store.get('profile');
 
     }
 
     this._init();
-
-    $scope.startMappingProcess = function(workAllocation){
-      console.log("Starting mapping process : " + workAllocation.url );
-      WorkAllocation.query({url:  $scope.workAllocation.urlProtocol+"://"+$scope.workAllocation.url, account_key: "account_key_here"})
-        .$promise.then(function(value){
-          //broadcast event to start connection
-          $rootScope.$broadcast("openPathStream");
-          $scope.isStarted = true;
-        })
-        .catch( function(data){
-          console.log("Work request failed");
-        });
-
-    }
-
-    /**
-     * Stops mapping process on servers
-     */
-    $scope.stopMappingProcess = function(account_key){
-      WorkAllocation.stopWork({account_key: "account_key_here"})
-        .$promise.then(function(){
-          $rootScope.$broadcast("closePathStream");
-          $scope.isStarted = false;
-        })
-    }
   }
 ]);
