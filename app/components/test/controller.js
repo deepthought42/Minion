@@ -22,6 +22,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.group = {name: "", description: "" };
       $scope.node_key = "";
       $scope.current_node = null;
+      $scope.visible = false;
       if(store.get('domain') != null){
         $scope.getTestsByUrl(store.get('domain').url);
       }
@@ -50,10 +51,10 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     $scope.runTest = function(test, correctness){
       Tester.runTest({key: test.key})
         .then(function(data){
-          console.log("Tester ran successfully :: "+data);
+          console.log("Test ran successfully :: "+data);
         })
         .catch(function(err){
-          console.log("Tester failed to run successfully");
+          console.log("Test failed to run successfully");
         });
     }
 
@@ -72,10 +73,27 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.showTestData = function(test_key, node){
-      $scope.visibleTestKey = test_key;
-      $scope.current_node = node;
+      if(test_key == $scope.visibleTestKey){
+        $scope.visible = !$scope.visible;
+      }
+      else{
+        $scope.visibleTestKey = test_key;
+        $scope.current_node = node;
+        $scope.visible = true;
+      }
     }
-    
+
+    $scope.toggleTestDataVisibility = function(test_key, node){
+      if(test_key == $scope.visibleTestKey){
+        $scope.visible = !$scope.visible;
+      }
+      else{
+        $scope.visibleTestKey = test_key;
+        $scope.current_node = node;
+        $scope.visible = true;
+      }
+    }
+
     $scope.isCurrentNodePage = function(){
       console.log("current node being checked : "+ ($scope.current_node.type=='Page'));
       return $scope.current_node=='Page';

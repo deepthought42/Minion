@@ -9,10 +9,8 @@
 
     <ul class="sidebar-nav">
       <li >
-
         <a href="#/tests" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
           <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
-
           Tests
         </a>
       </li>
@@ -28,7 +26,8 @@
           Qanairy <span app-version></span>
     </div>
     <label for="main-nav-check" class="toggle-menu"
-       style="{{navToggledOpen ? 'color:yellow' : 'color:#bfbfbf'}}">
+       style="{{navToggledOpen ? 'color:#fddb4e' : 'color:#bfbfbf'}}"
+       ng-click="navToggledOpen = !navToggledOpen">
       ☰
     </label>
   </div>

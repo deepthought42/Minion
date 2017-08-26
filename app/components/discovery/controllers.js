@@ -18,7 +18,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
     this._init = function(){
       $scope.tests = [];
       $scope.isStarted = false;
-      $scope.current_node_image = "";
       $scope.current_node = null;
       $scope.visible = false;
 
@@ -91,7 +90,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         $scope.current_node = node;
         $scope.visible = true;
       }
-
     }
 
     $scope.stopMappingProcess = function(){

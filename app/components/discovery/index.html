@@ -6,7 +6,7 @@
   </button>
 -->
 
-  <div class="no-gutter row discovery-tools-row" >
+  <div class="no-gutter row tools-row" >
     <div class="col-xs-2">
       <div class="input-group">
         <span class="input-group-btn">
@@ -94,44 +94,52 @@
         </div>
     	</div>
     </div>
-    <div class="row no-gutter" ng-show="visibleTestKey==test.key && visible" style="background-color:white;">
+    <div class="test__container" ng-show="visibleTestKey==test.key && visible" style="background-color:white;">
       <div class="row no-gutter" >
-        <div ng-repeat="node in test.path.path" class="col-sm-1" ng-click="setCurrentNode(node)">
-          <i class="fa fa-arrow-right pull-left"></i>
-          <img src="{{node.screenshot}}" style="width: 100px; height:100px"
-               uib-tooltip="{{node.url}}"
-               ng-show="node.screenshot"
-               ng-click="current_node_image=node.screenshot"/>
-          <div class="col-sm-11" ng-show="node.type == 'PageElement'">
-            <div class="elementBubble">
-              <i class="fa fa-list-alt fa-2x icon" uib-tooltip="node.xpath"></i>
-            </div>
+        <div ng-repeat="node in test.path.path" class="path-element-container" ng-click="setCurrentNode(node)">
+          <div  ng-show="node.screenshot" class="path-element">
+            <img src="{{node.screenshot}}" class="path-node-image"
+                 uib-tooltip="{{node.url}}"/>
           </div>
-          <div  class="col-sm-11" ng-show="node.type == 'Action'">
-            <div class="actionBubble pull-right">
-              <i class="fa fa-mouse-pointer icon" uib-tooltip="node.name"></i>
-            </div>
+          <div ng-show="node.type == 'PageElement'" class="path-element">
+            <i class="fa fa-square fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
+          </div>
+          <div ng-show="node.type == 'Action'" class="path-element">
+              <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
+          </div>
+          <div class="path-arrow">
+            <i class="fa fa-arrow-right "></i>
           </div>
         </div>
-        <div class="row no-gutter">
-          <label>Groups: </label>
-          <div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
-            {{group.name}}
+        <div class="path-element-container">
+          <div  ng-show="test.result.screenshot" class="path-element">
+            <img src="{{test.result.screenshot}}" class="path-node-image"
+                 uib-tooltip="{{test.result.url}}"/>
           </div>
-          <input ng-model="group.name" />
-          <i class="fa fa-plus" ng-click="addGroup(test, group)"></i>
         </div>
       </div>
       <div class="row no-gutter">
-          <span>
+        <label>Groups: </label>
+        <div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
+          {{group.name}}
+        </div>
+        <input ng-model="group.name" />
+        <i class="fa fa-plus" ng-click="addGroup(test, group)"></i>
+      </div>
+      <div class="row no-gutter">
+        <span>
+          {{current_node.type}}
           Element CSS
         </span>
         <span>
           Play Test
         </span>
+        <span>
+          History
+        </span>
       </div>
       <!-- Node Examination -->
-      <div class="col-sm-12" ng-show="current_node.type=='Page'">
+      <div class="row no-gutter" ng-show="current_node.type=='Page'">
         <div class="col-sm-4">
           <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
         </div>
@@ -146,7 +154,7 @@
         </div>
       </div>
 
-      <div class="col-sm-12" ng-show="current_node.type=='PageElement'">
+      <div class="row no-gutter" ng-show="current_node.type=='PageElement'">
         <div class="pull-right col-sm-2" >
           <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
         </div>

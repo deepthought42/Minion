@@ -34,7 +34,7 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.$location = $location;
       $scope.current_path = $location.path();
       $scope.user_profile = store.get('profile');
-
+      $scope.navToggledOpen = true;
     }
 
     this._init();
