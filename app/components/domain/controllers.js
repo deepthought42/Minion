@@ -47,17 +47,21 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           clickOutsideToClose: true,
           scope: $scope,
           preserveScope: true,
-          template: '<md-dialog>' +
+          template: '<md-dialog class="col-sm-4" style="height:60%">' +
+                      '<div class="col-sm-12 domain-dialogue-header">' +
                       '  <md-dialog-content>' +
                       '     Start a new project by adding a domain.' +
                       '  </md-dialog-content>' +
-                      '  <md-dialog-content>' +
-                      '    <input id="domain_input" ng-model="domain_url" class="" placeholder="yourdomain.com" />' +
-                      '  </md-dialog-content>' +
-                      '  <md-dialog-content>' +
-                      '    <button id="create_domain_button" ng-click="createDomain(domain_url)" class="btn">Create Project</button>' +
-                      '  </md-dialog-content>' +
-                      '</md-dialog>',
+                      '</div>' +
+                      '<form>' +
+                      '<div class ="col-sm-12 domain-dialogue-input" >' +
+                      '  <input id="domain_input" class="form-control" ng-model="domain_url" class="" placeholder="yourdomain.com" />' +
+                      '</div>' +
+                      '<div class="col-sm-12">' +
+                      '  <md-button id="create_domain_button" class="md-primary md-raised domain-dialogue-button" ng-click="createDomain(domain_url)">Create Project</md-button>' +
+                      '</div>' +
+                      '</form>' +
+                    '</md-dialog>',
           controller: function DialogController($scope, $mdDialog) {
              $scope.closeDialog = function() {
                 $mdDialog.hide();
