@@ -88,37 +88,6 @@
     	 </div>
     	</div>
     </div>
-
-    <div id="secondary-nav" class="row no-gutter">
-       <div class="col-xs-5">
-          <div class="input-group">
-
-            <span class="input-group-btn">
-             <button type="submit" class="btn btn--gray">
-              All Tests <i class="fa fa-chevron-down fa-fw" aria-label="Open"></i>
-    					</button>
-            </span>
-            <input class="form-control" type="text"
-                       ng-model="search"
-                       placeholder="Contains Text"/>
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn--gray">
-                <i class="fa fa-search fa-fw" aria-label="Search"></i>
-              </button>
-            </span>
-        </div>
-      </div>
-
-      <div class="col-xs-3">
-        &nbsp;
-      </div>
-
-      <div class="col-xs-4">
-        <button class="btn btn--green pull-right">Run All</button>
-      </div>
-    </div>
   </div>
-  <div class="content clearfix">
-  	<div ui-view class="container-fluid"></div>
-  </div>
+	<div ui-view class="container-fluid content clearfix"></div>
 </div>
