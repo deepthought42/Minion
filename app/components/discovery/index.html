@@ -1,4 +1,4 @@
-<div class="row no-gutter" controller="WorkManagementCtrl">
+<div controller="WorkManagementCtrl">
 <!--  <button ng-show="isStarted"
           class="btn btn-danger col-xs-12"
           ng-click="stopMappingProcess('account_key_here')">
@@ -6,7 +6,7 @@
   </button>
 -->
 
-  <div class="row no-gutter">
+  <div class="no-gutter row discovery-tools-row" >
     <div class="col-xs-2">
       <div class="input-group">
         <span class="input-group-btn">
@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <div class="row no-gutter test__labels test">
+  <div class="row content  test__labels test">
     <div class="col-xs-2">
       Status
     </div>
@@ -54,9 +54,9 @@
     </div>
   </div>
 
-  <div class="test__container" ng-repeat="test in tests">
+  <div class="row test__container content" ng-repeat="test in tests">
 
-    <div class="row test" ng-click="showTestData(test.key, test.path.path[0])">
+    <div class="row test" ng-click="toggleTestDataVisibility(test.key, test.path.path[0])">
       <div class="col-xs-2 test__status">
        <div class="row no-gutter">
         <span class="col-xs-6" ng-click="updateCorrectness(test, true)">
@@ -94,7 +94,7 @@
         </div>
     	</div>
     </div>
-    <div class="row no-gutter" ng-show="visibleTestKey==test.key" style="background-color:white;">
+    <div class="row no-gutter" ng-show="visibleTestKey==test.key && visible" style="background-color:white;">
       <div class="row no-gutter" >
         <div ng-repeat="node in test.path.path" class="col-sm-1" ng-click="setCurrentNode(node)">
           <i class="fa fa-arrow-right pull-left"></i>
@@ -123,7 +123,7 @@
         </div>
       </div>
       <div class="row no-gutter">
-        <md-tab>
+          <span>
           Element CSS
         </span>
         <span>

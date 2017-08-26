@@ -20,6 +20,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.isStarted = false;
       $scope.current_node_image = "";
       $scope.current_node = null;
+      $scope.visible = false;
 
       if(store.get('domain') != null){
 
@@ -81,9 +82,16 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.current_node = node;
     }
 
-    $scope.showTestData = function(test_key, node){
-      $scope.visibleTestKey = test_key;
-      $scope.current_node = node;
+    $scope.toggleTestDataVisibility = function(test_key, node){
+      if(test_key == $scope.visibleTestKey){
+        $scope.visible = !$scope.visible;
+      }
+      else{
+        $scope.visibleTestKey = test_key;
+        $scope.current_node = node;
+        $scope.visible = true;
+      }
+
     }
 
     $scope.stopMappingProcess = function(){

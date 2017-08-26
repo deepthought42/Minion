@@ -351,10 +351,10 @@ a img {border: none; }
 html, body {
   min-height: 100%;
 }
+
 .main-header {
   background: #ffffff;
   padding: 0px;
-  color: white;
   position: fixed;
 	width: 80%;
   left: 20%;
@@ -501,11 +501,10 @@ width: calc(100% - 80px);
 
 
 
-
 /*--------------------------- [5. Body/ View Frame] --------------------------------------------------------------------------------*/
 
 .content {
-  padding: 15px;
+  padding: 0px 15px 0px 15px;
 	background-color: #f5f5f5;
 	}
 
@@ -558,6 +557,7 @@ width: calc(100% - 80px);
 .test__btns > .btn-group{
 	float: right !important;
 }
+
 /*--------------------------- [7. Footer] ------------------------------------------------------------------------------*/
 
 
@@ -785,4 +785,8 @@ width: calc(100% - 80px);
   display: flex;
   margin:auto;
   justify-content: center;
+}
+
+.discovery-tools-row {
+  background-color: #f5f5f5;
 }
