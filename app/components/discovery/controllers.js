@@ -110,8 +110,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
     $scope.updateCorrectness = function(test, correctness){
       Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
         .then(function(data){
-          console.log("successfully updated");
-        })
+          test.correct = data.correct;
+        });
+
     }
 
     this._init();

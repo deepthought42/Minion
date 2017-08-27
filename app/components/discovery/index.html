@@ -59,20 +59,19 @@
     <div class="row test" ng-click="toggleTestDataVisibility(test.key, test.path.path[0])">
       <div class="col-xs-2 test__status">
        <div class="row no-gutter">
-        <span class="col-xs-6" ng-click="updateCorrectness(test, true)">
-          <i class="fa fa-check"
-             style="{{pathWrapper.correct ? 'color:green' : 'color:#bfbfbf'}}"
-             ng-click="pathWrapper.correct=!pathWrapper.correct"></i>
-             <br/>
+         <div class="col-xs-6" ng-click="updateCorrectness(test, true)">
+           <i class="fa fa-check"
+               style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"
+               ></i>
+           <br/>
            Correct
-        </span>
-        <span class="col-xs-6" ng-click="updateCorrectness(test, false)">
-          <i  class="fa fa-times"
-              style="{{!pathWrapper.correct && pathWrapper.correct != null ? 'color:red' : 'color:#bfbfbf'}}"
-              ng-click="pathWrapper.correct=!pathWrapper.correct"></i>
-          <br/>
-          Incorrect
-        </span>
+        </div>
+        <div class="col-xs-6" ng-click="updateCorrectness(test, false)">
+            <i  class="fa fa-times"
+                style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
+            <br/>
+            Incorrect
+        </div>
     	  </div>
       </div>
 
@@ -103,7 +102,7 @@
           </div>
           <div ng-show="node.type == 'PageElement'" class="path-element">
             <i class="fa fa-font fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.text"></i>
-            <i class="fa fa-paper-plane-o fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.submit"></i>
+            <i class="fa fa-paper-  plane-o fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.submit"></i>
 
             <i class="fa fa-square-o fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
           </div>
@@ -114,7 +113,7 @@
             <i class="fa fa-arrow-right "></i>
           </div>
         </div>
-        <div class="path-element-container">
+        <div class="path-element-container" ng-click="setCurrentNode(test.result)">
           <div  ng-show="test.result.screenshot" class="path-element">
             <img src="{{test.result.screenshot}}" class="path-node-image"
                  uib-tooltip="{{test.result.url}}"/>
@@ -129,83 +128,82 @@
         <input ng-model="group.name" />
         <i class="fa fa-plus" ng-click="addGroup(test, group)"></i>
       </div>
-      <div class="row no-gutter">
-        <span>
-          Element CSS
-        </span>
-        <span>
-          Play Test
-        </span>
-        <span>
-          History
-        </span>
-      </div>
-      <!-- Node Examination -->
-      <!-- Node Examination -->
-      <div class="row no-gutter" ng-show="current_node.type=='Page'">
-        <div class="col-sm-4">
-          <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
-        </div>
-        <div class="col-sm-3">
-          <div class="col-sm-12">
-            <div>
-              <label>Landable -</label>
-              <span>{{current_node.landable}}</span>
-            </div>
-            <div>
-              <label>URL -</label>
-              <span>{{current_node.url}}</span>
-            </div>
-            <div>
-              <label>Visible Element counts- </label>
-              <span>{{current_node.elementCounts || "coming soon"}}</span>
-            </div>
-            <div>
-              <label>Total Weight -</label>
-              <span>{{current_node.totalWeight}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="row no-gutter" ng-show="current_node.type=='PageElement'">
-        <div class="pull-right col-sm-2" ng-show="current_node.screenshot" >
-          <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
-        </div>
-        <div>
-          ELEMENT
-          <div>
-           tag type -  {{current_node.name}}
-          </div>
-          <div>
-            xpath - {{current_node.xpath}}
-          </div>
-          css
-          <div ng-repeat="(key, value) in current_node.cssProperties">
-              {{key}} -           {{value}}
-          </div>
-          <div>
-            attributes
-            <div ng-repeat="(key, value) in current_node.attributes">
-              {{key}} -           {{value}}
+      <div class="row no-gutter">
+        <md-tabs>
+          <md-tab label="Node Data">
+            <div class="col-sm-12" ng-show="current_node.type=='Page'">
+              <div class="col-sm-4" >
+                <img src="{{current_node.screenshot}}" class="path-node-image"  uib-tooltip="{{current_node.url}}" />
+              </div>
+              <div class="col-sm-8">
+                <div class="col-sm-12">
+                  <div>
+                    <label>Landable -</label>
+                    <span>{{current_node.landable}}</span>
+                  </div>
+                  <div>
+                    <label>URL -</label>
+                    <span>{{current_node.url}}</span>
+                  </div>
+                  <div>
+                    <label>Visible Element counts- </label>
+                    <span>{{current_node.elementCounts || "coming soon"}}</span>
+                  </div>
+                  <div>
+                    <label>Total Weight -</label>
+                    <span>{{current_node.totalWeight}}</span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div>
-            Internal Text - {{current_node.text}}
-          </div>
-        </div>
-        <div class="row no-gutter" ng-show="current_node=='Action'">
-          <div>
-            Action
-            <div>
-              Name : {{current_node.name}}
+            <div class="col-sm-12" ng-show="current_node.type=='PageElement'">
+              <div class="pull-right col-sm-2" ng-show="current_node.screenshot" >
+                <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
+              </div>
+              <div>
+                ELEMENT
+                <div>
+                 tag type -  {{current_node.name}}
+                </div>
+                <div>
+                  xpath - {{current_node.xpath}}
+                </div>
+                css
+                <div ng-repeat="(key, value) in current_node.cssProperties">
+                    {{key}} -           {{value}}
+                </div>
+                <div>
+                  attributes
+                  <div ng-repeat="(key, value) in current_node.attributes">
+                    {{key}} -           {{value}}
+                  </div>
+                </div>
+                <div>
+                  Internal Text - {{current_node.text}}
+                </div>
+              </div>
             </div>
-            <div>
-              Value : {{current_node.val}}
+            <div class="col-sm-12" ng-show="current_node.type=='Action'">
+              Action
+              <div>
+                Name : {{current_node.name}}
+              </div>
+              <div>
+                Value : {{current_node.val}}
+              </div>
             </div>
-          </div>
-        </div>
+          </md-tab>
+          <md-tab label="History">
+            Put test run history here
+          </md-tab>
+        </md-tabs>
       </div>
+      <!-- Node Examination -->
+      <!-- Node Examination -->
+
+
+
     </div>
   </div>
 </div>
