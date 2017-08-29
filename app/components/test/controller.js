@@ -48,7 +48,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       return $scope.test.correct;
     }
 
-    $scope.runTest = function(test, correctness){
+    $scope.runTest = function(test){
       Tester.runTest({key: test.key})
         .then(function(data){
           console.log("Test ran successfully :: "+data);

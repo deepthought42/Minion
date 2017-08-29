@@ -79,7 +79,7 @@
         {{test.name || "Test # (Add funtionality)"}}
       </div>
       <div class="col-xs-2">
-        {{test.runtime || "0 ms"}}
+        {{test.runtime || test.created_at}} ms
       </div>
       <div class="col-xs-2">
         &nbsp;
@@ -87,7 +87,6 @@
 
       <div class="col-xs-2 test__btns">
         <div class="btn-group" role="group" aria-label="Run Favorite More">
-         <button class="btn btn--left btn--gray">Run</button>
          <button class="btn btn--right btn--gray"><i class="fa fa-angle-down"></i>
          </button>
         </div>
