@@ -49,7 +49,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.runTest = function(test){
-      Tester.runTest({key: test.key})
+      Tester.runTest({key: test.key, browser_type:'phantomjs'}).$promise
         .then(function(data){
           console.log("Test ran successfully :: "+data);
         })
