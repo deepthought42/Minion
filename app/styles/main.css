@@ -290,7 +290,7 @@ a img {border: none; }
 
 
 
-/*--------------------------- [3. Nav Bar] -----------------------------------------------------------------------------*/
+/*--------------------------- [3. Sidenav Bar] -----------------------------------------------------------------------------*/
 
 
 
@@ -483,62 +483,85 @@ width: calc(100% - 80px);
 	text-align: right;
 }
 
-/*--------------------------- [3. Secondary Nav] -----------------------------------------------------------------------------*/
-
-#secondary-nav{
-	 background: #ffffff;
-	color: #2d2d2d;
-	padding:15px;
-	border-bottom: 2px solid #eeeeee;
-}
-
-
-
-
-
-
-
-
 /*--------------------------- [5. Body/ View Frame] --------------------------------------------------------------------------------*/
 
-.content {
-  padding: 0px 15px 0px 15px;
+
+/*--exterior container--*/
+.container-fluid {
 	background-color: #f5f5f5;
 	}
 
+/*--interior container--*/
+.content {
+	}
+
+/*--------------------------- [3. Secondary Nav] -----------------------------------------------------------------------------*/
+
+.secondary-nav{
+	color: #2d2d2d;
+	padding:15px;
+	/*border-bottom: 2px solid #eeeeee;*/
+}
+
 /*--------------------------- [6. Tests] --------------------------------------------------------------------------------*/
 
-.test__labels{
+.test-labels{
 	text-align: center !important;
 	padding-top: 20px;
 	padding-bottom: 10px;
+	height: 60px;
+}
+
+.test-container{
+	border-top: 1px solid #e0e0e0;
 }
 
 .test{
 	background-color: #ffffff;
-	text-align: center !important;
 	border-top: 0px solid #e0e0e0;
 	border-right: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 	border-left: 1px solid #e0e0e0;
-	padding: 10px 0px 10px 0px;
-	border-top-width: 0px;
+}
+
+
+/*-------break this down for each data point,correct,incorrect---------*/
+.test__profile{
+	padding-top: 20px;
+	text-align: center !important;
+	padding-bottom: 10px;
 	height: 60px;
 }
 
-.test__container > :first-child{
+
+.test__path{
+	height: 120px;
+}
+
+.test__groups{
+	height: 60px;
 	border-top: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	padding:15px;
 }
 
-.test__status  > .row  > .col-xs-6:first-child{
-
+.test__info{
+	height: 300px;
 }
 
-.test > div{
+.node__data{
+	padding:15px;
+}
+
+.test__history{
+	padding:15px;
+}
+
+/*.test > div{
 	position: relative;
  	top: 50%;
   	transform: perspective(1px) translateY(-50%);
-}
+}*/
 
 .test__title{
 	font-size: 18px;
@@ -785,9 +808,6 @@ width: calc(100% - 80px);
   justify-content: center;
 }
 
-.tools-row {
-  background-color: #f5f5f5;
-}
 
 .path-node-image {
   max-width:100%;

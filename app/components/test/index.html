@@ -1,192 +1,202 @@
+<div class="content">
+	<div class="row no-gutter secondary-nav">
+	  <div class="col-xs-2">
+		<button class="btn btn--green">
+		  Create Test Suite
+		</button>
+	  </div>
+	  <div class="col-xs-7">
+	  </div>
+	  <div class="col-xs-2 search">
+		<span class="fa fa-search"></span>
+		<input ng-model="search" placeholder="Search" />
+	  </div>
+	  <div class="col-sm-1">
+		<select ng-options="group as group for group in groups"
+				ng-model="selectedGroup">
+				<option value="" disabled selected>Filter</option>
+		</select>
+		<i class="fa fa-play-circle-o" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)"></i>
+	  </div>
+	</div>
 
-<div class="row no-gutter tools-row">
-  <div class="col-xs-2">
-    <button class="btn btn--green">
-      Create Test Suite
-    </button>
-  </div>
-  <div class="col-xs-7">
-  </div>
-  <div class="col-xs-2 search">
-    <span class="fa fa-search"></span>
-    <input ng-model="search" placeholder="Search" />
-  </div>
-  <div class="col-sm-1">
-    <select ng-options="group as group for group in groups"
-            ng-model="selectedGroup">
-            <option value="" disabled selected>Filter</option>
-    </select>
-    <i class="fa fa-play-circle-o" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)"></i>
-  </div>
+	<div class="row no-gutter test-labels">
+	  <div class="col-sm-2">
+		Status
+	  </div>
+	  <div class="col-sm-4">
+		Test Title
+	  </div>
+	  <div class="col-sm-2">
+		Time (seconds)
+		<i class="fa fa-sort"></i>
+	  </div>
+	  <div class="col-sm-2">
+		Date Last run
+		<i class="fa fa-sort"></i>
+	  </div>
+	  <div class="col-sm-2">
+
+	  </div>
+	</div>
+
+	  <div class="test-container">
+	  	<div class="test" ng-repeat="test in tests">
+
+
+			<div class="test__profile" ng-click="showTestData(test.key)">
+			  <div class="col-xs-2 test__status">
+				<span class="col-xs-12" ng-show="pathWrapper.passing">
+				  <i class="fa fa-check"
+					 style="color:green"></i>
+				  <br/>
+				   Passing
+				</span>
+				<span class="col-xs-12" ng-show="!pathWrapper.passing && pathWrapper.passing != null">
+				  <i  class="fa fa-times"
+					  style="color:red"></i>
+				  <br/>
+				  Failing
+				</span>
+
+
+				<span class="col-xs-12" ng-show="!pathWrapper.passing">
+				  <i  class="fa fa-question"
+					  style="color:orange"></i>
+				  <br/>
+				  Unknown
+				</span>
+			  </div>
+
+			  <div class="col-xs-4 test__title">
+				{{test.name || "Test #"}}
+			  </div>
+			  <div class="col-xs-2">
+				{{test.runtime || "0 ms"}}
+			  </div>
+			  <div class="col-xs-2">
+				&nbsp;
+			  </div>
+
+			  <div class="col-xs-2 test__btns">
+				<div class="btn-group" role="group" aria-label="Run Favorite More">
+				 <button class="btn btn--left btn--gray" ng-click="runTest(test)">Run</button>
+				 <button class="btn btn--right btn--gray"><i class="fa fa-angle-down"></i>
+				 </button>
+				</div>
+			  </div>
+			</div>
+
+
+			<div ng-show="visibleTestKey==test.key && visible">
+			  <div class="test__path" >
+				<div ng-repeat="node in test.path.path" class="path-element-container" ng-click="setCurrentNode(node)">
+				  <div  ng-show="node.screenshot" class="path-element">
+					<img src="{{node.screenshot}}" class="path-node-image"
+						 uib-tooltip="{{node.url}}"/>
+				  </div>
+				  <div ng-show="node.type == 'PageElement'" class="path-element">
+					<i class="fa fa-square fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
+				  </div>
+				  <div ng-show="node.type == 'Action'" class="path-element">
+					  <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
+				  </div>
+				  <div class="path-arrow">
+					<i class="fa fa-arrow-right "></i>
+				  </div>
+				</div>
+				<div class="path-element-container" ng-click="setCurrentNode(test.result)">
+				  <div  ng-show="test.result.screenshot" class="path-element">
+					<img src="{{test.result.screenshot}}" class="path-node-image"
+						 uib-tooltip="{{test.result.url}}"/>
+				  </div>
+				</div>
+			  </div>
+			  <div class="test__groups">
+				<label>Groups: </label>
+				<div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
+				  {{group.name}}
+				</div>
+				<input ng-model="group.name" />
+				<i class="fa fa-plus" ng-click="addGroup(test, group)"></i>
+			  </div>
+			  <div class="test__info">
+				<md-tabs>
+				  <md-tab label="Node Data" >
+				  	<div class="node__data">
+						<div class="col-sm-12" ng-show="current_node.type=='Page'">
+						  <div class="col-sm-4">
+							<img src="{{current_node.screenshot}}" class="path-node-image" uib-tooltip="{{current_node.url}}" />
+						  </div>
+						  <div class="col-sm-8">
+							<div class="col-sm-12">
+							  <div>
+								<label>Landable -</label>
+								<span>{{current_node.landable}}</span>
+							  </div>
+							  <div>
+								<label>URL -</label>
+								<span>{{current_node.url}}</span>
+							  </div>
+							  <div>
+								<label>Visible Element counts- </label>
+								<span>{{current_node.elementCounts || "coming soon"}}</span>
+							  </div>
+							  <div>
+								<label>Total Weight -</label>
+								<span>{{current_node.totalWeight}}</span>
+							  </div>
+							</div>
+						  </div>
+						</div>
+						<div class="col-sm-12" ng-show="current_node.type=='PageElement'">
+						  <div class="pull-right col-sm-2" ng-show="current_node.screenshot" >
+							<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
+						  </div>
+						  <div>
+							ELEMENT
+							<div>
+							 tag type -  {{current_node.name}}
+							</div>
+							<div>
+							  xpath - {{current_node.xpath}}
+							</div>
+							css
+							<div ng-repeat="(key, value) in current_node.cssProperties">
+								{{key}} -           {{value}}
+							</div>
+							<div>
+							  attributes
+							  <div ng-repeat="(key, value) in current_node.attributes">
+								{{key}} -           {{value}}
+							  </div>
+							</div>
+							<div>
+							  Internal Text - {{current_node.text}}
+							</div>
+						  </div>
+						</div>
+						<div class="col-sm-12" ng-show="current_node.type=='Action'">
+						  Action
+						  <div>
+							Name : {{current_node.name}}
+						  </div>
+						  <div>
+							Value : {{current_node.val}}
+						  </div>
+						</div>
+					  </div>
+				  </md-tab>
+				  <md-tab label="History">
+					  <div class="test__history">
+						Put test run history 
+					  </div>
+				  </md-tab>
+				</md-tabs>
+			  </div>
+			</div>
+		</div>
+
+
+	  </div>
 </div>
-
-<div class="test row no-gutter test__labels">
-  <div class="col-sm-2">
-    Status
-  </div>
-  <div class="col-sm-4">
-    Test Title
-  </div>
-  <div class="col-sm-2">
-    Time (seconds)
-    <i class="fa fa-sort"></i>
-  </div>
-  <div class="col-sm-2">
-    Date Last run
-    <i class="fa fa-sort"></i>
-  </div>
-  <div class="col-sm-2">
-
-  </div>
-</div>
-
-  <div class="test__container" ng-repeat="test in tests">
-
-    <div class="row test" ng-click="showTestData(test.key)">
-      <div class="col-xs-2 test__status">
-        <span class="col-xs-12" ng-show="pathWrapper.passing">
-          <i class="fa fa-check"
-             style="color:green"></i>
-          <br/>
-           Passing
-        </span>
-        <span class="col-xs-12" ng-show="!pathWrapper.passing && pathWrapper.passing != null">
-          <i  class="fa fa-times"
-              style="color:red"></i>
-          <br/>
-          Failing
-        </span>
-
-
-        <span class="col-xs-12" ng-show="!pathWrapper.passing">
-          <i  class="fa fa-question"
-              style="color:orange"></i>
-          <br/>
-          Unknown
-        </span>
-      </div>
-
-      <div class="col-xs-4 test__title">
-        {{test.name || "Test #"}}
-      </div>
-      <div class="col-xs-2">
-        {{test.runtime || "0 ms"}}
-      </div>
-      <div class="col-xs-2">
-        &nbsp;
-      </div>
-
-      <div class="col-xs-2 test__btns">
-        <div class="btn-group" role="group" aria-label="Run Favorite More">
-         <button class="btn btn--left btn--gray" ng-click="runTest(test)">Run</button>
-         <button class="btn btn--right btn--gray"><i class="fa fa-angle-down"></i>
-         </button>
-        </div>
-      </div>
-    </div>
-    
-    
-    <div class="test__container" ng-show="visibleTestKey==test.key && visible" style="background-color:white;">
-      <div class="row no-gutter" >
-        <div ng-repeat="node in test.path.path" class="path-element-container" ng-click="setCurrentNode(node)">
-          <div  ng-show="node.screenshot" class="path-element">
-            <img src="{{node.screenshot}}" class="path-node-image"
-                 uib-tooltip="{{node.url}}"/>
-          </div>
-          <div ng-show="node.type == 'PageElement'" class="path-element">
-            <i class="fa fa-square fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
-          </div>
-          <div ng-show="node.type == 'Action'" class="path-element">
-              <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
-          </div>
-          <div class="path-arrow">
-            <i class="fa fa-arrow-right "></i>
-          </div>
-        </div>
-        <div class="path-element-container" ng-click="setCurrentNode(test.result)">
-          <div  ng-show="test.result.screenshot" class="path-element">
-            <img src="{{test.result.screenshot}}" class="path-node-image"
-                 uib-tooltip="{{test.result.url}}"/>
-          </div>
-        </div>
-      </div>
-      <div class="row no-gutter">
-        <label>Groups: </label>
-        <div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
-          {{group.name}}
-        </div>
-        <input ng-model="group.name" />
-        <i class="fa fa-plus" ng-click="addGroup(test, group)"></i>
-      </div>
-      <div class="row no-gutter">
-        <md-tabs>
-          <md-tab label="Node Data">
-            <div class="col-sm-12" ng-show="current_node.type=='Page'">
-              <div class="col-sm-4">
-                <img src="{{current_node.screenshot}}" class="path-node-image" uib-tooltip="{{current_node.url}}" />
-              </div>
-              <div class="col-sm-8">
-                <div class="col-sm-12">
-                  <div>
-                    <label>Landable -</label>
-                    <span>{{current_node.landable}}</span>
-                  </div>
-                  <div>
-                    <label>URL -</label>
-                    <span>{{current_node.url}}</span>
-                  </div>
-                  <div>
-                    <label>Visible Element counts- </label>
-                    <span>{{current_node.elementCounts || "coming soon"}}</span>
-                  </div>
-                  <div>
-                    <label>Total Weight -</label>
-                    <span>{{current_node.totalWeight}}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12" ng-show="current_node.type=='PageElement'">
-              <div class="pull-right col-sm-2" ng-show="current_node.screenshot" >
-                <img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
-              </div>
-              <div>
-                ELEMENT
-                <div>
-                 tag type -  {{current_node.name}}
-                </div>
-                <div>
-                  xpath - {{current_node.xpath}}
-                </div>
-                css
-                <div ng-repeat="(key, value) in current_node.cssProperties">
-                    {{key}} -           {{value}}
-                </div>
-                <div>
-                  attributes
-                  <div ng-repeat="(key, value) in current_node.attributes">
-                    {{key}} -           {{value}}
-                  </div>
-                </div>
-                <div>
-                  Internal Text - {{current_node.text}}
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12" ng-show="current_node.type=='Action'">
-              Action
-              <div>
-                Name : {{current_node.name}}
-              </div>
-              <div>
-                Value : {{current_node.val}}
-              </div>
-            </div>
-          </md-tab>
-          <md-tab label="History">
-            Put test run history here
-          </md-tab>
-        </md-tabs>
-      </div>
-    </div>
-  </div>
