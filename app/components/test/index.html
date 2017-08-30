@@ -46,21 +46,20 @@
 
 			<div class="test__profile" ng-click="showTestData(test.key)">
 			  <div class="col-xs-2 test__status">
-				<span class="col-xs-12" ng-show="pathWrapper.passing">
+				<span class="col-xs-12" ng-show="test.correct">
 				  <i class="fa fa-check"
 					 style="color:green"></i>
 				  <br/>
 				   Passing
 				</span>
-				<span class="col-xs-12" ng-show="!pathWrapper.passing && pathWrapper.passing != null">
+				<span class="col-xs-12" ng-show="!test.correct && test.correct != null">
 				  <i  class="fa fa-times"
 					  style="color:red"></i>
 				  <br/>
 				  Failing
 				</span>
 
-
-				<span class="col-xs-12" ng-show="!pathWrapper.passing">
+				<span class="col-xs-12" ng-show="test.correct == null">
 				  <i  class="fa fa-question"
 					  style="color:orange"></i>
 				  <br/>
@@ -189,7 +188,7 @@
 				  </md-tab>
 				  <md-tab label="History">
 					  <div class="test__history">
-						Put test run history 
+						Put test run history
 					  </div>
 				  </md-tab>
 				</md-tabs>

@@ -99,6 +99,9 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       return $scope.current_node=='Page';
     }
 
+    $scope.object_keys = function(obj){
+      return Object.keys(obj);
+    }
     $scope._init();
   }
 ]);
