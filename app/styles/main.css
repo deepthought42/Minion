@@ -120,7 +120,9 @@ html {
     padding-right:0;
     padding-left:0;
 }
-
+.no-padding {
+    padding:0px !important;
+}
 
 
 .fa { display:inline !important; }
@@ -498,23 +500,12 @@ width: calc(100% - 80px);
 /*--------------------------- [3. Secondary Nav] -----------------------------------------------------------------------------*/
 
 .secondary-nav{
-	color: #2d2d2d;
-	padding:15px;
+	color: #2d2d2d;height: 60px;
 	/*border-bottom: 2px solid #eeeeee;*/
 }
 
-/*--------------------------- [6. Tests] --------------------------------------------------------------------------------*/
+/*--------------------------- [6. Test/Test Container/Test Labels] --------------------------------------------------------------------------------*/
 
-.test-labels{
-	text-align: center !important;
-	padding-top: 20px;
-	padding-bottom: 10px;
-	height: 60px;
-}
-
-.test-container{
-	border-top: 1px solid #e0e0e0;
-}
 
 .test{
 	background-color: #ffffff;
@@ -524,44 +515,56 @@ width: calc(100% - 80px);
 	border-left: 1px solid #e0e0e0;
 }
 
+.test-container{
+	border-top: 1px solid #e0e0e0;
+}
 
-/*-------break this down for each data point,correct,incorrect---------*/
-.test__profile{
-	padding-top: 20px;
+.test-labels{
 	text-align: center !important;
+	padding-top: 20px;
 	padding-bottom: 10px;
 	height: 60px;
 }
 
-
-.test__path{
-	height: 120px;
-}
-
-.test__groups{
-	height: 60px;
-	border-top: 1px solid #e0e0e0;
-	border-bottom: 1px solid #e0e0e0;
-	padding:15px;
-}
-
-.test__info{
-	height: 300px;
-}
-
-.node__data{
-	padding:15px;
-}
-
-.test__history{
-	padding:15px;
-}
-
-/*.test > div{
+.test__profile > div,
+.secondary-nav > div,
+.test__path > div
+{
 	position: relative;
  	top: 50%;
   	transform: perspective(1px) translateY(-50%);
-}*/
+}
+
+
+/*--------------------------- [6. Test Profile] --------------------------------------------------------------------------------*/
+
+
+/*-------break this down for each data point,correct,incorrect---------*/
+.test__profile{
+	padding-top: 0px;
+	text-align: center !important;
+	padding-bottom: 0px;
+	height: 60px;
+}
+
+
+.test__profile {
+  color: #424242;
+  background-color: #ffffff;
+}
+
+.test__profile:focus,
+.test__profile.focus {
+	outline:none;
+  background-color: #fafafa;
+}
+.test__profile:hover {
+  background-color: #fafafa;
+}
+.test__profile:active,
+.test__profile.active {
+  background-color: #fafafa;
+}
 
 .test__title{
 	font-size: 18px;
@@ -579,18 +582,118 @@ width: calc(100% - 80px);
 	float: right !important;
 }
 
+
+/*--------------------------- [6. Test Path] --------------------------------------------------------------------------------*/
+
+.test__path{
+	
+border-top: 1px solid #e0e0e0;
+	height: 120px;
+}
+
+
+
+.path-node-image {
+  max-width:100%;
+  max-height:100%;
+  line-height: 70px;
+  vertical-align: middle;
+}
+
+.path-node-container {
+  height: 75px;
+  width:  75px;
+  float: left;
+}
+
+.path-node {
+  height: 75px;
+  width:  50px;
+  float: left;
+  line-height: 50px;
+  vertical-align: middle;
+  text-align: center;
+	
+}
+
+.path-element {
+	height: 50px !important;
+	border: 1px solid #a0a0a0;
+	border-radius: 50%;
+	position: relative;
+ 	top: 50%;
+  	transform: perspective(1px) translateY(-50%);
+}
+
+.path-action {
+	height: 50px !important;
+	border: 1px solid #a0a0a0;
+	position: relative;
+ 	top: 50%;
+  	transform: perspective(1px) translateY(-50%);
+}
+
+
+.path-arrow {
+  vertical-align: middle;
+  line-height: 5em;
+  height: 100%;
+  width: 25px;
+  float: left;
+}
+
+.path-bar{
+  vertical-align: top;
+  height: 50%;
+  width: 25px;
+  float: left;
+	border-bottom: 1px solid #a0a0a0;
+}
+
+.fa-rotate-45 {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/*--------------------------- [6. Test Groups] --------------------------------------------------------------------------------*/
+
+.test__groups{
+	height: 60px;
+	border-top: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	padding:15px;
+}
+
+
+/*--------------------------- [6. Test Info] --------------------------------------------------------------------------------*/
+
+
+.test__info{
+	height: 300px;
+}
+
+.node__data{
+	padding:15px;
+}
+
+.test__history{
+	padding:15px;
+}
+
+.info__title{
+		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-size: 16px;
+		line-height: 26px;
+		letter-spacing:.2px;
+		margin-bottom: 18px;
+		display: inline;
+		color:#11366e;
+}
+
 /*--------------------------- [7. Footer] ------------------------------------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -806,43 +909,4 @@ width: calc(100% - 80px);
   display: flex;
   margin:auto;
   justify-content: center;
-}
-
-
-.path-node-image {
-  max-width:100%;
-  max-height:100%;
-  line-height: 70px;
-  vertical-align: middle;
-}
-
-.path-element-container {
-  height: 70px;
-  width:  50px;
-  float: left;
-}
-
-.path-element {
-  height: 70px;
-  width:  35px;
-  float: left;
-  line-height: 70px;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.path-arrow {
-  vertical-align: middle;
-  line-height: 5em;
-  height: 100%;
-  width: 15px;
-  float: left;
-}
-
-.fa-rotate-45 {
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
 }

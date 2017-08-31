@@ -101,26 +101,26 @@
     
     <div ng-show="visibleTestKey==test.key && visible">
       <div class="test__path" >
-        <div ng-repeat="node in test.path.path" class="path-element-container" ng-click="setCurrentNode(node)">
-          <div  ng-show="node.screenshot" class="path-element">
+        <div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
+          <div  ng-show="node.screenshot" class="path-node">
             <img src="{{node.screenshot}}" class="path-node-image"
                  uib-tooltip="{{node.url}}"/>
           </div>
-          <div ng-show="node.type == 'PageElement'" class="path-element">
+          <div ng-show="node.type == 'PageElement'" class="path-node path-element">
             <i class="fa fa-font fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.text"></i>
             <i class="fa fa-paper-  plane-o fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.submit"></i>
 
             <i class="fa fa-square-o fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
           </div>
-          <div ng-show="node.type == 'Action'" class="path-element">
+          <div ng-show="node.type == 'Action'" class="path-node path-action">
               <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
           </div>
           <div class="path-arrow">
             <i class="fa fa-arrow-right "></i>
           </div>
         </div>
-        <div class="path-element-container" ng-click="setCurrentNode(test.result)">
-          <div  ng-show="test.result.screenshot" class="path-element">
+        <div class="path-node-container" ng-click="setCurrentNode(test.result)">
+          <div  ng-show="test.result.screenshot" class="path-node">
             <img src="{{test.result.screenshot}}" class="path-node-image"
                  uib-tooltip="{{test.result.url}}"/>
           </div>
@@ -140,7 +140,7 @@
         <md-tabs>
           <md-tab label="Node Data">
            	<div class="node__data">
-				<div class="col-sm-12" ng-show="current_node.type=='Page'">
+				<div class="col-sm-12 no-padding" ng-show="current_node.type=='Page'">
 				  <div class="col-sm-4" >
 					<img src="{{current_node.screenshot}}" class="path-node-image"  uib-tooltip="{{current_node.url}}" />
 				  </div>
@@ -165,7 +165,7 @@
 					</div>
 				  </div>
 				</div>
-				<div class="col-sm-12" ng-show="current_node.type=='PageElement'">
+				<div class="col-sm-12 no-padding" ng-show="current_node.type=='PageElement'">
 				  <div class="pull-right col-sm-2" ng-show="current_node.screenshot" >
 					<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
 				  </div>
@@ -192,7 +192,7 @@
 					</div>
 				  </div>
 				</div>
-				<div class="col-sm-12" ng-show="current_node.type=='Action'">
+				<div class="col-sm-12 no-padding" ng-show="current_node.type=='Action'">
 				  Action
 				  <div>
 					Name : {{current_node.name}}

@@ -1,26 +1,55 @@
 <div class="content">
-	<div class="row no-gutter secondary-nav">
-	  <div class="col-xs-2">
-		<button class="btn btn--green">
-		  Create Test Suite
+	<div class="no-gutter secondary-nav">
+	 
+	  <div class="col-md-6 col-sm-0">
+	  </div>
+	  <div class="col-md-2 col-sm-6 search">
+	
+	  
+	  
+	 
+		
+		
+		<div class="input-group">
+  <input type="text" class="form-control" ng-model="search" placeholder="Search Tests" aria-describedby="basic-addon2">
+  <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+</div>
+		</div>
+		
+		
+	  <div class="col-md-2 col-sm-6">
+		
+			
+			
+			 <!-- /.dropdown -->
+    			<div class="dropdown dropdown-toggle pull-right"  ng-show="auth.isAuthenticated" data-toggle="dropdown" href="#">
+    				Filter
+    				<i class="fa fa-caret-down"></i>
+    			</div>
+    			<ul class="dropdown-menu">
+    				
+    				<li><a href="">
+        <input type="checkbox" aria-label="Checkbox for following text input">&nbsp;
+					 Failed</a>
+    				</li>
+    				<li><a href="">
+        <input type="checkbox" aria-label="Checkbox for following text input">&nbsp;
+					 Passed</a>
+    				</li>
+    				
+    			</ul>
+    			<!-- /.dropdown-user -->
+    			
+    			
+	  </div>
+	   <div class="col-sm-12 col-md-2">
+		<button class="btn btn--green pull-right" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)">
+		  Run Tests
 		</button>
-	  </div>
-	  <div class="col-xs-7">
-	  </div>
-	  <div class="col-xs-2 search">
-		<span class="fa fa-search"></span>
-		<input ng-model="search" placeholder="Search" />
-	  </div>
-	  <div class="col-sm-1">
-		<select ng-options="group as group for group in groups"
-				ng-model="selectedGroup">
-				<option value="" disabled selected>Filter</option>
-		</select>
-		<i class="fa fa-play-circle-o" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)"></i>
 	  </div>
 	</div>
 
-	<div class="row no-gutter test-labels">
+	<div class="no-gutter test-labels">
 	  <div class="col-sm-2">
 		Status
 	  </div>
@@ -28,11 +57,11 @@
 		Test Title
 	  </div>
 	  <div class="col-sm-2">
-		Time (seconds)
+		Time (ms)
 		<i class="fa fa-sort"></i>
 	  </div>
 	  <div class="col-sm-2">
-		Date Last run
+		Date Last Run
 		<i class="fa fa-sort"></i>
 	  </div>
 	  <div class="col-sm-2">
@@ -90,23 +119,31 @@
 
 			<div ng-show="visibleTestKey==test.key && visible">
 			  <div class="test__path" >
-				<div ng-repeat="node in test.path.path" class="path-element-container" ng-click="setCurrentNode(node)">
-				  <div  ng-show="node.screenshot" class="path-element">
+				<div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
+				  <div  ng-show="node.screenshot" class="path-node">
 					<img src="{{node.screenshot}}" class="path-node-image"
 						 uib-tooltip="{{node.url}}"/>
 				  </div>
-				  <div ng-show="node.type == 'PageElement'" class="path-element">
+				  
+				  
+				  <div ng-show="node.type == 'PageElement'" class="path-node path-element" >
 					<i class="fa fa-square fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
 				  </div>
-				  <div ng-show="node.type == 'Action'" class="path-element">
+			  
+				  <div ng-show="node.type == 'Action'" class="path-node path-action">
 					  <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
 				  </div>
-				  <div class="path-arrow">
-					<i class="fa fa-arrow-right "></i>
+			 
+				  
+				  
+				  
+				   <div class="path-bar">
+					
 				  </div>
+				  
 				</div>
-				<div class="path-element-container" ng-click="setCurrentNode(test.result)">
-				  <div  ng-show="test.result.screenshot" class="path-element">
+				<div class="path-node-container" ng-click="setCurrentNode(test.result)">
+				  <div  ng-show="test.result.screenshot" class="path-node">
 					<img src="{{test.result.screenshot}}" class="path-node-image"
 						 uib-tooltip="{{test.result.url}}"/>
 				  </div>
@@ -122,9 +159,9 @@
 			  </div>
 			  <div class="test__info">
 				<md-tabs>
-				  <md-tab label="Node Data" >
+				  <md-tab label="Node Data" class="info__title">
 				  	<div class="node__data">
-						<div class="col-sm-12" ng-show="current_node.type=='Page'">
+						<div class="col-sm-12 no-padding" ng-show="current_node.type=='Page'">
 						  <div class="col-sm-4">
 							<img src="{{current_node.screenshot}}" class="path-node-image" uib-tooltip="{{current_node.url}}" />
 						  </div>
@@ -149,12 +186,12 @@
 							</div>
 						  </div>
 						</div>
-						<div class="col-sm-12" ng-show="current_node.type=='PageElement'">
+						<div class="col-sm-12 no-padding" ng-show="current_node.type=='PageElement'">
 						  <div class="pull-right col-sm-2" ng-show="current_node.screenshot" >
 							<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
 						  </div>
 						  <div>
-							ELEMENT
+							  <h3>ELEMENT</h3>
 							<div>
 							 tag type -  {{current_node.name}}
 							</div>
@@ -176,8 +213,8 @@
 							</div>
 						  </div>
 						</div>
-						<div class="col-sm-12" ng-show="current_node.type=='Action'">
-						  Action
+						<div class="col-sm-12 no-padding" ng-show="current_node.type=='Action'">
+							<h4>Action</h4>
 						  <div>
 							Name : {{current_node.name}}
 						  </div>
