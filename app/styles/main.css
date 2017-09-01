@@ -150,7 +150,7 @@ a img {border: none; }
 	p{
 		font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 12px;
-		line-height: 19px;
+		line-height: 18px;
 		letter-spacing:.2px;
 		margin-bottom: 16px;
 		display: inline;
@@ -188,11 +188,11 @@ a img {border: none; }
 
 	h4{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-size: 16px;
-		line-height: 26px;
+		font-size: 22px;
+		line-height: 20px;
+		font-weight:normal !important;
 		letter-spacing:.1px;
-		margin-bottom: 18px;
-		display: inline;
+		padding-bottom: 0px !important;
 		color:#3376c6;
 	}
 	h5{
@@ -346,6 +346,7 @@ a img {border: none; }
 }
 * {
   box-sizing: border-box;
+outline:none !important;
 }
 
 html, body {
@@ -504,6 +505,15 @@ width: calc(100% - 80px);
 	/*border-bottom: 2px solid #eeeeee;*/
 }
 
+.search { position: relative; }
+.search input { text-indent: 0px; }
+.search .fa-search {
+  font-size: 1em;
+  color: grey;
+}
+
+
+
 /*--------------------------- [6. Test/Test Container/Test Labels] --------------------------------------------------------------------------------*/
 
 
@@ -601,13 +611,13 @@ border-top: 1px solid #e0e0e0;
 }
 
 .path-node-container {
-  height: 75px;
-  width:  75px;
+  height: 80px;
+  width:  80px;
   float: left;
 }
 
 .path-node {
-  height: 75px;
+  height: 80px;
   width:  50px;
   float: left;
   line-height: 50px;
@@ -618,7 +628,7 @@ border-top: 1px solid #e0e0e0;
 
 .path-element {
 	height: 50px !important;
-	border: 1px solid #a0a0a0;
+	border: 1px solid #e0e0e0;
 	border-radius: 50%;
 	position: relative;
  	top: 50%;
@@ -627,12 +637,11 @@ border-top: 1px solid #e0e0e0;
 
 .path-action {
 	height: 50px !important;
-	border: 1px solid #a0a0a0;
+	border: 1px solid #e0e0e0;
 	position: relative;
  	top: 50%;
   	transform: perspective(1px) translateY(-50%);
 }
-
 
 .path-arrow {
   vertical-align: middle;
@@ -645,9 +654,9 @@ border-top: 1px solid #e0e0e0;
 .path-bar{
   vertical-align: top;
   height: 50%;
-  width: 25px;
+  width: 15px;
   float: left;
-	border-bottom: 1px solid #a0a0a0;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .fa-rotate-45 {
@@ -665,8 +674,12 @@ border-top: 1px solid #e0e0e0;
 	border-top: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 	padding:15px;
+	
 }
 
+.test__groups > div{
+	display: inline;
+}
 
 /*--------------------------- [6. Test Info] --------------------------------------------------------------------------------*/
 
@@ -681,14 +694,39 @@ border-top: 1px solid #e0e0e0;
 
 .test__history{
 	padding:15px;
+	font-size: 14px !important;
+		line-height: 20px;
+		letter-spacing:.2px;
+		color:#333333;
+}
+
+.key--value {
+}
+
+.data__key{
+	text-transform: capitalize;
+	
+		font-size: 14px;
+		line-height: 20px;
+		letter-spacing:.2px;
+		padding-bottom: 6px !important;
+		color:#333333;
+	text-align: left;
+}
+
+.data__value{
+		font-size: 14px !important;
+		line-height: 20px;
+		letter-spacing:.2px;
+		padding-bottom: 6px !important;
+		color:#333333;
 }
 
 .info__title{
-		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 16px;
 		line-height: 26px;
 		letter-spacing:.2px;
-		margin-bottom: 18px;
+		padding-bottom: 30px !important;
 		display: inline;
 		color:#11366e;
 }
@@ -878,16 +916,6 @@ border-top: 1px solid #e0e0e0;
 
 .a0-footer {
   display: none !important
-}
-
-.search { position: relative; }
-.search input { text-indent: 10px; }
-.search .fa-search {
-  position: absolute;
-  top: .4em;
-  right: 2.5em;
-  font-size: 1em;
-  color: grey;
 }
 
 .domain-dialogue-header {

@@ -3,7 +3,7 @@
 	 
 	  <div class="col-md-6 col-sm-0">
 	  </div>
-	  <div class="col-md-2 col-sm-6 search">
+	  <div class="col-md-3 col-sm-6 search">
 	
 	  
 	  
@@ -11,13 +11,13 @@
 		
 		
 		<div class="input-group">
-  <input type="text" class="form-control" ng-model="search" placeholder="Search Tests" aria-describedby="basic-addon2">
+  <input type="text" class="form-control pull-right" ng-model="search" placeholder="Search Tests" aria-describedby="basic-addon2">
   <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
 </div>
 		</div>
 		
 		
-	  <div class="col-md-2 col-sm-6">
+	  <div class="col-md-1 col-sm-2">
 		
 			
 			
@@ -42,7 +42,7 @@
     			
     			
 	  </div>
-	   <div class="col-sm-12 col-md-2">
+	   <div class="col-sm-4 col-md-2">
 		<button class="btn btn--green pull-right" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)">
 		  Run Tests
 		</button>
@@ -106,7 +106,6 @@
 			  <div class="col-xs-2">
 				&nbsp;
 			  </div>
-
 			  <div class="col-xs-2 test__btns">
 				<div class="btn-group" role="group" aria-label="Run Favorite More">
 				 <button class="btn btn--left btn--gray" ng-click="runTest(test)">Run</button>
@@ -120,27 +119,21 @@
 			<div ng-show="visibleTestKey==test.key && visible">
 			  <div class="test__path" >
 				<div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
-				  <div  ng-show="node.screenshot" class="path-node">
+				  
+				  <div  ng-show="node.screenshot" class="path-node path-page">
 					<img src="{{node.screenshot}}" class="path-node-image"
 						 uib-tooltip="{{node.url}}"/>
 				  </div>
-				  
-				  
-				  <div ng-show="node.type == 'PageElement'" class="path-node path-element" >
-					<i class="fa fa-square fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
+				  <div class="path-bar display-none">
 				  </div>
-			  
+				  <div ng-show="node.type == 'PageElement'" class="path-node path-element" >
+					<i class="fa fa-square fa-2x" uib-tooltip="node.xpath" ></i>
+				  </div>
 				  <div ng-show="node.type == 'Action'" class="path-node path-action">
 					  <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
 				  </div>
-			 
-				  
-				  
-				  
 				   <div class="path-bar">
-					
 				  </div>
-				  
 				</div>
 				<div class="path-node-container" ng-click="setCurrentNode(test.result)">
 				  <div  ng-show="test.result.screenshot" class="path-node">
@@ -150,12 +143,16 @@
 				</div>
 			  </div>
 			  <div class="test__groups">
-				<label>Groups: </label>
+				<div><label>Groups: </label></div>
 				<div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
 				  {{group.name}}
 				</div>
+				<div>
 				<input ng-model="group.name" />
+				</div>
+				<div>
 				<i class="fa fa-plus" ng-click="addGroup(test, group)"></i>
+				</div>
 			  </div>
 			  <div class="test__info">
 				<md-tabs>
@@ -167,22 +164,38 @@
 						  </div>
 						  <div class="col-sm-8">
 							<div class="col-sm-12">
-							  <div>
-								<label>Landable -</label>
-								<span>{{current_node.landable}}</span>
-							  </div>
-							  <div>
-								<label>URL -</label>
-								<span>{{current_node.url}}</span>
-							  </div>
-							  <div>
-								<label>Visible Element counts- </label>
-								<span>{{current_node.elementCounts || "coming soon"}}</span>
-							  </div>
-							  <div>
-								<label>Total Weight -</label>
-								<span>{{current_node.totalWeight}}</span>
-							  </div>
+						  <div class="key--value">
+						  <div class="col-sm-1 data__key">
+							 Landable:&nbsp;&nbsp;
+						  </div> 
+						  <div class="col-sm-11 data__value">
+							 {{current_node.landable}}
+						  </div>
+						 </div> 
+						  <div class="key--value">
+						  <div class="col-sm-1 data__key">
+							 URL:&nbsp;&nbsp;
+						  </div> 
+						  <div class="col-sm-11 data__value">
+							 {{current_node.url}}
+						  </div>
+						 </div> 
+						  <div class="key--value">
+						  <div class="col-sm-1 data__key">
+							 Visible Element Counts:&nbsp;&nbsp;
+						  </div> 
+						  <div class="col-sm-11 data__value">
+							 {{current_node.elementCounts || "coming soon"}}
+						  </div>
+						 </div> 
+						  <div class="key--value">
+						  <div class="col-sm-1 data__key">
+							 Total Weight:&nbsp;&nbsp;
+						  </div> 
+						  <div class="col-sm-11 data__value">
+							 {{current_node.totalWeight}}
+						  </div>
+						 </div>
 							</div>
 						  </div>
 						</div>
@@ -191,37 +204,81 @@
 							<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
 						  </div>
 						  <div>
-							  <h3>ELEMENT</h3>
-							<div>
-							 tag type -  {{current_node.name}}
+							  <h4>Element</h4>
 							</div>
-							<div>
-							  xpath - {{current_node.xpath}}
-							</div>
-							css
-							<div ng-repeat="(key, value) in current_node.cssProperties">
-								{{key}} -           {{value}}
-							</div>
-							<div>
-							  attributes
-							  <div ng-repeat="(key, value) in current_node.attributes">
-								{{key}} -           {{value}}
-							  </div>
-							</div>
-							<div>
-							  Internal Text - {{current_node.text}}
-							</div>
+ 
+					 
+						 <div class="key--value">
+						  <div class="col-sm-1 data__key no-padding">
+							 tag type:&nbsp;&nbsp;
+						  </div> 
+						  <div class="col-sm-11 data__value no-padding" style="text-transform:capitalize !important;">
+							 {{current_node.name}}
 						  </div>
+						 </div> 
+						 <div class="key--value">
+						  <div class="col-sm-1 data__key no-padding">
+							 xpath:&nbsp;&nbsp;
+						  </div> 
+						  <div class="col-sm-11 data__value no-padding">
+							 {{current_node.xpath}}
+						  </div>
+						 </div> 
+						 <div class="key--value">
+						  <div class="col-sm-1 data__key">
+							 CSS:&nbsp;&nbsp;
+						  </div> 
+						  <div class="col-sm-11 data__value" ng-repeat="(key, value) in current_node.cssProperties">
+								{{key}} -           {{value}}
+						  </div>
+						 </div> 
+						 <div class="key--value">
+						  <div class="col-sm-1 data__key">
+							 attributes:&nbsp;&nbsp;
+						  </div> 
+						  
+						  <div class="col-sm-11 data__value" ng-repeat="(key, value) in current_node.attributes">
+								{{key}} -           {{value}}
+						  </div>
+						 </div> 
+						 <div class="key--value">
+						  <div class="col-sm-1 data__key">
+							 text:&nbsp;&nbsp;
+						  </div> 
+						  
+						  <div class="col-sm-11 data__value">
+							 {{current_node.text}}
+						  </div>
+						 </div> 
+						  
+						  
+						  
+						  
+						  
 						</div>
+						
+						
+						
 						<div class="col-sm-12 no-padding" ng-show="current_node.type=='Action'">
-							<h4>Action</h4>
-						  <div>
-							Name : {{current_node.name}}
+							<div><h4>Action</h4></div>
+							 <div class="key--value">
+						  <div class="col-sm-1 data__key">
+							 Name:&nbsp;&nbsp;
+						  </div> 
+						  <div class="col-sm-11 data__value">
+							 {{current_node.name}}
 						  </div>
-						  <div>
-							Value : {{current_node.val}}
+						 </div> 
+						  <div class="key--value">
+						  <div class="col-sm-1 data__key">
+							 Value:&nbsp;&nbsp;
+						  </div> 
+						  <div class="col-sm-11 data__value">
+							 {{current_node.val}}
 						  </div>
+						 </div> 
 						</div>
+						
 					  </div>
 				  </md-tab>
 				  <md-tab label="History">
