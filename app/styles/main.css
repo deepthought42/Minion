@@ -291,6 +291,30 @@ a img {border: none; }
 }
 
 
+/*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/
+
+#main-nav{
+	 background: #ffffff;
+	height: 60px;
+	color: #2d2d2d;
+	border-bottom: 1px solid #eeeeee;
+}
+
+#main-nav > div
+{
+	position: relative;
+ 	top: 50%;
+  	transform: perspective(1px) translateY(-50%);
+}
+
+#left-main-nav{
+
+}
+
+#right-main-nav{
+	text-align: right;
+}
+
 
 /*--------------------------- [3. Sidenav Bar] -----------------------------------------------------------------------------*/
 
@@ -467,24 +491,6 @@ width: calc(100% - 80px);
 }
 
 
-/*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/
-
-#main-nav{
-	 background: #ffffff;
-	height: 60px;
-	color: #2d2d2d;
-	padding:15px;
-	padding-top: 25px;
-	border-bottom: 1px solid #eeeeee;
-}
-
-#left-main-nav{
-
-}
-
-#right-main-nav{
-	text-align: right;
-}
 
 /*--------------------------- [5. Body/ View Frame] --------------------------------------------------------------------------------*/
 
@@ -580,9 +586,7 @@ width: calc(100% - 80px);
 	font-size: 18px;
 }
 
-.test__status{
-	float: left !important;
-}
+
 
 .test__btns{
 	float: right !important;
@@ -593,6 +597,19 @@ width: calc(100% - 80px);
 }
 
 
+/*--------------------------- [6. Test Status] --------------------------------------------------------------------------------*/
+
+.status{
+	background-color: #d9d9d9;
+	color: #ffffff;
+	font-size: 10px;
+	height:60px;
+}
+
+.status--symbol{
+	font-size: 30px;
+	
+}
 /*--------------------------- [6. Test Path] --------------------------------------------------------------------------------*/
 
 .test__path{
@@ -916,6 +933,61 @@ border-top: 1px solid #e0e0e0;
 
 .a0-footer {
   display: none !important
+}
+
+
+/*--------------------------- [7. Domains Page] ------------------------------------------------------------------------------*/
+
+.error__message{
+	font-weight: 700;
+	color: #ffffff;
+	text-align: center;
+	padding: 10px;
+	background-color:red;
+	margin-bottom:10px;
+}
+
+.domain__button{
+	background-color:#ffffff;
+	margin:10px;
+	padding:10px;
+	height:250px;
+	width:250px;
+	border-radius: 5px;
+}
+
+.domain--largeicon{
+	font-size: 150px;
+	line-height: 150px;
+	font-weight: 700;
+	color: #bbbbbb;
+	text-align: center;
+	padding: 10px;
+}
+
+.domain__trash{
+	text-align: right;
+	padding: 10px;
+	right:0px;
+	bottom:0px;
+	position:fixed;
+}
+
+.domain__title{
+	font-size: 20px;
+	line-height: 28px;
+	padding: 10px;
+	text-align: center;
+}
+
+.domain__modal{
+	background-color:#ffffff;
+	margin:10px;
+	padding:10px;
+	height:250px !important;
+	width:600px !important;
+	border-radius: 5px;
+	border: 1px solid #e0e0e0;
 }
 
 .domain-dialogue-header {
