@@ -1,11 +1,12 @@
-<div class="col-md-12 error__message" ng-show="domain_error">
+<div class="row">
+ <div class="col-md-12 error__message" ng-show="domain_error">
   {{domain_error}}
 </div>
 <div class="col-md-12 error__message" ng-show="show_create_domain_err">
   {{domain_creation_err}}
 </div>
-
-<div layout="row">
+</div>
+<div class="row">
   <div class="domain__button" ng-click="openCreateDomainDialog()">
     <div class="domain--largeicon">
       <i class="fa fa-plus"></i>
