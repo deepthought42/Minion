@@ -24,7 +24,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       if(store.get('domain') != null){
 
         $scope.discovery_url = store.get('domain').url;
-        $scope.tests = Tester.query({url: $scope.discovery_url});
+        $scope.tests = Tester.getUnverified({url: $scope.discovery_url});
 
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;

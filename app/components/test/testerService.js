@@ -10,6 +10,7 @@ testerService.factory('Tester', ['$resource', 'Qanairy.serviceConfig', function 
     runTest: {url : config.basePath + '/tests/runTest/:key', method: 'POST', params: {key: '@key', browser_type: '@browser_type'}},
     addGroup: {url : config.basePath + '/tests/addGroup', method: 'POST', params: {key: '@key', description: '@description', name: '@name'}},
     getGroups: {url: config.basePath + '/tests/groups', method: 'GET', isArray: true, params: {url: '@url'}},
-    runTestsByGroup: {url: config.basePath + '/tests/runTestGroup/:group', method: 'POST', params: { group: '@group', url: '@url'}}
+    runTestsByGroup: {url: config.basePath + '/tests/runTestGroup/:group', method: 'POST', params: { group: '@group', url: '@url'}},
+    getUnverified: {url: config.basePath + '/tests/unverified', method: 'GET', isArray: true, params: {url: '@url' }}
   });
 }]);
