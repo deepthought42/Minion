@@ -17,10 +17,12 @@
 	  </div>
 	  <div class="col-md-1 col-sm-2">
 			 <!-- /.dropdown -->
-    			<div class="dropdown dropdown-toggle pull-right"  ng-options="group as group for group in groups" ng-model="selectedGroup" data-toggle="dropdown" href="#">
+    			<select class="dropdown dropdown-toggle pull-right"
+                ng-options="group as group for group in groups"
+                ng-model="selectedGroup" data-toggle="dropdown" href="#">
     				Filter
     				<i class="fa fa-caret-down"></i>
-    			</div>
+    			</select>
     			<ul class="dropdown-menu">
     				<li><a href="">
         <input type="checkbox" aria-label="Checkbox for following text input">&nbsp;
@@ -31,7 +33,7 @@
 					 Passed</a>
     				</li>
     			</ul>
-    			<!-- /.dropdown -->	
+    			<!-- /.dropdown -->
 	  </div>
 	  <div class="col-md-2 col-sm-4 ">
 		<button class="btn btn--green pull-right" ng-click="startMappingProcess()" ng-show="!isStarted">Start Discovery</button>
@@ -149,31 +151,31 @@
 								  <div class="key--value row">
 								  <div class="col-sm-1 data__key">
 									 Landable:&nbsp;&nbsp;
-								  </div> 
+								  </div>
 								  <div class="col-sm-11 data__value">
 									 {{current_node.landable}}
 								  </div>
-								 </div> 
+								 </div>
 								  <div class="key--value row">
 								  <div class="col-sm-1 data__key">
 									 URL:&nbsp;&nbsp;
-								  </div> 
+								  </div>
 								  <div class="col-sm-11 data__value">
 									 {{current_node.url}}
 								  </div>
-								 </div> 
+								 </div>
 								  <div class="key--value row">
 								  <div class="col-sm-1 data__key">
 									 Visible Element Counts:&nbsp;&nbsp;
-								  </div> 
+								  </div>
 								  <div class="col-sm-11 data__value">
 									 {{current_node.elementCounts || "coming soon"}}
 								  </div>
-								 </div> 
+								 </div>
 								  <div class="key--value row">
 								  <div class="col-sm-1 data__key">
 									 Total Weight:&nbsp;&nbsp;
-								  </div> 
+								  </div>
 								  <div class="col-sm-11 data__value">
 									 {{current_node.totalWeight}}
 								  </div>
@@ -191,45 +193,45 @@
 								 <div class="key--value row">
 								  <div class="col-sm-1 data__key no-padding">
 									 Tag type:&nbsp;&nbsp;
-								  </div> 
+								  </div>
 								  <div class="col-sm-11 data__value no-padding" style="text-transform:capitalize !important;">
 									 {{current_node.name}}
 								  </div>
-								 </div> 
+								 </div>
 								 <div class="key--value row">
 								  <div class="col-sm-1 data__key no-padding">
 									 Xpath:&nbsp;&nbsp;
-								  </div> 
+								  </div>
 								  <div class="col-sm-11 data__value no-padding">
 									 {{current_node.xpath}}
 								  </div>
-								 </div> 
+								 </div>
 								 <div class="key--value row">
 								  <div class="col-sm-1 data__key">
 									 CSS:&nbsp;&nbsp;
-								  </div> 
+								  </div>
 								 <div class="col-sm-11 data__value" ng-repeat="(key, value) in .cssProperties">
 										{{key}} -           {{value}}
 								  </div>
-								 </div> 
+								 </div>
 								 <div class="key--value row">
 								  <div class="col-sm-1 data__key">
 									 Attributes:&nbsp;&nbsp;
-								  </div> 
+								  </div>
 
 								  <div class="col-sm-11 data__value" ng-repeat="(key, value) in current_node.attributes">
 										{{key}} -           {{value}}
 								  </div>
-								 </div> 
+								 </div>
 								 <div class="key--value row">
 								  <div class="col-sm-1 data__key">
 									 Text:&nbsp;&nbsp;
-								  </div> 
+								  </div>
 
 								  <div class="col-sm-11 data__value">
 									 {{current_node.text}}
 								  </div>
-								 </div> 
+								 </div>
 							</div>
 						</div>
 						<div class="" ng-show="current_node.type=='Action'">
@@ -237,19 +239,19 @@
 								<div class="key--value row">
 								  <div class="col-sm-1 data__key">
 									 Name:&nbsp;&nbsp;
-								  </div> 
+								  </div>
 								  <div class="col-sm-11 data__value">
 									 {{current_node.name}}
 								  </div>
-								</div> 
+								</div>
 								<div class="key--value row">
 								  <div class="col-sm-1 data__key">
 									Value:&nbsp;&nbsp;
-								  </div> 
+								  </div>
 								  <div class="col-sm-11 data__value">
 									 {{current_node.val}}
 								  </div>
-								</div> 
+								</div>
 						</div>
 					  </div>
 				  </md-tab>
