@@ -120,7 +120,9 @@ html {
     padding-right:0;
     padding-left:0;
 }
-
+.no-padding {
+    padding:0px !important;
+}
 
 
 .fa { display:inline !important; }
@@ -148,7 +150,7 @@ a img {border: none; }
 	p{
 		font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 12px;
-		line-height: 19px;
+		line-height: 18px;
 		letter-spacing:.2px;
 		margin-bottom: 16px;
 		display: inline;
@@ -186,11 +188,11 @@ a img {border: none; }
 
 	h4{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-size: 16px;
-		line-height: 26px;
+		font-size: 22px;
+		line-height: 20px;
+		font-weight:normal !important;
 		letter-spacing:.1px;
-		margin-bottom: 18px;
-		display: inline;
+		padding-bottom: 0px !important;
 		color:#3376c6;
 	}
 	h5{
@@ -289,6 +291,30 @@ a img {border: none; }
 }
 
 
+/*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/
+
+#main-nav{
+	 background: #ffffff;
+	height: 60px;
+	color: #2d2d2d;
+	border-bottom: 1px solid #eeeeee;
+}
+
+#main-nav > div
+{
+	position: relative;
+ 	top: 50%;
+  	transform: perspective(1px) translateY(-50%);
+}
+
+#left-main-nav{
+
+}
+
+#right-main-nav{
+	text-align: right;
+}
+
 
 /*--------------------------- [3. Sidenav Bar] -----------------------------------------------------------------------------*/
 
@@ -344,6 +370,7 @@ a img {border: none; }
 }
 * {
   box-sizing: border-box;
+outline:none !important;
 }
 
 html, body {
@@ -404,7 +431,6 @@ background: linear-gradient(#3e3e3e, #383838);
   width: 80%;
   padding-left:0px;
   transition: width 0.3s ease;
-
 }
 
 .main-nav-check {
@@ -464,24 +490,6 @@ width: calc(100% - 80px);
 }
 
 
-/*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/
-
-#main-nav{
-	 background: #ffffff;
-	height: 60px;
-	color: #2d2d2d;
-	padding:15px;
-	padding-top: 25px;
-	border-bottom: 1px solid #eeeeee;
-}
-
-#left-main-nav{
-
-}
-
-#right-main-nav{
-	text-align: right;
-}
 
 /*--------------------------- [5. Body/ View Frame] --------------------------------------------------------------------------------*/
 
@@ -489,21 +497,66 @@ width: calc(100% - 80px);
 /*--exterior container--*/
 .container-fluid {
 	background-color: #f5f5f5;
+	height:100%;
 	}
 
 /*--interior container--*/
-.content {
+.content {height:100%;
 	}
-
 /*--------------------------- [3. Secondary Nav] -----------------------------------------------------------------------------*/
 
 .secondary-nav{
 	color: #2d2d2d;
-	padding:15px;
+	height: 60px;
 	/*border-bottom: 2px solid #eeeeee;*/
 }
 
-/*--------------------------- [6. Tests] --------------------------------------------------------------------------------*/
+.search { position: relative; }
+.search input { text-indent: 0px; }
+.search .fa-search {
+  font-size: 1em;
+  color: grey;
+}
+
+
+
+/*--------------------------- [6. Test/Test Container/Test Labels] --------------------------------------------------------------------------------*/
+
+
+.test{
+	background-color: #ffffff;
+	border-top: 0px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.test-container{
+	background-color: #ffffff;
+	border-top: 1px solid #e0e0e0;
+	border-right: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+    overflow-y:auto;
+	height: -moz-calc(100% - 90px);
+/* WebKit */
+height: -webkit-calc(100% - 90px);
+/* Opera */
+height: -o-calc(100% - 90px);
+/* Standard */
+height: calc(100% - 90px);
+	margin-bottom: 90px !important;
+}
+
+.full__height{
+	height: -moz-calc(100% - 90px);
+/* WebKit */
+height: -webkit-calc(100% - 90px);
+/* Opera */
+height: -o-calc(100% - 90px);
+/* Standard */
+height: calc(100% - 90px);
+	padding-bottom: 15px !important;
+}
+
 
 .test-labels{
 	text-align: center !important;
@@ -512,38 +565,164 @@ width: calc(100% - 80px);
 	height: 60px;
 }
 
-.test-container{
-	border-top: 1px solid #e0e0e0;
+.test__profile > div,
+.secondary-nav > div,
+.test__path > div
+{
+	position: relative;
+ 	top: 50%;
+  	transform: perspective(1px) translateY(-50%);
 }
 
-.test{
-	background-color: #ffffff;
-	border-top: 0px solid #e0e0e0;
-	border-right: 1px solid #e0e0e0;
-	border-bottom: 1px solid #e0e0e0;
-	border-left: 1px solid #e0e0e0;
-}
+
+/*--------------------------- [6. Test Profile] --------------------------------------------------------------------------------*/
 
 
 /*-------break this down for each data point,correct,incorrect---------*/
 .test__profile{
-	padding-top: 20px;
+	padding-top: 0px;
 	text-align: center !important;
-	padding-bottom: 10px;
+	padding-bottom: 0px;
 	height: 60px;
 }
 
 
+.test__profile {
+  color: #424242;
+  background-color: #ffffff;
+}
+
+.test__profile:focus,
+.test__profile.focus {
+	outline:none;
+  background-color: #fafafa;
+}
+.test__profile:hover {
+  background-color: #fafafa;
+}
+.test__profile:active,
+.test__profile.active {
+  background-color: #fafafa;
+}
+
+.test__title{
+	font-size: 18px;
+}
+
+
+
+.test__btns{
+	float: right !important;
+}
+
+.test__btns > .btn-group{
+	float: right !important;
+}
+
+
+/*--------------------------- [6. Test Status] --------------------------------------------------------------------------------*/
+
+.status{
+	background-color: #d9d9d9;
+	color: #ffffff;
+	font-size: 10px;
+	height:60px;
+}
+
+.status--symbol{
+	font-size: 30px;
+	
+}
+/*--------------------------- [6. Test Path] --------------------------------------------------------------------------------*/
+
 .test__path{
+	
+border-top: 1px solid #e0e0e0;
 	height: 120px;
 }
+
+
+
+.path-node-image {
+  max-width:100%;
+  max-height:100%;
+  line-height: 70px;
+  vertical-align: middle;
+}
+
+.path-node-container {
+  height: 80px;
+  width:  80px;
+  float: left;
+}
+
+.path-node {
+  height: 80px;
+  width:  50px;
+  float: left;
+  line-height: 50px;
+  vertical-align: middle;
+  text-align: center;
+	
+}
+
+.path-element {
+	height: 50px !important;
+	border: 1px solid #e0e0e0;
+	border-radius: 50%;
+	position: relative;
+ 	top: 50%;
+  	transform: perspective(1px) translateY(-50%);
+}
+
+.path-action {
+	height: 50px !important;
+	border: 1px solid #e0e0e0;
+	position: relative;
+ 	top: 50%;
+  	transform: perspective(1px) translateY(-50%);
+}
+
+.path-arrow {
+  vertical-align: middle;
+  line-height: 5em;
+  height: 100%;
+  width: 25px;
+  float: left;
+}
+
+.path-bar{
+  vertical-align: top;
+  height: 50%;
+  width: 15px;
+  float: left;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.fa-rotate-45 {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/*--------------------------- [6. Test Groups] --------------------------------------------------------------------------------*/
 
 .test__groups{
 	height: 60px;
 	border-top: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 	padding:15px;
+	
 }
+
+.test__groups > div{
+	display: inline;
+}
+
+/*--------------------------- [6. Test Info] --------------------------------------------------------------------------------*/
+
 
 .test__info{
 	height: 300px;
@@ -555,42 +734,44 @@ width: calc(100% - 80px);
 
 .test__history{
 	padding:15px;
+	font-size: 14px !important;
+		line-height: 20px;
+		letter-spacing:.2px;
+		color:#333333;
 }
 
-/*.test > div{
-	position: relative;
- 	top: 50%;
-  	transform: perspective(1px) translateY(-50%);
-}*/
-
-.test__title{
-	font-size: 18px;
+.key--value {
 }
 
-.test__status{
-	float: left !important;
+.data__key{
+	text-transform: capitalize;
+	
+		font-size: 14px;
+		line-height: 20px;
+		letter-spacing:.2px;
+		padding-bottom: 6px !important;
+		color:#333333;
+	text-align: left;
 }
 
-.test__btns{
-	float: right !important;
+.data__value{
+		font-size: 14px !important;
+		line-height: 20px;
+		letter-spacing:.2px;
+		padding-bottom: 6px !important;
+		color:#333333;
 }
 
-.test__btns > .btn-group{
-	float: right !important;
+.info__title{
+		font-size: 16px;
+		line-height: 26px;
+		letter-spacing:.2px;
+		padding-bottom: 30px !important;
+		display: inline;
+		color:#11366e;
 }
 
 /*--------------------------- [7. Footer] ------------------------------------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -777,14 +958,59 @@ width: calc(100% - 80px);
   display: none !important
 }
 
-.search { position: relative; }
-.search input { text-indent: 10px; }
-.search .fa-search {
-  position: absolute;
-  top: .4em;
-  right: 2.5em;
-  font-size: 1em;
-  color: grey;
+
+/*--------------------------- [7. Domains Page] ------------------------------------------------------------------------------*/
+
+.error__message{
+	font-weight: 700;
+	color: #ffffff;
+	text-align: center;
+	padding: 10px;
+	background-color:red;
+	margin: 0px 0px 0px 0px;
+}
+
+.domain__button{
+	background-color:#ffffff;
+	margin:15px 15px;
+	padding:15px;
+	height:250px;
+	width:250px;
+	border-radius: 5px;
+}
+
+.domain--largeicon{
+	font-size: 150px;
+	line-height: 150px;
+	font-weight: 700;
+	color: #bbbbbb;
+	text-align: center;
+	padding: 10px;
+}
+
+.domain__trash{
+	text-align: right;
+	padding: 15px;
+	right:0px;
+	bottom:0px;
+	position:fixed;
+}
+
+.domain__title{
+	font-size: 20px;
+	line-height: 28px;
+	padding: 10px;
+	text-align: center;
+}
+
+.domain__modal{
+	background-color:#ffffff;
+	margin:10px;
+	padding:10px;
+	height:250px !important;
+	width:600px !important;
+	border-radius: 5px;
+	border: 1px solid #e0e0e0;
 }
 
 .domain-dialogue-header {
@@ -806,43 +1032,4 @@ width: calc(100% - 80px);
   display: flex;
   margin:auto;
   justify-content: center;
-}
-
-
-.path-node-image {
-  max-width:100%;
-  max-height:100%;
-  line-height: 70px;
-  vertical-align: middle;
-}
-
-.path-element-container {
-  height: 70px;
-  width:  50px;
-  float: left;
-}
-
-.path-element {
-  height: 70px;
-  width:  35px;
-  float: left;
-  line-height: 70px;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.path-arrow {
-  vertical-align: middle;
-  line-height: 5em;
-  height: 100%;
-  width: 15px;
-  float: left;
-}
-
-.fa-rotate-45 {
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
 }

@@ -1,18 +1,21 @@
-<div class="col-md-12" ng-show="domain_error">
+<div class="row">
+ <div class="col-md-12 error__message" ng-show="domain_error">
   {{domain_error}}
 </div>
-<div class="col-md-12" ng-show="show_create_domain_err">
+<div class="col-md-12 error__message" ng-show="show_create_domain_err">
   {{domain_creation_err}}
 </div>
-
-<div layout="row" layout-padding="" layout-wrap="" layout-fill=""  class="whiteframedemoBasicClassUsage">
-  <md-whiteframe ng-click="openCreateDomainDialog()" flex-sm="25" flex-gt-sm="20" flex-gt-md="15" layout="" layout-align="center center" style="background-color:white;margin: 10px;height:150px" >
-    <span>
-      +
+</div>
+<div class="row">
+  <div class="domain__button" ng-click="openCreateDomainDialog()">
+    <div class="domain--largeicon">
+      <i class="fa fa-plus"></i>
+      </div>
+      <div class="domain__title">
      Add Domain
-   </span>
-  </md-whiteframe>
-  <md-whiteframe ng-repeat="domain in domains" flex-sm="25" flex-gt-sm="20" flex-gt-md="15" layout="" layout-align="center center" style="background-color:white;margin: 10px"  ng-click="selectDomain(domain)">
+   </div>
+  </div>
+  <md-whiteframe class="domain__modal" ng-repeat="domain in domains" flex-sm="25" flex-gt-sm="20" flex-gt-md="15" ng-click="selectDomain(domain)">
       <div>
         {{domain.logo}}
       </div>
@@ -21,12 +24,17 @@
       </div>
   </md-whiteframe>
 </div>
+<div>
+	<div class="domain--largeicon domain__trash">
+      <i class="fa fa-trash"></i>
+      </div>
+</div>
 
 
 <!--<div>
-  <div>
+  <h4>
     Start a new project by adding a domain.
-  </div>
+  </h4>
   <div>
     <input id="domain_input" ng-model="domain_url" class="" placeholder="yourdomain.com" />
   </div>
