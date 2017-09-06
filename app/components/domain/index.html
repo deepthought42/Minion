@@ -15,14 +15,14 @@
      Add Domain
    </div>
   </div>
-  <md-whiteframe class="domain__modal" ng-repeat="domain in domains" flex-sm="25" flex-gt-sm="20" flex-gt-md="15" ng-click="selectDomain(domain)">
+  <div class="domain__modal" ng-repeat="domain in domains" flex-sm="25" flex-gt-sm="20" flex-gt-md="15" ng-click="selectDomain(domain)">
       <div>
         {{domain.logo}}
       </div>
       <div>
         {{domain.url}}
       </div>
-  </md-whiteframe>
+  </div>
 </div>
 <div>
 	<div class="domain--largeicon domain__trash">

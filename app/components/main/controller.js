@@ -26,10 +26,6 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
       if(store.get('domain')){
         $scope.domain = store.get('domain').url;
-        $scope.showDomainHeader = true;
-      }
-      else{
-        $scope.showDomainHeader = false;
       }
       $scope.$location = $location;
       $scope.current_path = $location.path();
