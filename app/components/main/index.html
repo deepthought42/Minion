@@ -34,66 +34,70 @@
   </div>
 </nav>
 
-  <!-- /#sidebar-wrapper -->
-
-  <!-- Page Content -->
 
 
+<!-- Page Content -->
+<div class="page-wrap">
+
+  <div id="nav-bar" class="main-header container-fluid">
+    <div id="main-nav" class="row">
+
+		  <div id="left-main-nav" class="col-xs-6"  ng-show="auth.isAuthenticated">
+				<span ng-show="!isAuthenticated">
+				  Hi {{user_profile.email}}, you have {###} failed tests.
+				  <a href="#/results" >Review?</a>
+				</span>
+		  </div>
 
 
-
-
-    <div class="page-wrap">
-
-      <div id="nav-bar" class="main-header container-fluid">
-        <div id="main-nav" class="row">
-
-  			  <div id="left-main-nav" class="col-xs-6">
-    				<span ng-show="!isAuthenticated">
-    				  Hi {{user_profile.email}}, you have {###} failed tests.
-    				  <a href="#/results" >Review?</a>
-    				</span>
-  			  </div>
-
-
-  			  <div id="right-main-nav" class="col-xs-6">
-  				  <div class="row">
-  						<div class="col-xs-8"
-  						 style=""
-  						 ng-show="showDomainHeader">
-  						  Domain: {{domain}}
-  						  <a ui-sref="main.domains">Change?</a>
-  						</div>
-  						<div class="col-xs-4">
-  						  <!-- /.dropdown -->
-  							<div class="dropdown dropdown-toggle"  ng-show="auth.isAuthenticated" data-toggle="dropdown" href="#">
-  								<i class="fa fa-user fa-fw"></i>
-  								<i class="fa fa-caret-down"></i>
-  							</div>
-  							<ul class="dropdown-menu dropdown-user">
-  								<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-  								</li>
-  								<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-  								</li>
-  								<li class="divider"></li>
-  								<li>
-  								  <a ng-show="!auth.isAuthenticated" href="#/" ng-click="authService.signin()">
-  									<i class="fa fa-sign-in fa-fw"></i>
-  									 Login | Sign up
-  								  </a>
-  								  <a ng-show="auth.isAuthenticated" href="#/" ng-click="authService.signout()">
-  									<i class="fa fa-sign-out fa-fw"></i>
-  									 Logout
-  								  </a>
-  								</li>
-  							</ul>
-  							<!-- /.dropdown-user -->
-  						</div>
-  				  </div>
-    			</div>
-   		   </div>
-
-         <div ui-view class="full__height"></div>
+		  <div id="right-main-nav" class="col-xs-6" ng-show="auth.isAuthenticated">
+			  <div class="row">
+					<div class="col-xs-8"
+					 style="">
+					  Domain: {{domain}}
+					  <a ui-sref="main.domains">Change?</a>
+					</div>
+					<div class="col-xs-4">
+					  <!-- /.dropdown -->
+						<div class="dropdown dropdown-toggle" data-toggle="dropdown" href="#">
+							<i class="fa fa-user fa-fw"></i>
+							<i class="fa fa-caret-down"></i>
+						</div>
+						<ul class="dropdown-menu dropdown-user">
+							<li>
+                <a href="#">
+                  <i class="fa fa-user fa-fw"></i>
+                  User Profile
+                </a>
+							</li>
+							<li>
+                <a href="#">
+                  <i class="fa fa-gear fa-fw"></i>
+                  Settings
+                </a>
+							</li>
+							<li class="divider"></li>
+							<li>
+							  <a href="/v2/logout"
+                   ng-click="authService.logout()">
+								<i class="fa fa-sign-out fa-fw"></i>
+								 Logout
+							  </a>
+							</li>
+						</ul>
+						<!-- /.dropdown-user -->
+					</div>
+			  </div>
+			</div>
+      <div class="pull-right" ng-show="!auth.isAuthenticated">
+        <a href="#/" ng-click="authService.signin()">
+          <i class="fa fa-sign-in fa-fw"></i>
+          Login | Sign up
+        </a>
       </div>
+   </div>
 
-    </div>
+     <div ui-view class="full__height"></div>
+  </div>
+
+</div>

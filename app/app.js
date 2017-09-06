@@ -167,7 +167,6 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
          }
        }, function(profile, idToken, accessToken, state, refreshToken) {
          store.set('profile', profile);
-         console.log("signed in")
        }, function(err) {
          console.log("Sign in Error :(", err);
        });
@@ -175,14 +174,12 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
      else{
        if(fromState.name == 'main.domains' && store.get('domain') == null){
          e.preventDefault();
-         $rootScope.$broadcast('domainRequiredError');
        }
      }
     });
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
-        console.log("403 forbidden");
-
+        console.log("unautorized user");
         auth.signin({
           authParams: {
             scope: 'openid profile app_metadata' // This is if you want the full JWT
