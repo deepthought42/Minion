@@ -17,20 +17,22 @@
 	  </div>
 	  <div class="col-md-1 col-sm-2">
 			 <!-- /.dropdown -->
-    			<select class="dropdown dropdown-toggle pull-right"
-                ng-options="group as group for group in groups"
-                ng-model="selectedGroup" data-toggle="dropdown" href="#">
+    			<div class="dropdown dropdown-toggle pull-right" data-toggle="dropdown" href="#">
     				Filter
     				<i class="fa fa-caret-down"></i>
-    			</select>
+    			</div>
     			<ul class="dropdown-menu">
-    				<li><a href="">
-        <input type="checkbox" aria-label="Checkbox for following text input">&nbsp;
-					 Failed</a>
+    				<li>
+							<a href="">
+        				<input type="checkbox" aria-label="Checkbox for following text input">&nbsp;
+					 				Failed
+							</a>
     				</li>
-    				<li><a href="">
-        <input type="checkbox" aria-label="Checkbox for following text input">&nbsp;
-					 Passed</a>
+    				<li>
+							<a href="">
+      					<input type="checkbox" aria-label="Checkbox for following text input">&nbsp;
+					 				Passed
+							</a>
     				</li>
     			</ul>
     			<!-- /.dropdown -->
