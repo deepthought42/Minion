@@ -24,7 +24,7 @@
 					 Passed</a>
 					</li>
 				</ul>
-				<!-- /.dropdown -->	
+				<!-- /.dropdown -->
 	  </div>
 	  <div class="col-sm-4 col-md-2">
 		<button class="btn btn--green pull-right" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)">
@@ -141,31 +141,31 @@
 							  <div class="key--value row">
 							  <div class="col-sm-1 data__key">
 								 Landable:&nbsp;&nbsp;
-							  </div> 
+							  </div>
 							  <div class="col-sm-11 data__value">
 								 {{current_node.landable}}
 							  </div>
-							 </div> 
+							 </div>
 							  <div class="key--value row">
 							  <div class="col-sm-1 data__key">
 								 URL:&nbsp;&nbsp;
-							  </div> 
+							  </div>
 							  <div class="col-sm-11 data__value">
 								 {{current_node.url}}
 							  </div>
-							 </div> 
+							 </div>
 							  <div class="key--value row">
 							  <div class="col-sm-1 data__key">
 								 Visible Element Counts:&nbsp;&nbsp;
-							  </div> 
+							  </div>
 							  <div class="col-sm-11 data__value">
 								 {{current_node.elementCounts || "coming soon"}}
 							  </div>
-							 </div> 
+							 </div>
 							  <div class="key--value row">
 							  <div class="col-sm-1 data__key">
 								 Total Weight:&nbsp;&nbsp;
-							  </div> 
+							  </div>
 							  <div class="col-sm-11 data__value">
 								 {{current_node.totalWeight}}
 							  </div>
@@ -183,45 +183,45 @@
 							 <div class="key--value row">
 							  <div class="col-sm-1 data__key no-padding">
 								 Tag type:&nbsp;&nbsp;
-							  </div> 
+							  </div>
 							  <div class="col-sm-11 data__value no-padding" style="text-transform:capitalize !important;">
 								 {{current_node.name}}
 							  </div>
-							 </div> 
+							 </div>
 							 <div class="key--value row">
 							  <div class="col-sm-1 data__key no-padding">
 								 Xpath:&nbsp;&nbsp;
-							  </div> 
+							  </div>
 							  <div class="col-sm-11 data__value no-padding">
 								 {{current_node.xpath}}
 							  </div>
-							 </div> 
+							 </div>
 							 <div class="key--value row">
 							  <div class="col-sm-1 data__key no-padding">
 								 CSS:&nbsp;&nbsp;
-							  </div> 
-							 <div class="col-sm-11 data__value" ng-repeat="(key, value) in .cssProperties">
+							  </div>
+							 <div class="col-sm-11 data__value" ng-repeat="(key, value) in current_node.cssProperties">
 									{{key}} -           {{value}}
 							  </div>
-							 </div> 
+							 </div>
 							 <div class="key--value row">
 							  <div class="col-sm-1 data__key no-padding">
 								 Attributes:&nbsp;&nbsp;
-							  </div> 
+							  </div>
 
 							  <div class="col-sm-11 data__value" ng-repeat="(key, value) in current_node.attributes">
 									{{key}} -           {{value}}
 							  </div>
-							 </div> 
+							 </div>
 							 <div class="key--value row">
 							  <div class="col-sm-1 data__key no-padding">
 								 Text:&nbsp;&nbsp;
-							  </div> 
+							  </div>
 
 							  <div class="col-sm-11 data__value no-padding">
 								 {{current_node.text}}
 							  </div>
-							 </div> 
+							 </div>
 						</div>
 					</div>
 					<div class="" ng-show="current_node.type=='Action'">
@@ -229,25 +229,25 @@
 							<div class="key--value row">
 							  <div class="col-sm-1 data__key">
 								 Name:&nbsp;&nbsp;
-							  </div> 
+							  </div>
 							  <div class="col-sm-11 data__value">
 								 {{current_node.name}}
 							  </div>
-							</div> 
+							</div>
 							<div class="key--value row">
 							  <div class="col-sm-1 data__key">
 								Value:&nbsp;&nbsp;
-							  </div> 
+							  </div>
 							  <div class="col-sm-11 data__value">
 								 {{current_node.val}}
 							  </div>
-							</div> 
+							</div>
 					</div>
 				  </div>
 			  </md-tab>
 			  <md-tab label="History">
 				  <div class="test__history">
-					Put test run history 
+					Put test run history
 				  </div>
 			  </md-tab>
 			</md-tabs>

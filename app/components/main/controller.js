@@ -10,12 +10,12 @@ angular.module('Qanairy.main', ['ui.router'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'authService', 'WorkAllocation', 'PathRealtimeService', 'store', '$location',
+.controller('MainCtrl', ['$rootScope', '$scope', 'auth', 'WorkAllocation', 'PathRealtimeService', 'store', '$location',
   function ($rootScope, $scope, auth, WorkAllocation, PathRealtimeService, store, $location) {
 
     this._init = function(){
       $scope.displayUserDropDown = false;
-      $scope.authService = auth;
+      $scope.auth = auth;
       $scope.menuToggled = false;
       $scope.isAuthenticated = false;
       $scope.paths = [];
@@ -34,12 +34,12 @@ angular.module('Qanairy.main', ['ui.router'])
     }
 
     $scope.login = function(){
-      $scope.authService.login();
+      $scope.auth.login();
       $scope.isAuthenticated=true;
     }
 
     $scope.logout = function(){
-      $scope.authService.logout();
+      $scope.auth.logout();
       $scope.isAuthenticated=false;
     }
 
