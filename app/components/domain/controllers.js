@@ -28,6 +28,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         $scope.show_create_domain_err = false;
         var domain = successResult;
         store.set('domain', url);
+        $scope.closeDialog();
       },
       function(errorResult){
         $scope.show_create_domain_err = true;
@@ -50,9 +51,9 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           preserveScope: true,
           template: '<md-dialog class="col-sm-4" style="height:60%">' +
                       '<div class="col-sm-12 domain-dialogue-header">' +
-                      '  <md-dialog-content>' +
-                      '     Start a new project by adding a domain.' +
-                      '  </md-dialog-content>' +
+                        '<md-dialog-content>' +
+                            'Start a new project by adding a domain.' +
+                        '</md-dialog-content>' +
                       '</div>' +
                       '<form>' +
                       '<div class ="col-sm-12 domain-dialogue-input" >' +
@@ -67,7 +68,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
                         '</div>' +
                       '</div>' +
                       '<div class="col-sm-12">' +
-                      '  <md-button id="create_domain_button" class="md-primary md-raised domain-dialogue-button" ng-click="createDomain(protocol, domain_url)">Create Project</md-button>' +
+                        '<md-button id="create_domain_button" class="md-primary md-raised domain-dialogue-button" ng-click="createDomain(protocol, domain_url)">Create Project</md-button>' +
                       '</div>' +
                       '</form>' +
                     '</md-dialog>',
