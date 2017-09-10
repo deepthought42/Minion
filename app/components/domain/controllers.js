@@ -22,11 +22,12 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_creation_err = "An error occurred while saving the domain";
     }
 
-    $scope.createDomain = function(domain_url){
-      Domain.save(domain_url).$promise.then(function(successResult){
+    $scope.createDomain = function(protocol, domain){
+      var url = protocol + "://" + domain;
+      Domain.save(url).$promise.then(function(successResult){
         $scope.show_create_domain_err = false;
         var domain = successResult;
-        store.set('domain', domain_url);
+        store.set('domain', url);
       },
       function(errorResult){
         $scope.show_create_domain_err = true;
@@ -55,10 +56,18 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
                       '</div>' +
                       '<form>' +
                       '<div class ="col-sm-12 domain-dialogue-input" >' +
-                      '  <input id="domain_input" class="form-control" ng-model="domain_url" class="" placeholder="yourdomain.com" />' +
+                        '<div>' +
+                          '<select id="domain_protocol" class="form-control" ng-model="protocol" class="" >' +
+                            '<option value="http">http</option>' +
+                            '<option value="https">https</option>' +
+                          '</select>' +
+                        '</div>' +
+                        '<div>' +
+                          '<input id="domain_input" class="form-control" ng-model="domain_url" class="" placeholder="yourdomain.com" />' +
+                        '</div>' +
                       '</div>' +
                       '<div class="col-sm-12">' +
-                      '  <md-button id="create_domain_button" class="md-primary md-raised domain-dialogue-button" ng-click="createDomain(domain_url)">Create Project</md-button>' +
+                      '  <md-button id="create_domain_button" class="md-primary md-raised domain-dialogue-button" ng-click="createDomain(protocol, domain_url)">Create Project</md-button>' +
                       '</div>' +
                       '</form>' +
                     '</md-dialog>',
