@@ -1,5 +1,10 @@
 <div class="content">
 	<div class="secondary-nav no-gutter">
+		<div class="col-sm-4 col-md-2">
+		<button class="btn btn--green pull-left" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)">
+		  Run Tests
+		</button>
+	  </div>
 	  <div class="col-md-6 col-sm-0">
 	  </div>
 	  <div class="col-md-3 col-sm-6 search">
@@ -26,11 +31,7 @@
 				</ul>
 				<!-- /.dropdown -->
 	  </div>
-	  <div class="col-sm-4 col-md-2">
-		<button class="btn btn--green pull-right" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)">
-		  Run Tests
-		</button>
-	  </div>
+
 	</div>
 
 	<div class="test-labels">
@@ -55,22 +56,16 @@
 			<div class="test__profile" ng-click="showTestData(test.key)">
 			  <div class="col-xs-2 test__status">
 				<span ng-show="pathWrapper.passing">
-				  <i class="fa fa-check"
+				  <i class="fa fa-check-circle status--symbol"
 					 style="color:green"></i>
-				  <br/>
-				   Passing
 				</span>
 				<span ng-show="!pathWrapper.passing && pathWrapper.passing != null">
-				  <i  class="fa fa-times"
+				  <i  class="fa fa-times-circle status--symbol"
 					  tyle="color:red"></i>
-				  <br/>
-				  Failing
 				</span>
 				<span ng-show="!pathWrapper.passing">
-				  <i  class="fa fa-question"
+				  <i  class="fa fa-question-circle status--symbol"
 					  style="color:orange"></i>
-				  <br/>
-				  Unknown
 				</span>
 			  </div>
 			  <div class="col-xs-4 test__title">

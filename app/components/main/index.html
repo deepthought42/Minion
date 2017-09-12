@@ -42,22 +42,15 @@
   <div id="nav-bar" class="main-header container-fluid">
     <div id="main-nav" class="row">
 
-		  <div id="left-main-nav" class="col-xs-6"  ng-show="auth.isAuthenticated">
-				<span ng-show="!isAuthenticated">
-				  Hi {{user_profile.email}}, you have {###} failed tests.
-				  <a href="#/results" >Review?</a>
-				</span>
-		  </div>
-
+		  <div id="left-main-nav" class="col-xs-6">
+        {{domain}}
+        <a ui-sref="main.domains">Change?</a>
+      </div>
 
 		  <div id="right-main-nav" class="col-xs-6" ng-show="auth.isAuthenticated">
 			  <div class="row">
-					<div class="col-xs-8"
-					 style="">
-					  Domain: {{domain}}
-					  <a ui-sref="main.domains">Change?</a>
-					</div>
-					<div class="col-xs-4">
+
+					<div class="col-xs-12 pull-right">
 					  <!-- /.dropdown -->
 						<div class="dropdown dropdown-toggle" data-toggle="dropdown" href="#">
 							<i class="fa fa-user fa-fw"></i>
