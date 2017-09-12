@@ -171,7 +171,9 @@
 									 Visible Element Counts:&nbsp;&nbsp;
 								  </div>
 								  <div class="col-sm-11 data__value">
-									 {{current_node.elementCounts || "coming soon"}}
+										<div class="col-sm-12" ng-repeat="(key, value) in current_node.elementCounts">
+								 			{{key}} - {{value}}
+										</div>
 								  </div>
 								 </div>
 								  <div class="key--value row">
