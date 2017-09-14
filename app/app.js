@@ -9,7 +9,6 @@ var qanairyAuthProvider = null;
 angular.module('Qanairy', [
   'ui.router',
   'Qanairy.discovery',
-  'Qanairy.dashboard',
   'Qanairy.domain',
   'Qanairy.tests',
   'Qanairy.main',
