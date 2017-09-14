@@ -631,12 +631,12 @@ height: calc(100% - 90px);
 
 .status--symbol{
 	font-size: 30px;
-	
+
 }
 /*--------------------------- [6. Test Path] --------------------------------------------------------------------------------*/
 
 .test__path{
-	
+
 border-top: 1px solid #e0e0e0;
 	height: 120px;
 }
@@ -663,7 +663,7 @@ border-top: 1px solid #e0e0e0;
   line-height: 50px;
   vertical-align: middle;
   text-align: center;
-	
+
 }
 
 .path-element {
@@ -714,7 +714,7 @@ border-top: 1px solid #e0e0e0;
 	border-top: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 	padding:15px;
-	
+
 }
 
 .test__groups > div{
@@ -745,7 +745,7 @@ border-top: 1px solid #e0e0e0;
 
 .data__key{
 	text-transform: capitalize;
-	
+
 		font-size: 14px;
 		line-height: 20px;
 		letter-spacing:.2px;
@@ -1007,7 +1007,7 @@ border-top: 1px solid #e0e0e0;
 	background-color:#ffffff;
 	margin:10px;
 	padding:10px;
-	height:250px !important;
+	height:50px !important;
 	width:600px !important;
 	border-radius: 5px;
 	border: 1px solid #e0e0e0;
