@@ -127,6 +127,14 @@ html {
 
 .fa { display:inline !important; }
 
+.white{
+  color: white !important;
+}
+
+.text--shadow{
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.06);
+}
+
 /*--------------------------- [1. Links] -------------------------------------------------------------------------------------*/
 
 a img {border: none; }
@@ -228,6 +236,9 @@ a img {border: none; }
   border-radius: 4px;
 }
 
+.btn-lg{
+  border-width: 0px !important;
+}
 
 .btn--left {
    border-top-right-radius:0px !important;
@@ -249,45 +260,46 @@ a img {border: none; }
 	margin-left: 1px !important;
 }
 
+
 .btn--green {
   color: #fff;
-  background-color: #2ecc71;
+  background-color: #66bb6a;
 }
 .btn--green:focus,
 .btn--green.focus {
   color: #fff !important;
-  background-color: #27ae60;
+  background-color: #43a047;
 }
 .btn--green:hover {
   color: #fff !important;
-  background-color: #27ae60;
+  background-color: #43a047;
 }
 .btn--green:active,
 .btn--green.active,
 .open > .dropdown-toggle.btn--green {
   color: #fff !important;
-  background-color: #27ae60;
+  background-color: #43a047;
 }
 
 
 .btn--red {
   color: #fff;
-  background-color: #EE393A;
+  background-color: #ef5350;
 }
 .btn--red:focus,
 .btn--red.focus {
   color: #fff !important;
-  background-color: #EE393A;
+  background-color: #e53935;
 }
 .btn--red:hover {
   color: #fff !important;
-  background-color: #EE393A;
+  background-color: #e53935;
 }
 .btn--red:active,
 .btn--red.active,
 .open > .dropdown-toggle.btn--red {
   color: #fff !important;
-  background-color: #EE393A;
+  background-color: #e53935;
 }
 
 .btn--gray {
@@ -333,6 +345,19 @@ a img {border: none; }
 
 #right-main-nav{
 	text-align: right;
+}
+
+.user__name{
+  display: inline !important;
+}
+
+.dropdown{
+  display: inline !important;
+  padding-left:12px;
+}
+
+.login__signup{
+  padding-right:15px;
 }
 
 
@@ -656,7 +681,7 @@ height: calc(100% - 90px);
 
 .status{
 	color: #ffffff !important;
-	font-size: 10px;
+	font-size: 12px;
 	height:60px;
 }
 
@@ -664,8 +689,7 @@ height: calc(100% - 90px);
 /*--------------------------- [6. Test Path] --------------------------------------------------------------------------------*/
 
 .test__path{
-
-border-top: 1px solid #e0e0e0;
+  border-top: 1px solid #e0e0e0;
 	height: 120px;
   padding: 0px 15px !important;
 }
@@ -692,9 +716,29 @@ border-top: 1px solid #e0e0e0;
   line-height: 50px;
   vertical-align: middle;
   text-align: center;
-
 }
 
+.path-node {
+  color: #424242;
+    border: 1px solid #ffffff;
+}
+
+.path-node:focus,
+.path-node.focus {
+	outline:none;
+    border: 1px solid #fddb4e;
+}
+.path-node:hover {
+  border: 1px solid #fddb4e;
+}
+.path-node:active,
+.path-node.active {
+  border: 1px solid #fddb4e;
+}
+
+.test__title{
+	font-size: 18px;
+}
 .path-element {
 	height: 50px !important;
 	border: 1px solid #e0e0e0;
@@ -976,15 +1020,15 @@ border-top: 1px solid #e0e0e0;
 
 
 .a0-sign-up > span {
-  text-align: center !important
+  text-align: center !important;
 }
 
 .a0-primary {
-  background-color: #fddc05 !important
+  background-color: #fddc05 !important;
 }
 
 .a0-footer {
-  display: none !important
+  display: none !important;
 }
 
 
@@ -1014,8 +1058,39 @@ border-top: 1px solid #e0e0e0;
 	font-weight: 700;
 	color: #bbbbbb;
 	text-align: center;
-	padding: 10px;
 }
+
+.domain__button:focus,
+.domain__button.focus {
+  background-color:#eeeeee;
+    color: #999999 !important;
+}
+.domain__button:hover {
+  background-color:#eeeeee;
+    color: #999999 !important;
+}
+.domain__button:active,
+.domain__button.active,
+.open > .dropdown-toggle.domain__button {
+  background-color:#eeeeee;
+    color: #999999 !important;
+}
+
+
+.domain--largeicon:focus,
+.domain--largeicon.focus {
+  color: #999999;
+}
+.domain--largeicon:hover {
+  color: #999999;
+}
+.domain--largeicon:active,
+.domain--largeicon.active,
+.open > .dropdown-toggle.domain--largeicon {
+  color: #999999;
+}
+
+
 
 .domain__trash{
 	text-align: right;
@@ -1026,31 +1101,35 @@ border-top: 1px solid #e0e0e0;
 }
 
 .domain__title{
+    color: #2d2d2d !important;
 	font-size: 20px;
 	line-height: 28px;
-	padding: 10px;
+	padding: 15px;
 	text-align: center;
 }
 
 .domain__modal{
 	background-color:#ffffff;
 	margin:10px;
-	padding:10px;
+	padding:15px;
 	height:250px !important;
 	width:600px !important;
 	border-radius: 5px;
 	border: 1px solid #e0e0e0;
 }
-
+.domain-dialogue-close{
+  text-align:right;
+  padding:30px 30px;
+}
 .domain-dialogue-header {
-  height: 4em;
   text-align:center;
   vertical-align: middle;
-  line-height: 4em;
+  padding:30px 0px 30px 0px;
 }
 
 .domain-dialogue-input {
-  height: 20em;
+
+  padding:120px 0px 120px 0px;
   display: flex;
    justify-content: center;
    align-items:center;

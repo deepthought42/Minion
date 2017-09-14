@@ -34,11 +34,11 @@
 	<div class="test-container">
 		<div class="test" ng-repeat="test in tests">
 			<div class="test__profile" ng-click="toggleTestDataVisibility(test.key, test.path.path[0])">
-			  <div class="col-xs-2 test__status">
+			  <div class="col-xs-2 test__status text--shadow">
 			   <div class="row no-gutter">
 					 <div class="col-xs-6 btn--green status">
 				 <div class="" ng-click="updateCorrectness(test, true)">
-				   <i class="fa fa-check status--symbol"
+				   <i class="fa fa-check status--symbol white"
 					   style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"
 					   ></i>
 				   <br/>
@@ -46,7 +46,7 @@
 				</div></div>
 				<div class="status col-xs-6 btn--red">
 				<div class="" ng-click="updateCorrectness(test, false)">
-					<i  class="fa fa-times status--symbol"
+					<i  class="fa fa-times status--symbol white"
 						style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
 					<br/>
 					Incorrect
