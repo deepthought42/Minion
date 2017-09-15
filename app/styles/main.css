@@ -612,6 +612,12 @@ height: calc(100% - 90px);
 	height: 60px;
 }
 
+.empty__state{
+  padding-bottom:60px;
+}
+
+
+.empty__state,
 .test__profile > div,
 .secondary-nav > div,
 .test__path > div
