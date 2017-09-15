@@ -47,15 +47,15 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           clickOutsideToClose: true,
           scope: $scope,
           preserveScope: true,
-          template: '<md-dialog class="col-sm-4" style="height:60%">' +
+          template: '<md-dialog class="col-sm-4" style="">' +
                       '<div class="col-sm-12 domain-dialogue-close" ng-click="closeCreateDomainDialog()">' +
                       '  <md-dialog-content>' +
-                      '     <h3><i class="fa fa-times"></i></h3>' +
+                      '     <h3 style="text-align:right;"><i class="fa fa-times"></i></h3>' +
                       '  </md-dialog-content>' +
                       '</div>' +
                       '<div class="col-sm-12 domain-dialogue-header">' +
                       '  <md-dialog-content>' +
-                      '     <h3>Start a new project by adding a domain.</h3>' +
+                      '     <h3>Start a new project by adding a&nbsp;domain.</h3>' +
                       '  </md-dialog-content>' +
                       '</div>' +
                       '<form>' +
@@ -63,7 +63,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
                       '  <input id="domain_input" class="form-control" ng-model="domain_url" class="" placeholder="yourdomain.com" />' +
                       '</div>' +
                       '<div class="col-sm-12 text-center">' +
-                      '  <button id="create_domain_button" class="btn-lg btn--green" ng-click="createDomain(domain_url)">Create Project</button>' +
+                      '  <button id="create_domain_button" class="btn-lg btn--green domain-dialogue-button" ng-click="createDomain(domain_url)">Create Project</button>' +
                       '</div>' +
                       '</form>' +
                     '</md-dialog>',
