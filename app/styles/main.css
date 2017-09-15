@@ -1058,29 +1058,29 @@ height: calc(100% - 90px);
 	height:250px;
 	width:250px;
 	border-radius: 5px;
+  color: #bbbbbb !important;
 }
 
 .domain--largeicon{
 	font-size: 150px;
 	line-height: 150px;
 	font-weight: 700;
-	color: #bbbbbb;
 	text-align: center;
 }
 
 .domain__button:focus,
 .domain__button.focus {
-  background-color:#eeeeee;
+  background-color:#e0e0e0;
     color: #999999 !important;
 }
 .domain__button:hover {
-  background-color:#eeeeee;
+  background-color:#e0e0e0;
     color: #999999 !important;
 }
 .domain__button:active,
 .domain__button.active,
 .open > .dropdown-toggle.domain__button {
-  background-color:#eeeeee;
+  background-color:#e0e0e0;
     color: #999999 !important;
 }
 
@@ -1098,9 +1098,21 @@ height: calc(100% - 90px);
   color: #999999;
 }
 
-
+.domain__trash:focus,
+.domain__trash.focus {
+  color: #999999;
+}
+.domain__trash:hover {
+  color: #999999;
+}
+.domain__trash:active,
+.domain__trash.active,
+.open > .dropdown-toggle.domain__trash {
+  color: #999999;
+}
 
 .domain__trash{
+    color: #bbbbbb;
 	text-align: right;
 	padding: 15px;
 	right:0px;
