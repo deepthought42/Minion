@@ -123,7 +123,9 @@
 						<label>Groups: </label></div>
 						<div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
 						  {{group.name}}
-							<i class="fa fa-cross" ng-click=""></i>
+							<span ng-click="removeGroup(test.key, group)">
+								<i class="fa fa-times"></i>
+							</span>
 						</div>
 					<div>
 						<input ng-model="group.name" />
