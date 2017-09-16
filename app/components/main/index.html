@@ -50,13 +50,12 @@
     <div id="main-nav" class="row">
 
 		  <div id="left-main-nav" class="col-xs-6">
-        {{domain}}
+        {{domain || "www.yourdomain.com"}}
         <a ui-sref="main.domains">Change?</a>
       </div>
 
 		  <div id="right-main-nav" class="col-xs-6" ng-show="auth.isAuthenticated">
 			  <div class="row">
-
 					<div class="col-xs-12">
               <div class="user__name">{{user_profile.email}}</div>
 					  <!-- /.dropdown -->

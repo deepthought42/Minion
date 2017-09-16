@@ -20,6 +20,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.isStarted = false;
       $scope.current_node = null;
       $scope.visible = false;
+      $scope.selectedTab = {};
+      $scope.selectedTab.dataTab = 0;
+      $scope.group = {};
+      $scope.group.name = "";
+      $scope.group.description = ""
+
+      if(store.get('active') === undefined){
+        $scope.selectedTab.dataTab = 0;
+      }
+      else{
+        $scope.selectedTab.dataTab = store.get('active');
+      }
 
       if(store.get('domain') != null){
 
@@ -44,6 +56,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         $state.go("main.domains")
       }
     }
+
+    $scope.onTabChanges = function(currentTabIndex){
+       store.set('active',currentTabIndex);
+       $scope.selectedTab.dataTab = currentTabIndex;
+     };
 
     $rootScope.$on("openPathStream", function(){
       /**We use an event source for sse over websockets because websockets are overkill for the current usage */
@@ -74,14 +91,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         $scope.paths.push(JSON.parse(message.data));
         $scope.$apply();
       })
-      */;
+      */
     }
 
     $scope.setCurrentNode = function(node){
       $scope.current_node = node;
+      store.set('active',0);
+      $scope.selectedTab.dataTab= 0;
+      console.log('setting current node '+$scope.selectedTab.dataTab);
     }
 
     $scope.toggleTestDataVisibility = function(test_key, node){
+      $scope.selectedTab.dataTab = 0;
       if(test_key == $scope.visibleTestKey){
         $scope.visible = !$scope.visible;
       }
@@ -97,6 +118,13 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         .$promise.then(function(){
           $scope.isStarted = false;
         });
+    }
+
+
+    $scope.addGroup = function(test, group){
+      console.log("Adding group "+group+" to test ");
+
+      Tester.addGroup({name: group.name, description: group.description, key: test.key})
     }
 
     /**

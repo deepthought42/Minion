@@ -68,8 +68,16 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       Tester.addGroup({name: group.name, description: group.description, key: test.key})
     }
 
+    $scope.removeGroup = function(group){
+      Tester.removeGroup({group: group});
+    }
+
     $scope.setCurrentNode = function(node){
       $scope.current_node = node;
+    }
+
+    $scope.setTestName = function(key, name){
+      Tester.updateName({key: key, name: name});
     }
 
     $scope.showTestData = function(test_key, node){
