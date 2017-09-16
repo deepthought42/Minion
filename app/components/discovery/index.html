@@ -126,14 +126,14 @@
 								 uib-tooltip="{{test.result.url}}"/>
 						  </div>
 						</div>
-						{{selectedTab}}
+						{{selectedTab.dataTab}}
 
 				  </div>
 
 				  <div class="test__groups">
 						<div>
 							<label>Groups: </label>
-							{{selectedTab}}
+							{{selectedTab.dataTab}}
 
 						</div>
 						<div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
@@ -148,7 +148,7 @@
 				  </div>
 
 			  <div class="test__info">
-					<md-tabs md-selected="selectedTab">
+					<md-tabs md-selected="selectedTab.dataTab">
 					  <md-tab label="Node Data" md-on-select="onTabChanges(0)">
 							<div class="node__data">
 								<div class="" ng-show="current_node.type=='Page'">

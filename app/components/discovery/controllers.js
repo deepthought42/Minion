@@ -20,16 +20,17 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.isStarted = false;
       $scope.current_node = null;
       $scope.visible = false;
-      $scope.selectedTab = 0;
+      $scope.selectedTab = {};
+      $scope.selectedTab.dataTab = 0;
       $scope.group = {};
       $scope.group.name = "";
       $scope.group.description = ""
 
       if(store.get('active') === undefined){
-        $scope.selectedTab = 0;
+        $scope.selectedTab.dataTab = 0;
       }
       else{
-        $scope.selectedTab = store.get('active');
+        $scope.selectedTab.dataTab = store.get('active');
       }
 
       if(store.get('domain') != null){
@@ -58,7 +59,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     $scope.onTabChanges = function(currentTabIndex){
        store.set('active',currentTabIndex);
-       $scope.selectedTab = currentTabIndex;
+       $scope.selectedTab.dataTab = currentTabIndex;
      };
 
     $rootScope.$on("openPathStream", function(){
@@ -96,12 +97,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
     $scope.setCurrentNode = function(node){
       $scope.current_node = node;
       store.set('active',0);
-      $scope.selectedTab= 0;
-      console.log('setting current node '+$scope.selectedTab);
+      $scope.selectedTab.dataTab= 0;
+      console.log('setting current node '+$scope.selectedTab.dataTab);
     }
 
     $scope.toggleTestDataVisibility = function(test_key, node){
-      $scope.selectedTab = 0;
+      $scope.selectedTab.dataTab = 0;
       if(test_key == $scope.visibleTestKey){
         $scope.visible = !$scope.visible;
       }
