@@ -693,7 +693,9 @@ height: calc(100% - 90px);
 	height:60px;
 }
 
-
+.status--symbol{
+	font-size: 30px;
+}
 /*--------------------------- [6. Test Path] --------------------------------------------------------------------------------*/
 
 .test__path{
@@ -1126,7 +1128,9 @@ height: calc(100% - 90px);
 .domain__modal{
 	background-color:#ffffff;
 	margin:10px;
-	padding:15px;
+  padding:10px;
+	height:50px !important;
+	width:600px !important;
 	border-radius: 5px;
 	border: 1px solid #e0e0e0;
 }
