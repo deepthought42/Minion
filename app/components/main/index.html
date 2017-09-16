@@ -12,7 +12,15 @@
         <li id="notification_li">
 		<a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
       <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
-    Tests<span id="notification_count">3</span></a>
+    Tests</a>
+
+    <span id="notification_count">3</span>
+
+			<div id="notificationContainer">
+			<div id="notificationTitle">Notifications</div>
+			<div id="notificationsBody" class="notifications"></div>
+			<div id="notificationFooter"><a href="#">See All</a></div>
+			</div>
       </li>
       <li>
         <a href="#/discovery"  style="{{$location.path() == '/discovery' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
