@@ -98,7 +98,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.current_node = node;
       store.set('active',0);
       $scope.selectedTab.dataTab= 0;
-      console.log('setting current node '+$scope.selectedTab.dataTab);
     }
 
     $scope.toggleTestDataVisibility = function(test_key, node){
@@ -122,9 +121,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
 
     $scope.addGroup = function(test, group){
-      console.log("Adding group "+group+" to test ");
-
       Tester.addGroup({name: group.name, description: group.description, key: test.key})
+    }
+
+    $scope.removeGroup = function(key, group){
+      Tester.removeGroup({key: key, name: group.name});
     }
 
     /**
