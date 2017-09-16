@@ -12,15 +12,7 @@
         <li id="notification_li">
 		<a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
       <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
-    Tests</a>
-
-    <span id="notification_count">3</span>
-
-			<div id="notificationContainer">
-			<div id="notificationTitle">Notifications</div>
-			<div id="notificationsBody" class="notifications"></div>
-			<div id="notificationFooter"><a href="#">See All</a></div>
-			</div>
+    Tests <span id="notification_count">1283</span></a>
       </li>
       <li>
         <a href="#/discovery"  style="{{$location.path() == '/discovery' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
@@ -47,7 +39,7 @@
 <div class="page-wrap">
 
   <div id="nav-bar" class="main-header container-fluid">
-    <div id="main-nav" class="row">
+    <div id="main-nav" class="row vertical__center__int">
 
 		  <div id="left-main-nav" class="col-xs-6">
         {{domain || "www.yourdomain.com"}}
@@ -96,8 +88,17 @@
         </a>
       </div>
    </div>
-
-     <div ui-view class="full__height"></div>
-  </div>
-
+     <div ui-view class="full__height">
+     </div>
+   </div>
 </div>
+<!-- not sure where to put this, need to set it up so that it removes itself when tests is clicked on
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#notificationLink").click(function(){
+        $("#notification_count").fadeOut("slow");
+        return false;
+      });
+    });
+  </script>
+-->
