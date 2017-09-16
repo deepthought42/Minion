@@ -9,11 +9,10 @@
     </div>
 
     <ul class="sidebar-nav">
-      <li >
-        <a href="#/tests" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
-          <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
-          Tests
-        </a>
+        <li id="notification_li">
+		<a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
+      <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
+    Tests<span id="notification_count">3</span></a>
       </li>
       <li>
         <a href="#/discovery"  style="{{$location.path() == '/discovery' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
@@ -42,22 +41,15 @@
   <div id="nav-bar" class="main-header container-fluid">
     <div id="main-nav" class="row">
 
-		  <div id="left-main-nav" class="col-xs-6"  ng-show="auth.isAuthenticated">
-				<span ng-show="!isAuthenticated">
-				  Hi {{user_profile.email}}, you have {###} failed tests.
-				  <a href="#/results" >Review?</a>
-				</span>
-		  </div>
-
+		  <div id="left-main-nav" class="col-xs-6">
+        {{domain || "www.yourdomain.com"}}
+        <a ui-sref="main.domains">Change?</a>
+      </div>
 
 		  <div id="right-main-nav" class="col-xs-6" ng-show="auth.isAuthenticated">
 			  <div class="row">
-					<div class="col-xs-8"
-					 style="">
-					  {{domain || "www.yourdomain.com"}}
-					  <a ui-sref="main.domains">Change?</a>
-					</div>
-					<div class="col-xs-4">
+					<div class="col-xs-12">
+              <div class="user__name">{{user_profile.email}}</div>
 					  <!-- /.dropdown -->
 						<div class="dropdown dropdown-toggle" data-toggle="dropdown" href="#">
 							<i class="fa fa-user fa-fw"></i>
@@ -89,7 +81,7 @@
 					</div>
 			  </div>
 			</div>
-      <div class="pull-right" ng-show="!auth.isAuthenticated">
+      <div class="pull-right login__signup" ng-show="!auth.isAuthenticated">
         <a href="#/" ng-click="signin()">
           <i class="fa fa-sign-in fa-fw"></i>
           Login | Sign up

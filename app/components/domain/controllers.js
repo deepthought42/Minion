@@ -51,11 +51,16 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           clickOutsideToClose: true,
           scope: $scope,
           preserveScope: true,
-          template: '<md-dialog class="col-sm-4" style="height:60%">' +
+          template: '<md-dialog class="col-sm-4" style="">' +
+                      '<div class="col-sm-12 domain-dialogue-close" ng-click="closeCreateDomainDialog()">' +
+                      '  <md-dialog-content>' +
+                      '     <h3 style="text-align:right;"><i class="fa fa-times"></i></h3>' +
+                      '  </md-dialog-content>' +
+                      '</div>' +
                       '<div class="col-sm-12 domain-dialogue-header">' +
-                        '<md-dialog-content>' +
-                            'Start a new project by adding a domain.' +
-                        '</md-dialog-content>' +
+                      '  <md-dialog-content>' +
+                      '     <h3>Start a new project by adding a&nbsp;domain.</h3>' +
+                      '  </md-dialog-content>' +
                       '</div>' +
                       '<form name="domain_form" ng-submit="domain_form.$valid && createDomain(protocol, domain)" novalidate>' +
                         '<div class ="col-sm-12 domain-dialogue-input" >' +
