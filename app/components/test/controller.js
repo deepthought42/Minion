@@ -68,7 +68,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       Tester.addGroup({name: group.name, description: group.description, key: test.key})
     }
 
-    $scope.removeGroup(group){
+    $scope.removeGroup = function(group){
       Tester.removeGroup({group: group});
     }
 
