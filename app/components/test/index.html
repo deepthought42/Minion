@@ -58,15 +58,15 @@
 		<div class="test" ng-repeat="test in tests" ng-show="tests.length>0">
 			<div class="test__profile" ng-click="showTestData(test.key)">
 			  <div class="col-xs-2 test__status">
-				<span ng-show="pathWrapper.passing">
+				<span ng-show="test.correct">
 				  <i class="fa fa-check-circle status--symbol"
 					 style="color:green"></i>
 				</span>
-				<span ng-show="!pathWrapper.passing && pathWrapper.passing != null">
+				<span ng-show="!test.correct && test.correct != null">
 				  <i  class="fa fa-times-circle status--symbol"
 					  tyle="color:red"></i>
 				</span>
-				<span ng-show="!pathWrapper.passing">
+				<span ng-show="!test.correct">
 				  <i  class="fa fa-question-circle status--symbol"
 					  style="color:orange"></i>
 				</span>
