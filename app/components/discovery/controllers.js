@@ -96,20 +96,21 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     $scope.setCurrentNode = function(node){
       $scope.current_node = node;
-      store.set('active',0);
-      $scope.selectedTab.dataTab= 0;
     }
 
-    $scope.toggleTestDataVisibility = function(test_key, node){
+    $scope.setTestName = function(key, name){
+      Tester.updateName({key: key, name: name});
+    }
+
+    $scope.showTestData = function(test, node){
+      test.visible = true;
+      setCurrentNode(node);
+    }
+
+
+    $scope.toggleTestDataVisibility = function(test, node){
       $scope.selectedTab.dataTab = 0;
-      if(test_key == $scope.visibleTestKey){
-        $scope.visible = !$scope.visible;
-      }
-      else{
-        $scope.visibleTestKey = test_key;
-        $scope.current_node = node;
-        $scope.visible = true;
-      }
+      test.visible = !test.visible;
     }
 
     $scope.stopMappingProcess = function(){
