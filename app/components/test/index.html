@@ -8,30 +8,35 @@
 	  <div class="col-md-6 col-sm-0">
 	  </div>
 	  <div class="col-md-3 col-sm-6 search">
-		<div class="input-group">
-		  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon2">
-		  <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
-		</div>
+			<div class="input-group">
+			  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon2">
+			  <span class="input-group-addon" id="basic-addon2">
+					<i class="fa fa-search"></i>
+				</span>
+			</div>
 	  </div>
 	  <div class="col-md-1 col-sm-2">
 			 <!-- /.dropdown -->
-				<div class="dropdown dropdown-toggle pull-right"  ng-show="auth.isAuthenticated" data-toggle="dropdown" href="#">
-					Filter
-					<i class="fa fa-caret-down"></i>
-				</div>
-				<ul class="dropdown-menu">
-					<li><a href="">
-		<input type="checkbox" aria-label="Checkbox for following text input">&nbsp;
-					 Failed</a>
-					</li>
-					<li><a href="">
-		<input type="checkbox" aria-label="Checkbox for following text input">&nbsp;
-					 Passed</a>
-					</li>
-				</ul>
+			<div class="dropdown dropdown-toggle pull-right"  ng-show="auth.isAuthenticated" data-toggle="dropdown" href="#">
+				Filter
+				<i class="fa fa-caret-down"></i>
+			</div>
+			<ul class="dropdown-menu">
+				<li>
+					<a href="">
+						<input type="checkbox" aria-label="Checkbox for following text input" />&nbsp;
+					 	Failed
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<input type="checkbox" aria-label="Checkbox for following text input">&nbsp;
+					 	Passed
+				 	</a>
+				</li>
+			</ul>
 				<!-- /.dropdown -->
 	  </div>
-
 	</div>
 
 	<div class="test-labels">
@@ -58,18 +63,18 @@
 		<div class="test" ng-repeat="test in tests | filter:searchText" ng-show="tests.length>0">
 			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test)">
 			  <div class="col-xs-2 test__status">
-				<span ng-show="test.correct">
-				  <i class="fa fa-check-circle status--symbol"
-					 style="color:green"></i>
-				</span>
-				<span ng-show="!test.correct && test.correct != null">
-				  <i  class="fa fa-times-circle status--symbol"
-					  tyle="color:red"></i>
-				</span>
-				<span ng-show="!test.correct">
-				  <i  class="fa fa-question-circle status--symbol"
-					  style="color:orange"></i>
-				</span>
+					<span ng-show="test.correct">
+					  <i class="fa fa-check-circle status--symbol"
+						 style="color:green"></i>
+					</span>
+					<span ng-show="!test.correct && test.correct != null">
+					  <i  class="fa fa-times-circle status--symbol"
+						  style="color:red"></i>
+					</span>
+					<span ng-show="test.correct == null">
+					  <i  class="fa fa-question-circle status--symbol"
+						  style="color:orange"></i>
+					</span>
 			  </div>
 			  <div class="col-xs-4 test__title">
 					<div ng-click="showNameInputField(test, true)" ng-show="!test.show_test_name_edit_field">
@@ -84,7 +89,7 @@
 					{{test.runtime || "0 ms"}}
 			  </div>
 			  <div class="col-xs-2">
-				&nbsp;
+					&nbsp;
 			  </div>
 			  <div class="col-xs-2 test__btns">
 					<div class="btn-group" role="group" aria-label="Run Favorite More">
