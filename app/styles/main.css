@@ -166,30 +166,6 @@ a img {border: none; }
 		min-width: 300px;
 	}
 
-  h1,
-  .h1 {
-    font-size: 36px;
-  }
-  h2,
-  .h2 {
-    font-size: 30px;
-  }
-  h3,
-  .h3 {
-    font-size: 24px;
-  }
-  h4,
-  .h4 {
-    font-size: 18px;
-  }
-  h5,
-  .h5 {
-    font-size: 14px;
-  }
-  h6,
-  .h6 {
-    font-size: 12px;
-  }
 
 
 	h1{
@@ -287,6 +263,9 @@ a img {border: none; }
 	margin-left: 1px !important;
 }
 
+.select__neutral{
+  background-color: #bbbbbb !important;
+}
 
 .btn--green {
   color: #fff;
@@ -576,13 +555,11 @@ width: calc(100% - 80px);
 
 
 /*--exterior container--*/
-.container-fluid {
-	background-color: #f5f5f5;
-	height:100%;
-	}
 
 /*--interior container--*/
-.content {height:100%;
+.content {
+  background-color: #f5f5f5;
+  height:100%;
 	}
 /*--------------------------- [3. Secondary Nav] -----------------------------------------------------------------------------*/
 
@@ -680,6 +657,7 @@ md-tab {
 }
 
 .test-container{
+  margin:0px 15px;
 	background-color: #ffffff;
 	border-top: 1px solid #e0e0e0;
 	border-right: 1px solid #e0e0e0;
