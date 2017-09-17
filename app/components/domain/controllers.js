@@ -30,6 +30,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         $scope.show_create_domain_err = false;
         var domain = successResult;
         store.set('domain', domain);
+        $scope.domains.push(domain);
         $scope.closeDialog();
       },
       function(errorResult){
