@@ -1,36 +1,46 @@
 <div class="row">
- <div class="col-md-12 error__message" ng-show="domain_error">
-  {{domain_error}}
-</div>
-<div class="col-md-12 error__message" ng-show="show_create_domain_err">
-  {{domain_creation_err}}
-</div>
-</div>
-<div class="row">
-  <div class="domain__button" ng-click="openCreateDomainDialog()">
-    <div class="domain--largeicon">
-      <i class="fa fa-plus"></i>
-      </div>
-      <h3 class="domain__title">
-     Add Domain
-   </h3>
+    <div class="col-md-12 error__message" ng-show="domain_error">
+      {{domain_error}}
+    </div>
+    <div class="col-md-12 error__message" ng-show="show_create_domain_err">
+      {{domain_creation_err}}
+    </div>
   </div>
-  
-  <div class="domain__modal" ng-repeat="domain in domains" flex-sm="10" flex-gt-sm="10" flex-gt-md="5" ng-click="selectDomain(domain)">
+    <div class="domain__button" ng-click="openCreateDomainDialog()">
+      <div class="" ng-click="close" style="text-align:right !important; position: relative;">
+           <h3 style="margin:0px; text-align:right !important; right:0px; position: absolute;">
+             <i class="fa fa-times delete__domain"></i>
+           </h3>
+      </div>
+      <div class="vertical__center">
+        <div class="domain--largeicon">
+          <i class="fa fa-plus fa-4x"></i>
+        </div>
+      </div>
       <div>
-        {{domain.logo}}
+        <h5 class="domain__title">
+            Add Domain
+        </h5>
       </div>
-      <div  class="domain__title">
-        {{domain.url}}
+    </div>
+    <div class="domain__button" ng-repeat="domain in domains" ng-click="selectDomain(domain)">
+      <div class="" ng-click="close" style="text-align:right !important; position: relative;">
+           <h3 style="margin:0px; text-align:right !important; right:0px; position: absolute;">
+             <i class="fa fa-times delete__domain"></i>
+           </h3>
       </div>
-  </div>
+      <div  class="vertical__center">
+        <div class="domain__logo">
+          {{domain.logo}}<img class="" src="./img/qanairy_logo.png">
+        </div>
+      </div>
+      <div>
+        <h5 class="domain__title">
+            {{domain.url}}
+        </h5>
+      </div>
+    </div>
 </div>
-<div>
-	<div class="domain--largeicon domain__trash">
-      <i class="fa fa-trash"></i>
-      </div>
-</div>
-
 
 <!--<div>
   <h4>

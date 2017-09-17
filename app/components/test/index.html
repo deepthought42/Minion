@@ -1,5 +1,5 @@
 <div class="content">
-	<div class="secondary-nav no-gutter">
+	<div class="secondary-nav vertical__center__int no-gutter">
 		<div class="col-sm-4 col-md-2">
 		<button class="btn btn--green pull-left" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)">
 		  Run Tests
@@ -52,11 +52,11 @@
 	</div>
 
 	<div class="test-container">
-		<div class="empty__state" ng-show="tests.length==0">
+		<div class="empty__state vertical__center" ng-show="tests.length==0">
 			<h3>Start a &#34;<a href="#/discovery">Discovery</a>&#34; to let Qanairy map your tests.</h3>
 		</div>
 		<div class="test" ng-repeat="test in tests | filter:searchText" ng-show="tests.length>0">
-			<div class="test__profile" ng-click="toggleTestDataVisibility(test)">
+			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test)">
 			  <div class="col-xs-2 test__status">
 				<span ng-show="test.correct">
 				  <i class="fa fa-check-circle status--symbol"
@@ -100,7 +100,7 @@
 
 
 			<div ng-show="test.visible">
-			  <div class="test__path" >
+			  <div class="test__path vertical__center__int" >
 				<div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
 				  <div  ng-show="node.screenshot" class="path-node path-page">
 						<img src="{{node.screenshot}}" class="path-node-image"
@@ -108,10 +108,10 @@
 					  </div>
 					  <div class="path-bar display-none">
 					  </div>
-					 <div ng-show="node.type == 'PageElement'" class="path-node path-element" >
+					 <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center" >
 						<i class="fa fa-square fa-2x" uib-tooltip="node.xpath" ></i>
 					  </div>
-					  <div ng-show="node.type == 'Action'" class="path-node path-action">
+					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center">
 						  <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
 					  </div>
 					  <div class="path-bar">
