@@ -205,12 +205,13 @@ a img {border: none; }
 		display: inline;
 		color:#999;
 	}
-	h5{
+  h5{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-size: 14px;
-		font-weight:normal;
-		color:#FFFFFF;
-		padding: 10px;
+    color: #2d2d2d !important;
+		font-size: 20px !important;
+		font-weight:400 !important;
+		letter-spacing:.1px;
+    text-align: center;
 	}
 
 
@@ -334,13 +335,6 @@ a img {border: none; }
 	border-bottom: 1px solid #eeeeee;
 }
 
-#main-nav > div
-{
-	position: relative;
- 	top: 50%;
-  	transform: perspective(1px) translateY(-50%);
-}
-
 #left-main-nav{
 
 }
@@ -384,6 +378,22 @@ a img {border: none; }
 }
 
 .sidebar-nav a:visited { color: #ffffff;}
+
+#notification_li {
+			position:relative
+			}
+#notification_count
+		{
+		padding: 3px 7px 3px 7px;
+		background: #cc0000;
+		color: #ffffff;
+		font-weight: bold;
+		margin-left: 15px;
+		border-radius: 10px;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		font-size: 10px;
+		}
 
 
 .sidebar-nav li {
@@ -616,17 +626,12 @@ height: calc(100% - 90px);
   padding-bottom:60px;
 }
 
-
-.empty__state,
-.test__profile > div,
-.secondary-nav > div,
-.test__path > div
-{
+.vertical__center,
+.vertical__center__int > div{
 	position: relative;
  	top: 50%;
-  	transform: perspective(1px) translateY(-50%);
+  transform: perspective(1px) translateY(-50%);
 }
-
 
 /*--------------------------- [6. Test Profile] --------------------------------------------------------------------------------*/
 
@@ -678,15 +683,6 @@ height: calc(100% - 90px);
 	font-size: 30px !important;
 }
 
-.status > div
-{
-	position: relative;
- 	top: 50%;
-  	transform: perspective(1px) translateY(-50%);
-}
-
-
-
 .status{
 	color: #ffffff !important;
 	font-size: 12px;
@@ -703,8 +699,6 @@ height: calc(100% - 90px);
 	height: 120px;
   padding: 0px 15px !important;
 }
-
-
 
 .path-node-image {
   max-width:100%;
@@ -753,17 +747,11 @@ height: calc(100% - 90px);
 	height: 50px !important;
 	border: 1px solid #e0e0e0;
 	border-radius: 50%;
-	position: relative;
- 	top: 50%;
-  	transform: perspective(1px) translateY(-50%);
 }
 
 .path-action {
 	height: 50px !important;
 	border: 1px solid #e0e0e0;
-	position: relative;
- 	top: 50%;
-  	transform: perspective(1px) translateY(-50%);
 }
 
 .path-arrow {
@@ -1061,13 +1049,27 @@ height: calc(100% - 90px);
 	width:250px;
 	border-radius: 5px;
   color: #bbbbbb !important;
+  float:left;
+}
+
+.domain__logo{
+  max-height:100px;
+	width:100%;
+  margin: auto;
+	text-align: center;
+}
+
+.domain__logo img{
+	width:100%;
+  padding:0px 15px;
 }
 
 .domain--largeicon{
-	font-size: 150px;
-	line-height: 150px;
 	font-weight: 700;
 	text-align: center;
+}
+
+.domain__title{
 }
 
 .domain__button:focus,
@@ -1100,42 +1102,22 @@ height: calc(100% - 90px);
   color: #999999;
 }
 
-.domain__trash:focus,
-.domain__trash.focus {
-  color: #999999;
+.delete__domain:focus,
+.delete__domain.focus {
+  color: #333333;
 }
-.domain__trash:hover {
-  color: #999999;
+.delete__domain:hover {
+  color: #333333;
 }
-.domain__trash:active,
-.domain__trash.active,
-.open > .dropdown-toggle.domain__trash {
-  color: #999999;
-}
-
-.domain__trash{
-    color: #bbbbbb;
-	text-align: right;
-	padding: 15px;
-	right:0px;
-	bottom:0px;
-	position:fixed;
+.delete__domain:active,
+.delete__domain.active,
+.open > .dropdown-toggle.delete__domain {
+  color: #333333;
 }
 
-.domain__title{
+.delete__domain{
+    color: #999999;
 }
-
-.domain__modal{
-	background-color:#ffffff;
-	margin:10px;
-  padding:10px;
-	height:50px !important;
-	width:600px !important;
-	border-radius: 5px;
-	border: 1px solid #e0e0e0;
-}
-
-
 
 .domain-dialogue-close{
   text-align:right !important;
