@@ -95,24 +95,13 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.showTestData = function(test, node){
-      if(test_key == $scope.visibleTestKey){
-        $scope.visible = !$scope.visible;
-      }
-      else{
-        test.visible = true;
-        $scope.current_node = node;
-      }
+      test.visible = true;
+      $scope.current_node = node;
     }
 
-    $scope.toggleTestDataVisibility = function(test_key, node){
-      if(test_key == $scope.visibleTestKey){
-        $scope.visible = !$scope.visible;
-      }
-      else{
-        $scope.visibleTestKey = test_key;
-        $scope.current_node = node;
-        $scope.visible = true;
-      }
+    $scope.toggleTestDataVisibility = function(test, node){
+      test.visible = !test.visible;
+      $scope.current_node = node;
     }
 
     $scope.isCurrentNodePage = function(){

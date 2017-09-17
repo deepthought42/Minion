@@ -79,7 +79,7 @@
 
 			<div ng-show="visibleTestKey==test.key && visible" >
 			  <div class="test__path">
-					<div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
+					<div ng-repeat="node in test.path.path" class="path-node-container" ng-click="toggleTestDataVisibility(test, node)">
 					  <div  ng-show="node.screenshot" class="path-node path-page">
 							<img src="{{node.screenshot}}" class="path-node-image"
 								 	 uib-tooltip="{{node.url}}"/>
@@ -128,7 +128,7 @@
 						</div>
 				  </div>
 
-			  <div class="test__info">
+			  <div class="test__info" ng-show="test.visible">
 					<md-tabs md-selected="selectedTab.dataTab">
 					  <md-tab label="Node Data" md-on-select="onTabChanges(0)">
 							<div class="node__data">
