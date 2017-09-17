@@ -9,7 +9,7 @@
 	  </div>
 	  <div class="col-md-3 col-sm-6 search">
 		<div class="input-group">
-		  <input type="text" class="form-control pull-right" ng-model="search" placeholder="Search Tests" aria-describedby="basic-addon2">
+		  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon2">
 		  <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
 		</div>
 	  </div>
@@ -55,7 +55,7 @@
 		<div class="empty__state" ng-show="tests.length==0">
 			<h3>Start a &#34;<a href="#/discovery">Discovery</a>&#34; to let Qanairy map your tests.</h3>
 		</div>
-		<div class="test" ng-repeat="test in tests" ng-show="tests.length>0">
+		<div class="test" ng-repeat="test in tests | filter:searchText" ng-show="tests.length>0">
 			<div class="test__profile" ng-click="toggleTestDataVisibility(test)">
 			  <div class="col-xs-2 test__status">
 				<span ng-show="test.correct">
