@@ -205,12 +205,13 @@ a img {border: none; }
 		display: inline;
 		color:#999;
 	}
-	h5{
+  h5{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-size: 14px;
-		font-weight:normal;
-		color:#FFFFFF;
-		padding: 10px;
+    color: #2d2d2d !important;
+		font-size: 20px !important;
+		font-weight:400 !important;
+		letter-spacing:.1px;
+    text-align: center;
 	}
 
 
@@ -1048,23 +1049,22 @@ height: calc(100% - 90px);
 	width:250px;
 	border-radius: 5px;
   color: #bbbbbb !important;
+  float:left;
 }
 
 .domain__logo{
-  height:100px;
-	width:200px;
-  text-align: center;
+  max-height:100px;
+	width:100%;
+  margin: auto;
+	text-align: center;
 }
 
 .domain__logo img{
-  height:auto;
 	width:100%;
-  text-align: center;
+  padding:0px 15px;
 }
 
 .domain--largeicon{
-	font-size: 100px;
-	line-height: 100px;
 	font-weight: 700;
 	text-align: center;
 }
@@ -1102,26 +1102,21 @@ height: calc(100% - 90px);
   color: #999999;
 }
 
-.domain__trash:focus,
-.domain__trash.focus {
-  color: #999999;
+.delete__domain:focus,
+.delete__domain.focus {
+  color: #333333;
 }
-.domain__trash:hover {
-  color: #999999;
+.delete__domain:hover {
+  color: #333333;
 }
-.domain__trash:active,
-.domain__trash.active,
-.open > .dropdown-toggle.domain__trash {
-  color: #999999;
+.delete__domain:active,
+.delete__domain.active,
+.open > .dropdown-toggle.delete__domain {
+  color: #333333;
 }
 
-.domain__trash{
-    color: #bbbbbb;
-	text-align: right;
-	padding: 15px;
-	right:0px;
-	bottom:0px;
-	position:fixed;
+.delete__domain{
+    color: #999999;
 }
 
 .domain-dialogue-close{
