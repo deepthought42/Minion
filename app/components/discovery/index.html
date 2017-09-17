@@ -78,10 +78,11 @@
 			</div>
 
 			<div ng-show="visibleTestKey==test.key && visible" >
-			  <div class="test__path vertical__center__int">					  <div  ng-show="node.screenshot" class="path-node path-page">
-							<img src="{{node.screenshot}}" class="path-node-image"
-								 	 uib-tooltip="{{node.url}}"/>
-					  </div>
+			  <div class="test__path vertical__center__int">
+					<div  ng-show="node.screenshot" class="path-node path-page">
+						<img src="{{node.screenshot}}" class="path-node-image"
+							 	 uib-tooltip="{{node.url}}"/>
+				  </div>
 					  <div class="path-bar display-none">
 						</div>
 					  <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center">
