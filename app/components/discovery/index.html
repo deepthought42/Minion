@@ -83,8 +83,6 @@
 						<img src="{{node.screenshot}}" class="path-node-image"
 							 	 uib-tooltip="{{node.url}}"/>
 				  </div>
-					  <div class="path-bar display-none">
-						</div>
 					  <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center">
 						<i class="fa fa-font fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.text"></i>
 						<i class="fa fa-paper-  plane-o fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.submit"></i>
@@ -177,7 +175,7 @@
 									<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
 								  </div>
 								  <div class="col-sm-8">
-									  <div class="row">
+									  <div class="row node__title">
 										  <h4>Element</h4>
 									  </div>
 									 <div class="key--value row">
@@ -225,7 +223,9 @@
 								</div>
 							</div>
 							<div class="" ng-show="current_node.type=='Action'">
-									<div><h4>Action</h4></div>
+									<div class="row node__title">
+										<h4>Action</h4>
+									</div>
 									<div class="key--value row">
 									  <div class="col-sm-1 data__key">
 										 Name:&nbsp;&nbsp;

@@ -73,7 +73,7 @@
 			  </div>
 			  <div class="col-xs-4 test__title">
 					<div ng-click="showNameInputField(test, true)" ng-show="!test.show_test_name_edit_field">
-						{{test.name || "Test #"}}
+						<h2>{{test.name || "Test #"}}</h2>
 					</div>
 					<div ng-show="test.show_test_name_edit_field">
 						<input type=-"text" ng-model="test.name" />
@@ -101,15 +101,13 @@
 
 			<div ng-show="test.visible">
 			  <div class="test__path vertical__center__int" >
-				<div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
-				  <div  ng-show="node.screenshot" class="path-node path-page">
-						<img src="{{node.screenshot}}" class="path-node-image"
+				  <div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
+				    <div ng-show="node.screenshot" class="path-node path-page">
+						  <img src="{{node.screenshot}}" class="path-node-image"
 							 uib-tooltip="{{node.url}}"/>
 					  </div>
-					  <div class="path-bar display-none">
-					  </div>
-					 <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center" >
-						<i class="fa fa-square fa-2x" uib-tooltip="node.xpath" ></i>
+					 <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center">
+						<i class="fa fa-square fa-2x icon" uib-tooltip="node.xpath" ></i>
 					  </div>
 					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center">
 						  <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
@@ -119,12 +117,12 @@
 					</div>
 					<div class="path-node-container" ng-click="setCurrentNode(test.result)">
 					  <div  ng-show="test.result.screenshot" class="path-node">
-						<img src="{{test.result.screenshot}}" class="path-node-image"
+						  <img src="{{test.result.screenshot}}" class="path-node-image"
 							 uib-tooltip="{{test.result.url}}"/>
 					  </div>
 					</div>
-				  </div>
-				  <div class="test__groups">
+				</div>
+				<div class="test__groups">
 					<div>
 						<label>Groups: </label></div>
 						<div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
@@ -188,7 +186,7 @@
 								<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
 							  </div>
 							  <div class="col-sm-8">
-								  <div class="row">
+								  <div class="row node__title">
 									  <h4>Element</h4>
 								  </div>
 								 <div class="key--value row">
@@ -236,7 +234,9 @@
 							</div>
 						</div>
 						<div class="" ng-show="current_node.type=='Action'">
-								<div><h4>Action</h4></div>
+								<div class="row node__title">
+									<h4>Action</h4>
+								</div>
 								<div class="key--value row">
 								  <div class="col-sm-1 data__key">
 									 Name:&nbsp;&nbsp;

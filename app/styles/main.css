@@ -165,6 +165,33 @@ a img {border: none; }
 		color:#333333;
 		min-width: 300px;
 	}
+
+  h1,
+  .h1 {
+    font-size: 36px;
+  }
+  h2,
+  .h2 {
+    font-size: 30px;
+  }
+  h3,
+  .h3 {
+    font-size: 24px;
+  }
+  h4,
+  .h4 {
+    font-size: 18px;
+  }
+  h5,
+  .h5 {
+    font-size: 14px;
+  }
+  h6,
+  .h6 {
+    font-size: 12px;
+  }
+
+
 	h1{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 30px;
@@ -176,10 +203,8 @@ a img {border: none; }
 	}
 	h2{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-size: 16px;
-		line-height: 26px;
-		letter-spacing:.2px;
-		margin-bottom: 18px;
+		font-size: 18px;
+		letter-spacing:0px;
 		display: inline;
 		color:#11366e;
 	}
@@ -201,7 +226,6 @@ a img {border: none; }
 		font-weight:400 !important;
 		line-height: 20px;
 		letter-spacing:.1px;
-		margin-bottom: 22px;
 		display: inline;
 		color:#999;
 	}
@@ -577,6 +601,75 @@ width: calc(100% - 80px);
 
 
 
+/*--------------------------- [?. Material Design Tabs] --------------------------------------------------------------------------------*/
+
+
+.info__title{
+		font-size: 16px;
+		line-height: 26px;
+		letter-spacing:.2px;
+		padding-bottom: 30px !important;
+		display: inline;
+		color:#11366e;
+}
+
+md-tabs {
+  display: block;
+  margin: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  &:not(.md-no-tab-content):not(.md-dynamic-height) {
+    min-height: 200 + $tabs-header-height;
+  }
+}
+
+md-tab {
+  position: absolute;
+  z-index: -1;
+  left: -9999px;
+}
+
+.md-tab {
+  font-size: 16px;
+  text-align: center;
+  line-height: $tabs-header-height - 24;
+  padding: auto 15px;
+  transition: background-color 0.35s $swift-ease-in-out-timing-function;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  text-transform: uppercase;
+  @include rtl(float, left, right);
+  font-weight: 500;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  &.md-focused, &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+  &.md-active {
+    cursor: default;
+  }
+  &.md-disabled {
+    pointer-events: none;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-drag: none;
+    opacity: 0.5;
+    cursor: default;
+  }
+  &.ng-leave {
+    transition: none;
+  }
+}
+
+
+
+
+
 /*--------------------------- [6. Test/Test Container/Test Labels] --------------------------------------------------------------------------------*/
 
 
@@ -663,12 +756,6 @@ height: calc(100% - 90px);
   background-color: #fafafa;
 }
 
-.test__title{
-	font-size: 18px;
-}
-
-
-
 .test__btns{
 	float: right !important;
 }
@@ -696,26 +783,34 @@ height: calc(100% - 90px);
 
 .test__path{
   border-top: 1px solid #e0e0e0;
-	height: 120px;
-  padding: 0px 15px !important;
+	height: 135px;
+  padding: 0px 30px  0px 30px !important;
 }
 
 .path-node-image {
-  max-width:100%;
-  max-height:100%;
-  line-height: 70px;
   vertical-align: middle;
+  width: auto;
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.path-bar .display_none_right{
+  display: none !important;
+}
+
+.path-page {
 }
 
 .path-node-container {
-  height: 80px;
-  width:  80px;
+  height: 90px;
+  width:  90px;
   float: left;
 }
 
 .path-node {
-  height: 80px;
-  width:  50px;
+  height: 90px;
+  width:  60px;
   float: left;
   line-height: 50px;
   vertical-align: middle;
@@ -730,44 +825,35 @@ height: calc(100% - 90px);
 .path-node:focus,
 .path-node.focus {
 	outline:none;
-    border: 1px solid #fddb4e;
+    border: 2px solid #fddb4e;
 }
 .path-node:hover {
-  border: 1px solid #fddb4e;
+  border: 2px solid #fddb4e;
 }
 .path-node:active,
 .path-node.active {
-  border: 1px solid #fddb4e;
+  border: 2px solid #fddb4e;
 }
 
-.test__title{
-	font-size: 18px;
-}
 .path-element {
-	height: 50px !important;
-	border: 1px solid #e0e0e0;
+	height: 60px !important;
+	border: 1px solid #eeeeee;
 	border-radius: 50%;
+  padding:8px;
 }
 
 .path-action {
-	height: 50px !important;
-	border: 1px solid #e0e0e0;
-}
-
-.path-arrow {
-  vertical-align: middle;
-  line-height: 5em;
-  height: 100%;
-  width: 25px;
-  float: left;
+	height: 60px !important;
+	border: 1px solid #eeeeee;
+  padding:8px;
 }
 
 .path-bar{
   vertical-align: top;
   height: 50%;
-  width: 15px;
+  width: 30px;
   float: left;
-	border-bottom: 1px solid #e0e0e0;
+	border-bottom: 1px solid #eeeeee;
 }
 
 .fa-rotate-45 {
@@ -803,6 +889,10 @@ height: calc(100% - 90px);
 	padding:15px;
 }
 
+.node__title{
+  padding-bottom:15px;
+}
+
 .test__history{
 	padding:15px;
 	font-size: 14px !important;
@@ -831,15 +921,6 @@ height: calc(100% - 90px);
 		letter-spacing:.2px;
 		padding-bottom: 6px !important;
 		color:#333333;
-}
-
-.info__title{
-		font-size: 16px;
-		line-height: 26px;
-		letter-spacing:.2px;
-		padding-bottom: 30px !important;
-		display: inline;
-		color:#11366e;
 }
 
 /*--------------------------- [7. Footer] ------------------------------------------------------------------------------*/
