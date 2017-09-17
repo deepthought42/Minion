@@ -72,28 +72,34 @@
 				</span>
 			  </div>
 			  <div class="col-xs-4 test__title">
-				{{test.name || "Test #"}}
+					<div ng-click="showNameInputField(test, true)" ng-show="!test.show_test_name_edit_field">
+						{{test.name || "Test #"}}
+					</div>
+					<div ng-show="test.show_test_name_edit_field">
+						<input type=-"text" ng-model="test.name" />
+						<i class="fa fa-plus" ng-click="updateTestName(test)"></i>
+					</div>
 			  </div>
 			  <div class="col-xs-2">
-				{{test.runtime || "0 ms"}}
+					{{test.runtime || "0 ms"}}
 			  </div>
 			  <div class="col-xs-2">
 				&nbsp;
 			  </div>
 			  <div class="col-xs-2 test__btns">
-				<div class="btn-group" role="group" aria-label="Run Favorite More">
-				 <button class="btn btn--left btn--gray" ng-click="runTest(test)">
-					 Run
-				 </button>
-				 <button class="btn btn--right btn--gray">
-					 <i class="fa fa-angle-down"></i>
-				 </button>
-				</div>
+					<div class="btn-group" role="group" aria-label="Run Favorite More">
+					 <button class="btn btn--left btn--gray" ng-click="runTest(test)">
+						 Run
+					 </button>
+					 <button class="btn btn--right btn--gray">
+						 <i class="fa fa-angle-down"></i>
+					 </button>
+					</div>
 			  </div>
 			</div>
 
 
-			<div ng-show="visibleTestKey==test.key && visible">
+			<div ng-show="test.visible">
 			  <div class="test__path" >
 				<div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
 				  <div  ng-show="node.screenshot" class="path-node path-page">

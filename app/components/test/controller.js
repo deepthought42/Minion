@@ -23,29 +23,43 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.node_key = "";
       $scope.current_node = null;
       $scope.visible = false;
+
       if(store.get('domain') != null){
         $scope.getTestsByUrl(store.get('domain').url);
       }
       else {
         $state.go('main.domains');
       }
-    }
+    };
+
+    $scope.showNameInputField = function(test, showInput) {
+      test.show_test_name_edit_field = showInput;
+    };
 
     $scope.setCurrentNodeKey = function(key){
       $scope.node_key=key;
-    }
+    };
 
     $scope.getTestsByUrl = function(url) {
       $scope.tests = Tester.query({url: url});
     };
 
     $scope.getTestByName = function(name) {
-      $scope.tests = Tester.query({name: name});
+      $scope.tests = Tester.query({name: name}).$promise.then(function(){
+      });
+
     };
 
     $scope.updateTestCorrectness = function(test, correctness){
       $scope.test = Tester.updateCorrectness({key: test.key, correct: correctness});
-      return $scope.test.correct;
+    }
+
+    $scope.updateTestName = function(test){
+      test.show_test_name_edit_field=false;
+
+      Tester.updateName({key: test.key, name: test.name}).$promise.then(function(data){
+        test.show_test_name_edit_field=false;
+      });
     }
 
     $scope.runTest = function(test){
@@ -80,14 +94,13 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       Tester.updateName({key: key, name: name});
     }
 
-    $scope.showTestData = function(test_key, node){
+    $scope.showTestData = function(test, node){
       if(test_key == $scope.visibleTestKey){
         $scope.visible = !$scope.visible;
       }
       else{
-        $scope.visibleTestKey = test_key;
+        test.visible = true;
         $scope.current_node = node;
-        $scope.visible = true;
       }
     }
 

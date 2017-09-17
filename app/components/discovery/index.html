@@ -85,12 +85,12 @@
 								 	 uib-tooltip="{{node.url}}"/>
 					  </div>
 					  <div class="path-bar display-none">
-							  </div>
+					  </div>
 					  <div ng-show="node.type == 'PageElement'" class="path-node path-element">
-						<i class="fa fa-font fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.text"></i>
-						<i class="fa fa-paper-  plane-o fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.submit"></i>
+							<i class="fa fa-font fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.text"></i>
+							<i class="fa fa-paper-  plane-o fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.submit"></i>
 
-						<i class="fa fa-square-o fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
+							<i class="fa fa-square-o fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
 					  </div>
 					  <div ng-show="node.type == 'Action'" class="path-node path-action">
 						  <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
@@ -102,7 +102,7 @@
 					  <div  ng-show="test.result.screenshot" class="path-node">
 							<img src="{{test.result.screenshot}}" class="path-node-image"
 								 uib-tooltip="{{test.result.url}}"/>
-						  </div>
+					  </div>
 						</div>
 						{{selectedTab.dataTab}}
 
