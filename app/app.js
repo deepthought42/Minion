@@ -155,7 +155,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       $location.go('/login');
     });
 
-  $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
+    $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
      if (!auth.isAuthenticated) {
        // get me a login modal!
@@ -178,7 +178,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
     });
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
-        console.log("unautorized user");
+        console.log("unauthorized user");
         auth.signin({
           authParams: {
             scope: 'openid profile app_metadata' // This is if you want the full JWT
