@@ -180,9 +180,10 @@ a img {border: none; }
 	h2{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 18px;
+    font-weight:400 !important;
 		letter-spacing:0px;
 		display: inline;
-		color:#11366e;
+		color:#2d2d2d;
 	}
   /*--------------------------- [x] ---------------------------*/
 	h3{
@@ -715,6 +716,9 @@ height: calc(100% - 90px);
 	height: 60px;
 }
 
+.test__title{
+  text-align: left;
+}
 
 .test__profile {
   color: #424242;
@@ -1109,6 +1113,21 @@ height: calc(100% - 90px);
 	border-radius: 5px;
   color: #bbbbbb !important;
   float:left;
+  position: relative;
+}
+
+.domain__button__height{
+	height: -moz-calc(100% - 20px);
+/* WebKit */
+height: -webkit-calc(100% - 20px);
+/* Opera */
+height: -o-calc(100% - 20px);
+/* Standard */
+height: calc(100% - 20px);
+}
+
+.domain__icon{
+  padding-bottom:30px !important;
 }
 
 .domain__logo{
@@ -1129,6 +1148,12 @@ height: calc(100% - 90px);
 }
 
 .domain__title{
+  position: absolute;
+  padding:0px 15px;
+  bottom:30px;
+  left:0px;
+  width:100%;
+  margin: auto;
 }
 
 .domain__button:focus,
