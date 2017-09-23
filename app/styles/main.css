@@ -166,9 +166,8 @@ a img {border: none; }
 		min-width: 300px;
 	}
 
-
-
-	h1{
+  h1,
+  .h1{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 30px;
 		line-height: 35px;
@@ -177,7 +176,8 @@ a img {border: none; }
 		font-weight:normal;
 		color:#11366e;
 	}
-	h2{
+  h2,
+  .h2{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 18px;
     font-weight:400 !important;
@@ -186,7 +186,8 @@ a img {border: none; }
 		color:#2d2d2d;
 	}
   /*--------------------------- [x] ---------------------------*/
-	h3{
+	h3,
+  .h3{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #2d2d2d !important;
 		font-size: 20px;
@@ -197,7 +198,8 @@ a img {border: none; }
 	}
 
 /*--------------------------- [Modal Header] ---------------------------*/
-  h4{
+  h4,
+  .h4{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 18px;
 		font-weight:400 !important;
@@ -206,7 +208,8 @@ a img {border: none; }
 		display: inline;
 		color:#999;
 	}
-  h5{
+  h5,
+  .h5{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #2d2d2d !important;
 		font-size: 20px !important;
@@ -583,12 +586,6 @@ width: calc(100% - 80px);
 
 
 .info__title{
-		font-size: 16px;
-		line-height: 26px;
-		letter-spacing:.2px;
-		padding-bottom: 30px !important;
-		display: inline;
-		color:#11366e;
 }
 
 md-tabs {

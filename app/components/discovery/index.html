@@ -33,13 +33,14 @@
 
 	<div class="test-container">
 		<div class="empty__state vertical__center" ng-show="tests.length==0">
+			<button class="btn--green btn-lg" ng-click="startMappingProcess()" ng-show="!isStarted">Start Discovery</button>
 			<h3>Begin a Discovery by first adding a <a ui-sref="main.domains">Domain</a>.</h3>
 		</div>
 		<div class="test" ng-repeat="test in tests" ng-show="tests.length>0">
 			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test.key, test.path.path[0])">
 			  <div class="col-xs-2 test__status text--shadow">
 			   <div class="row no-gutter">
-					 <div class="col-xs-6 btn--green status vertical__center__int">
+					 <div class="col-xs-6 btn--green select__neutral status vertical__center__int">
 				 <div class="" ng-click="updateCorrectness(test, true)">
 				   <i class="fa fa-check status--symbol white"
 					   style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"
@@ -47,7 +48,7 @@
 				   <br/>
 				   Correct
 				</div></div>
-				<div class="status col-xs-6 btn--red vertical__center__int">
+				<div class="status col-xs-6 btn--red select__neutral vertical__center__int">
 				<div class="" ng-click="updateCorrectness(test, false)">
 					<i  class="fa fa-times status--symbol white"
 						style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
@@ -127,7 +128,7 @@
 
 			  <div class="test__info" ng-show="test.visible">
 					<md-tabs md-selected="selectedTab.dataTab">
-					  <md-tab label="Node Data" md-on-select="onTabChanges(0)">
+					  <md-tab label="Node Data" class="info__title h5" md-on-select="onTabChanges(0)">
 							<div class="node__data">
 								<div class="" ng-show="current_node.type=='Page'">
 								  <div class="col-sm-4">
@@ -245,7 +246,7 @@
 							</div>
 						  </div>
 					  </md-tab>
-					  <md-tab label="History" md-on-select="onTabChanges(1)">
+					  <md-tab label="History" class="info__title h5" md-on-select="onTabChanges(1)">
 							<div class="test__history">
 							Put test run history here
 						  </div>
