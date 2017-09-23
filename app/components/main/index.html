@@ -38,8 +38,8 @@
 <!-- Page Content -->
 <div class="page-wrap">
 
-  <div id="nav-bar" class="main-header container-fluid">
-    <div id="main-nav" class="row vertical__center__int">
+  <div id="nav-bar" class="main-header container-fluid content ">
+    <div id="main-nav" class="vertical__center__int">
 
 		  <div id="left-main-nav" class="col-xs-6">
         {{domain || "www.yourdomain.com"}}
@@ -47,9 +47,8 @@
       </div>
 
 		  <div id="right-main-nav" class="col-xs-6" ng-show="auth.isAuthenticated">
-			  <div class="row">
-					<div class="col-xs-12">
-              <div class="user__name">{{user_profile.email}}</div>
+            <div class="user__name">{{user_profile.email}}
+            </div>
 					  <!-- /.dropdown -->
 						<div class="dropdown dropdown-toggle" data-toggle="dropdown" href="#">
 							<i class="fa fa-user fa-fw"></i>
@@ -78,8 +77,6 @@
 							</li>
 						</ul>
 						<!-- /.dropdown-user -->
-					</div>
-			  </div>
 			</div>
       <div class="pull-right login__signup" ng-show="!auth.isAuthenticated">
         <a href="#/" ng-click="signin()">
