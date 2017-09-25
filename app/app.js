@@ -178,7 +178,6 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
      }
     });
 
-/*
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
         console.log("unauthorized user");
         auth.signin({
@@ -192,7 +191,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
           console.log("Sign in Error :(", err);
         });
     });
-*/
+
     $rootScope.$on('account-missing', function (e){
       console.log("account missing");
       e.preventDefault();
