@@ -41,20 +41,51 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
-        $scope.pusher = new Pusher('5103e64528e1579e78e3', {
+        var pusher = new Pusher('77fec1184d841b55919e', {
           cluster: 'us2',
           encrypted: true
         });
 
-        var channel = $scope.pusher.subscribe($scope.discovery_url);
+
+
+        console.debug($scope.extractHostname($scope.discovery_url))
+        var channel = pusher.subscribe($scope.extractHostname($scope.discovery_url));
+        channel.bind('test-discovered', function(data) {
+          console.log("discovery url :: " + $scope.extractHostname($scope.discovery_url));
+          alert(data.message);
+          $scope.paths.push(JSON.parse(message.data));
+
+        });
+
+        /*var channel = $scope.pusher.subscribe($scope.discovery_url);
         channel.bind('test-discovered', function(data) {
           alert(data.message);
           $scope.paths.push(JSON.parse(message.data));
         });
+        */
       }
       else{
         $state.go("main.domains")
       }
+    }
+
+    $scope.extractHostname =  function(url) {
+        var hostname;
+        //find & remove protocol (http, ftp, etc.) and get hostname
+
+        if (url.indexOf("://") > -1) {
+            hostname = url.split('/')[2];
+        }
+        else {
+            hostname = url.split('/')[0];
+        }
+
+        //find & remove port number
+        hostname = hostname.split(':')[0];
+        //find & remove "?"
+        hostname = hostname.split('?')[0];
+
+        return hostname;
     }
 
     $scope.onTabChanges = function(currentTabIndex){
