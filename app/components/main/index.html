@@ -9,21 +9,26 @@
     </div>
 
     <ul class="sidebar-nav">
-        <li id="notification_li">
-		<a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
-      <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
-    Tests <span id="notification_count">1283</span></a>
+      <li id="notification_li">
+        <a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
+          <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
+          Tests
+  {{$scope.approved_test_cnt}}
+          <span id="notification_count">
+            {{$scope.approved_test_cnt}}
+          </span>
+        </a>
       </li>
       <li>
         <a href="#/discovery"  style="{{$location.path() == '/discovery' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
-          <i class="fa fa-map-o sidebar-nav-icons" aria-hidden="true"
-             ></i>
+          <i class="fa fa-map-o sidebar-nav-icons" aria-hidden="true"></i>
           Discovery
         </a>
       </li>
     </ul>
     <div class="version">
-          Qanairy <span app-version></span>
+      Qanairy
+      <span app-version></span>
     </div>
     <label for="main-nav-check" class="toggle-menu"
        style="{{navToggledOpen ? 'color:#fddb4e' : 'color:#bfbfbf'}}"

@@ -24,6 +24,8 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.protocols = ["http", "https", "file"];
       $scope.workAllocation = {};
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
+
+      $scope.approved_test_cnt = store.get('approved_test_cnt');
       if(store.get('domain')){
         $scope.domain = store.get('domain').url;
       }
@@ -31,6 +33,7 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.current_path = $location.path();
       $scope.user_profile = store.get('profile');
       $scope.navToggledOpen = true;
+      console.log("approved_test_cnt :: "+ $scope.approved_test_cnt);
     }
 
     $scope.login = function(){
