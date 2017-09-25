@@ -9,21 +9,25 @@
     </div>
 
     <ul class="sidebar-nav">
-        <li id="notification_li">
-		<a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
-      <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
-    Tests <span id="notification_count">1283</span></a>
+      <li id="notification_li">
+        <a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
+          <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
+          Tests
+          <span id="notification_count" ng-show="approved_test_cnt">
+            {{approved_test_cnt}}
+          </span>
+        </a>
       </li>
       <li>
         <a href="#/discovery"  style="{{$location.path() == '/discovery' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
-          <i class="fa fa-map-o sidebar-nav-icons" aria-hidden="true"
-             ></i>
+          <i class="fa fa-map-o sidebar-nav-icons" aria-hidden="true"></i>
           Discovery
         </a>
       </li>
     </ul>
     <div class="version">
-          Qanairy <span app-version></span>
+      Qanairy
+      <span app-version></span>
     </div>
     <label for="main-nav-check" class="toggle-menu"
        style="{{navToggledOpen ? 'color:#fddb4e' : 'color:#bfbfbf'}}"
@@ -37,45 +41,42 @@
 
 <!-- Page Content -->
 <div class="page-wrap">
-
   <div id="nav-bar" class="main-header container-fluid content ">
     <div id="main-nav" class="vertical__center__int">
-
 		  <div id="left-main-nav" class="col-xs-6">
         {{domain || "www.yourdomain.com"}}
         <a ui-sref="main.domains">Change?</a>
       </div>
 
 		  <div id="right-main-nav" class="col-xs-6" ng-show="auth.isAuthenticated">
-            <div class="user__name">{{user_profile.email}}
-            </div>
-					  <!-- /.dropdown -->
-						<div class="dropdown dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="fa fa-user fa-fw"></i>
-							<i class="fa fa-caret-down"></i>
-						</div>
-						<ul class="dropdown-menu dropdown-user">
-							<li>
-                <a href="#">
-                  <i class="fa fa-user fa-fw"></i>
-                  User Profile
-                </a>
-							</li>
-							<li>
-                <a href="#">
-                  <i class="fa fa-gear fa-fw"></i>
-                  Settings
-                </a>
-							</li>
-							<li class="divider"></li>
-							<li>
-							  <a href="#/"
-                   ng-click="logout()">
-								<i class="fa fa-sign-out fa-fw"></i>
-								 Logout
-							  </a>
-							</li>
-						</ul>
+        <div class="user__name">{{user_profile.email}}
+        </div>
+			  <!-- /.dropdown -->
+				<div class="dropdown dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="fa fa-user fa-fw"></i>
+					<i class="fa fa-caret-down"></i>
+				</div>
+				<ul class="dropdown-menu dropdown-user">
+					<li>
+            <a href="#">
+              <i class="fa fa-user fa-fw"></i>
+              User Profile
+            </a>
+					</li>
+					<li>
+            <a href="#">
+              <i class="fa fa-gear fa-fw"></i>
+              Settings
+            </a>
+					</li>
+					<li class="divider"></li>
+					<li>
+					  <a href="#/" ng-click="logout()">
+			         <i class="fa fa-sign-out fa-fw"></i>
+			         Logout
+					  </a>
+					</li>
+				</ul>
 						<!-- /.dropdown-user -->
 			</div>
       <div class="pull-right login__signup" ng-show="!auth.isAuthenticated">
