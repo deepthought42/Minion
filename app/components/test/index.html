@@ -61,18 +61,14 @@
 		<div class="test" ng-repeat="test in tests | filter:searchText" ng-show="tests.length>0">
 			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test)">
 			  <div class="col-xs-2 test__status">
-				<span ng-show="test.correct">
-				  <i class="fa fa-check-circle status--symbol"
-					 	 style="color:green"></i>
-				</span>
-				<span ng-show="!test.correct && test.correct != null">
-				  <i  class="fa fa-times-circle status--symbol"
-					 		style="color:red"></i>
-				</span>
-				<span ng-show="!test.correct">
-				  <i  class="fa fa-question-circle status--symbol"
-					  	style="color:orange"></i>
-				</span>
+					<span ng-show="test.correct">
+					  <i class="fa fa-check-circle status--symbol"
+						 	 style="color:green"></i>
+					</span>
+					<span ng-show="!test.correct && test.correct != null">
+					  <i  class="fa fa-times-circle status--symbol"
+						 		style="color:red"></i>
+					</span>
 			  </div>
 			  <div class="col-xs-4 test__title">
 					<div ng-click="showNameInputField(test, true)" ng-show="!test.show_test_name_edit_field">
@@ -250,7 +246,7 @@
 								</div>
 								<div class="key--value row">
 								  <div class="col-sm-1 data__key">
-									Value:&nbsp;&nbsp;
+										Value:&nbsp;&nbsp;
 								  </div>
 								  <div class="col-sm-11 data__value">
 									 {{current_node.val}}
