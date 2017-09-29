@@ -101,30 +101,30 @@
 							<img src="{{test.result.screenshot}}" class="path-node-image"
 								 uib-tooltip="{{test.result.url}}"/>
 					  </div>
-						</div>
+					</div>
 						{{selectedTab.dataTab}}
 
-				  </div>
+			  </div>
 
-				  <div class="test__groups">
-						<div>
-							<label>Groups: </label>
-							{{selectedTab.dataTab}}
+			  <div class="test__groups">
+					<div>
+						<label>Groups: </label>
+						{{selectedTab.dataTab}}
 
-						</div>
-						<div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
-						  {{group.name}}
-							<span ng-click="removeGroup(test.key, group)">
-								<i class="fa fa-times"></i>
-							</span>
-						</div>
-						<div>
-							<input ng-model="group.name" />
-						</div>
-						<div  ng-click="addGroup(test, group)">
-							<i class="fa fa-plus"></i>
-						</div>
-				  </div>
+					</div>
+					<div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
+					  {{group.name}}
+						<span ng-click="removeGroup(test.key, group)">
+							<i class="fa fa-times"></i>
+						</span>
+					</div>
+					<div>
+						<input ng-model="group.name" />
+					</div>
+					<div  ng-click="addGroup(test, group)">
+						<i class="fa fa-plus"></i>
+					</div>
+			  </div>
 
 			  <div class="test__info" ng-show="test.visible">
 					<md-tabs md-selected="selectedTab.dataTab">
@@ -136,44 +136,44 @@
 								  </div>
 								  <div class="col-sm-8">
 									  <div class="key--value row">
-									  <div class="col-sm-1 data__key">
-										 Landable:&nbsp;&nbsp;
+										  <div class="col-sm-1 data__key">
+											 Landable:&nbsp;&nbsp;
+										  </div>
+										  <div class="col-sm-11 data__value">
+											 {{current_node.landable}}
+										  </div>
 									  </div>
-									  <div class="col-sm-11 data__value">
-										 {{current_node.landable}}
-									  </div>
-									 </div>
 									  <div class="key--value row">
-									  <div class="col-sm-1 data__key">
-										 URL:&nbsp;&nbsp;
-									  </div>
-									  <div class="col-sm-11 data__value">
-										 {{current_node.url}}
-									  </div>
-									 </div>
+										  <div class="col-sm-1 data__key">
+											  URL:&nbsp;&nbsp;
+										  </div>
+										  <div class="col-sm-11 data__value">
+											  {{current_node.url}}
+										  </div>
+										</div>
 									  <div class="key--value row">
-									  <div class="col-sm-1 data__key">
-										 Visible Element Counts:&nbsp;&nbsp;
-									  </div>
-									  <div class="col-sm-11 data__value">
-											<div class="col-sm-12" ng-repeat="(key, value) in current_node.elementCounts">
-									 			{{key}} - {{value}}
-											</div>
-									  </div>
-									 </div>
+										  <div class="col-sm-1 data__key">
+											 Visible Element Counts:&nbsp;&nbsp;
+										  </div>
+										  <div class="col-sm-11 data__value">
+												<div class="col-sm-12" ng-repeat="(key, value) in current_node.elementCounts">
+										 			{{key}} - {{value}}
+												</div>
+										  </div>
+										</div>
 									  <div class="key--value row">
-									  <div class="col-sm-1 data__key">
-										 Total Weight:&nbsp;&nbsp;
+										  <div class="col-sm-1 data__key">
+											 Total Weight:&nbsp;&nbsp;
+										  </div>
+										  <div class="col-sm-11 data__value">
+											 {{current_node.totalWeight}}
+										  </div>
 									  </div>
-									  <div class="col-sm-11 data__value">
-										 {{current_node.totalWeight}}
-									  </div>
-									 </div>
 								  </div>
 								</div>
 								<div class="" ng-show="current_node.type=='PageElement'">
 								  <div class="pull-right col-sm-4" ng-show="current_node.screenshot" >
-									<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
+										<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
 								  </div>
 								  <div class="col-sm-8">
 									  <div class="row node__title">
@@ -199,9 +199,9 @@
 									  <div class="col-sm-1 data__key">
 										 CSS:&nbsp;&nbsp;
 									  </div>
-									 <div class="col-sm-11 data__value" ng-repeat="(key, value) in current_node.cssProperties">
+									 	<div class="col-sm-11 data__value" ng-repeat="(key, value) in current_node.cssProperties">
 											{{key}} -           {{value}}
-									  </div>
+								  	</div>
 									 </div>
 									 <div class="key--value row">
 									  <div class="col-sm-1 data__key">
