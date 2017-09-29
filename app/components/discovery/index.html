@@ -78,18 +78,16 @@
 			  </div>
 			</div>
 
-			<div ng-show="visibleTestKey==test.key && visible" >
-			  <div class="test__path vertical__center__int">
-					<div  ng-show="node.screenshot" class="path-node path-page">
-						<img src="{{node.screenshot}}" class="path-node-image"
-							 	 uib-tooltip="{{node.url}}"/>
-				  </div>
-					  <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center">
-						<i class="fa fa-font fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.text"></i>
-						<i class="fa fa-paper-  plane-o fa-2x" uib-tooltip="node.xpath" ng-show="node.attributes.submit"></i>
-
-							<i class="fa fa-square-o fa-2x fa-rotate-45" uib-tooltip="node.xpath" ></i>
+			<div ng-show="test.visible">
+				<div class="test__path vertical__center__int" >
+				  <div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
+				    <div ng-show="node.screenshot" class="path-node path-page">
+						  <img src="{{node.screenshot}}" class="path-node-image"
+							 uib-tooltip="{{node.url}}"/>
 					  </div>
+					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center">
+						 	<i class="fa fa-square fa-2x icon" uib-tooltip="node.xpath" ></i>
+			  		</div>
 					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center">
 						  <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
 					  </div>
@@ -98,33 +96,31 @@
 					</div>
 					<div class="path-node-container" ng-click="setCurrentNode(test.result)">
 					  <div  ng-show="test.result.screenshot" class="path-node">
-							<img src="{{test.result.screenshot}}" class="path-node-image"
-								 uib-tooltip="{{test.result.url}}"/>
+						  <img src="{{test.result.screenshot}}" class="path-node-image"
+							 		 uib-tooltip="{{test.result.url}}"/>
 					  </div>
-						</div>
-						{{selectedTab.dataTab}}
+					</div>
+				</div>
 
-				  </div>
+		  <div class="test__groups">
+				<div>
+					<label>Groups: </label>
+					{{selectedTab.dataTab}}
 
-				  <div class="test__groups">
-						<div>
-							<label>Groups: </label>
-							{{selectedTab.dataTab}}
-
-						</div>
-						<div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
-						  {{group.name}}
-							<span ng-click="removeGroup(test.key, group)">
-								<i class="fa fa-times"></i>
-							</span>
-						</div>
-						<div>
-							<input ng-model="group.name" />
-						</div>
-						<div  ng-click="addGroup(test, group)">
-							<i class="fa fa-plus"></i>
-						</div>
-				  </div>
+				</div>
+				<div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
+				  {{group.name}}
+					<span ng-click="removeGroup(test.key, group)">
+						<i class="fa fa-times"></i>
+					</span>
+				</div>
+				<div>
+					<input ng-model="group.name" />
+				</div>
+				<div  ng-click="addGroup(test, group)">
+					<i class="fa fa-plus"></i>
+				</div>
+		  </div>
 
 			  <div class="test__info" ng-show="test.visible">
 					<md-tabs md-selected="selectedTab.dataTab">
@@ -132,25 +128,25 @@
 							<div class="node__data">
 								<div class="" ng-show="current_node.type=='Page'">
 								  <div class="col-sm-4">
-									<img src="{{current_node.screenshot}}" class="path-node-image" uib-tooltip="{{current_node.url}}" />
+										<img src="{{current_node.screenshot}}" class="path-node-image" uib-tooltip="{{current_node.url}}" />
 								  </div>
 								  <div class="col-sm-8">
 									  <div class="key--value row">
-									  <div class="col-sm-1 data__key">
-										 Landable:&nbsp;&nbsp;
+										  <div class="col-sm-1 data__key">
+											 Landable:&nbsp;&nbsp;
+										  </div>
+										  <div class="col-sm-11 data__value">
+											 {{current_node.landable}}
+										  </div>
 									  </div>
-									  <div class="col-sm-11 data__value">
-										 {{current_node.landable}}
-									  </div>
-									 </div>
 									  <div class="key--value row">
-									  <div class="col-sm-1 data__key">
-										 URL:&nbsp;&nbsp;
-									  </div>
-									  <div class="col-sm-11 data__value">
-										 {{current_node.url}}
-									  </div>
-									 </div>
+										  <div class="col-sm-1 data__key">
+											 	URL:&nbsp;&nbsp;
+										  </div>
+										  <div class="col-sm-11 data__value">
+											 	{{current_node.url}}
+										  </div>
+									 	</div>
 									  <div class="key--value row">
 									  <div class="col-sm-1 data__key">
 										 Visible Element Counts:&nbsp;&nbsp;
@@ -162,13 +158,13 @@
 									  </div>
 									 </div>
 									  <div class="key--value row">
-									  <div class="col-sm-1 data__key">
-										 Total Weight:&nbsp;&nbsp;
-									  </div>
-									  <div class="col-sm-11 data__value">
-										 {{current_node.totalWeight}}
-									  </div>
-									 </div>
+										  <div class="col-sm-1 data__key">
+											 Total Weight:&nbsp;&nbsp;
+										  </div>
+										  <div class="col-sm-11 data__value">
+											 {{current_node.totalWeight}}
+										  </div>
+										</div>
 								  </div>
 								</div>
 								<div class="" ng-show="current_node.type=='PageElement'">
