@@ -141,7 +141,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     $scope.toggleTestDataVisibility = function(test, node){
       $scope.selectedTab.dataTab = 0;
-      test.visible = !test.visible;
+
+      test.visible = !test.visible || true;
     }
 
     $scope.stopMappingProcess = function(){
@@ -168,12 +169,22 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     }
 
-    $scope.updateCorrectness = function(test, correctness){
+    $scope.updateCorrectness = function(test, correctness, idx){
       Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
         .then(function(data){
           test.correct = data.correct;
-        });
+          //remove from list
+          $scope.tests.splice(idx, 1);
+          //update approved test count
 
+          if(!store.get('approved_test_cnt')){
+            store.set('approved_test_cnt', 1);
+          }
+          else{
+            var approved_cnt = store.get('approved_test_cnt');
+            store.set('approved_test_cnt', approved_cnt);
+          }
+        });
     }
 
     this._init();
