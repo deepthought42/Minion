@@ -156,6 +156,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
     });
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
+      console.log("state changed");
      //var requireLogin = toState.data.requireLogin || false;
      if (!auth.isAuthenticated) {
        // get me a login modal!

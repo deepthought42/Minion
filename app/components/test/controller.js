@@ -24,6 +24,11 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.current_node = null;
       $scope.visible = false;
 
+
+      if(store.get('approved_test_cnt')){
+        delete store.approved_test_cnt;
+      }
+
       if(store.get('domain') != null){
         $scope.getTestsByUrl(store.get('domain').url);
       }
