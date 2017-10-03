@@ -33,8 +33,8 @@
 
 	<div class="test-container">
 		<div class="empty__state vertical__center" ng-show="tests.length==0">
-			<button class="btn--green btn-lg" ng-click="startMappingProcess()" ng-show="!isStarted">Start Discovery</button>
-			<h3>Begin a Discovery by first adding a <a ui-sref="main.domains">Domain</a>.</h3>
+			<h3>Collect your tests by first running a Discovery.</h3>
+			<div style="text-align:center; margin: 0px auto;"><button class="btn--green btn-lg" ng-click="startMappingProcess()" ng-show="!isStarted">Start Discovery</button></div>
 		</div>
 		<div class="test" ng-repeat="test in tests" ng-show="tests.length>0">
 			<div class="test__profile vertical__center__int" >
