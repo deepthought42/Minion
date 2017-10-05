@@ -46,15 +46,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           encrypted: true
         });
 
-
-
-        console.debug($scope.extractHostname($scope.discovery_url))
+        console.log($scope.extractHostname($scope.discovery_url))
         var channel = pusher.subscribe($scope.extractHostname($scope.discovery_url));
-        channel.bind('test-discovered', function(data) {
+        channel.bind('test-discovered ', function(data) {
           console.log("discovery url :: " + $scope.extractHostname($scope.discovery_url));
-          alert(data.message);
-          $scope.paths.push(JSON.parse(message.data));
-
+          console.log("discovery data :: " + data);
+          $scope.paths.push(JSON.parse(data));
         });
 
         /*var channel = $scope.pusher.subscribe($scope.discovery_url);
