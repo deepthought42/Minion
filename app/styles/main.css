@@ -112,9 +112,8 @@ html {
     color: #222;
     font-size: .875em;
     line-height: 1.4;
-	background-color:#f5f5f5;
-}
-
+	  background-color:#f5f5f5;
+    }
 
 .no-gutter > [class*='col-'] {
     padding-right:0;
@@ -129,6 +128,14 @@ html {
 
 .white{
   color: white !important;
+}
+
+.green{
+  color: #43a047 !important;
+}
+
+.red{
+  color: #e53935 !important;
 }
 
 .text--shadow{
@@ -267,9 +274,7 @@ a img {border: none; }
 	margin-left: 1px !important;
 }
 
-.select__neutral{
-  background-color: #bbbbbb !important;
-}
+
 
 .btn--green {
   color: #fff;
@@ -332,6 +337,9 @@ a img {border: none; }
   background-color: #cccccc;
 }
 
+.select__neutral{
+  background-color: #bbbbbb;
+}
 
 /*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/
 
@@ -564,6 +572,7 @@ width: calc(100% - 80px);
 .content {
   background-color: #f5f5f5;
   height:100%;
+  min-width: 612px !important;
 	}
 /*--------------------------- [3. Secondary Nav] -----------------------------------------------------------------------------*/
 
@@ -586,6 +595,14 @@ width: calc(100% - 80px);
 
 
 .info__title{
+  height: 30px !important;
+  padding: 15px !important;
+  font-size: 16px;
+  text-align: center;
+  line-height: 24px;
+}
+
+.info__tab {
 }
 
 md-tabs {
@@ -606,6 +623,8 @@ md-tab {
   left: -9999px;
 }
 
+
+
 .md-tab {
   font-size: 16px;
   text-align: center;
@@ -615,7 +634,7 @@ md-tab {
   cursor: pointer;
   white-space: nowrap;
   position: relative;
-  text-transform: uppercase;
+  text-transform: capitalize;
   @include rtl(float, left, right);
   font-weight: 500;
   box-sizing: border-box;
@@ -682,7 +701,6 @@ height: -o-calc(100% - 90px);
 height: calc(100% - 90px);
 	padding-bottom: 15px !important;
 }
-
 
 .test-labels{
 	text-align: center !important;
@@ -787,6 +805,11 @@ height: calc(100% - 90px);
   float: left;
 }
 
+.page-container {
+  height: auto !important;
+  float: left;
+}
+
 .path-node {
   height: 90px;
   width:  60px;
@@ -885,7 +908,6 @@ height: calc(100% - 90px);
 
 .data__key{
 	text-transform: capitalize;
-
 		font-size: 14px;
 		line-height: 20px;
 		letter-spacing:.2px;
@@ -899,7 +921,7 @@ height: calc(100% - 90px);
 		line-height: 20px;
 		letter-spacing:.2px;
 		padding-bottom: 6px !important;
-		color:#333333;
+		color:#666666;
 }
 
 /*--------------------------- [7. Footer] ------------------------------------------------------------------------------*/
