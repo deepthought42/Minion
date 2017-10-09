@@ -48,10 +48,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
         console.log($scope.extractHostname($scope.discovery_url))
         var channel = pusher.subscribe($scope.extractHostname($scope.discovery_url));
-        channel.bind('test-discovered ', function(data) {
+        channel.bind('test-discovered', function(data) {
           console.log("discovery url :: " + $scope.extractHostname($scope.discovery_url));
           console.log("discovery data :: " + data);
           $scope.paths.push(JSON.parse(data));
+          $scope.$apply();
         });
 
         /*var channel = $scope.pusher.subscribe($scope.discovery_url);
