@@ -1,11 +1,11 @@
 <div class="content">
 	<div class="secondary-nav vertical__center__int">
-		<div class="col-sm-4 col-md-2">
+		<div class="col-md-2 col-sm-4">
 		<button class="btn btn--green pull-left" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)">
 		  Run Tests
 		</button>
 	  </div>
-	  <div class="col-md-6 col-sm-0">
+	  <div class="col-md-5 col-sm-0">
 	  </div>
 	  <div class="col-md-3 col-sm-6 search">
 		<div class="input-group">
@@ -13,7 +13,7 @@
 		  <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
 		</div>
 	  </div>
-	  <div class="col-md-1 col-sm-2">
+	  <div class="col-md-2 col-sm-2">
 		 	<!-- /.dropdown -->
 			<div class="dropdown dropdown-toggle pull-right"  ng-show="auth.isAuthenticated" data-toggle="dropdown" href="#">
 				Filter
@@ -62,12 +62,10 @@
 			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test)">
 			  <div class="col-xs-2 test__status">
 					<span ng-show="test.correct">
-					  <i class="fa fa-check-circle status--symbol"
-						 	 style="color:green"></i>
+					  <i class="fa fa-check-circle green status--symbol"></i>
 					</span>
 					<span ng-show="!test.correct && test.correct != null">
-					  <i  class="fa fa-times-circle status--symbol"
-						 		style="color:red"></i>
+					  <i  class="fa fa-times-circle red status--symbol"></i>
 					</span>
 			  </div>
 			  <div class="col-xs-4 test__title">
