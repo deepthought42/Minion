@@ -46,21 +46,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           encrypted: true
         });
 
-        console.log($scope.extractHostname($scope.discovery_url))
+        console.log("host name :: "+$scope.extractHostname($scope.discovery_url));
+
         var channel = pusher.subscribe($scope.extractHostname($scope.discovery_url));
         channel.bind('test-discovered', function(data) {
           console.log("discovery url :: " + $scope.extractHostname($scope.discovery_url));
           console.log("discovery data :: " + data);
-          $scope.paths.push(JSON.parse(data));
+          $scope.tests.push(JSON.parse(data));
           $scope.$apply();
         });
-
-        /*var channel = $scope.pusher.subscribe($scope.discovery_url);
-        channel.bind('test-discovered', function(data) {
-          alert(data.message);
-          $scope.paths.push(JSON.parse(message.data));
-        });
-        */
       }
       else{
         $state.go("main.domains")
@@ -91,36 +85,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
        $scope.selectedTab.dataTab = currentTabIndex;
      };
 
-    $rootScope.$on("openPathStream", function(){
-      /**We use an event source for sse over websockets because websockets are overkill for the current usage */
-      $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here", function(message) {
-        console.log("Recieved message from server " + message + " :: " + Object.keys(message));
-        $scope.paths.push(JSON.parse(message.data));
-        $scope.$apply();
-      });
-    });
-
-    $rootScope.$on("closePathStream", function(){
-      console.log("Closing Event Source");
-      $scope.eventSource.close();
-
-    })
-
     $scope.startMappingProcess = function(){
       console.log("Starting mapping process : " + $scope.discovery_url );
       WorkAllocation.query({url:  $scope.discovery_url})
         .$promise.then(function(value){
           $scope.isStarted = true;
         });
-
-
-      /*
-      $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here",function(message) {
-        console.log("Recieved message from server " + message + " :: " + Object.keys(message));
-        $scope.paths.push(JSON.parse(message.data));
-        $scope.$apply();
-      })
-      */
     }
 
     $scope.setCurrentNode = function(node){
