@@ -1,17 +1,17 @@
 <div class="content">
 	<div class="secondary-nav vertical__center__int">
 		<div class="col-md-2 col-sm-4">
-		<button class="btn btn--green pull-left" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)">
-		  Run Tests
-		</button>
+  		<button class="btn btn--green pull-left" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)">
+  		  Run Tests
+  		</button>
 	  </div>
 	  <div class="col-md-5 col-sm-0">
 	  </div>
 	  <div class="col-md-3 col-sm-6 search">
-		<div class="input-group">
-		  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon2">
-		  <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
-		</div>
+  		<div class="input-group">
+  		  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon2">
+  		  <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+  		</div>
 	  </div>
 	  <div class="col-md-2 col-sm-2">
 		 	<!-- /.dropdown -->
@@ -39,16 +39,16 @@
 
 	<div class="test-labels">
 	  <div class="col-sm-2">
-		Status
+		    Status
 	  </div>
 	  <div class="col-sm-4">
-		Test Title
+		    Test Title
 	  </div>
 	  <div class="col-sm-2">
-		Time (ms)&nbsp;<i class="fa fa-sort"></i>
+		    Time (ms)&nbsp;<i class="fa fa-sort"></i>
 	  </div>
 	  <div class="col-sm-2">
-		Date Last Run&nbsp;<i class="fa fa-sort"></i>
+		    Date Last Run&nbsp;<i class="fa fa-sort"></i>
 	  </div>
 	  <div class="col-sm-2">
 	  </div>
@@ -56,9 +56,11 @@
 
 	<div class="test-container">
 		<div class="empty__state vertical__center" ng-show="tests.length==0">
-			<h3>Start a &#34;<a href="#/discovery">Discovery</a>&#34; to let Qanairy map your tests.</h3>
+			<h3>
+        Start a &#34;<a href="#/discovery">Discovery</a>&#34; to let Qanairy map your tests.
+      </h3>
 		</div>
-		<div class="test" ng-repeat="test in tests | filter:searchText" ng-show="tests.length>0">
+		<div class="test" ng-repeat="test in tests | filter:searchText" ng-show="tests.length > 0">
 			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test)">
 			  <div class="col-xs-2 test__status">
 					<span ng-show="test.correct">
@@ -114,7 +116,8 @@
 					</div>
 					<div class="path-node-container" ng-click="setCurrentNode(test.result)">
 					  <div  ng-show="test.result.screenshot" class="path-node">
-						  <img src="{{test.result.screenshot}}" class="path-node-image"
+						  <img src="{{test.result.screenshot}}"
+                   class="path-node-image"
 							 		 uib-tooltip="{{test.result.url}}"/>
 					  </div>
 					</div>
@@ -122,7 +125,10 @@
 				<div class="test__groups">
 					<div>
 						<label>Groups: </label></div>
-						<div ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
+						<div ng-repeat="group in test.groups"
+                 data-toggle="tooltip"
+                 data-placement="top"
+                 title="{{group.description}}">
 						  {{group.name}}
 							<span ng-click="removeGroup(test.key, group)">
 								<i class="fa fa-times"></i>
@@ -151,24 +157,24 @@
 										  <div class="col-sm-11 data__value">
 											 {{current_node.landable}}
 										  </div>
-										 </div>
-										  <div class="key--value row">
+									  </div>
+									  <div class="key--value row">
 										  <div class="col-sm-1 data__key">
 											 URL:&nbsp;&nbsp;
 										  </div>
 										  <div class="col-sm-11 data__value">
 											 {{current_node.url}}
 										  </div>
-										 </div>
-										  <div class="key--value row">
+									  </div>
+									  <div class="key--value row">
 										  <div class="col-sm-1 data__key">
 											 Visible Element Counts:&nbsp;&nbsp;
 										  </div>
 										  <div class="col-sm-11 data__value">
 											 {{current_node.elementCounts || "coming soon"}}
 										  </div>
-										 </div>
-										  <div class="key--value row">
+									  </div>
+									  <div class="key--value row">
 										  <div class="col-sm-1 data__key">
 											 Total Weight:&nbsp;&nbsp;
 										  </div>
@@ -195,71 +201,71 @@
 									  </div>
 								 </div>
 								 <div class="key--value row">
-								  <div class="col-sm-1 data__key no-padding">
-									 Xpath:&nbsp;&nbsp;
-								  </div>
-								  <div class="col-sm-11 data__value no-padding">
-									 {{current_node.xpath}}
-								  </div>
+	                  <div class="col-sm-1 data__key no-padding">
+      								 Xpath:&nbsp;&nbsp;
+    							  </div>
+      							<div class="col-sm-11 data__value no-padding">
+      								 {{current_node.xpath}}
+      					    </div>
 								 </div>
 								 <div class="key--value row">
-								  <div class="col-sm-1 data__key no-padding">
-									 CSS:&nbsp;&nbsp;
-								  </div>
-								 <div class="col-sm-11 data__value" ng-repeat="(key, value) in current_node.cssProperties">
-										{{key}} -           {{value}}
-								  </div>
-								 </div>
-								 <div class="key--value row">
-								  <div class="col-sm-1 data__key no-padding">
-									 Attributes:&nbsp;&nbsp;
-								  </div>
+								   <div class="col-sm-1 data__key no-padding">
+                     CSS:&nbsp;&nbsp;
+                   </div>
+								   <div class="col-sm-11 data__value" ng-repeat="(key, value) in current_node.cssProperties">
+										 {{key}} -           {{value}}
+			             </div>
+							   </div>
+  							 <div class="key--value row">
+  							   <div class="col-sm-1 data__key no-padding">
+  								   Attributes:&nbsp;&nbsp;
+  							   </div>
 
-								  <div class="col-sm-11 data__value" ng-repeat="(key, value) in current_node.attributes">
-										{{key}} -           {{value}}
-								  </div>
-								 </div>
-								 <div class="key--value row">
-									  <div class="col-sm-1 data__key no-padding">
-										 Text:&nbsp;&nbsp;
-									  </div>
+      						 <div class="col-sm-11 data__value" ng-repeat="(key, value) in current_node.attributes">
+      						 	 {{key}} -           {{value}}
+      						 </div>
+  							 </div>
+  							 <div class="key--value row">
+  								  <div class="col-sm-1 data__key no-padding">
+  			                  Text:&nbsp;&nbsp;
+  								  </div>
 
-									  <div class="col-sm-11 data__value no-padding">
-										 {{current_node.text}}
-									  </div>
-								 </div>
+  								  <div class="col-sm-11 data__value no-padding">
+                      {{current_node.text}}
+  								  </div>
+  							 </div>
+  						</div>
+  					</div>
+						<div class="" ng-show="current_node.type=='Action'">
+							<div class="row node__title">
+								<h4>Action</h4>
+							</div>
+							<div class="key--value row">
+							  <div class="col-sm-1 data__key">
+								  Name:&nbsp;&nbsp;
+							  </div>
+							  <div class="col-sm-11 data__value">
+								  {{current_node.name}}
+							  </div>
+							</div>
+							<div class="key--value row">
+							  <div class="col-sm-1 data__key">
+									Value:&nbsp;&nbsp;
+							  </div>
+							  <div class="col-sm-11 data__value">
+								  {{current_node.val}}
+							  </div>
 							</div>
 						</div>
-						<div class="" ng-show="current_node.type=='Action'">
-								<div class="row node__title">
-									<h4>Action</h4>
-								</div>
-								<div class="key--value row">
-								  <div class="col-sm-1 data__key">
-									 Name:&nbsp;&nbsp;
-								  </div>
-								  <div class="col-sm-11 data__value">
-									 {{current_node.name}}
-								  </div>
-								</div>
-								<div class="key--value row">
-								  <div class="col-sm-1 data__key">
-										Value:&nbsp;&nbsp;
-								  </div>
-								  <div class="col-sm-11 data__value">
-									 {{current_node.val}}
-								  </div>
-								</div>
-						</div>
-					  </div>
-				  </md-tab>
-				  <md-tab label="History" class="info__title h5">
-					  <div class="test__history">
-						Put test run history
-					  </div>
-				  </md-tab>
-				</md-tabs>
-		  </div>
+				  </div>
+			  </md-tab>
+  		  <md-tab label="History" class="info__title h5">
+  			  <div class="test__history">
+		        Put test run history
+  			  </div>
+  		  </md-tab>
+  		</md-tabs>
+    </div>
 		</div>
 	  </div>
 	</div>

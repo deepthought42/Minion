@@ -46,12 +46,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           encrypted: true
         });
 
-        console.log("host name :: "+$scope.extractHostname($scope.discovery_url));
-
         var channel = pusher.subscribe($scope.extractHostname($scope.discovery_url));
         channel.bind('test-discovered', function(data) {
-          console.log("discovery url :: " + $scope.extractHostname($scope.discovery_url));
-          console.log("discovery data :: " + data);
           $scope.tests.push(JSON.parse(data));
           $scope.$apply();
         });
@@ -86,7 +82,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
      };
 
     $scope.startMappingProcess = function(){
-      console.log("Starting mapping process : " + $scope.discovery_url );
       WorkAllocation.query({url:  $scope.discovery_url})
         .$promise.then(function(value){
           $scope.isStarted = true;
@@ -106,11 +101,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       setCurrentNode(node);
     }
 
-
     $scope.toggleTestDataVisibility = function(test, node){
       $scope.selectedTab.dataTab = 0;
 
-      test.visible = !test.visible || true;
+      test.visible = !test.visible;
     }
 
     $scope.stopMappingProcess = function(){
