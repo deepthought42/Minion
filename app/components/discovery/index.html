@@ -86,7 +86,7 @@
 							 uib-tooltip="{{node.url}}"/>
 					  </div>
 					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center">
-						 	<i class="fa fa-square fa-2x icon" uib-tooltip="node.xpath" ></i>
+							<span class="" uib-tooltip="node.xpath" >{{node.name}}</span>
 			  		</div>
 					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center">
 						  <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
