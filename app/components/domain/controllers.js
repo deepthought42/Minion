@@ -53,7 +53,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           scope: $scope,
           preserveScope: true,
           template: '<md-dialog class="col-sm-4" style="">' +
-                      '<div class="col-sm-12 domain-dialogue-close" ng-click="closeCreateDomainDialog()">' +
+                      '<div class="col-sm-12 domain-dialogue-close" ng-click="closeDialog()">' +
                       '  <md-dialog-content>' +
                       '     <h3 style="text-align:right;"><i class="fa fa-times"></i></h3>' +
                       '  </md-dialog-content>' +
