@@ -46,11 +46,14 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.runTest = function(test, correctness){
-      Tester.runTest({key: test.key})
+      test.running = true;
+      Tester.runTest({key: test.key, browser_type: "phantomjs"})
         .then(function(data){
+          test.running = false;
           console.log("Tester ran successfully :: "+data);
         })
         .catch(function(err){
+          test.running = false;
           console.log("Tester failed to run successfully");
         });
     }
@@ -72,7 +75,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         $scope.group
       });
     }
-    
+
     $scope.toggleTestDataVisibility = function(test){
       test.visible = !test.visible;
     }
