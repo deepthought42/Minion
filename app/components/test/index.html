@@ -101,12 +101,14 @@
 			<div ng-show="test.visible">
 			  <div class="test__path vertical__center__int" >
 				  <div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
-				    <div ng-show="node.screenshot" class="path-node path-page">
-						  <img src="{{node.screenshot}}" class="path-node-image"
-							 uib-tooltip="{{node.url}}"/>
+				    <div ng-show="node.screenshot" class="path-node path-page"
+                 uib-tooltip="{{node.url}}">
+						  <img src="{{node.screenshot}}" class="path-node-image"/>
 					  </div>
 					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center">
-						 	<span class="" uib-tooltip="node.xpath" >{{node.name}}</span>
+						 	<span class="" uib-tooltip="node.xpath" >
+                {{node.name}}
+              </span>
 			  		</div>
 					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center">
 						  <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>

@@ -22,6 +22,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.visible = false;
       $scope.selectedTab = {};
       $scope.selectedTab.dataTab = 0;
+      $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
       $scope.group.description = ""
@@ -116,11 +117,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
 
     $scope.addGroup = function(test, group){
-      Tester.addGroup({name: group.name, description: group.description, key: test.key})
+      Tester.addGroup({name: group.name,
+                       description: group.description,
+                       key: test.key}).$promise.
+                then(function(data){
+                   $scope.groups.push(group);
+                 })
     }
 
     $scope.removeGroup = function(key, group){
-      Tester.removeGroup({key: key, name: group.name});
+      Tester.removeGroup({key: key, name: group.name}).$promise.then(function(data){
+        $scope.group
+      });
     }
 
     /**
