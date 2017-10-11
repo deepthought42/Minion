@@ -47,7 +47,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
     $scope.runTest = function(test, correctness){
       test.running = true;
-      Tester.runTest({key: test.key, browser_type: "phantomjs"})
+      Tester.runTest({key: test.key, browser_type: "phantomjs"}).$promise
         .then(function(data){
           test.running = false;
           console.log("Tester ran successfully :: "+data);
@@ -65,14 +65,15 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     $scope.addGroup = function(test, group){
       console.log("Adding group "+group+" to test ");
 
-      Tester.addGroup({name: group.name, description: group.description, key: test.key}).$promise.then(function(data){
-        $scope.groups.push(group);
-      });
+      Tester.addGroup({name: group.name, description: group.description, key: test.key}).$promise
+        .then(function(data){
+          test.groups.push(data);
+        });
     }
 
-    $scope.removeGroup = function(key, group){
-      Tester.removeGroup({key: key, name: group.name}).$promise.then(function(data){
-        $scope.group
+    $scope.removeGroup = function(test, group, $index){
+      Tester.removeGroup({group_key: group.key, test_key: test.key}).$promise.then(function(data){
+        test.groups.splice($index,1);
       });
     }
 
