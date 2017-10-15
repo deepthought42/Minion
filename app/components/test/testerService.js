@@ -7,7 +7,7 @@ testerService.factory('Tester', ['$resource', 'Qanairy.serviceConfig', function 
     update: { method: 'PUT'},
     findByName: {url : config.basePath + '/tests/name', method: 'GET', isArray: true},
     updateCorrectness: {url : config.basePath + '/tests/updateCorrectness/:key', method: 'PUT', params: {key: '@key', correct: '@correct'}},
-    runTest: {url : config.basePath + '/tests/runTest/:key', method: 'POST', params: {key: '@key'}},
+    runTest: {url : config.basePath + '/tests/runTest/:key', method: 'POST', params: {browser_type: '@browser_type'}},
     addGroup: {url : config.basePath + '/tests/addGroup', method: 'POST', params: {key: '@key', description: '@description', name: '@name'}},
     removeGroup: {url : config.basePath + '/tests/remove/group', method: 'POST', params: {group_key: '@group_key', test_key: '@test_key'}},
     getGroups: {url: config.basePath + '/tests/groups', method: 'GET', isArray: true, params: {url: '@url'}},
