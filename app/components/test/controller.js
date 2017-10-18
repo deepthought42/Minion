@@ -41,8 +41,11 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     };
 
     $scope.updateTestCorrectness = function(test, correctness){
-      $scope.test = Tester.updateCorrectness({key: test.key, correct: correctness});
-      return $scope.test.correct;
+      console.log("test key " + test.key);
+      Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
+        .then(function(data){
+          test.correct = data.correct;
+        });
     }
 
     $scope.runTest = function(test, correctness){
@@ -84,6 +87,15 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     $scope.setCurrentNode = function(node){
       $scope.current_node = node;
       console.log("Change current node");
+    }
+
+    $scope.getDate = function(test){
+      if(test.lastRunTime == null){
+        return null;
+      }
+      else{
+        return new Date(test.lastRunTime).toLocaleString();
+      }
     }
 
     $scope.isCurrentNodePage = function(){
