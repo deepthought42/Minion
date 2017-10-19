@@ -37,7 +37,6 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
     });
 
     authProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
-      console.log("success token stuff : "+idToken);
       store.set('token', idToken);
 
         profilePromise.then(function(profile) {
@@ -51,9 +50,6 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
             //create account with user data
             //do something with it
           }
-          // sessionStorage.set('token', idToken);
-          console.log("profile token keys :: "+Object.keys(profile));
-          console.log("app_metadata :: "+Object.keys(profile.app_metadata));
         });
       });
 
@@ -156,11 +152,9 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
     });
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
-      console.log("state changed");
      //var requireLogin = toState.data.requireLogin || false;
      if (!auth.isAuthenticated) {
        // get me a login modal!
-       console.log("going back to signin")
        auth.signin({
          authParams: {
            scope: 'openid profile email' // This is if you want the full JWT

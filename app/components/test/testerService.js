@@ -12,6 +12,7 @@ testerService.factory('Tester', ['$resource', 'Qanairy.serviceConfig', function 
     removeGroup: {url : config.basePath + '/tests/remove/group', method: 'POST', params: {group_key: '@group_key', test_key: '@test_key'}},
     getGroups: {url: config.basePath + '/tests/groups', method: 'GET', isArray: true, params: {url: '@url'}},
     runTestsByGroup: {url: config.basePath + '/tests/runTestGroup/:group', method: 'POST', params: { group: '@group', url: '@url'}},
+    runTests: {url: config.basePath + '/tests/runAll', method: 'POST', isArray: true, params: {test_keys: '@test_keys'}},
     getUnverified: {url: config.basePath + '/tests/unverified', method: 'GET', isArray: true, params: {url : '@url'}}
   });
 }]);

@@ -41,7 +41,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     };
 
     $scope.updateTestCorrectness = function(test, correctness){
-      console.log("test key " + test.key);
       Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
         .then(function(data){
           test.correct = data.correct;
@@ -53,6 +52,27 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       Tester.runTest({key: test.key, browser_type: "phantomjs"}).$promise
         .then(function(data){
           test.running = false;
+          test.correct = data.passes;
+          console.log("Tester ran successfully :: "+data);
+        })
+        .catch(function(err){
+          test.running = false;
+          console.log("Tester failed to run successfully");
+        });
+    }
+
+    $scope.runTests = function(tests){
+      console.log("running "+tests.length + " tests");
+      //get keys for tests and put
+      var keys = [];
+      tests.forEach(function(test){
+        keys.push(test.key);
+      });
+      console.log(keys.length + " keys prepared to send");
+      Tester.runTests({test_keys: keys, browser_type: "phantomjs"}).$promise
+        .then(function(data){
+          test.running = false;
+          test.correct = data.passes;
           console.log("Tester ran successfully :: "+data);
         })
         .catch(function(err){
@@ -66,8 +86,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.addGroup = function(test, group){
-      console.log("Adding group "+group+" to test ");
-
       Tester.addGroup({name: group.name, description: group.description, key: test.key}).$promise
         .then(function(data){
           test.groups.push(data);
@@ -86,7 +104,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
     $scope.setCurrentNode = function(node){
       $scope.current_node = node;
-      console.log("Change current node");
     }
 
     $scope.getDate = function(test){
@@ -99,7 +116,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.isCurrentNodePage = function(){
-      console.log("current node being checked : "+ ($scope.current_node.type=='Page'));
       return $scope.current_node=='Page';
     }
 

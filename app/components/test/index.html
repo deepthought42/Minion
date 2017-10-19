@@ -1,7 +1,7 @@
 <div class="content">
 	<div class="secondary-nav vertical__center__int">
 		<div class="col-md-2 col-sm-4">
-  		<button class="btn btn--green pull-left" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)">
+  		<button class="btn btn--green pull-left" ng-click="runTests()">
   		  Run Tests
   		</button>
 	  </div>
@@ -60,7 +60,7 @@
         Start a &#34;<a href="#/discovery">Discovery</a>&#34; to let Qanairy map your tests.
       </h3>
 		</div>
-		<div class="test" ng-repeat="test in tests | orderBy:['correct', 'lastRunTime'] | filter:searchText" ng-show="tests.length > 0">
+		<div class="test" ng-repeat="test in (filteredTests = tests | filter:searchText)  | orderBy:['correct', 'lastRunTime']" ng-show="tests.length > 0">
 			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test)">
         <div class="col-xs-2 test__status" ng-show="test.running">
           <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>

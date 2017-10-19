@@ -40,7 +40,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         $scope.tests = Tester.getUnverified({url: $scope.discovery_url});
 
         // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+        //Pusher.logToConsole = true;
 
         var pusher = new Pusher('77fec1184d841b55919e', {
           cluster: 'us2',
