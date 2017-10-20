@@ -115,7 +115,22 @@
               </span>
 			  		</div>
 					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center">
-						  <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
+							<span ng-show="node.name=='click'">
+						  	<i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
+							</span>
+							<span ng-show="node.name=='doubleClick'">
+								<i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name" ></i>
+								<div class=”doubleclick” >x2</div>
+							</span>
+							<span ng-show="node.name=='mouseover'">
+								<i class="fa fa-hand-pointer-o fa-2x icon" uib-tooltip="node.name"></i>
+							</span>
+							<span ng-show="node.name=='scroll'">
+								<i class="fa fa-arrows-v fa-2x icon" uib-tooltip="node.name"></i>
+							</span>
+							<span ng-show="node.name=='sendKeys'">
+								<i class="fa fa-i-cursor fa-2x icon" uib-tooltip="node.name"></i>
+							</span>
 					  </div>
 					  <div class="path-bar">
 					  </div>

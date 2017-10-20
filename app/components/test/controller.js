@@ -23,7 +23,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.group = {name: "", description: "" };
       $scope.node_key = "";
       $scope.current_node = null;
-
+      $scope.filteredTests = [];
       $scope.getTestsByUrl(store.get('domain').url);
     }
 
@@ -61,22 +61,19 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         });
     }
 
-    $scope.runTests = function(tests){
-      console.log("running "+tests.length + " tests");
+    $scope.runTests = function(){
       //get keys for tests and put
       var keys = [];
-      tests.forEach(function(test){
+      $scope.filteredTests.forEach(function(test){
         keys.push(test.key);
       });
-      console.log(keys.length + " keys prepared to send");
+
       Tester.runTests({test_keys: keys, browser_type: "phantomjs"}).$promise
         .then(function(data){
-          test.running = false;
-          test.correct = data.passes;
+
           console.log("Tester ran successfully :: "+data);
         })
         .catch(function(err){
-          test.running = false;
           console.log("Tester failed to run successfully");
         });
     }
