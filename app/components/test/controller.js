@@ -70,8 +70,18 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
       Tester.runTests({test_keys: keys, browser_type: "phantomjs"}).$promise
         .then(function(data){
+          var keys = Object.keys(data);
+          keys.forEach(function(key){
+            var val = data[key];
+            //iterate over tests and set correctness based on if test key is present in data
 
-          console.log("Tester ran successfully :: "+data);
+            $scope.filteredTests.forEach(function(test){
+              if(data[test.key]){
+                test.correct = data[test.key];
+                console.log('val '+val);
+              }
+            })
+          })
         })
         .catch(function(err){
           console.log("Tester failed to run successfully");
