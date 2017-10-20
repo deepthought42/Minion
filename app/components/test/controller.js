@@ -19,61 +19,62 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $('[data-toggle="tooltip"]').tooltip()
 
       $scope.tester = {};
+      $scope.groups = [];
       $scope.group = {name: "", description: "" };
       $scope.node_key = "";
       $scope.current_node = null;
-      $scope.visible = false;
-
-
-      if(store.get('approved_test_cnt')){
-        delete store.approved_test_cnt;
-      }
-
-      if(store.get('domain') != null){
-        $scope.getTestsByUrl(store.get('domain').url);
-      }
-      else {
-        $state.go('main.domains');
-      }
-    };
-
-    $scope.showNameInputField = function(test, showInput) {
-      test.show_test_name_edit_field = showInput;
-    };
+      $scope.filteredTests = [];
+      $scope.getTestsByUrl(store.get('domain').url);
+    }
 
     $scope.setCurrentNodeKey = function(key){
       $scope.node_key=key;
-    };
+    }
 
     $scope.getTestsByUrl = function(url) {
       $scope.tests = Tester.query({url: url});
+      $scope.groups = Tester.getGroups({url: url});
     };
 
     $scope.getTestByName = function(name) {
-      $scope.tests = Tester.query({name: name}).$promise.then(function(){
-      });
-
+      $scope.tests = Tester.query({name: name});
     };
 
     $scope.updateTestCorrectness = function(test, correctness){
-      $scope.test = Tester.updateCorrectness({key: test.key, correct: correctness});
-    }
-
-    $scope.updateTestName = function(test){
-      test.show_test_name_edit_field=false;
-
-      Tester.updateName({key: test.key, name: test.name}).$promise.then(function(data){
-        test.show_test_name_edit_field=false;
-      });
-    }
-
-    $scope.runTest = function(test){
-      Tester.runTest({key: test.key, browser_type:'phantomjs'}).$promise
+      Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
         .then(function(data){
-          console.log("Test ran successfully :: "+data);
+          test.correct = data.correct;
+        });
+    }
+
+    $scope.runTest = function(test, correctness){
+      test.running = true;
+      Tester.runTest({key: test.key, browser_type: "phantomjs"}).$promise
+        .then(function(data){
+          test.running = false;
+          test.correct = data.passes;
+          console.log("Tester ran successfully :: "+data);
         })
         .catch(function(err){
-          console.log("Test failed to run successfully");
+          test.running = false;
+          console.log("Tester failed to run successfully");
+        });
+    }
+
+    $scope.runTests = function(){
+      //get keys for tests and put
+      var keys = [];
+      $scope.filteredTests.forEach(function(test){
+        keys.push(test.key);
+      });
+
+      Tester.runTests({test_keys: keys, browser_type: "phantomjs"}).$promise
+        .then(function(data){
+
+          console.log("Tester ran successfully :: "+data);
+        })
+        .catch(function(err){
+          console.log("Tester failed to run successfully");
         });
     }
 
@@ -82,41 +83,39 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.addGroup = function(test, group){
-      console.log("Adding group "+group+" to test ");
-
-      Tester.addGroup({name: group.name, description: group.description, key: test.key})
+      Tester.addGroup({name: group.name, description: group.description, key: test.key}).$promise
+        .then(function(data){
+          test.groups.push(data);
+        });
     }
 
-    $scope.removeGroup = function(key, group){
-      Tester.removeGroup({key: key, name: group.name});
+    $scope.removeGroup = function(test, group, $index){
+      Tester.removeGroup({group_key: group.key, test_key: test.key}).$promise.then(function(data){
+        test.groups.splice($index,1);
+      });
+    }
+
+    $scope.toggleTestDataVisibility = function(test){
+      test.visible = !test.visible;
     }
 
     $scope.setCurrentNode = function(node){
       $scope.current_node = node;
     }
 
-    $scope.setTestName = function(key, name){
-      Tester.updateName({key: key, name: name});
-    }
-
-    $scope.showTestData = function(test, node){
-      test.visible = true;
-      $scope.current_node = node;
-    }
-
-    $scope.toggleTestDataVisibility = function(test, node){
-      test.visible = !test.visible;
-      $scope.current_node = node;
+    $scope.getDate = function(test){
+      if(test.lastRunTime == null){
+        return null;
+      }
+      else{
+        return new Date(test.lastRunTime).toLocaleString();
+      }
     }
 
     $scope.isCurrentNodePage = function(){
-      console.log("current node being checked : "+ ($scope.current_node.type=='Page'));
       return $scope.current_node=='Page';
     }
 
-    $scope.object_keys = function(obj){
-      return Object.keys(obj);
-    }
     $scope._init();
   }
 ]);

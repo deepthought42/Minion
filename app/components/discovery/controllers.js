@@ -22,6 +22,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.visible = false;
       $scope.selectedTab = {};
       $scope.selectedTab.dataTab = 0;
+      $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
       $scope.group.description = ""
@@ -39,27 +40,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         $scope.tests = Tester.getUnverified({url: $scope.discovery_url});
 
         // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+        //Pusher.logToConsole = true;
 
         var pusher = new Pusher('77fec1184d841b55919e', {
           cluster: 'us2',
           encrypted: true
         });
 
-        console.log($scope.extractHostname($scope.discovery_url))
         var channel = pusher.subscribe($scope.extractHostname($scope.discovery_url));
-        channel.bind('test-discovered ', function(data) {
-          console.log("discovery url :: " + $scope.extractHostname($scope.discovery_url));
-          console.log("discovery data :: " + data);
-          $scope.paths.push(JSON.parse(data));
-        });
-
-        /*var channel = $scope.pusher.subscribe($scope.discovery_url);
         channel.bind('test-discovered', function(data) {
-          alert(data.message);
-          $scope.paths.push(JSON.parse(message.data));
+          $scope.tests.push(JSON.parse(data));
+          $scope.$apply();
         });
-        */
       }
       else{
         $state.go("main.domains")
@@ -90,36 +82,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
        $scope.selectedTab.dataTab = currentTabIndex;
      };
 
-    $rootScope.$on("openPathStream", function(){
-      /**We use an event source for sse over websockets because websockets are overkill for the current usage */
-      $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here", function(message) {
-        console.log("Recieved message from server " + message + " :: " + Object.keys(message));
-        $scope.paths.push(JSON.parse(message.data));
-        $scope.$apply();
-      });
-    });
-
-    $rootScope.$on("closePathStream", function(){
-      console.log("Closing Event Source");
-      $scope.eventSource.close();
-
-    })
-
     $scope.startMappingProcess = function(){
-      console.log("Starting mapping process : " + $scope.discovery_url );
       WorkAllocation.query({url:  $scope.discovery_url})
         .$promise.then(function(value){
           $scope.isStarted = true;
         });
-
-
-      /*
-      $scope.eventSource = PathRealtimeService.connect("/realtime/streamPathExperience", "account_key_here",function(message) {
-        console.log("Recieved message from server " + message + " :: " + Object.keys(message));
-        $scope.paths.push(JSON.parse(message.data));
-        $scope.$apply();
-      })
-      */
     }
 
     $scope.setCurrentNode = function(node){
@@ -135,11 +102,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       setCurrentNode(node);
     }
 
-
     $scope.toggleTestDataVisibility = function(test, node){
       $scope.selectedTab.dataTab = 0;
 
-      test.visible = !test.visible || true;
+      test.visible = !test.visible;
     }
 
     $scope.stopMappingProcess = function(){
@@ -151,11 +117,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
 
     $scope.addGroup = function(test, group){
-      Tester.addGroup({name: group.name, description: group.description, key: test.key})
+      Tester.addGroup({name: group.name,
+                       description: group.description,
+                       key: test.key}).$promise.
+                then(function(data){
+                   $scope.groups.push(group);
+                 })
     }
 
     $scope.removeGroup = function(key, group){
-      Tester.removeGroup({key: key, name: group.name});
+      Tester.removeGroup({key: key, name: group.name}).$promise.then(function(data){
+        $scope.group
+      });
     }
 
     /**
