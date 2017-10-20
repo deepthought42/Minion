@@ -115,6 +115,39 @@ html {
 	  background-color:#f5f5f5;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    :focus {
+    outline: none;
+    }
+
+/*----
+    :focus {
+    outline: 1px solid #fddb4e;
+    }
+    :active {
+      outline:none;
+    }
+----*/
+
+
+    .form-control:focus {
+    outline: 0px;
+    border-color: #fddb4e;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+    }
+    .form-control:active {
+      outline:none;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+
 .no-gutter > [class*='col-'] {
     padding-right:0;
     padding-left:0;
@@ -215,6 +248,8 @@ a img {border: none; }
 		display: inline;
 		color:#999;
 	}
+
+
   h5,
   .h5{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -225,6 +260,18 @@ a img {border: none; }
     text-align: center;
 	}
 
+
+
+/*--------------------------- [Domain Titles] ---------------------------*/
+  h6,
+  .h6{
+		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #2d2d2d !important;
+		font-size: 16px !important;
+		font-weight:400 !important;
+		letter-spacing:.1px;
+    text-align: center;
+	}
 
 /*--------------------------- [3. Buttons] -----------------------------------------------------------------------------*/
 
@@ -327,7 +374,6 @@ a img {border: none; }
   background-color: #cccccc;
 }
 .btn--gray:hover {
-  color: #fff;
   background-color: #cccccc;
 }
 .btn--gray:active,
@@ -439,14 +485,6 @@ a img {border: none; }
     font-size: 18px;
     line-height: 20px;
 	text-align: center;
-}
-* {
-  box-sizing: border-box;
-outline:none !important;
-}
-
-html, body {
-  min-height: 100%;
 }
 
 .main-header {
@@ -583,11 +621,7 @@ width: calc(100% - 80px);
 }
 
 .search { position: relative; }
-.search input { text-indent: 0px; }
-.search .fa-search {
-  font-size: 1em;
-  color: grey;
-}
+input { text-indent: 0px; }
 
 
 
@@ -680,7 +714,7 @@ md-tab {
 	border-right: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 	border-left: 1px solid #e0e0e0;
-    overflow-y:auto;
+    overflow-y:scroll;
 	height: -moz-calc(100% - 90px);
 /* WebKit */
 height: -webkit-calc(100% - 90px);
@@ -706,7 +740,20 @@ height: calc(100% - 90px);
 	text-align: center !important;
 	padding-top: 20px;
 	padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
 	height: 60px;
+}
+
+.test-labels{
+  width: -moz-calc(100% - 15px);
+/* WebKit */
+width: -webkit-calc(100% - 15px);
+/* Opera */
+width: -o-calc(100% - 15px);
+/* Standard */
+width: calc(100% - 15px);
+	 left: 15px;
 }
 
 .empty__state{
@@ -733,6 +780,21 @@ height: calc(100% - 90px);
 
 .test__title{
   text-align: left;
+}
+
+.edithover{
+  text-align: right !important;
+  position:relative;
+  bottom:0px;
+  right:0px;
+}
+
+.test__title .edithover {
+visibility:hidden;
+}
+
+.test__title:hover .edithover {
+visibility:visible;
 }
 
 .test__profile {

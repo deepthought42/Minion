@@ -43,6 +43,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
      */
     $scope.selectDomain = function(domain){
       store.set('domain', domain);
+      console.log("set domain");
       $state.go("main.tests");
     }
 
