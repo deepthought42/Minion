@@ -654,7 +654,7 @@ md-tabs {
   position: relative;
   flex-shrink: 0;
   &:not(.md-no-tab-content):not(.md-dynamic-height) {
-    min-height: 200 + $tabs-header-height;
+    min-height: 300 + $tabs-header-height;
   }
 }
 
@@ -903,13 +903,13 @@ visibility:visible;
 .path-element {
 	height: 60px !important;
 	border: 1px solid #eeeeee;
-	border-radius: 50%;
   padding:8px;
 }
 
 .path-action {
 	height: 60px !important;
 	border: 1px solid #eeeeee;
+  border-radius: 50%;
   padding:8px;
 }
 
@@ -971,7 +971,7 @@ visibility:visible;
 
 
 .test__info{
-	height: 300px;
+	height: 100%;
 }
 
 .node__data{
@@ -979,7 +979,7 @@ visibility:visible;
 }
 
 .node__title{
-  padding-bottom:15px;
+  padding-bottom:5px;
 }
 
 .test__history{
@@ -998,6 +998,7 @@ visibility:visible;
 		font-size: 14px;
 		line-height: 20px;
 		letter-spacing:.2px;
+    padding-top:10px;
 		padding-bottom: 6px !important;
 		color:#333333;
 	text-align: left;
