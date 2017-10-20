@@ -1,7 +1,7 @@
 <div class="content">
 	<div class="secondary-nav vertical__center__int">
 		<div class="col-md-2 col-sm-4">
-  		<button class="btn btn--green pull-left" ng-click="runGroupTests('www.thecodelesscode.com',selectedGroup)">
+  		<button class="btn btn--green pull-left" ng-click="runTests()">
   		  Run Tests
   		</button>
 	  </div>
@@ -60,18 +60,18 @@
         Start a &#34;<a href="#/discovery">Discovery</a>&#34; to let Qanairy map your tests.
       </h3>
 		</div>
-		<div class="test" ng-repeat="test in tests | orderBy:['correct'] | filter:searchText" ng-show="tests.length > 0">
+		<div class="test" ng-repeat="test in (filteredTests = tests | filter:searchText)  | orderBy:['correct', 'lastRunTime']" ng-show="tests.length > 0">
 			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test)">
         <div class="col-xs-2 test__status" ng-show="test.running">
           <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
           <span class="sr-only">Running...</span>
         </div>
-        <div class="col-xs-2 test__status" ng-show="!test.running">
+        <div class="col-xs-2 test__status" ng-show="!test.running" >
 					<span ng-show="test.correct">
-					  <i class="fa fa-check-circle green status--symbol"></i>
+					  <i class="fa fa-check-circle green status--symbol" ng-click="updateTestCorrectness(test, false)"></i>
 					</span>
 					<span ng-show="!test.correct && test.correct != null">
-					  <i  class="fa fa-times-circle red status--symbol"></i>
+					  <i  class="fa fa-times-circle red status--symbol" ng-click="updateTestCorrectness(test, true)"></i>
 					</span>
 			  </div>
 			  <div class="col-xs-4 test__title">
@@ -87,7 +87,7 @@
 					{{test.runtime || "0 ms"}}
 			  </div>
 			  <div class="col-xs-2">
-					&nbsp;
+					{{ getDate(test) || "Unknown / Not since discovery"}}
 			  </div>
 			  <div class="col-xs-2 test__btns">
 					<div class="btn-group" role="group" aria-label="Run Favorite More">
@@ -115,7 +115,22 @@
               </span>
 			  		</div>
 					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center">
-						  <i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
+							<span ng-show="node.name=='click'">
+						  	<i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
+							</span>
+							<span ng-show="node.name=='doubleClick'">
+								<i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name" ></i>
+								<div class=”doubleclick” >x2</div>
+							</span>
+							<span ng-show="node.name=='mouseover'">
+								<i class="fa fa-hand-pointer-o fa-2x icon" uib-tooltip="node.name"></i>
+							</span>
+							<span ng-show="node.name=='scroll'">
+								<i class="fa fa-arrows-v fa-2x icon" uib-tooltip="node.name"></i>
+							</span>
+							<span ng-show="node.name=='sendKeys'">
+								<i class="fa fa-i-cursor fa-2x icon" uib-tooltip="node.name"></i>
+							</span>
 					  </div>
 					  <div class="path-bar">
 					  </div>
@@ -267,7 +282,9 @@
 			  </md-tab>
   		  <md-tab label="History" class="info__title h5">
   			  <div class="test__history">
-		        Put test run history
+		      	<div ng-repeat="record in test.records">
+							{{record}}
+						</div>
   			  </div>
   		  </md-tab>
   		</md-tabs>

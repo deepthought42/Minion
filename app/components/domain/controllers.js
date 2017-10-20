@@ -43,7 +43,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
      */
     $scope.selectDomain = function(domain){
       store.set('domain', domain);
-      console.log("set domain");
       $state.go("main.tests");
     }
 
@@ -94,7 +93,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     this._init();
 
     $scope.$on('domainRequiredError', function(){
-      console.log("domain error "+$scope.domain_error);
       $scope.domain_error = "A domain must be selected first";
       //$scope.$apply();
     })
