@@ -60,7 +60,16 @@
 			  </div>
 
 			  <div class="col-xs-4 test__title" ng-click="toggleTestDataVisibility(test, test.path.path[0])">
-					{{test.name || "Test # (Add funtionality)"}}
+					<div class="row">
+						<div class="col-xs-12" ng-click="test.show_test_name_edit_field=true" ng-show="!test.show_test_name_edit_field">
+							<h2>{{test.name || "Test #  (Add funtionality)"}}</h2>
+							<i class="fa fa-pencil edithover"></i>
+						</div>
+						<div ng-show="test.show_test_name_edit_field">
+							<input type="text" ng-model="new_name" ng-value="test.name" />
+							<i class="fa fa-plus" ng-click="setTestName(test, new_name)"></i>
+						</div>
+					</div>
 			  </div>
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, test.path.path[0])">
 					{{test.runtime || "0ms"}}
@@ -127,112 +136,111 @@
 
 			  <div class="test__info" ng-show="test.visible">
 
-<!-- not working bootstrap tabs - need help
+<!-- not working bootstrap tabs - need help -->
 
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
-						<li class="nav-item">
-							<a class="nav-link active" id="node-data-tab" data-toggle="tab" href="#nodedata" role="tab" aria-controls="nodedata" aria-expanded="true">Node Data</a>
+						<li class="nav-item"  ng-click="visible_tab_name='nodedata'">
+							<a	 class="nav-link active" id="node-data-tab" data-toggle="tab" role="tab"  aria-controls="nodedata" aria-expanded="true">Node Data</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history">History</a>
+						<li class="nav-item" ng-click="visible_tab_name='history'">
+							<a class="nav-link" id="history-tab" data-toggle="tab" role="tab" aria-controls="history" >History</a>
 						</li>
 					</ul>
-					<div class="tab-content" id="myTabContent">
-						<div class="tab-pane fade show active" id="nodedata" role="tabpanel" aria-labelledby="node-data-tab">
-							<div class="node__data">
-								<div class="" ng-show="current_node.type=='Page'">
+					<div class="tab-content" >
+						<div class="tab-pane active node__data" id="nodedata" role="tabpanel" aria-labelledby="node-data-tab" ng-show="visible_tab_name=='nodedata'">
+							<div class="" ng-show="current_node.type=='Page'">
 
-									<div class="col-sm-4 col-xs-12 page-container">
-										<img type="button" class="path-node-image" data-toggle="modal" data-target="#exampleModal" src="{{current_node.screenshot}}" class="path-node-image" />
+								<div class="col-sm-4 col-xs-12 page-container">
+									<img type="button" class="path-node-image" data-toggle="modal" data-target="#exampleModal" src="{{current_node.screenshot}}" class="path-node-image" />
+								</div>
+
+								<div class="col-sm-8 col-xs-12">
+									<div class="key--value row">
+										<div class="col-xs-3 data__key">
+										 Landable:&nbsp;&nbsp;
+										</div>
+										<div class="col-xs-9 data__value">
+										 {{current_node.landable}}
+										</div>
 									</div>
-
-									<div class="col-sm-8 col-xs-12">
-										<div class="key--value row">
-											<div class="col-xs-3 data__key">
-											 Landable:&nbsp;&nbsp;
-											</div>
-											<div class="col-xs-9 data__value">
-											 {{current_node.landable}}
+									<div class="key--value row">
+										<div class="col-xs-3 data__key">
+											URL:&nbsp;&nbsp;
+										</div>
+										<div class="col-xs-9 data__value">
+											{{current_node.url}}
+										</div>
+									</div>
+									<div class="key--value row">
+										<div class="col-sm-3 data__key">
+										 Visible Element Counts:&nbsp;&nbsp;
+										</div>
+										<div class="col-sm-9 data__value">
+											<div class="col-sm-12" ng-repeat="(key, value) in current_node.elementCounts">
+												{{key}} - {{value}}
 											</div>
 										</div>
-										<div class="key--value row">
-											<div class="col-xs-3 data__key">
-												URL:&nbsp;&nbsp;
-											</div>
-											<div class="col-xs-9 data__value">
-												{{current_node.url}}
-											</div>
+									</div>
+									<div class="key--value row">
+										<div class="col-sm-3 data__key">
+										 Total Weight:&nbsp;&nbsp;
 										</div>
-										<div class="key--value row">
-											<div class="col-sm-3 data__key">
-											 Visible Element Counts:&nbsp;&nbsp;
-											</div>
-											<div class="col-sm-9 data__value">
-												<div class="col-sm-12" ng-repeat="(key, value) in current_node.elementCounts">
-													{{key}} - {{value}}
-												</div>
-											</div>
-										</div>
-										<div class="key--value row">
-											<div class="col-sm-3 data__key">
-											 Total Weight:&nbsp;&nbsp;
-											</div>
-											<div class="col-sm-9 data__value">
-											 {{current_node.totalWeight}}
-											</div>
+										<div class="col-sm-9 data__value">
+										 {{current_node.totalWeight}}
 										</div>
 									</div>
 								</div>
-								<div class="" ng-show="current_node.type=='PageElement'">
-									<div class="pull-right col-sm-4" ng-show="current_node.screenshot" >
-										<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
+							</div>
+							<div class="" ng-show="current_node.type=='PageElement'">
+								<div class="pull-right col-sm-4" ng-show="current_node.screenshot" >
+									<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
+								</div>
+								<div class="col-sm-8">
+									<div class="row node__title">
+										<h4>Element</h4>
 									</div>
-									<div class="col-sm-8">
-										<div class="row node__title">
-											<h4>Element</h4>
-										</div>
-									 <div class="key--value row">
+								 	<div class="key--value row">
 										<div class="col-sm-3 data__key no-padding">
-										 Tag type:&nbsp;&nbsp;
+										  Tag type:&nbsp;&nbsp;
 										</div>
 										<div class="col-sm-9 data__value no-padding" style="text-transform:capitalize !important;">
-										 {{current_node.name}}
+										  {{current_node.name}}
 										</div>
-									 </div>
-									 <div class="key--value row">
+								 	</div>
+									<div class="key--value row">
 										<div class="col-sm-3 data__key no-padding">
-										 Xpath:&nbsp;&nbsp;
+										  Xpath:&nbsp;&nbsp;
 										</div>
 										<div class="col-sm-9 data__value no-padding">
-										 {{current_node.xpath}}
+										  {{current_node.xpath}}
 										</div>
-									 </div>
-									 <div class="key--value row">
+								  </div>
+								 	<div class="key--value row">
 										<div class="col-sm-3 data__key">
-										 CSS:&nbsp;&nbsp;
+									  	CSS:&nbsp;&nbsp;
 										</div>
 										<div class="col-sm-9 data__value" ng-repeat="(key, value) in current_node.cssProperties">
 											{{key}} -           {{value}}
 										</div>
-									 </div>
-									 <div class="key--value row">
+								 	</div>
+								 	<div class="key--value row">
 										<div class="col-sm-3 data__key">
-										 Attributes:&nbsp;&nbsp;
+									 		Attributes:&nbsp;&nbsp;
 										</div>
 
 										<div class="col-sm-9 data__value" ng-repeat="(key, value) in current_node.attributes">
 											{{key}} -           {{value}}
 										</div>
-									 </div>
-									 <div class="key--value row">
+								 	</div>
+								 	<div class="key--value row">
 										<div class="col-sm-3 data__key">
-										 Text:&nbsp;&nbsp;
+									 		Text:&nbsp;&nbsp;
 										</div>
 
 										<div class="col-sm-9 data__value">
-										 {{current_node.text}}
+									 		{{current_node.text}}
 										</div>
-									 </div>
+								 	</div>
 								</div>
 							</div>
 							<div class="" ng-show="current_node.type=='Action'">
@@ -256,16 +264,17 @@
 										</div>
 									</div>
 							</div>
-							</div>
 						</div>
-						<div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+						<div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab"  ng-show="visible_tab_name=='history'">
 							<div class="test__history">
-							Put test run history here
+								<div ng-repeat="record in test.records">
+									{{record}}
+								</div>
 							</div>
 						</div>
-					</div>-->
+					</div>
 
-
+<!--
 					<md-tabs md-selected="selectedTab.dataTab">
 					  <md-tab label="Node Data" class="info__title h5" md-on-select="onTabChanges(0)">
 							<div class="node__data">
@@ -394,6 +403,7 @@
 					  </md-tab>
 					</md-tabs>
 			  </div>
+			-->
 			  <!-- Node Examination -->
 			  <!-- Node Examination -->
 		</div>

@@ -13,8 +13,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
   });
 }])
 
-.controller('TesterIndexCtrl', ['$scope', '$interval', 'Tester', 'store', '$state',
-  function($scope, $interval, Tester, store, $state) {
+.controller('TesterIndexCtrl', ['$rootScope', '$scope', '$interval', 'Tester', 'store', '$state',
+  function($rootScope, $scope, $interval, Tester, store, $state) {
     $scope._init= function(){
       $('[data-toggle="tooltip"]').tooltip()
 
@@ -43,6 +43,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     $scope.updateTestCorrectness = function(test, correctness){
       Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
         .then(function(data){
+          console.log("Updated correctness of test");
+          $rootScope.$broadcast("updateFailingCnt");
           test.correct = data.correct;
         });
     }
@@ -65,18 +67,20 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       //get keys for tests and put
       var keys = [];
       $scope.filteredTests.forEach(function(test){
+        test.running = true;
         keys.push(test.key);
       });
 
       Tester.runTests({test_keys: keys, browser_type: "phantomjs"}).$promise
         .then(function(data){
-          var keys = Object.keys(data);
+          keys = Object.keys(data);
           keys.forEach(function(key){
             var val = data[key];
             //iterate over tests and set correctness based on if test key is present in data
 
             $scope.filteredTests.forEach(function(test){
               if(data[test.key]){
+                test.running = false;
                 test.correct = data[test.key];
                 console.log('val '+val);
               }
@@ -120,6 +124,17 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       else{
         return new Date(test.lastRunTime).toLocaleString();
       }
+    }
+
+    $scope.setTestName = function(test, new_name){
+      Tester.updateName({key: test.key, name: new_name}).$promise
+        .then(function(data){
+          test.show_test_name_edit_field=false;
+          test.name = new_name;
+        })
+        .catch(function(err){
+          test.show_test_name_edit_field = false;
+        });
     }
 
     $scope.isCurrentNodePage = function(){

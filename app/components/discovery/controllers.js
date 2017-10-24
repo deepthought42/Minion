@@ -20,8 +20,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.isStarted = false;
       $scope.current_node = null;
       $scope.visible = false;
+
       $scope.selectedTab = {};
       $scope.selectedTab.dataTab = 0;
+
       $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
@@ -93,8 +95,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.current_node = node;
     }
 
-    $scope.setTestName = function(key, name){
-      Tester.updateName({key: key, name: name});
+    $scope.setTestName = function(test, new_name){
+      Tester.updateName({key: test.key, name: new_name}).$promise
+        .then(function(data){
+          test.show_test_name_edit_field=false;
+          test.name = new_name;
+        })
+        .catch(function(err){
+          test.show_test_name_edit_field = false;
+        });
     }
 
     $scope.showTestData = function(test, node){

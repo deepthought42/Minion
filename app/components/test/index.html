@@ -76,15 +76,15 @@
 			  </div>
 			  <div class="col-xs-4 test__title">
 					<div class="row">
-					<div class="col-xs-12" ng-click="showNameInputField(test, true)" ng-show="!test.show_test_name_edit_field">
-						<h2>{{test.name || "Test #"}}</h2>
-						<i class="fa fa-pencil edithover"></i>
+						<div class="col-xs-12" ng-click="test.show_test_name_edit_field = true" ng-show="!test.show_test_name_edit_field">
+							<h2>{{test.name || "Test #"}}</h2>
+							<i class="fa fa-pencil edithover"></i>
+						</div>
+						<div ng-show="test.show_test_name_edit_field">
+							<input type="text" ng-model="new_name" ng-value="test.name" />
+							<i class="fa fa-plus" ng-click="setTestName(test, new_name)"></i>
+						</div>
 					</div>
-					<div ng-show="test.show_test_name_edit_field">
-						<input type=-"text" ng-model="test.name" />
-						<i class="fa fa-plus" ng-click="updateTestName(test)"></i>
-					</div>
-				</div>
 			  </div>
 			  <div class="col-xs-2">
 					{{test.runtime || "0 ms"}}
