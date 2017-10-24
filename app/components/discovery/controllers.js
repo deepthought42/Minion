@@ -113,7 +113,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     $scope.toggleTestDataVisibility = function(test, node){
       $scope.selectedTab.dataTab = 0;
-
+      $scope.current_node = node;
       test.visible = !test.visible;
     }
 
