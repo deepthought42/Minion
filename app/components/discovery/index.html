@@ -76,10 +76,10 @@
 					</div>
 			  </div>
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, test.path.path[0])">
-					{{test.runtime || "0ms"}}
+					{{test.runTime}} ms
 			  </div>
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, test.path.path[0])">
-					&nbsp;
+					{{ getDate(test) || "Unknown / Not since discovery"}}
 			  </div>
 
 			  <div class="col-xs-2 test__btns">
@@ -115,7 +115,6 @@
 							 		 uib-tooltip="{{test.result.url}}"/>
 					  </div>
 					</div>
-						{{selectedTab.dataTab}}
 			  </div>
 
 			  <div class="test__groups">

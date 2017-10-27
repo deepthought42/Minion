@@ -55,32 +55,43 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         .then(function(data){
           test.running = false;
           test.correct = data.passes;
-          console.log("Tester ran successfully :: "+data);
+
+          Raven.captureMessage("Test ran successfully :: "+data,{
+              level: 'info'
+          });
+
         })
         .catch(function(err){
           test.running = false;
-          console.log("Tester failed to run successfully");
+          Raven.captureMessage("Tester failed to run successfully"+data,{
+              level: 'info'
+          });
         });
     }
 
     $scope.runTests = function(){
       //get keys for tests and put
-      var keys = [];
+      $scope.keys = [];
       $scope.filteredTests.forEach(function(test){
         test.running = true;
-        keys.push(test.key);
+        $scope.keys.push(test.key);
       });
 
-      Tester.runTests({test_keys: keys, browser_type: "phantomjs"}).$promise
+      Tester.runTests({test_keys: $scope.keys, browser_type: "phantomjs"}).$promise
         .then(function(data){
-          keys = Object.keys(data);
-          keys.forEach(function(key){
+          Raven.captureMessage("Test ran successfully :: "+data,{
+              level: 'info'
+          });
+
+          //keys = Object.keys(data);
+          $scope.keys.forEach(function(key){
             var val = data[key];
             //iterate over tests and set correctness based on if test key is present in data
 
             $scope.filteredTests.forEach(function(test){
+              test.running = false;
+
               if(data[test.key]){
-                test.running = false;
                 test.correct = data[test.key];
                 console.log('val '+val);
               }
@@ -88,6 +99,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           })
         })
         .catch(function(err){
+          Raven.captureException(err);
+          Raven.showReportDialog();
           console.log("Tester failed to run successfully");
         });
     }
@@ -118,11 +131,11 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.getDate = function(test){
-      if(test.lastRunTime == null){
+      if(test.lastRunTimestamp == null){
         return null;
       }
       else{
-        return new Date(test.lastRunTime).toLocaleString();
+        return new Date(test.lastRunTimestamp).toLocaleString();
       }
     }
 

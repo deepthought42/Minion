@@ -18,7 +18,8 @@ angular.module('Qanairy', [
   'angular-storage',
   'ngMaterial',
   'Qanairy.version',
-  'AuthInterceptor'
+  'AuthInterceptor',
+  'ngRaven'
 ]).
 config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',
   function($urlRouterProvider, authProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider) {

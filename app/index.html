@@ -59,6 +59,15 @@
   -->
 
   <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/raven-js/dist/raven.min.js"></script>
+  <script src="bower_components/raven-js/dist/plugins/angular.min.js"></script>
+  <script>
+    Raven
+      .config('https://786d6d49f47c4dd1b85b08ce0a42f449@sentry.io/236287')
+      .addPlugin(Raven.Plugins.Angular)
+      .install();
+  </script>
+
   <script src="bower_components/angular-material/angular-material.min.js"></script>
 
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
