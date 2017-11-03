@@ -190,7 +190,7 @@
 						 		 aria-labelledby="node-data-tab"
 								 ng-show="visible_tab=='nodedata'+$index">
 							<div class="node__data">
-								<div class="" ng-show="current_node.type=='Page'">
+								<div class="col-sm-12" ng-show="current_node.type=='Page'">
 
 									<div class="col-sm-4 col-xs-12 page-container">
 										<img type="button" class="path-node-image" data-toggle="modal" data-target="#exampleModal" src="{{current_node.screenshot}}" class="path-node-image" />
@@ -215,7 +215,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="" ng-show="current_node.type=='PageElement'">
+								<div class="col-sm-12" ng-show="current_node.type=='PageElement'">
 									<div class="pull-right col-sm-4" ng-show="current_node.screenshot" >
 										<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
 									</div>
@@ -243,7 +243,7 @@
 											<div class="col-sm-3 data__key">
 										  	CSS:&nbsp;&nbsp;
 											</div>
-											<div class="col-sm-9 data__value" ng-repeat="(key, value) in current_node.cssProperties">
+											<div class="col-sm-9 data__value" ng-repeat="(key, value) in current_node.cssValues">
 												{{key}} -           {{value}}
 											</div>
 									 	</div>
@@ -252,8 +252,8 @@
 										 		Attributes:&nbsp;&nbsp;
 											</div>
 
-											<div class="col-sm-9 data__value" ng-repeat="(key, value) in current_node.attributes">
-												{{key}} -           {{value}}
+											<div class="col-sm-9 data__value" ng-repeat="attributein current_node.attributes">
+												{{attribute.name}} -           {{attribute.vals}}
 											</div>
 									 	</div>
 									 	<div class="key--value row">
@@ -267,7 +267,7 @@
 									 	</div>
 									</div>
 								</div>
-								<div class="" ng-show="current_node.type=='Action'">
+								<div class="col-sm-12" ng-show="current_node.type=='Action'">
 										<div class="row node__title">
 											<h4>Action</h4>
 										</div>
