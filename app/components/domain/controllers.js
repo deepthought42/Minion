@@ -28,10 +28,10 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
       Domain.save(url).$promise.then(function(successResult){
         $scope.show_create_domain_err = false;
-        var domain = successResult;
-        store.set('domain', domain);
-        $scope.domains.push(domain);
+        store.set('domain', successResult);
+        $scope.domains.push(successResult);
         $scope.closeDialog();
+        $rootScope.$broadcast("domain_updated", successResult);
       },
       function(errorResult){
         $scope.show_create_domain_err = true;
@@ -43,6 +43,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
      */
     $scope.selectDomain = function(domain){
       store.set('domain', domain);
+      $rootScope.$broadcast("domain_updated", domain);
       $state.go("main.tests");
     }
 

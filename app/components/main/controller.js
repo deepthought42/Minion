@@ -15,12 +15,11 @@ angular.module('Qanairy.main', ['ui.router'])
     var getFailingCount = function(){
       Tester.getFailingCount({url: $scope.domain }).$promise
         .then(function(data){
-          console.log("data :: "+data.failing);
           store.set("failing_tests", data.failing);
           $scope.failingTests = data.failing;
         })
-        .catch(function(){
-
+        .catch(function(err){
+          $scope.errors.push(err);
         });
     }
 
@@ -35,10 +34,9 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.protocols = ["http", "https", "file"];
       $scope.workAllocation = {};
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
+      $scope.domain = store.get('domain');
+      $scope.errors = [];
 
-      if(store.get('domain')){
-        $scope.domain = store.get('domain').url;
-      }
       getFailingCount();
 
       $scope.$location = $location;
@@ -59,11 +57,13 @@ angular.module('Qanairy.main', ['ui.router'])
 
     this._init();
 
-
+    $scope.$on('domain_updated', function(){
+      $scope.domain = store.get('domain');
+      console.log("domain set in main");
+    })
 
     $scope.$on('updateFailingCnt', function(){
       getFailingCount();
-      console.log("updating failing test count now ... " );
     })
   }
 ]);
