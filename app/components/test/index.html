@@ -55,12 +55,20 @@
 	</div>
 
 	<div class="test-container">
-		<div class="empty__state vertical__center" ng-show="tests.length==0">
+		<div class="empty__state vertical__center" ng-show="waitingOnTests">
+			<div style="text-align:center; margin: 0px auto;">
+				<i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+				<span class="sr-only">Running...</span>
+			</div>
+		</div>
+		<div class="empty__state vertical__center" ng-show="!waitingOnTests && tests.length==0">
 			<h3>
         Start a &#34;<a href="#/discovery">Discovery</a>&#34; to let Qanairy map your tests.
       </h3>
 		</div>
-		<div class="test" ng-repeat="test in (filteredTests = tests | filter:searchText)  | orderBy:['correct', 'lastRunTime']" ng-show="tests.length > 0">
+		<div class="test"
+				 ng-repeat="test in (filteredTests = tests | filter:searchText)  | orderBy:['correct', 'lastRunTime']"
+				 ng-show="!waitingOnTests && tests.length > 0">
 			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test)">
         <div class="col-xs-2 test__status" ng-show="test.running">
           <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
@@ -252,7 +260,7 @@
 										 		Attributes:&nbsp;&nbsp;
 											</div>
 
-											<div class="col-sm-9 data__value" ng-repeat="attributein current_node.attributes">
+											<div class="col-sm-9 data__value" ng-repeat="attribute in current_node.attributes">
 												{{attribute.name}} -           {{attribute.vals}}
 											</div>
 									 	</div>

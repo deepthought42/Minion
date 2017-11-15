@@ -37,7 +37,17 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     };
 
     $scope.getTestByName = function(name) {
-      $scope.tests = Tester.query({name: name});
+      $scope.waitingOnTests = true;
+      Tester.query({name: name}).$promise
+        .then(function(data){
+          console.log("test data " + data)
+          $scope.tests = data;
+          $scope.waitingOnTests = false;
+        })
+        .catch(function(err){
+          $scope.errors = err;
+          $scope.waitingOnTests = false;
+        });
     };
 
     $scope.updateTestCorrectness = function(test, correctness){

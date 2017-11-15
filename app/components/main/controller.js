@@ -16,13 +16,14 @@ angular.module('Qanairy.main', ['ui.router'])
       Tester.getFailingCount({url: $scope.domain }).$promise
         .then(function(data){
           console.log("data :: "+data.failing);
+          store.set("failing_tests", data.failing);
           $scope.failingTests = data.failing;
         })
         .catch(function(){
 
-        });;
+        });
     }
-    
+
     this._init = function(){
       $scope.displayUserDropDown = false;
       $scope.auth = auth;

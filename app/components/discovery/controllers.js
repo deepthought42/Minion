@@ -15,7 +15,19 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
 .controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester', 'store', '$state',
   function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester, store, $state) {
+    var getFailingCount = function(){
+      Tester.getFailingCount({url: $scope.domain }).$promise
+        .then(function(data){
+          store.set("failing_tests", data.failing);
+          $scope.failing_tests = data.failing;
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        });;
+    }
+
     this._init = function(){
+      $scope.errors = [];
       $scope.tests = [];
       $scope.isStarted = false;
       $scope.current_node = null;
@@ -27,7 +39,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
-      $scope.group.description = ""
+      $scope.group.description = "";
 
       if(store.get('active') === undefined){
         $scope.selectedTab.dataTab = 0;
@@ -37,9 +49,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       }
 
       if(store.get('domain') != null){
-
+        $scope.waitingOnTests = true;
         $scope.discovery_url = store.get('domain').url;
-        $scope.tests = Tester.getUnverified({url: $scope.discovery_url});
+        Tester.getUnverified({url: $scope.discovery_url}).$promise
+            .then(function(data){
+              $scope.tests = data
+              $scope.waitingOnTests = false;
+            })
+            .catch(function(err){
+              console.log("error getting tests");
+              $scope.errors = err;
+              $scope.waitingOnTests = false;
+            });
 
         // Enable pusher logging - don't include this in production
         //Pusher.logToConsole = true;
@@ -58,6 +79,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       else{
         $state.go("main.domains")
       }
+
+      getFailingCount();
     }
 
     $scope.extractHostname =  function(url) {
