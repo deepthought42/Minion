@@ -16,7 +16,14 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 .controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state',
   function($rootScope, $scope, Domain,  $mdDialog, store, $state) {
     this._init = function(){
-      $scope.domains = Domain.query();
+      $scope.errors = [];
+      Domain.query().$promise
+        .then(function(data){
+          $scope.domains = data;
+        })
+        .catch(function(err){
+          $scope.errors.push(data);
+        });
       $scope.protocol = "";
       $scope.domain_url = "";
       $scope.domain_error = "";
