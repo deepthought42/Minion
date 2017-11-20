@@ -165,6 +165,8 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
      if (!auth.isAuthenticated) {
+       e.preventDefault();
+
        // get me a login modal!
        auth.signin({
          authParams: {
@@ -172,6 +174,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
          }
        }, function(profile, idToken, accessToken, state, refreshToken) {
          store.set('profile', profile);
+         $state.go(toState.name, toParams);
        }, function(err) {
          console.log("Sign in Error :(", err);
        });

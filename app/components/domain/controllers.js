@@ -22,7 +22,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           $scope.domains = data;
         })
         .catch(function(err){
-          $scope.errors.push(data);
+          $scope.errors.push(err);
         });
       $scope.protocol = "";
       $scope.domain_url = "";

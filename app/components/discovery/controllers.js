@@ -22,6 +22,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.failing_tests = data.failing;
         })
         .catch(function(err){
+          $scope.errors = [];
           $scope.errors.push(err);
         });;
     }
