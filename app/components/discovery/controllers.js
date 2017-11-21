@@ -120,12 +120,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
     }
 
     $scope.setTestName = function(test, new_name){
+      test.show_waiting_icon = true;
       Tester.updateName({key: test.key, name: new_name}).$promise
         .then(function(data){
+          test.show_waiting_icon = false;
           test.show_test_name_edit_field=false;
           test.name = new_name;
         })
         .catch(function(err){
+          test.show_waiting_icon = false;
           test.show_test_name_edit_field = false;
         });
     }

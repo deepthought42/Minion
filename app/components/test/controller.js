@@ -6,10 +6,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
   $stateProvider.state('main.tests', {
     url: '/tests',
     templateUrl: 'components/test/index.html',
-    controller: 'TesterIndexCtrl',
-    sp: {
-      authenticate: true
-    }
+    controller: 'TesterIndexCtrl'
   });
 }])
 
@@ -17,8 +14,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
   function($rootScope, $scope, $interval, Tester, store, $state) {
     $scope._init= function(){
       $('[data-toggle="tooltip"]').tooltip()
-
-      $scope.tester = {};
+      $scope.errors = [];
+      $scope.tests = {};
       $scope.groups = [];
       $scope.group = {name: "", description: "" };
       $scope.node_key = "";
@@ -40,7 +37,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           $scope.waitingOnTests = false;
         })
         .catch(function(err){
-          $scope.errors = err;
+          $scope.errors.push(err);
           $scope.waitingOnTests = false;
         });;
       $scope.groups = Tester.getGroups({url: url});
@@ -51,6 +48,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         .then(function(data){
         })
         .catch(function(err){
+          $scope.errors.push(err);
         });
     };
 
@@ -60,6 +58,9 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           console.log("Updated correctness of test");
           $rootScope.$broadcast("updateFailingCnt");
           test.correct = data.correct;
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
         });
     }
 
@@ -113,6 +114,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           })
         })
         .catch(function(err){
+          $scope.errors.push(err);
           Raven.captureException(err);
           Raven.showReportDialog();
           console.log("Tester failed to run successfully");
@@ -120,20 +122,33 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.runGroupTests = function(url, group){
-      Tester.runTestsByGroup({url: url, group: group});
+      Tester.runTestsByGroup({url: url, group: group}).$promise
+        .then(function(data){
+
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        });
     }
 
     $scope.addGroup = function(test, group){
       Tester.addGroup({name: group.name, description: group.description, key: test.key}).$promise
         .then(function(data){
           test.groups.push(data);
-        });
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        });;
     }
 
     $scope.removeGroup = function(test, group, $index){
-      Tester.removeGroup({group_key: group.key, test_key: test.key}).$promise.then(function(data){
-        test.groups.splice($index,1);
-      });
+      Tester.removeGroup({group_key: group.key, test_key: test.key}).$promise
+        .then(function(data){
+          test.groups.splice($index,1);
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        });;
     }
 
     $scope.toggleTestDataVisibility = function(test){
@@ -154,12 +169,16 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.setTestName = function(test, new_name){
+      test.show_waiting_icon = true;
       Tester.updateName({key: test.key, name: new_name}).$promise
         .then(function(data){
+          test.show_waiting_icon = false;
           test.show_test_name_edit_field=false;
           test.name = new_name;
         })
         .catch(function(err){
+          test.show_waiting_icon = false;
+          $scope.errors.push(err);
           test.show_test_name_edit_field = false;
         });
     }
