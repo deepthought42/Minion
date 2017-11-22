@@ -30,17 +30,24 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
     $scope.getTestsByUrl = function(url) {
       $scope.waitingOnTests = true;
-      $scope.tests = Tester.query({url: url}).$promise
+      Tester.query({url: url}).$promise
         .then(function(data){
-          console.log("test data " + data)
           $scope.tests = data;
           $scope.waitingOnTests = false;
         })
         .catch(function(err){
+          $scope.tests = [];
           $scope.errors.push(err);
           $scope.waitingOnTests = false;
-        });;
-      $scope.groups = Tester.getGroups({url: url});
+        });
+
+      Tester.getGroups({url: url}).$promise
+        .then(function(data){
+          $scope.groups = data;
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        });
     };
 
     $scope.getTestByName = function(name) {

@@ -5,14 +5,17 @@
   		  Run Tests
   		</button>
 	  </div>
+
 	  <div class="col-md-5 col-sm-0">
 	  </div>
+
 	  <div class="col-md-3 col-sm-6 search">
-		<div class="input-group">
-		  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon1">
-		  <span class="input-group-addon btn--gray" id="basic-addon1"><i class="fa fa-search"></i></span>
-		</div>
+			<div class="input-group">
+			  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon1">
+			  <span class="input-group-addon btn--gray" id="basic-addon1"><i class="fa fa-search"></i></span>
+			</div>
 	  </div>
+
 	  <div class="col-md-2 col-sm-2">
 		 	<!-- /.dropdown -->
 			<div class="dropdown dropdown-toggle pull-right"  ng-show="auth.isAuthenticated" data-toggle="dropdown" href="#">
@@ -66,10 +69,11 @@
         Start a &#34;<a href="#/discovery">Discovery</a>&#34; to let Qanairy map your tests.
       </h3>
 		</div>
+
 		<div class="test"
-				 ng-repeat="test in (filteredTests = tests | filter:searchText)  | orderBy:['correct', 'lastRunTime']"
+				 ng-repeat="test in (filteredTests = tests) | filter:searchText"
 				 ng-show="!waitingOnTests && tests.length > 0">
-			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test)">
+			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
         <div class="col-xs-2 test__status" ng-show="test.running">
           <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
           <span class="sr-only">Running...</span>
@@ -84,14 +88,14 @@
 			  </div>
 			  <div class="col-xs-4 test__title">
 					<div class="row">
-						<div class="col-xs-12" ng-click="test.show_test_name_edit_field = true" ng-show="!test.show_test_name_edit_field">
+						<div class="col-xs-12" ng-show="!test.show_test_name_edit_field">
 							<h2>{{test.name || "Test #"}}</h2>
-							<i class="fa fa-pencil edithover"></i>
+							<i class="fa fa-pencil edithover"  ng-click="test.show_test_name_edit_field = true" ></i>
 						</div>
 						<div ng-show="test.show_test_name_edit_field">
 							<input type="text" ng-model="new_name" ng-value="test.name" />
 							<i class="fa fa-plus" ng-click="setTestName(test, new_name)"
-								 ng-show="test.show_waiting_icon"></i>
+								 ng-show="!test.show_waiting_icon"></i>
 							<i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw"
 								  ng-show="test.show_waiting_icon" aria-hidden="true"></i>
 						</div>
@@ -103,7 +107,6 @@
 			  <div class="col-xs-2">
 					{{ getDate(test) || "Unknown / Not since discovery"}}
 			  </div>
-
 
 			  <div class="col-xs-2 test__btns">
 					<div class="btn-group" role="group" aria-label="Run Favorite More">
@@ -181,9 +184,6 @@
 						</div>
 			  </div>
 
-
-
-
 			  <div class="test__info">
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item" ng-click="visible_tab='nodedata'+$index">
@@ -194,9 +194,9 @@
 						</li>
 					</ul>
 					<div class="tab-content">
-						<div class="tab-pane active node__data" id="{{'nodedata'+$index}}"
+						<div class="tab-pane node__data" id="{{'nodedata'+$index}}"
 						 		 aria-labelledby="node-data-tab"
-								 ng-show="visible_tab=='nodedata'+$index">
+								 ng-class="{active: visible_tab=='nodedata'+$index}">
 							<div class="node__data">
 								<div class="col-sm-12" ng-show="current_node.type=='Page'">
 
@@ -298,11 +298,13 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade " id="{{'history'+$index}}" aria-labelledby="history-tab" ng-show="visible_tab=='nodedata'+$index">
-							<div class="test__history">
-								<div ng-repeat="record in test.records">
-									{{record}}
-								</div>
+						<div class="tab-pane" id="{{'history'+$index}}" aria-labelledby="history-tab"  ng-class="{active: visible_tab=='history'+$index}">
+							<div class="test__history" ng-repeat="record in test.records">
+								Passes : {{record.passes}}
+								<br />
+								Ran at : {{record.ranAt}}
+								<br />
+								Total duration : {{record.runTime}}
 							</div>
 						</div>
 					</div>
