@@ -5,14 +5,17 @@
   		  Run Tests
   		</button>
 	  </div>
+
 	  <div class="col-md-5 col-sm-0">
 	  </div>
+
 	  <div class="col-md-3 col-sm-6 search">
-		<div class="input-group">
-		  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon1">
-		  <span class="input-group-addon btn--gray" id="basic-addon1"><i class="fa fa-search"></i></span>
-		</div>
+			<div class="input-group">
+			  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon1">
+			  <span class="input-group-addon btn--gray" id="basic-addon1"><i class="fa fa-search"></i></span>
+			</div>
 	  </div>
+
 	  <div class="col-md-2 col-sm-2">
 		 	<!-- /.dropdown -->
 			<div class="dropdown dropdown-toggle pull-right"  ng-show="auth.isAuthenticated" data-toggle="dropdown" href="#">
@@ -55,13 +58,22 @@
 	</div>
 
 	<div class="test-container">
-		<div class="empty__state vertical__center" ng-show="tests.length==0">
+		<div class="empty__state vertical__center" ng-show="waitingOnTests">
+			<div style="text-align:center; margin: 0px auto;">
+				<i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+				<span class="sr-only">Running...</span>
+			</div>
+		</div>
+		<div class="empty__state vertical__center" ng-show="!waitingOnTests && tests.length==0">
 			<h3>
         Start a &#34;<a href="#/discovery">Discovery</a>&#34; to let Qanairy map your tests.
       </h3>
 		</div>
-		<div class="test" ng-repeat="test in (filteredTests = tests | filter:searchText)  | orderBy:['correct', 'lastRunTime']" ng-show="tests.length > 0">
-			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test)">
+
+		<div class="test"
+				 ng-repeat="test in (filteredTests = tests) | filter:searchText"
+				 ng-show="!waitingOnTests && tests.length > 0">
+			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
         <div class="col-xs-2 test__status" ng-show="test.running">
           <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
           <span class="sr-only">Running...</span>
@@ -76,31 +88,30 @@
 			  </div>
 			  <div class="col-xs-4 test__title">
 					<div class="row">
-					<div class="col-xs-12" ng-click="showNameInputField(test, true)" ng-show="!test.show_test_name_edit_field">
-						<h2>{{test.name || "Test #"}}</h2>
-						<i class="fa fa-pencil edithover"></i>
+						<div class="col-xs-12" ng-show="!test.show_test_name_edit_field">
+							<h2>{{test.name || "Test #"}}</h2>
+							<i class="fa fa-pencil edithover"  ng-click="test.show_test_name_edit_field = true" ></i>
+						</div>
+						<div ng-show="test.show_test_name_edit_field">
+							<input type="text" ng-model="new_name" ng-value="test.name" />
+							<i class="fa fa-plus" ng-click="setTestName(test, new_name)"
+								 ng-show="!test.show_waiting_icon"></i>
+							<i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw"
+								  ng-show="test.show_waiting_icon" aria-hidden="true"></i>
+						</div>
 					</div>
-					<div ng-show="test.show_test_name_edit_field">
-						<input type=-"text" ng-model="test.name" />
-						<i class="fa fa-plus" ng-click="updateTestName(test)"></i>
-					</div>
-				</div>
 			  </div>
 			  <div class="col-xs-2">
-					{{test.runtime || "0 ms"}}
+					{{test.runTime}} ms
 			  </div>
 			  <div class="col-xs-2">
 					{{ getDate(test) || "Unknown / Not since discovery"}}
 			  </div>
 
-
 			  <div class="col-xs-2 test__btns">
 					<div class="btn-group" role="group" aria-label="Run Favorite More">
 					 <button class="btn btn--left btn--gray" ng-click="runTest(test)">
 						 Run
-					 </button>
-					 <button class="btn btn--right btn--gray">
-						 <i class="fa fa-angle-down"></i>
 					 </button>
 					</div>
 			  </div>
@@ -108,7 +119,7 @@
 
 
 			<div ng-show="test.visible">
-			  <div class="test__path vertical__center__int" >
+			  <div class="test__path vertical__center__int" ng-click="visible_tab='nodedata'+$index">
 				  <div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
 				    <div ng-show="node.screenshot" class="path-node path-page"
                  uib-tooltip="{{node.url}}">
@@ -173,15 +184,23 @@
 						</div>
 			  </div>
 
-
-
-
 			  <div class="test__info">
-					<md-tabs>
-					 	<md-tab label="Node Data" class="info__title h5">
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item" ng-click="visible_tab='nodedata'+$index">
+							<a class="nav-link active" ng-class="{active: visible_tab=='nodedata'+$index}" id="node-data-tab" data-toggle="tab" role="tab" aria-controls="nodedata" aria-expanded="true" >Node Data</a>
+						</li>
+						<li class="nav-item" ng-click="visible_tab='history'+$index" >
+							<a class="nav-link" ng-class="{active: visible_tab=='history'+$index}" id="history-tab" data-toggle="tab" role="tab" aria-controls="{{'history'+$index}}" >History</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane node__data" id="{{'nodedata'+$index}}"
+						 		 aria-labelledby="node-data-tab"
+								 ng-class="{active: visible_tab=='nodedata'+$index}">
 							<div class="node__data">
-								<div class="" ng-show="current_node.type=='Page'">
+								<div class="col-sm-12" ng-show="current_node.type=='Page'">
 
+<<<<<<< HEAD
 								  <div class="col-sm-3 col-xs-2 page-container">
 										<img type="button" class="path-node-image"
 										data-toggle="modal" data-target="#exampleModal"
@@ -194,101 +213,118 @@
 									  </div>
 									  <div class="key--value">
 										  <div class="data__key">
+=======
+									<div class="col-sm-4 col-xs-12 page-container">
+										<img type="button" class="path-node-image" data-toggle="modal" data-target="#exampleModal" src="{{current_node.screenshot}}" class="path-node-image" />
+									</div>
+
+									<div class="col-sm-8 col-xs-12">
+										<div class="key--value row">
+											<div class="col-xs-3 data__key">
+>>>>>>> master
 											 Landable:&nbsp;&nbsp;
-										  </div>
-										  <div class="data__value">
+											</div>
+											<div class="col-xs-9 data__value">
 											 {{current_node.landable}}
-										  </div>
-									  </div>
-									  <div class="key--value">
-										  <div class="data__key">
-											 Visible Element Counts:&nbsp;&nbsp;
-										  </div>
-										  <div class="data__value">
-												<div class="" ng-repeat="(key, value) in current_node.elementCounts">
-										 			{{key}} - {{value}}
-												</div>
-										  </div>
+											</div>
 										</div>
-									  <div class="key--value">
-										  <div class="data__key">
-											 Total Weight:&nbsp;&nbsp;
-										  </div>
-										  <div class="data__value">
-											 {{current_node.totalWeight}}
-										  </div>
+										<div class="key--value row">
+											<div class="col-xs-3 data__key">
+												URL:&nbsp;&nbsp;
+											</div>
+											<div class="col-xs-9 data__value">
+												{{current_node.url}}
+											</div>
 										</div>
-								  </div>
+									</div>
 								</div>
-								<div class="" ng-show="current_node.type=='PageElement'">
-								  <div class="pull-right col-sm-4" ng-show="current_node.screenshot" >
+								<div class="col-sm-12" ng-show="current_node.type=='PageElement'">
+									<div class="pull-right col-sm-4" ng-show="current_node.screenshot" >
 										<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
-								  </div>
-								  <div class="">
-									  <div class="node__title">
-										  <h4>Element - {{current_node.name}}</h4>
+									</div>
+									<div class="col-sm-8">
+										<div class="row node__title">
+											<h4>Element</h4>
+										</div>
+									 	<div class="key--value row">
+											<div class="col-sm-3 data__key no-padding">
+											  Tag type:&nbsp;&nbsp;
+											</div>
+											<div class="col-sm-9 data__value no-padding" style="text-transform:capitalize !important;">
+											  {{current_node.name}}
+											</div>
+									 	</div>
+										<div class="key--value row">
+											<div class="col-sm-3 data__key no-padding">
+											  Xpath:&nbsp;&nbsp;
+											</div>
+											<div class="col-sm-9 data__value no-padding">
+											  {{current_node.xpath}}
+											</div>
 									  </div>
-									 <div class="key--value">
-									  <div class="data__key">
-										 Xpath:&nbsp;&nbsp;
-									  </div>
-									  <div class="data__value">
-										 {{current_node.xpath}}
-									  </div>
-									 </div>
-									 <div class="row">
-										 <div class="key--value col-sm-6">
-										  <div class="data__key">
-											 CSS:&nbsp;&nbsp;
-										  </div>
-										 	<div class="data__value" ng-repeat="(key, value) in current_node.cssProperties">
+									 	<div class="key--value row">
+											<div class="col-sm-3 data__key">
+										  	CSS:&nbsp;&nbsp;
+											</div>
+											<div class="col-sm-9 data__value" ng-repeat="(key, value) in current_node.cssValues">
 												{{key}} -           {{value}}
-									  	</div>
-										 </div>
-										 <div class="key--value col-sm-6">
-										  <div class="data__key">
-											 Attributes:&nbsp;&nbsp;
-										  </div>
-										  <div class="data__value" ng-repeat="(key, value) in current_node.attributes">
-												{{key}} -           {{value}}
-										  </div>
-										 </div>
-									 </div>
-									 <div class="key--value">
-									  <div class="data__key">
-										 Text:&nbsp;&nbsp;
-									  </div>
-									  <div class="data__value">
-										 {{current_node.text}}
-									  </div>
-									 </div>
+											</div>
+									 	</div>
+									 	<div class="key--value row">
+											<div class="col-sm-3 data__key">
+										 		Attributes:&nbsp;&nbsp;
+											</div>
+
+											<div class="col-sm-9 data__value" ng-repeat="attribute in current_node.attributes">
+												{{attribute.name}} -           {{attribute.vals}}
+											</div>
+									 	</div>
+									 	<div class="key--value row">
+											<div class="col-sm-3 data__key">
+										 		Text:&nbsp;&nbsp;
+											</div>
+
+											<div class="col-sm-9 data__value">
+										 		{{current_node.text}}
+											</div>
+									 	</div>
+									</div>
+								</div>
+								<div class="col-sm-12" ng-show="current_node.type=='Action'">
+										<div class="row node__title">
+											<h4>Action</h4>
+										</div>
+										<div class="key--value row">
+											<div class="col-sm-3 data__key">
+											 Name:&nbsp;&nbsp;
+											</div>
+											<div class="col-sm-9 data__value">
+											 {{current_node.name}}
+											</div>
+										</div>
+										<div class="key--value row">
+											<div class="col-sm-3 data__key">
+											Value:&nbsp;&nbsp;
+											</div>
+											<div class="col-sm-9 data__value">
+											 {{current_node.val}}
+											</div>
+										</div>
 								</div>
 							</div>
-							<div class="" ng-show="current_node.type=='Action'">
-									<div class="node__title">
-										<h4>Action - {{current_node.name}}</h4>
-									</div>
-									<div class="key--value">
-									  <div class="data__key">
-										Value:&nbsp;&nbsp;
-									  </div>
-									  <div class="data__value">
-										 {{current_node.val}}
-									  </div>
-									</div>
-							</div>
-				  </div>
-			  </md-tab>
-  		  <md-tab label="History" class="info__title h5">
-  			  <div class="test__history">
-		      	<div ng-repeat="record in test.records">
-							{{record}}
 						</div>
-  			  </div>
-  		  </md-tab>
-  		</md-tabs>
-    </div>
-		</div>
+						<div class="tab-pane" id="{{'history'+$index}}" aria-labelledby="history-tab"  ng-class="{active: visible_tab=='history'+$index}">
+							<div class="test__history" ng-repeat="record in test.records">
+								Passes : {{record.passes}}
+								<br />
+								Ran at : {{record.ranAt}}
+								<br />
+								Total duration : {{record.runTime}}
+							</div>
+						</div>
+					</div>
+    		</div>
+			</div>
 	  </div>
 	</div>
 </div>

@@ -6,12 +6,25 @@ angular.module('Qanairy.main', ['ui.router'])
     url: "",
     abstract: true,
     templateUrl: 'components/main/index.html',
-    controller: 'MainCtrl'
+    controller: 'MainCtrl',
+    data: {
+        requireLogin: true // this property will apply to all children of 'app'
+      }
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'auth', 'WorkAllocation', 'PathRealtimeService', 'store', '$location',
-  function ($rootScope, $scope, auth, WorkAllocation, PathRealtimeService, store, $location) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'auth', 'WorkAllocation', 'PathRealtimeService', 'store', '$location', 'Tester',
+  function ($rootScope, $scope, auth, WorkAllocation, PathRealtimeService, store, $location, Tester) {
+    var getFailingCount = function(){
+      Tester.getFailingCount({url: $scope.domain }).$promise
+        .then(function(data){
+          store.set("failing_tests", data.failing);
+          $scope.failingTests = data.failing;
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        });
+    }
 
     this._init = function(){
       $scope.displayUserDropDown = false;
@@ -24,11 +37,11 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.protocols = ["http", "https", "file"];
       $scope.workAllocation = {};
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
+      $scope.domain = store.get('domain');
+      $scope.errors = [];
 
-      $scope.approved_test_cnt = store.get('approved_test_cnt');
-      if(store.get('domain')){
-        $scope.domain = store.get('domain').url;
-      }
+      getFailingCount();
+
       $scope.$location = $location;
       $scope.current_path = $location.path();
       $scope.user_profile = store.get('profile');
@@ -46,5 +59,14 @@ angular.module('Qanairy.main', ['ui.router'])
     }
 
     this._init();
+
+    $scope.$on('domain_updated', function(){
+      $scope.domain = store.get('domain');
+      console.log("domain set in main");
+    })
+
+    $scope.$on('updateFailingCnt', function(){
+      getFailingCount();
+    })
   }
 ]);

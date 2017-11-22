@@ -1,11 +1,10 @@
 <!-- Sidebar -->
 <input type="checkbox" class="main-nav-check" id="main-nav-check" />
 
-
 <nav class="side-nav" id="side-nav">
   <div id="sidepanel">
     <div class="sidebar-brand">
-		     <img src="./img/qanairy_logo.png">
+		  <img src="./img/qanairy_logo.png" />
     </div>
 
     <ul class="sidebar-nav">
@@ -13,8 +12,8 @@
         <a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
           <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
           Tests
-          <span id="notification_count" ng-show="approved_test_cnt">
-            {{approved_test_cnt}}
+          <span id="notification_count" ng-show="failingTests">
+            {{failingTests}}
           </span>
         </a>
       </li>
@@ -37,14 +36,12 @@
   </div>
 </nav>
 
-
-
 <!-- Page Content -->
 <div class="page-wrap">
   <div id="nav-bar" class="main-header container-fluid content ">
     <div id="main-nav" class="vertical__center__int">
 		  <div id="left-main-nav" class="col-xs-6">
-        {{domain || "www.yourdomain.com"}}
+        {{domain.url || "www.yourdomain.com"}}
         <a ui-sref="main.domains">Change?</a>
       </div>
 
@@ -54,7 +51,6 @@
 			  <!-- /.dropdown -->
 				<div class="dropdown dropdown-toggle" data-toggle="dropdown" href="#">
 					<i class="fa fa-user fa-fw"></i>
-					<i class="fa fa-caret-down"></i>
 				</div>
 				<ul class="dropdown-menu dropdown-user">
 					<li>

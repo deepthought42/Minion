@@ -15,17 +15,32 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
 .controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester', 'store', '$state',
   function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester, store, $state) {
+    var getFailingCount = function(){
+      Tester.getFailingCount({url: $scope.domain }).$promise
+        .then(function(data){
+          store.set("failing_tests", data.failing);
+          $scope.failing_tests = data.failing;
+        })
+        .catch(function(err){
+          $scope.errors = [];
+          $scope.errors.push(err);
+        });;
+    }
+
     this._init = function(){
+      $scope.errors = [];
       $scope.tests = [];
       $scope.isStarted = false;
       $scope.current_node = null;
       $scope.visible = false;
+
       $scope.selectedTab = {};
       $scope.selectedTab.dataTab = 0;
+
       $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
-      $scope.group.description = ""
+      $scope.group.description = "";
 
       if(store.get('active') === undefined){
         $scope.selectedTab.dataTab = 0;
@@ -35,9 +50,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       }
 
       if(store.get('domain') != null){
-
+        $scope.waitingOnTests = true;
         $scope.discovery_url = store.get('domain').url;
-        $scope.tests = Tester.getUnverified({url: $scope.discovery_url});
+        Tester.getUnverified({url: $scope.discovery_url}).$promise
+            .then(function(data){
+              $scope.tests = data
+              $scope.waitingOnTests = false;
+            })
+            .catch(function(err){
+              console.log("error getting tests");
+              $scope.errors = err;
+              $scope.waitingOnTests = false;
+            });
 
         // Enable pusher logging - don't include this in production
         //Pusher.logToConsole = true;
@@ -56,6 +80,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       else{
         $state.go("main.domains")
       }
+
+      getFailingCount();
     }
 
     $scope.extractHostname =  function(url) {
@@ -93,8 +119,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.current_node = node;
     }
 
-    $scope.setTestName = function(key, name){
-      Tester.updateName({key: key, name: name});
+    $scope.setTestName = function(test, new_name){
+      test.show_waiting_icon = true;
+      Tester.updateName({key: test.key, name: new_name}).$promise
+        .then(function(data){
+          test.show_waiting_icon = false;
+          test.show_test_name_edit_field=false;
+          test.name = new_name;
+        })
+        .catch(function(err){
+          test.show_waiting_icon = false;
+          test.show_test_name_edit_field = false;
+        });
     }
 
     $scope.showTestData = function(test, node){
@@ -104,7 +140,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     $scope.toggleTestDataVisibility = function(test, node){
       $scope.selectedTab.dataTab = 0;
-
+      $scope.current_node = node;
       test.visible = !test.visible;
     }
 

@@ -16,16 +16,18 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
 .controller('AccountCtrl', ['$rootScope', '$scope', 'Account',
   function($rootScope, $scope, Account) {
     this._init = function(){
-      $scope.paths = [];
-      $scope.isStarted = false;
-      $scope.current_node_image = "";
-      $scope.current_node = null;
+
     }
 
     this._init();
 
     $scope.$on('new-account', function(event, args){
-      console.log("NEW ACCOUNT WOOOO!!");
+      console.log("NEW ACCOUNT! WOOO!");
+      var account = {
+        service_package: "alpha",
+        users: ["test32@qanairy.com"]
+      }
+      Account.save(account);
     });
 
     $scope.createAlphaAccount = function(){

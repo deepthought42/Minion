@@ -18,7 +18,8 @@ angular.module('Qanairy', [
   'angular-storage',
   'ngMaterial',
   'Qanairy.version',
-  'AuthInterceptor'
+  'AuthInterceptor',
+  'ngRaven'
 ]).
 config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',
   function($urlRouterProvider, authProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider) {
@@ -36,38 +37,8 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       }
     });
 
-    authProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
-      store.set('token', idToken);
 
-        profilePromise.then(function(profile) {
-          store.set('profile', profile);
-          //$rootScope.$broadcast('new-account');
-          profile.app_metadata.plan = "alpha"
-          if(profile.app_metadata && profile.app_metadata.status == "new"){
-            console.log("navigating to account index");
-            //broadcast event to trigger creating account
-            $location.path("/accounts");
-            //create account with user data
-            //do something with it
-          }
-        });
-      });
 
-      authProvider.on('authenticated', function($location) {
-        console.log("Authenticated ;; ")
-        // This is after a refresh of the page
-        // If the user is still authenticated, you get this event
-      });
-
-      authProvider.on('loginFailure', function($location, error) {
-        console.log("ERROR !!");
-
-      });
-
-      authProvider.on('forbidden', function($location, error){
-        console.log("forbidden request");
-        $location.go('/login');
-      });
 
       jwtOptionsProvider.config({
         /*tokenGetter: function(auth) {
@@ -134,7 +105,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
         );
   }])
 
-.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', function($rootScope, auth, store, jwtHelper, $state , $location){
+.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', 'Account', function($rootScope, auth, store, jwtHelper, $state , $location, Account){
 
     qanairyAuthProvider.on('authenticated', function($location) {
       // This is after a refresh of the page
@@ -151,9 +122,51 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       $location.go('/login');
     });
 
+    qanairyAuthProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
+      store.set('token', idToken);
+
+        profilePromise.then(function(profile) {
+          store.set('profile', profile);
+          //$rootScope.$broadcast('new-account');
+          profile.app_metadata.plan = "alpha"
+          if(profile.app_metadata && profile.app_metadata.status == "new"){
+            console.log("navigating to account index");
+            //broadcast event to trigger creating account
+            //$location.path("/accounts");
+            console.log("NEW ACCOUNT! WOOO!");
+            var account = {
+              service_package: "alpha",
+              users: ["test32@qanairy.com"]
+            }
+            Account.save(account);
+            //create account with user data
+            //$rootScope.$broadcast("new-account");
+          }
+        });
+      });
+
+
+      qanairyAuthProvider.on('authenticated', function($location) {
+        console.log("Authenticated ;; ")
+        // This is after a refresh of the page
+        // If the user is still authenticated, you get this event
+      });
+
+      qanairyAuthProvider.on('loginFailure', function($location, error) {
+        console.log("ERROR !!");
+
+      });
+
+      qanairyAuthProvider.on('forbidden', function($location, error){
+        console.log("forbidden request");
+        $location.go('/login');
+      });
+
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
      if (!auth.isAuthenticated) {
+       e.preventDefault();
+
        // get me a login modal!
        auth.signin({
          authParams: {
@@ -161,6 +174,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
          }
        }, function(profile, idToken, accessToken, state, refreshToken) {
          store.set('profile', profile);
+         $state.go(toState.name, toParams);
        }, function(err) {
          console.log("Sign in Error :(", err);
        });
@@ -188,8 +202,14 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
 
     $rootScope.$on('account-missing', function (e){
       console.log("account missing");
-      e.preventDefault();
-      $location.path('/accounts');
+      //e.preventDefault();
+      //$location.path('/accounts');
+
+      var account = {
+        service_package: "alpha",
+        users: ["test32@qanairy.com"]
+      }
+      Account.save(account);
     })
   // Put the authService on $rootScope so its methods
   // can be accessed from the nav bar

@@ -6,19 +6,16 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
   $stateProvider.state('main.tests', {
     url: '/tests',
     templateUrl: 'components/test/index.html',
-    controller: 'TesterIndexCtrl',
-    sp: {
-      authenticate: true
-    }
+    controller: 'TesterIndexCtrl'
   });
 }])
 
-.controller('TesterIndexCtrl', ['$scope', '$interval', 'Tester', 'store', '$state',
-  function($scope, $interval, Tester, store, $state) {
+.controller('TesterIndexCtrl', ['$rootScope', '$scope', '$interval', 'Tester', 'store', '$state',
+  function($rootScope, $scope, $interval, Tester, store, $state) {
     $scope._init= function(){
       $('[data-toggle="tooltip"]').tooltip()
-
-      $scope.tester = {};
+      $scope.errors = [];
+      $scope.tests = {};
       $scope.groups = [];
       $scope.group = {name: "", description: "" };
       $scope.node_key = "";
@@ -32,18 +29,45 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.getTestsByUrl = function(url) {
-      $scope.tests = Tester.query({url: url});
-      $scope.groups = Tester.getGroups({url: url});
+      $scope.waitingOnTests = true;
+      Tester.query({url: url}).$promise
+        .then(function(data){
+          $scope.tests = data;
+          $scope.waitingOnTests = false;
+        })
+        .catch(function(err){
+          $scope.tests = [];
+          $scope.errors.push(err);
+          $scope.waitingOnTests = false;
+        });
+
+      Tester.getGroups({url: url}).$promise
+        .then(function(data){
+          $scope.groups = data;
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        });
     };
 
     $scope.getTestByName = function(name) {
-      $scope.tests = Tester.query({name: name});
+      Tester.query({name: name}).$promise
+        .then(function(data){
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        });
     };
 
     $scope.updateTestCorrectness = function(test, correctness){
       Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
         .then(function(data){
+          console.log("Updated correctness of test");
+          $rootScope.$broadcast("updateFailingCnt");
           test.correct = data.correct;
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
         });
     }
 
@@ -53,29 +77,42 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         .then(function(data){
           test.running = false;
           test.correct = data.passes;
-          console.log("Tester ran successfully :: "+data);
+
+          Raven.captureMessage("Test ran successfully :: "+data,{
+              level: 'info'
+          });
+
         })
         .catch(function(err){
           test.running = false;
-          console.log("Tester failed to run successfully");
+          Raven.captureMessage("Tester failed to run successfully"+data,{
+              level: 'info'
+          });
         });
     }
 
     $scope.runTests = function(){
       //get keys for tests and put
-      var keys = [];
+      $scope.keys = [];
       $scope.filteredTests.forEach(function(test){
-        keys.push(test.key);
+        test.running = true;
+        $scope.keys.push(test.key);
       });
 
-      Tester.runTests({test_keys: keys, browser_type: "phantomjs"}).$promise
+      Tester.runTests({test_keys: $scope.keys, browser_type: "phantomjs"}).$promise
         .then(function(data){
-          var keys = Object.keys(data);
-          keys.forEach(function(key){
+          Raven.captureMessage("Test ran successfully :: "+data,{
+              level: 'info'
+          });
+
+          //keys = Object.keys(data);
+          $scope.keys.forEach(function(key){
             var val = data[key];
             //iterate over tests and set correctness based on if test key is present in data
 
             $scope.filteredTests.forEach(function(test){
+              test.running = false;
+
               if(data[test.key]){
                 test.correct = data[test.key];
                 console.log('val '+val);
@@ -84,25 +121,41 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           })
         })
         .catch(function(err){
+          $scope.errors.push(err);
+          Raven.captureException(err);
+          Raven.showReportDialog();
           console.log("Tester failed to run successfully");
         });
     }
 
     $scope.runGroupTests = function(url, group){
-      Tester.runTestsByGroup({url: url, group: group});
+      Tester.runTestsByGroup({url: url, group: group}).$promise
+        .then(function(data){
+
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        });
     }
 
     $scope.addGroup = function(test, group){
       Tester.addGroup({name: group.name, description: group.description, key: test.key}).$promise
         .then(function(data){
           test.groups.push(data);
-        });
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        });;
     }
 
     $scope.removeGroup = function(test, group, $index){
-      Tester.removeGroup({group_key: group.key, test_key: test.key}).$promise.then(function(data){
-        test.groups.splice($index,1);
-      });
+      Tester.removeGroup({group_key: group.key, test_key: test.key}).$promise
+        .then(function(data){
+          test.groups.splice($index,1);
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        });;
     }
 
     $scope.toggleTestDataVisibility = function(test){
@@ -114,12 +167,27 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.getDate = function(test){
-      if(test.lastRunTime == null){
+      if(test.lastRunTimestamp == null){
         return null;
       }
       else{
-        return new Date(test.lastRunTime).toLocaleString();
+        return new Date(test.lastRunTimestamp).toLocaleString();
       }
+    }
+
+    $scope.setTestName = function(test, new_name){
+      test.show_waiting_icon = true;
+      Tester.updateName({key: test.key, name: new_name}).$promise
+        .then(function(data){
+          test.show_waiting_icon = false;
+          test.show_test_name_edit_field=false;
+          test.name = new_name;
+        })
+        .catch(function(err){
+          test.show_waiting_icon = false;
+          $scope.errors.push(err);
+          test.show_test_name_edit_field = false;
+        });
     }
 
     $scope.isCurrentNodePage = function(){
