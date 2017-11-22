@@ -98,6 +98,13 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
        });
     };
 
+        .then(function(data){
+        })
+        .catch(function(err){
+          $scope.errors.push(err);
+        })
+    }
+
     this._init();
 
     $scope.$on('domainRequiredError', function(){

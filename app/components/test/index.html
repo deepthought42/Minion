@@ -20,7 +20,6 @@
 		 	<!-- /.dropdown -->
 			<div class="dropdown dropdown-toggle pull-right"  ng-show="auth.isAuthenticated" data-toggle="dropdown" href="#">
 				Filter
-				<i class="fa fa-caret-down"></i>
 			</div>
 			<ul class="dropdown-menu">
 				<li>
@@ -48,7 +47,7 @@
 			Test Title
 	  </div>
 	  <div class="col-sm-2">
-		    Time (ms)&nbsp;<i class="fa fa-sort"></i>
+		    Time (s)&nbsp;<i class="fa fa-sort"></i>
 	  </div>
 	  <div class="col-sm-2">
 		    Date Last Run&nbsp;<i class="fa fa-sort"></i>
@@ -102,7 +101,7 @@
 					</div>
 			  </div>
 			  <div class="col-xs-2">
-					{{test.runTime}} ms
+					{{test.runTime/1000}} s
 			  </div>
 			  <div class="col-xs-2">
 					{{ getDate(test) || "Unknown / Not since discovery"}}
@@ -200,7 +199,6 @@
 							<div class="node__data">
 								<div class="col-sm-12" ng-show="current_node.type=='Page'">
 
-<<<<<<< HEAD
 								  <div class="col-sm-3 col-xs-2 page-container">
 										<img type="button" class="path-node-image"
 										data-toggle="modal" data-target="#exampleModal"
@@ -211,18 +209,9 @@
 										<div class="node__title">
 										  <h4>Page - {{current_node.url}}</h4>
 									  </div>
-									  <div class="key--value">
-										  <div class="data__key">
-=======
-									<div class="col-sm-4 col-xs-12 page-container">
-										<img type="button" class="path-node-image" data-toggle="modal" data-target="#exampleModal" src="{{current_node.screenshot}}" class="path-node-image" />
-									</div>
-
-									<div class="col-sm-8 col-xs-12">
-										<div class="key--value row">
-											<div class="col-xs-3 data__key">
->>>>>>> master
-											 Landable:&nbsp;&nbsp;
+									  <div class="row key--value">
+										  <div class="col-xs-3 data__key">
+											 Landable:
 											</div>
 											<div class="col-xs-9 data__value">
 											 {{current_node.landable}}
@@ -230,7 +219,7 @@
 										</div>
 										<div class="key--value row">
 											<div class="col-xs-3 data__key">
-												URL:&nbsp;&nbsp;
+												URL:
 											</div>
 											<div class="col-xs-9 data__value">
 												{{current_node.url}}
@@ -302,12 +291,12 @@
 											 {{current_node.name}}
 											</div>
 										</div>
-										<div class="key--value row">
+										<div class="key--value row" ng-show="current_node.val">
 											<div class="col-sm-3 data__key">
-											Value:&nbsp;&nbsp;
+												Value:&nbsp;&nbsp;
 											</div>
 											<div class="col-sm-9 data__value">
-											 {{current_node.val}}
+												{{current_node.val}}
 											</div>
 										</div>
 								</div>

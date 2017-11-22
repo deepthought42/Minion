@@ -6,6 +6,10 @@
   </button>
 -->
 
+	<div class="col-md-12 error__message" ng-repeat="error in errors">
+		{{error}}
+		{{error.message}}
+	</div>
 	<div class="secondary-nav vertical__center__int" >
 	  <div class="col-md-2 col-sm-4">
 			<button class="btn btn--green pull-left" ng-click="startMappingProcess()" ng-disabled="isStarted || failing_tests>0">Start Discovery</button>
@@ -22,7 +26,7 @@
 		  Test Title
 		</div>
 		<div class="col-xs-2">
-		  Time (ms)&nbsp;<i class="fa fa-sort"></i>
+		  Time (s)&nbsp;<i class="fa fa-sort"></i>
 		</div>
 		<div class="col-xs-2">
 		  Date Discovered&nbsp;<i class="fa fa-sort"></i>
@@ -83,7 +87,7 @@
 					</div>
 			  </div>
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, test.path.path[0])">
-					{{test.runTime}} ms
+					{{test.runTime/1000}} s
 			  </div>
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, test.path.path[0])">
 					{{ test.time_discovered || "Unknown"}}
@@ -255,7 +259,7 @@
 									 {{current_node.name}}
 									</div>
 								</div>
-								<div class="key--value row">
+								<div class="key--value row" ng-show="current_node.val">
 									<div class="col-sm-3 data__key">
 										Value:&nbsp;&nbsp;
 									</div>
