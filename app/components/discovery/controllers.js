@@ -151,11 +151,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
 
     $scope.addGroup = function(test, group){
+      if(!group.name.length){
+         $scope.errors.push("Group name cannot be empty");
+         return;
+      }
       Tester.addGroup({name: group.name,
                        description: group.description,
                        key: test.key}).$promise
                 .then(function(data){
-                   $scope.groups.push(data);
+                   test.groups.push(data);
                  })
                  .catch(function(err){
                    $scope.errors.push(err.data.message);
