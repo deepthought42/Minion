@@ -133,13 +133,19 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.addGroup = function(test, group){
-      Tester.addGroup({name: group.name, description: group.description, key: test.key}).$promise
-        .then(function(data){
-          test.groups.push(data);
-        })
-        .catch(function(err){
-          $scope.errors.push(err);
-        });;
+      if(!group.name.length){
+         $scope.errors.push("Group name cannot be empty");
+         return;
+      }
+      Tester.addGroup({name: group.name,
+                       description: group.description,
+                       key: test.key}).$promise
+                .then(function(data){
+                   test.groups.push(data);
+                 })
+                 .catch(function(err){
+                   $scope.errors.push(err.data.message);
+                 });
     }
 
     $scope.removeGroup = function(test, group, $index){
