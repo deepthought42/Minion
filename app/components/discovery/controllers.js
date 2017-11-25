@@ -166,14 +166,14 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
                  });
     }
 
-    $scope.removeGroup = function(key, group){
-      Tester.removeGroup({key: key, name: group.name}).$promise
+    $scope.removeGroup = function(test, group, $index){
+      Tester.removeGroup({group_key: group.key, test_key: test.key}).$promise
         .then(function(data){
-          $scope.group
+          test.groups.splice($index,1);
         })
         .catch(function(err){
-          $scope.errors.push(err.data.message);
-        });;
+          $scope.errors.push(err);
+        });
     }
 
     /**
