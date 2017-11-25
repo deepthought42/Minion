@@ -199,19 +199,21 @@
 							<div class="node__data">
 								<div class="" ng-show="current_node.type=='Page'">
 
-								  <div class="col-sm-3 col-xs-2 page-container">
+								<div class="row">
+								  <div class="col-sm-12 col-xs-12">
+										<div class="node__title">
+										  <h4>Page - {{current_node.url}}</h4>
+									  </div>
+									</div>
+									<div class="col-sm-3 col-xs-2">
 										<img type="button" class="path-node-image"
 										data-toggle="modal" data-target="#exampleModal"
 										src="{{current_node.screenshot}}" class="path-node-image" />
 									</div>
-
-								  <div class="col-sm-9 col-xs-10">
-										<div class="node__title">
-										  <h4>Page - {{current_node.url}}</h4>
-									  </div>
-									  <div class="row key--value">
-										  <div class="col-xs-3 data__key">
-											 Landable:
+									<div class="col-sm-9 col-xs-10">
+										<div class="key--value row">
+											<div class="col-xs-3 data__key">
+											 Landable:&nbsp;&nbsp;
 											</div>
 											<div class="col-xs-9 data__value">
 											 {{current_node.landable}}
@@ -227,7 +229,8 @@
 										</div>
 									</div>
 								</div>
-								<div class="" ng-show="current_node.type=='PageElement'">
+								</div>
+								<div class="col-sm-12" ng-show="current_node.type=='PageElement'">
 									<div class="pull-right col-sm-4" ng-show="current_node.screenshot" >
 										<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" tooltip-placement="top" uib-tooltip="{{current_node.url}}" />
 									</div>
