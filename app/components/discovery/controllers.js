@@ -49,7 +49,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
               $scope.waitingOnTests = false;
             })
             .catch(function(err){
-              console.log("error getting tests");
               $scope.errors.push(err.data.message);
               $scope.waitingOnTests = false;
             });
@@ -105,7 +104,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.isStarted = true;
         })
         .catch(function(err){
-          console.log("error:: "+err);
           $scope.errors.push(err.data.message);
         });
     }
