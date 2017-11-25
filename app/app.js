@@ -19,6 +19,7 @@ angular.module('Qanairy', [
   'ngMaterial',
   'Qanairy.version',
   'AuthInterceptor',
+  'ui.bootstrap',
   'ngRaven'
 ]).
 config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',

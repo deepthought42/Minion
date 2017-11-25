@@ -71,21 +71,19 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         });
     }
 
-    $scope.runTest = function(test, correctness){
+    $scope.runTest = function(test, index){
       test.running = true;
       Tester.runTest({key: test.key, browser_type: "phantomjs"}).$promise
         .then(function(data){
           test.running = false;
           test.correct = data.passes;
-
-          Raven.captureMessage("Test ran successfully :: "+data,{
-              level: 'info'
-          });
-
+          //move test to top of list
+          $scope.tests.splice(index, 1);
+          $scope.tests.unshift(data);
         })
         .catch(function(err){
           test.running = false;
-          Raven.captureMessage("Tester failed to run successfully"+data,{
+          Raven.captureMessage("Test failed to run successfully"+data,{
               level: 'info'
           });
         });
@@ -101,10 +99,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
       Tester.runTests({test_keys: $scope.keys, browser_type: "phantomjs"}).$promise
         .then(function(data){
-          Raven.captureMessage("Test ran successfully :: "+data,{
-              level: 'info'
-          });
-
           //keys = Object.keys(data);
           $scope.keys.forEach(function(key){
             var val = data[key];
@@ -162,7 +156,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       test.visible = !test.visible;
 
       if(test.visible){
-        setCurrentNode(test.path.path[0]);
+        $scope.setCurrentNode(test.path.path[0]);
       }
     }
 

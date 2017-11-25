@@ -98,11 +98,18 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
        });
     };
 
-        .then(function(data){
-        })
-        .catch(function(err){
-          $scope.errors.push(err);
-        })
+    $scope.removeDomain = function(domain, index){
+      var confirmed_delete = confirm("Are you sure you want to remove "+domain.url);
+
+      if(confirmed_delete){
+        Domain.delete({key: domain.key}).$promise
+          .then(function(data){
+            $scope.domains.splice(index, 1);
+          })
+          .catch(function(err){
+            $scope.errors.push(err);
+          })
+      }
     }
 
     this._init();

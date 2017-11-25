@@ -1,5 +1,5 @@
 {
-  "name": "Minion",
+  "name": "minion",
   "description": "A starter project for AngularJS",
   "version": "0.0.1",
   "homepage": "",
@@ -21,7 +21,8 @@
     "stomp-websocket": "~2.3.4",
     "ng-stomp": "~0.3.0",
     "event-source-polyfill":"~0.0.8",
-    "raven-js": "latest"
+    "angular-bootstrap": "~2.5.0",
+    "raven-js": "~3.20.1"
   },
   "resolutions": {
     "angular": "^1.4.9"

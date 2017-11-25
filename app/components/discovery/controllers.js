@@ -33,20 +33,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.current_node = null;
       $scope.visible = false;
 
-      $scope.selectedTab = {};
-      $scope.selectedTab.dataTab = 0;
+      $scope.visible_tab = "nodedata0";
 
       $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
       $scope.group.description = "";
-
-      if(store.get('active') === undefined){
-        $scope.selectedTab.dataTab = 0;
-      }
-      else{
-        $scope.selectedTab.dataTab = store.get('active');
-      }
 
       if(store.get('domain') != null){
         $scope.waitingOnTests = true;
@@ -141,10 +133,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       setCurrentNode(node);
     }
 
-    $scope.toggleTestDataVisibility = function(test, node){
-      $scope.selectedTab.dataTab = 0;
-      $scope.current_node = node;
+    $scope.toggleTestDataVisibility = function(test){
       test.visible = !test.visible;
+
+      if(test.visible){
+        $scope.setCurrentNode(test.path.path[0]);
+      }
     }
 
     $scope.stopMappingProcess = function(){
