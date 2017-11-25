@@ -1,4 +1,4 @@
-t/*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
+/*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
 
 /*
  * What follows is the result of much research on cross-browser styling.
@@ -408,7 +408,7 @@ a img {border: none; }
 }
 
 #right-main-nav{
-	text-align: right;
+  text-align: right;
 }
 
 .user__name{
@@ -416,7 +416,6 @@ a img {border: none; }
 }
 
 .dropdown{
-  display: inline !important;
   padding-left:12px;
 }
 
@@ -648,7 +647,6 @@ input { text-indent: 0px; }
 
 .tab-pane{
   display: inline-block !important;
-
 }
 
 /*--------------------------- [6. Test/Test Container/Test Labels] --------------------------------------------------------------------------------*/
@@ -780,6 +778,7 @@ visibility:visible;
 	color: #ffffff !important;
 	font-size: 12px;
 	height:60px;
+  border-right: 1px solid #fafafa;
 }
 
 .status--symbol{
@@ -880,7 +879,7 @@ visibility:visible;
 .test__groups{
 	height: 60px;
 	border-top: 1px solid #e0e0e0;
-	border-bottom: 1px solid #e0e0e0;
+	border-bottom: 0px solid #e0e0e0;
 	padding:15px;
 }
 

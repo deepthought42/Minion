@@ -108,8 +108,8 @@
 			  </div>
 
 			  <div class="col-xs-2 test__btns">
-					<div class="btn-group" role="group" aria-label="Run Favorite More">
-					 <button class="btn btn--left btn--gray" ng-click="runTest(test, $index)">
+					<div class="btn-group" role="group" aria-label="Functions">
+					 <button class="btn btn--gray" ng-click="runTest(test, $index)">
 						 Run
 					 </button>
 					</div>
@@ -197,34 +197,34 @@
 						 		 aria-labelledby="node-data-tab"
 								 ng-class="{active: visible_tab=='nodedata'+$index}">
 							<div class="node__data">
-								<div class="" ng-show="current_node.type=='Page'">
-
-								<div class="row">
-								  <div class="col-sm-12 col-xs-12">
-										<div class="node__title">
-										  <h4>Page - {{current_node.url}}</h4>
-									  </div>
-									</div>
-									<div class="col-sm-3 col-xs-2">
-										<img type="button" class="path-node-image"
-										data-toggle="modal" data-target="#exampleModal"
-										src="{{current_node.screenshot}}" class="path-node-image" />
-									</div>
-									<div class="col-sm-9 col-xs-10">
-										<div class="key--value row">
-											<div class="col-xs-3 data__key">
-											 Landable:&nbsp;&nbsp;
-											</div>
-											<div class="col-xs-9 data__value">
-											 {{current_node.landable}}
+								<div class="col-sm-12" ng-show="current_node.type=='Page'">
+									<div class="row">
+										<div class="col-sm-12 col-xs-12">
+											<div class="node__title">
+												<h4>Page - {{current_node.url}}</h4>
 											</div>
 										</div>
-										<div class="key--value row">
-											<div class="col-xs-3 data__key">
-												URL:
+										<div class="col-sm-3 col-xs-2">
+											<img type="button" class="path-node-image"
+											data-toggle="modal" data-target="#exampleModal"
+											src="{{current_node.screenshot}}" class="path-node-image" />
+										</div>
+										<div class="col-sm-9 col-xs-10">
+											<div class="key--value row">
+												<div class="col-xs-3 data__key">
+												 Landable:&nbsp;&nbsp;
+												</div>
+												<div class="col-xs-9 data__value">
+												 {{current_node.landable}}
+												</div>
 											</div>
-											<div class="col-xs-9 data__value">
-												{{current_node.url}}
+											<div class="key--value row">
+												<div class="col-xs-3 data__key">
+													URL:&nbsp;&nbsp;
+												</div>
+												<div class="col-xs-9 data__value">
+													{{current_node.url}}
+												</div>
 											</div>
 										</div>
 									</div>
