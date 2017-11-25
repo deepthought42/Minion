@@ -646,64 +646,10 @@ input { text-indent: 0px; }
 .info__tab {
 }
 
-md-tabs {
-  display: block;
-  margin: 0;
-  border-radius: 2px;
-  overflow: hidden;
-  position: relative;
-  flex-shrink: 0;
-  &:not(.md-no-tab-content):not(.md-dynamic-height) {
-    min-height: 300 + $tabs-header-height;
-  }
+.tab-pane{
+  display: inline-block !important;
+
 }
-
-md-tab {
-  position: absolute;
-  z-index: -1;
-  left: -9999px;
-}
-
-
-
-.md-tab {
-  font-size: 16px;
-  text-align: center;
-  line-height: $tabs-header-height - 24;
-  padding: auto 15px;
-  transition: background-color 0.35s $swift-ease-in-out-timing-function;
-  cursor: pointer;
-  white-space: nowrap;
-  position: relative;
-  text-transform: capitalize;
-  @include rtl(float, left, right);
-  font-weight: 500;
-  box-sizing: border-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  &.md-focused, &:focus {
-    box-shadow: none;
-    outline: none;
-  }
-  &.md-active {
-    cursor: default;
-  }
-  &.md-disabled {
-    pointer-events: none;
-    touch-action: pan-y;
-    user-select: none;
-    -webkit-user-drag: none;
-    opacity: 0.5;
-    cursor: default;
-  }
-  &.ng-leave {
-    transition: none;
-  }
-}
-
-
-
-
 
 /*--------------------------- [6. Test/Test Container/Test Labels] --------------------------------------------------------------------------------*/
 
