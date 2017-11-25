@@ -18,18 +18,19 @@
         </h5>
       </div>
     </div>
-    <div class="domain__button" ng-repeat="domain in domains" ng-click="selectDomain(domain)">
-      <div class="" ng-click="close" style="text-align:right !important; position: relative;">
-           <h3 style="margin:0px; text-align:right !important; right:0px; position: absolute;">
-             <i class="fa fa-times delete__domain"></i>
-           </h3>
+    <div class="domain__button" ng-repeat="domain in domains">
+      <div class="" ng-click="removeDomain(domain, $index)" style="text-align:right !important; position: relative;">
+         <h3 style="margin:0px; text-align:right !important; right:0px; position: absolute;">
+           <i class="fa fa-times delete__domain" ></i>
+         </h3>
       </div>
-      <div  class="vertical__center domain__icon">
+      <div  class="vertical__center domain__icon" ng-click="selectDomain(domain)">
         <div class="domain__logo">
-          {{domain.logo}}<img class="" src="./img/qanairy_logo.png">
+          {{domain.logo}}
+          <img class="" src="./img/qanairy_logo.png">
         </div>
       </div>
-      <div class="domain__title">
+      <div class="domain__title" ng-click="selectDomain(domain)">
         <h6>
             {{domain.url}}
         </h6>

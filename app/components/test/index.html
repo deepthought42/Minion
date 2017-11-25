@@ -20,7 +20,6 @@
 		 	<!-- /.dropdown -->
 			<div class="dropdown dropdown-toggle pull-right"  ng-show="auth.isAuthenticated" data-toggle="dropdown" href="#">
 				Filter
-				<i class="fa fa-caret-down"></i>
 			</div>
 			<ul class="dropdown-menu">
 				<li>
@@ -48,7 +47,7 @@
 			Test Title
 	  </div>
 	  <div class="col-sm-2">
-		    Time (ms)&nbsp;<i class="fa fa-sort"></i>
+		    Time (s)&nbsp;<i class="fa fa-sort"></i>
 	  </div>
 	  <div class="col-sm-2">
 		    Date Last Run&nbsp;<i class="fa fa-sort"></i>
@@ -73,12 +72,12 @@
 		<div class="test"
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText"
 				 ng-show="!waitingOnTests && tests.length > 0">
-			<div class="test__profile vertical__center__int" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
+			<div class="test__profile vertical__center__int">
         <div class="col-xs-2 test__status" ng-show="test.running">
           <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
           <span class="sr-only">Running...</span>
         </div>
-        <div class="col-xs-2 test__status" ng-show="!test.running" >
+        <div class="col-xs-2 test__status" ng-show="!test.running">
 					<span ng-show="test.correct">
 					  <i class="fa fa-check-circle green status--symbol" ng-click="updateTestCorrectness(test, false)"></i>
 					</span>
@@ -86,7 +85,7 @@
 					  <i  class="fa fa-times-circle red status--symbol" ng-click="updateTestCorrectness(test, true)"></i>
 					</span>
 			  </div>
-			  <div class="col-xs-4 test__title">
+			  <div class="col-xs-4 test__title" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					<div class="row">
 						<div class="col-xs-12" ng-show="!test.show_test_name_edit_field">
 							<h2>{{test.name || "Test #"}}</h2>
@@ -101,16 +100,16 @@
 						</div>
 					</div>
 			  </div>
-			  <div class="col-xs-2">
-					{{test.runTime}} ms
+			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
+					{{test.runTime/1000}} s
 			  </div>
-			  <div class="col-xs-2">
+			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					{{ getDate(test) || "Unknown / Not since discovery"}}
 			  </div>
 
 			  <div class="col-xs-2 test__btns">
 					<div class="btn-group" role="group" aria-label="Run Favorite More">
-					 <button class="btn btn--left btn--gray" ng-click="runTest(test)">
+					 <button class="btn btn--left btn--gray" ng-click="runTest(test, $index)">
 						 Run
 					 </button>
 					</div>
@@ -120,32 +119,31 @@
 
 			<div ng-show="test.visible">
 			  <div class="test__path vertical__center__int" ng-click="visible_tab='nodedata'+$index">
-				  <div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
-				    <div ng-show="node.screenshot" class="path-node path-page"
-                 uib-tooltip="{{node.url}}">
+				  <div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)" tooltip-placement="top" uib-tooltip="{{node.url}}">
+				    <div ng-show="node.screenshot" class="path-node path-page">
 						  <img src="{{node.screenshot}}" class="path-node-image"/>
 					  </div>
-					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center">
-						 	<span class="" uib-tooltip="node.xpath" >
+					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center" tooltip-placement="top" uib-tooltip="node.xpath">
+						 	<span class="" >
                 {{node.name}}
               </span>
 			  		</div>
-					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center">
+					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center" tooltip-placement="top" uib-tooltip="node.name">
 							<span ng-show="node.name=='click'">
-						  	<i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name"></i>
+						  	<i class="fa fa-mouse-pointer fa-2x icon" ></i>
 							</span>
 							<span ng-show="node.name=='doubleClick'">
-								<i class="fa fa-mouse-pointer fa-2x icon" uib-tooltip="node.name" ></i>
+								<i class="fa fa-mouse-pointer fa-2x icon"></i>
 								<div class=”doubleclick” >x2</div>
 							</span>
 							<span ng-show="node.name=='mouseover'">
-								<i class="fa fa-hand-pointer-o fa-2x icon" uib-tooltip="node.name"></i>
+								<i class="fa fa-hand-pointer-o fa-2x icon"></i>
 							</span>
 							<span ng-show="node.name=='scroll'">
-								<i class="fa fa-arrows-v fa-2x icon" uib-tooltip="node.name"></i>
+								<i class="fa fa-arrows-v fa-2x icon"></i>
 							</span>
 							<span ng-show="node.name=='sendKeys'">
-								<i class="fa fa-i-cursor fa-2x icon" uib-tooltip="node.name"></i>
+								<i class="fa fa-i-cursor fa-2x icon"></i>
 							</span>
 					  </div>
 					  <div class="path-bar">
@@ -155,6 +153,7 @@
 					  <div  ng-show="test.result.screenshot" class="path-node">
 						  <img src="{{test.result.screenshot}}"
                    class="path-node-image"
+									 tooltip-placement="top"
 							 		 uib-tooltip="{{test.result.url}}"/>
 					  </div>
 					</div>
@@ -198,7 +197,7 @@
 						 		 aria-labelledby="node-data-tab"
 								 ng-class="{active: visible_tab=='nodedata'+$index}">
 							<div class="node__data">
-								<div class="col-sm-12" ng-show="current_node.type=='Page'">
+								<div class="" ng-show="current_node.type=='Page'">
 
 								<div class="row">
 								  <div class="col-sm-12 col-xs-12">
@@ -222,7 +221,7 @@
 										</div>
 										<div class="key--value row">
 											<div class="col-xs-3 data__key">
-												URL:&nbsp;&nbsp;
+												URL:
 											</div>
 											<div class="col-xs-9 data__value">
 												{{current_node.url}}
@@ -233,7 +232,7 @@
 								</div>
 								<div class="col-sm-12" ng-show="current_node.type=='PageElement'">
 									<div class="pull-right col-sm-4" ng-show="current_node.screenshot" >
-										<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" uib-tooltip="{{current_node.url}}" />
+										<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" tooltip-placement="top" uib-tooltip="{{current_node.url}}" />
 									</div>
 									<div class="col-sm-8">
 										<div class="row node__title">
@@ -295,12 +294,12 @@
 											 {{current_node.name}}
 											</div>
 										</div>
-										<div class="key--value row">
+										<div class="key--value row" ng-show="current_node.val">
 											<div class="col-sm-3 data__key">
-											Value:&nbsp;&nbsp;
+												Value:&nbsp;&nbsp;
 											</div>
 											<div class="col-sm-9 data__value">
-											 {{current_node.val}}
+												{{current_node.val}}
 											</div>
 										</div>
 								</div>

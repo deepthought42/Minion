@@ -22,8 +22,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.failing_tests = data.failing;
         })
         .catch(function(err){
-          $scope.errors = [];
-          $scope.errors.push(err);
+          $scope.errors.push(err.data.message);
         });;
     }
 
@@ -34,20 +33,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.current_node = null;
       $scope.visible = false;
 
-      $scope.selectedTab = {};
-      $scope.selectedTab.dataTab = 0;
+      $scope.visible_tab = "nodedata0";
 
       $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
       $scope.group.description = "";
-
-      if(store.get('active') === undefined){
-        $scope.selectedTab.dataTab = 0;
-      }
-      else{
-        $scope.selectedTab.dataTab = store.get('active');
-      }
 
       if(store.get('domain') != null){
         $scope.waitingOnTests = true;
@@ -59,7 +50,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
             })
             .catch(function(err){
               console.log("error getting tests");
-              $scope.errors = err;
+              $scope.errors.push(err.data.message);
               $scope.waitingOnTests = false;
             });
 
@@ -109,9 +100,13 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
      };
 
     $scope.startMappingProcess = function(){
-      WorkAllocation.query({url:  $scope.discovery_url})
-        .$promise.then(function(value){
+      WorkAllocation.query({url:  $scope.discovery_url}).$promise
+        .then(function(value){
           $scope.isStarted = true;
+        })
+        .catch(function(err){
+          console.log("error:: "+err);
+          $scope.errors.push(err.data.message);
         });
     }
 
@@ -138,16 +133,21 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       setCurrentNode(node);
     }
 
-    $scope.toggleTestDataVisibility = function(test, node){
-      $scope.selectedTab.dataTab = 0;
-      $scope.current_node = node;
+    $scope.toggleTestDataVisibility = function(test){
       test.visible = !test.visible;
+
+      if(test.visible){
+        $scope.setCurrentNode(test.path.path[0]);
+      }
     }
 
     $scope.stopMappingProcess = function(){
-      WorkAllocation.stopWork()
-        .$promise.then(function(){
+      WorkAllocation.stopWork().$promise
+        .then(function(){
           $scope.isStarted = false;
+        })
+        .catch(function(err){
+          $scope.errors.push(err.data.message);
         });
     }
 
@@ -155,16 +155,23 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
     $scope.addGroup = function(test, group){
       Tester.addGroup({name: group.name,
                        description: group.description,
-                       key: test.key}).$promise.
-                then(function(data){
-                   $scope.groups.push(group);
+                       key: test.key}).$promise
+                .then(function(data){
+                   $scope.groups.push(data);
                  })
+                 .catch(function(err){
+                   $scope.errors.push(err.data.message);
+                 });
     }
 
     $scope.removeGroup = function(key, group){
-      Tester.removeGroup({key: key, name: group.name}).$promise.then(function(data){
-        $scope.group
-      });
+      Tester.removeGroup({key: key, name: group.name}).$promise
+        .then(function(data){
+          $scope.group
+        })
+        .catch(function(err){
+          $scope.errors.push(err.data.message);
+        });;
     }
 
     /**
@@ -190,6 +197,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
             var approved_cnt = store.get('approved_test_cnt');
             store.set('approved_test_cnt', approved_cnt);
           }
+        })
+        .catch(function(err){
+          $scope.errors.push(err.data.message);
         });
     }
 
