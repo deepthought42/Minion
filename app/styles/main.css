@@ -1,4 +1,4 @@
-t/*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
+/*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
 
 /*
  * What follows is the result of much research on cross-browser styling.
@@ -409,11 +409,10 @@ a img {border: none; }
 }
 
 #right-main-nav{
-	text-align: right;
+  text-align: right;
 }
 
 .dropdown{
-  display: inline !important;
   padding-left:12px;
 }
 
@@ -645,7 +644,6 @@ input { text-indent: 0px; }
 
 .tab-pane{
   display: inline-block !important;
-
 }
 
 /*--------------------------- [6. Test/Test Container/Test Labels] --------------------------------------------------------------------------------*/
@@ -788,6 +786,7 @@ width: calc(100% - 15px);
 	color: #ffffff !important;
 	font-size: 12px;
 	height:60px;
+  border-right: 1px solid #fafafa;
 }
 
 .status--symbol{
