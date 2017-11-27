@@ -1,8 +1,10 @@
 <div class="content">
+
+
 	<div class="secondary-nav vertical__center__int">
 		<div class="col-md-2 col-sm-4">
   		<button class="btn btn--green pull-left" ng-click="runTests()">
-  		  Run Tests
+  		  Run All Tests
   		</button>
 	  </div>
 
@@ -57,6 +59,8 @@
 	</div>
 
 	<div class="test-container">
+
+
 		<div class="empty__state vertical__center" ng-show="waitingOnTests">
 			<div style="text-align:center; margin: 0px auto;">
 				<i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw"
@@ -70,9 +74,14 @@
       </h3>
 		</div>
 
+
+
 		<div class="test"
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText"
 				 ng-show="!waitingOnTests && tests.length > 0">
+
+
+
 			<div class="test__profile vertical__center__int">
         <div class="col-xs-1 test__status" ng-show="test.running">
           <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
@@ -89,7 +98,7 @@
 			  <div class="col-xs-4 test__title" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					<div class="row">
 						<div class="col-xs-12" ng-show="!test.show_test_name_edit_field">
-							<h2 ng-click="test.show_test_name_edit_field = true" >{{test.name || "Test #"}}</h2>
+							<h2 ng-click="test.show_test_name_edit_field = true" >{{test.name || "Test #"+($index+1)}}</h2>
 							<i class="fa fa-pencil edithover"  ng-click="test.show_test_name_edit_field = true" ></i>
 						</div>
 						<div class="vertical__center__int no-gutter" ng-show="test.show_test_name_edit_field">
@@ -106,9 +115,6 @@
 						</div>
 					</div>
 			  </div>
-
-
-
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					{{test.runTime/1000}} s
 			  </div>
@@ -116,7 +122,7 @@
 					{{ getDate(test) || "Unknown / Not since discovery"}}
 			  </div>
 			  <div class="col-xs-1 test__btns">
-					<div class="btn-group" role="group" aria-label="Run Favorite More">
+					<div class="btn-group" role="group" aria-label="Test Functions">
 					 <button class="btn btn--gray" ng-click="runTest(test, $index)">
 						 Run
 					 </button>
@@ -177,12 +183,12 @@
 								<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2"><i class="fa fa-plus"></i></span>
 							</div>
 						</div>
-						<div class="col-md-8 col-sm-6 ">
+						<div class="col-md-8 col-sm-6">
 							<div class="group__tag"
 									 ng-repeat="group in test.groups"
 	                 data-toggle="tooltip"
 	                 data-placement="top"
-	                 title="{{group.description}}">
+	                 title="{{group.description}}" >
 							  {{group.name}}
 								<span ng-click="removeGroup(test, group, $index)">
 									<i class="remove__group fa fa-times"></i>
@@ -201,10 +207,8 @@
 						</li>
 					</ul>
 					<div class="tab-content">
-						<div class="tab-pane node__data" id="{{'nodedata'+$index}}"
-						 		 aria-labelledby="node-data-tab"
-								 ng-class="{active: visible_tab=='nodedata'+$index}">
-							<div class="">
+						<div class="tab-pane" id="{{'nodedata'+$index}}" aria-labelledby="node-data-tab" ng-class="{active: visible_tab=='nodedata'+$index}">
+							<div class="node__data">
 								<div class="col-sm-12" ng-show="current_node.type=='Page'">
 									<div class="row">
 									  <div class="col-sm-12 col-xs-12 node__title">
@@ -216,95 +220,76 @@
 											src="{{current_node.screenshot}}" class="path-node-image" />
 										</div>
 										<div class="col-sm-9 col-xs-10">
-											<div class="key--value row">
-												<div class="col-xs-3 data__key">
-												 Landable:&nbsp;&nbsp;
+											<div class="key--value">
+												<div class="data__key">
+												 Landable:
 												</div>
-												<div class="col-xs-9 data__value">
+												<div class="data__value">
 												 {{current_node.landable}}
-												</div>
-											</div>
-											<div class="key--value row">
-												<div class="col-xs-3 data__key">
-													URL:
-												</div>
-												<div class="col-xs-9 data__value">
-													{{current_node.url}}
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="col-sm-12" ng-show="current_node.type=='PageElement'">
-									<div class="pull-right col-sm-4" ng-show="current_node.screenshot" >
-										<img src="{{current_node.screenshot}}" style="width: 100px; height:100px" tooltip-placement="top" uib-tooltip="{{current_node.url}}" />
-									</div>
-									<div class="col-sm-8">
-										<div class="row node__title">
-											<h4>Element</h4>
+									<div class="row">
+									  <div class="col-sm-12 col-xs-12 node__title">
+											<h4>Element - {{current_node.name}}</h4>
 										</div>
-									 	<div class="key--value row">
-											<div class="col-sm-3 data__key no-padding">
-											  Tag type:&nbsp;&nbsp;
+										<div class="col-sm-12 col-xs-12">
+											<div class="key--value">
+												<div class="data__key">
+												 Xpath:
+												</div>
+												<div class="data__value">
+												 {{current_node.xpath}}
+												</div>
 											</div>
-											<div class="col-sm-9 data__value no-padding" style="text-transform:capitalize !important;">
-											  {{current_node.name}}
+										</div>
+										<div class="col-sm-6 col-xs-12">
+											<div class="key--value">
+												<div class="data__key">
+													CSS:
+												</div>
+												<div class="data__value" ng-repeat="(key, value) in current_node.cssValues">
+													{{key}} -           {{value}}
+												</div>
 											</div>
-									 	</div>
-										<div class="key--value row">
-											<div class="col-sm-3 data__key no-padding">
-											  Xpath:&nbsp;&nbsp;
+										</div>
+										<div class="col-sm-6 col-xs-12">
+											<div class="key--value">
+												<div class="data__key">
+													Attributes:
+												</div>
+												<div class="data__value" ng-repeat="attribute in current_node.attributes">
+													{{attribute.name}} -           {{attribute.vals}}
+												</div>
 											</div>
-											<div class="col-sm-9 data__value no-padding">
-											  {{current_node.xpath}}
+										</div>
+										<div class="col-sm-12 col-xs-12">
+											<div class="key--value">
+												<div class="data__key">
+													Text:
+												</div>
+												<div class="data__value">
+											 		{{current_node.text}}
+												</div>
 											</div>
-									  </div>
-									 	<div class="key--value row">
-											<div class="col-sm-3 data__key">
-										  	CSS:&nbsp;&nbsp;
-											</div>
-											<div class="col-sm-9 data__value" ng-repeat="(key, value) in current_node.cssValues">
-												{{key}} -           {{value}}
-											</div>
-									 	</div>
-									 	<div class="key--value row">
-											<div class="col-sm-3 data__key">
-										 		Attributes:&nbsp;&nbsp;
-											</div>
-
-											<div class="col-sm-9 data__value" ng-repeat="attribute in current_node.attributes">
-												{{attribute.name}} -           {{attribute.vals}}
-											</div>
-									 	</div>
-									 	<div class="key--value row">
-											<div class="col-sm-3 data__key">
-										 		Text:&nbsp;&nbsp;
-											</div>
-
-											<div class="col-sm-9 data__value">
-										 		{{current_node.text}}
-											</div>
-									 	</div>
+										</div>
 									</div>
 								</div>
 								<div class="col-sm-12" ng-show="current_node.type=='Action'">
-										<div class="row node__title">
-											<h4>Action</h4>
+									  <div class="node__title">
+											<h4>Action - {{current_node.name}}</h4>
 										</div>
-										<div class="key--value row">
-											<div class="col-sm-3 data__key">
-											 Name:&nbsp;&nbsp;
-											</div>
-											<div class="col-sm-9 data__value">
-											 {{current_node.name}}
-											</div>
-										</div>
-										<div class="key--value row" ng-show="current_node.value || current_node.name=='sendKeys'">
-											<div class="col-sm-3 data__key">
-												Value:&nbsp;&nbsp;
-											</div>
-											<div class="col-sm-9 data__value">
-												{{current_node.val}}
+										<div class="">
+											<div class="key--value" ng-show="current_node.value || current_node.name=='sendKeys'">
+												<div class="data__key">
+													Value:
+												</div>
+												<div class="data__value">
+													{{current_node.val}}
+												</div>
 											</div>
 										</div>
 								</div>
@@ -321,7 +306,13 @@
 						</div>
 					</div>
     		</div>
+
 			</div>
+
+
+
+
+
 	  </div>
 	</div>
 </div>

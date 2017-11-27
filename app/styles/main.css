@@ -160,6 +160,10 @@ html {
   display: inline-block !important;
 }
 
+.inline{
+  display: inline !important;
+}
+
 .white{
   color: white !important;
 }
@@ -254,7 +258,7 @@ a img {border: none; }
 		line-height: 20px;
 		letter-spacing:.1px;
 		display: inline;
-		color:#999;
+		color:#666;
 	}
 
 
@@ -740,6 +744,7 @@ width: calc(100% - 15px);
 .title__edit{
     border-radius: 4px !important;
     width:100% !important;
+    margin-left: 15px;
 }
 
 
@@ -936,16 +941,17 @@ width: calc(100% - 15px);
 }
 
 .key--value {
+    padding-top:10px;
 }
 
 .data__key{
 	text-transform: capitalize;
-		font-size: 14px;
+		font-size: 16px;
+    font-weight: bold;
 		line-height: 20px;
 		letter-spacing:.2px;
-    padding-top:10px;
 		padding-bottom: 6px !important;
-		color:#333333;
+		color:#666666;
 	text-align: left;
 }
 
@@ -954,7 +960,7 @@ width: calc(100% - 15px);
 		line-height: 20px;
 		letter-spacing:.2px;
 		padding-bottom: 6px !important;
-		color:#666666;
+		color:#333333;
 }
 
 /*--------------------------- [7. Footer] ------------------------------------------------------------------------------*/
