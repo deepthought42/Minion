@@ -156,8 +156,9 @@ html {
     padding:0px !important;
 }
 
-
-.fa { display:inline !important; }
+.inline--block{
+  display: inline-block !important;
+}
 
 .white{
   color: white !important;
@@ -409,10 +410,6 @@ a img {border: none; }
 
 #right-main-nav{
   text-align: right;
-}
-
-.user__name{
-  display: inline !important;
 }
 
 .dropdown{
@@ -717,29 +714,40 @@ width: calc(100% - 15px);
 /*-------break this down for each data point,correct,incorrect---------*/
 .test__profile{
 	padding-top: 0px;
-	text-align: center !important;
+	text-align: center;
 	padding-bottom: 0px;
 	height: 60px;
+}
+
+.test__profile > div{
+	display: inline;
 }
 
 .test__title{
   text-align: left;
 }
 
+.title__edit__buttons{
+  margin: 0px 0px 0px 5px;
+  display: inline-block;
+  height: 30px;
+  padding: 4px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+}
+
+.title__edit{
+    border-radius: 4px !important;
+    width:100% !important;
+}
+
+
 .edithover{
   text-align: right !important;
   position:relative;
   padding-left: 15px;
-  bottom:1px;
   right:0px;
-}
-
-.test__title .edithover {
-visibility:hidden;
-}
-
-.test__title:hover .edithover {
-visibility:visible;
 }
 
 .test__profile {
@@ -887,14 +895,6 @@ visibility:visible;
 	display: inline;
 }
 
-
-.vertical__center,
-.vertical__center__int > div{
-	position: relative;
- 	top: 50%;
-  transform: perspective(1px) translateY(-50%);
-}
-
 .remove__group{
   padding-left: 6px;
 }
@@ -924,7 +924,7 @@ visibility:visible;
 }
 
 .node__title{
-  padding-bottom:5px;
+  padding-bottom:15px;
 }
 
 .test__history{

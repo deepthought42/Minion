@@ -40,7 +40,7 @@
 	</div>
 
 	<div class="test-labels">
-	  <div class="col-sm-2">
+	  <div class="col-sm-1">
 		    Status
 	  </div>
 	  <div class="col-sm-4 test__title">
@@ -49,17 +49,18 @@
 	  <div class="col-sm-2">
 		    Time (s)&nbsp;<i class="fa fa-sort"></i>
 	  </div>
-	  <div class="col-sm-2">
+	  <div class="col-sm-4">
 		    Date Last Run&nbsp;<i class="fa fa-sort"></i>
 	  </div>
-	  <div class="col-sm-2">
+	  <div class="col-sm-1">
 	  </div>
 	</div>
 
 	<div class="test-container">
 		<div class="empty__state vertical__center" ng-show="waitingOnTests">
 			<div style="text-align:center; margin: 0px auto;">
-				<i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+				<i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw"
+						aria-hidden="true"></i>
 				<span class="sr-only">Running...</span>
 			</div>
 		</div>
@@ -73,11 +74,11 @@
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText"
 				 ng-show="!waitingOnTests && tests.length > 0">
 			<div class="test__profile vertical__center__int">
-        <div class="col-xs-2 test__status" ng-show="test.running">
+        <div class="col-xs-1 test__status" ng-show="test.running">
           <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
           <span class="sr-only">Running...</span>
         </div>
-        <div class="col-xs-2 test__status" ng-show="!test.running">
+        <div class="col-xs-1 test__status" ng-show="!test.running">
 					<span ng-show="test.correct">
 					  <i class="fa fa-check-circle green status--symbol" ng-click="updateTestCorrectness(test, false)"></i>
 					</span>
@@ -88,27 +89,34 @@
 			  <div class="col-xs-4 test__title" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					<div class="row">
 						<div class="col-xs-12" ng-show="!test.show_test_name_edit_field">
-							<h2>{{test.name || "Test #"}}</h2>
+							<h2 ng-click="test.show_test_name_edit_field = true" >{{test.name || "Test #"}}</h2>
 							<i class="fa fa-pencil edithover"  ng-click="test.show_test_name_edit_field = true" ></i>
 						</div>
-						<div ng-show="test.show_test_name_edit_field">
-							<input type="text" ng-model="new_name" ng-value="test.name" />
-							<i class="fa fa-plus" ng-click="setTestName(test, new_name)"
-								 ng-show="!test.show_waiting_icon"></i>
-							<i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw"
-								  ng-show="test.show_waiting_icon" aria-hidden="true"></i>
+						<div class="vertical__center__int no-gutter" ng-show="test.show_test_name_edit_field">
+								<div class="col-md-6 col-sm-8 ">
+									<div class="input-group ">
+										<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" />
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-4 ">
+									<div class="title__edit__buttons btn--gray" ng-click="cancelTestName(test, new_name)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--green" ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div>
+									<div class=""><i class="fa fa-hourglass-half fa-spin fa-2x green fa-fw" ng-show="test.show_waiting_icon" aria-hidden="true"></i>
+									</div>
+								</div>
 						</div>
 					</div>
 			  </div>
+
+
+
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					{{test.runTime/1000}} s
 			  </div>
-			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
+			  <div class="col-xs-4" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					{{ getDate(test) || "Unknown / Not since discovery"}}
 			  </div>
-
-			  <div class="col-xs-2 test__btns">
-					<div class="btn-group" role="group" aria-label="Functions">
+			  <div class="col-xs-1 test__btns">
+					<div class="btn-group" role="group" aria-label="Run Favorite More">
 					 <button class="btn btn--gray" ng-click="runTest(test, $index)">
 						 Run
 					 </button>
@@ -196,13 +204,11 @@
 						<div class="tab-pane node__data" id="{{'nodedata'+$index}}"
 						 		 aria-labelledby="node-data-tab"
 								 ng-class="{active: visible_tab=='nodedata'+$index}">
-							<div class="node__data">
+							<div class="">
 								<div class="col-sm-12" ng-show="current_node.type=='Page'">
 									<div class="row">
-										<div class="col-sm-12 col-xs-12">
-											<div class="node__title">
-												<h4>Page - {{current_node.url}}</h4>
-											</div>
+									  <div class="col-sm-12 col-xs-12 node__title">
+											<h4>Page - {{current_node.url}}</h4>
 										</div>
 										<div class="col-sm-3 col-xs-2">
 											<img type="button" class="path-node-image"
@@ -220,7 +226,7 @@
 											</div>
 											<div class="key--value row">
 												<div class="col-xs-3 data__key">
-													URL:&nbsp;&nbsp;
+													URL:
 												</div>
 												<div class="col-xs-9 data__value">
 													{{current_node.url}}
@@ -228,7 +234,6 @@
 											</div>
 										</div>
 									</div>
-								</div>
 								</div>
 								<div class="col-sm-12" ng-show="current_node.type=='PageElement'">
 									<div class="pull-right col-sm-4" ng-show="current_node.screenshot" >
