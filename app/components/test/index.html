@@ -1,6 +1,4 @@
 <div class="content">
-
-
 	<div class="secondary-nav vertical__center__int">
 		<div class="col-md-2 col-sm-4">
   		<button class="btn btn--green pull-left" ng-click="runTests()">
@@ -59,8 +57,6 @@
 	</div>
 
 	<div class="test-container">
-
-
 		<div class="empty__state vertical__center" ng-show="waitingOnTests">
 			<div style="text-align:center; margin: 0px auto;">
 				<i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw"
@@ -74,14 +70,9 @@
       </h3>
 		</div>
 
-
-
 		<div class="test"
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText"
 				 ng-show="!waitingOnTests && tests.length > 0">
-
-
-
 			<div class="test__profile vertical__center__int">
         <div class="col-xs-1 test__status" ng-show="test.running">
           <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
@@ -132,7 +123,6 @@
 			  </div>
 			</div>
 
-
 			<div ng-show="test.visible">
 			  <div class="test__path vertical__center__int" ng-click="visible_tab='nodedata'+$index">
 				  <div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)" tooltip-placement="top">
@@ -174,28 +164,27 @@
 					</div>
 				</div>
 				<div class="test__groups vertical__center__int no-gutter">
-
-						<div class="col-md-1 col-sm-1 ">
-							<h4>Groups: </h4>
+					<div class="col-md-1 col-sm-1 ">
+						<h4>Groups: </h4>
+					</div>
+					<div class="col-md-3 col-sm-5 ">
+						<div class="input-group">
+							<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2">
+							<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2"><i class="fa fa-plus"></i></span>
 						</div>
-						<div class="col-md-3 col-sm-5 ">
-							<div class="input-group">
-								<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2">
-								<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2"><i class="fa fa-plus"></i></span>
-							</div>
+					</div>
+					<div class="col-md-8 col-sm-6">
+						<div class="group__tag"
+								 ng-repeat="group in test.groups"
+                 data-toggle="tooltip"
+                 data-placement="top"
+                 title="{{group.description}}" >
+						  {{group.name}}
+							<span ng-click="removeGroup(test, group, $index)">
+								<i class="remove__group fa fa-times"></i>
+							</span>
 						</div>
-						<div class="col-md-8 col-sm-6">
-							<div class="group__tag"
-									 ng-repeat="group in test.groups"
-	                 data-toggle="tooltip"
-	                 data-placement="top"
-	                 title="{{group.description}}" >
-							  {{group.name}}
-								<span ng-click="removeGroup(test, group, $index)">
-									<i class="remove__group fa fa-times"></i>
-								</span>
-							</div>
-						</div>
+					</div>
 			  </div>
 
 			  <div class="test__info">
@@ -307,13 +296,7 @@
 						</div>
 					</div>
     		</div>
-
 			</div>
-
-
-
-
-
 	  </div>
 	</div>
 </div>
