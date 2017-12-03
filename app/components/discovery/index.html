@@ -83,7 +83,7 @@
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-4 ">
-									<div class="title__edit__buttons btn--gray" ng-click="cancelTestName(test, new_name)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--green" ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div>
+									<div class="title__edit__buttons btn--gray" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--green" ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div>
 									<div class=""><i class="fa fa-hourglass-half fa-spin fa-2x green fa-fw" ng-show="test.show_waiting_icon" aria-hidden="true"></i>
 									</div>
 								</div>
@@ -102,31 +102,30 @@
 				<div class="test__path vertical__center__int" ng-click="visible_tab='nodedata'+$index">
 				  <div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
 				    <div ng-show="node.screenshot" class="path-node path-page"
-								 tooltip-placement="top"
-						     uib-tooltip="{{node.url}}">
+								 tooltip-placement="top">
 						  <img src="{{node.screenshot}}" class="path-node-image"/>
 					  </div>
 					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center">
-							<span class="" tooltip-placement="top" uib-tooltip="node.xpath" >
+							<span class="" tooltip-placement="top">
 								{{node.name}}
 							</span>
 			  		</div>
 					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center">
 							<span ng-show="node.name=='click'">
-						  	<i class="fa fa-mouse-pointer fa-2x icon" tooltip-placement="top" uib-tooltip="node.name"></i>
+						  	<i class="fa fa-mouse-pointer fa-2x icon" tooltip-placement="top"></i>
 							</span>
 							<span ng-show="node.name=='doubleClick'">
-								<i class="fa fa-mouse-pointer fa-2x icon" tooltip-placement="top" uib-tooltip="node.name" ></i>
+								<i class="fa fa-mouse-pointer fa-2x icon" tooltip-placement="top"></i>
 								<div class=”doubleclick” >x2</div>
 							</span>
 							<span ng-show="node.name=='mouseover'">
-								<i class="fa fa-hand-pointer-o fa-2x icon" uib-tooltip="node.name"></i>
+								<i class="fa fa-hand-pointer-o fa-2x icon"></i>
 							</span>
 							<span ng-show="node.name=='scroll'">
-								<i class="fa fa-arrows-v fa-2x icon" uib-tooltip="node.name"></i>
+								<i class="fa fa-arrows-v fa-2x icon"></i>
 							</span>
 							<span ng-show="node.name=='sendKeys'">
-								<i class="fa fa-i-cursor fa-2x icon" uib-tooltip="node.name"></i>
+								<i class="fa fa-i-cursor fa-2x icon"></i>
 							</span>
 					  </div>
 					  <div class="path-bar">
@@ -134,8 +133,7 @@
 					</div>
 					<div class="path-node-container" ng-click="setCurrentNode(test.result);visible_tab='nodedata'+$index">
 					  <div  ng-show="test.result.screenshot" class="path-node">
-						  <img src="{{test.result.screenshot}}" class="path-node-image"
-							 		 uib-tooltip="{{test.result.url}}"/>
+						  <img src="{{test.result.screenshot}}" class="path-node-image"/>
 					  </div>
 					</div>
 			  </div>

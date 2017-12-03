@@ -83,9 +83,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         })
         .catch(function(err){
           test.running = false;
-          Raven.captureMessage("Test failed to run successfully"+data,{
-              level: 'info'
-          });
+
         });
     }
 
@@ -116,8 +114,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         })
         .catch(function(err){
           $scope.errors.push(err);
-          Raven.captureException(err);
-          Raven.showReportDialog();
+
           console.log("Tester failed to run successfully");
         });
     }
@@ -194,8 +191,17 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         });
     }
 
+    $scope.showTestNameEdit = function(test){
+      test.show_test_name_edit_field = true;
+      test.show_waiting_icon = false;
+    }
+
     $scope.isCurrentNodePage = function(){
       return $scope.current_node=='Page';
+    }
+
+    $scope.cancelEditingTestName = function(test){
+      test.show_test_name_edit_field = false;
     }
 
     $scope._init();

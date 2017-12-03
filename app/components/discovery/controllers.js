@@ -22,7 +22,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.failing_tests = data.failing;
         })
         .catch(function(err){
-          $scope.errors.push(err.data.message);
+          $scope.errors.push(err.data);
         });;
     }
 
@@ -49,7 +49,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
               $scope.waitingOnTests = false;
             })
             .catch(function(err){
-              $scope.errors.push(err.data.message);
+              $scope.errors.push(err.data);
               $scope.waitingOnTests = false;
             });
 
@@ -104,7 +104,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.isStarted = true;
         })
         .catch(function(err){
-          $scope.errors.push(err.data.message);
+          $scope.errors.push(err.data);
         });
     }
 
@@ -145,7 +145,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.isStarted = false;
         })
         .catch(function(err){
-          $scope.errors.push(err.data.message);
+          $scope.errors.push(err.data);
         });
     }
 
@@ -162,7 +162,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
                    test.groups.push(data);
                  })
                  .catch(function(err){
-                   $scope.errors.push(err.data.message);
+                   $scope.errors.push(err.data);
                  });
     }
 
@@ -184,6 +184,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     }
 
+    $scope.cancelEditingTestName = function(test){
+      test.show_test_name_edit_field = false;
+    }
+
     $scope.updateCorrectness = function(test, correctness, idx){
       Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
         .then(function(data){
@@ -201,7 +205,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           }
         })
         .catch(function(err){
-          $scope.errors.push(err.data.message);
+          $scope.errors.push(err.data);
         });
     }
 
