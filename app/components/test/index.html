@@ -92,15 +92,13 @@
 							<h2 ng-click="showTestNameEdit(test)" >{{test.name || "Test #"+($index+1)}}</h2>
 							<i class="fa fa-pencil edithover"  ng-click="showTestNameEdit(test)" ></i>
 						</div>
-						<div class="vertical__center__int no-gutter" ng-show="test.show_test_name_edit_field">
-								<div class="col-md-6 col-sm-8 ">
-									<div class="input-group ">
-										<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" />
-									</div>
+						<div class="col-xs-12 vertical__center__int no-gutter" ng-show="test.show_test_name_edit_field">
+								<div class="col-md-6 col-sm-8">
+									<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" />
 								</div>
 								<div class="col-md-6 col-sm-4 ">
-									<div class="title__edit__buttons btn--gray" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
-									<div class="title__edit__buttons btn--green" ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div>
+									<div class="title__edit__buttons btn--green pull-right" ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div>
+									<div class="title__edit__buttons btn--gray pull-right" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
 									<div class="" ng-show="test.show_waiting_icon" >
 										<i class="fa fa-hourglass-half fa-spin fa-2x green fa-fw" aria-hidden="true"></i>
 									</div>
