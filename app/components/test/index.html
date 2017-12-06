@@ -74,11 +74,11 @@
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText"
 				 ng-show="!waitingOnTests && tests.length > 0">
 			<div class="test__profile vertical__center__int">
-        <div class="col-xs-1 test__status" ng-show="test.running">
+        <div class="col-xs-1 test__status" ng-show="test.runStatus">
           <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
           <span class="sr-only">Running...</span>
         </div>
-        <div class="col-xs-1 test__status" ng-show="!test.running">
+        <div class="col-xs-1 test__status" ng-show="!test.runStatus">
 					<span ng-show="test.correct">
 					  <i class="fa fa-check-circle green status--symbol" ng-click="updateTestCorrectness(test, false)"></i>
 					</span>
@@ -204,8 +204,9 @@
 										</div>
 										<div class="col-sm-3 col-xs-2">
 											<img type="button" class="path-node-image"
-											data-toggle="modal" data-target="#exampleModal"
-											src="{{current_node.screenshot}}" class="path-node-image" />
+													data-toggle="modal" data-target="#exampleModal"
+													src="{{current_node.screenshot}}" class="path-node-image"
+													ng-click="openPageModal(current_node)" />
 										</div>
 										<div class="col-sm-9 col-xs-10">
 											<div class="key--value">

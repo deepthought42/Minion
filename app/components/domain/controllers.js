@@ -33,7 +33,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     $scope.createDomain = function(protocol, domain){
       var url = protocol + "://" + domain;
 
-      Domain.save(url).$promise.then(function(successResult){
+      Domain.save(domain).$promise.then(function(successResult){
         $scope.show_create_domain_err = false;
         store.set('domain', successResult);
         $scope.domains.push(successResult);
@@ -97,6 +97,30 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           }
        });
     };
+
+    var fsClient = filestack.init('AZ3Vgj49DQyOMFzbi5BsHz');
+    $scope.openPicker = function(domain) {
+      fsClient.pick({
+        fromSources:["local_file_system","url","imagesearch","facebook","instagram","googledrive","dropbox","onedrive","clouddrive"],
+        accept:["image/*"],
+        transformations:{}
+      }).then(function(response) {
+        // declare this function to handle response
+        //set filestack url somewhere
+        domain.logoUrl = response.filesUploaded[0].url;
+        Domain.save(domain).$promise
+          .then(function(successResult){
+            $scope.show_create_domain_err = false;
+            store.set('domain', successResult);
+            $rootScope.$broadcast("domain_updated", successResult);
+          })
+          .catch(function(err){
+            $scope.errors.push(err);
+          })
+        console.log("domain url :: "+domain);
+        console.log("response :: "+ Object.keys(response.filesUploaded[0]));
+      });
+    }
 
     $scope.removeDomain = function(domain, index){
       var confirmed_delete = confirm("Are you sure you want to remove "+domain.url);
