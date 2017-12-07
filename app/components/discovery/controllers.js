@@ -63,6 +63,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
         var channel = pusher.subscribe($scope.extractHostname($scope.discovery_url));
         channel.bind('test-discovered', function(data) {
+          $scope.waitingOnTests = false;
           $scope.tests.push(JSON.parse(data));
           $scope.$apply();
         });
@@ -98,12 +99,14 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
        $scope.selectedTab.dataTab = currentTabIndex;
      };
 
-    $scope.startMappingProcess = function(){
+    $scope.startDiscovery = function(){
+      $scope.waitingOnTests = true;
       WorkAllocation.query({url:  $scope.discovery_url}).$promise
         .then(function(value){
           $scope.isStarted = true;
         })
         .catch(function(err){
+          $scope.waitingOnTests = false;
           $scope.errors.push(err.data);
         });
     }
@@ -189,8 +192,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
     }
 
     $scope.updateCorrectness = function(test, correctness, idx){
+      test.waitingOnStatusChange = true;
       Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
         .then(function(data){
+          test.waitingOnStatusChange = false;
           test.correct = data.correct;
           //remove from list
           $scope.tests.splice(idx, 1);
@@ -205,6 +210,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           }
         })
         .catch(function(err){
+          test.waitingOnStatusChange = false;
           $scope.errors.push(err.data);
         });
     }
