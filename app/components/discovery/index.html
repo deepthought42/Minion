@@ -12,7 +12,7 @@
 	</div>
 	<div class="secondary-nav vertical__center__int" >
 	  <div class="col-md-2 col-sm-4">
-			<button class="btn btn--green pull-left" ng-click="startMappingProcess()" ng-disabled="isStarted || failing_tests>0">Start Discovery</button>
+			<button class="btn btn--green pull-left" ng-click="startDiscovery()" ng-disabled="isStarted || failing_tests>0">Start Discovery</button>
 	  </div>
 		<div class="col-md-10 col-sm-8">
 	  </div>
@@ -43,7 +43,7 @@
 		<div class="empty__state vertical__center" ng-show="!waitingOnTests && tests.length==0">
 			<h3>Collect your tests by first running a Discovery.</h3>
 			<div style="text-align:center; margin: 0px auto;">
-				<button class="btn btn--green btn-lg" ng-click="startMappingProcess()"  ng-disabled="isStarted || failing_tests>0">
+				<button class="btn btn--green btn-lg" ng-click="startDiscovery()"  ng-disabled="isStarted || failing_tests>0">
 					Start Discovery
 				</button>
 			</div>
@@ -52,7 +52,11 @@
 			<div class="test__profile vertical__center__int" >
 			  <div class="col-xs-2 test__status text--shadow">
 			   	<div class="row no-gutter">
-					 	<div class="col-xs-6 btn--green select__neutral status vertical__center__int">
+						<div class="col-xs-1 test__status" ng-show="test.waitingOnStatusChange">
+		          <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+		          <span class="sr-only">Running...</span>
+		        </div>
+					 	<div class="col-xs-6 btn--green select__neutral status vertical__center__int" ng-show="!test.waitingOnStatusChange">
 						 	<div class="" ng-click="updateCorrectness(test, true, $index)">
 						   	<i class="fa fa-check status--symbol white"
 							   	 style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
@@ -60,7 +64,7 @@
 						   	Correct
 							</div>
 						</div>
-						<div class="status col-xs-6 btn--red select__neutral vertical__center__int">
+						<div class="status col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange">
 							<div class="" ng-click="updateCorrectness(test, false, $index)">
 								<i  class="fa fa-times status--symbol white"
 									style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
@@ -76,15 +80,17 @@
 							<h2 ng-click="test.show_test_name_edit_field = true" >{{test.name || "Test #"+($index+1)}}</h2>
 							<i class="fa fa-pencil edithover"  ng-click="test.show_test_name_edit_field = true" ></i>
 						</div>
-						<div class="vertical__center__int no-gutter" ng-show="test.show_test_name_edit_field">
+						<div class="col-xs-12 vertical__center__int no-gutter" ng-show="test.show_test_name_edit_field">
 								<div class="col-md-6 col-sm-8 ">
 									<div class="input-group ">
 										<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" />
 									</div>
 								</div>
 								<div class="col-md-6 col-sm-4 ">
-									<div class="title__edit__buttons btn--gray" ng-click="cancelTestName(test, new_name)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--green" ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div>
-									<div class=""><i class="fa fa-hourglass-half fa-spin fa-2x green fa-fw" ng-show="test.show_waiting_icon" aria-hidden="true"></i>
+									<div class="title__edit__buttons btn--green pull-right" ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div>
+									<div class="title__edit__buttons btn--gray pull-right" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
+									<div class="">
+										<i class="fa fa-hourglass-half fa-spin fa-2x green fa-fw" ng-show="test.show_waiting_icon" aria-hidden="true"></i>
 									</div>
 								</div>
 						</div>
@@ -101,47 +107,43 @@
 			<div ng-show="test.visible">
 				<div class="test__path vertical__center__int" ng-click="visible_tab='nodedata'+$index">
 				  <div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)">
-				    <div ng-show="node.screenshot" class="path-node path-page"
-								 tooltip-placement="top"
-						     uib-tooltip="{{node.url}}">
+				    <div ng-show="node.screenshot" class="path-node path-page" tooltip-placement="top">
 						  <img src="{{node.screenshot}}" class="path-node-image"/>
 					  </div>
 					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center">
-							<span class="" tooltip-placement="top" uib-tooltip="node.xpath" >
+							<span class="" tooltip-placement="top">
 								{{node.name}}
 							</span>
 			  		</div>
 					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center">
 							<span ng-show="node.name=='click'">
-						  	<i class="fa fa-mouse-pointer fa-2x icon" tooltip-placement="top" uib-tooltip="node.name"></i>
+						  	<i class="fa fa-mouse-pointer fa-2x icon" tooltip-placement="top"></i>
 							</span>
 							<span ng-show="node.name=='doubleClick'">
-								<i class="fa fa-mouse-pointer fa-2x icon" tooltip-placement="top" uib-tooltip="node.name" ></i>
+								<i class="fa fa-mouse-pointer fa-2x icon" tooltip-placement="top"></i>
 								<div class=”doubleclick” >x2</div>
 							</span>
 							<span ng-show="node.name=='mouseover'">
-								<i class="fa fa-hand-pointer-o fa-2x icon" uib-tooltip="node.name"></i>
+								<i class="fa fa-hand-pointer-o fa-2x icon"></i>
 							</span>
 							<span ng-show="node.name=='scroll'">
-								<i class="fa fa-arrows-v fa-2x icon" uib-tooltip="node.name"></i>
+								<i class="fa fa-arrows-v fa-2x icon"></i>
 							</span>
 							<span ng-show="node.name=='sendKeys'">
-								<i class="fa fa-i-cursor fa-2x icon" uib-tooltip="node.name"></i>
+								<i class="fa fa-i-cursor fa-2x icon"></i>
 							</span>
 					  </div>
 					  <div class="path-bar">
 					  </div>
 					</div>
 					<div class="path-node-container" ng-click="setCurrentNode(test.result);visible_tab='nodedata'+$index">
-					  <div  ng-show="test.result.screenshot" class="path-node">
-						  <img src="{{test.result.screenshot}}" class="path-node-image"
-							 		 uib-tooltip="{{test.result.url}}"/>
+					  <div ng-show="test.result.screenshot" class="path-node">
+						  <img src="{{test.result.screenshot}}" class="path-node-image"/>
 					  </div>
 					</div>
 			  </div>
 
 				<div class="test__groups vertical__center__int no-gutter">
-
 					<div class="col-md-1 col-sm-1 ">
 						<h4>Groups: </h4>
 					</div>
@@ -151,18 +153,15 @@
 							<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2"><i class="fa fa-plus"></i></span>
 						</div>
 					</div>
-					<div class="col-md-8 col-sm-6 ">
-						<div class="group__tag"
-								 ng-repeat="group in test.groups"
-	               data-toggle="tooltip"
-	               data-placement="top"
-	               title="{{group.description}}">
+					<div class="col-md-8 col-sm-6">
+						<div class="group__tag" ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
 						  {{group.name}}
 							<span ng-click="removeGroup(test, group, $index)">
 								<i class="remove__group fa fa-times"></i>
 							</span>
 						</div>
 					</div>
+				</div>
 			</div>
 		  <div class="test__info" ng-show="test.visible">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -188,10 +187,10 @@
 									<div class="col-sm-9 col-xs-10">
 										<div class="key--value">
 											<div class="data__key">
-											 Landable:
-											</div>
-											<div class="data__value">
-											 {{current_node.landable}}
+												<span>
+											 		Landable:
+												</span>
+												<input type="checkbox" ng-checked="current_node.landable" disabled/>
 											</div>
 										</div>
 									</div>
@@ -247,23 +246,23 @@
 								</div>
 							</div>
 							<div class="col-sm-12" ng-show="current_node.type=='Action'">
-									<div class="node__title">
-										<h4>Action - {{current_node.name}}</h4>
-									</div>
-									<div class="">
-										<div class="key--value" ng-show="current_node.value || current_node.name=='sendKeys'">
-											<div class="data__key">
-												Value:
-											</div>
-											<div class="data__value">
-												{{current_node.val}}
-											</div>
+								<div class="node__title">
+									<h4>Action - {{current_node.name}}</h4>
+								</div>
+								<div class="">
+									<div class="key--value" ng-show="current_node.value || current_node.name=='sendKeys'">
+										<div class="data__key">
+											Value:
+										</div>
+										<div class="data__value">
+											{{current_node.val}}
 										</div>
 									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-			</div>
-  	</div>
+				</div>
+  		</div>
 	</div>
 </div>

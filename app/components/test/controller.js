@@ -10,8 +10,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
   });
 }])
 
-.controller('TesterIndexCtrl', ['$rootScope', '$scope', '$interval', 'Tester', 'store', '$state',
-  function($rootScope, $scope, $interval, Tester, store, $state) {
+.controller('TesterIndexCtrl', ['$rootScope', '$scope', '$interval', 'Tester', 'store', '$state', '$mdDialog',
+  function($rootScope, $scope, $interval, Tester, store, $state, $mdDialog) {
     $scope._init= function(){
       $('[data-toggle="tooltip"]').tooltip()
       $scope.errors = [];
@@ -72,20 +72,18 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.runTest = function(test, index){
-      test.running = true;
+      test.runStatus = true;
       Tester.runTest({key: test.key, browser_type: "phantomjs"}).$promise
         .then(function(data){
-          test.running = false;
+          test.runStatus = false;
           test.correct = data.passes;
           //move test to top of list
           $scope.tests.splice(index, 1);
           $scope.tests.unshift(data);
         })
         .catch(function(err){
-          test.running = false;
-          Raven.captureMessage("Test failed to run successfully"+data,{
-              level: 'info'
-          });
+          test.runStatus = false;
+
         });
     }
 
@@ -93,7 +91,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       //get keys for tests and put
       $scope.keys = [];
       $scope.filteredTests.forEach(function(test){
-        test.running = true;
+        test.runStatus = true;
         $scope.keys.push(test.key);
       });
 
@@ -105,7 +103,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
             //iterate over tests and set correctness based on if test key is present in data
 
             $scope.filteredTests.forEach(function(test){
-              test.running = false;
+              test.runStatus = false;
 
               if(data[test.key]){
                 test.correct = data[test.key];
@@ -116,8 +114,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         })
         .catch(function(err){
           $scope.errors.push(err);
-          Raven.captureException(err);
-          Raven.showReportDialog();
+
           console.log("Tester failed to run successfully");
         });
     }
@@ -194,9 +191,40 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         });
     }
 
+    $scope.showTestNameEdit = function(test){
+      test.show_test_name_edit_field = true;
+      test.show_waiting_icon = false;
+    }
+
     $scope.isCurrentNodePage = function(){
       return $scope.current_node=='Page';
     }
+
+    $scope.cancelEditingTestName = function(test){
+      test.show_test_name_edit_field = false;
+    }
+
+    $scope.openPageModal = function(page) {
+      $scope.current_preview_page = page;
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          template: '<md-dialog class="" style="">' +
+                      '<div class="col-sm-12 domain-dialogue-close" ng-click="closeDialog()">' +
+                      '  <md-dialog-content>' +
+                      '     <h3 style="text-align:right;"><i class="fa fa-times"></i></h3>' +
+                      '  </md-dialog-content>' +
+                      '</div>' +
+                      '<img src="{{current_preview_page.screenshot}}" />' +
+                    '</md-dialog>',
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
 
     $scope._init();
   }

@@ -22,7 +22,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.failing_tests = data.failing;
         })
         .catch(function(err){
-          $scope.errors.push(err.data.message);
+          $scope.errors.push(err.data);
         });;
     }
 
@@ -49,7 +49,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
               $scope.waitingOnTests = false;
             })
             .catch(function(err){
-              $scope.errors.push(err.data.message);
+              $scope.errors.push(err.data);
               $scope.waitingOnTests = false;
             });
 
@@ -63,6 +63,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
         var channel = pusher.subscribe($scope.extractHostname($scope.discovery_url));
         channel.bind('test-discovered', function(data) {
+          $scope.waitingOnTests = false;
           $scope.tests.push(JSON.parse(data));
           $scope.$apply();
         });
@@ -98,13 +99,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
        $scope.selectedTab.dataTab = currentTabIndex;
      };
 
-    $scope.startMappingProcess = function(){
+    $scope.startDiscovery = function(){
+      $scope.waitingOnTests = true;
       WorkAllocation.query({url:  $scope.discovery_url}).$promise
         .then(function(value){
           $scope.isStarted = true;
         })
         .catch(function(err){
-          $scope.errors.push(err.data.message);
+          $scope.waitingOnTests = false;
+          $scope.errors.push(err.data);
         });
     }
 
@@ -145,7 +148,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.isStarted = false;
         })
         .catch(function(err){
-          $scope.errors.push(err.data.message);
+          $scope.errors.push(err.data);
         });
     }
 
@@ -162,7 +165,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
                    test.groups.push(data);
                  })
                  .catch(function(err){
-                   $scope.errors.push(err.data.message);
+                   $scope.errors.push(err.data);
                  });
     }
 
@@ -184,9 +187,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     }
 
+    $scope.cancelEditingTestName = function(test){
+      test.show_test_name_edit_field = false;
+    }
+
     $scope.updateCorrectness = function(test, correctness, idx){
+      test.waitingOnStatusChange = true;
       Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
         .then(function(data){
+          test.waitingOnStatusChange = false;
           test.correct = data.correct;
           //remove from list
           $scope.tests.splice(idx, 1);
@@ -201,7 +210,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           }
         })
         .catch(function(err){
-          $scope.errors.push(err.data.message);
+          test.waitingOnStatusChange = false;
+          $scope.errors.push(err.data);
         });
     }
 

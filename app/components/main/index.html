@@ -46,34 +46,34 @@
       </div>
 
 		  <div id="right-main-nav" class="col-xs-6" ng-show="auth.isAuthenticated">
-        <div class="inline--block">{{user_profile.email}}
+        <div class="inline--block">
+          {{user_profile.email}}
         </div>
 			  <!-- /.dropdown -->
-				<div class="inline--block dropdown dropdown-toggle" data-toggle="dropdown" href="#">
+        <div class="dropdown dropdown-toggle pull-right" data-toggle="dropdown" href="#">
 					<i class="fa fa-user fa-fw"></i>
-				</div>
-				<ul class="dropdown-menu dropdown-user">
-					<li>
-            <a href="#">
-              <i class="fa fa-user fa-fw"></i>
-              User Profile
-            </a>
-					</li>
-					<li>
-            <a href="#">
-              <i class="fa fa-gear fa-fw"></i>
-              Settings
-            </a>
-					</li>
-					<li class="divider"></li>
-					<li>
-					  <a href="#/" ng-click="logout()">
-			         <i class="fa fa-sign-out fa-fw"></i>
-			         Logout
-					  </a>
-					</li>
-				</ul>
-						<!-- /.dropdown-user -->
+          <ul class="dropdown-menu dropdown-user" style="opacity: 1">
+            <li>
+              <a href="#">
+                <i class="fa fa-user fa-fw"></i>
+                User Profile
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-gear fa-fw"></i>
+                Settings
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#/" ng-click="logout()">
+                <i class="fa fa-sign-out fa-fw"></i>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
 			</div>
       <div class="pull-right login__signup" ng-show="!auth.isAuthenticated">
         <a href="#/" ng-click="signin()">
@@ -81,10 +81,10 @@
           Login | Sign up
         </a>
       </div>
-   </div>
-     <div ui-view class="full__height">
-     </div>
-   </div>
+    </div>
+    <div ui-view class="full__height">
+    </div>
+  </div>
 </div>
 <!-- not sure where to put this, need to set it up so that it removes itself when tests is clicked on
   <script type="text/javascript">
