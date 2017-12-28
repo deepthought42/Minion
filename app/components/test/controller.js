@@ -167,12 +167,12 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.current_node = node;
     }
 
-    $scope.getDate = function(test){
-      if(test.lastRunTimestamp == null){
+    $scope.getDate = function(value){
+      if(value == null){
         return null;
       }
       else{
-        return new Date(test.lastRunTimestamp).toLocaleString();
+        return new Date(value).toLocaleString();
       }
     }
 
