@@ -40,13 +40,11 @@
 				<span class="sr-only">Running...</span>
 			</div>
 		</div>
-		<div class="empty__state vertical__center" ng-show="!waitingOnTests && tests.length==0">
+		<div class="empty__state vertical__center__int" ng-show="!waitingOnTests && tests.length==0">
 			<h3>Collect your tests by first running a Discovery.</h3>
-			<div style="text-align:center; margin: 0px auto;">
-				<button class="btn btn--green btn-lg" ng-click="startDiscovery()"  ng-disabled="isStarted || failing_tests>0">
-					Start Discovery
-				</button>
-			</div>
+			<button class="btn btn--green btn-lg" ng-click="startDiscovery()" ng-disabled="isStarted || failing_tests>0">
+				Start Discovery
+			</button>
 		</div>
 		<div class="test" ng-repeat="test in tests" ng-show="!waitingOnTests && tests.length>0">
 			<div class="test__profile vertical__center__int" >

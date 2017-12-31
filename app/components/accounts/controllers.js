@@ -22,18 +22,16 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
     this._init();
 
     $scope.$on('new-account', function(event, args){
-      console.log("NEW ACCOUNT! WOOO!");
+      console.log("NEW ACCOUNT event! WOOO!");
       var account = {
-        service_package: "alpha",
-        users: ["test32@qanairy.com"]
+        service_package: "alpha"
       }
       Account.save(account);
     });
 
-    $scope.createAlphaAccount = function(){
+    $scope.createAccount = function(account_type){
       var account = {
-        service_package: "alpha",
-        users: ["test32@qanairy.com"]
+        service_package: account_type
       }
       Account.save(account);
     }
