@@ -17,6 +17,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   function($rootScope, $scope, Domain,  $mdDialog, store, $state) {
     this._init = function(){
       $scope.errors = [];
+      $scope.host = "";
       Domain.query().$promise
         .then(function(data){
           $scope.domains = data;
@@ -30,10 +31,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_creation_err = "An error occurred while saving the domain";
     }
 
-    $scope.createDomain = function(protocol, domain){
-      var url = protocol + "://" + domain;
-
-      Domain.save(domain).$promise.then(function(successResult){
+    $scope.createDomain = function(protocol, host){
+      Domain.save({protocol: protocol, url: host, logo_url: ""}).$promise.then(function(successResult){
         $scope.show_create_domain_err = false;
         store.set('domain', successResult);
         $scope.domains.push(successResult);
@@ -70,7 +69,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
                       '     <h3>Start a new project by adding a&nbsp;domain.</h3>' +
                       '  </md-dialog-content>' +
                       '</div>' +
-                      '<form name="domain_form" ng-submit="domain_form.$valid && createDomain(protocol, domain)" novalidate>' +
+                      '<form name="domain_form" ng-submit="domain_form.$valid && createDomain(protocol, host)" novalidate>' +
                         '<div class ="col-sm-12 domain-dialogue-input" >' +
                           '<div>' +
                             '<select id="domain_protocol" class="form-control" ng-model="protocol" required>' +
@@ -79,7 +78,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
                             '</select>' +
                           '</div>' +
                           '<div>' +
-                            '<input id="domain_input" class="form-control" ng-model="domain" placeholder="yourdomain.com" required/>' +
+                            '<input id="domain_input" class="form-control" ng-model="host" placeholder="yourdomain.com" required/>' +
                           '</div>' +
                         '</div>' +
                         '<div ng-show="domain_creation_error" class="error">' +

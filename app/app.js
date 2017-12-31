@@ -105,7 +105,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
         );
   }])
 
-.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', 'Account', function($rootScope, auth, store, jwtHelper, $state , $location, Account){
+.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', function($rootScope, auth, store, jwtHelper, $state , $location, Account, $window){
 
     qanairyAuthProvider.on('authenticated', function($location) {
       // This is after a refresh of the page
@@ -135,10 +135,10 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
             //$location.path("/accounts");
             console.log("NEW ACCOUNT! WOOO!");
             var account = {
-              service_package: "alpha",
-              users: ["test32@qanairy.com"]
+              service_package: "alpha"
             }
             Account.save(account);
+            $window.location.reload();
             //create account with user data
             //$rootScope.$broadcast("new-account");
           }

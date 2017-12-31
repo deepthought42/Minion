@@ -80,10 +80,10 @@
         </div>
         <div class="col-xs-1 test__status" ng-show="!test.runStatus">
 					<span ng-show="test.correct">
-					  <i class="fa fa-check-circle green status--symbol" ng-click="updateTestCorrectness(test, false)"></i>
+					  <i class="fa fa-check-circle green status--symbol" ng-dblclick="updateTestCorrectness(test, false)"></i>
 					</span>
 					<span ng-show="!test.correct && test.correct != null">
-					  <i  class="fa fa-times-circle red status--symbol" ng-click="updateTestCorrectness(test, true)"></i>
+					  <i  class="fa fa-times-circle red status--symbol" ng-dblclick="updateTestCorrectness(test, true)"></i>
 					</span>
 			  </div>
 			  <div class="col-xs-4 test__title" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
@@ -108,7 +108,7 @@
 					{{test.runTime/1000}} s
 			  </div>
 			  <div class="col-xs-4" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
-					{{ getDate(test) || "Unknown / Not since discovery"}}
+					{{ getDate(test.lastRunTimestamp) || "Unknown / Not since discovery"}}
 			  </div>
 			  <div class="col-xs-1 test__btns">
 					<div class="btn-group" role="group" aria-label="Test Functions">
@@ -120,38 +120,38 @@
 			</div>
 
 			<div ng-show="test.visible">
-			  <div class="test__path vertical__center__int" ng-click="visible_tab='nodedata'+$index">
-				  <div ng-repeat="node in test.path.path" class="path-node-container" ng-click="setCurrentNode(node)" tooltip-placement="top">
+			  <div class="test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index">
+				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
 				    <div ng-show="node.screenshot" class="path-node path-page">
 						  <img src="{{node.screenshot}}" class="path-node-image"/>
 					  </div>
-					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center" tooltip-placement="top">
+					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top">
 						 	<span class="" >
                 {{node.name}}
               </span>
 			  		</div>
-					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center" tooltip-placement="top">
-							<span ng-show="node.name=='click'">
-						  	<i class="fa fa-mouse-pointer fa-2x icon" ></i>
+					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top">
+							<span ng-show="node.name=='click'" class="vertical__center__int">
+						  	<i class="fa fa-mouse-pointer fa-2x icon"></i>
 							</span>
-							<span ng-show="node.name=='doubleClick'">
+							<span ng-show="node.name=='doubleClick'" class="vertical__center__int">
 								<i class="fa fa-mouse-pointer fa-2x icon"></i>
 								<div class=”doubleclick” >x2</div>
 							</span>
-							<span ng-show="node.name=='mouseover'">
+							<span ng-show="node.name=='mouseover'" class="vertical__center__int">
 								<i class="fa fa-hand-pointer-o fa-2x icon"></i>
 							</span>
-							<span ng-show="node.name=='scroll'">
+							<span ng-show="node.name=='scroll'" class="vertical__center__int">
 								<i class="fa fa-arrows-v fa-2x icon"></i>
 							</span>
-							<span ng-show="node.name=='sendKeys'">
-								<i class="fa fa-i-cursor fa-2x icon"></i>
+							<span ng-show="node.name=='sendKeys'" class="vertical__center__int">
+								<i class="fa fa-i-cursor fa-2x icon "></i>
 							</span>
 					  </div>
 					  <div class="path-bar">
 					  </div>
 					</div>
-					<div class="path-node-container" ng-click="setCurrentNode(test.result)">
+					<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)">
 					  <div  ng-show="test.result.screenshot" class="path-node">
 						  <img src="{{test.result.screenshot}}"
                    class="path-node-image"
@@ -286,9 +286,9 @@
 							<div class="test__history" ng-repeat="record in test.records">
 								Passes : {{record.passes}}
 								<br />
-								Ran at : {{record.ranAt}}
+								Ran at : {{getDate(record.ranAt)}}
 								<br />
-								Total duration : {{record.runTime}}
+								Total duration : {{record.runTime/1000}} ms
 							</div>
 						</div>
 					</div>
