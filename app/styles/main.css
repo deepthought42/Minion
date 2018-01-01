@@ -226,7 +226,7 @@ a img {border: none; }
 /*--------------------------- [2. Text Format] -------------------------------------------------------------------------------*/
 
 	p{
-		font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 		font-size: 12px;
 		line-height: 18px;
 		letter-spacing:.2px;
@@ -271,7 +271,7 @@ a img {border: none; }
   h4,
   .h4{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-size: 18px;
+		font-size: 20px;
 		font-weight:400 !important;
 		line-height: 20px;
 		letter-spacing:.1px;
@@ -648,23 +648,8 @@ input { text-indent: 0px; }
 
 
 
-/*--------------------------- [?. Material Design Tabs] --------------------------------------------------------------------------------*/
 
 
-.info__title{
-  height: 30px !important;
-  padding: 15px !important;
-  font-size: 16px;
-  text-align: center;
-  line-height: 24px;
-}
-
-.info__tab {
-}
-
-.tab-pane{
-  display: inline-block !important;
-}
 
 /*--------------------------- [6. Test/Test Container/Test Labels] --------------------------------------------------------------------------------*/
 
@@ -817,6 +802,7 @@ input { text-indent: 0px; }
 
 .test__path{
   border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #cccccc;
 	height: 135px;
   padding: 0px 30px  0px 30px !important;
 }
@@ -907,8 +893,9 @@ input { text-indent: 0px; }
 
 .test__groups{
 	height: 60px;
-	border-top: 1px solid #e0e0e0;
-	border-bottom: 0px solid #e0e0e0;
+	border-top: 1px solid #ffffff;
+	border-bottom: 1px solid #e0e0e0;
+  background-color: #eeeeee;
 	padding:15px;
 }
 
@@ -933,6 +920,30 @@ input { text-indent: 0px; }
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+
+/*--------------------------- [?. Tabs] --------------------------------------------------------------------------------*/
+
+
+.info__title{
+  height: 30px !important;
+  padding: 15px !important;
+  font-size: 16px;
+  text-align: center;
+  line-height: 24px;
+}
+
+.info__tab {
+}
+
+
+.tab-pane{
+  display: inline-block !important;
+  padding:20px 25px 10px 25px;
+  width:100%;
+}
+
+
+
 /*--------------------------- [6. Test Info] --------------------------------------------------------------------------------*/
 
 
@@ -940,16 +951,17 @@ input { text-indent: 0px; }
 	height: 100%;
 }
 
-.node__data{
-	padding:15px;
-}
+
 
 .node__title{
   padding-bottom:15px;
+  margin-bottom:10px;
+	border-bottom: 1px solid #e0e0e0;
+  width:100% !important;
 }
 
 .test__history{
-	padding:15px;
+	margin:15px;
 	font-size: 14px !important;
 		line-height: 20px;
 		letter-spacing:.2px;
