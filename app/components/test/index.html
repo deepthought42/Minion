@@ -8,15 +8,7 @@
 
 	  <div class="col-md-5 col-sm-0">
 	  </div>
-
-	  <div class="col-md-3 col-sm-6 search">
-			<div class="input-group">
-			  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon1">
-			  <span class="input-group-addon btn--gray" id="basic-addon1"><i class="fa fa-search"></i></span>
-			</div>
-	  </div>
-
-	  <div class="col-md-2 col-sm-2">
+		<div class="col-md-2 col-sm-2">
 		 	<!-- /.dropdown -->
 			<div class="dropdown dropdown-toggle pull-right"  ng-show="auth.isAuthenticated" data-toggle="dropdown" href="#">
 				Filter
@@ -36,6 +28,12 @@
 				</li>
 			</ul>
 			<!-- /.dropdown -->
+	  </div>
+	  <div class="col-md-3 col-sm-6 search">
+			<div class="input-group">
+			  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon1">
+			  <span class="input-group-addon btn--gray" id="basic-addon1"><i class="fa fa-search"></i></span>
+			</div>
 	  </div>
 	</div>
 
@@ -206,13 +204,13 @@
 											<h4><span style="font-weight:bold;">Page</span> - <a href="{{current_node.url}}">{{current_node.url}}</a></h4>
 										</div>
 										<div class="">
-											<div class="col-sm-3 col-xs-2">
+											<div class="page__image col-xs-2">
 												<img type="button" class="path-node-image"
 														data-toggle="modal" data-target="#exampleModal"
 														src="{{current_node.screenshot}}" class="path-node-image"
 														ng-click="openPageModal(current_node)" />
 											</div>
-											<div class="col-sm-9 col-xs-10">
+											<div class="col-xs-10">
 												<div class="key--value">
 													<div class="data__key">
 													 Landable
@@ -291,11 +289,10 @@
 								</div>
 							</div>
 							<div class="test__history" ng-repeat="record in test.records" ng-show="visible_tab=='history'+$index">
+								<h5>{{getDate(record.ranAt)}}</h5>
 								Passes : {{record.passes}}
 								<br />
-								Ran at : {{getDate(record.ranAt)}}
-								<br />
-								Total duration : {{record.runTime/1000}} ms
+								Total Run Duration : {{record.runTime/1000}} ms
 							</div>
 						</div>
 					</div>

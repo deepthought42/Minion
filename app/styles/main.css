@@ -229,7 +229,7 @@ a img {border: none; }
 		font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 		font-size: 12px;
 		line-height: 18px;
-		letter-spacing:.2px;
+		letter-spacing:.1px;
 		margin-bottom: 16px;
 		display: inline;
 		color:#333333;
@@ -282,13 +282,17 @@ a img {border: none; }
 
   h5,
   .h5{
-		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #2d2d2d !important;
-		font-size: 20px !important;
-		font-weight:400 !important;
-		letter-spacing:.1px;
-    text-align: center;
+    font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		color:#666 !important;
+    font-size: 16px !important;
+    font-weight:bold !important;
+    letter-spacing:.1px;
+    text-align: left;
+    margin-bottom: 6px;
+    text-transform: capitalize;
 	}
+
+
 
 
 
@@ -807,6 +811,10 @@ input { text-indent: 0px; }
   padding: 0px 30px  0px 30px !important;
 }
 
+.page__image{
+    padding: 10px 10px 6px 0px !important;
+}
+
 .path-node-image {
   vertical-align: middle;
   width: auto;
@@ -820,6 +828,7 @@ input { text-indent: 0px; }
 }
 
 .path-page {
+    padding: 10px 10px -10px 0px !important;
 }
 
 .path-node-container {
@@ -899,6 +908,10 @@ input { text-indent: 0px; }
 	padding:15px;
 }
 
+.input-group-addon{
+  width:35px;
+}
+
 .test__groups > div{
 	display: inline;
 }
@@ -936,7 +949,7 @@ input { text-indent: 0px; }
 }
 
 
-.tab-pane{
+.node__data{
   display: inline-block !important;
   padding:20px 25px 10px 25px;
   width:100%;
@@ -960,14 +973,6 @@ input { text-indent: 0px; }
   width:100% !important;
 }
 
-.test__history{
-	margin:15px;
-	font-size: 14px !important;
-		line-height: 20px;
-		letter-spacing:.2px;
-		color:#333333;
-}
-
 .key--value {
     padding-top:10px;
 }
@@ -977,7 +982,7 @@ input { text-indent: 0px; }
 	font-size: 16px;
   font-weight: bold;
 	line-height: 20px;
-	letter-spacing:.2px;
+	letter-spacing:.1px;
 	padding-bottom: 6px !important;
 	color:#666666;
 	text-align: left;
@@ -986,10 +991,25 @@ input { text-indent: 0px; }
 .data__value{
 		font-size: 14px !important;
 		line-height: 20px;
-		letter-spacing:.2px;
+		letter-spacing:.1px;
 		padding-bottom: 6px !important;
 		color:#333333;
 }
+
+
+/*--------------------------- [6. Test History] --------------------------------------------------------------------------------*/
+
+
+.test__history{
+	margin:15px;
+	font-size: 14px !important;
+		line-height: 20px;
+		letter-spacing:.1px;
+		color:#333333;
+}
+
+
+
 
 /*--------------------------- [7. Footer] ------------------------------------------------------------------------------*/
 
