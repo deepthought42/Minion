@@ -188,20 +188,24 @@
 				<div class="test__info tabs tabs-style-bar" ng-show="test.visible">
 					<nav>
 						<ul>
-							<li class="" ng-click="visible_tab='nodedata'+$index">
-								<a ng-href="" class="icon icon-home" \>
+							<li class="{{visible_tab=='nodedata'+$index ? 'tab-current' : ''}}" ng-click="visible_tab='nodedata'+$index">
+								<div class="icon icon-home tab" >
+									<span>
 										Node Data
-								</a>
+									</span>
+								</div>
 							</li>
-							<li class="" ng-click="visible_tab='history'+$index">
-								<a ng-href="" class="icon icon-home" \>
+							<li class="{{visible_tab=='history'+$index ? 'tab-current' : ''}}"  ng-click="visible_tab='history'+$index">
+								<div class="icon icon-home tab">
+									<span>
 										History
-								</a>
+									</span>
+								</div>
 							</li>
 						</ul>
 					</nav>
 					<div class="content-wrap">
-							<div class="node__data"  ng-show="visible_tab=='nodedata'+$index">
+							<div class="node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
 								<div class="col-sm-12" ng-show="current_node.type=='Page'">
 									<div class="row">
 									  <div class="col-sm-12 col-xs-12 node__title">
