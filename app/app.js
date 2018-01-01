@@ -23,7 +23,7 @@ angular.module('Qanairy', [
 ]).
 config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',
   function($urlRouterProvider, authProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider) {
-    $urlRouterProvider.otherwise('/domains');
+    //$urlRouterProvider.otherwise('/domains');
     qanairyAuthProvider = authProvider;
 
     storeProvider.setStore("sessionStorage");

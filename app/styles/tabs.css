@@ -60,7 +60,7 @@
 	flex: 1;
 }
 
-.tabs nav a {
+.tabs nav div.tab {
 	position: relative;
 	display: block;
 	overflow: hidden;
@@ -69,16 +69,16 @@
 	line-height: 2.5;
 }
 
-.tabs nav a span {
+.tabs nav div.tab span {
 	vertical-align: middle;
 	font-size: 0.75em;
 }
 
-.tabs nav li.tab-current a {
+.tabs nav li.tab-current div.tab {
 	color: #74777b;
 }
 
-.tabs nav a:focus {
+.tabs nav div.tab:focus {
 	outline: none;
 }
 
@@ -182,10 +182,10 @@
 }
 
 @media screen and (max-width: 58em) {
-	.tabs nav a.icon span {
+	.tabs nav div.icon span {
 		display: none;
 	}
-	.tabs nav a:before {
+	.tabs nav div.tab:before {
 		margin-right: 0;
 	}
 }
