@@ -216,7 +216,8 @@
 												CSS:
 											</div>
 											<div class="data__value" ng-repeat="(key, value) in current_node.cssValues">
-												{{key}} -           {{value}}
+												<div class="data__key">{{key}}</div>
+												<div class="data__value">{{value}}</div>
 											</div>
 										</div>
 									</div>
@@ -226,7 +227,8 @@
 												Attributes:
 											</div>
 											<div class="data__value" ng-repeat="attribute in current_node.attributes">
-												{{attribute.name}} -           {{attribute.vals}}
+												<div class="data__key">{{attribute.name}}</div>
+												<div class="data__value">{{attribute.vals}}</div>
 											</div>
 										</div>
 									</div>
