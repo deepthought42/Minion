@@ -101,14 +101,53 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     $scope.startDiscovery = function(){
       $scope.waitingOnTests = true;
-      WorkAllocation.query({url:  $scope.discovery_url}).$promise
-        .then(function(value){
-          $scope.isStarted = true;
-        })
-        .catch(function(err){
-          $scope.waitingOnTests = false;
-          $scope.errors.push(err.data);
-        });
+
+      if($scope.chrome){
+        WorkAllocation.query({url:  $scope.discovery_url, browser: "chrome"}).$promise
+          .then(function(value){
+            $scope.isStarted = true;
+          })
+          .catch(function(err){
+            $scope.waitingOnTests = false;
+            $scope.errors.push(err.data);
+          });
+      }
+      if($scope.firefox){
+        WorkAllocation.query({url:  $scope.discovery_url, browser: "firefox"}).$promise
+          .then(function(value){
+            $scope.isStarted = true;
+          })
+          .catch(function(err){
+            $scope.waitingOnTests = false;
+            $scope.errors.push(err.data);
+          });
+        }
+
+      if($scope.ie){
+        WorkAllocation.query({url:  $scope.discovery_url, browser: "ie"}).$promise
+          .then(function(value){
+            $scope.isStarted = true;
+          })
+          .catch(function(err){
+            $scope.waitingOnTests = false;
+            $scope.errors.push(err.data);
+          });
+        }
+
+      if($scope.safari){
+        WorkAllocation.query({url:  $scope.discovery_url, browser: "safari"}).$promise
+          .then(function(value){
+            $scope.isStarted = true;
+          })
+          .catch(function(err){
+            $scope.waitingOnTests = false;
+            $scope.errors.push(err.data);
+          });
+        }
+    }
+
+    $scope.showBrowserSelection = function(){
+        $scope.showBrowserSelectionPane = true;
     }
 
     $scope.setCurrentNode = function(node){
