@@ -158,6 +158,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
          $scope.errors.push("Group name cannot be empty");
          return;
       }
+
+      //Check if group already exists before creating adding it
+      for(var i=0; i < test.groups.length; i++){
+          if(test.groups[i].name === group.name){
+            $scope.showExistingGroupNotice = true;
+            return;
+          }
+      }
+      
       Tester.addGroup({name: group.name,
                        description: group.description,
                        key: test.key}).$promise
