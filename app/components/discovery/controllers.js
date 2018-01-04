@@ -102,8 +102,17 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
     $scope.startDiscovery = function(){
       $scope.waitingOnTests = true;
 
+      WorkAllocation.startWork({url:  $scope.discovery_url, browsers: ["chrome","firefox", "intenet_explorer", "safari"]}).$promise
+        .then(function(value){
+          $scope.isStarted = true;
+        })
+        .catch(function(err){
+          $scope.waitingOnTests = false;
+          $scope.errors.push(err.data);
+        });
+        /*
       if($scope.chrome){
-        WorkAllocation.query({url:  $scope.discovery_url, browser: "chrome"}).$promise
+        WorkAllocation.startWork({url:  $scope.discovery_url, browsers: ["chrome","firefox", "intenet_explorer", "safari"]}).$promise
           .then(function(value){
             $scope.isStarted = true;
           })
@@ -144,6 +153,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
             $scope.errors.push(err.data);
           });
         }
+        */
     }
 
     $scope.showBrowserSelection = function(){
