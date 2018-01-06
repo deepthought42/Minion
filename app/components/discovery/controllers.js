@@ -101,7 +101,26 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     $scope.startDiscovery = function(){
       $scope.waitingOnTests = true;
-      WorkAllocation.query({url:  $scope.discovery_url}).$promise
+      $scope.showBrowserSelectionPane = false;
+
+      var browsers = [];
+      if($scope.chrome_selected){
+        browsers.push("chrome");
+      }
+      if($scope.firefox_selected){
+        browsers.push("firefox");
+      }
+      if($scope.ie_selected){
+        browsers.push("internet_explorer");
+      }
+      if($scope.safari_selected){
+        browsers.push("safari");
+      }
+      if($scope.opera_selected){
+        browsers.push("opera");
+      }
+
+      WorkAllocation.startWork({url:  $scope.discovery_url, browsers: browsers}).$promise
         .then(function(value){
           $scope.isStarted = true;
         })
@@ -109,6 +128,54 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.waitingOnTests = false;
           $scope.errors.push(err.data);
         });
+        /*
+      if($scope.chrome){
+        WorkAllocation.startWork({url:  $scope.discovery_url, browsers: ["chrome","firefox", "intenet_explorer", "safari"]}).$promise
+          .then(function(value){
+            $scope.isStarted = true;
+          })
+          .catch(function(err){
+            $scope.waitingOnTests = false;
+            $scope.errors.push(err.data);
+          });
+      }
+      if($scope.firefox){
+        WorkAllocation.query({url:  $scope.discovery_url, browser: "firefox"}).$promise
+          .then(function(value){
+            $scope.isStarted = true;
+          })
+          .catch(function(err){
+            $scope.waitingOnTests = false;
+            $scope.errors.push(err.data);
+          });
+        }
+
+      if($scope.ie){
+        WorkAllocation.query({url:  $scope.discovery_url, browser: "ie"}).$promise
+          .then(function(value){
+            $scope.isStarted = true;
+          })
+          .catch(function(err){
+            $scope.waitingOnTests = false;
+            $scope.errors.push(err.data);
+          });
+        }
+
+      if($scope.safari){
+        WorkAllocation.query({url:  $scope.discovery_url, browser: "safari"}).$promise
+          .then(function(value){
+            $scope.isStarted = true;
+          })
+          .catch(function(err){
+            $scope.waitingOnTests = false;
+            $scope.errors.push(err.data);
+          });
+        }
+        */
+    }
+
+    $scope.showBrowserSelection = function(){
+        $scope.showBrowserSelectionPane = true;
     }
 
     $scope.setCurrentNode = function(node){

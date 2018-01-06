@@ -12,7 +12,7 @@
 	</div>
 	<div class="secondary-nav vertical__center__int" >
 	  <div class="col-md-2 col-sm-4">
-			<button class="btn btn--green pull-left" ng-click="startDiscovery()" ng-disabled="isStarted || failing_tests>0">Start Discovery</button>
+			<button class="btn btn--green pull-left" ng-click="showBrowserSelection()" ng-disabled="isStarted || failing_tests>0">Start Discovery</button>
 	  </div>
 		<div class="col-md-10 col-sm-8">
 	  </div>
@@ -40,13 +40,64 @@
 				<span class="sr-only">Running...</span>
 			</div>
 		</div>
-		<div class="empty__state vertical__center__int" ng-show="!waitingOnTests && tests.length==0">
+		<div class="empty__state vertical__center__int" ng-show="!waitingOnTests && tests.length==0 && !showBrowserSelectionPane">
 			<h3>Collect your tests by first running a Discovery.</h3>
-			<button class="btn btn--green btn-lg" ng-click="startDiscovery()" ng-disabled="isStarted || failing_tests>0">
+			<button class="btn btn--green btn-lg" ng-click="showBrowserSelection()" ng-disabled="isStarted || failing_tests>0">
 				Start Discovery
 			</button>
 		</div>
-		<div class="test" ng-repeat="test in tests" ng-show="!waitingOnTests && tests.length>0">
+		<div class="empty__state vertical__center__int row" ng-show="showBrowserSelectionPane">
+			<div class="col-sm-12">
+				<h3>Select Browsers</h3>
+			</div>
+			<div class="col-sm-12">
+				<div class="col-xs-2">
+				</div>
+
+				<div class="col-xs-2">
+					<div class="col-sm-12 vertical__center__int">
+						<img src="/img/Chrome.ico" class="browser-icon"></img>
+					</div>
+					<div class="col-sm-12 vertical__center__int">
+						<input type="checkbox" ng-model="chrome_selected"/>
+					</div>
+				</div>
+
+				<div class="col-xs-2">
+					<div class="col-sm-12 vertical__center__int">
+						<img src="/img/firefox.png" class="browser-icon"></img>
+					</div>
+					<div class="col-sm-12 vertical__center__int">
+						<input type="checkbox" ng-model="firefox_selected"/>
+					</div>
+				</div>
+				
+				<div class="col-xs-2" >
+					<div class="col-sm-12 vertical__center__int">
+						<img src="/img/internet_explorer.png" class="browser-icon disabled_image"></img>
+					</div>
+					<div class="col-sm-12 vertical__center__int">
+						<input type="checkbox" ng-model="ie_selected" ng-disabled="true"/>
+					</div>
+				</div>
+
+				<div class="col-xs-2">
+					<div class="col-sm-12 vertical__center__int">
+						<img src="/img/safari.png" class="browser-icon disabled_image"></img>
+					</div>
+					<div class="col-sm-12 vertical__center__int">
+						<input type="checkbox" ng-model="safari_selected" ng-disabled="true"/>
+					</div>
+				</div>
+
+				<div class="col-xs-2">
+				</div>
+			</div>
+			<button class="btn btn--green btn-lg" ng-click="startDiscovery(browsers)" ng-disabled="isStarted || failing_tests>0">
+				Run
+			</button>
+		</div>
+		<div class="test" ng-repeat="test in tests" ng-show="!waitingOnTests && tests.length>0  && !showBrowserSelectionPane">
 			<div class="test__profile vertical__center__int" >
 			  <div class="col-xs-2 test__status text--shadow">
 			   	<div class="row no-gutter">

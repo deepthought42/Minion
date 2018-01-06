@@ -147,6 +147,11 @@ html {
       min-height: 100%;
     }
 
+    .browser-icon{
+      height: 200px;
+      width: 200px;
+    }
+
 
 .no-gutter > [class*='col-'] {
     padding-right:0;
@@ -1403,4 +1408,9 @@ height: calc(100% - 20px);
   display: flex;
   margin:0px auto 60px auto;
   justify-content: center;
+}
+
+.disabled_image {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
 }
