@@ -13,8 +13,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
   });
 }])
 
-.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester', 'store', '$state',
-  function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester, store, $state) {
+.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester', 'store', '$state', '$mdDialog',
+  function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester, store, $state, $mdDialog) {
     var getFailingCount = function(){
       Tester.getFailingCount({url: $scope.domain }).$promise
         .then(function(data){
@@ -102,7 +102,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     $scope.startDiscovery = function(){
       $scope.waitingOnTests = true;
-      $scope.showBrowserSelectionPane = false;
 
       var browsers = [];
       if($scope.chrome_selected){
@@ -120,7 +119,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       if($scope.opera_selected){
         browsers.push("opera");
       }
-
+      $scope.closeDialog();
       WorkAllocation.startWork({url:  $scope.discovery_url, browsers: browsers}).$promise
         .then(function(value){
           $scope.isStarted = true;
@@ -129,10 +128,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.waitingOnTests = false;
           $scope.errors.push(err.data);
         });
-    }
-
-    $scope.showBrowserSelection = function(){
-        $scope.showBrowserSelectionPane = true;
     }
 
     $scope.setTestIndex = function(idx){
@@ -244,6 +239,20 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.errors.push(err.data);
         });
     }
+
+    $scope.openBrowserSelectionDialog  = function(event) {
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/discovery/default_browser_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
 
     this._init();
   }
