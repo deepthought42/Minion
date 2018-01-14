@@ -30,7 +30,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.errors = [];
       $scope.tests = [];
       $scope.isStarted = false;
-      $scope.current_node = null;
+      $scope.current_node = [];
       $scope.visible = false;
 
       $scope.visible_tab = "nodedata0";
@@ -39,6 +39,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.group = {};
       $scope.group.name = "";
       $scope.group.description = "";
+      $scope.test_idx = 0;
 
       if(store.get('domain') != null){
         $scope.waitingOnTests = true;
@@ -128,58 +129,19 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.waitingOnTests = false;
           $scope.errors.push(err.data);
         });
-        /*
-      if($scope.chrome){
-        WorkAllocation.startWork({url:  $scope.discovery_url, browsers: ["chrome","firefox", "intenet_explorer", "safari"]}).$promise
-          .then(function(value){
-            $scope.isStarted = true;
-          })
-          .catch(function(err){
-            $scope.waitingOnTests = false;
-            $scope.errors.push(err.data);
-          });
-      }
-      if($scope.firefox){
-        WorkAllocation.query({url:  $scope.discovery_url, browser: "firefox"}).$promise
-          .then(function(value){
-            $scope.isStarted = true;
-          })
-          .catch(function(err){
-            $scope.waitingOnTests = false;
-            $scope.errors.push(err.data);
-          });
-        }
-
-      if($scope.ie){
-        WorkAllocation.query({url:  $scope.discovery_url, browser: "ie"}).$promise
-          .then(function(value){
-            $scope.isStarted = true;
-          })
-          .catch(function(err){
-            $scope.waitingOnTests = false;
-            $scope.errors.push(err.data);
-          });
-        }
-
-      if($scope.safari){
-        WorkAllocation.query({url:  $scope.discovery_url, browser: "safari"}).$promise
-          .then(function(value){
-            $scope.isStarted = true;
-          })
-          .catch(function(err){
-            $scope.waitingOnTests = false;
-            $scope.errors.push(err.data);
-          });
-        }
-        */
     }
 
     $scope.showBrowserSelection = function(){
         $scope.showBrowserSelectionPane = true;
     }
 
+    $scope.setTestIndex = function(idx){
+      $scope.test_idx = idx;
+    }
+
     $scope.setCurrentNode = function(node){
-      $scope.current_node = node;
+      console.log("setting node data for test index : "+$scope.test_idx);
+      $scope.current_node[$scope.test_idx] = node;
     }
 
     $scope.setTestName = function(test, new_name){
@@ -201,8 +163,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       setCurrentNode(node);
     }
 
-    $scope.toggleTestDataVisibility = function(test){
+    $scope.toggleTestDataVisibility = function(test, test_idx){
       test.visible = !test.visible;
+      $scope.test_idx = test_idx
 
       if(test.visible){
         $scope.setCurrentNode(test.path.path[0]);
@@ -260,7 +223,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     $scope.updateCorrectness = function(test, correctness, idx){
       test.waitingOnStatusChange = true;
-      Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
+      Tester.setDiscoveredPassingStatus({key: test.key, correct: correctness}).$promise
         .then(function(data){
           test.waitingOnStatusChange = false;
           test.correct = data.correct;

@@ -71,7 +71,7 @@
 						<input type="checkbox" ng-model="firefox_selected"/>
 					</div>
 				</div>
-				
+
 				<div class="col-xs-2" >
 					<div class="col-sm-12 vertical__center__int">
 						<img src="/img/internet_explorer.png" class="browser-icon disabled_image"></img>
@@ -123,7 +123,7 @@
 						</div>
 				  </div>
 			  </div>
-				<div class="col-xs-6 test__title vertical__left__int" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
+				<div class="col-xs-6 test__title vertical__left__int" ng-click="toggleTestDataVisibility(test, $index);visible_tab='nodedata'+$index">
 					<div class="row" >
 						<div class="col-xs-12 " ng-show="!test.show_test_name_edit_field">
 							<h2 ng-click="test.show_test_name_edit_field = true" >{{test.name || "Test #"+($index+1)}}</h2>
@@ -145,16 +145,16 @@
 						</div>
 					</div>
 				</div>
-			  <div class="col-xs-2 vertical__center__int" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
+			  <div class="col-xs-2 vertical__center__int" ng-click="toggleTestDataVisibility(test, $index);visible_tab='nodedata'+$index">
 					{{test.runTime/1000}} s
 			  </div>
-			  <div class="col-xs-2 vertical__center__int" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
+			  <div class="col-xs-2 vertical__center__int" ng-click="toggleTestDataVisibility(test, $index);visible_tab='nodedata'+$index">
 					{{ test.time_discovered || "Unknown"}}
 			  </div>
 			</div>
 
 			<div ng-show="test.visible">
-				<div class="test__path vertical__left__int " ng-click="visible_tab='nodedata'+$index">
+				<div class="test__path vertical__left__int " ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int " ng-click="setCurrentNode(node)">
 				    <div ng-show="node.screenshot" class="path-node path-page" tooltip-placement="top">
 						  <img src="{{node.screenshot}}" class="path-node-image"/>
@@ -223,15 +223,15 @@
 				<div class="tab-content">
 					<div class="tab-pane" id="{{'nodedata'+$index}}" aria-labelledby="node-data-tab" ng-class="{active: visible_tab=='nodedata'+$index}">
 						<div class="node__data">
-							<div class="col-sm-12" ng-show="current_node.type=='Page'">
+							<div class="col-sm-12" ng-show="current_node[$index].type=='Page'">
 								<div class="row">
 									<div class="col-sm-12 col-xs-12 node__title">
-										<h4>Page - {{current_node.url}}</h4>
+										<h4>Page - {{current_node[$index].url}}</h4>
 									</div>
 									<div class="col-sm-3 col-xs-2">
 										<img type="button" class="path-node-image"
 										data-toggle="modal" data-target="#exampleModal"
-										src="{{current_node.screenshot}}" class="path-node-image" />
+										src="{{current_node[$index].screenshot}}" class="path-node-image" />
 									</div>
 									<div class="col-sm-9 col-xs-10">
 										<div class="key--value">
@@ -239,16 +239,16 @@
 												<span>
 											 		Landable:
 												</span>
-												<input type="checkbox" ng-checked="current_node.landable" disabled/>
+												<input type="checkbox" ng-checked="current_node[$index].landable" disabled/>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-12" ng-show="current_node.type=='PageElement'">
+							<div class="col-sm-12" ng-show="current_node[$index].type=='PageElement'">
 								<div class="row">
 									<div class="col-sm-12 col-xs-12 node__title">
-										<h4>Element - {{current_node.name}}</h4>
+										<h4>Element - {{current_node[$index].name}}</h4>
 									</div>
 									<div class="col-sm-12 col-xs-12">
 										<div class="key--value">
@@ -256,7 +256,7 @@
 											 Xpath:
 											</div>
 											<div class="data__value">
-											 {{current_node.xpath}}
+											 {{current_node[$index].xpath}}
 											</div>
 										</div>
 									</div>
@@ -265,7 +265,7 @@
 											<div class="data__key">
 												CSS:
 											</div>
-											<div class="data__value" ng-repeat="(key, value) in current_node.cssValues">
+											<div class="data__value" ng-repeat="(key, value) in current_node[$index].cssValues">
 												{{key}} -           {{value}}
 											</div>
 										</div>
@@ -275,7 +275,7 @@
 											<div class="data__key">
 												Attributes:
 											</div>
-											<div class="data__value" ng-repeat="attribute in current_node.attributes">
+											<div class="data__value" ng-repeat="attribute in current_node[$index].attributes">
 												{{attribute.name}} -           {{attribute.vals}}
 											</div>
 										</div>
@@ -286,23 +286,23 @@
 												Text:
 											</div>
 											<div class="data__value">
-												{{current_node.text}}
+												{{current_node[$index].text}}
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-12" ng-show="current_node.type=='Action'">
+							<div class="col-sm-12" ng-show="current_node[$index].type=='Action'">
 								<div class="node__title">
-									<h4>Action - {{current_node.name}}</h4>
+									<h4>Action - {{current_node[$index].name}}</h4>
 								</div>
 								<div class="">
-									<div class="key--value" ng-show="current_node.value || current_node.name=='sendKeys'">
+									<div class="key--value" ng-show="current_node[$index].value || current_node[$index].name=='sendKeys'">
 										<div class="data__key">
 											Value:
 										</div>
 										<div class="data__value">
-											{{current_node.val}}
+											{{current_node[$index].val}}
 										</div>
 									</div>
 								</div>
