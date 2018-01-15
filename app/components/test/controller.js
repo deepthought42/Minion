@@ -83,7 +83,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         })
         .catch(function(err){
           test.runStatus = false;
-
         });
     }
 
@@ -210,14 +209,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           clickOutsideToClose: true,
           scope: $scope,
           preserveScope: true,
-          template: '<md-dialog class="" style="">' +
-                      '<div class="col-sm-12 domain-dialogue-close" ng-click="closeDialog()">' +
-                      '  <md-dialog-content>' +
-                      '     <h3 style="text-align:right;"><i class="fa fa-times"></i></h3>' +
-                      '  </md-dialog-content>' +
-                      '</div>' +
-                      '<img src="{{current_preview_page.screenshot}}" />' +
-                    '</md-dialog>',
+          templateUrl: "components/test/page_modal.html",
           controller: function DialogController($scope, $mdDialog) {
              $scope.closeDialog = function() {
                 $mdDialog.hide();
@@ -226,6 +218,20 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
        });
     };
 
+    $scope.openBrowserSelectionDialog  = function(event) {
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/test/browser_selection_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
+    
     $scope._init();
   }
 ]);
