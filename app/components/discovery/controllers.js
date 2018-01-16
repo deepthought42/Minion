@@ -100,27 +100,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
        $scope.selectedTab.dataTab = currentTabIndex;
      };
 
-    $scope.startDiscovery = function(){
-      $scope.waitingOnTests = true;
-
-      var browsers = [];
-      if($scope.chrome_selected){
-        browsers.push("chrome");
-      }
-      if($scope.firefox_selected){
-        browsers.push("firefox");
-      }
-      if($scope.ie_selected){
-        browsers.push("internet_explorer");
-      }
-      if($scope.safari_selected){
-        browsers.push("safari");
-      }
-      if($scope.opera_selected){
-        browsers.push("opera");
-      }
+    $scope.startDiscovery = function(browser_name){
       $scope.closeDialog();
-      WorkAllocation.startWork({url:  $scope.discovery_url, browsers: browsers}).$promise
+
+      $scope.waitingOnTests = true;
+      WorkAllocation.startWork({url:  $scope.discovery_url, browser: browser_name}).$promise
         .then(function(value){
           $scope.isStarted = true;
         })
