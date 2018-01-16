@@ -13,8 +13,8 @@ angular.module('Qanairy.main', ['ui.router'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'auth', 'WorkAllocation', 'PathRealtimeService', 'store', '$location', 'Tester',
-  function ($rootScope, $scope, auth, WorkAllocation, PathRealtimeService, store, $location, Tester) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'auth', 'PathRealtimeService', 'store', '$location', 'Tester',
+  function ($rootScope, $scope, auth, PathRealtimeService, store, $location, Tester) {
     var getFailingCount = function(){
       Tester.getFailingCount({url: $scope.domain }).$promise
         .then(function(data){

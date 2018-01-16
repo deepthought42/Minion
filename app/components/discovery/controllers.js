@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService', 'Qanairy.PathRealtimeService'])
+angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.discovery', {
@@ -13,8 +13,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
   });
 }])
 
-.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester', 'store', '$state', '$mdDialog',
-  function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester, store, $state, $mdDialog) {
+.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'Discovery', 'PathRealtimeService', 'Tester', 'store', '$state', '$mdDialog',
+  function($rootScope, $scope, Discovery, PathRealtimeService, Tester, store, $state, $mdDialog) {
     var getFailingCount = function(){
       Tester.getFailingCount({url: $scope.domain }).$promise
         .then(function(data){
@@ -100,11 +100,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
        $scope.selectedTab.dataTab = currentTabIndex;
      };
 
-    $scope.startDiscovery = function(browser_name){
+    $scope.startDiscovery = function(){
       $scope.closeDialog();
+      var browser_name = null;
+      if($scope.firefox_selected){
+        browser_name = "firefox";
+      }
+      else if($scope.chrome_selected){
+        browser_name = "chrome";
+      }
 
       $scope.waitingOnTests = true;
-      WorkAllocation.startWork({url:  $scope.discovery_url, browser: browser_name}).$promise
+      Discovery.startWork({url:  $scope.discovery_url, browser: browser_name}).$promise
         .then(function(value){
           $scope.isStarted = true;
         })
