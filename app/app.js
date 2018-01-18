@@ -85,24 +85,6 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
 
       }
       $httpProvider.interceptors.push('jwtInterceptor');
-
-      $httpProvider.interceptors.push(
-        	function($q) {
-        		return {
-            	'request': function(config) {
-                //if(store.get('token')){
-                  //$httpProvider.defaults.headers.common['Authorization'] = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZW1haWwiOiJia2luZHJlZEBxYW5haXJ5LmNvbSIsImNsaWVudElEIjoid1Q3UGhqczlCcHdFZm5aZUZMdksxaHdIV1Aya1U3TFYiLCJ1cGRhdGVkX2F0IjoiMjAxNy0wOC0wN1QyMjoyNzoxOC44NjNaIiwibmFtZSI6ImJraW5kcmVkQHFhbmFpcnkuY29tIiwicGljdHVyZSI6Imh0dHBzOi8vcy5ncmF2YXRhci5jb20vYXZhdGFyLzZlMWY2NTMxNzM1NmJiODdjZTI3ZTIxNjY0MmRjYjgyP3M9NDgwJnI9cGcmZD1odHRwcyUzQSUyRiUyRmNkbi5hdXRoMC5jb20lMkZhdmF0YXJzJTJGYmsucG5nIiwidXNlcl9pZCI6ImF1dGgwfDU5N2JjMTAwNDk3NDI1Nzk2YTgyNzU0ZiIsIm5pY2tuYW1lIjoiYmtpbmRyZWQiLCJpZGVudGl0aWVzIjpbeyJ1c2VyX2lkIjoiNTk3YmMxMDA0OTc0MjU3OTZhODI3NTRmIiwicHJvdmlkZXIiOiJhdXRoMCIsImNvbm5lY3Rpb24iOiJVc2VybmFtZS1QYXNzd29yZC1BdXRoZW50aWNhdGlvbiIsImlzU29jaWFsIjpmYWxzZX1dLCJjcmVhdGVkX2F0IjoiMjAxNy0wNy0yOFQyMjo1NjowMC4yODVaIiwiYXBwX21ldGFkYXRhIjp7InJvbGVzIjpbInFhbmFpcnkiXSwic3RhdHVzIjoiYWNjb3VudF9vd25lciJ9LCJyb2xlcyI6WyJxYW5haXJ5Il0sInN0YXR1cyI6ImFjY291bnRfb3duZXIiLCJwZXJzaXN0ZW50Ijp7fSwiaXNzIjoiaHR0cHM6Ly9xYW5haXJ5LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1OTdiYzEwMDQ5NzQyNTc5NmE4Mjc1NGYiLCJhdWQiOiJ3VDdQaGpzOUJwd0VmblplRkx2SzFod0hXUDJrVTdMViIsImV4cCI6MTUwMjE4MDgzOSwiaWF0IjoxNTAyMTQ0ODM5fQ.UzOqhFGmoEukXMdmN7pwv2iRvtZ6GLwEf2_ss1CUVlE";
-                  //$httpProvider.defaults.headers.common['Token-Type'] = auth_headers['token-type'];
-        			    //$httpProvider.defaults.headers.common['Client'] = auth_headers['client'];
-        					//$httpProvider.defaults.headers.common['Expiry'] = auth_headers['expiry'];
-        					//$httpProvider.defaults.headers.common['Uid'] = auth_headers['uid'];
-
-
-        		    return config;
-        			}
-        		};
-          }
-        );
   }])
 
 .run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', function($rootScope, auth, store, jwtHelper, $state , $location, Account, $window){
@@ -135,7 +117,8 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
             //$location.path("/accounts");
             console.log("NEW ACCOUNT! WOOO!");
             var account = {
-              service_package: "alpha"
+              service_package: "alpha",
+              payment_acct: "stripe_acct_tmp"
             }
             Account.save(account);
             $window.location.reload();
