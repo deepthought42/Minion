@@ -71,22 +71,25 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         });
     }
 
-    $scope.runTest = function(test, index){
-      test.runStatus = true;
-      Tester.runTest({key: test.key, browser_type: "phantomjs"}).$promise
+    $scope.runTest = function(test, index, browser){
+      $scope.keys = [];
+      $scope.keys.push($scope.test.key);
+      $scope.test.runStatus = true;
+      Tester.runTests({test_keys: keys, browser_type: browser}).$promise
         .then(function(data){
-          test.runStatus = false;
-          test.correct = data.passes;
+          $scope.test.runStatus = false;
+          $scope.test.correct = data.passes;
           //move test to top of list
-          $scope.tests.splice(index, 1);
+          $scope.tests.splice($scope.test_idx, 1);
           $scope.tests.unshift(data);
         })
         .catch(function(err){
-          test.runStatus = false;
+          $scope.test.runStatus = false;
         });
     }
 
-    $scope.runTests = function(){
+    $scope.runTests = function(browser){
+      $scope.closeDialog();
       //get keys for tests and put
       $scope.keys = [];
       $scope.filteredTests.forEach(function(test){
@@ -94,8 +97,10 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         $scope.keys.push(test.key);
       });
 
-      Tester.runTests({test_keys: $scope.keys, browser_type: "phantomjs"}).$promise
+      Tester.runTests({test_keys: $scope.keys, browser_type: browser}).$promise
         .then(function(data){
+          $scope.closeDialog();
+
           //keys = Object.keys(data);
           $scope.keys.forEach(function(key){
             var val = data[key];
@@ -218,7 +223,14 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
        });
     };
 
-    $scope.openBrowserSelectionDialog  = function(event) {
+    $scope.openBrowserSelectionDialog  = function(test, $index) {
+      $scope.runSingleTestFlag = false;
+      if(test != null && $index != null){
+        $scope.runSingleTestFlag = true;
+      }
+
+      $scope.test = test;
+      $scope.test_idx = $index;
        $mdDialog.show({
           clickOutsideToClose: true,
           scope: $scope,
@@ -231,7 +243,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           }
        });
     };
-    
+
     $scope._init();
   }
 ]);

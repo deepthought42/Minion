@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-xs-3 vertical__center__int">
-      <button class="btn" ng-click="chrome_selected=!chrome_selected" ng-class="{active: chrome_selected}">
+      <button class="btn" ng-click="browser='chrome';chrome_selected=!chrome_selected" ng-class="{active: chrome_selected}">
         <img src="/img/Chrome.ico" class="browser-icon"></img>
       </button>
     </div>
@@ -15,7 +15,7 @@
     <div class="col-xs-2">
     </div>
     <div class="col-xs-3 vertical__center__int">
-      <button class="btn" ng-click="firefox_selected=!firefox_selected" ng-class="{active: firefox_selected}">
+      <button class="btn" ng-click="browser='firefox';firefox_selected=!firefox_selected" ng-class="{active: firefox_selected}">
         <img src="/img/firefox.png" class="browser-icon"></img>
       </button>
     </div>
@@ -36,7 +36,7 @@
     <div class="col-xs-2">
     </div>
   </div>
-  <button class="btn btn--green btn-lg" ng-click="runTest(test, $index) or runTests(browsers)" ng-disabled="browsers.length === 0">
+  <button class="btn btn--green btn-lg" ng-click="runSingleTestFlag?runTest(browser) : runTests(browser)" ng-disabled="browsers.length === 0">
     Run
   </button>
 </div>

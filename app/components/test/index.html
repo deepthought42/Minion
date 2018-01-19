@@ -43,15 +43,18 @@
 	  <div class="col-sm-1">
 		    Status
 	  </div>
-	  <div class="col-sm-4 test__title">
+	  <div class="col-sm-3 test__title">
 			Test Title
 	  </div>
 	  <div class="col-sm-2">
 		    Time (s)&nbsp;<i class="fa fa-sort"></i>
 	  </div>
-	  <div class="col-sm-4">
+	  <div class="col-sm-3">
 		    Date Last Run&nbsp;<i class="fa fa-sort"></i>
 	  </div>
+		<div class="col-xs-2">
+
+		</div>
 	  <div class="col-sm-1">
 	  </div>
 	</div>
@@ -109,12 +112,25 @@
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					{{test.runTime/1000}} s
 			  </div>
-			  <div class="col-xs-4" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
+			  <div class="col-xs-3" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					{{ getDate(test.lastRunTimestamp) || "Unknown / Not since discovery"}}
 			  </div>
+				<div class="col-xs-2">
+					<div class="col-sm-2" ng-repeat="(browser, status) in test.browserPassingStatuses">
+						<div>
+							<img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'"></img>
+							<img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" ></img>
+						</div>
+
+						<div>
+							<i class="fa fa-check green" ng-show="status" />
+							<i class="fa fa-times red" ng-show="!status" />
+						</div>
+					</div>
+				</div>
 			  <div class="col-xs-1 test__btns">
 					<div class="btn-group" role="group" aria-label="Test Functions">
-					 <button class="btn btn--gray" ng-click="openBrowserSelectionDialog()">
+					 <button class="btn btn--gray" ng-click="openBrowserSelectionDialog(test, $index)">
 						 Run
 					 </button>
 					</div>
