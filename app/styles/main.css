@@ -231,10 +231,10 @@ a img {border: none; }
 /*--------------------------- [2. Text Format] -------------------------------------------------------------------------------*/
 
 	p{
-		font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 		font-size: 12px;
 		line-height: 18px;
-		letter-spacing:.2px;
+		letter-spacing:.1px;
 		margin-bottom: 16px;
 		display: inline;
 		color:#333333;
@@ -276,7 +276,7 @@ a img {border: none; }
   h4,
   .h4{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-size: 18px;
+		font-size: 20px;
 		font-weight:400 !important;
 		line-height: 20px;
 		letter-spacing:.1px;
@@ -287,13 +287,17 @@ a img {border: none; }
 
   h5,
   .h5{
-		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #2d2d2d !important;
-		font-size: 20px !important;
-		font-weight:400 !important;
-		letter-spacing:.1px;
-    text-align: center;
+    font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		color:#666;
+    font-size: 16px;
+    font-weight:bold;
+    letter-spacing:.1px;
+    text-align: left;
+    margin-bottom: 2px;
+    text-transform: capitalize;
 	}
+
+
 
 
 
@@ -301,9 +305,9 @@ a img {border: none; }
   h6,
   .h6{
 		font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #2d2d2d !important;
-		font-size: 16px !important;
-		font-weight:400 !important;
+    color: #2d2d2d;
+		font-size: 16px;
+		font-weight:400;
 		letter-spacing:.1px;
     text-align: center;
 	}
@@ -653,23 +657,8 @@ input { text-indent: 0px; }
 
 
 
-/*--------------------------- [?. Material Design Tabs] --------------------------------------------------------------------------------*/
 
 
-.info__title{
-  height: 30px !important;
-  padding: 15px !important;
-  font-size: 16px;
-  text-align: center;
-  line-height: 24px;
-}
-
-.info__tab {
-}
-
-.tab-pane{
-  display: inline-block !important;
-}
 
 /*--------------------------- [6. Test/Test Container/Test Labels] --------------------------------------------------------------------------------*/
 
@@ -822,8 +811,13 @@ input { text-indent: 0px; }
 
 .test__path{
   border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #cccccc;
 	height: 135px;
   padding: 0px 30px  0px 30px !important;
+}
+
+.page__image{
+    padding: 10px 10px 6px 0px !important;
 }
 
 .path-node-image {
@@ -839,6 +833,7 @@ input { text-indent: 0px; }
 }
 
 .path-page {
+    padding: 10px 10px -10px 0px !important;
 }
 
 .path-node-container {
@@ -912,9 +907,14 @@ input { text-indent: 0px; }
 
 .test__groups{
 	height: 60px;
-	border-top: 1px solid #e0e0e0;
+	border-top: 1px solid #ffffff;
 	border-bottom: 0px solid #e0e0e0;
+  background-color: #eeeeee;
 	padding:15px;
+}
+
+.input-group-addon{
+  width:35px;
 }
 
 .test__groups > div{
@@ -938,6 +938,100 @@ input { text-indent: 0px; }
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+
+/*--------------------------- [?. Tabs] --------------------------------------------------------------------------------*/
+
+
+.info__title{
+  height: 30px !important;
+  padding: 15px !important;
+  font-size: 16px;
+  text-align: center;
+  line-height: 24px;
+}
+
+.info__tab {
+}
+
+/*****************************/
+/* Top Line */
+/*****************************/
+
+.tabs-style-topline {
+	max-width: 1200px;
+}
+
+.tabs-style-topline nav li {
+	border: 1px solid rgba(40,44,42,0.1);
+  border-top: none;
+}
+
+.tabs-style-topline nav li:not(:last-child) {
+  border-left: none;
+}
+
+.tabs-style-topline nav li:not(:first-child) {
+  	border-right: none;
+    border-left: none;
+}
+
+
+
+.tabs-style-topline nav li.tab-current {
+	border-top-color: #fde441;
+	border-bottom: none;
+}
+
+.tabs-style-topline nav div.tab {
+	padding: 20px 20px 10px 20px;
+	background-color: #eeeeee;
+	-webkit-transition: color 0.2s;
+	transition: color 0.2s;
+  color:#757575;
+  font-size: 16px;
+  font-weight:400;
+  letter-spacing:.1px;
+  text-align: center;
+  margin-bottom: 0px;
+  text-transform: capitalize;
+}
+
+
+.tabs-style-topline nav div.tab:hover,
+.tabs-style-topline nav div.tab:focus {
+	color: #2d2d2d;
+  font-weight: 400;
+}
+
+.tabs-style-topline nav li.tab-current div.tab {
+	background: none;
+	box-shadow: inset 0 3px 0 #fde441;
+	color: #2d2d2d !important;
+}
+
+.tabs-style-topline .icon::before {
+	display: block;
+	margin: 0;
+}
+
+.tabs-style-topline nav div.tab span {
+	text-transform: uppercase;
+}
+
+.node__data{
+  display: inline-block !important;
+  padding:25px 25px 10px 25px;
+  width:100%;
+}
+
+.tab__icon{
+  line-height: 1.0em;
+  padding: 3px 0px 0px 0px;
+  font-size: 1.5em;
+}
+
+
+
 /*--------------------------- [6. Test Info] --------------------------------------------------------------------------------*/
 
 
@@ -945,20 +1039,13 @@ input { text-indent: 0px; }
 	height: 100%;
 }
 
-.node__data{
-	padding:15px;
-}
+
 
 .node__title{
   padding-bottom:15px;
-}
-
-.test__history{
-	padding:15px;
-	font-size: 14px !important;
-		line-height: 20px;
-		letter-spacing:.2px;
-		color:#333333;
+  margin-bottom:10px;
+	border-bottom: 1px solid #e0e0e0;
+  width:100% !important;
 }
 
 .key--value {
@@ -970,7 +1057,7 @@ input { text-indent: 0px; }
 	font-size: 16px;
   font-weight: bold;
 	line-height: 20px;
-	letter-spacing:.2px;
+	letter-spacing:.1px;
 	padding-bottom: 6px !important;
 	color:#666666;
 	text-align: left;
@@ -979,10 +1066,26 @@ input { text-indent: 0px; }
 .data__value{
 		font-size: 14px !important;
 		line-height: 20px;
-		letter-spacing:.2px;
+		letter-spacing:.1px;
 		padding-bottom: 6px !important;
 		color:#333333;
 }
+
+
+/*--------------------------- [6. Test History] --------------------------------------------------------------------------------*/
+
+
+.test__history{
+	font-size: 14px !important;
+	line-height: 20px;
+	letter-spacing:.1px;
+	color:#333333;
+  padding:25px 25px 16px 25px;
+  width:100%;
+}
+
+
+
 
 /*--------------------------- [7. Footer] ------------------------------------------------------------------------------*/
 

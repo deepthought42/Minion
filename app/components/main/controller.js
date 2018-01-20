@@ -54,7 +54,7 @@ angular.module('Qanairy.main', ['ui.router'])
     }
 
     $scope.logout = function(){
-      $scope.auth.logout();
+      $scope.auth.signout();
       $scope.isAuthenticated=false;
     }
 

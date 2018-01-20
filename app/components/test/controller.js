@@ -139,15 +139,26 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
          $scope.errors.push("Group name cannot be empty");
          return;
       }
-      Tester.addGroup({name: group.name,
-                       description: group.description,
-                       key: test.key}).$promise
-                .then(function(data){
-                   test.groups.push(data);
-                 })
-                 .catch(function(err){
-                   $scope.errors.push(err.data.message);
-                 });
+
+      //Check if group already exists before creating adding it
+      for(var i=0; i < test.groups.length; i++){
+          if(test.groups[i].name === group.name){
+            $scope.showExistingGroupNotice = true;
+            return;
+          }
+      }
+
+      if(test.groups){
+        Tester.addGroup({name: group.name,
+                         description: group.description,
+                         key: test.key}).$promise
+                  .then(function(data){
+                     test.groups.push(data);
+                   })
+                   .catch(function(err){
+                     $scope.errors.push(err.data.message);
+                   });
+       }
     }
 
     $scope.removeGroup = function(test, group, $index){
