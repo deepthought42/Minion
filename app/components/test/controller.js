@@ -21,6 +21,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.node_key = "";
       $scope.current_node = null;
       $scope.filteredTests = [];
+      $scope.default_browser = store.get('domain')['discoveryBrowser'];
       $scope.getTestsByUrl(store.get('domain').url);
     }
 

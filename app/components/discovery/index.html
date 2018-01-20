@@ -109,7 +109,7 @@
 				<div class="test__path vertical__left__int " ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int " ng-click="setCurrentNode(node)">
 				    <div ng-show="node.browserScreenshots[default_browser]" class="path-node path-page" tooltip-placement="top">
-						  <img src="{{node.screenshot}}" class="path-node-image"/>
+						  <img src="{{node.browserScreenshots[default_browser]}}" class="path-node-image"/>
 					  </div>
 					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element">
 							<span class="" tooltip-placement="top">
@@ -138,8 +138,8 @@
 						</div>
 					</div>
 					<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result);visible_tab='nodedata'+$index">
-					  <div ng-show="test.result.screenshot" class="path-node">
-						  <img src="{{test.result.screenshot}}" class="path-node-image"/>
+					  <div ng-show="test.result.browserScreenshots[default_browser]" class="path-node">
+							<img src="{{test.result.browserScreenshots[default_browser]}}" class="path-node-image"/>
 					  </div>
 					</div>
 			  </div>
@@ -183,7 +183,7 @@
 									<div class="col-sm-3 col-xs-2">
 										<img type="button" class="path-node-image"
 										data-toggle="modal" data-target="#exampleModal"
-										src="{{current_node[$index].screenshot}}" class="path-node-image" />
+										src="{{current_node[$index].browserScreenshots[default_browser]}}" class="path-node-image" />
 									</div>
 									<div class="col-sm-9 col-xs-10">
 										<div class="key--value">
