@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService', 'Qanairy.PathRealtimeService'])
+angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.discovery', {
@@ -13,8 +13,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
   });
 }])
 
-.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester', 'store', '$state',
-  function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester, store, $state) {
+.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'Discovery', 'PathRealtimeService', 'Tester', 'store', '$state', '$mdDialog',
+  function($rootScope, $scope, Discovery, PathRealtimeService, Tester, store, $state, $mdDialog) {
     var getFailingCount = function(){
       Tester.getFailingCount({url: $scope.domain }).$promise
         .then(function(data){
@@ -30,15 +30,17 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       $scope.errors = [];
       $scope.tests = [];
       $scope.isStarted = false;
-      $scope.current_node = null;
+      $scope.current_node = [];
       $scope.visible = false;
 
       $scope.visible_tab = "nodedata0";
-
+      $scope.default_browser = store.get('domain')['discoveryBrowser'];
+      console.log("default browser "+ $scope.default_browser);
       $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
       $scope.group.description = "";
+      $scope.test_idx = 0;
 
       if(store.get('domain') != null){
         $scope.waitingOnTests = true;
@@ -100,27 +102,17 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
      };
 
     $scope.startDiscovery = function(){
-      $scope.waitingOnTests = true;
-      $scope.showBrowserSelectionPane = false;
-
-      var browsers = [];
-      if($scope.chrome_selected){
-        browsers.push("chrome");
-      }
+      $scope.closeDialog();
+      var browser_name = null;
       if($scope.firefox_selected){
-        browsers.push("firefox");
+        browser_name = "firefox";
       }
-      if($scope.ie_selected){
-        browsers.push("internet_explorer");
-      }
-      if($scope.safari_selected){
-        browsers.push("safari");
-      }
-      if($scope.opera_selected){
-        browsers.push("opera");
+      else if($scope.chrome_selected){
+        browser_name = "chrome";
       }
 
-      WorkAllocation.startWork({url:  $scope.discovery_url, browsers: browsers}).$promise
+      $scope.waitingOnTests = true;
+      Discovery.startWork({url:  $scope.discovery_url, browser: browser_name}).$promise
         .then(function(value){
           $scope.isStarted = true;
         })
@@ -128,58 +120,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.waitingOnTests = false;
           $scope.errors.push(err.data);
         });
-        /*
-      if($scope.chrome){
-        WorkAllocation.startWork({url:  $scope.discovery_url, browsers: ["chrome","firefox", "intenet_explorer", "safari"]}).$promise
-          .then(function(value){
-            $scope.isStarted = true;
-          })
-          .catch(function(err){
-            $scope.waitingOnTests = false;
-            $scope.errors.push(err.data);
-          });
-      }
-      if($scope.firefox){
-        WorkAllocation.query({url:  $scope.discovery_url, browser: "firefox"}).$promise
-          .then(function(value){
-            $scope.isStarted = true;
-          })
-          .catch(function(err){
-            $scope.waitingOnTests = false;
-            $scope.errors.push(err.data);
-          });
-        }
-
-      if($scope.ie){
-        WorkAllocation.query({url:  $scope.discovery_url, browser: "ie"}).$promise
-          .then(function(value){
-            $scope.isStarted = true;
-          })
-          .catch(function(err){
-            $scope.waitingOnTests = false;
-            $scope.errors.push(err.data);
-          });
-        }
-
-      if($scope.safari){
-        WorkAllocation.query({url:  $scope.discovery_url, browser: "safari"}).$promise
-          .then(function(value){
-            $scope.isStarted = true;
-          })
-          .catch(function(err){
-            $scope.waitingOnTests = false;
-            $scope.errors.push(err.data);
-          });
-        }
-        */
     }
 
-    $scope.showBrowserSelection = function(){
-        $scope.showBrowserSelectionPane = true;
+    $scope.setTestIndex = function(idx){
+      $scope.test_idx = idx;
     }
 
     $scope.setCurrentNode = function(node){
-      $scope.current_node = node;
+      console.log("setting node data for test index : "+$scope.test_idx);
+      $scope.current_node[$scope.test_idx] = node;
     }
 
     $scope.setTestName = function(test, new_name){
@@ -201,8 +150,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
       setCurrentNode(node);
     }
 
-    $scope.toggleTestDataVisibility = function(test){
+    $scope.toggleTestDataVisibility = function(test, test_idx){
       test.visible = !test.visible;
+      $scope.test_idx = test_idx
 
       if(test.visible){
         $scope.setCurrentNode(test.path.path[0]);
@@ -269,7 +219,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     $scope.updateCorrectness = function(test, correctness, idx){
       test.waitingOnStatusChange = true;
-      Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
+      Tester.setDiscoveredPassingStatus({key: test.key, correct: correctness}).$promise
         .then(function(data){
           test.waitingOnStatusChange = false;
           test.correct = data.correct;
@@ -290,6 +240,20 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.errors.push(err.data);
         });
     }
+
+    $scope.openBrowserSelectionDialog  = function(event) {
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/discovery/default_browser_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
 
     this._init();
   }

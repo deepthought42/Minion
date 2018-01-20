@@ -1,7 +1,7 @@
 <div class="content">
 	<div class="secondary-nav vertical__center__int">
 		<div class="col-md-2 col-sm-4">
-  		<button class="btn btn--green pull-left" ng-click="runTests()">
+  		<button class="btn btn--green pull-left" ng-click="openBrowserSelectionDialog()">
   		  Run All Tests
   		</button>
 	  </div>
@@ -41,15 +41,18 @@
 	  <div class="col-sm-1">
 		    Status
 	  </div>
-	  <div class="col-sm-4 test__title">
+	  <div class="col-sm-3 test__title">
 			Test Title
 	  </div>
 	  <div class="col-sm-2">
 		    Time (s)&nbsp;<i class="fa fa-sort"></i>
 	  </div>
-	  <div class="col-sm-4">
+	  <div class="col-sm-3">
 		    Date Last Run&nbsp;<i class="fa fa-sort"></i>
 	  </div>
+		<div class="col-xs-2">
+
+		</div>
 	  <div class="col-sm-1">
 	  </div>
 	</div>
@@ -84,7 +87,7 @@
 					  <i  class="fa fa-times-circle red status--symbol" ng-dblclick="updateTestCorrectness(test, true)"></i>
 					</span>
 			  </div>
-			  <div class="col-xs-4 test__title" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
+			  <div class="col-xs-3 test__title" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					<div class="row">
 						<div class="col-xs-12" ng-show="!test.show_test_name_edit_field">
 							<h2 ng-click="showTestNameEdit(test)" >
@@ -113,12 +116,25 @@
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					{{test.runTime/1000}} s
 			  </div>
-			  <div class="col-xs-4" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
+			  <div class="col-xs-3" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					{{ getDate(test.lastRunTimestamp) || "Unknown / Not since discovery"}}
 			  </div>
+				<div class="col-xs-2">
+					<div class="col-sm-2" ng-repeat="(browser, status) in test.browserPassingStatuses">
+						<div class="vertical__center">
+							<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="browser=='chrome'"></img>
+							<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="browser=='firefox'" ></img>
+						</div>
+
+						<div class="vertical__center">
+							<i class="fa fa-check fa-2x green" ng-show="status" />
+							<i class="fa fa-times fa-2x red" ng-show="!status" />
+						</div>
+					</div>
+				</div>
 			  <div class="col-xs-1 test__btns">
 					<div class="btn-group" role="group" aria-label="Test Functions">
-					 <button class="btn btn--gray" ng-click="runTest(test, $index)">
+					 <button class="btn btn--gray" ng-click="openBrowserSelectionDialog(test, $index)">
 						 Run
 					 </button>
 					</div>
@@ -128,8 +144,8 @@
 			<div ng-show="test.visible">
 			  <div class="test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index">
 				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-				    <div ng-show="node.screenshot" class="path-node path-page">
-						  <img src="{{node.screenshot}}" class="path-node-image"/>
+				    <div ng-show="node.browserScreenshots[default_browser]" class="path-node path-page">
+						  <img src="{{node.browserScreenshots[default_browser]}}" class="path-node-image"/>
 					  </div>
 					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top">
 						 	<span class="" >
@@ -158,8 +174,8 @@
 					  </div>
 					</div>
 					<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)">
-					  <div  ng-show="test.result.screenshot" class="path-node">
-						  <img src="{{test.result.screenshot}}"
+					  <div  ng-show="test.result.browserScreenshots[default_browser]" class="path-node">
+						  <img src="{{test.result.browserScreenshots[default_browser]}}"
                    class="path-node-image"
 									 tooltip-placement="top"/>
 					  </div>
@@ -225,7 +241,7 @@
 											<div class="page__image col-xs-2">
 												<img type="button" class="path-node-image"
 														data-toggle="modal" data-target="#exampleModal"
-														src="{{current_node.screenshot}}" class="path-node-image"
+														src="{{current_node.browserScreenshots[default_browser]}}" class="path-node-image"
 														ng-click="openPageModal(current_node)" />
 											</div>
 											<div class="col-xs-10">

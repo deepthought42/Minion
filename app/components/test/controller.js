@@ -21,6 +21,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.node_key = "";
       $scope.current_node = null;
       $scope.filteredTests = [];
+      $scope.default_browser = store.get('domain')['discoveryBrowser'];
       $scope.getTestsByUrl(store.get('domain').url);
     }
 
@@ -71,23 +72,25 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         });
     }
 
-    $scope.runTest = function(test, index){
-      test.runStatus = true;
-      Tester.runTest({key: test.key, browser_type: "phantomjs"}).$promise
+    $scope.runTest = function(test, index, browser){
+      $scope.keys = [];
+      $scope.keys.push($scope.test.key);
+      $scope.test.runStatus = true;
+      Tester.runTests({test_keys: keys, browser_type: browser}).$promise
         .then(function(data){
-          test.runStatus = false;
-          test.correct = data.passes;
+          $scope.test.runStatus = false;
+          $scope.test.correct = data.passes;
           //move test to top of list
-          $scope.tests.splice(index, 1);
+          $scope.tests.splice($scope.test_idx, 1);
           $scope.tests.unshift(data);
         })
         .catch(function(err){
-          test.runStatus = false;
-
+          $scope.test.runStatus = false;
         });
     }
 
-    $scope.runTests = function(){
+    $scope.runTests = function(browser){
+      $scope.closeDialog();
       //get keys for tests and put
       $scope.keys = [];
       $scope.filteredTests.forEach(function(test){
@@ -95,8 +98,10 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         $scope.keys.push(test.key);
       });
 
-      Tester.runTests({test_keys: $scope.keys, browser_type: "phantomjs"}).$promise
+      Tester.runTests({test_keys: $scope.keys, browser_type: browser}).$promise
         .then(function(data){
+          $scope.closeDialog();
+
           //keys = Object.keys(data);
           $scope.keys.forEach(function(key){
             var val = data[key];
@@ -221,14 +226,28 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           clickOutsideToClose: true,
           scope: $scope,
           preserveScope: true,
-          template: '<md-dialog class="" style="">' +
-                      '<div class="col-sm-12 domain-dialogue-close" ng-click="closeDialog()">' +
-                      '  <md-dialog-content>' +
-                      '     <h3 style="text-align:right;"><i class="fa fa-times"></i></h3>' +
-                      '  </md-dialog-content>' +
-                      '</div>' +
-                      '<img src="{{current_preview_page.screenshot}}" />' +
-                    '</md-dialog>',
+          templateUrl: "components/test/page_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
+
+    $scope.openBrowserSelectionDialog  = function(test, $index) {
+      $scope.runSingleTestFlag = false;
+      if(test != null && $index != null){
+        $scope.runSingleTestFlag = true;
+      }
+
+      $scope.test = test;
+      $scope.test_idx = $index;
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/test/browser_selection_modal.html",
           controller: function DialogController($scope, $mdDialog) {
              $scope.closeDialog = function() {
                 $mdDialog.hide();

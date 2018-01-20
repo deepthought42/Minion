@@ -147,7 +147,7 @@ html {
       min-height: 100%;
     }
 
-    .browser-icon{
+    .modal-browser-icon{
       height: 200px;
       width: 200px;
     }
@@ -1413,4 +1413,9 @@ height: calc(100% - 20px);
 .disabled_image {
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
+}
+
+.browser-icon {
+  width: 25px;
+  height: 25px;
 }

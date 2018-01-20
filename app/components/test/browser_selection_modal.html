@@ -1,0 +1,42 @@
+<div class="empty__state vertical__center__int row">
+  <div class="col-sm-12">
+    <h3>Select Browsers</h3>
+  </div>
+  <div class="col-sm-12">
+    <div class="col-xs-2">
+    </div>
+
+    <div class="col-xs-3 vertical__center__int">
+      <button class="btn" ng-click="browser='chrome';chrome_selected=!chrome_selected" ng-class="{active: chrome_selected}">
+        <img src="/img/Chrome.ico" class="modal-browser-icon"></img>
+      </button>
+    </div>
+
+    <div class="col-xs-2">
+    </div>
+    <div class="col-xs-3 vertical__center__int">
+      <button class="btn" ng-click="browser='firefox';firefox_selected=!firefox_selected" ng-class="{active: firefox_selected}">
+        <img src="/img/firefox.png" class="modal-browser-icon"></img>
+      </button>
+    </div>
+
+    <!--
+    <div class="col-xs-2 vertical__center__int" >
+      <button ng-model="ie_selected" ng-show="false">
+        <img src="/img/internet_explorer.png" class="modal-browser-icon disabled_image"></img>
+      </button>
+    </div>
+
+    <div class="col-xs-2 vertical__center__int">
+      <button ng-model="safari_selected" ng-show="false">
+        <img src="/img/safari.png" class="modal-browser-icon disabled_image"></img>
+      </button>
+    </div>
+      -->
+    <div class="col-xs-2">
+    </div>
+  </div>
+  <button class="btn btn--green btn-lg" ng-click="runSingleTestFlag?runTest(browser) : runTests(browser)" ng-disabled="browsers.length === 0">
+    Run
+  </button>
+</div>

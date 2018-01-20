@@ -32,16 +32,17 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     }
 
     $scope.createDomain = function(protocol, host){
-      Domain.save({protocol: protocol, url: host, logo_url: ""}).$promise.then(function(successResult){
-        $scope.show_create_domain_err = false;
-        store.set('domain', successResult);
-        $scope.domains.push(successResult);
-        $scope.closeDialog();
-        $rootScope.$broadcast("domain_updated", successResult);
-      },
-      function(errorResult){
-        $scope.show_create_domain_err = true;
-      });
+      Domain.save({protocol: protocol, url: host, logo_url: ""}).$promise
+        .then(function(successResult){
+          $scope.show_create_domain_err = false;
+          store.set('domain', successResult);
+          $scope.domains.push(successResult);
+          $scope.closeDialog();
+          $rootScope.$broadcast("domain_updated", successResult);
+        },
+        function(errorResult){
+          $scope.show_create_domain_err = true;
+        });
     }
 
     /**
@@ -58,37 +59,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           clickOutsideToClose: true,
           scope: $scope,
           preserveScope: true,
-          template: '<md-dialog class="col-sm-4" style="">' +
-                      '<div class="col-sm-12 domain-dialogue-close" ng-click="closeDialog()">' +
-                      '  <md-dialog-content>' +
-                      '     <h3 style="text-align:right;"><i class="fa fa-times"></i></h3>' +
-                      '  </md-dialog-content>' +
-                      '</div>' +
-                      '<div class="col-sm-12 domain-dialogue-header">' +
-                      '  <md-dialog-content>' +
-                      '     <h3>Start a new project by adding a&nbsp;domain.</h3>' +
-                      '  </md-dialog-content>' +
-                      '</div>' +
-                      '<form name="domain_form" ng-submit="domain_form.$valid && createDomain(protocol, host)" novalidate>' +
-                        '<div class ="col-sm-12 domain-dialogue-input" >' +
-                          '<div>' +
-                            '<select id="domain_protocol" class="form-control" ng-model="protocol" required>' +
-                              '<option value="http">http</option>' +
-                              '<option value="https">https</option>' +
-                            '</select>' +
-                          '</div>' +
-                          '<div>' +
-                            '<input id="domain_input" class="form-control" ng-model="host" placeholder="yourdomain.com" required/>' +
-                          '</div>' +
-                        '</div>' +
-                        '<div ng-show="domain_creation_error" class="error">' +
-                          'Something went wrong, Please try again' +
-                        '</div>' +
-                        '<div class="col-sm-12">' +
-                          '<md-button id="create_domain_button" class="md-primary md-raised domain-dialogue-button" type="submit" ng-disabled="domain_form.$invalid">Create Project</md-button>' +
-                        '</div>' +
-                      '</form>' +
-                    '</md-dialog>',
+          templateUrl: "components/domain/create_domain_modal.html",
           controller: function DialogController($scope, $mdDialog) {
              $scope.closeDialog = function() {
                 $mdDialog.hide();
