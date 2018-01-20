@@ -34,7 +34,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.visible = false;
 
       $scope.visible_tab = "nodedata0";
-
+      $scope.default_browser = store.get('domain')['discoveryBrowser'];
+      console.log("default browser "+ $scope.default_browser);
       $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
