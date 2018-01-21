@@ -58,7 +58,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       //get default browser for domain
       //if default browser is not set then show default browser selection dialog box
       $rootScope.$broadcast("domain_updated", domain);
-      $state.go("main.tests");
+      $state.go("main.discovery");
     }
 
     $scope.openCreateDomainDialog  = function(event) {
