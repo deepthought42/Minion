@@ -144,8 +144,7 @@
 			<div ng-show="test.visible">
 			  <div class="test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index">
 				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-				    <div ng-show="node.browserScreenshots[default_browser]" class="path-node path-page">\
-							{{node.browserScreenshots[default_browser]}}
+				    <div ng-show="node.browserScreenshots[default_browser]" class="path-node">
 						  <img src="{{node.browserScreenshots[default_browser]}}" class="path-node-image"/>
 					  </div>
 					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top">

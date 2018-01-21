@@ -35,7 +35,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
       $scope.visible_tab = "nodedata0";
       $scope.default_browser = store.get('domain')['discoveryBrowser'];
-      console.log("default browser "+ $scope.default_browser);
       $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
@@ -101,18 +100,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
        $scope.selectedTab.dataTab = currentTabIndex;
      };
 
+     /**
+     *  Starts discovery process for a given domain via Qanairy api
+     */
     $scope.startDiscovery = function(){
-      $scope.closeDialog();
-      var browser_name = null;
-      if($scope.firefox_selected){
-        browser_name = "firefox";
-      }
-      else if($scope.chrome_selected){
-        browser_name = "chrome";
-      }
-
       $scope.waitingOnTests = true;
-      Discovery.startWork({url:  $scope.discovery_url, browser: browser_name}).$promise
+      Discovery.startWork({url:  $scope.discovery_url}).$promise
         .then(function(value){
           $scope.isStarted = true;
         })
@@ -159,7 +152,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       }
     }
 
-    $scope.stopMappingProcess = function(){
+    $scope.stopDiscoveryProcess = function(){
       WorkAllocation.stopWork().$promise
         .then(function(){
           $scope.isStarted = false;
@@ -175,15 +168,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
          $scope.errors.push("Group name cannot be empty");
          return;
       }
-
-      //Check if group already exists before creating adding it
-      for(var i=0; i < test.groups.length; i++){
-          if(test.groups[i].name === group.name){
-            $scope.showExistingGroupNotice = true;
-            return;
-          }
-      }
-      
       Tester.addGroup({name: group.name,
                        description: group.description,
                        key: test.key}).$promise

@@ -9,7 +9,7 @@
            <h3>Start a new project by adding a&nbsp;domain.</h3>
         </md-dialog-content>
     </div>
-    <form name="domain_form" ng-submit="domain_form.$valid && createDomain(protocol, host)" novalidate>
+    <form name="domain_form" ng-submit="selected_browser && domain_form.$valid && createDomain(protocol, host, selected_browser)" novalidate>
         <div class ="col-sm-12 domain-dialogue-input" >
           <div>
             <select id="domain_protocol" class="form-control" ng-model="protocol" required>
@@ -21,23 +21,23 @@
             <input id="domain_input" class="form-control" ng-model="host" placeholder="yourdomain.com" required/>
           </div>
         </div>
-        <div class="col-sm-12 empty__state vertical__center__int row">
-          <div class="col-sm-12">
+        <div class="col-xs-12 empty__state vertical__center__int row">
+          <div class="col-xs-12">
             <h3>Which browser does your team use the most?</h3>
           </div>
-          <div class="col-sm-12">
+          <div class="col-xs-12">
             <div class="col-xs-4">
             </div>
 
             <div class="col-xs-2 vertical__center__int">
-              <button class="btn" ng-click="chrome_selected=true;firefox_selected=false" ng-class="{active: chrome_selected}">
-                <img src="/img/Chrome.ico" class="modal-browser-icon"></img>
+              <button class="btn" ng-click="chrome_selected=true;firefox_selected=false;selected_browser='chrome'" ng-class="{active: chrome_selected}">
+                <img src="/img/Chrome.ico" class="browser-icon"></img>
               </button>
             </div>
 
             <div class="col-xs-2 vertical__center__int">
-              <button class="btn" ng-click="firefox_selected=true;chrome_selected=false" ng-class="{active: firefox_selected}">
-                <img src="/img/firefox.png" class="modal-browser-icon"></img>
+              <button class="btn" ng-click="firefox_selected=true;chrome_selected=false;selected_browser='firefox'" ng-class="{active: firefox_selected}">
+                <img src="/img/firefox.png" class="browser-icon"></img>
               </button>
             </div>
 
@@ -45,14 +45,14 @@
             </div>
           </div>
         </div>
-        <div class='col-xs-12'>
-
+        <div class="col-xs-12 vertical__center domain-dialogue-input">
+          <button ng-click="openPicker(domain)">Upload Logo</button>
         </div>
         <div ng-show="domain_creation_error" class="error">
           Something went wrong, Please try again
         </div>
-        <div class="col-sm-12">
-          <md-button id="create_domain_button" class="md-primary md-raised domain-dialogue-button" type="submit" ng-disabled="domain_form.$invalid">Create Project</md-button>
+        <div class="col-xs-12">
+          <md-button id="create_domain_button" class="md-primary md-raised domain-dialogue-button" type="submit" ng-disabled="!selected_browser || domain_form.$invalid">Create Project</md-button>
         </div>
     </form>
 </md-dialog>
