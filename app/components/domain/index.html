@@ -24,12 +24,12 @@
            <i class="fa fa-times delete__domain" ></i>
          </h3>
       </div>
-      <button ng-click="openPicker(domain)">Upload Logo</button>
       <div  class="vertical__center domain__icon" ng-click="selectDomain(domain)">
         <div class="domain__logo">
           {{domain.logo}}
           <img class="" src="{{domain.logoUrl || './img/qanairy_logo.png'}}">
         </div>
+        <button ng-click="openPicker(domain)">Upload Logo</button>
       </div>
       <div class="domain__title" ng-click="selectDomain(domain)">
         <h6>
