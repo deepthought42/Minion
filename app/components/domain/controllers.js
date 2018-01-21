@@ -31,18 +31,23 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_creation_err = "An error occurred while saving the domain";
     }
 
-    $scope.createDomain = function(protocol, host){
-      Domain.save({protocol: protocol, url: host, logo_url: ""}).$promise
-        .then(function(successResult){
-          $scope.show_create_domain_err = false;
-          store.set('domain', successResult);
-          $scope.domains.push(successResult);
-          $scope.closeDialog();
-          $rootScope.$broadcast("domain_updated", successResult);
-        },
-        function(errorResult){
-          $scope.show_create_domain_err = true;
-        });
+    $scope.createDomain = function(protocol, host, default_browser){
+      if(default_browser){
+        Domain.save({protocol: protocol, url: host, logo_url: "", discoveryBrowser: default_browser}).$promise
+          .then(function(successResult){
+            $scope.show_create_domain_err = false;
+            store.set('domain', successResult);
+            $scope.domains.push(successResult);
+            $scope.closeDialog();
+            $rootScope.$broadcast("domain_updated", successResult);
+          },
+          function(errorResult){
+            $scope.show_create_domain_err = true;
+          });
+      }
+      else{
+        $scope.show_create_domain_err = true;
+      }
     }
 
     /**
@@ -50,6 +55,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
      */
     $scope.selectDomain = function(domain){
       store.set('domain', domain);
+      //get default browser for domain
+      //if default browser is not set then show default browser selection dialog box
       $rootScope.$broadcast("domain_updated", domain);
       $state.go("main.tests");
     }
