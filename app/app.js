@@ -161,12 +161,15 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
        });
      }
      else{
-       if(toState.name != 'main.domains' && fromState.name == 'main.domains' && store.get('domain') == null){
-         e.preventDefault();
-       }
-       else if(toState.name != 'main.domains' && fromState.name != 'main.domains' && store.get('domain') == null){
-         e.preventDefault();
-         $state.go('main.domains');
+       if(store.get('domain') == null){
+         $rootScope.$broadcast('domainRequiredError');
+         if(toState.name != 'main.domains' && fromState.name == 'main.domains'){
+           e.preventDefault();
+         }
+         else if(toState.name != 'main.domains' && fromState.name != 'main.domains'){
+           e.preventDefault();
+           $state.go('main.domains');
+         }
        }
      }
     });
