@@ -138,12 +138,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
-    $scope.showTestData = function(test, node){
-      test.visible = true;
-      setCurrentNode(node);
-    }
-
     $scope.toggleTestDataVisibility = function(test, test_idx){
+      $scope.tests[$scope.test_idx].visible = false;
       test.visible = !test.visible;
       $scope.test_idx = test_idx
 
@@ -172,6 +168,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
                        description: group.description,
                        key: test.key}).$promise
                 .then(function(data){
+                   $scope.group.name = null;
                    test.groups.push(data);
                  })
                  .catch(function(err){

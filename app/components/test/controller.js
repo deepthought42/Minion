@@ -21,6 +21,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.node_key = "";
       $scope.current_node = null;
       $scope.filteredTests = [];
+      $scope.test_idx = 0;
       $scope.default_browser = store.get('domain')['discoveryBrowser'];
       $scope.getTestsByUrl(store.get('domain').url);
     }
@@ -153,6 +154,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
                          description: group.description,
                          key: test.key}).$promise
                   .then(function(data){
+                     $scope.group.name = null;
                      test.groups.push(data);
                    })
                    .catch(function(err){
@@ -171,8 +173,10 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         });;
     }
 
-    $scope.toggleTestDataVisibility = function(test){
+    $scope.toggleTestDataVisibility = function(test, index){
+      $scope.tests[$scope.test_idx].visible = false;
       test.visible = !test.visible;
+      $scope.test_idx = index;
 
       if(test.visible){
         $scope.setCurrentNode(test.path.path[0]);
