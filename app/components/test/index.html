@@ -298,14 +298,12 @@
 													Attributes
 												</div>
 												<div class="data__value" ng-repeat="attribute in current_node.attributes">
-													<div class="data__value" ng-repeat="attribute in current_node[$index].attributes">
-														<div class="data__key">
-															{{attribute.name}}
-														</div>
-														<span class="data__value" ng-repeat="value in attribute.vals">
-															{{value}}
-														</span>
+													<div class="data__key">
+														{{attribute.name}}
 													</div>
+													<span class="data__value" ng-repeat="value in attribute.vals">
+														{{value}}
+													</span>
 												</div>
 											</div>
 										</div>
