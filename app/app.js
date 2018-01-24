@@ -13,6 +13,7 @@ angular.module('Qanairy', [
   'Qanairy.tests',
   'Qanairy.main',
   'Qanairy.account',
+  'Qanairy.login',
   'auth0.auth0',
   'angular-jwt',
   'angular-storage',
@@ -34,7 +35,7 @@ config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterce
       domain:  AUTH0_DOMAIN,
       responseType: 'token id_token',
       audience: 'https://qanairy.auth0.com/userinfo',
-      redirectUri:  location.href,
+      redirectUri: 'http://localhost:8001/#/discovery',
       theme: {
         logo: 'https://s3.amazonaws.com/qanairy.com/assets/images/qanairy_logo_300.png',
         primaryColor: '#fddc05'
@@ -42,7 +43,7 @@ config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterce
       scope: 'openid'
     });
 
-    $urlRouterProvider.otherwise('/');
+    //$urlRouterProvider.otherwise('/');
 
       jwtOptionsProvider.config({
         /*tokenGetter: function(auth) {
@@ -89,74 +90,23 @@ config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterce
 
       }
       $httpProvider.interceptors.push('jwtInterceptor');
-      $locationProvider.html5Mode(true);
+
+      $locationProvider.hashPrefix('');
+      //$locationProvider.html5Mode(true);
   }])
 
-.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', function($rootScope, auth, store, jwtHelper, $state , $location, Account, $window){
+.run(['$rootScope', 'angularAuth0', 'authService', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', function($rootScope, angularAuth0, authService, store, jwtHelper, $state , $location, Account, $window){
 
-    qanairyAuthProvider.on('authenticated', function($location) {
-      // This is after a refresh of the page
-      // If the user is still authenticated, you get this event
-    });
-
-    qanairyAuthProvider.on('loginFailure', function($location, error) {
-      console.log("ERROR !!");
-
-    });
-
-    qanairyAuthProvider.on('forbidden', function($location, error){
-      console.log("forbidden request");
-      $location.go('/login');
-    });
-
-    qanairyAuthProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
-      store.set('token', idToken);
-
-        profilePromise.then(function(profile) {
-          store.set('profile', profile);
-          //$rootScope.$broadcast('new-account');
-          profile.app_metadata.plan = "alpha"
-          if(profile.app_metadata && profile.app_metadata.status == "new"){
-            console.log("navigating to account index");
-            //broadcast event to trigger creating account
-            //$location.path("/accounts");
-            console.log("NEW ACCOUNT! WOOO!");
-            var account = {
-              service_package: "alpha",
-              payment_acct: "stripe_acct_tmp"
-            }
-            Account.save(account);
-            $window.location.reload();
-            //create account with user data
-            //$rootScope.$broadcast("new-account");
-          }
-        });
-      });
-
-
-      qanairyAuthProvider.on('authenticated', function($location) {
-        console.log("Authenticated ;; ")
-        // This is after a refresh of the page
-        // If the user is still authenticated, you get this event
-      });
-
-      qanairyAuthProvider.on('loginFailure', function($location, error) {
-        console.log("ERROR !!");
-
-      });
-
-      qanairyAuthProvider.on('forbidden', function($location, error){
-        console.log("forbidden request");
-        $location.go('/login');
-      });
+    authService.handleAuthentication();
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
+      console.log("Changing state");
      //var requireLogin = toState.data.requireLogin || false;
-     if (!auth.isAuthenticated) {
+     if (!angularAuth0.isAuthenticated) {
        e.preventDefault();
 
        // get me a login modal!
-       auth.signin({
+       angularAuth0.authorize({
          authParams: {
            scope: 'openid profile email' // This is if you want the full JWT
          }
@@ -206,7 +156,4 @@ config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterce
       }
       Account.save(account);
     })
-  // Put the authService on $rootScope so its methods
-  // can be accessed from the nav bar
-  auth.hookEvents();
 }]);
