@@ -45,6 +45,12 @@
             </div>
           </div>
         </div>
+        <div>
+          <input type="checkbox" ng-model="add-user-flag"/>
+          <input type="text" placeholder="username" ng-model="test_user.username" />
+          <input type="text" placeholder="password" ng-model="test_user.password" />
+          <input type="text" placeholder="role" ng-model="test_user.role" />
+        </div>
         <div class="col-xs-12 vertical__center domain-dialogue-input">
           <button ng-click="openPicker(domain)">Upload Logo</button>
         </div>
