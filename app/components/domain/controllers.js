@@ -17,6 +17,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   function($rootScope, $scope, Domain,  $mdDialog, store, $state) {
     this._init = function(){
       $scope.errors = [];
+      $scope.display_user_form_flag = false;
       $scope.host = "";
       Domain.query().$promise
         .then(function(data){
@@ -27,11 +28,14 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         });
       $scope.protocol = "";
       $scope.domain_url = "";
+      $scope.chrome_selected = false;
+      $scope.firefox_selected= false;
+
       $scope.domain_error = "";
       $scope.domain_creation_err = "An error occurred while saving the domain";
     }
 
-    $scope.createDomain = function(protocol, host, default_browser){
+    $scope.createDomain = function(protocol, host, default_browser, test_user){
       if(default_browser){
         Domain.save({protocol: protocol, url: host, logo_url: "", discoveryBrowser: default_browser, testUsers: [test_user]}).$promise
           .then(function(successResult){
@@ -50,6 +54,11 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       }
     }
 
+    $scope.setSelectedBrowser = function(browser){
+      $scope.chrome_selected = browser=="chrome";
+      $scope.firefox_selected= browser == "firefox";
+      $scope.selected_browser= browser;
+    }
     /**
      * Sets domain for session
      */
