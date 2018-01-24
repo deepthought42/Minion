@@ -13,7 +13,7 @@ angular.module('Qanairy', [
   'Qanairy.tests',
   'Qanairy.main',
   'Qanairy.account',
-  'auth0',
+  'auth0.auth0',
   'angular-jwt',
   'angular-storage',
   'ngMaterial',
@@ -21,22 +21,28 @@ angular.module('Qanairy', [
   'AuthInterceptor',
   'ngRaven'
 ]).
-config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',
-  function($urlRouterProvider, authProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider) {
+config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', '$stateProvider','$locationProvider','angularAuth0Provider',
+  function($urlRouterProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, $stateProvider, $locationProvider, angularAuth0Provider) {
     //$urlRouterProvider.otherwise('/domains');
-    qanairyAuthProvider = authProvider;
+    qanairyAuthProvider = angularAuth0Provider;
 
     storeProvider.setStore("sessionStorage");
-    authProvider.init({
+
+    // Initialization for the angular-auth0 library
+    angularAuth0Provider.init({
       clientID: AUTH0_CLIENT_ID,
       domain:  AUTH0_DOMAIN,
-      callbackUrl: location.href,
+      responseType: 'token id_token',
+      audience: 'https://qanairy.auth0.com/userinfo',
+      redirectUri:  location.href,
       theme: {
         logo: 'https://s3.amazonaws.com/qanairy.com/assets/images/qanairy_logo_300.png',
         primaryColor: '#fddc05'
-      }
+      },
+      scope: 'openid'
     });
 
+    $urlRouterProvider.otherwise('/');
 
       jwtOptionsProvider.config({
         /*tokenGetter: function(auth) {
@@ -83,6 +89,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
 
       }
       $httpProvider.interceptors.push('jwtInterceptor');
+      $locationProvider.html5Mode(true);
   }])
 
 .run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', function($rootScope, auth, store, jwtHelper, $state , $location, Account, $window){
