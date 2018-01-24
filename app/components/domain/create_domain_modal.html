@@ -52,9 +52,9 @@
           <input type="checkbox" ng-model="display_user_form_flag" />
         </div>
         <div class="col-xs-12" ng-show="display_user_form_flag">
-          Username <input type="text" placeholder="username" ng-model="test_user.username" required />
+          Username <input type="text" placeholder="username" ng-model="test_user.username" ng-required="display_user_form_flag" />
           <br/>
-          Password <input type="text" placeholder="password" ng-model="test_user.password" required />
+          Password <input type="text" placeholder="password" ng-model="test_user.password" ng-required="display_user_form_flag" />
           <br/>
           Role <input type="text" placeholder="role" ng-model="test_user.role" />
         </div>
