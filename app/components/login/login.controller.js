@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
+  angular.module('Qanairy.login', ['ui.router', 'authService'])
 
   .config(['$stateProvider', function($stateProvider) {
     $stateProvider.state('main.login', {

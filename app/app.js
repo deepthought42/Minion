@@ -102,7 +102,7 @@ config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterce
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
       console.log("Changing state");
      //var requireLogin = toState.data.requireLogin || false;
-     if (!angularAuth0.isAuthenticated) {
+     /*if (!angularAuth0.isAuthenticated) {
        e.preventDefault();
 
        // get me a login modal!
@@ -128,7 +128,7 @@ config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterce
            $state.go('main.domains');
          }
        }
-     }
+     }*/
     });
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
