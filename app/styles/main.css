@@ -429,115 +429,49 @@ a img {border: none; }
 /*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/
 
 #main-nav{
-	background: #111111;
-	min-height: 60px;
-	color: #ffffff;
-	border-bottom: 0px solid #eeeeee;
+	 background: #ffffff;
+	height: 60px;
+	color: #2d2d2d;
+	border-bottom: 1px solid #eeeeee;
 }
 
+#left-main-nav{
 
-
-.main-nav {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  font-size:16px;
-  line-height: 20px;
-  flex: 1;
-  margin: 0;
-  width: 100%;
-  justify-content: flex-end;
-  text-align: center;
 }
 
-
-.left-main-nav{
-    justify-content: flex-start;
-}
-.right-main-nav{
-  justify-content: flex-end;
-}
-
-.domain-link a {
-    display: inline;
-    text-decoration: none;
-	  padding: 15px 10px;
-    margin: 0px 5px;
-    color: #ffffff;
-}
-
-.domain-link a:focus {
-  outline: none;
-	color: #fde441 !important;
-	border-bottom: 5px solid #fde441;
-	padding-bottom: 16px !important;
-}
-.domain-link a:visited { color: #ffffff;}
-.domain-link a:hover {
-  text-decoration: none;
-  color: #fde441;
-	border-bottom: 5px solid #fde441;
-	padding-bottom: 16px !important;
-}
-
-.main-nav-icons{
-  padding-right:10px;
-}
-
-.main-nav-link a {
-    display: inline;
-    text-decoration: none;
-	  padding: 15px 10px;
-    margin: 0px 5px;
-    color: #ffffff;
-}
-
-.main-nav-link a:focus {
-  outline: none;
-	color: #fde441 !important;
-	border-bottom: 5px solid #fde441;
-	padding-bottom: 16px !important;
-}
-.main-nav-link a:visited { color: #ffffff;}
-.main-nav-link a:hover {
-    color: #fde441;
-	border-bottom: 5px solid #fde441;
-	padding-bottom: 16px !important;
-}
-
-.divider {
-  width: 2px;
-  margin: 0px 10px;
-  background: #333;
+#right-main-nav{
+  text-align: right;
 }
 
 .dropdown{
   padding-left:12px;
 }
 
-.flex-auto {
-  flex: 1 1 auto;
-}
-
-.flex-initial {
-  flex: 0 1 auto;
-}
-
-.flex-none {
-  flex: 0 0 auto;
-}
-
-.domain-link {
-  flex: 0 0 auto;
-}
-
-.domain-link .dropdown-toggle::after {
-    display:none
-}
-
 .login__signup{
   padding-right:15px;
 }
+
+
+/*--------------------------- [3. Sidenav Bar] -----------------------------------------------------------------------------*/
+
+
+
+.sidebar-nav {
+  list-style: none;
+	font-size:16px;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-nav a:focus {
+    outline: none;
+	color: #fde441 !important;
+	background: rgba(0,0,0,0.2) !important;
+	border-left: 5px solid #fde441;
+	padding-left: 15px !important;
+}
+
+.sidebar-nav a:visited { color: #ffffff;}
 
 #notification_li {
 			position:relative
@@ -548,35 +482,155 @@ a img {border: none; }
 		background: #cc0000;
 		color: #ffffff;
 		font-weight: bold;
+		margin-left: 15px;
 		border-radius: 10px;
 		-moz-border-radius: 10px;
 		-webkit-border-radius: 10px;
 		font-size: 10px;
 		}
 
-.brand{
-	text-align: left;
-  padding: 10px 30px 0 0;
+
+.sidebar-nav li {
+    text-indent: 10px;
+
+    line-height: 20px;
 }
 
-.brand span{
-  font-size:12px;
-  line-height: 14px;
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+	  padding: 20px;
+    color: #ffffff;
 }
 
-.search {
-  position: relative;
-  padding: 10px 0 10px 0;
+.sidebar-nav-icons{
+   padding-right:14px;
 }
-input { text-indent: 0px; }
 
+.sidebar-nav li a:hover {
+    color: #fde441;
+    background: rgba(0,0,0,0.1);
+	border-left: 5px solid #fde441;
+	padding-left: 15px !important;
+}
+.sidebar-brand{
+	padding: 15px 15px 14px 15px;
+    font-size: 18px;
+    line-height: 20px;
+	text-align: center;
+}
 
-.main-container {
+.main-header {
   background: #ffffff;
   padding: 0px;
   position: fixed;
-	width: 100%;
+	width: 80%;
+  left: 20%;
+  transition: all 0.3s ease;
 }
+.toggle-menu {
+  position: absolute;
+	width: 100%;
+	text-align: center;
+  bottom: 0px;
+  padding: 14px 0px 14px 0px;
+  color: white;
+  font-size: 32px;
+  line-height: 32px;
+  cursor: pointer;
+  margin-bottom: 0px !important;
+background: linear-gradient(#3e3e3e, #383838);
+  border-top: 1px solid #484848;
+}
+
+.toggle-menu a {
+  display: block;
+  background: linear-gradient(#3e3e3e, #383838);
+  border-top: 1px solid #484848;
+  border-bottom: 1px solid #2E2E2E;
+  color: white;
+  padding: 15px;
+}
+.toggle-menu a:hover, .side-nav a:focus {
+  background: linear-gradient(#484848, #383838);
+}
+
+.version {
+  position: absolute;
+	width: 100%;
+	text-align: center;
+  bottom: 60px;
+  padding: 14px 0px 14px 0px;
+  color: #616161;
+  font-size: 12px;
+  line-height: 14px;
+  cursor: pointer;
+  margin-bottom: 0px !important;
+}
+
+.page-wrap {
+  float: right;
+  width: 80%;
+  padding-left:0px;
+  transition: width 0.3s ease;
+}
+
+.main-nav-check {
+  display: none;
+}
+
+
+.side-nav {
+  position: fixed;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  background: #3B3B3B;
+  overflow: hidden;
+  transition: width 0.3s ease;
+}
+.side-nav a {
+  display: block;
+  background: linear-gradient(#3e3e3e, #383838);
+  border-top: 1px solid #484848;
+  border-bottom: 1px solid #2E2E2E;
+  color: white;
+  padding: 15px;
+}
+.side-nav a:hover, .side-nav a:focus {
+  background: linear-gradient(#484848, #383838);
+}
+
+.close-menu {
+
+	display: block;
+}
+
+#main-nav-check:checked + #side-nav {
+  width: 80px;
+}
+
+#main-nav-check:checked ~ .page-wrap {
+  width: 100%;
+  padding-left:80px;
+}
+#main-nav-check:checked ~ .page-wrap .open-menu {
+  display: block;
+}
+#main-nav-check:checked ~ .page-wrap .close-menu {
+ display: none;
+}
+#main-nav-check:checked ~ .page-wrap .main-header {
+  width: -moz-calc(100% - 80px);
+  /* WebKit */
+  width: -webkit-calc(100% - 80px);
+  /* Opera */
+  width: -o-calc(100% - 80px);
+  /* Standard */
+  width: calc(100% - 80px);
+	 left: 80px;
+}
+
 
 
 /*--------------------------- [5. Body/ View Frame] --------------------------------------------------------------------------------*/
@@ -598,6 +652,14 @@ input { text-indent: 0px; }
 	/*border-bottom: 2px solid #eeeeee;*/
 }
 
+.search { position: relative; }
+input { text-indent: 0px; }
+
+
+
+
+
+
 /*--------------------------- [6. Test/Test Container/Test Labels] --------------------------------------------------------------------------------*/
 
 
@@ -608,10 +670,12 @@ input { text-indent: 0px; }
 }
 
 .test-container{
-  margin:0px 0px;
+  margin:0px 15px;
 	background-color: #ffffff;
 	border-top: 1px solid #e0e0e0;
+	border-right: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
     overflow-y:scroll;
 	height: -moz-calc(100% - 90px);
   /* WebKit */
@@ -746,11 +810,8 @@ input { text-indent: 0px; }
 /*--------------------------- [6. Test Path] --------------------------------------------------------------------------------*/
 
 .test__path{
-
-    border-top: 1px solid #e0e0e0;
-  -webkit-box-shadow: inset 0 10px 6px -8px #e7e7e7;
-     -moz-box-shadow: inset 0 10px 6px -8px #e7e7e7;
-          box-shadow: inset 0 10px 6px -8px #e7e7e7;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #cccccc;
 	height: 135px;
   padding: 0px 30px  0px 30px !important;
 }
@@ -848,10 +909,8 @@ input { text-indent: 0px; }
 	height: 60px;
 	border-top: 1px solid #ffffff;
 	border-bottom: 0px solid #e0e0e0;
-	padding:30px 15px 30px 15px;
-  -webkit-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
-     -moz-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
-          box-shadow: inset 0 -10px 6px -8px #e7e7e7;
+  background-color: #eeeeee;
+	padding:15px;
 }
 
 .input-group-addon{
@@ -899,18 +958,33 @@ input { text-indent: 0px; }
 /*****************************/
 
 .tabs-style-topline {
+	max-width: 1200px;
 }
 
 .tabs-style-topline nav li {
-	border-bottom: 1px solid #e0e0e0;
+	border: 1px solid rgba(40,44,42,0.1);
+  border-top: none;
 }
 
+.tabs-style-topline nav li:not(:last-child) {
+  border-left: none;
+}
+
+.tabs-style-topline nav li:not(:first-child) {
+  	border-right: none;
+    border-left: none;
+}
+
+
+
 .tabs-style-topline nav li.tab-current {
+	border-top-color: #fde441;
 	border-bottom: none;
 }
 
 .tabs-style-topline nav div.tab {
 	padding: 20px 20px 10px 20px;
+	background-color: #eeeeee;
 	-webkit-transition: color 0.2s;
 	transition: color 0.2s;
   color:#757575;
@@ -933,8 +1007,6 @@ input { text-indent: 0px; }
 	background: none;
 	box-shadow: inset 0 3px 0 #fde441;
 	color: #2d2d2d !important;
-  border-right: 1px solid #e0e0e0;
-  border-left: 1px solid #e0e0e0;
 }
 
 .tabs-style-topline .icon::before {
@@ -965,7 +1037,6 @@ input { text-indent: 0px; }
 
 .test__info{
 	height: 100%;
-  margin: 0px 15px !important;
 }
 
 
