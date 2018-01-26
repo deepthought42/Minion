@@ -4,6 +4,7 @@ var AUTH0_CLIENT_ID='wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV';
 var API_SERVER_URL='api.qanairy.com:8080';  // default server url for Java Spring Security API sample
 var DELEGATION_ENABLED=false;
 var API_SERVER_CLIENT_ID='';  // set to '' if DELEGATION_ENABLED=false
+var LOCK_OPTIONS = {}
 var qanairyAuthProvider = null;
 // Declare app level module which depends on views, and components
 angular.module('Qanairy', [
@@ -14,6 +15,7 @@ angular.module('Qanairy', [
   'Qanairy.main',
   'Qanairy.account',
   'auth0',
+  'auth0.lock',
   'angular-jwt',
   'angular-storage',
   'ngMaterial',
@@ -21,9 +23,14 @@ angular.module('Qanairy', [
   'AuthInterceptor',
   'ngRaven'
 ]).
-config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',
-  function($urlRouterProvider, authProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider) {
+config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'lockProvider',
+  function($urlRouterProvider, authProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, lockProvider) {
     //$urlRouterProvider.otherwise('/domains');
+    lockProvider.init({
+        clientID: AUTH0_CLIENT_ID,
+        domain: AUTH0_DOMAIN,
+        options: LOCK_OPTIONS
+      });
     qanairyAuthProvider = authProvider;
 
     storeProvider.setStore("sessionStorage");
@@ -37,6 +44,12 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       }
     });
 
+    var options = {
+      theme: {
+        logo: 'https://s3.amazonaws.com/qanairy.com/assets/images/qanairy_logo_300.png'
+      }
+    };
+    var lock = new Auth0Lock('wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV', 'qanairy.auth0.com', options);
 
       jwtOptionsProvider.config({
         /*tokenGetter: function(auth) {
@@ -85,8 +98,23 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       $httpProvider.interceptors.push('jwtInterceptor');
   }])
 
-.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', function($rootScope, auth, store, jwtHelper, $state , $location, Account, $window){
+.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', 'lock',
+      function($rootScope, auth, store, jwtHelper, $state , $location, Account, $window, lock){
 
+
+  // For use with UI Router
+    lock.interceptHash();
+
+    lock.on('authenticated', function(authResult) {
+      localStorage.setItem('id_token', authResult.idToken);
+
+      lock.getProfile(authResult.idToken, function(error, profile) {
+        if (error) {
+          console.log(error);
+        }
+        localStorage.setItem('profile', JSON.stringify(profile));
+      });
+    });
     qanairyAuthProvider.on('authenticated', function($location) {
       // This is after a refresh of the page
       // If the user is still authenticated, you get this event
