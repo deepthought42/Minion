@@ -67,7 +67,7 @@
 		</div>
 		<div class="empty__state vertical__center" ng-show="!waitingOnTests && tests.length==0">
 			<h3>
-        Start a &#34;<a href="#/discovery">Discovery</a>&#34; to let Qanairy map your tests.
+        Start a <a href="#/discovery">Discovery</a> to let Qanairy map your tests. 
       </h3>
 		</div>
 
@@ -181,29 +181,7 @@
 					  </div>
 					</div>
 				</div>
-				<div class="test__groups vertical__center__int no-gutter">
-					<div class="col-md-1 col-sm-1 ">
-						<h4>Groups: </h4>
-					</div>
-					<div class="col-md-3 col-sm-5 ">
-						<div class="input-group">
-							<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2">
-							<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2"><i class="fa fa-plus"></i></span>
-						</div>
-					</div>
-					<div class="col-md-8 col-sm-6">
-						<div class="group__tag"
-								 ng-repeat="group in test.groups"
-                 data-toggle="tooltip"
-                 data-placement="top"
-                 title="{{group.description}}" >
-						  {{group.name}}
-							<span ng-click="removeGroup(test, group, $index)">
-								<i class="remove__group fa fa-times"></i>
-							</span>
-						</div>
-					</div>
-			  </div>
+			</div>
 
 				<div class="test__info tabs tabs-style-topline" ng-show="test.visible">
 					<nav>
@@ -330,6 +308,32 @@
 							</div>
 						</div>
 					</div>
+
+
+					<div ng-show="test.visible">
+						<div class="test__groups vertical__center__int no-gutter">
+							<div class="col-md-1 col-sm-1 ">
+								<h4>Groups: </h4>
+							</div>
+							<div class="col-md-3 col-sm-5 ">
+								<div class="input-group">
+									<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2">
+									<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2"><i class="fa fa-plus"></i></span>
+								</div>
+							</div>
+							<div class="col-md-8 col-sm-6">
+								<div class="group__tag"
+										 ng-repeat="group in test.groups"
+		                 data-toggle="tooltip"
+		                 data-placement="top"
+		                 title="{{group.description}}" >
+								  {{group.name}}
+									<span ng-click="removeGroup(test, group, $index)">
+										<i class="remove__group fa fa-times"></i>
+									</span>
+								</div>
+							</div>
+						</div>
     		</div>
 			</div>
 	  </div>

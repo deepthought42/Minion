@@ -15,7 +15,6 @@
 	position: relative;
 	overflow: hidden;
 	margin: 0 auto;
-	width: 100%;
 	font-weight: 300;
 	font-size: 1.25em;
 }
@@ -34,7 +33,7 @@
 	display: flex;
 	margin: 0 auto;
 	padding: 0;
-	max-width: 1200px;
+	width: 100%;
 	list-style: none;
 	-ms-box-orient: horizontal;
 	-ms-box-pack: center;
@@ -141,13 +140,15 @@
 /* Content */
 .content-wrap {
 	position: relative;
+  border-right: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .content-wrap section {
 	display: none;
 	margin: 0 auto;
 	padding: 1em;
-	max-width: 1200px;
 	text-align: center;
 }
 
