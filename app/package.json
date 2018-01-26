@@ -23,7 +23,7 @@
     "angular-auth0": "latest"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "bower install bower.json",
 
     "prestart": "npm install",
     "start": "http-server -a localhost -p 8001",
