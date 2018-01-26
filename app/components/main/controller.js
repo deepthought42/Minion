@@ -13,8 +13,8 @@ angular.module('Qanairy.main', ['ui.router'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'auth', 'PathRealtimeService', 'store', '$location', 'Tester',
-  function ($rootScope, $scope, auth, PathRealtimeService, store, $location, Tester) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'lock', 'PathRealtimeService', 'store', '$location', 'Tester',
+  function ($rootScope, $scope, lock, PathRealtimeService, store, $location, Tester) {
     var getFailingCount = function(){
       Tester.getFailingCount({url: $scope.domain }).$promise
         .then(function(data){
@@ -28,12 +28,11 @@ angular.module('Qanairy.main', ['ui.router'])
 
     this._init = function(){
       $scope.displayUserDropDown = false;
-      $scope.auth = auth;
+      $scope.lock = lock;
       $scope.menuToggled = false;
       $scope.isAuthenticated = false;
       $scope.paths = [];
       $scope.isStarted = false;
-      $scope.auth = auth;
       $scope.protocols = ["http", "https", "file"];
       $scope.workAllocation = {};
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
@@ -49,12 +48,15 @@ angular.module('Qanairy.main', ['ui.router'])
     }
 
     $scope.login = function(){
-      $scope.auth.login();
+      console.log("Showing lock now?");
+      $scope.lock.show();
+      //$scope.auth.login();
       $scope.isAuthenticated=true;
     }
 
     $scope.logout = function(){
-      $scope.auth.signout();
+      lock.show();
+      //$scope.auth.signout();
       $scope.isAuthenticated=false;
     }
 

@@ -14,7 +14,6 @@ angular.module('Qanairy', [
   'Qanairy.tests',
   'Qanairy.main',
   'Qanairy.account',
-  'auth0',
   'auth0.lock',
   'angular-jwt',
   'angular-storage',
@@ -23,14 +22,15 @@ angular.module('Qanairy', [
   'AuthInterceptor',
   'ngRaven'
 ]).
-config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'lockProvider',
-  function($urlRouterProvider, authProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, lockProvider) {
+config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'lockProvider',
+  function($urlRouterProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, lockProvider) {
     //$urlRouterProvider.otherwise('/domains');
     lockProvider.init({
         clientID: AUTH0_CLIENT_ID,
         domain: AUTH0_DOMAIN,
         options: LOCK_OPTIONS
       });
+      /*
     qanairyAuthProvider = authProvider;
 
     storeProvider.setStore("sessionStorage");
@@ -43,7 +43,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
         primaryColor: '#fddc05'
       }
     });
-
+*/
     var options = {
       theme: {
         logo: 'https://s3.amazonaws.com/qanairy.com/assets/images/qanairy_logo_300.png'
@@ -98,8 +98,8 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
       $httpProvider.interceptors.push('jwtInterceptor');
   }])
 
-.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', 'lock',
-      function($rootScope, auth, store, jwtHelper, $state , $location, Account, $window, lock){
+.run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', 'lock',
+      function($rootScope, store, jwtHelper, $state , $location, Account, $window, lock){
 
 
   // For use with UI Router
@@ -115,6 +115,8 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
         localStorage.setItem('profile', JSON.stringify(profile));
       });
     });
+
+    /*
     qanairyAuthProvider.on('authenticated', function($location) {
       // This is after a refresh of the page
       // If the user is still authenticated, you get this event
@@ -170,10 +172,10 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
         console.log("forbidden request");
         $location.go('/login');
       });
-
+      */
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
-     if (!auth.isAuthenticated) {
+     /*if (!auth.isAuthenticated) {
        e.preventDefault();
 
        // get me a login modal!
@@ -200,11 +202,12 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
          }
        }
      }
+     */
     });
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
         console.log("unauthorized user");
-        auth.signin({
+      /*  auth.signin({
           authParams: {
             scope: 'openid profile app_metadata' // This is if you want the full JWT
           }
@@ -214,6 +217,7 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
         }, function(err) {
           console.log("Sign in Error :(", err);
         });
+        */
     });
 
     $rootScope.$on('account-missing', function (e){
@@ -229,5 +233,5 @@ config(['$urlRouterProvider', 'authProvider', '$httpProvider', 'jwtOptionsProvid
     })
   // Put the authService on $rootScope so its methods
   // can be accessed from the nav bar
-  auth.hookEvents();
+  //auth.hookEvents();
 }]);
