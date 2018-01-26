@@ -87,7 +87,7 @@
 					  <i  class="fa fa-times-circle red status--symbol" ng-dblclick="updateTestCorrectness(test, true)"></i>
 					</span>
 			  </div>
-			  <div class="col-xs-3 test__title" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
+			  <div class="col-xs-3 test__title" ng-click="toggleTestDataVisibility(test, $index);visible_tab='nodedata'+$index">
 					<div class="row">
 						<div class="col-xs-12" ng-show="!test.show_test_name_edit_field">
 							<h2 ng-click="showTestNameEdit(test)" >
@@ -103,7 +103,7 @@
 									<div class="pull-right title__edit__buttons btn--green" ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">
 										Save
 									</div>
-									<div class="pull-right title__edit__buttons btn--gray" ng-click="cancelTestName(test, new_name)" ng-show="!test.show_waiting_icon">
+									<div class="pull-right title__edit__buttons btn--gray" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">
 										Cancel
 									</div>
 									<div class="pull-right">
@@ -144,7 +144,7 @@
 			<div ng-show="test.visible">
 			  <div class="test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index">
 				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-				    <div ng-show="node.browserScreenshots[default_browser]" class="path-node path-page">
+				    <div ng-show="node.browserScreenshots[default_browser]" class="path-node" >
 						  <img src="{{node.browserScreenshots[default_browser]}}" class="path-node-image"/>
 					  </div>
 					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top">
@@ -276,7 +276,12 @@
 													Attributes
 												</div>
 												<div class="data__value" ng-repeat="attribute in current_node.attributes">
-													{{attribute.name}} -           {{attribute.vals}}
+													<div class="data__key">
+														{{attribute.name}}
+													</div>
+													<span class="data__value" ng-repeat="value in attribute.vals">
+														{{value}}
+													</span>
 												</div>
 											</div>
 										</div>
