@@ -1,5 +1,5 @@
 {
-  "name": "Minion_client",
+  "name": "minion_client",
   "private": true,
   "version": "0.0.2",
   "description": "",
@@ -19,8 +19,7 @@
     "shelljs": "^0.2.6"
   },
   "dependencies":{
-    "auth0-js": "latest",
-    "angular-auth0": "latest"
+    "angular-ui-bootstrap": "latest"
   },
   "scripts": {
     "postinstall": "bower install",
