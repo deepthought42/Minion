@@ -143,132 +143,144 @@
 					  </div>
 					</div>
 			  </div>
-
-				<div class="test__groups vertical__center__int no-gutter">
-					<div class="col-md-1 col-sm-1 ">
-						<h4>Groups: </h4>
-					</div>
-					<div class="col-md-3 col-sm-5 ">
-						<div class="input-group">
-							<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2">
-							<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2"><i class="fa fa-plus"></i></span>
-						</div>
-					</div>
-					<div class="col-md-8 col-sm-6">
-						<div class="group__tag" ng-repeat="group in test.groups" data-toggle="tooltip" data-placement="top" title="{{group.description}}">
-						  {{group.name}}
-							<span ng-click="removeGroup(test, group, $index)">
-								<i class="remove__group fa fa-times"></i>
-							</span>
-						</div>
-					</div>
-				</div>
 			</div>
-		  <div class="test__info" ng-show="test.visible">
-				<ul class="nav nav-tabs" id="myTab" role="tablist">
-					<li class="nav-item" ng-click="visible_tab='nodedata'+$index">
-						<a class="nav-link active" ng-class="{active: visible_tab=='nodedata'+$index}" id="node-data-tab" data-toggle="tab" role="tab" aria-controls="nodedata" aria-expanded="true" >
-								Node Data
-						</a>
-					</li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane" id="{{'nodedata'+$index}}" aria-labelledby="node-data-tab" ng-class="{active: visible_tab=='nodedata'+$index}">
-						<div class="node__data">
-							<div class="col-sm-12" ng-show="current_node[$index].type=='Page'">
-								<div class="row">
-									<div class="col-sm-12 col-xs-12 node__title">
-										<h4>Page - {{current_node[$index].url}}</h4>
+			<div class="test__info tabs tabs-style-topline" ng-show="test.visible">
+				<nav>
+					<ul>
+						<li class="{{visible_tab=='nodedata'+$index ? 'tab-current' : ''}}" ng-click="visible_tab='nodedata'+$index">
+							<div class="icon tab" >
+								<div class="tab__icon" >
+									<i class="fa fa-code"></i>
+								</div>
+								<span>
+									Node Data
+								</span>
+							</div>
+						</li>
+					</ul>
+				</nav>
+				<div class="content-wrap">
+						<div class="node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
+							<div class="col-sm-12" ng-show="current_node.type=='Page'">
+								<div class="row no-gutter">
+									<div class="node__title">
+										<h4><span style="font-weight:bold;">Page</span> - <a href="{{current_node.url}}">{{current_node.url}}</a></h4>
 									</div>
-									<div class="col-sm-3 col-xs-2">
-										<img type="button" class="path-node-image"
-										data-toggle="modal" data-target="#exampleModal"
-										src="{{current_node[$index].browserScreenshots[default_browser]}}" class="path-node-image" />
-									</div>
-									<div class="col-sm-9 col-xs-10">
-										<div class="key--value">
-											<div class="data__key">
-												<span>
-													Landable:
-												</span>
-												<input type="checkbox" ng-checked="current_node[$index].landable" disabled/>
+									<div class="">
+										<div class="page__image col-xs-2">
+											<img type="button" class="path-node-image"
+													data-toggle="modal" data-target="#exampleModal"
+													src="{{current_node.browserScreenshots[default_browser]}}" class="path-node-image"
+													ng-click="openPageModal(current_node)" />
+										</div>
+										<div class="col-xs-10">
+											<div class="key--value">
+												<div class="data__key">
+												 Landable
+												</div>
+												<div class="data__value">
+												 <input type="checkbox" ng-checked="current_node.landable" disabled/>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-12" ng-show="current_node[$index].type=='PageElement'">
-								<div class="row">
-									<div class="col-sm-12 col-xs-12 node__title">
-										<h4>Element - {{current_node[$index].name}}</h4>
+							<div class="col-sm-12" ng-show="current_node.type=='PageElement'">
+								<div class="row no-gutter">
+									<div class="node__title">
+										<h4><span style="font-weight:bold;">Element</span> - {{current_node.name}}</h4>
 									</div>
 									<div class="col-sm-12 col-xs-12">
 										<div class="key--value">
 											<div class="data__key">
-											 Xpath:
+											 Xpath
 											</div>
 											<div class="data__value">
-											 {{current_node[$index].xpath}}
+											 {{current_node.xpath}}
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-12 col-xs-12">
+										<div class="key--value">
+											<div class="data__key">
+												Text
+											</div>
+											<div class="data__value">
+												{{current_node.text}}
 											</div>
 										</div>
 									</div>
 									<div class="col-sm-6 col-xs-12">
 										<div class="key--value">
 											<div class="data__key">
-												CSS:
+												CSS
 											</div>
-											<div class="data__value" ng-repeat="(key, value) in current_node[$index].cssValues">
-												<div class="data__key">{{key}}</div>
-												<div class="data__value">{{value}}</div>
+											<div class="data__value" ng-repeat="(key, value) in current_node.cssValues">
+												{{key}}:           {{value}};
 											</div>
 										</div>
 									</div>
 									<div class="col-sm-6 col-xs-12">
 										<div class="key--value">
 											<div class="data__key">
-												Attributes:
+												Attributes
 											</div>
-											<div class="data__value" ng-repeat="attribute in current_node[$index].attributes">
+                      <div class="data__value" ng-repeat="attribute in current_node[$index].attributes">
 												<div class="data__key">
 													{{attribute.name}}
 												</div>
 												<span class="data__value" ng-repeat="value in attribute.vals">
 													{{value}}
 												</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-12 col-xs-12" ng-show="text.length > 0">
-										<div class="key--value">
-											<div class="data__key">
-												Text:
-											</div>
-											<div class="data__value">
-												{{current_node[$index].text}}
-											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-12" ng-show="current_node[$index].type=='Action'">
-								<div class="node__title">
-									<h4>Action - {{current_node[$index].name}}</h4>
-								</div>
-								<div class="">
-									<div class="key--value" ng-show="current_node[$index].value || current_node[$index].name=='sendKeys'">
-										<div class="data__key">
-											Value:
-										</div>
-										<div class="data__value">
-											{{current_node[$index].val}}
+							<div class="col-sm-12" ng-show="current_node.type=='Action'">
+								<div class="row no-gutter">
+									<div class="node__title">
+										<h4><span style="font-weight:bold;">Action</span> - {{current_node.name}}</h4>
+									</div>
+									<div class="col-xs-12">
+										<div class="key--value" ng-show="current_node.value || current_node.name=='sendKeys'">
+											<div class="data__key">
+												Value
+											</div>
+											<div class="data__value">
+												{{current_node.value}}
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-				</div><!-- /content -->
-			</div><!-- /tabs -->
-		</section>
-		</div>
+					</div>
+				</div>
+				<div ng-show="test.visible">
+					<div class="test__groups vertical__center__int no-gutter">
+						<div class="col-md-1 col-sm-1 ">
+							<h4>Groups: </h4>
+						</div>
+						<div class="col-md-3 col-sm-5 ">
+							<div class="input-group">
+								<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2">
+								<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2"><i class="fa fa-plus"></i></span>
+							</div>
+						</div>
+						<div class="col-md-8 col-sm-6">
+							<div class="group__tag"
+									 ng-repeat="group in test.groups"
+									 data-toggle="tooltip"
+									 data-placement="top"
+									 title="{{group.description}}" >
+								{{group.name}}
+								<span ng-click="removeGroup(test, group, $index)">
+									<i class="remove__group fa fa-times"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+			</div>
 	</div>
 </div>
