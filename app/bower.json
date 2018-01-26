@@ -1,12 +1,12 @@
 {
-  "name": "minion",
+  "name": "Minion",
   "description": "A starter project for AngularJS",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "homepage": "",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "~1.6.7",
+    "angular": "~1.4.0",
     "angular-ui-router": "~0.2.15",
     "angular-loader": "~1.4.0",
     "angular-mocks": "~1.4.0",
@@ -20,11 +20,10 @@
     "sockjs": "~0.3.4",
     "stomp-websocket": "~2.3.4",
     "ng-stomp": "~0.3.0",
-    "event-source-polyfill": "~0.0.8",
+    "event-source-polyfill":"~0.0.8",
     "raven-js": "latest"
   },
   "resolutions": {
-    "angular": "^1.4.9",
-    "webcomponentsjs": "1.1.0"
+    "angular": "^1.4.9"
   }
 }
