@@ -13,8 +13,8 @@ angular.module('Qanairy.main', ['ui.router'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'authService', 'PathRealtimeService', 'store', '$location', 'Tester',
-  function ($rootScope, $scope, authService, PathRealtimeService, store, $location, Tester) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'Auth', 'PathRealtimeService', 'store', '$location', 'Tester',
+  function ($rootScope, $scope, Auth, PathRealtimeService, store, $location, Tester) {
     var getFailingCount = function(){
       Tester.getFailingCount({url: $scope.domain }).$promise
         .then(function(data){
@@ -28,7 +28,7 @@ angular.module('Qanairy.main', ['ui.router'])
 
     this._init = function(){
       $scope.displayUserDropDown = false;
-      $scope.auth = authService;
+      $scope.auth = Auth;
       $scope.menuToggled = false;
       $scope.isAuthenticated = false;
       $scope.paths = [];
@@ -53,7 +53,7 @@ angular.module('Qanairy.main', ['ui.router'])
     }
 
     $scope.logout = function(){
-      $scope.auth.signout();
+      $scope.auth.logout();
       $scope.isAuthenticated=false;
     }
 

@@ -13,6 +13,7 @@ angular.module('Qanairy', [
   'Qanairy.tests',
   'Qanairy.main',
   'Qanairy.account',
+  'Qanairy.auth',
   'Qanairy.login',
   'auth0.auth0',
   'angular-jwt',
@@ -95,9 +96,9 @@ config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterce
       //$locationProvider.html5Mode(true);
   }])
 
-.run(['$rootScope', 'angularAuth0', 'authService', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', function($rootScope, angularAuth0, authService, store, jwtHelper, $state , $location, Account, $window){
+.run(['$rootScope', 'angularAuth0', 'Auth', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', function($rootScope, angularAuth0, Auth, store, jwtHelper, $state , $location, Account, $window){
 
-    authService.handleAuthentication();
+    Auth.handleAuthentication();
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
       console.log("Changing state");

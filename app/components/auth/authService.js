@@ -1,14 +1,8 @@
-(function () {
+'use strict';
 
-  'use strict';
+var authService = angular.module('Qanairy.auth', ['ngResource', 'Qanairy.serviceConfig']);
 
-  angular
-    .module('Qanairy')
-    .service('authService', authService);
-
-  authService.$inject = ['$state', 'angularAuth0', '$timeout'];
-
-  function authService($state, angularAuth0, $timeout) {
+authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', function ($state, angularAuth0, $timeout) {
 
     function login(username, password) {
       angularAuth0.client.login({
@@ -77,7 +71,7 @@
       localStorage.removeItem('access_token');
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
-      $state.go('main.domains');
+      $state.go('main.login');
     }
 
     function isAuthenticated() {
@@ -95,5 +89,4 @@
       logout: logout,
       isAuthenticated: isAuthenticated
     }
-  }
-})();
+}])

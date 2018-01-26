@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.login', ['ui.router', 'Qanairy.AuthService'])
+angular.module('Qanairy.login', ['ui.router', 'Qanairy.auth'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.login', {
