@@ -14,7 +14,7 @@
     "angular-material": "1.1.6",
     "angular-resource": "1.5.8",
     "auth0-lock": "latest",
-    "auth0-angular": "latest",
+    "angular-auth0": "2.0.0",
     "angular-lock": "latest",
     "angular-jwt": "latest",
     "a0-angular-storage": "latest",
