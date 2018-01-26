@@ -10,12 +10,12 @@ angular.module('Qanairy.login', ['ui.router', 'Qanairy.auth'])
   });
 }])
 
-.controller('LoginController', ['$rootScope', '$scope',
-  function($rootScope, $scope) {
+.controller('LoginController', ['$rootScope', '$scope', 'Auth',
+  function($rootScope, $scope, Auth) {
     this._init = function(){
       console.log("HELP");
-      //var vm = this;
-      //vm.auth = authService;
+      $scope.vm = this;
+      $scope.vm.auth = Auth;
     }
 
     this._init();
