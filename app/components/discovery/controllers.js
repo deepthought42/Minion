@@ -119,9 +119,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.test_idx = idx;
     }
 
-    $scope.setCurrentNode = function(node){
-      console.log("setting node data for test index : "+$scope.test_idx);
-      $scope.current_node[$scope.test_idx] = node;
+    $scope.setCurrentNode = function(node, test_idx){
+      $scope.current_node[test_idx] = node;
     }
 
     $scope.setTestName = function(test, new_name){
@@ -139,13 +138,17 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.toggleTestDataVisibility = function(test, test_idx){
-      $scope.tests[$scope.test_idx].visible = false;
-      test.visible = !test.visible;
-      $scope.test_idx = test_idx
+      if($scope.test_idx != test_idx){
+        $scope.tests[$scope.test_idx].visible = false;
+      }
+
+      $scope.test_idx = test_idx;
 
       if(test.visible){
-        $scope.setCurrentNode(test.path.path[0]);
+        $scope.setCurrentNode(test.path.path[0], test_idx);
       }
+      test.visible = !test.visible;
+
     }
 
     $scope.stopDiscoveryProcess = function(){
