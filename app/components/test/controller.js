@@ -15,11 +15,11 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     $scope._init= function(){
       $('[data-toggle="tooltip"]').tooltip()
       $scope.errors = [];
-      $scope.tests = {};
+      $scope.tests = [];
       $scope.groups = [];
       $scope.group = {name: "", description: "" };
       $scope.node_key = "";
-      $scope.current_node = null;
+      $scope.current_node = [];
       $scope.filteredTests = [];
       $scope.test_idx = 0;
       if(store.get('domain')){
@@ -176,17 +176,20 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.toggleTestDataVisibility = function(test, index){
-      $scope.tests[$scope.test_idx].visible = false;
+      if($scope.test_idx != index){
+        $scope.tests[$scope.test_idx].visible = false;
+      }
+
       test.visible = !test.visible;
       $scope.test_idx = index;
 
       if(test.visible){
-        $scope.setCurrentNode(test.path.path[0]);
+        $scope.setCurrentNode(test.path.path[0], index);
       }
     }
 
-    $scope.setCurrentNode = function(node){
-      $scope.current_node = node;
+    $scope.setCurrentNode = function(node, index){
+      $scope.current_node[index] = node;
     }
 
     $scope.getDate = function(value){
@@ -216,10 +219,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     $scope.showTestNameEdit = function(test){
       test.show_test_name_edit_field = true;
       test.show_waiting_icon = false;
-    }
-
-    $scope.isCurrentNodePage = function(){
-      return $scope.current_node=='Page';
     }
 
     $scope.cancelEditingTestName = function(test){
