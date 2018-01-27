@@ -2,9 +2,37 @@
 var AUTH0_DOMAIN='qanairy.auth0.com';
 var AUTH0_CLIENT_ID='wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV';
 var API_SERVER_URL='api.qanairy.com:8080';  // default server url for Java Spring Security API sample
-var DELEGATION_ENABLED=false;
+var DELEGATION_ENABLED=true;
 var API_SERVER_CLIENT_ID='';  // set to '' if DELEGATION_ENABLED=false
-var LOCK_OPTIONS = {}
+var LOCK_OPTIONS = {
+    theme: {
+      logo: 'https://s3.amazonaws.com/qanairy.com/assets/images/qanairy_logo_300.png',
+      primaryColor: '#fddc05'
+    },
+    languageDictionary: {
+      signUpTerms: "I agree to the <a href='/terms' target='_new'>terms of service</a> and <a href='/privacy' target='_new'>privacy policy</a>."
+    },
+    mustAcceptTerms: true,
+    redirectUrl: 'http://localhost:8001/*'
+    /*avatar: {
+      url: function(email, cb) {
+        // Obtain the avatar url for the email input by the user, Lock
+        // will preload the image it before displaying it.
+        // Note that in case of an error you call cb with the error in
+        // the first arg instead of `null`.
+        var url = obtainAvatarUrl(email);
+        cb(null, url);
+      },
+      displayName: function(email, cb) {
+        // Obtain the display name for the email input by the user.
+        // Note that in case of an error you call cb with the error in
+        // the first arg instead of `null`.
+        var displayName = obtainDisplayName(email);
+        cb(null, displayName);
+      }
+    }
+    */
+  }
 var qanairyAuthProvider = null;
 // Declare app level module which depends on views, and components
 angular.module('Qanairy', [
@@ -22,34 +50,23 @@ angular.module('Qanairy', [
   'AuthInterceptor',
   'ngRaven'
 ]).
-config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'lockProvider',
-  function($urlRouterProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, lockProvider) {
-    //$urlRouterProvider.otherwise('/domains');
+config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'lockProvider', '$locationProvider',
+  function($urlRouterProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, lockProvider, $locationProvider) {
+    $urlRouterProvider.otherwise('/domains');
+    $locationProvider.html5Mode(true);
+
     lockProvider.init({
         clientID: AUTH0_CLIENT_ID,
         domain: AUTH0_DOMAIN,
         options: LOCK_OPTIONS
       });
-      /*
-    qanairyAuthProvider = authProvider;
 
-    storeProvider.setStore("sessionStorage");
-    authProvider.init({
-      clientID: AUTH0_CLIENT_ID,
-      domain:  AUTH0_DOMAIN,
-      callbackUrl: location.href,
-      theme: {
-        logo: 'https://s3.amazonaws.com/qanairy.com/assets/images/qanairy_logo_300.png',
-        primaryColor: '#fddc05'
-      }
-    });
-*/
     var options = {
       theme: {
         logo: 'https://s3.amazonaws.com/qanairy.com/assets/images/qanairy_logo_300.png'
       }
     };
-    var lock = new Auth0Lock('wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV', 'qanairy.auth0.com', options);
+    var lock = new Auth0Lock('wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV', 'qanairy.auth0.com', LOCK_OPTIONS);
 
       jwtOptionsProvider.config({
         /*tokenGetter: function(auth) {
@@ -58,7 +75,7 @@ config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterce
           return sessionStorage.getItem("token"); //storeProvider.get("token");
         },*/
         whiteListedDomains: ['localhost', 'api.qanairy.com'],
-      //  unauthenticatedRedirectPath: '/login'
+        //unauthenticatedRedirectPath: '/login'
       });
 
       jwtInterceptorProvider.tokenGetter = function (store, auth) {
@@ -116,63 +133,6 @@ config(['$urlRouterProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterce
       });
     });
 
-    /*
-    qanairyAuthProvider.on('authenticated', function($location) {
-      // This is after a refresh of the page
-      // If the user is still authenticated, you get this event
-    });
-
-    qanairyAuthProvider.on('loginFailure', function($location, error) {
-      console.log("ERROR !!");
-
-    });
-
-    qanairyAuthProvider.on('forbidden', function($location, error){
-      console.log("forbidden request");
-      $location.go('/login');
-    });
-
-    qanairyAuthProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
-      store.set('token', idToken);
-
-        profilePromise.then(function(profile) {
-          store.set('profile', profile);
-          //$rootScope.$broadcast('new-account');
-          profile.app_metadata.plan = "alpha"
-          if(profile.app_metadata && profile.app_metadata.status == "new"){
-            console.log("navigating to account index");
-            //broadcast event to trigger creating account
-            //$location.path("/accounts");
-            console.log("NEW ACCOUNT! WOOO!");
-            var account = {
-              service_package: "alpha",
-              payment_acct: "stripe_acct_tmp"
-            }
-            Account.save(account);
-            $window.location.reload();
-            //create account with user data
-            //$rootScope.$broadcast("new-account");
-          }
-        });
-      });
-
-
-      qanairyAuthProvider.on('authenticated', function($location) {
-        console.log("Authenticated ;; ")
-        // This is after a refresh of the page
-        // If the user is still authenticated, you get this event
-      });
-
-      qanairyAuthProvider.on('loginFailure', function($location, error) {
-        console.log("ERROR !!");
-
-      });
-
-      qanairyAuthProvider.on('forbidden', function($location, error){
-        console.log("forbidden request");
-        $location.go('/login');
-      });
-      */
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
      /*if (!auth.isAuthenticated) {
