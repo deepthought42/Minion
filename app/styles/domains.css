@@ -1,0 +1,142 @@
+
+
+/*--------------------------- [7. Domains Page] ------------------------------------------------------------------------------*/
+
+.error__message{
+	font-weight: 700;
+	color: #ffffff;
+	text-align: center;
+	padding: 10px;
+	background-color:red;
+	margin: 0px 0px 0px 0px;
+}
+
+.domain__button{
+	background-color:#ffffff;
+	margin:15px 15px;
+	padding:15px;
+	height:250px;
+	width:250px;
+	border-radius: 5px;
+  color: #bbbbbb !important;
+  float:left;
+  position: relative;
+	text-align: center;
+}
+
+.domain__button__height{
+	height: -moz-calc(100% - 20px);
+/* WebKit */
+height: -webkit-calc(100% - 20px);
+/* Opera */
+height: -o-calc(100% - 20px);
+/* Standard */
+height: calc(100% - 20px);
+}
+
+.domain__icon{
+  padding-bottom:30px !important;
+}
+
+.domain__logo{
+  max-height:100px;
+	width:100%;
+  margin: auto;
+	text-align: center;
+}
+
+.domain__logo img{
+	width:100%;
+  padding:0px 15px;
+}
+
+.domain--largeicon{
+	font-weight: 700;
+	text-align: center;
+}
+
+.domain__title{
+  position: absolute;
+  padding:0px 15px;
+  bottom:30px;
+  left:0px;
+  width:100%;
+  margin: auto;
+}
+
+.domain__button:focus,
+.domain__button.focus {
+  background-color:#e0e0e0;
+    color: #999999 !important;
+}
+.domain__button:hover {
+  background-color:#e0e0e0;
+    color: #999999 !important;
+}
+.domain__button:active,
+.domain__button.active,
+.open > .dropdown-toggle.domain__button {
+  background-color:#e0e0e0;
+    color: #999999 !important;
+}
+
+
+.domain--largeicon:focus,
+.domain--largeicon.focus {
+  color: #999999;
+}
+.domain--largeicon:hover {
+  color: #999999;
+}
+.domain--largeicon:active,
+.domain--largeicon.active,
+.open > .dropdown-toggle.domain--largeicon {
+  color: #999999;
+}
+
+.delete__domain:focus,
+.delete__domain.focus {
+  color: #333333;
+}
+.delete__domain:hover {
+  color: #333333;
+}
+.delete__domain:active,
+.delete__domain.active,
+.open > .dropdown-toggle.delete__domain {
+  color: #333333;
+}
+
+.delete__domain{
+    color: #999999;
+}
+
+.domain-dialogue-close{
+  text-align:right !important;
+  padding:30px 30px;
+}
+.domain-dialogue-header {
+  text-align:center;
+  vertical-align: middle;
+  padding:0px 0px 0px 0px;
+}
+
+.domain-dialogue-input {
+  max-width: 440px;
+  padding:60px 0px 60px 0px;
+  margin: auto;
+  display: flex;
+   justify-content: center;
+   align-items:center;
+}
+
+.domain-dialogue-button {
+  display: flex;
+  margin:0px auto 60px auto;
+  justify-content: center;
+}
+
+.disabled_image {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}

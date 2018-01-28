@@ -1,12 +1,13 @@
 <md-dialog class="col-sm-4" style="">
-    <div class="col-sm-12 domain-dialogue-close" ng-click="closeDialog()">
+    <div class="col-sm-12 dialogue-close" ng-click="closeDialog()">
         <md-dialog-content>
-           <h3 style="text-align:right;"><i class="fa fa-times"></i></h3>
+
+           <h2 style="text-align:right;"><i class="fa fa-times"></i></h2>
         </md-dialog-content>
     </div>
     <div class="col-sm-12 domain-dialogue-header">
         <md-dialog-content>
-           <h3>Start a new project by adding a&nbsp;domain.</h3>
+           <h2 class="modal__title">Start a new project by adding a&nbsp;domain.</h2>
         </md-dialog-content>
     </div>
     <form name="domain_form" ng-submit="selected_browser && domain_form.$valid && createDomain(protocol, host, selected_browser)" novalidate>
@@ -23,7 +24,7 @@
         </div>
         <div class="col-xs-12 empty__state vertical__center__int row">
           <div class="col-xs-12">
-            <h3>Which browser does your team use the most?</h3>
+            <h2>Which browser does your team use the most?</h2>
           </div>
           <div class="col-xs-12">
             <div class="col-xs-4">
@@ -51,7 +52,7 @@
         <div ng-show="domain_creation_error" class="error">
           Something went wrong, Please try again
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12 modal_action_button">
           <md-button id="create_domain_button" class="md-primary md-raised domain-dialogue-button" type="submit" ng-disabled="!selected_browser || domain_form.$invalid">Create Project</md-button>
         </div>
     </form>
