@@ -39,7 +39,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.group = {};
       $scope.group.name = "";
       $scope.group.description = "";
-      $scope.test_idx = 0;
+      $scope.test_idx = -1;
 
       if(store.get('domain') != null){
         $scope.waitingOnTests = true;
@@ -139,14 +139,14 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
     $scope.toggleTestDataVisibility = function(test, test_idx){
       if($scope.test_idx != test_idx){
-        $scope.tests[$scope.test_idx].visible = false;
+        if($scope.test_idx >=0){
+          $scope.tests[$scope.test_idx].visible = false;
+        }
+        $scope.setCurrentNode(test.path.path[0], test_idx);
       }
 
       $scope.test_idx = test_idx;
 
-      if(test.visible){
-        $scope.setCurrentNode(test.path.path[0], test_idx);
-      }
       test.visible = !test.visible;
 
     }

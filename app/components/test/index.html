@@ -213,13 +213,13 @@
 								<div class="col-sm-12" ng-show="current_node[$index].type=='Page'">
 									<div class="row no-gutter">
 									  <div class="node__title">
+
 											<h4>
 												<span style="font-weight:bold;">Page</span> - <a href="{{current_node[$index].url}}">{{current_node[$index].url}}</a>
 											</h4>
 										</div>
 										<div class="">
 											<div class="page__image col-xs-2">
-												{{current_node[$index].browserScreenshots[default_browser]}}
 												<img type="button" class="path-node-image"
 														data-toggle="modal" data-target="#exampleModal"
 														src="{{current_node[$index].browserScreenshots[default_browser]}}" class="path-node-image"
