@@ -1,0 +1,83 @@
+/*--------------------------- [1. ] -----------------------------------------*/
+.dialogue-close{
+  text-align:right !important;
+  padding:30px 30px 0px 30px;
+}
+
+md-dialog {
+    opacity: 0;
+    min-width: 240px;
+    max-width: 80%;
+    max-height: 80%;
+    position: relative;
+    overflow: auto;
+    box-shadow: 0 7px 8px -4px rgba(0,0,0,.2), 0 13px 19px 2px rgba(0,0,0,.14), 0 5px 24px 4px rgba(0,0,0,.12);
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.modal__title{
+	text-align: center;
+	padding: 20px 30px 40px 30px;
+}
+
+.modal-browser-icon{
+	height: 100px;
+	width: 100px;
+	padding: 15px;
+}
+
+.fa-icon{
+	text-shadow: 0px 2px #ffffff;
+	font-size: 64px;
+}
+
+.fa-icon i{
+	padding: 15px;
+}
+
+.browser_buttons{
+	display: inline-block;
+	padding-bottom: 0px;
+}
+
+/* Button Depressed */
+.btn-depressed {
+	background: #eee;
+	color:#cccccc;
+	box-shadow: 0 6px #ccc;
+	border-radius: 5px;
+	-webkit-transition: none;
+	-moz-transition: none;
+	transition: none;
+}
+
+.btn-depressed:focus {
+	color:#bbb;
+	outline: none;
+}
+
+.btn-depressed:hover {
+	color:#bbb;
+	box-shadow: 0 4px #ccc;
+	top: 2px;
+}
+
+.btn-depressed:active {
+	color:#bbb;
+	box-shadow: 0 0 #ccc;
+	top: 8px;
+}
+
+.btn-depressed:active,
+.btn-depressed.active {
+	box-shadow: 0 4px #ccc;
+	top: 2px;
+}
+
+.modal_action_button{
+  padding: 60px;
+	text-align: center;
+}
