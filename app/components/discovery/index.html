@@ -151,9 +151,8 @@
 			<div ng-show="test.visible">
 				<div class="test__path vertical__left__int " ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int " ng-click="setCurrentNode(node, $index)">
-
-						<div ng-show="node.browserScreenshots[default_browser]" class="path-node" tooltip-placement="top">
-						  <img src="{{node.browserScreenshots[default_browser]}}" class="path-node-image"/>
+						<div ng-show="node.browser_screenshot[default_browser]" class="path-node" tooltip-placement="top">
+						  <img src="{{node.browser_screenshot[default_browser]}}" class="path-node-image"/>
 					  </div>
 					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element">
 							<span class="" tooltip-placement="top">
@@ -182,8 +181,8 @@
 						</div>
 					</div>
 					<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, $index);visible_tab='nodedata'+$index">
-					  <div ng-show="test.result.browserScreenshots[default_browser]" class="path-node">
-							<img src="{{test.result.browserScreenshots[default_browser]}}" class="path-node-image"/>
+					  <div ng-show="test.result.browser_screenshot[default_browser]" class="path-node">
+							<img src="{{test.result.browser_screenshot[default_browser]}}" class="path-node-image"/>
 					  </div>
 					</div>
 			  </div>
