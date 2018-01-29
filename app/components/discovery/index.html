@@ -7,7 +7,6 @@
 -->
 
 	<div class="col-md-12 error__message" ng-repeat="error in errors">
-		{{error}}
 		{{error.message}}
 	</div>
 	<div class="secondary-nav vertical__center__int" >
@@ -152,6 +151,7 @@
 			<div ng-show="test.visible">
 				<div class="test__path vertical__left__int " ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int " ng-click="setCurrentNode(node, $index)">
+
 						<div ng-show="node.browserScreenshots[default_browser]" class="path-node" tooltip-placement="top">
 						  <img src="{{node.browserScreenshots[default_browser]}}" class="path-node-image"/>
 					  </div>
