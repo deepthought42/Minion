@@ -1,16 +1,9 @@
 // app/auth/auth.service.js
+'use strict';
 
-(function () {
+var authService = angular.module('Qanairy.authService', []);
 
-  'use strict';
-
-  angular
-    .module('Qanairy')
-    .service('authService', authService);
-
-  authService.$inject = ['$state', 'angularAuth0', '$timeout'];
-
-  function authService($state, angularAuth0, $timeout) {
+authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', function ($state, angularAuth0, $timeout) {
 
     function login() {
       angularAuth0.authorize();
@@ -20,10 +13,10 @@
       angularAuth0.parseHash(function(err, authResult) {
         if (authResult && authResult.accessToken && authResult.idToken) {
           setSession(authResult);
-          $state.go('home');
+          $state.go('main.domains');
         } else if (err) {
           $timeout(function() {
-            $state.go('home');
+            $state.go('main.domains');
           });
           console.log(err);
         }
@@ -58,5 +51,4 @@
       logout: logout,
       isAuthenticated: isAuthenticated
     }
-  }
-})();
+}]);
