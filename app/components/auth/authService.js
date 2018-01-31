@@ -1,9 +1,9 @@
 // app/auth/auth.service.js
 'use strict';
 
-var authService = angular.module('Qanairy.authService', ['Qanairy.AccountService']);
+var authService = angular.module('Qanairy.authService', []);
 
-authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'Account', 'store', function ($state, angularAuth0, $timeout, Account, store) {
+authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', function ($state, angularAuth0, $timeout) {
 
     function login() {
       angularAuth0.authorize();
@@ -12,17 +12,6 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'Account', 's
     function handleAuthentication() {
       angularAuth0.parseHash(function(err, authResult) {
         if (authResult && authResult.accessToken && authResult.idToken) {
-          var user = angularAuth0.client.userInfo(authResult.accessToken, function(err, user){
-            console.log("USER :: "+Object.keys(user));
-            var account = {
-              service_package: "alpha",
-              payment_acct: "stripe_acct_tmp"
-            }
-            console.log("Token :: "+authResult.idToken);
-            store.set('token', authResult.idToken);
-            console.log("session token :: "+store.get('token'));
-            Account.save(account);
-          });
           setSession(authResult);
           $state.go('main.domains');
         } else if (err) {

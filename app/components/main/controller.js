@@ -29,6 +29,7 @@ angular.module('Qanairy.main', ['ui.router'])
     this._init = function(){
       $scope.displayUserDropDown = false;
       $scope.menuToggled = false;
+      $scope.auth = Auth;
       $scope.isAuthenticated = false;
       $scope.paths = [];
       $scope.isStarted = false;
