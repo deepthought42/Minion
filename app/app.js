@@ -34,117 +34,26 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       responseType: 'token id_token',
       audience: 'https://qanairy.auth0.com/userinfo',
       redirectUri: 'http://localhost:8001',
-      scope: 'openid'
+      scope: 'openid profile email terms'
     });
 
       jwtOptionsProvider.config({
-        /*tokenGetter: function(auth) {
+        tokenGetter: function(auth) {
           console.log("stored conf token :: " + sessionStorage.getItem("token"));//+storeProvider.get('className'));
 
           return sessionStorage.getItem("token"); //storeProvider.get("token");
-        },*/
+        },
         whiteListedDomains: ['localhost', 'api.qanairy.com'],
       //  unauthenticatedRedirectPath: '/login'
       });
 
-      jwtInterceptorProvider.tokenGetter = function (store, auth) {
-        if (DELEGATION_ENABLED) {
-          // does Auth0 delegation lookup
-          var fetchDelegationTokenFromAuth0 = function () {
-            console.log("enabled : what");
 
-            return auth.getToken({
-              targetClientId: 'mbFktm6CPSZ7ZsAcFj11nwzkb3X64fpP',
-              scope: 'openid profile app_metadata'
-            }).then(function (delegation) {
-              store.set('delegationToken', delegation.id_token);
-              console.log("success :: "+delegation.id_token);
-              return delegation.id_token;
-            })
-            .catch(function(data){
-              console.log("error getting token");
-            });
-          };
-
-          var targetClientId = API_SERVER_CLIENT_ID;
-          var delegationToken = store.get('delegationToken');
-          if (delegationToken) {
-            // use cached delegation token
-            return delegationToken;
-          } else {
-            console.log("delegation");
-            return fetchDelegationTokenFromAuth0();
-          }
-        } else {
-          // just obtain authentication token for this Client App
-          return store.get('token');
-        }
-
-      }
       $httpProvider.interceptors.push('jwtInterceptor');
   }])
 
 .run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', 'Auth',
   function($rootScope, store, jwtHelper, $state , $location, Account, $window, Auth){
     Auth.handleAuthentication();
-
-/*
-    qanairyAuthProvider.on('authenticated', function($location) {
-      // This is after a refresh of the page
-      // If the user is still authenticated, you get this event
-    });
-
-    qanairyAuthProvider.on('loginFailure', function($location, error) {
-      console.log("ERROR !!");
-
-    });
-
-    qanairyAuthProvider.on('forbidden', function($location, error){
-      console.log("forbidden request");
-      $location.go('/login');
-    });
-
-    qanairyAuthProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
-      store.set('token', idToken);
-
-        profilePromise.then(function(profile) {
-          store.set('profile', profile);
-          //$rootScope.$broadcast('new-account');
-          profile.app_metadata.plan = "alpha"
-          if(profile.app_metadata && profile.app_metadata.status == "new"){
-            console.log("navigating to account index");
-            //broadcast event to trigger creating account
-            //$location.path("/accounts");
-            console.log("NEW ACCOUNT! WOOO!");
-            var account = {
-              service_package: "alpha",
-              payment_acct: "stripe_acct_tmp"
-            }
-            Account.save(account);
-            $window.location.reload();
-            //create account with user data
-            //$rootScope.$broadcast("new-account");
-          }
-        });
-      });
-
-
-      qanairyAuthProvider.on('authenticated', function($location) {
-        console.log("Authenticated ;; ")
-        // This is after a refresh of the page
-        // If the user is still authenticated, you get this event
-      });
-
-      qanairyAuthProvider.on('loginFailure', function($location, error) {
-        console.log("ERROR !!");
-
-      });
-
-      qanairyAuthProvider.on('forbidden', function($location, error){
-        console.log("forbidden request");
-        $location.go('/login');
-      });
-*/
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
       if(!Auth.isAuthenticated()){
         Auth.login();
@@ -181,6 +90,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
         console.log("unauthorized user");
+        Auth.login();
         /*auth.signin({
           authParams: {
             scope: 'openid profile app_metadata' // This is if you want the full JWT
