@@ -34,7 +34,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       responseType: 'token id_token',
       audience: 'https://qanairy.auth0.com/userinfo',
       redirectUri: 'http://localhost:8001',
-      scope: 'openid'
+      scope: 'openid profile create:accounts'
     });
 
       jwtOptionsProvider.config({
@@ -48,37 +48,8 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       });
 
       jwtInterceptorProvider.tokenGetter = function (store, auth) {
-        if (DELEGATION_ENABLED) {
-          // does Auth0 delegation lookup
-          var fetchDelegationTokenFromAuth0 = function () {
-            console.log("enabled : what");
-
-            return auth.getToken({
-              targetClientId: 'mbFktm6CPSZ7ZsAcFj11nwzkb3X64fpP',
-              scope: 'openid profile app_metadata'
-            }).then(function (delegation) {
-              store.set('delegationToken', delegation.id_token);
-              console.log("success :: "+delegation.id_token);
-              return delegation.id_token;
-            })
-            .catch(function(data){
-              console.log("error getting token");
-            });
-          };
-
-          var targetClientId = API_SERVER_CLIENT_ID;
-          var delegationToken = store.get('delegationToken');
-          if (delegationToken) {
-            // use cached delegation token
-            return delegationToken;
-          } else {
-            console.log("delegation");
-            return fetchDelegationTokenFromAuth0();
-          }
-        } else {
           // just obtain authentication token for this Client App
           return store.get('token');
-        }
 
       }
       $httpProvider.interceptors.push('jwtInterceptor');
@@ -181,6 +152,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
         console.log("unauthorized user");
+        Auth.handleAuthentication();
         /*auth.signin({
           authParams: {
             scope: 'openid profile app_metadata' // This is if you want the full JWT

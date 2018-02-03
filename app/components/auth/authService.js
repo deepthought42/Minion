@@ -3,7 +3,7 @@
 
 var authService = angular.module('Qanairy.authService', []);
 
-authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', function ($state, angularAuth0, $timeout) {
+authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'Account', function ($state, angularAuth0, $timeout, store, Account) {
 
     function login() {
       angularAuth0.authorize();
@@ -12,11 +12,30 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', function ($st
     function handleAuthentication() {
       angularAuth0.parseHash(function(err, authResult) {
         if (authResult && authResult.accessToken && authResult.idToken) {
+          console.log("auth result 2");
+          angularAuth0.client.userInfo(authResult.accessToken, function(err, user){
+            console.log("user :: "+user);
+            if(user){
+              var account = {
+                service_package: "alpha",
+              }
+              console.log("Token :: "+authResult.accessToken);
+              store.set('token', authResult.accessToken);
+              console.log("session token :: "+store.get('token'));
+              Account.save(account);
+            }
+            else if(err){
+              console.log("Error :: "+Object.keys(err));
+              console.log("Error :: "+ err.name);
+              console.log("Error :: "+ err.description);
+            }
+          });
           setSession(authResult);
           $state.go('main.domains');
         } else if (err) {
           $timeout(function() {
             $state.go('main.domains');
+            //angularAuth0.login();
           });
           console.log(err);
         }
