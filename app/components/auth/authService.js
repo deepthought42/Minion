@@ -12,6 +12,8 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', function ($st
     function handleAuthentication() {
       angularAuth0.parseHash(function(err, authResult) {
         if (authResult && authResult.accessToken && authResult.idToken) {
+          sessionStorage.setItem('token', authResult.accessToken);
+
           setSession(authResult);
           $state.go('main.domains');
         } else if (err) {

@@ -16,7 +16,7 @@ angular.module('Qanairy.main', ['ui.router'])
 .controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Tester', 'Auth',
   function ($rootScope, $scope, PathRealtimeService, store, $location, Tester, Auth) {
     var getFailingCount = function(){
-      Tester.getFailingCount({url: $scope.domain }).$promise
+      Tester.getFailingCount({url: "http://www.qanairy.com" }).$promise
         .then(function(data){
           store.set("failing_tests", data.failing);
           $scope.failingTests = data.failing;
@@ -39,7 +39,7 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.domain = store.get('domain');
       $scope.errors = [];
 
-      getFailingCount();
+      getFailingCount({url: "http://www.qanairy.com"});
 
       $scope.$location = $location;
       $scope.current_path = $location.path();
@@ -55,6 +55,7 @@ angular.module('Qanairy.main', ['ui.router'])
     $scope.logout = function(){
       Auth.logout();
       $scope.isAuthenticated=false;
+      Auth.login();
     }
 
     this._init();
@@ -65,7 +66,7 @@ angular.module('Qanairy.main', ['ui.router'])
     })
 
     $scope.$on('updateFailingCnt', function(){
-      getFailingCount();
+      getFailingCount({url: "http://www.qanairy.com"});
     })
   }
 ]);

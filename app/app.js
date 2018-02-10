@@ -34,14 +34,14 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       responseType: 'token id_token',
       audience: 'https://api.qanairy.com',
       redirectUri: 'http://localhost:8001',
-      scope: 'openid profile'
+      scope: 'openid profile read:domains delete:domains update:domains create:accounts read:tests update:tests read:groups update:groups create:groups'
     });
 
       jwtOptionsProvider.config({
         tokenGetter: function(auth) {
           console.log("stored conf token :: " + sessionStorage.getItem("token"));//+storeProvider.get('className'));
 
-          return sessionStorage.getItem("token"); //storeProvider.get("token");
+          return localStorage.getItem("access-token"); //storeProvider.get("token");
         },
         whiteListedDomains: ['localhost', 'api.qanairy.com'],
       //  unauthenticatedRedirectPath: '/login'
