@@ -34,13 +34,11 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       responseType: 'token id_token',
       audience: 'https://api.qanairy.com',
       redirectUri: 'http://localhost:8001',
-      scope: 'openid profile read:domains delete:domains update:domains create:accounts read:tests update:tests read:groups update:groups create:groups'
+      scope: 'openid profile read:domains delete:domains update:domains create:domains create:accounts read:tests update:tests read:groups update:groups create:groups run:tests start:discovery'
     });
 
       jwtOptionsProvider.config({
         tokenGetter: function(auth) {
-          console.log("stored conf token :: " + sessionStorage.getItem("token"));//+storeProvider.get('className'));
-
           return localStorage.getItem("access-token"); //storeProvider.get("token");
         },
         whiteListedDomains: ['localhost', 'api.qanairy.com'],
@@ -55,63 +53,6 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
   function($rootScope, store, jwtHelper, $state , $location, Account, $window, Auth){
     Auth.handleAuthentication();
 
-/*
-    qanairyAuthProvider.on('authenticated', function($location) {
-      // This is after a refresh of the page
-      // If the user is still authenticated, you get this event
-    });
-
-    qanairyAuthProvider.on('loginFailure', function($location, error) {
-      console.log("ERROR !!");
-
-    });
-
-    qanairyAuthProvider.on('forbidden', function($location, error){
-      console.log("forbidden request");
-      $location.go('/login');
-    });
-
-    qanairyAuthProvider.on('loginSuccess', function($location, profilePromise, idToken, store) {
-      store.set('token', idToken);
-
-        profilePromise.then(function(profile) {
-          store.set('profile', profile);
-          //$rootScope.$broadcast('new-account');
-          profile.app_metadata.plan = "alpha"
-          if(profile.app_metadata && profile.app_metadata.status == "new"){
-            console.log("navigating to account index");
-            //broadcast event to trigger creating account
-            //$location.path("/accounts");
-            console.log("NEW ACCOUNT! WOOO!");
-            var account = {
-              service_package: "alpha",
-              payment_acct: "stripe_acct_tmp"
-            }
-            Account.save(account);
-            $window.location.reload();
-            //create account with user data
-            //$rootScope.$broadcast("new-account");
-          }
-        });
-      });
-
-
-      qanairyAuthProvider.on('authenticated', function($location) {
-        console.log("Authenticated ;; ")
-        // This is after a refresh of the page
-        // If the user is still authenticated, you get this event
-      });
-
-      qanairyAuthProvider.on('loginFailure', function($location, error) {
-        console.log("ERROR !!");
-
-      });
-
-      qanairyAuthProvider.on('forbidden', function($location, error){
-        console.log("forbidden request");
-        $location.go('/login');
-      });
-*/
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
       if(!Auth.isAuthenticated()){
         Auth.login();
