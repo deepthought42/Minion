@@ -75,25 +75,39 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         });
     }
 
-    $scope.runTest = function(test, index, browser){
+    $scope.runTest = function(firefox_selected, chrome_selected){
       $scope.keys = [];
       $scope.keys.push($scope.test.key);
       $scope.test.runStatus = true;
-      Tester.runTests({test_keys: keys, browser_type: browser}).$promise
-        .then(function(data){
-          $scope.test.runStatus = false;
-          $scope.test.correct = data.passes;
-          //move test to top of list
-          $scope.tests.splice($scope.test_idx, 1);
-          $scope.tests.unshift(data);
-        })
-        .catch(function(err){
-          $scope.test.runStatus = false;
-        });
+      var browsers = [];
+
+      if(firefox_selected){
+        browsers.push("firefox");
+      }
+
+      if(chrome_selected){
+        browsers.push("chrome");
+      }
+
+      for(var i=0; i < browsers.length; i++){
+
+        Tester.runTests({test_keys: $scope.keys, browser_type: browsers[i]}).$promise
+          .then(function(data){
+            $scope.closeDialog();
+
+            $scope.test.runStatus = false;
+            $scope.test.correct = data.passes;
+            //move test to top of list
+            $scope.tests.splice($scope.test_idx, 1);
+            $scope.tests.unshift(data);
+          })
+          .catch(function(err){
+            $scope.test.runStatus = false;
+          });
+        }
     }
 
-    $scope.runTests = function(browser){
-      $scope.closeDialog();
+    $scope.runTests = function(firefox_selected, chrome_selected){
       //get keys for tests and put
       $scope.keys = [];
       $scope.filteredTests.forEach(function(test){
@@ -101,30 +115,41 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         $scope.keys.push(test.key);
       });
 
-      Tester.runTests({test_keys: $scope.keys, browser_type: browser}).$promise
-        .then(function(data){
-          $scope.closeDialog();
+      var browsers = [];
+      if(firefox_selected){
+        browsers.push("firefox");
+      }
 
-          //keys = Object.keys(data);
-          $scope.keys.forEach(function(key){
-            var val = data[key];
-            //iterate over tests and set correctness based on if test key is present in data
+      if(chrome_selected){
+        browsers.push("chrome");
+      }
 
-            $scope.filteredTests.forEach(function(test){
-              test.runStatus = false;
+      for(var i=0; i < browsers.length; i++){
+        Tester.runTests({test_keys: $scope.keys, browser_type: browsers[i]}).$promise
+          .then(function(data){
+            $scope.closeDialog();
 
-              if(data[test.key]){
-                test.correct = data[test.key];
-                console.log('val '+val);
-              }
+            //keys = Object.keys(data);
+            $scope.keys.forEach(function(key){
+              var val = data[key];
+              //iterate over tests and set correctness based on if test key is present in data
+
+              $scope.filteredTests.forEach(function(test){
+                test.runStatus = false;
+
+                if(data[test.key]){
+                  test.correct = data[test.key];
+                  console.log('val '+val);
+                }
+              })
             })
           })
-        })
-        .catch(function(err){
-          $scope.errors.push(err);
+          .catch(function(err){
+            $scope.errors.push(err);
 
-          console.log("Tester failed to run successfully");
-        });
+            console.log("Tester failed to run successfully");
+          });
+        }
     }
 
     $scope.runGroupTests = function(url, group){
@@ -241,6 +266,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     };
 
     $scope.openBrowserSelectionDialog  = function(test, $index) {
+      $scope.chrome_selected = false;
+      $scope.firefox_selected = false;
       $scope.runSingleTestFlag = false;
       if(test != null && $index != null){
         $scope.runSingleTestFlag = true;
