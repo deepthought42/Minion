@@ -11,16 +11,16 @@
       </div>
       <div class="col-xs-3 vertical__center__int">
         <button class="btn btn-depressed" ng-click="browser='chrome';chrome_selected=!chrome_selected" ng-class="{active: chrome_selected}">
-          <img src="/img/Chrome.ico" class="modal-browser-icon"></img>
-          <div class="fa-icon">
+          <img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="chrome_selected"></img>
+          <div class="fa-icon" ng-show="!chrome_selected">
             <i class="fa fa-chrome"></i>
           </div>
         </button>
       </div>
       <div class="col-xs-3 vertical__center__int">
         <button class="btn btn-depressed" ng-click="browser='firefox';firefox_selected=!firefox_selected" ng-class="{active: firefox_selected}">
-          <img src="/img/firefox.png" class="modal-browser-icon"></img>
-          <div class="fa-icon">
+          <img src="/img/firefox.png" class="modal-browser-icon" ng-show="firefox_selected"></img>
+          <div class="fa-icon" ng-show="!firefox_selected">
             <i class="fa fa-firefox"></i>
           </div>
         </button>
