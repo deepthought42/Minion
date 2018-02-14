@@ -62,10 +62,10 @@
         </div>
         <div class="col-xs-1 test__status" ng-show="!test.runStatus">
 					<span ng-show="test.correct">
-					  <i class="fa fa-check-circle green status--symbol" ng-dblclick="updateTestCorrectness(test, false)"></i>
+					  <i class="fa fa-check-circle green status--symbol"></i>
 					</span>
 					<span ng-show="!test.correct && test.correct != null">
-					  <i  class="fa fa-times-circle red status--symbol" ng-dblclick="updateTestCorrectness(test, true)"></i>
+					  <i  class="fa fa-times-circle red status--symbol"></i>
 					</span>
 			  </div>
 			  <div class="col-xs-3 test__title" ng-click="toggleTestDataVisibility(test, $index);visible_tab='nodedata'+$index">
@@ -102,7 +102,7 @@
 			  </div>
 				<div class="col-xs-3">
 					<div class="row">
-						<div class="col-sm-2" ng-repeat="(browser, status) in test.browserPassingStatuses">
+						<div class="col-sm-2" ng-repeat="(browser, status) in test.browserPassingStatuses" ng-dblclick="updateTestCorrectness(test, browser, !status)">
 							<div class="vertical__center">
 								<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="browser=='chrome'"></img>
 								<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="browser=='firefox'" ></img>

@@ -63,10 +63,10 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         });
     };
 
-    $scope.updateTestCorrectness = function(test, correctness){
-      Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
+    $scope.updateTestCorrectness = function(test, browser, correctness){
+      Tester.updateCorrectness({key: test.key, browser: browser, correct: correctness}).$promise
         .then(function(data){
-          console.log("Updated correctness of test");
+          test.browserPassingStatuses = data.browserPassingStatuses;
           $rootScope.$broadcast("updateFailingCnt");
           test.correct = data.correct;
         })
