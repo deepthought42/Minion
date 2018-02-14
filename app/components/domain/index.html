@@ -17,17 +17,22 @@
   </div>
 </div>
 <div class="domain__button" ng-repeat="domain in domains">
-  <div class="" ng-click="removeDomain(domain, $index)" style="text-align:right !important; position: relative;">
-     <h2 style="margin:0px; text-align:right !important; right:0px; position: absolute;">
-       <i class="fa fa-times delete__domain" ></i>
-     </h2>
-  </div>
-  <div  class="vertical__center domain__icon" ng-click="selectDomain(domain)">
-    <div class="domain__logo">
-      {{domain.logo}}
-      <img class="" src="{{domain.logoUrl || './img/qanairy_logo.png'}}">
+  <div class="row">
+    <div class="col-sm-2" style="text-align:left !important; position: relative;">
+      <img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="domain.discoveryBrowser=='chrome'"></img>
+      <img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="domain.discoveryBrowser=='firefox'" ></img>
     </div>
-    <button ng-click="openPicker(domain)">Upload Logo</button>
+    <div class="col-sm-8">
+    </div>
+    <div class="col-sm-2" ng-click="removeDomain(domain, $index)"  style="text-align:right !important; position: relative;">
+       <i class="fa fa-times delete__domain" ></i>
+    </div>
+  </div>
+  <div class="row vertical__center domain__icon"  ng-click="openPicker(domain)">
+    <div class="domain__logo">
+        <img class="" src="{{domain.logoUrl || './img/qanairy_logo.png'}}" />
+        Upload Logo
+    </div>
   </div>
   <div class="domain__title" ng-click="selectDomain(domain)">
     <h6>
