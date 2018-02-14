@@ -54,9 +54,6 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     Auth.handleAuthentication();
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
-      if(!Auth.isAuthenticated()){
-        Auth.login();
-      }
      //var requireLogin = toState.data.requireLogin || false;
      /*if (!auth.isAuthenticated) {
        e.preventDefault();
