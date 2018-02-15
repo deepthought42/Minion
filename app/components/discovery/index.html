@@ -23,6 +23,7 @@
 						Discovery Start
 					</div>
 					<div class="stat_value">
+						{{store.get("domain").discoveryStarted | date : 'mm/dd/YY HH:mm a'}}
 						01/17/18 2:16 pm
 					</div>
 				</div>
@@ -33,8 +34,8 @@
 					<div class="stat_key">
 						Last Test Found
 					</div>
-					<div class="stat_value">
-						00:28 hrs ago
+					<div class="stat_value" ng-show="tests.length">
+						{{(Date.now() - (tests | orderBy:{'lastRunTimestamp':true})[0].lastRunTimestamp)  | date : 'HH:mm'}} hrs ago
 					</div>
 				</div>
 			</div>
@@ -45,6 +46,7 @@
 						Total Runtime
 					</div>
 					<div class="stat_value">
+						{{(store.get("domain").lastDiscoveryPathRanAt - store.get("domain").discoveryStarted )| date : 'mm/dd/YY HH:mm a'}}
 						1:47 hrs
 					</div>
 				</div>
@@ -55,7 +57,7 @@
 					<div class="stat_key">
 						Total Tests
 					</div>
-					<div class="stat_value">
+					<div class="stat_value" ng-show="tests.length">
 						{{tests.length}} tests
 					</div>
 				</div>
