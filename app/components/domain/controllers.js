@@ -21,6 +21,9 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       Domain.query().$promise
         .then(function(data){
           $scope.domains = data;
+          if($scope.domains == null || !$scope.domains.length){
+            $scope.openCreateDomainDialog();
+          }
         })
         .catch(function(err){
           $scope.errors.push(err);
@@ -63,7 +66,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
     $scope.openCreateDomainDialog  = function(event) {
        $mdDialog.show({
-          clickOutsideToClose: true,
+          clickOutsideToClose: $scope.domains.length,
           scope: $scope,
           preserveScope: true,
           templateUrl: "components/domain/create_domain_modal.html",
@@ -106,6 +109,9 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         Domain.delete({key: domain.key}).$promise
           .then(function(data){
             $scope.domains.splice(index, 1);
+            if(!$scope.domains.length){
+              $scope.openCreateDomainDialog();
+            }
           })
           .catch(function(err){
             $scope.errors.push(err);

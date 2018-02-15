@@ -55,22 +55,6 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
-     /*if (!auth.isAuthenticated) {
-       e.preventDefault();
-
-       // get me a login modal!
-       auth.signin({
-         authParams: {
-           scope: 'openid profile email' // This is if you want the full JWT
-         }
-       }, function(profile, idToken, accessToken, state, refreshToken) {
-         store.set('profile', profile);
-         $state.go(toState.name, toParams);
-       }, function(err) {
-         console.log("Sign in Error :(", err);
-       });
-     }
-     else{
        if(store.get('domain') == null){
          $rootScope.$broadcast('domainRequiredError');
          if(toState.name != 'main.domains' && fromState.name == 'main.domains'){
@@ -81,7 +65,6 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
            $state.go('main.domains');
          }
        }
-     }*/
     });
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
