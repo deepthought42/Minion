@@ -3,7 +3,7 @@
 
 var authService = angular.module('Qanairy.authService', []);
 
-authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', function ($state, angularAuth0, $timeout) {
+authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', function ($state, angularAuth0, $timeout, store) {
 
     function login() {
       angularAuth0.authorize();
@@ -15,7 +15,12 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', function ($st
           sessionStorage.setItem('token', authResult.accessToken);
 
           setSession(authResult);
-          $state.go('main.domains');
+          if(store.get('domain')){
+            $state.go('main.tests');
+          }
+          else{
+            $state.go('main.domains');
+          }
         } else if (err) {
           $timeout(function() {
             $state.go('main.domains');
