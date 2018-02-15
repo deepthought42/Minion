@@ -40,10 +40,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.group.name = "";
       $scope.group.description = "";
       $scope.test_idx = -1;
-
-      if(store.get('domain') != null){
+      $scope.current_domain = store.get('domain')
+      if($scope.current_domain != null){
         $scope.waitingOnTests = true;
-        $scope.discovery_url = store.get('domain').url;
+        $scope.discovery_url = $scope.current_domain.url;
         Tester.getUnverified({url: $scope.discovery_url}).$promise
             .then(function(data){
               $scope.tests = data
