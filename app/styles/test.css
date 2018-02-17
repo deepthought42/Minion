@@ -157,13 +157,13 @@
 /*--------------------------- [6. Test Path] --------------------------------------------------------------------------------*/
 
 .test__path{
-
-    border-top: 1px solid #e0e0e0;
-  -webkit-box-shadow: inset 0 10px 6px -8px #e7e7e7;
-     -moz-box-shadow: inset 0 10px 6px -8px #e7e7e7;
-          box-shadow: inset 0 10px 6px -8px #e7e7e7;
+	border-top: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	padding-left: 15px;
 	height: 135px;
-  padding: 0px 30px  0px 30px !important;
+	-webkit-box-shadow: inset 0 10px 6px -8px #e7e7e7;
+		 -moz-box-shadow: inset 0 10px 6px -8px #e7e7e7;
+					box-shadow: inset 0 10px 6px -8px #e7e7e7;
 }
 
 .page__image{
@@ -257,6 +257,13 @@
 
 .test__groups{
 	padding:30px 15px 30px 15px;
+	background-color:#f9f9f9;
+	height: 100%;
+	border-left: 1px solid #e0e0e0;
+}
+
+.groups_input_padding{
+	padding:5px 0px 15px 0px;
 }
 
 .input-group-addon{
@@ -272,7 +279,7 @@
 }
 
 .group__tag{
-  margin-left: 15px;
+  margin-right: 15px;
   display: inline-block;
   height: 30px;
   padding: 4px 12px;
@@ -353,7 +360,7 @@
 
 .node__data{
   display: inline-block !important;
-  padding:25px 25px 10px 25px;
+  padding:20px 20px 10px 20px;
   width:100%;
 }
 
@@ -369,8 +376,6 @@
 
 
 .test__info{
-	height: 100%;
-  margin: 0px 15px !important;
 }
 
 
@@ -414,9 +419,14 @@
 	line-height: 20px;
 	letter-spacing:.1px;
 	color:#333333;
-  padding:25px 25px 16px 25px;
+  padding:20px 20px;
+	border-top: 1px solid #e0e0e0;
   width:100%;
-	-webkit-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
-		 -moz-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
-					box-shadow: inset 0 -10px 6px -8px #e7e7e7;
+}
+
+.test__history__frame{
+	border-bottom: 1px solid #e0e0e0;
+					-webkit-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
+						 -moz-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
+									box-shadow: inset 0 -10px 6px -8px #e7e7e7;
 }
