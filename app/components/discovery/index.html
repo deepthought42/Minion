@@ -93,12 +93,12 @@
 			<button class="btn btn--primary btn-lg" ng-click="startDiscovery()" ng-show="!isStarted">
 				Start Discovery
 			</button>
-			<button class="btn btn--primary pull-left" ng-click="stopDiscvery()" ng-show="isStarted">
+			<button class="btn btn--red pull-left" ng-click="stopDiscvery()" ng-show="isStarted">
 				Stop Discovery
 			</button>
 		</div>
 
-		<div class="test" ng-repeat="test in tests" ng-show="!waitingOnTests && tests.length>0  && !showBrowserSelectionPane">
+		<div class="test" ng-repeat="test in tests" ng-show="tests.length>0 && !showBrowserSelectionPane">
 			<div class="test__profile vertical__center__int" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 			  <div class="col-xs-2 test__status text--shadow">
 			   	<div class="row no-gutter">
