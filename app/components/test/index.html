@@ -289,8 +289,10 @@
 								</div>
 								<div class="col-md-3 col-sm-5 ">
 									<div class="input-group">
-										<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2">
-										<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2"><i class="fa fa-plus"></i></span>
+										<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2" maxlength="20">
+										<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2">
+											<i class="fa fa-plus"></i>
+										</span>
 									</div>
 								</div>
 								<div class="col-md-8 col-sm-6">
