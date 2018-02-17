@@ -41,8 +41,6 @@
 	</div>
 
 	<div class="test-container">
-
-
 		<div class="empty__state vertical__center" ng-show="waitingOnTests">
 			<div style="text-align:center; margin: 0px auto;">
 				<i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw"
@@ -128,49 +126,44 @@
 					</div>
 			  </div>
 			</div>
-
-			<div ng-show="test.visible">
-				<div class="col-xs-12">
-				  <div class="test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index">
-					  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-					    <div ng-show="node.browserScreenshots[default_browser]" class="path-node" >
-							  <img src="{{node.browserScreenshots[default_browser]}}" class="path-node-image"/>
-						  </div>
-						 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top">
-							 	<span class="" >
-	                {{node.name}}
-	              </span>
-				  		</div>
-						  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top">
-								<span ng-show="node.name=='click'" class="vertical__center__int">
-							  	<i class="fa fa-mouse-pointer fa-2x"></i>
-								</span>
-								<span ng-show="node.name=='doubleClick'" class="vertical__center__int">
-									<i class="fa fa-mouse-pointer fa-2x"></i>
-									<div class=”doubleclick” >
-										x2
-									</div>
-								</span>
-								<span ng-show="node.name=='mouseover'" class="vertical__center__int">
-									<i class="fa fa-hand-pointer-o fa-2x"></i>
-								</span>
-								<span ng-show="node.name=='scroll'" class="vertical__center__int">
-									<i class="fa fa-arrows-v fa-2x"></i>
-								</span>
-								<span ng-show="node.name=='sendKeys'" class="vertical__center__int">
-									<i class="fa fa-i-cursor fa-2x"></i>
-								</span>
-						  </div>
-						  <div class="path-bar">
-						  </div>
-						</div>
-						<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)">
-						  <div  ng-show="test.result.browserScreenshots[default_browser]" class="path-node">
-							  <img src="{{test.result.browserScreenshots[default_browser]}}"
-	                   class="path-node-image"
-										 tooltip-placement="top"/>
-						  </div>
-						</div>
+			<div ng-show="test.visible" class="col-xs-12">
+			  <div class="test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index">
+				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
+				    <div ng-show="node.browser_screenshot[default_browser]" class="path-node" >
+						  <img src="{{node.browser_screenshot[default_browser]}}" class="path-node-image"/>
+					  </div>
+					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top">
+						 	<span class="" >
+                {{node.name}}
+              </span>
+			  		</div>
+					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top">
+							<span ng-show="node.name=='click'" class="vertical__center__int">
+						  	<i class="fa fa-mouse-pointer fa-2x"></i>
+							</span>
+							<span ng-show="node.name=='doubleClick'" class="vertical__center__int">
+								<i class="fa fa-mouse-pointer fa-2x"></i>
+								<div class=”doubleclick” >
+									x2
+								</div>
+							</span>
+							<span ng-show="node.name=='mouseover'" class="vertical__center__int">
+								<i class="fa fa-hand-pointer-o fa-2x"></i>
+							</span>
+							<span ng-show="node.name=='scroll'" class="vertical__center__int">
+								<i class="fa fa-arrows-v fa-2x"></i>
+							</span>
+							<span ng-show="node.name=='sendKeys'" class="vertical__center__int">
+								<i class="fa fa-i-cursor fa-2x"></i>
+							</span>
+					  </div>
+					  <div class="path-bar">
+					  </div>
+					</div>
+					<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)">
+					  <div  ng-show="test.result.browser_screenshot[default_browser]" class="path-node">
+						  <img src="{{test.result.browser_screenshot[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
+					  </div>
 					</div>
 				</div>
 			</div>
@@ -183,14 +176,15 @@
 										<div class="row no-gutter">
 										  <div class="node__title">
 												<h5>
-													<span style="font-weight:bold;">Page</span> - <a href="{{current_node[$index].url}}">{{current_node[$index].url}}</a>
+													<span style="font-weight:bold;">Page</span> -
+													<a href="{{current_node[$index].url}}">{{current_node[$index].url}}</a>
 												</h5>
 											</div>
 											<div class="">
 												<div class="page__image col-xs-2">
 													<img type="button" class="path-node-image"
 															data-toggle="modal" data-target="#exampleModal"
-															src="{{current_node[$index].browserScreenshots[default_browser]}}" class="path-node-image"
+															src="{{current_node[$index].browser_screenshot[default_browser]}}" class="path-node-image"
 															ng-click="openPageModal(current_node[$index])" />
 												</div>
 												<div class="col-xs-10">

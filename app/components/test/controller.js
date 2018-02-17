@@ -214,7 +214,12 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.setCurrentNode = function(node, index){
-      $scope.current_node[index] = node;
+      if(index== null){
+        $scope.current_node[$scope.test_idx] = node;
+      }
+      else{
+        $scope.current_node[index] = node;
+      }
     }
 
     $scope.getDate = function(value){
