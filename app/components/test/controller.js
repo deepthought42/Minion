@@ -21,7 +21,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.node_key = "";
       $scope.current_node = [];
       $scope.filteredTests = [];
-      $scope.test_idx = 0;
+      $scope.test_idx = -1;
       if(store.get('domain')){
         $scope.default_browser = store.get('domain')['discoveryBrowser'];
         $scope.getTestsByUrl(store.get('domain').url);
@@ -201,7 +201,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.toggleTestDataVisibility = function(test, index){
-      if($scope.test_idx != index){
+      if($scope.test_idx >= 0 && $scope.test_idx != index){
         $scope.tests[$scope.test_idx].visible = false;
       }
 
@@ -214,7 +214,12 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.setCurrentNode = function(node, index){
-      $scope.current_node[index] = node;
+      if(index== null){
+        $scope.current_node[$scope.test_idx] = node;
+      }
+      else{
+        $scope.current_node[index] = node;
+      }
     }
 
     $scope.getDate = function(value){
