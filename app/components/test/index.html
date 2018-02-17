@@ -55,7 +55,7 @@
 		</div>
 
 		<div class="test"
-				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','-lastRunTimestamp'] "
+				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] "
 				 ng-show="!waitingOnTests && tests.length > 0">
 
 
