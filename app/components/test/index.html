@@ -99,7 +99,7 @@
 					</div>
 			  </div>
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
-					{{test.runTime/1000}} s
+					{{test.runTime | date: 'm'}} m {{test.runTime | date: 'ss'}} s
 			  </div>
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}

@@ -23,7 +23,7 @@
 						Discovery Start
 					</div>
 					<div class="stat_value" ng-show="current_domain">
-						{{current_domain.lastDiscoveryStartedAt | date : 'MM/dd/yy hh:mm a'}}
+						{{current_domain.lastDiscoveryStartedAt | date : 'M/dd/yy h:mm a'}}
 					</div>
 				</div>
 		  </div>
@@ -34,7 +34,7 @@
 						Last Test Found
 					</div>
 					<div class="stat_value" ng-show="tests.length">
-						{{(Date.now() - (tests | orderBy:{'lastRunTimestamp':true})[0].lastDiscoveryPathRanAt)  | date : 'hh:mm'}} hrs ago
+						{{(Date.now() - (tests | orderBy:{'lastRunTimestamp':true})[tests.length-1].lastRunTimestamp)  | date : 'h:mm'}} hrs ago
 					</div>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 						Total Runtime
 					</div>
 					<div class="stat_value" ng-show="current_domain">
-						{{(current_domain.lastDiscoveryPathRanAt - current_domain.lastDiscoveryStartedAt ) | date : 'hh:mm'}}
+						{{((current_domain.lastRunTimestamp - current_domain.lastDiscoveryStartedAt ) | date : 'h:mm') || ""}}
 					</div>
 				</div>
 			</div>
@@ -141,7 +141,7 @@
 					</div>
 				</div>
 			  <div class="col-xs-2 vertical__center__int" ng-click="toggleTestDataVisibility(test, $index);visible_tab='nodedata'+$index">
-					{{test.runTime/1000}} s
+					{{test.runTime | date: 'm'}} m {{test.runTime | date: 'ss'}} s
 			  </div>
 			  <div class="col-xs-2 vertical__center__int" ng-click="toggleTestDataVisibility(test, $index);visible_tab='nodedata'+$index">
 					{{ test.time_discovered || "Unknown"}}
