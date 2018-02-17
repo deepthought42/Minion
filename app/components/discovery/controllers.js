@@ -119,8 +119,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.test_idx = idx;
     }
 
-    $scope.setCurrentNode = function(node, test_idx){
-      $scope.current_node[test_idx] = node;
+    $scope.setCurrentNode = function(node){
+      $scope.current_node[$scope.test_idx] = node;
     }
 
     $scope.setTestName = function(test, new_name){
