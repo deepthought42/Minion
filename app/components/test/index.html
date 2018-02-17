@@ -126,57 +126,60 @@
 					</div>
 			  </div>
 			</div>
-			<div ng-show="test.visible" class="col-xs-12">
-			  <div class="test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index">
-				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-				    <div ng-show="node.browser_screenshot[default_browser]" class="path-node" >
-						  <img src="{{node.browser_screenshot[default_browser]}}" class="path-node-image"/>
-					  </div>
-					 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top">
-						 	<span class="" >
-                {{node.name}}
-              </span>
-			  		</div>
-					  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top">
-							<span ng-show="node.name=='click'" class="vertical__center__int">
-						  	<i class="fa fa-mouse-pointer fa-2x"></i>
-							</span>
-							<span ng-show="node.name=='doubleClick'" class="vertical__center__int">
-								<i class="fa fa-mouse-pointer fa-2x"></i>
-								<div class=”doubleclick” >
-									x2
-								</div>
-							</span>
-							<span ng-show="node.name=='mouseover'" class="vertical__center__int">
-								<i class="fa fa-hand-pointer-o fa-2x"></i>
-							</span>
-							<span ng-show="node.name=='scroll'" class="vertical__center__int">
-								<i class="fa fa-arrows-v fa-2x"></i>
-							</span>
-							<span ng-show="node.name=='sendKeys'" class="vertical__center__int">
-								<i class="fa fa-i-cursor fa-2x"></i>
-							</span>
-					  </div>
-					  <div class="path-bar">
-					  </div>
-					</div>
-					<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)">
-					  <div  ng-show="test.result.browser_screenshot[default_browser]" class="path-node">
-						  <img src="{{test.result.browser_screenshot[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
-					  </div>
+
+
+			<div ng-show="test.visible">
+				<div class="row test__path">
+				  <div class="col-xs-12 vertical__left__int" ng-click="visible_tab='nodedata'+$index">
+					  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
+					    <div ng-show="node.browser_screenshot[default_browser]" class="path-node" >
+							  <img src="{{node.browser_screenshot[default_browser]}}" class="path-node-image"/>
+						  </div>
+						 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top">
+							 	<span class="" >
+	                {{node.name}}
+	              </span>
+				  		</div>
+						  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top">
+								<span ng-show="node.name=='click'" class="vertical__center__int">
+							  	<i class="fa fa-mouse-pointer fa-2x"></i>
+								</span>
+								<span ng-show="node.name=='doubleClick'" class="vertical__center__int">
+									<i class="fa fa-mouse-pointer fa-2x"></i>
+									<div class=”doubleclick” >
+										x2
+									</div>
+								</span>
+								<span ng-show="node.name=='mouseover'" class="vertical__center__int">
+									<i class="fa fa-hand-pointer-o fa-2x"></i>
+								</span>
+								<span ng-show="node.name=='scroll'" class="vertical__center__int">
+									<i class="fa fa-arrows-v fa-2x"></i>
+								</span>
+								<span ng-show="node.name=='sendKeys'" class="vertical__center__int">
+									<i class="fa fa-i-cursor fa-2x"></i>
+								</span>
+						  </div>
+						  <div class="path-bar">
+						  </div>
+						</div>
+						<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)">
+						  <div  ng-show="test.result.browser_screenshot[default_browser]" class="path-node">
+							  <img src="{{test.result.browser_screenshot[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
+						  </div>
+						</div>
 					</div>
 				</div>
 			</div>
 
 				<div class="test__info" ng-show="test.visible">
 					<div class="col-xs-8">
-						<div class="content-wrap row">
-								<div class="node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
+						<div class="row node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
 									<div class="col-sm-12" ng-show="current_node[$index].type=='Page'">
-										<div class="row no-gutter">
+										<div class="row">
 										  <div class="node__title">
 												<h5>
-													<span style="font-weight:bold;">Page</span> -
+													<span style="font-weight:bold;">Page -</span>
 													<a href="{{current_node[$index].url}}">{{current_node[$index].url}}</a>
 												</h5>
 											</div>
@@ -270,32 +273,23 @@
 										</div>
 									</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="test__history" ng-repeat="record in test.records" ng-show="visible_tab=='history'+$index">
-									<h5>{{getDate(record.ranAt)}}</h5>
-									Passes : {{record.passes}}
-									<br />
-									Total Run Duration : {{record.runTime/1000}} ms
-								</div>
-							</div>
-						</div>
 					</div>
-					<div class="col-xs-4">
-							<div class="test__groups vertical__center__int no-gutter">
-								<div class="col-md-1 col-sm-1 ">
-									<h5>Groups: </h5>
+					<div class="col-xs-4 test__groups">
+							<div class="row no-gutter">
+								<div class="col-sm-12 ">
+									<h5>Groups</h5>
 								</div>
-								<div class="col-md-3 col-sm-5 ">
-									<div class="input-group">
+								<div class="col-sm-8">
+									<div class="input-group groups_input_padding">
 										<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2" maxlength="20">
 										<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2">
 											<i class="fa fa-plus"></i>
 										</span>
 									</div>
 								</div>
-								<div class="col-md-8 col-sm-6">
+								<div class="col-sm-4">
+								</div>
+								<div class="col-sm-12">
 									<div class="group__tag"
 											 ng-repeat="group in test.groups"
 											 data-toggle="tooltip"
@@ -309,7 +303,23 @@
 								</div>
 							</div>
 					</div>
+					<div class="col-xs-12 test__history__frame">
+						<div class="row">
+							<div class="test__history" ng-repeat="record in test.records">
+								<h5>{{getDate(record.ranAt)}}</h5>
+								Passes : {{record.passes}}
+								<br />
+								Total Run Duration : {{record.runTime/1000}} ms
+							</div>
+						</div>
+					</div>
+
+
+
 				</div>
+
+
+
 
 	  </div>
 	</div>

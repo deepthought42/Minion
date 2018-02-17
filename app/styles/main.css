@@ -194,7 +194,7 @@ html {
 
 .vertical__left,
 .vertical__left__int {
-  display: flex;
+  width:100%;
   align-items: left !important;
   justify-content: left !important;
 }
