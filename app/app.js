@@ -69,6 +69,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
         console.log("unauthorized user");
+        Auth.login();
         /*auth.signin({
           authParams: {
             scope: 'openid profile app_metadata' // This is if you want the full JWT
@@ -83,6 +84,8 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
 
     $rootScope.$on('account-missing', function (e){
       console.log("account missing");
+//    NOTE TO IMPLEMENT --- NAVIGATE TO ACCOUNT SIGN UP PAGE
+
       //e.preventDefault();
       //$location.path('/accounts');
 
