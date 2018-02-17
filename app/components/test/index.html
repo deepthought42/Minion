@@ -55,7 +55,7 @@
 		</div>
 
 		<div class="test"
-				 ng-repeat="test in (filteredTests = tests) | filter:searchText"
+				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','-lastRunTimestamp'] "
 				 ng-show="!waitingOnTests && tests.length > 0">
 
 
@@ -99,10 +99,10 @@
 					</div>
 			  </div>
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
-					{{test.runTime/1000}} s
+					{{test.runTime | date: 'm'}} m {{test.runTime | date: 'ss'}} s
 			  </div>
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
-					{{ getDate(test.lastRunTimestamp) || "Unknown / Not since discovery"}}
+					{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
 			  </div>
 				<div class="col-xs-3">
 					<div class="row">
@@ -281,8 +281,10 @@
 								</div>
 								<div class="col-sm-8">
 									<div class="input-group groups_input_padding">
-										<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2">
-										<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2"><i class="fa fa-plus"></i></span>
+										<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2" maxlength="20">
+										<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2">
+											<i class="fa fa-plus"></i>
+										</span>
 									</div>
 								</div>
 								<div class="col-sm-4">
