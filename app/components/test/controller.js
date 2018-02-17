@@ -95,10 +95,10 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         Tester.runTests({test_keys: $scope.keys, browser_type: browsers[i]}).$promise
           .then(function(data){
             $scope.test.runStatus = false;
-            $scope.test.correct = data.passes;
+            $scope.test.correct = data[$scope.test.key];
             //move test to top of list
             $scope.tests.splice($scope.test_idx, 1);
-            $scope.tests.unshift(data);
+            $scope.tests.unshift($scope.test);
           })
           .catch(function(err){
             $scope.test.runStatus = false;
