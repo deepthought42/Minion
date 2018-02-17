@@ -69,10 +69,6 @@
 	width: 100%;
 }
 
-.test__profile > div{
-	display: inline;
-}
-
 .status__title{
   text-align: center !important;
 }
@@ -253,13 +249,57 @@
   transform: rotate(45deg);
 }
 
+
+
+/*--------------------------- [6. Test Info] --------------------------------------------------------------------------------*/
+
+
+.test__info{
+    display: flex;
+}
+
+.node__data{
+    border: 0px;
+    padding:15px;
+}
+
+.node__title{
+  padding-bottom:15px;
+  margin-bottom:10px;
+	border-bottom: 1px solid #e0e0e0;
+  width:100%;
+}
+
+.key--value {
+    padding-top:10px;
+}
+
+.data__key{
+	text-transform: capitalize;
+	font-size: 16px;
+  font-weight: bold;
+	line-height: 20px;
+	letter-spacing:.1px;
+	padding-bottom: 6px !important;
+	color:#666666;
+	text-align: left;
+}
+
+.data__value{
+		font-size: 14px !important;
+		line-height: 20px;
+		letter-spacing:.1px;
+		padding-bottom: 6px !important;
+		color:#333333;
+}
+
 /*--------------------------- [6. Test Groups] --------------------------------------------------------------------------------*/
 
 .test__groups{
-	padding:30px 15px 30px 15px;
 	background-color:#f9f9f9;
-	height: 100%;
 	border-left: 1px solid #e0e0e0;
+    padding-top:15px;
+    padding-bottom:15px;
 }
 
 .groups_input_padding{
@@ -268,10 +308,6 @@
 
 .input-group-addon{
   width:35px;
-}
-
-.test__groups > div{
-	display: inline;
 }
 
 .remove__group{
@@ -303,118 +339,11 @@
   line-height: 24px;
 }
 
-.info__tab {
-}
-
-/*****************************/
-/* Top Line */
-/*****************************/
-
-.tabs-style-topline {
-}
-
-.tabs-style-topline nav li {
-	border-bottom: 1px solid #e0e0e0;
-}
-
-.tabs-style-topline nav li.tab-current {
-	border-bottom: none;
-}
-
-.tabs-style-topline nav div.tab {
-	padding: 20px 20px 10px 20px;
-	-webkit-transition: color 0.2s;
-	transition: color 0.2s;
-  color:#757575;
-  font-size: 16px;
-  font-weight:400;
-  letter-spacing:.1px;
-  text-align: center;
-  margin-bottom: 0px;
-  text-transform: capitalize;
-}
-
-
-.tabs-style-topline nav div.tab:hover,
-.tabs-style-topline nav div.tab:focus {
-	color: #2d2d2d;
-  font-weight: 400;
-}
-
-.tabs-style-topline nav li.tab-current div.tab {
-	background: none;
-	box-shadow: inset 0 3px 0 #ffee58;
-	color: #2d2d2d !important;
-  border-right: 1px solid #e0e0e0;
-  border-left: 1px solid #e0e0e0;
-}
-
-.tabs-style-topline .icon::before {
-	display: block;
-	margin: 0;
-}
-
-.tabs-style-topline nav div.tab span {
-	text-transform: uppercase;
-}
-
-.node__data{
-  display: inline-block !important;
-  padding:20px 20px 10px 20px;
-  width:100%;
-}
-
-.tab__icon{
-  line-height: 1.0em;
-  padding: 3px 0px 0px 0px;
-  font-size: 1.5em;
-}
-
-
-
-/*--------------------------- [6. Test Info] --------------------------------------------------------------------------------*/
-
-
-.test__info{
-}
-
-
-
-.node__title{
-  padding-bottom:15px;
-  margin-bottom:10px;
-	border-bottom: 1px solid #e0e0e0;
-  width:100% !important;
-}
-
-.key--value {
-    padding-top:10px;
-}
-
-.data__key{
-	text-transform: capitalize;
-	font-size: 16px;
-  font-weight: bold;
-	line-height: 20px;
-	letter-spacing:.1px;
-	padding-bottom: 6px !important;
-	color:#666666;
-	text-align: left;
-}
-
-.data__value{
-		font-size: 14px !important;
-		line-height: 20px;
-		letter-spacing:.1px;
-		padding-bottom: 6px !important;
-		color:#333333;
-}
-
-
 /*--------------------------- [6. Test History] --------------------------------------------------------------------------------*/
 
 
 .test__history{
+    display: block;
 	font-size: 14px !important;
 	line-height: 20px;
 	letter-spacing:.1px;

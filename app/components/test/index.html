@@ -34,7 +34,7 @@
 		    Date Last Run&nbsp;<i class="fa fa-sort"></i>
 	  </div>
 		<div class="col-xs-3">
-				Browsers
+            Browsers
 		</div>
 	  <div class="col-sm-1">
 	  </div>
@@ -108,8 +108,8 @@
 					<div class="row">
 						<div class="col-sm-2" ng-repeat="(browser, status) in test.browserPassingStatuses" ng-dblclick="updateTestCorrectness(test, browser, !status)">
 							<div class="vertical__center">
-								<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="browser=='chrome'"></img>
-								<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="browser=='firefox'" ></img>
+								<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="browser=='chrome'">
+								<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="browser=='firefox'" >
 							</div>
 							<div class="vertical__center">
 								<i class="fa fa-check fa-2x green" ng-show="status" />
@@ -172,154 +172,150 @@
 				</div>
 			</div>
 
-				<div class="test__info" ng-show="test.visible">
-					<div class="col-xs-8">
-						<div class="row node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
-									<div class="col-sm-12" ng-show="current_node[$index].type=='Page'">
-										<div class="row">
-										  <div class="node__title">
-												<h5>
-													<span style="font-weight:bold;">Page -</span>
-													<a href="{{current_node[$index].url}}">{{current_node[$index].url}}</a>
-												</h5>
-											</div>
-											<div class="">
-												<div class="page__image col-xs-2">
-													<img type="button" class="path-node-image"
-															data-toggle="modal" data-target="#exampleModal"
-															src="{{current_node[$index].browser_screenshot[default_browser]}}" class="path-node-image"
-															ng-click="openPageModal(current_node[$index])" />
-												</div>
-												<div class="col-xs-10">
-													<div class="key--value">
-														<div class="data__key">
-														 Landable
-														</div>
-														<div class="data__value">
-														 <input type="checkbox" ng-checked="current_node[$index].landable" disabled/>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-12" ng-show="current_node[$index].type=='PageElement'">
-										<div class="row no-gutter">
-										  <div class="node__title">
-												<h5><span style="font-weight:bold;">Element</span> - {{current_node[$index].name}}</h5>
-											</div>
-											<div class="col-sm-12 col-xs-12">
-												<div class="key--value">
-													<div class="data__key">
-													 Xpath
-													</div>
-													<div class="data__value">
-													 {{current_node[$index].xpath}}
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-12 col-xs-12">
-												<div class="key--value">
-													<div class="data__key">
-														Text
-													</div>
-													<div class="data__value">
-												 		{{current_node[$index].text}}
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-6 col-xs-12">
-												<div class="key--value">
-													<div class="data__key">
-														CSS
-													</div>
-													<div class="data__value" ng-repeat="(key, value) in current_node[$index].cssValues">
-														{{key}}:           {{value}};
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-6 col-xs-12">
-												<div class="key--value">
-													<div class="data__key">
-														Attributes
-													</div>
-													<div class="data__value" ng-repeat="attribute in current_node[$index].attributes">
-														<div class="data__key">
-															{{attribute.name}}
-														</div>
-														<span class="data__value" ng-repeat="value in attribute.vals">
-															{{value}}
-														</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-12" ng-show="current_node[$index].type=='Action'">
-										<div class="row no-gutter">
-										  <div class="node__title">
-												<h5><span style="font-weight:bold;">Action</span> - {{current_node[$index].name}}</h5>
-											</div>
-											<div class="col-xs-12">
-												<div class="key--value" ng-show="current_node[$index].value || current_node[$index].name=='sendKeys'">
-													<div class="data__key">
-														Value
-													</div>
-													<div class="data__value">
-														{{current_node[$index].value}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-							</div>
-					</div>
-					<div class="col-xs-4 test__groups">
-							<div class="row no-gutter">
-								<div class="col-sm-12 ">
-									<h5>Groups</h5>
-								</div>
-								<div class="col-sm-8">
-									<div class="input-group groups_input_padding">
-										<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2" maxlength="20">
-										<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2">
-											<i class="fa fa-plus"></i>
-										</span>
-									</div>
-								</div>
-								<div class="col-sm-4">
-								</div>
-								<div class="col-sm-12">
-									<div class="group__tag"
-											 ng-repeat="group in test.groups"
-											 data-toggle="tooltip"
-											 data-placement="top"
-											 title="{{group.description}}">
-										{{group.name}}
-										<span ng-click="removeGroup(test, group, $index)">
-											<i class="remove__group fa fa-times"></i>
-										</span>
-									</div>
-								</div>
-							</div>
-					</div>
-					<div class="col-xs-12 test__history__frame">
-						<div class="row">
-							<div class="test__history" ng-repeat="record in test.records">
-								<h5>{{getDate(record.ranAt)}}</h5>
-								Passes : {{record.passes}}
-								<br />
-								Total Run Duration : {{record.runTime/1000}} ms
-							</div>
-						</div>
-					</div>
-
-
-
-				</div>
-
-
-
+            <div class="test__info" ng-show="test.visible">
+                <div class="col-xs-8">
+                    <div class="row node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
+                                <div class="col-sm-12" ng-show="current_node[$index].type=='Page'">
+                                    <div class="row">
+                                        <div class="node__title">
+                                            <h5>
+                                                <span style="font-weight:bold;">Page -</span>
+                                                <a href="{{current_node[$index].url}}">{{current_node[$index].url}}</a>
+                                            </h5>
+                                        </div>
+                                        <div class="">
+                                            <div class="page__image col-xs-2">
+                                                <img type="button" class="path-node-image"
+                                                        data-toggle="modal" data-target="#exampleModal"
+                                                        src="{{current_node[$index].browser_screenshot[default_browser]}}" class="path-node-image"
+                                                        ng-click="openPageModal(current_node[$index])" />
+                                            </div>
+                                            <div class="col-xs-10">
+                                                <div class="key--value">
+                                                    <div class="data__key">
+                                                     Landable
+                                                    </div>
+                                                    <div class="data__value">
+                                                     <input type="checkbox" ng-checked="current_node[$index].landable" disabled/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12" ng-show="current_node[$index].type=='PageElement'">
+                                    <div class="row no-gutter">
+                                      <div class="node__title">
+                                            <h5><span style="font-weight:bold;">Element</span> - {{current_node[$index].name}}</h5>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-12">
+                                            <div class="key--value">
+                                                <div class="data__key">
+                                                 Xpath
+                                                </div>
+                                                <div class="data__value">
+                                                 {{current_node[$index].xpath}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-12">
+                                            <div class="key--value">
+                                                <div class="data__key">
+                                                    Text
+                                                </div>
+                                                <div class="data__value">
+                                                    {{current_node[$index].text}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="key--value">
+                                                <div class="data__key">
+                                                    CSS
+                                                </div>
+                                                <div class="data__value" ng-repeat="(key, value) in current_node[$index].cssValues">
+                                                    {{key}}:           {{value}};
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="key--value">
+                                                <div class="data__key">
+                                                    Attributes
+                                                </div>
+                                                <div class="data__value" ng-repeat="attribute in current_node[$index].attributes">
+                                                    <div class="data__key">
+                                                        {{attribute.name}}
+                                                    </div>
+                                                    <span class="data__value" ng-repeat="value in attribute.vals">
+                                                        {{value}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12" ng-show="current_node[$index].type=='Action'">
+                                    <div class="row no-gutter">
+                                      <div class="node__title">
+                                            <h5><span style="font-weight:bold;">Action</span> - {{current_node[$index].name}}</h5>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="key--value" ng-show="current_node[$index].value || current_node[$index].name=='sendKeys'">
+                                                <div class="data__key">
+                                                    Value
+                                                </div>
+                                                <div class="data__value">
+                                                    {{current_node[$index].value}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 test__groups">
+                        <div class="row">
+                            <div class="col-sm-12 ">
+                                <h5>Groups</h5>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="input-group groups_input_padding">
+                                    <input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2" maxlength="20">
+                                    <span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2">
+                                        <i class="fa fa-plus"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="group__tag"
+                                         ng-repeat="group in test.groups"
+                                         data-toggle="tooltip"
+                                         data-placement="top"
+                                         title="{{group.description}}">
+                                    {{group.name}}
+                                    <span ng-click="removeGroup(test, group, $index)">
+                                        <i class="remove__group fa fa-times"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="" ng-show="test.visible">
+                <div class="col-xs-12 test__history__frame">
+                    <div class="row">
+                        <div class="test__history" ng-repeat="record in test.records">
+                            <h5>{{getDate(record.ranAt)}}</h5>
+                            Passes : {{record.passes}}
+                            <br />
+                            Total Run Duration : {{record.runTime/1000}} ms
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 	  </div>
 	</div>
