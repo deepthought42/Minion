@@ -124,7 +124,7 @@
 						</div>
 				  </div>
 			  </div>
-				<div class="col-xs-6 test__title vertical__left__int" ng-click="toggleTestDataVisibility(test, $index);visible_tab='nodedata'+$index">
+				<div class="col-xs-6 test__title vertical__left__int" ng-click="toggleTestDataVisibility(test, $index);">
 					<div class="row" >
 						<div class="col-xs-12 " ng-show="!test.show_test_name_edit_field">
 							<h4 ng-click="test.show_test_name_edit_field = true" >{{test.name || "Test #"+($index+1)}}</h4>
@@ -146,17 +146,17 @@
 						</div>
 					</div>
 				</div>
-			  <div class="col-xs-2 vertical__center__int" ng-click="toggleTestDataVisibility(test, $index);visible_tab='nodedata'+$index">
+			  <div class="col-xs-2 vertical__center__int" ng-click="toggleTestDataVisibility(test, $index)">
 					{{test.runTime | date: 'm'}} m {{test.runTime | date: 'ss'}} s
 			  </div>
-			  <div class="col-xs-2 vertical__center__int" ng-click="toggleTestDataVisibility(test, $index);visible_tab='nodedata'+$index">
+			  <div class="col-xs-2 vertical__center__int" ng-click="toggleTestDataVisibility(test, $index)">
 					{{ test.time_discovered || "Unknown"}}
 			  </div>
 			</div>
 
 			<div ng-show="test.visible">
 				<div class="test__path vertical__left__int " >
-				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)">
+				  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node, $index)">
 						<div ng-show="node.browser_screenshot[default_browser]" class="path-node" tooltip-placement="top">
 						  <img src="{{node.browser_screenshot[default_browser]}}" class="path-node-image"/>
 					  </div>
@@ -186,7 +186,7 @@
 						<div class="path-bar">
 						</div>
 					</div>
-					<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result);visible_tab='nodedata'+$index">
+					<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, $index)">
 					  <div ng-show="test.result.browser_screenshot[default_browser]" class="path-node">
 							<img src="{{test.result.browser_screenshot[default_browser]}}" class="path-node-image"/>
 					  </div>
@@ -286,10 +286,15 @@
 									</div>
 								</div>
 							</div>
+						</div>
 							<div class="col-sm-12" ng-show="current_node[$index].type=='Action'">
 								<div class="row no-gutter">
 									<div class="node__title">
-										<h5><span style="font-weight:bold;">Action</span> - {{current_node[$index].name}}</h5>
+										<h5>
+											<span style="font-weight:bold;">
+												Action
+											</span> - {{current_node[$index].name}}
+										</h5>
 									</div>
 									<div class="col-xs-12">
 										<div class="key--value" ng-show="current_node[$index].value || current_node[$index].name=='sendKeys'">
@@ -304,7 +309,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
 				</div>
 				<div ng-show="test.visible">
 					<div class="test__groups vertical__center__int no-gutter">
