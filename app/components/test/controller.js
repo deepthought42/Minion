@@ -89,12 +89,11 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         browsers.push("chrome");
       }
 
+      $scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
 
         Tester.runTests({test_keys: $scope.keys, browser_type: browsers[i]}).$promise
           .then(function(data){
-            $scope.closeDialog();
-
             $scope.test.runStatus = false;
             $scope.test.correct = data.passes;
             //move test to top of list
@@ -124,10 +123,10 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         browsers.push("chrome");
       }
 
+      $scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
         Tester.runTests({test_keys: $scope.keys, browser_type: browsers[i]}).$promise
           .then(function(data){
-            $scope.closeDialog();
 
             //keys = Object.keys(data);
             $scope.keys.forEach(function(key){
@@ -139,7 +138,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
                 if(data[test.key]){
                   test.correct = data[test.key];
-                  console.log('val '+val);
                 }
               })
             })
@@ -147,7 +145,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           .catch(function(err){
             $scope.errors.push(err);
 
-            console.log("Tester failed to run successfully");
+            console.log("Test failed to run successfully");
           });
         }
     }
