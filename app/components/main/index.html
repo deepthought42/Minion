@@ -19,24 +19,19 @@
       </div>
 		  <div class="col-lg-6 col-md-7 offset-lg-1" ng-show="auth.isAuthenticated">
         <div class="right-main-nav main-nav">
-          <div class="domain-link">
-            <div class="dropdown dropdown-toggle pull-right" data-toggle="dropdown" href="#">
-              <div>
-                  <a href="thisneedstolinktothisdomainssettingsmodal">
-                    {{domain.url || "www.yourdomain.com"}}
-                    <i class="fa fa-caret-down fa-fw"></i>
-                  </a>
+          <div class="domain-link dropdown  pull-right">
+              <div class="dropdown-toggle" data-toggle="dropdown" id="domainsDropdownMenuButton">
+                {{domain.url || "www.yourdomain.com"}}
+                <i class="fa fa-caret-down fa-fw"></i>
               </div>
-              <ul class="dropdown-menu" style="opacity: 1">
-
+              <ul class="dropdown-menu" aria-labelledby="domainsDropdownMenuButton">
+                <li class="dropdown-item" ng-repeat="domain in domains">
+                </li>
                 <li class="divider"></li>
-                <li>
-                  <a ui-sref="main.domains">
+                <li class="dropdown-item" ngclick="showDomainsPage()">
                     Manage Domains
-                  </a>
                 </li>
               </ul>
-            </div>
           </div>
           <div class="divider"></div>
           <div class="flex-initial main-nav-link" id="notification_li">
@@ -56,7 +51,7 @@
           </div>
           <div class="divider"></div>
           <div class="flex-none dropdown pull-right">
-              <i class="fa fa-user fa-fw dropdown-toggle" id="userDropdownMenuButton"  dropdown-toggle  data-toggle="dropdown"></i>
+              <i class="fa fa-user fa-fw dropdown-toggle" id="userDropdownMenuButton" data-toggle="dropdown"></i>
               <ul class="dropdown-menu" aria-labelledby="userDropdownMenuButton">
                 <li class="dropdown-item">
                   <i class="fa fa-user fa-fw"></i>
