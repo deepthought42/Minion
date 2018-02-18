@@ -31,30 +31,6 @@
   justify-content: flex-end;
 }
 
-
-.dropdown-toggle{
-     display: inline;
-}
-
-.user_settings {
-    padding: 0px;
-    margin: 0px;
-    width: 50px;
-}
-
-.divider {
-  width: 2px;
-  margin: 0px 10px;
-  background: #333;
-}
-
-.horizontal-divider{
-  height: 1px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background: #e0e0e0;
-}
-
 .domain-link a {
     display: inline;
     text-decoration: none;
@@ -102,6 +78,16 @@
 	padding-bottom: 16px !important;
 }
 
+.divider {
+  width: 2px;
+  margin: 0px 10px;
+  background: #333;
+}
+
+.dropdown{
+  padding-left:12px;
+}
+
 .flex-auto {
   flex: 1 1 auto;
 }
@@ -129,7 +115,6 @@
 #notification_li {
 			position:relative
 			}
-
 #notification_count
 		{
 		padding: 3px 7px 3px 7px;
@@ -202,7 +187,7 @@ float: right;
 }
 
 .stat_key{
-font-weight: 500;
+font-weight: bold;
 }
 
 .stat_value{

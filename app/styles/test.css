@@ -5,9 +5,6 @@
 	background-color: #ffffff;
 	border-top: 0px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
-                -webkit-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
-                -moz-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
-                box-shadow: inset 0 -10px 6px -8px #e7e7e7;
 }
 
 .test-container{
@@ -40,10 +37,9 @@
 .test-labels{
 	padding-top: 20px;
 	padding-bottom: 10px;
-    padding-left: 0px;
-    padding-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 	height: 60px;
-    font-weight: 500;
 }
 
 .test-labels{
@@ -118,14 +114,14 @@
 .test__profile:focus,
 .test__profile.focus {
 	outline:none;
-  background-color: #f9f9f9;
+  background-color: #fafafa;
 }
 .test__profile:hover {
-  background-color: #f9f9f9;
+  background-color: #fafafa;
 }
 .test__profile:active,
 .test__profile.active {
-  background-color: #f9f9f9;
+  background-color: #fafafa;
 }
 
 .test__btns{
@@ -142,7 +138,7 @@
 	color: #ffffff !important;
 	font-size: 12px;
 	height:60px;
-  border-right: 1px solid #f9f9f9;
+  border-right: 1px solid #fafafa;
 	text-align: center;
 }
 
@@ -158,7 +154,8 @@
 
 .test__path{
 	border-top: 1px solid #e0e0e0;
-	padding-left: 30px;
+	border-bottom: 1px solid #e0e0e0;
+	padding-left: 15px;
 	height: 135px;
 	-webkit-box-shadow: inset 0 10px 6px -8px #e7e7e7;
 		 -moz-box-shadow: inset 0 10px 6px -8px #e7e7e7;
@@ -257,19 +254,13 @@
 /*--------------------------- [6. Test Info] --------------------------------------------------------------------------------*/
 
 
-.test__data{
-    margin:0px 30px 15px 30px;
-}
-
 .test__info{
     display: flex;
 }
 
 .node__data{
     border: 0px;
-    margin-top:15px;
-    margin-right:15px;
-    margin-bottom:15px;
+    padding:15px;
 }
 
 .node__title{
@@ -305,11 +296,10 @@
 /*--------------------------- [6. Test Groups] --------------------------------------------------------------------------------*/
 
 .test__groups{
+	background-color:#f9f9f9;
 	border-left: 1px solid #e0e0e0;
     padding-top:15px;
     padding-bottom:15px;
-    border-top-right-radius: 5px;
-    margin-bottom: 15px;
 }
 
 .groups_input_padding{
@@ -351,26 +341,21 @@
 
 /*--------------------------- [6. Test History] --------------------------------------------------------------------------------*/
 
+
 .test__history{
-	border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    padding-bottom: 15px;
+    display: block;
+	font-size: 14px !important;
+	line-height: 20px;
+	letter-spacing:.1px;
+	color:#333333;
+  padding:20px 20px;
+	border-top: 1px solid #e0e0e0;
+  width:100%;
 }
 
-.test__history__labels{
-    background-color: #f0f0f0;
-    padding-top:15px;
-    padding-bottom:15px;
-    border-bottom: 1px solid #e0e0e0;
-    font-weight: 500;
-}
-
-.test__history__record{
-    width:100%;
-    padding-top:10px;
-    padding-bottom:10px;
-}
-
-.test__history__record:nth-child(even) {
-   background-color: #f7f7f7;
+.test__history__frame{
+	border-bottom: 1px solid #e0e0e0;
+					-webkit-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
+						 -moz-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
+									box-shadow: inset 0 -10px 6px -8px #e7e7e7;
 }
