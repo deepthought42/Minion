@@ -43,7 +43,7 @@
 	<div class="test-container">
 		<div class="empty__state vertical__center" ng-show="waitingOnTests">
 			<div style="text-align:center; margin: 0px auto;">
-				<i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw"
+				<i class="fa fa-cirle-notch fa-spin fa-3x green fa-fw"
 						aria-hidden="true"></i>
 				<span class="sr-only">Running...</span>
 			</div>
@@ -57,11 +57,9 @@
 		<div class="test"
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] "
 				 ng-show="!waitingOnTests && tests.length > 0">
-
-
 			<div class="test__profile vertical__center__int">
                 <div class="col-xs-1 test__status" ng-show="test.runStatus">
-                  <i class="fa fa-hourglass-half fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+                  <i class="fa fa-circle-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
                   <span class="sr-only">Running...</span>
                 </div>
                 <div class="col-xs-1 test__status" ng-show="!test.runStatus">
@@ -92,7 +90,7 @@
                                     Cancel
                                 </div>
                                 <div class="pull-right">
-                                    <i class="fa fa-hourglass-half fa-spin fa-2x green fa-fw" ng-show="test.show_waiting_icon" aria-hidden="true"></i>
+                                    <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw" ng-show="test.show_waiting_icon" aria-hidden="true"></i>
                                 </div>
                             </div>
                           </div>
@@ -104,20 +102,20 @@
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test);visible_tab='nodedata'+$index">
 					{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
 			  </div>
-				<div class="col-xs-3">
-					<div class="row">
-						<div class="col-sm-2" ng-repeat="(browser, status) in test.browserPassingStatuses" ng-dblclick="updateTestCorrectness(test, browser, !status)">
-							<div class="vertical__center">
-								<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="browser=='chrome'">
-								<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="browser=='firefox'" >
-							</div>
-							<div class="vertical__center">
-								<i class="fa fa-check fa-2x green" ng-show="status" />
-								<i class="fa fa-times fa-2x red" ng-show="!status" />
-							</div>
-						</div>
-					</div>
-				</div>
+            <div class="col-xs-3">
+                <div class="row">
+                    <div class="col-sm-2" ng-repeat="(browser, status) in test.browserPassingStatuses" ng-dblclick="updateTestCorrectness(test, browser, !status)">
+                        <div class="vertical__center">
+                            <img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="browser=='chrome'">
+                            <img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="browser=='firefox'" >
+                        </div>
+                        <div class="vertical__center">
+                            <i class="fa fa-check fa-2x green" ng-show="status" />
+                            <i class="fa fa-times fa-2x red" ng-show="!status" />
+                        </div>
+                    </div>
+                </div>
+            </div>
 			  <div class="col-xs-1 test__btns">
 					<div class="btn-group" role="group" aria-label="Test Functions">
 					 <button class="btn btn--secondary" ng-click="openBrowserSelectionDialog(test, $index)">
@@ -126,8 +124,6 @@
 					</div>
 			  </div>
 			</div>
-
-
 			<div ng-show="test.visible">
 				<div class="row test__path">
 				  <div class="col-xs-12 vertical__left__int" ng-click="visible_tab='nodedata'+$index">

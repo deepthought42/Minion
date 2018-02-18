@@ -2,15 +2,6 @@
 
 /*--------------------------- [7. Domains Page] ------------------------------------------------------------------------------*/
 
-.error__message{
-	font-weight: 700;
-	color: #ffffff;
-	text-align: center;
-	padding: 10px;
-	background-color:red;
-	margin: 0px 0px 0px 0px;
-}
-
 .domain__button{
 	background-color:#ffffff;
 	margin:15px 15px;
