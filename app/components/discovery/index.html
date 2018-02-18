@@ -11,10 +11,10 @@
 	</div>
 	<div class="secondary-nav vertical__center__int" >
 	  <div class="col-md-2 col-sm-4">
-			<button class="btn btn--primary pull-left" ng-click="startDiscovery()" ng-show="!isStarted || failing_tests==0">
+			<button class="btn btn--primary pull-left" ng-click="startDiscovery()" ng-show="!isStarted">
 				Start Discovery
 			</button>
-			<button class="btn btn--primary pull-left" ng-click="stopDiscvery()" ng-show="isStarted">
+			<button class="btn btn--red pull-left" ng-click="stopDiscvery()" ng-show="isStarted">
 				Stop Discovery
 			</button>
 	  </div>
