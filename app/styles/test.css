@@ -62,6 +62,17 @@
 	text-align: center;
 }
 
+
+.error__message{
+	font-weight: 500;
+	color: #ffffff;
+	text-align: center;
+	padding: 5px;
+	background-color:red;
+    height:60px;
+}
+
+
 /*--------------------------- [6. Test Profile] --------------------------------------------------------------------------------*/
 
 
