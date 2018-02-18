@@ -13,8 +13,8 @@ angular.module('Qanairy.main', ['ui.router'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Tester', 'Auth',
-  function ($rootScope, $scope, PathRealtimeService, store, $location, Tester, Auth) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Tester', 'Auth', '$state',
+  function ($rootScope, $scope, PathRealtimeService, store, $location, Tester, Auth, $state) {
     var getFailingCount = function(){
       Tester.getFailingCount({url: "http://www.qanairy.com" }).$promise
         .then(function(data){
@@ -45,6 +45,10 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.current_path = $location.path();
       $scope.user_profile = store.get('profile');
       $scope.navToggledOpen = true;
+    }
+
+    $scope.showDomainsPage = function(){
+      $state.go("main.domains");
     }
 
     $scope.login = function(){

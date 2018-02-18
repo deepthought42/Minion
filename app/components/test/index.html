@@ -304,38 +304,38 @@
                             </div>
                     </div>
                 </div>
-                    <div class="col-xs-12 test__history">
-                        <div class="row test__history__labels">
-                              <div class="col-sm-3">
-                                    Browser
-                              </div>
-                              <div class="col-sm-3">
-                                    Status&nbsp;<i class="fa fa-sort"></i>
-                              </div>
-                              <div class="col-sm-3">
-                                    Total Runtime (s)&nbsp;<i class="fa fa-sort"></i>
-                              </div>
-                              <div class="col-sm-3">
-                                    Date Last Run&nbsp;<i class="fa fa-sort"></i>
-                              </div>
-                        </div>
-                        <div class="row">
-                            <div class="test__history__record" ng-repeat="record in test.records">
-                              <div class="col-sm-3">
-                                    Browser
-                              </div>
-                              <div class="col-sm-3">
-                                    {{record.passes}}
-                              </div>
-                              <div class="col-sm-3">
-                                    {{record.runTime/1000}} ms
-                              </div>
-                              <div class="col-sm-3">
-                                    {{getDate(record.ranAt)}}
-                              </div>
-                            </div>
+                <div class="col-xs-12 test__history">
+                    <div class="row test__history__labels">
+                          <div class="col-sm-3">
+                                Browser
+                          </div>
+                          <div class="col-sm-3">
+                                Status&nbsp;<i class="fa fa-sort"></i>
+                          </div>
+                          <div class="col-sm-3">
+                                Total Runtime (s)&nbsp;<i class="fa fa-sort"></i>
+                          </div>
+                          <div class="col-sm-3">
+                                Date Last Run&nbsp;<i class="fa fa-sort"></i>
+                          </div>
+                    </div>
+                    <div class="row">
+                        <div class="test__history__record" ng-repeat="record in test.records">
+                          <div class="col-sm-3">
+                                Browser
+                          </div>
+                          <div class="col-sm-3">
+                                {{record.passes}}
+                          </div>
+                          <div class="col-sm-3">
+                                {{record.runTime/1000}} ms
+                          </div>
+                          <div class="col-sm-3">
+                                {{getDate(record.ranAt)}}
+                          </div>
                         </div>
                     </div>
+                </div>
             </div>
 
 	  </div>
