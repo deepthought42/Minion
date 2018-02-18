@@ -17,7 +17,7 @@
             </div>
           </div>
       </div>
-		  <div class="col-lg-6 col-md-7 offset-lg-1" ng-show="auth.isAuthenticated">
+      <div class="col-lg-6 col-md-7 offset-lg-1" ng-show="auth.isAuthenticated">
         <div class="right-main-nav main-nav">
           <div class="domain-link">
             <div class="dropdown dropdown-toggle pull-right" data-toggle="dropdown" href="#">
@@ -55,26 +55,28 @@
             </a>
           </div>
           <div class="divider"></div>
-          <div class="flex-none dropdown pull-right">
-              <i class="fa fa-user fa-fw dropdown-toggle" id="userDropdownMenuButton"  dropdown-toggle  data-toggle="dropdown"></i>
+          <div class="flex-none user_settings dropdown pull-right">
+              <div class="dropdown-toggle" id="userDropdownMenuButton" dropdown-toggle  data-toggle="dropdown">
+                <i class="fa fa-user fa-fw"></i>
+              </div>
               <ul class="dropdown-menu" aria-labelledby="userDropdownMenuButton">
                 <li class="dropdown-item">
-                  <i class="fa fa-user fa-fw"></i>
+                  <i class="fa fa-user"></i>
                   User Profile
                 </li>
                 <li class="dropdown-item">
-                  <i class="fa fa-gear fa-fw"></i>
+                  <i class="fa fa-gear"></i>
                   Settings
                 </li>
-                <li class="divider"></li>
+                <li class="horizontal-divider"></li>
                 <li class="dropdown-item" ng-click="logout()">
-                  <i class="fa fa`-sign-out fa-fw"></i>
-                  Logout`
+                  <i class="fa fa-sign-out"></i>
+                  Logout
                 </li>
               </ul>
           </div>
         </div>
-			</div>
+      </div>
     </div>
     <div ui-view class="full__height">
     </div>
