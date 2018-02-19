@@ -55,28 +55,6 @@
   background: #e0e0e0;
 }
 
-.domain-link a {
-    display: inline;
-    text-decoration: none;
-	  padding: 15px 10px;
-    margin: 0px 5px;
-    color: #ffffff;
-}
-
-.domain-link a:focus {
-  outline: none;
-	color: #ffee58 !important;
-	border-bottom: 5px solid #ffee58;
-	padding-bottom: 16px !important;
-}
-.domain-link a:visited { color: #ffffff;}
-.domain-link a:hover {
-  text-decoration: none;
-  color: #ffee58;
-	border-bottom: 5px solid #ffee58;
-	padding-bottom: 16px !important;
-}
-
 .main-nav-icons{
   padding-right:10px;
 }
@@ -114,13 +92,7 @@
   flex: 0 0 auto;
 }
 
-.domain-link {
-  flex: 0 0 auto;
-}
 
-.domain-link .dropdown-toggle::after {
-    display:none
-}
 
 .login__signup{
   padding-right:15px;
@@ -208,4 +180,90 @@ font-weight: 500;
 .stat_value{
 }
 
-/*--------------------------- [7. Footer - none currently] ------------------------------------------------------------------------------*/
+/*--------------------------- [7. dropdown] ------------------------------------------------------------------------------*/
+
+.domain-link li {
+    text-decoration: none;
+}
+
+.domain-link li:focus {
+  outline: none;
+}
+.domain-link li:visited { 
+}
+
+.domain-link li:hover {
+     background-color:#ffee58;
+  text-decoration: none;
+}
+
+.domain-link {
+  flex: 0 0 auto;
+}
+
+.domain-link .dropdown-toggle::after {
+    display:none
+}
+
+.dropdown-menu li:hover {
+     background-color:#e9e9e9;
+  text-decoration: none;
+}
+
+
+/*--------------------------- [pulled from dropdown scss] ------------------------------------------------------------------------------*/
+
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: ;
+  display: none;
+  float: left;
+  min-width:;
+  padding: ;
+  margin: ;
+  font-size: ;
+  color:;
+  text-align: left;
+  list-style: none;
+  background-color: ;
+  background-clip: padding-box;
+  border:;
+}
+
+  .dropdown-menu {
+    margin-top: 0;
+    margin-bottom: ;
+  }
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: ;
+  clear: both;
+  font-weight:;
+  color: ;
+  text-align: inherit; 
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+  
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-header {
+  display: block;
+  padding: ;
+  margin-bottom: 0;
+  font-size: ;
+  color:;
+  white-space: nowrap;
+}
+
+
+/*--------------------------- [5. footer] ------------------------------------------------------------------------------*/

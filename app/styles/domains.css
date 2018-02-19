@@ -57,17 +57,17 @@ height: calc(100% - 20px);
 
 .domain__button:focus,
 .domain__button.focus {
-  background-color:#e0e0e0;
+  background-color:#e9e9e9;
     color: #999999 !important;
 }
 .domain__button:hover {
-  background-color:#e0e0e0;
+  background-color:#e9e9e9;
     color: #999999 !important;
 }
 .domain__button:active,
 .domain__button.active,
 .open > .dropdown-toggle.domain__button {
-  background-color:#e0e0e0;
+  background-color:#e9e9e9;
     color: #999999 !important;
 }
 

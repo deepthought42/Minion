@@ -19,7 +19,7 @@
       </div>
       <div class="col-lg-6 col-md-7 offset-lg-1" ng-show="auth.isAuthenticated">
         <div class="right-main-nav main-nav">
-          <div class="domain-link dropdown  pull-right">
+          <div class="domain-link dropdown pull-right">
               <div class="dropdown-toggle" data-toggle="dropdown" id="domainsDropdownMenuButton">
                 {{domain.url || "www.yourdomain.com"}}
                 <i class="fa fa-caret-down fa-fw"></i>
@@ -27,7 +27,6 @@
               <ul class="dropdown-menu" aria-labelledby="domainsDropdownMenuButton">
                 <li class="dropdown-item" ng-repeat="domain in domains">
                 </li>
-                <li class="divider"></li>
                 <li class="dropdown-item" ng-click="showDomainsPage()">
                     Manage Domains
                 </li>
