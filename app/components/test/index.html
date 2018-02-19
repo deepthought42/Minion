@@ -127,15 +127,15 @@
 				<div class="row test__path">
 				  <div class="col-xs-12 vertical__left__int" ng-click="visible_tab='nodedata'+$index">
 					  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-					    <div ng-show="node.browser_screenshot[default_browser]" class="path-node" >
+					    <div ng-show="node.browser_screenshot[default_browser]" class="path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
 							  <img src="{{node.browser_screenshot[default_browser]}}" class="path-node-image"/>
 						  </div>
-						 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top">
+						 	<div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
 							 	<span class="" >
 	                {{node.name}}
 	              </span>
 				  		</div>
-						  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top">
+						  <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
 								<span ng-show="node.name=='click'" class="vertical__center__int">
 							  	<i class="fa fa-mouse-pointer fa-2x"></i>
 								</span>
@@ -158,8 +158,8 @@
 						  <div class="path-bar">
 						  </div>
 						</div>
-						<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)">
-						  <div  ng-show="test.result.browser_screenshot[default_browser]" class="path-node">
+						<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)" >
+						  <div  ng-show="test.result.browser_screenshot[default_browser]" class="path-node"ng-class="current_node[test_idx]==node ? 'active' : ''">
 							  <img src="{{test.result.browser_screenshot[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
 						  </div>
 						</div>
