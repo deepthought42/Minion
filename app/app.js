@@ -34,7 +34,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       responseType: 'token id_token',
       audience: 'https://api.qanairy.com',
       redirectUri: 'http://localhost:8001',
-      scope: 'openid profile read:domains delete:domains update:domains create:domains create:accounts read:tests update:tests read:groups update:groups create:groups run:tests start:discovery'
+      scope: 'openid profile read:domains delete:domains update:domains create:domains create:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery'
     });
 
       jwtOptionsProvider.config({
