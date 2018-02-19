@@ -15,6 +15,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     $scope._init= function(){
       $('[data-toggle="tooltip"]').tooltip()
       $scope.errors = [];
+      $scope.sortLastRun = false;
+      
       $scope.tests = [];
       $scope.groups = [];
       $scope.group = {name: "", description: "" };
