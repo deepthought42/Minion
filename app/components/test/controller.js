@@ -199,12 +199,13 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope.toggleTestDataVisibility = function(test, index){
-      if($scope.test_idx >= 0 && $scope.test_idx != index){
-        $scope.tests[$scope.test_idx].visible = false;
+      if($scope.test && $scope.test_idx != index){
+        $scope.test.visible = false;
       }
 
-      test.visible = !test.visible;
       $scope.test_idx = index;
+      $scope.test = test;
+      test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
 
       if(test.visible){
         $scope.setCurrentNode(test.path.path[0], index);
