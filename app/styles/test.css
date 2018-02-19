@@ -42,8 +42,6 @@
 .test-labels{
 	padding-top: 20px;
 	padding-bottom: 10px;
-    padding-left: 0px;
-    padding-right: 0px;
 	height: 60px;
     font-weight: 500;
 }
@@ -275,7 +273,6 @@
 }
 
 .test__info{
-    display: flex;
 }
 
 .node__data{
@@ -288,7 +285,7 @@
 .node__title{
   padding-bottom:15px;
   margin-bottom:10px;
-	border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
   width:100%;
 }
 
