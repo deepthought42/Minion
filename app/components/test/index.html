@@ -1,6 +1,4 @@
 <div class="content">
-
-
 	<div class="secondary-nav vertical__center__int">
 		<div class="col-sm-2">
   		<button class="btn btn--primary pull-left" ng-click="openBrowserSelectionDialog()">
@@ -54,7 +52,7 @@
 		</div>
 
 		<div class="test"
-				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] "
+				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] track by $index"
 				 ng-show="tests.length > 0">
 			<div class="test__profile vertical__center__int">
         <div class="col-xs-1 test__status" ng-show="test.runStatus">
