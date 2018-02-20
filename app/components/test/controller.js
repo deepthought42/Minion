@@ -93,8 +93,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
       $scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
-
-        Tester.runTests({test_keys: $scope.keys, browser_type: browsers[i]}).$promise
+        $scope.current_test_browser = browsers[i];
+        Tester.runTests({test_keys: $scope.keys, browser_type: $scope.current_test_browser}).$promise
           .then(function(data){
             $scope.test.runStatus = false;
 
@@ -103,6 +103,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
               for(var test_idx=0; test_idx < $scope.tests.length; test_idx++){
                 if($scope.tests[test_idx].key === returned_key){
                   $scope.tests[test_idx].correct = data[returned_key];
+                  $scope.tests[test_idx].browserPassingStatuses[$scope.current_test_browser];
                   //move test to top of list
                   var test = $scope.tests.splice(test_idx, 1);
                   $scope.tests.unshift(test);
