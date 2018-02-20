@@ -15,6 +15,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     $scope._init= function(){
       $('[data-toggle="tooltip"]').tooltip()
       $scope.errors = [];
+      $scope.sortLastRun = false;
+
       $scope.tests = [];
       $scope.groups = [];
       $scope.group = {name: "", description: "" };
@@ -91,14 +93,24 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
       $scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
-
-        Tester.runTests({test_keys: $scope.keys, browser_type: browsers[i]}).$promise
+        $scope.current_test_browser = browsers[i];
+        Tester.runTests({test_keys: $scope.keys, browser_type: $scope.current_test_browser}).$promise
           .then(function(data){
             $scope.test.runStatus = false;
-            $scope.test.correct = data[$scope.test.key];
-            //move test to top of list
-            $scope.tests.splice($scope.test_idx, 1);
-            $scope.tests.unshift($scope.test);
+
+            //use brute force method to find tests with returned keys so they can be updated
+            for(var returned_key in data.length){
+              for(var test_idx=0; test_idx < $scope.tests.length; test_idx++){
+                if($scope.tests[test_idx].key === returned_key){
+                  $scope.tests[test_idx].correct = data[returned_key];
+                  $scope.tests[test_idx].browserPassingStatuses[$scope.current_test_browser];
+                  //move test to top of list
+                  var test = $scope.tests.splice(test_idx, 1);
+                  $scope.tests.unshift(test);
+                  return;
+                }
+              }
+            }
           })
           .catch(function(err){
             $scope.test.runStatus = false;

@@ -75,13 +75,13 @@
 		<div class="col-xs-3 test__title">
 		  Test Title
 		</div>
-        <div class="col-xs-3">
+    <div class="col-xs-3">
 		</div>
 		<div class="col-xs-2">
-		  Time (s)&nbsp;<i class="fa fa-sort"></i>
+		  Time (s)&nbsp;
 		</div>
 		<div class="col-xs-2">
-		  Date Discovered&nbsp;<i class="fa fa-sort"></i>
+		  Date Discovered&nbsp;
 		</div>
 	</div>
 
@@ -157,8 +157,8 @@
 					{{ test.time_discovered || "Unknown"}}
 			  </div>
 			</div>
-            
-            
+
+
 	<div class="row test__path" ng-show="test.visible">
               <div class="col-xs-12 vertical__left__int" ng-click="visible_tab='nodedata'+$index">
                   <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
@@ -200,8 +200,8 @@
                     </div>
                 </div>
             </div>
-            
-            
+
+
             <div class="row test__data" ng-show="test.visible">
                 <div class="col-xs-12 test__info">
                     <div class="row">
