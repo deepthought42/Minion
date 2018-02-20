@@ -19,10 +19,13 @@
 <div class="domain__button" ng-repeat="domain in domains">
   <div class="row">
     <div class="col-sm-2" style="text-align:left !important; position: relative;">
-      <img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="domain.discoveryBrowser=='chrome'"></img>
-      <img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="domain.discoveryBrowser=='firefox'" ></img>
+      <img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="domain.discoveryBrowser=='chrome'">
+      <img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="domain.discoveryBrowser=='firefox'" >
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-2" ng-click="removeDomain(domain, $index)"  style="text-align:right !important; position: relative;">
+       <i class="fa fa-pencil delete__domain" ></i>
     </div>
     <div class="col-sm-2" ng-click="removeDomain(domain, $index)"  style="text-align:right !important; position: relative;">
        <i class="fa fa-times delete__domain" ></i>

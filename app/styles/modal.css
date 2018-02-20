@@ -34,7 +34,7 @@ md-dialog {
 
 .modal__title{
 	text-align: center;
-	padding: 30px 30px 40px 30px;
+	padding: 15px 30px 15px 30px;
 }
 
 .modal-browser-icon{
@@ -92,6 +92,9 @@ md-dialog {
 }
 
 .modal_action_button{
-  padding: 60px;
-	text-align: center;
+  padding:0px;
+	text-align: right;
+    float:right;
+    margin-bottom: 30px;
+    margin-right: 30px;
 }
