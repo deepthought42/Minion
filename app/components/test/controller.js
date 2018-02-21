@@ -180,23 +180,23 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
       //Check if group already exists before creating adding it
       for(var i=0; i < test.groups.length; i++){
-          if(test.groups[i].name === group.name){
+          if(test.groups[i].name == group.name){
             $scope.showExistingGroupNotice = true;
             return;
           }
       }
 
-      if(test.groups){
+      if($scope.showExistingGroupNotice){
         Tester.addGroup({name: group.name,
                          description: group.description,
                          key: test.key}).$promise
-                  .then(function(data){
-                     $scope.group.name = null;
-                     test.groups.push(data);
-                   })
-                   .catch(function(err){
-                     $scope.errors.push(err.data.message);
-                   });
+                    .then(function(data){
+                       $scope.group.name = null;
+                       test.groups.push(data);
+                     })
+                     .catch(function(err){
+                       $scope.errors.push(err.data.message);
+                     });
        }
     }
 

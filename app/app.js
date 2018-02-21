@@ -68,8 +68,9 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     });
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
-        console.log("unauthorized user");
-        Auth.login();
+        if(!Auth.isAuthenticated()){
+          Auth.login();
+        }
         /*auth.signin({
           authParams: {
             scope: 'openid profile app_metadata' // This is if you want the full JWT
