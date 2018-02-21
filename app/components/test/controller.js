@@ -103,7 +103,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
               for(var test_idx=0; test_idx < $scope.tests.length; test_idx++){
                 if($scope.tests[test_idx].key === returned_key){
                   $scope.tests[test_idx].correct = data[returned_key];
-                  $scope.tests[test_idx].browserPassingStatuses[$scope.current_test_browser];
+                  $scope.tests[test_idx].browserPassingStatuses[data[returned_key].browser] = data[returned_key].passes;
                   //move test to top of list
                   var test = $scope.tests.splice(test_idx, 1);
                   $scope.tests.unshift(test);
