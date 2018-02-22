@@ -17,6 +17,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   function($rootScope, $scope, Domain,  $mdDialog, store, $state) {
     this._init = function(){
       $scope.errors = [];
+      $scope.domains = [];
       $scope.host = "";
       Domain.query().$promise
         .then(function(data){

@@ -102,6 +102,13 @@ height: calc(100% - 20px);
     color: #999999;
 }
 
+.domain-dialogue {
+  max-width: 600px;
+  margin-bottom: 30px;
+    
+    margin:auto;
+}
+
 .domain-dialogue-close{
   text-align:right !important;
   padding:30px 30px;
@@ -112,19 +119,24 @@ height: calc(100% - 20px);
   padding:0px 0px 0px 0px;
 }
 
+
 .domain-dialogue-input {
   max-width: 440px;
-  padding:60px 0px 60px 0px;
-  margin: auto;
-  display: flex;
-   justify-content: center;
-   align-items:center;
+  padding:10px 0px 10px 0px;
+    display: flex;
 }
 
-.domain-dialogue-button {
-  display: flex;
-  margin:0px auto 60px auto;
-  justify-content: center;
+.form_molecule {
+    padding-bottom: 15px;
+}
+
+.form_label_description {
+    padding-top: 5px;
+     padding-bottom: 10px;
+}
+
+.form_label_description h6{
+    font-weight: 500;
 }
 
 .disabled_image {
