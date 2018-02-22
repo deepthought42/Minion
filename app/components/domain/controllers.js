@@ -89,6 +89,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         // declare this function to handle response
         //set filestack url somewhere
         domain.logoUrl = response.filesUploaded[0].url;
+        console.log("domain url yoyo :: "+domain.logoUrl);
         Domain.save(domain).$promise
           .then(function(successResult){
             $scope.show_create_domain_err = false;
@@ -98,8 +99,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           .catch(function(err){
             $scope.errors.push(err);
           })
-        console.log("domain url :: "+domain);
-        console.log("response :: "+ Object.keys(response.filesUploaded[0]));
+          return domain.logoUrl;
       });
     }
 
@@ -123,8 +123,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     this._init();
 
     $scope.$on('domainRequiredError', function(){
-      $scope.domain_error = "A domain must be selected first";
-      //$scope.$apply();
+      $scope.domain_error = "Start by adding and selecting a domain.";
     })
 
   }
