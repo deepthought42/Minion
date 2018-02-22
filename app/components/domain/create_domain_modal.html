@@ -36,25 +36,33 @@
                   <h6>Select A Browser</h6>
                   This will be the default browser this domain uses for discovery.
               </div>
-              <div class="row">
-                <div class="col-xs-2">
-                  <button class="btn" ng-click="chrome_selected=true;firefox_selected=false;selected_browser='chrome'" ng-class="{active: chrome_selected}">
-                    <img src="/img/Chrome.ico" class="browser-icon">
-                  </button>
-                </div>
-                <div class="col-xs-2">
-                  <button class="btn" ng-click="firefox_selected=true;chrome_selected=false;selected_browser='firefox'" ng-class="{active: firefox_selected}">
-                    <img src="/img/firefox.png" class="browser-icon">
-                  </button>
-                </div>
-                <div class="col-xs-8">
+              <div class="col-xs-12 browser_buttons">
+                <div class="row">
+                  <div class="col-xs-3 vertical__center__int">
+                    <button class="btn btn-depressed" ng-click="chrome_selected=true;firefox_selected=false;selected_browser='chrome'" ng-class="{active: chrome_selected}">
+                      <img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="chrome_selected">
+                      <div class="fa-icon" ng-show="!chrome_selected">
+                        <i class="fa fa-chrome"></i>
+                      </div>
+                    </button>
+                  </div>
+                  <div class="col-xs-3 vertical__center__int">
+                    <button class="btn btn-depressed" ng-click="firefox_selected=true;chrome_selected=false;selected_browser='firefox'" ng-class="{active: firefox_selected}">
+                      <img src="/img/firefox.png" class="modal-browser-icon" ng-show="firefox_selected">
+                      <div class="fa-icon" ng-show="!firefox_selected">
+                        <i class="fa fa-firefox"></i>
+                      </div>
+                    </button>
+                  </div>
+                  <div class="col-xs-6">
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-sm-12 form_molecule">
                 <div class="form_label_description">
                   <h6>Upload A Logo</h6>
-                  For best results use a 200px x200px transparents png.
+                  For best results use a 200px x 200px transparent png.
                    
               </div>
               <button class="btn btn--secondary" ng-click="openPicker(domain)">Upload Logo</button>
