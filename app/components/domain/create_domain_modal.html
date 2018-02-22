@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="col-xs-12 modal_action_button">
-          <button id="create_domain_button" class="btn btn--primary pull-right" type="submit" ng-click="selected_browser && domain_form.$valid && createDomain(protocol, host, selected_browser)"   ng-disabled="!selected_browser || domain_form.$invalid">Add Domain</button>
+          <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="createDomain(protocol, host, selected_browser)"  ng-disabled="!selected_browser || domain_form.$invalid">Add Domain</button>
         </div>
     </form>
 </md-dialog>
