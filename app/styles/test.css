@@ -68,8 +68,7 @@
 	color: #ffffff;
 	text-align: center;
 	padding: 5px;
-	background-color:red;
-    height:60px;
+	background-color:#F44336;
 }
 
 
@@ -90,11 +89,6 @@
 
 .test__title{
   text-align: left;
-}
-
-.browser-icon {
-  width: 25px;
-  height: 25px;
 }
 
 .title__edit__buttons{
