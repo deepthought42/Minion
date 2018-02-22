@@ -10,8 +10,6 @@
         </md-dialog-content>
     </div>
 
-
-
     <form name="domain_form" novalidate>
         <div class ="row domain-dialogue" >
             <div class ="col-sm-12 form_molecule" >
@@ -20,13 +18,13 @@
                     </div>
                 <div class ="domain-dialogue-input" >
                         <div>
-                    <select id="domain_protocol" class="form-control" ng-model="protocol" required>
+                    <select id="domain_protocol" class="form-control" ng-model="current_domain.protocol" required>
                       <option value="http">http</option>
                       <option value="https">https</option>
                     </select>
                   </div>
                   <div>
-                    <input id="domain_input" class="form-control" ng-model="host" placeholder="yourdomain.com" required/>
+                    <input id="domain_input" class="form-control" ng-model="current_domain.url" placeholder="yourdomain.com" required/>
                   </div>
                 </div>
             </div>
@@ -37,12 +35,12 @@
               </div>
               <div class="row">
                 <div class="col-xs-2">
-                  <button class="btn" ng-click="chrome_selected=true;firefox_selected=false;selected_browser='chrome'" ng-class="{active: chrome_selected}">
+                  <button class="btn" ng-click="chrome_selected=true;firefox_selected=false;selected_browser='chrome'" ng-class="{active: chrome_selected || domain.discoveryBrowser == 'chrome'}">
                     <img src="/img/Chrome.ico" class="browser-icon">
                   </button>
                 </div>
                 <div class="col-xs-2">
-                  <button class="btn" ng-click="firefox_selected=true;chrome_selected=false;selected_browser='firefox'" ng-class="{active: firefox_selected}">
+                  <button class="btn" ng-click="firefox_selected=true;chrome_selected=false;selected_browser='firefox'" ng-class="{active: firefox_selected || domain.discoveryBrowser == 'firefox'}">
                     <img src="/img/firefox.png" class="browser-icon">
                   </button>
                 </div>
@@ -56,7 +54,7 @@
                   For best results use a 200px x200px transparents png.
 
               </div>
-              <button class="btn btn--secondary" ng-click="domain.logoUrl = openPicker(domain)">Upload Logo</button>
+              <button class="btn btn--secondary" ng-click="current_domain.logo_url = openPicker(domain)">Upload Logo</button>
               <img ng-src="{{domain.logoUrl}}" />
             </div>
             <div ng-show="domain_creation_error" class="error">
@@ -64,7 +62,7 @@
             </div>
         </div>
         <div class="col-xs-12 modal_action_button">
-          <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="createDomain(protocol, host, selected_browser)"  ng-disabled="!selected_browser || domain_form.$invalid">Add Domain</button>
+          <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="createDomain(domain.protocol, domain.url, domain.selected_browser, domain.logo_url)"  ng-disabled="!selected_browser || domain_form.$invalid">Add Domain</button>
         </div>
     </form>
 </md-dialog>

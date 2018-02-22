@@ -35,9 +35,9 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_creation_err = "An error occurred while saving the domain";
     }
 
-    $scope.createDomain = function(protocol, host, default_browser){
+    $scope.createDomain = function(protocol, host, default_browser, logo_url){
       if(default_browser){
-        Domain.save({protocol: protocol, url: host, logo_url: "", discoveryBrowser: default_browser}).$promise
+        Domain.save({protocol: protocol, url: host, logo_url: logo_url, discoveryBrowser: default_browser}).$promise
           .then(function(successResult){
             $scope.show_create_domain_err = false;
             store.set('domain', successResult);
@@ -65,7 +65,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $state.go("main.discovery");
     }
 
-    $scope.openCreateDomainDialog  = function(event) {
+    $scope.openCreateDomainDialog  = function(domain) {
+      $scope.current_domain = domain;
        $mdDialog.show({
           clickOutsideToClose: $scope.domains.length,
           scope: $scope,
@@ -89,17 +90,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         // declare this function to handle response
         //set filestack url somewhere
         domain.logoUrl = response.filesUploaded[0].url;
-        console.log("domain url yoyo :: "+domain.logoUrl);
-        Domain.save(domain).$promise
-          .then(function(successResult){
-            $scope.show_create_domain_err = false;
-            store.set('domain', successResult);
-            $rootScope.$broadcast("domain_updated", successResult);
-          })
-          .catch(function(err){
-            $scope.errors.push(err);
-          })
-          return domain.logoUrl;
+
+        return domain.logoUrl;
       });
     }
 
