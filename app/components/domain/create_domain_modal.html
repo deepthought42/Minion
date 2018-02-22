@@ -12,13 +12,13 @@
     </div>
 
     <form name="domain_form" novalidate>
-        <div class ="row domain-dialogue" >
+        <div class ="domain-dialogue" >
             <div class ="col-sm-12 form_molecule" >
-                   <div class="form_label_description">
+                   <div class="form_label_description_domain">
                        <h6>Domain</h6>
                     </div>
                 <div class ="domain-dialogue-input" >
-                        <div>
+                        <div class="domain_protocol">
                     <select id="domain_protocol" class="form-control" ng-model="current_domain.protocol" required>
                       <option value="http">http</option>
                       <option value="https">https</option>
@@ -34,17 +34,17 @@
                   <h6>Select A Browser</h6>
                   This will be the default browser this domain uses for discovery.
               </div>
-              <div class="col-xs-12 browser_buttons">
-                <div class="row">
-                  <div class="col-xs-3 vertical__center__int">
+                 <div class="row browser_buttons">
+                  <div class="col-xs-3">
                     <button class="btn btn-depressed" ng-click="chrome_selected=true;firefox_selected=false;selected_browser='chrome'" ng-class="{active: chrome_selected || domain.discoveryBrowser == 'chrome'}">
+
                       <img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="chrome_selected">
                       <div class="fa-icon" ng-show="!chrome_selected">
                         <i class="fa fa-chrome"></i>
                       </div>
                     </button>
                   </div>
-                  <div class="col-xs-3 vertical__center__int">
+                  <div class="col-xs-3">
                     <button class="btn btn-depressed" ng-click="firefox_selected=true;chrome_selected=false;selected_browser='firefox'" ng-class="{active: firefox_selected || domain.discoveryBrowser == 'firefox'}">
                       <img src="/img/firefox.png" class="modal-browser-icon" ng-show="firefox_selected">
                       <div class="fa-icon" ng-show="!firefox_selected">
@@ -54,8 +54,7 @@
                   </div>
                   <div class="col-xs-6">
                   </div>
-                </div>
-              </div>
+                </div>   
             </div>
             <div class="col-sm-12 form_molecule">
                 <div class="form_label_description">
@@ -70,8 +69,8 @@
               Something went wrong, Please try again
             </div>
         </div>
-        <div class="col-xs-12 modal_action_button">
+            <div class="modal_action_button">
           <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="createDomain(current_domain.protocol, current_domain.url, current_domain.selected_browser, current_domain.logo_url)"  ng-disabled="!selected_browser || domain_form.$invalid">Add Domain</button>
-        </div>
+            </div>
     </form>
 </md-dialog>

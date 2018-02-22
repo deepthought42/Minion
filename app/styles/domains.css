@@ -102,43 +102,6 @@ height: calc(100% - 20px);
     color: #999999;
 }
 
-.domain-dialogue {
-  max-width: 600px;
-  margin-bottom: 30px;
-    
-    margin:auto;
-}
-
-.domain-dialogue-close{
-  text-align:right !important;
-  padding:30px 30px;
-}
-.domain-dialogue-header {
-  text-align:center;
-  vertical-align: middle;
-  padding:0px 0px 0px 0px;
-}
-
-
-.domain-dialogue-input {
-  max-width: 440px;
-  padding:10px 0px 10px 0px;
-    display: flex;
-}
-
-.form_molecule {
-    padding-bottom: 15px;
-}
-
-.form_label_description {
-    padding-top: 5px;
-     padding-bottom: 10px;
-}
-
-.form_label_description h6{
-    font-weight: 500;
-}
-
 .disabled_image {
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
