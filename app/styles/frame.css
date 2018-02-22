@@ -182,17 +182,17 @@ font-weight: 500;
 
 /*--------------------------- [7. dropdown] ------------------------------------------------------------------------------*/
 
-.domain-link li {
+.dropdown-item li {
     text-decoration: none;
 }
 
-.domain-link li:focus {
+.dropdown-item:focus {
   outline: none;
 }
-.domain-link li:visited { 
+.dropdown-item:visited { 
 }
 
-.domain-link li:hover {
+.dropdown-item:hover {
      background-color:#ffee58;
   text-decoration: none;
 }
@@ -208,6 +208,7 @@ font-weight: 500;
 .dropdown-menu li:hover {
      background-color:#e9e9e9;
   text-decoration: none;
+    color: #2d2d2d;
 }
 
 
