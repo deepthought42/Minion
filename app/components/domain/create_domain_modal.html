@@ -54,7 +54,7 @@
                   </div>
                   <div class="col-xs-6">
                   </div>
-                </div>   
+                </div>
             </div>
             <div class="col-sm-12 form_molecule">
                 <div class="form_label_description">
@@ -69,8 +69,9 @@
               Something went wrong, Please try again
             </div>
         </div>
-            <div class="modal_action_button">
-          <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="createDomain(current_domain.protocol, current_domain.url, current_domain.selected_browser, current_domain.logo_url)"  ng-disabled="!selected_browser || domain_form.$invalid">Add Domain</button>
-            </div>
+        {{current_domain.default_browser}}
+        <div class="modal_action_button">
+          <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="createDomain(current_domain.protocol, current_domain.url, selected_browser, current_domain.logo_url)"  ng-disabled="!selected_browser || domain_form.$invalid">Add Domain</button>
+        </div>
     </form>
 </md-dialog>
