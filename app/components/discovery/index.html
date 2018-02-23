@@ -107,9 +107,9 @@
 			  <div class="col-xs-2 test__status text--shadow">
 			   	<div class="row">
 						<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
-                          <i class="fa fa-circle-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
-                          <span class="sr-only">Running...</span>
-                        </div>
+              <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+              <span class="sr-only">Running...</span>
+            </div>
 					 	<div class="col-xs-6 btn--green select__neutral status vertical__center__int" ng-show="!test.waitingOnStatusChange">
 						 	<div class="" ng-click="updateCorrectness(test, true, $index)">
 						   	<i class="fa fa-check status--symbol white"
@@ -162,8 +162,8 @@
 	<div class="row test__path" ng-show="test.visible">
               <div class="col-xs-12 vertical__left__int" ng-click="visible_tab='nodedata'+$index">
                   <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-                        <div ng-show="node.browser_screenshot[default_browser]" class="path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
-                              <img src="{{node.browser_screenshot[default_browser]}}" class="path-node-image"/>
+                        <div ng-show="node.browser_screenshots[default_browser]" class="path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
+                              <img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
                           </div>
                         <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
                             <span class="" >
@@ -194,8 +194,8 @@
                         </div>
                     </div>
                     <div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)" >
-                      <div  ng-show="test.result.browser_screenshot[default_browser]" class="path-node"ng-class="current_node[test_idx]==node ? 'active' : ''">
-                          <img src="{{test.result.browser_screenshot[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
+                      <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-node"ng-class="current_node[test_idx]==node ? 'active' : ''">
+                          <img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
                       </div>
                     </div>
                 </div>
@@ -219,7 +219,7 @@
                                                     <div class="page__image col-xs-2">
                                                         <img type="button" class="path-node-image"
                                                                 data-toggle="modal" data-target="#exampleModal"
-                                                                src="{{current_node[$index].browser_screenshot[default_browser]}}" class="path-node-image"
+                                                                src="{{current_node[$index].browser_screenshots[default_browser]}}" class="path-node-image"
                                                                 ng-click="openPageModal(current_node[$index])" />
                                                     </div>
                                                     <div class="col-xs-10">

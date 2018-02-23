@@ -155,9 +155,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
             })
           })
           .catch(function(err){
-            $scope.errors.push(err);
-
-            console.log("Test failed to run successfully");
+            $scope.errors.push("Test failed to run successfully");
           });
         }
     }

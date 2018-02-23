@@ -84,8 +84,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     });
 
     $rootScope.$on('account-missing', function (e){
-      console.log("account missing");
-//    NOTE TO IMPLEMENT --- NAVIGATE TO ACCOUNT SIGN UP PAGE
+      //    NOTE TO IMPLEMENT --- NAVIGATE TO ACCOUNT SIGN UP PAGE
 
       //e.preventDefault();
       //$location.path('/accounts');
