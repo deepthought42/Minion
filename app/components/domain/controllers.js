@@ -68,7 +68,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     $scope.openCreateDomainDialog  = function(domain) {
       $scope.current_domain = domain;
        $mdDialog.show({
-          clickOutsideToClose: $scope.domains.length,
+          clickOutsideToClose: $scope.domains.length>0,
           scope: $scope,
           preserveScope: true,
           templateUrl: "components/domain/create_domain_modal.html",
