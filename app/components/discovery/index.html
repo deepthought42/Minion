@@ -5,7 +5,7 @@
       Stop!
   </button>
 -->
-    <div class="">
+    <div class="row">
         <div class="col-md-12 error__message" ng-repeat="error in errors">
             {{error.message}}
         </div>
@@ -92,14 +92,18 @@
 				<span class="sr-only">Running...</span>
 			</div>
 		</div>
-		<div class="empty__state vertical__center__int" ng-show="!waitingOnTests && tests.length==0 && !showBrowserSelectionPane">
-			<h2>Collect your tests by first running a Discovery.</h2>
-			<button class="btn btn--primary btn-lg" ng-click="startDiscovery()" ng-show="!isStarted">
-				Start Discovery
-			</button>
-			<button class="btn btn--red pull-left" ng-click="stopDiscvery()" ng-show="isStarted">
-				Stop Discovery
-			</button>
+		<div class="empty__state vertical__center_empty_state" ng-show="!waitingOnTests && tests.length==0 && !showBrowserSelectionPane">
+			<div>
+                <h2>Collect your tests by first running a Discovery.</h2>
+            </div>
+			<div>
+                <button class="btn btn--primary btn-lg" ng-click="startDiscovery()" ng-show="!isStarted">
+                    Start Discovery
+                </button>
+                <button class="btn btn--red pull-left" ng-click="stopDiscvery()" ng-show="isStarted">
+                    Stop Discovery
+                </button>
+            </div>
 		</div>
 
 		<div class="test" ng-repeat="test in tests" ng-show="tests.length>0 && !showBrowserSelectionPane">
