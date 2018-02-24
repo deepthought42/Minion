@@ -63,6 +63,11 @@
 }
 
 
+.empty__state div{
+  display:block;
+}
+
+
 .error__message{
 	font-weight: 500;
 	color: #ffffff;
