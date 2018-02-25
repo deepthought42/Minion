@@ -313,7 +313,7 @@
                                 Date Last Run&nbsp;<i class="fa fa-sort"></i>
                           </div>
                     </div>
-                    <div class="row test__history__record" ng-repeat="record in test.records">
+                    <div class="row test__history__record" ng-repeat="record in test.records | orderBy: '-ranAt'">
 											<div class="col-sm-3">
 												<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="record.browser=='chrome'">
 												<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="record.browser=='firefox'" >
