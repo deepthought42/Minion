@@ -232,7 +232,8 @@
                                                              Landable
                                                             </div>
                                                             <div class="data__value">
-                                                             <input type="checkbox" ng-checked="current_node[$index].landable" disabled/>
+                                                                <input type="checkbox" ng-checked="current_node[$index].landable" disabled/>
+                                                                &nbsp;Is this page landable?
                                                             </div>
                                                         </div>
                                                     </div>
@@ -264,7 +265,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 col-xs-12">
+                                                <div class="col-sm-4 col-xs-12">
                                                     <div class="key--value">
                                                         <div class="data__key">
                                                             CSS
@@ -274,18 +275,18 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 col-xs-12">
+                                                <div class="col-sm-8 col-xs-12">
                                                     <div class="key--value">
                                                         <div class="data__key">
                                                             Attributes
                                                         </div>
-                                                        <div class="data__value" ng-repeat="attribute in current_node[$index].attributes">
-                                                            <div class="data__key">
+                                                        <div class="row attribute__data__value" ng-repeat="attribute in current_node[$index].attributes">
+                                                            <div class="col-sm-5 attribute__key">
                                                                 {{attribute.name}}
                                                             </div>
-                                                            <span class="data__value" ng-repeat="value in attribute.vals">
+                                                            <div class="col-sm-7 pull-right attribute__value" ng-repeat="value in attribute.vals">
                                                                 {{value}}
-                                                            </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -317,7 +318,7 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <div class="input-group groups_input_padding">
-                                            <input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2" maxlength="20">
+                                            <input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Smoke, Login Form, etc." aria-describedby="basic-addon2" maxlength="20">
                                             <span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2">
                                                 <i class="fa fa-plus"></i>
                                             </span>

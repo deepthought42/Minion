@@ -1,23 +1,23 @@
-<div class="">
-  <div class="col-xs-12 dialogue-close" ng-click="">
+<div class="col-xs-12">
+  <div class=" dialogue-close" ng-click="">
          <h2 style="text-align:right;"><i class="fa fa-times"></i></h2>
   </div>
-  <div class="col-xs-12">
-    <h2 class="modal__title">Select Which Browsers To Test.</h2>
+  <div class="">
+    <h2 class="modal__title">Select any number of browsers to test.</h2>
   </div>
-  <div class="col-xs-12 browser_buttons">
+  <div class=" browser_buttons">
     <div class="row">
       <div class="col-xs-3">
       </div>
-      <div class="col-xs-3 vertical__center__int">
-        <button class="btn btn-depressed" ng-click="chrome_selected=!chrome_selected" ng-class="{active: chrome_selected}">
+      <div class="col-xs-3">
+        <button class="btn btn-depressed browser_spacing" ng-click="chrome_selected=!chrome_selected" ng-class="{active: chrome_selected}">
           <img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="chrome_selected">
           <div class="fa-icon" ng-show="!chrome_selected">
             <i class="fa fa-chrome"></i>
           </div>
         </button>
       </div>
-      <div class="col-xs-3 vertical__center__int">
+      <div class="col-xs-3">
         <button class="btn btn-depressed" ng-click="firefox_selected=!firefox_selected" ng-class="{active: firefox_selected}">
           <img src="/img/firefox.png" class="modal-browser-icon" ng-show="firefox_selected">
           <div class="fa-icon" ng-show="!firefox_selected">
@@ -42,8 +42,8 @@
       </div>
     </div>
   </div>
-  <div class="col-xs-12 modal_action_button">
-    <button class="btn btn--primary" ng-click="runSingleTestFlag?runTest(firefox_selected, chrome_selected) : runTests(firefox_selected, chrome_selected)"
+  <div class="modal_action_button_container">
+    <button class="btn btn--primary pull-right modal_action_button" ng-click="runSingleTestFlag?runTest(firefox_selected, chrome_selected) : runTests(firefox_selected, chrome_selected)"
             ng-disabled="!firefox_selected && !chrome_selected">
       Run
     </button>
