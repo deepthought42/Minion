@@ -291,6 +291,10 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
        });
     };
 
+    $scope.capitalizeFirstLetter = function(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     $scope._init();
   }
 ]);
