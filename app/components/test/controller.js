@@ -175,27 +175,16 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
          $scope.errors.push("Group name cannot be empty");
          return;
       }
-
-      //Check if group already exists before creating adding it
-      for(var i=0; i < test.groups.length; i++){
-          if(test.groups[i].name == group.name){
-            $scope.showExistingGroupNotice = true;
-            return;
-          }
-      }
-
-      if($scope.showExistingGroupNotice){
-        Tester.addGroup({name: group.name,
-                         description: group.description,
-                         key: test.key}).$promise
-                    .then(function(data){
-                       $scope.group.name = null;
-                       test.groups.push(data);
-                     })
-                     .catch(function(err){
-                       $scope.errors.push(err.data.message);
-                     });
-       }
+      Tester.addGroup({name: group.name,
+                       description: group.description,
+                       key: test.key}).$promise
+                .then(function(data){
+                   $scope.group.name = null;
+                   test.groups.push(data);
+                 })
+                 .catch(function(err){
+                   $scope.errors.push(err.data);
+                 });
     }
 
     $scope.removeGroup = function(test, group, $index){
@@ -301,6 +290,10 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           }
        });
     };
+
+    $scope.capitalizeFirstLetter = function(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     $scope._init();
   }
