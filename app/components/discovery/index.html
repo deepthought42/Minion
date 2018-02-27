@@ -114,16 +114,16 @@
               <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
               <span class="sr-only">Running...</span>
             </div>
-					 	<div class="col-xs-6 btn--green select__neutral status vertical__center__int" ng-show="!test.waitingOnStatusChange">
-						 	<div class="" ng-click="updateCorrectness(test, true, $index)">
+					 	<div class="col-xs-6 btn--green select__neutral status vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
+						 	<div class="" >
 						   	<i class="fa fa-check status--symbol white"
 							   	 style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
 								 <br />
 								 Correct
 							</div>
 						</div>
-						<div class="status col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange">
-							<div class="" ng-click="updateCorrectness(test, false, $index)">
+						<div class="status col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
+							<div class="" >
 								<i  class="fa fa-times status--symbol white"
 									style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
 									<br />
