@@ -7,7 +7,7 @@
     </div>
     <div class="domain-dialogue-header">
         <md-dialog-content>
-           <h2 class="modal__title">Start a new project by adding a&nbsp;domain.</h2>
+           <h2 class="modal__title">Edit your domain.</h2>
         </md-dialog-content>
     </div>
 
@@ -18,15 +18,7 @@
                        <h6>Domain</h6>
                     </div>
                 <div class ="domain-dialogue-input" >
-                        <div class="domain_protocol">
-                    <select id="domain_protocol" class="form-control" ng-model="current_domain.protocol" required>
-                      <option value="http">http</option>
-                      <option value="https">https</option>
-                    </select>
-                  </div>
-                  <div>
-                    <input id="domain_input" class="form-control" ng-model="current_domain.url" placeholder="yourdomain.com" required/>
-                  </div>
+                  {{current_domain.protocol + current_domain.url }}
                 </div>
             </div>
             <div class="col-sm-12 form_molecule">
@@ -62,7 +54,7 @@
                   For best results use a 200px x 200px transparent png.
 
               </div>
-              <button class="btn btn--secondary" ng-click="current_domain.logo_url = openPicker(domain)">Upload Logo</button>
+              <button class="btn btn--secondary" ng-click="openPicker(domain)">Upload Logo</button>
               <img ng-src="{{current_domain.logo_url}}" />
             </div>
             <div ng-show="domain_creation_error" class="error">
@@ -70,7 +62,7 @@
             </div>
         </div>
         <div class="modal_action_button">
-          <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="createDomain(current_domain.protocol, current_domain.url, selected_browser, current_domain.logo_url)"  ng-disabled="!selected_browser || domain_form.$invalid">Add Domain</button>
+          <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="updateDomain(current_domain.key, current_domain.key, current_domain.protocol, selected_browser, current_domain.logo_url)"  ng-disabled="!selected_browser || domain_form.$invalid">Update Domain</button>
         </div>
     </form>
 </md-dialog>
