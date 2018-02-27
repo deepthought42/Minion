@@ -28,19 +28,19 @@
               </div>
                  <div class="row browser_buttons">
                   <div class="col-xs-3">
-                    <button class="btn btn-depressed" ng-click="chrome_selected=true;firefox_selected=false;selected_browser='chrome'" ng-class="{active: chrome_selected || domain.discoveryBrowser == 'chrome'}">
+                    <button class="btn btn-depressed" ng-click="domain.discoveryBrowser = 'chrome'" ng-class="{active: domain.discoveryBrowser == 'chrome'}">
 
-                      <img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="chrome_selected">
-                      <div class="fa-icon" ng-show="!chrome_selected">
+                      <img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="domain.discoveryBrowser == 'chrome'">
+                      <div class="fa-icon" ng-show="domain.discoveryBrowser != 'chrome'">
                         <i class="fa fa-chrome"></i>
                       </div>
                     </button>
                   </div>
                   <div class="col-xs-3">
-                    <button class="btn btn-depressed" ng-click="firefox_selected=true;chrome_selected=false;selected_browser='firefox'" ng-class="{active: firefox_selected || domain.discoveryBrowser == 'firefox'}">
-                      <img src="/img/firefox.png" class="modal-browser-icon" ng-show="firefox_selected">
-                      <div class="fa-icon" ng-show="!firefox_selected">
-                        <i class="fa fa-firefox"></i>
+                    <button class="btn btn-depressed" ng-click="domain.discoveryBrowser = 'firefox'" ng-class="{active: domain.discoveryBrowser == 'firefox'}">
+                      <img src="/img/firefox.png" class="modal-browser-icon" ng-show="domain.discoveryBrowser == 'firefox'">
+                      <div class="fa-icon" ng-show="domain.discoveryBrowser != 'firefox'">
+                        <i class="fa fa-firefox modal-browser-icon"></i>
                       </div>
                     </button>
                   </div>
