@@ -11,8 +11,9 @@
             </div>
             <div class="flex-auto">
               <div class="input-group search">
-        			  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="basic-addon1">
-        			  <span class="input-group-addon btn--gray" id="basic-addon1"><i class="fa fa-search"></i></span>
+        		 <span class="input-group-addon"><i class="fa fa-search"></i></span>	  
+                  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
+        			 
         			</div>
             </div>
           </div>
@@ -57,10 +58,6 @@
                 <li class="dropdown-item">
                   <i class="fa fa-user"></i>
                   User Profile
-                </li>
-                <li class="dropdown-item">
-                  <i class="fa fa-gear"></i>
-                  Settings
                 </li>
                 <li class="horizontal-divider"></li>
                 <li class="dropdown-item" ng-click="logout()">

@@ -25,7 +25,7 @@
 	  <div class="col-sm-3 test__title">
 			Test Title
 	  </div>
-	  <div class="col-sm-2">
+	  <div class="col-sm-1">
 		    Time (s)&nbsp;
 	  </div>
 	  <div class="col-sm-2"  ng-click="sortLastRun=!sortLastRun">
@@ -34,7 +34,7 @@
 		<div class="col-xs-3">
         Browsers
 		</div>
-	  <div class="col-sm-1">
+	  <div class="col-sm-2">
 	  </div>
 	</div>
 
@@ -47,8 +47,8 @@
 		</div>
 		<div class="empty__state vertical__center" ng-show="!waitingOnTests && tests.length==0">
 			<h2>
-        Start a <a href="#/discovery">Discovery</a> to let Qanairy map your tests.
-      </h2>
+                No tests here? Visit <a href="#/discovery">Discovery</a> to manage all of your tests.
+            </h2>
 		</div>
 
 		<div class="test"
@@ -59,14 +59,14 @@
           <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
           <span class="sr-only">Running...</span>
         </div>
-        <div class="col-xs-1 test__status" ng-show="!test.runStatus">
-					<span ng-show="test.correct">
-					  <i class="fa fa-check-circle green status--symbol"></i>
-					</span>
-					<span ng-show="!test.correct && test.correct != null">
-					  <i  class="fa fa-times-circle red status--symbol"></i>
-					</span>
-          </div>
+        <div class="col-xs-1 test__status" ng-show="!test.runStatus" ng-click="toggleTestDataVisibility(test, $index)">
+            <span ng-show="test.correct">
+              <i class="fa fa-check-circle green status--symbol"></i>
+            </span>
+            <span ng-show="!test.correct && test.correct != null">
+              <i  class="fa fa-times-circle red status--symbol"></i>
+            </span>
+        </div>
             <div class="col-xs-3 test__title" ng-click="toggleTestDataVisibility(test, $index)">
             <div class="row">
             <div class="col-xs-12" ng-show="!test.show_test_name_edit_field">
@@ -120,12 +120,17 @@
                 </button>
             </div>
         </div>
+        <div class="col-xs-1" ng-click="toggleTestDataVisibility(test, $index)">
+            <div class="pull-right accordian" aria-label="open accordian">
+                <i class="fa fa-angle-right fa-2x" />
+            </div>
+        </div>
     </div>
 
             <div class="row test__path" ng-show="test.visible">
-              <div class="col-xs-12 vertical__left__int">
+              <div class="col-xs-12 ">
                   <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-                      <div ng-show="node.browser_screenshots[default_browser]" class="path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
+                      <div ng-show="node.browser_screenshots[default_browser]" class="path-page" ng-class="current_node[test_idx]==node ? 'active' : ''" >
                           <img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
                       </div>
                         <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
@@ -157,7 +162,7 @@
                         </div>
                     </div>
                     <div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)" >
-                      <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-node"ng-class="current_node[test_idx]==node ? 'active' : ''">
+                      <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-page" ng-class="current_node[test_idx]==node ? 'active' : ''">
                           <img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
                       </div>
                     </div>
@@ -189,7 +194,9 @@
                                                              Landable
                                                             </div>
                                                             <div class="data__value">
-																															{{current_node[$index].landable ? 'yes' : 'no'}}
+                                                                <input type="checkbox" ng-checked="current_node[$index].landable" disabled/>
+                                                                &nbsp;Is this page landable?
+																																{{current_node[$index].landable ? 'yes' : 'no'}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -221,7 +228,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 col-xs-12">
+                                                 <div class="col-sm-4 col-xs-12">
                                                     <div class="key--value">
                                                         <div class="data__key">
                                                             CSS
@@ -231,18 +238,18 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 col-xs-12">
+                                                <div class="col-sm-8 col-xs-12">
                                                     <div class="key--value">
                                                         <div class="data__key">
                                                             Attributes
                                                         </div>
-                                                        <div class="data__value" ng-repeat="attribute in current_node[$index].attributes">
-                                                            <div class="data__key">
+                                                        <div class="row attribute__data__value" ng-repeat="attribute in current_node[$index].attributes">
+                                                            <div class="col-sm-5 attribute__key">
                                                                 {{attribute.name}}
                                                             </div>
-                                                            <span class="data__value" ng-repeat="value in attribute.vals">
+                                                            <div class="col-sm-7 pull-right attribute__value" ng-repeat="value in attribute.vals">
                                                                 {{value}}
-                                                            </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -274,7 +281,7 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <div class="input-group groups_input_padding">
-                                            <input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Feature, Smoke, etc." aria-describedby="basic-addon2" maxlength="20">
+                                            <input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Smoke, Login Form, etc." aria-describedby="basic-addon2" maxlength="20">
                                             <span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2">
                                                 <i class="fa fa-plus"></i>
                                             </span>
@@ -298,6 +305,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="test__history__title">
+                    <h5>
+                        Run History
+                    </h5>
+                </div>
                 <div class="col-xs-12 test__history">
                     <div class="row test__history__labels">
                           <div class="col-sm-3">
@@ -317,7 +329,7 @@
 											<div class="col-sm-3">
 												<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="record.browser=='chrome'">
 												<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="record.browser=='firefox'" >
-												{{capitalizeFirstLetter(record.browser)}}
+                        <span class="browser_name">{{capitalizeFirstLetter(record.browser)}}</span>
                       </div>
                       <div class="col-sm-3">
 													<i class="fa fa-check fa-2x green" ng-show="record.passes" />
