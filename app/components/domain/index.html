@@ -24,7 +24,7 @@
     </div>
     <div class="col-sm-6">
     </div>
-    <div class="col-sm-2" ng-click="openCreateDomainDialog(domain)"  style="text-align:right !important; position: relative;">
+    <div class="col-sm-2" ng-click="openEditDomainDialog(domain)"  style="text-align:right !important; position: relative;">
        <i class="fa fa-pencil delete__domain" ></i>
     </div>
     <div class="col-sm-2" ng-click="removeDomain(domain, $index)"  style="text-align:right !important; position: relative;">
@@ -33,8 +33,7 @@
   </div>
   <div class="row vertical__center domain__icon" ng-click="selectDomain(domain)">
     <div class="domain__logo">
-        <img class="" src="{{domain.logoUrl || './img/qanairy_logo.png'}}" />
-        Upload Logo
+        <img class="" src="{{domain.logoUrl}}" />
     </div>
   </div>
   <div class="domain__title" ng-click="selectDomain(domain)">

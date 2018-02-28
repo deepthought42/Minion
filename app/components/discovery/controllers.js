@@ -190,6 +190,21 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
+    $scope.openPageModal = function(page) {
+      $scope.current_preview_page = page;
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/test/page_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
+    
     /**
     * Displays a info for a selected path object in the drop down that
     * accompanies the error panel for the associated path

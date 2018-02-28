@@ -28,7 +28,7 @@
 						Discovery Start
 					</div>
 					<div class="stat_value" ng-show="current_domain">
-						{{current_domain.lastDiscoveryStartedAt | date : 'M/dd/yy h:mm a'}}
+						{{(current_domain.lastDiscoveryStartedAt || '00:00') | date : 'M/dd/yy h:mm a'}}
 					</div>
 				</div>
 		  </div>
@@ -39,7 +39,7 @@
 						Last Test Found
 					</div>
 					<div class="stat_value" ng-show="tests.length">
-						{{(Date.now() - (tests | orderBy:{'lastRunTimestamp':true})[tests.length-1].lastRunTimestamp)  | date : 'h:mm'}} hrs ago
+						{{((Date.now() - (tests | orderBy:{'lastRunTimestamp':true})[tests.length-1].lastRunTimestamp) || '00:00') | date : 'h:mm'}} hrs ago
 					</div>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 						Total Runtime
 					</div>
 					<div class="stat_value" ng-show="current_domain">
-						{{((current_domain.lastRunTimestamp - current_domain.lastDiscoveryStartedAt ) | date : 'h:mm') || ""}}
+						{{((current_domain.lastRunTimestamp - current_domain.lastDiscoveryStartedAt ) | date : 'h:mm')  || '00:00'}}
 					</div>
 				</div>
 			</div>
@@ -61,7 +61,7 @@
 						Total Tests
 					</div>
 					<div class="stat_value" ng-show="tests.length">
-						{{tests.length}} tests
+						{{tests.length || 0}} tests
 					</div>
 				</div>
 			</div>
@@ -110,27 +110,27 @@
 			<div class="test__profile vertical__center__int" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 			  <div class="col-xs-2 test__status text--shadow">
 			   	<div class="row">
-                    <div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
-                      <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
-                      <span class="sr-only">Running...</span>
-                    </div>
-                    <div class="col-xs-6 btn--green select__neutral status vertical__center__int" ng-show="!test.waitingOnStatusChange">
-                        <div class="" ng-click="updateCorrectness(test, true, $index)">
-                        <i class="fa fa-check status--symbol white"
-                             style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
-                             <br />
-                             Correct
-                        </div>
-                    </div>
-                    <div class="status col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange">
-                        <div class="" ng-click="updateCorrectness(test, false, $index)">
-                            <i  class="fa fa-times status--symbol white"
-                                style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
-                                <br />
-                                Incorrect
-                        </div>
-                    </div>
-                  </div>
+						<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
+              <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+              <span class="sr-only">Running...</span>
+            </div>
+					 	<div class="col-xs-6 btn--green select__neutral status vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
+						 	<div class="" >
+						   	<i class="fa fa-check status--symbol white"
+							   	 style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
+								 <br />
+								 Correct
+							</div>
+						</div>
+						<div class="status col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
+							<div class="" >
+								<i  class="fa fa-times status--symbol white"
+									style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
+									<br />
+									Incorrect
+							</div>
+						</div>
+				  </div>
 			  </div>
 				<div class="col-xs-5 test__title" ng-click="toggleTestDataVisibility(test, $index);">
 					<div class="row" >
@@ -240,8 +240,8 @@
                                                              Landable
                                                             </div>
                                                             <div class="data__value">
-                                                                <input type="checkbox" ng-checked="current_node[$index].landable" disabled/>
                                                                 &nbsp;Is this page landable?
+                                                                {{current_node[$index].landable ? 'yes' : 'no'}}
                                                             </div>
                                                         </div>
                                                     </div>

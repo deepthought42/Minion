@@ -7,7 +7,7 @@
     </div>
     <div class="domain-dialogue-header">
         <md-dialog-content>
-           <h2 class="modal__title">Start a new project by adding a&nbsp;domain.</h2>
+           <h2 class="modal__title">Edit your domain settings</h2>
         </md-dialog-content>
     </div>
 
@@ -18,15 +18,7 @@
                        <h6>Domain</h6>
                     </div>
                 <div class ="domain-dialogue-input" >
-                        <div class="domain_protocol">
-                    <select id="domain_protocol" class="form-control" ng-model="current_domain.protocol" required>
-                      <option value="http">http</option>
-                      <option value="https">https</option>
-                    </select>
-                  </div>
-                  <div>
-                    <input id="domain_input" class="form-control" ng-model="current_domain.url" placeholder="yourdomain.com" required/>
-                  </div>
+                  {{current_domain.protocol +"://"+ current_domain.url }}
                 </div>
             </div>
             <div class="col-sm-12 form_molecule">
@@ -36,19 +28,19 @@
               </div>
                  <div class="row browser_buttons">
                   <div class="col-xs-3">
-                    <button class="btn btn-depressed" ng-click="chrome_selected=true;firefox_selected=false;selected_browser='chrome'" ng-class="{active: chrome_selected || domain.discoveryBrowser == 'chrome'}">
+                    <button class="btn btn-depressed" ng-click="domain.discoveryBrowser = 'chrome'" ng-class="{active: domain.discoveryBrowser == 'chrome'}">
 
-                      <img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="chrome_selected">
-                      <div class="fa-icon" ng-show="!chrome_selected">
+                      <img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="domain.discoveryBrowser == 'chrome'">
+                      <div class="fa-icon" ng-show="domain.discoveryBrowser != 'chrome'">
                         <i class="fa fa-chrome"></i>
                       </div>
                     </button>
                   </div>
                   <div class="col-xs-3">
-                    <button class="btn btn-depressed" ng-click="firefox_selected=true;chrome_selected=false;selected_browser='firefox'" ng-class="{active: firefox_selected || domain.discoveryBrowser == 'firefox'}">
-                      <img src="/img/firefox.png" class="modal-browser-icon" ng-show="firefox_selected">
-                      <div class="fa-icon" ng-show="!firefox_selected">
-                        <i class="fa fa-firefox"></i>
+                    <button class="btn btn-depressed" ng-click="domain.discoveryBrowser = 'firefox'" ng-class="{active: domain.discoveryBrowser == 'firefox'}">
+                      <img src="/img/firefox.png" class="modal-browser-icon" ng-show="domain.discoveryBrowser == 'firefox'">
+                      <div class="fa-icon" ng-show="domain.discoveryBrowser != 'firefox'">
+                        <i class="fa fa-firefox modal-browser-icon"></i>
                       </div>
                     </button>
                   </div>
@@ -62,7 +54,7 @@
                   For best results use a 200px x 200px transparent png.
 
               </div>
-              <button class="btn btn--secondary" ng-click="current_domain.logo_url = openPicker(domain)">Upload Logo</button>
+              <button class="btn btn--secondary" ng-click="openPicker(domain)">Upload Logo</button>
               <img ng-src="{{current_domain.logo_url}}" />
             </div>
             <div ng-show="domain_creation_error" class="error">
@@ -70,7 +62,9 @@
             </div>
         </div>
         <div class="modal_action_button">
-          <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="createDomain(current_domain.protocol, current_domain.url, selected_browser, current_domain.logo_url)"  ng-disabled="!selected_browser || domain_form.$invalid">Add Domain</button>
+          <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="updateDomain(current_domain.key, current_domain.protocol, current_domain.url, domain.discoveryBrowser, current_domain.logo_url)"  ng-disabled="!domain.discoveryBrowser">
+            Update Domain
+          </button>
         </div>
     </form>
 </md-dialog>

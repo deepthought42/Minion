@@ -37,13 +37,30 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
     $scope.createDomain = function(protocol, host, default_browser, logo_url){
       if(default_browser){
-        Domain.save({protocol: protocol, url: host, logo_url: logo_url, discoveryBrowser: default_browser}).$promise
+        Domain.save({protocol: protocol, url: host, logoUrl: logo_url, discoveryBrowser: default_browser}).$promise
           .then(function(successResult){
             $scope.show_create_domain_err = false;
             store.set('domain', successResult);
             $scope.domains.push(successResult);
             $scope.closeDialog();
             $rootScope.$broadcast("domain_updated", successResult);
+          },
+          function(errorResult){
+            $scope.show_create_domain_err = true;
+          });
+      }
+      else{
+        $scope.show_create_domain_err = true;
+      }
+    }
+
+    $scope.updateDomain = function(key, protocol, host, default_browser, logo_url){
+      if(default_browser){
+        Domain.update({key: key, protocol: protocol, url: host, logoUrl: logo_url, discoveryBrowser: default_browser}).$promise
+          .then(function(successResult){
+            $scope.show_create_domain_err = false;
+            store.set('domain', successResult);
+            $scope.closeDialog();
           },
           function(errorResult){
             $scope.show_create_domain_err = true;
@@ -80,6 +97,21 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
        });
     };
 
+    $scope.openEditDomainDialog  = function(domain) {
+      $scope.current_domain = domain;
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/domain/edit_domain_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
+
     var fsClient = filestack.init('AZ3Vgj49DQyOMFzbi5BsHz');
     $scope.openPicker = function(domain) {
       fsClient.pick({
@@ -89,9 +121,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       }).then(function(response) {
         // declare this function to handle response
         //set filestack url somewhere
-        domain.logoUrl = response.filesUploaded[0].url;
-
-        return domain.logoUrl;
+        $scope.current_domain.logo_url = response.filesUploaded[0].url;
+        $scope.$apply();
       });
     }
 
