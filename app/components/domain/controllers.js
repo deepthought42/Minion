@@ -60,9 +60,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           .then(function(successResult){
             $scope.show_create_domain_err = false;
             store.set('domain', successResult);
-            $scope.domains.push(successResult);
             $scope.closeDialog();
-            $rootScope.$broadcast("domain_updated", successResult);
           },
           function(errorResult){
             $scope.show_create_domain_err = true;
