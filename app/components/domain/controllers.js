@@ -54,7 +54,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       }
     }
 
-    $scope.updateDomain = function(protocol, host, default_browser, logo_url){
+    $scope.updateDomain = function(key, protocol, host, default_browser, logo_url){
       if(default_browser){
         Domain.update({key: key, protocol: protocol, url: host, logoUrl: logo_url, discoveryBrowser: default_browser}).$promise
           .then(function(successResult){
@@ -92,7 +92,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           preserveScope: true,
           templateUrl: "components/domain/create_domain_modal.html",
           controller: function DialogController($scope, $mdDialog) {
-             $scope.chrome_selected = ($scope.current_domain.discoveryBrowser == "chrome")
              $scope.closeDialog = function() {
                 $mdDialog.hide();
              }

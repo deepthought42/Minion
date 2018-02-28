@@ -7,7 +7,7 @@
     </div>
     <div class="domain-dialogue-header">
         <md-dialog-content>
-           <h2 class="modal__title">Edit your domain.</h2>
+           <h2 class="modal__title">Edit your domain settings</h2>
         </md-dialog-content>
     </div>
 
@@ -18,7 +18,7 @@
                        <h6>Domain</h6>
                     </div>
                 <div class ="domain-dialogue-input" >
-                  {{current_domain.protocol + current_domain.url }}
+                  {{current_domain.protocol +"://"+ current_domain.url }}
                 </div>
             </div>
             <div class="col-sm-12 form_molecule">
@@ -62,7 +62,9 @@
             </div>
         </div>
         <div class="modal_action_button">
-          <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="updateDomain(current_domain.key, current_domain.key, current_domain.protocol, selected_browser, current_domain.logo_url)"  ng-disabled="!selected_browser || domain_form.$invalid">Update Domain</button>
+          <button id="create_domain_button" class="btn btn--primary pull-right" ng-click="updateDomain(current_domain.key, current_domain.key, current_domain.protocol, domain.discoveryBrowser, current_domain.logo_url)"  ng-disabled="!domain.discoveryBrowser">
+            Update Domain
+          </button>
         </div>
     </form>
 </md-dialog>
