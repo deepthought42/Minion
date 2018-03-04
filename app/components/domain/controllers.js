@@ -19,6 +19,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.errors = [];
       $scope.domains = [];
       $scope.host = "";
+      $scope.disclaimerOptin = false;
+
       Domain.query().$promise
         .then(function(data){
           $scope.domains = data;
@@ -94,6 +96,21 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           scope: $scope,
           preserveScope: true,
           templateUrl: "components/domain/create_domain_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
+
+    $scope.openDisclaimerDomainDialog  = function(domain) {
+      $scope.current_domain = domain
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/domain/domain_disclaimer_modal.html",
           controller: function DialogController($scope, $mdDialog) {
              $scope.closeDialog = function() {
                 $mdDialog.hide();
