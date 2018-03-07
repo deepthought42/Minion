@@ -203,7 +203,7 @@
                         </div>
                     </div>
                     <div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)" >
-                      <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-node"ng-class="current_node[test_idx]==node ? 'active' : ''">
+                      <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-node" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
                           <img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
                       </div>
                     </div>

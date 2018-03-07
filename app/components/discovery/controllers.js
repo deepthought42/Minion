@@ -120,8 +120,14 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.setCurrentNode = function(node, idx){
-      $scope.current_node[$scope.test_idx] = node;
-      $scope.visible_tab='nodedata'+idx;
+      $scope.setCurrentNode = function(node, index){
+        if(index== null){
+          $scope.current_node[$scope.test_idx] = node;
+        }
+        else{
+          $scope.current_node[index] = node;
+        }
+      }
     }
 
     $scope.setTestName = function(test, new_name){
@@ -138,16 +144,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
-    $scope.toggleTestDataVisibility = function(test, test_idx){
-      test.visible = !test.visible;
-
-      if($scope.test_idx != test_idx && $scope.test_idx >=0){
-        $scope.tests[$scope.test_idx].visible = false;
+    $scope.toggleTestDataVisibility = function(test, index){
+      if($scope.test && $scope.test_idx != index){
+        $scope.test.visible = false;
       }
-      $scope.test_idx = test_idx;
 
-      $scope.setCurrentNode(test.path.path[0], 0);
+      $scope.test_idx = index;
+      $scope.test = test;
+      test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
 
+      if(test.visible){
+        $scope.setCurrentNode(test.path.path[0], index);
+      }
     }
 
     $scope.stopDiscoveryProcess = function(){
@@ -204,7 +212,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           }
        });
     };
-    
+
     /**
     * Displays a info for a selected path object in the drop down that
     * accompanies the error panel for the associated path
