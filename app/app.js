@@ -20,6 +20,7 @@ angular.module('Qanairy', [
   'Qanairy.version',
   'AuthInterceptor',
   'Qanairy.authService',
+  'Qanairy.user_profile',
   'ngRaven'
 ]).
 config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',
