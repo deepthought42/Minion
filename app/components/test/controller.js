@@ -99,14 +99,34 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
             $scope.test.runStatus = false;
 
             //use brute force method to find tests with returned keys so they can be updated
-            for(var returned_key in data.length){
+            console.log("data length");
+            for(var returned_key in data){
+              console.log("returned key" + returned_key);
               for(var test_idx=0; test_idx < $scope.tests.length; test_idx++){
+                console.log("test index :: "+ test_idx);
                 if($scope.tests[test_idx].key === returned_key){
-                  $scope.tests[test_idx].correct = data[returned_key];
-                  $scope.tests[test_idx].browserPassingStatuses[data[returned_key].browser] = data[returned_key].passes;
+                  var test_record = data[returned_key];
+                  $scope.tests[test_idx].correct = test_record.passing;
+                  $scope.tests[test_idx].browserPassingStatuses[test_record.browser] = test_record.passing;
+                  $scope.tests[test_idx].records.unshift(test_record);
                   //move test to top of list
-                  var test = $scope.tests.splice(test_idx, 1);
+                  var test = $scope.tests.splice(test_idx, 1)[0];
                   $scope.tests.unshift(test);
+                  if(test_record.passing){
+                    test.passingStatusClass = true;
+                    test.failingStatusClass = false;
+                  }
+                  else{
+                    test.failingStatusClass= true;
+                    test.passingStatusClass = false;
+                  }
+
+                  setTimeout(function() {
+                    test.passingStatusClass=false;
+                    test.faiingStatusClass=false;
+                    $scope.$apply();
+                  }, 1000);
+
                   return;
                 }
               }
@@ -143,6 +163,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
             //keys = Object.keys(data);
             $scope.keys.forEach(function(key){
               var val = data[key];
+
               //iterate over tests and set correctness based on if test key is present in data
 
               $scope.filteredTests.forEach(function(test){

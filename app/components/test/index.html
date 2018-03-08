@@ -47,14 +47,14 @@
 		</div>
 		<div class="empty__state vertical__center" ng-show="!waitingOnTests && tests.length==0">
 			<h2>
-                No tests here? Visit <a href="#/discovery">Discovery</a> to manage all of your tests.
-            </h2>
+          No tests here? Visit <a href="#/discovery">Discovery</a> to manage all of your tests.
+      </h2>
 		</div>
 
 		<div class="test"
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] track by $index"
 				 ng-show="tests.length > 0">
-			<div class="test__profile vertical__center__int">
+			<div class="test__profile vertical__center__int" ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass}">
         <div class="col-xs-1 test__status" ng-show="test.runStatus">
           <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
           <span class="sr-only">Running...</span>
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                     <div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)" >
-                      <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-page" ng-class="current_node[test_idx]==node ? 'active' : ''">
+                      <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-page" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
                           <img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
                       </div>
                     </div>
@@ -173,36 +173,24 @@
                     <div class="row">
                         <div class="col-xs-8">
                             <div class="row node__data" id="{{'nodedata'+$index}}">
-                                        <div class="col-sm-12" ng-show="current_node[$index].type=='Page'">
-                                            <div class="row">
-                                                <div class="node__title">
-                                                    <h5>
-                                                        <span style="font-weight:bold;">Page -</span>
-                                                        <a href="{{current_node[$index].url}}">{{current_node[$index].url}}</a>
-                                                    </h5>
-                                                </div>
-                                                <div class="">
-                                                    <div class="page__image col-xs-2" ng-repeat="(browser, screenshot) in current_node[$index].browser_screenshots">
-                                                        <img type="button" class="path-node-image"
-                                                                data-toggle="modal" data-target="#exampleModal"
-                                                                src="{{screenshot}}" class="path-node-image"
-                                                                ng-click="openPageModal(current_node[$index])" />
-                                                    </div>
-                                                    <div class="col-xs-10">
-                                                        <div class="key--value">
-                                                            <div class="data__key">
-                                                             Landable
-                                                            </div>
-                                                            <div class="data__value">
-                                                                <input type="checkbox" ng-checked="current_node[$index].landable" disabled/>
-                                                                &nbsp;Is this page landable?
-																																{{current_node[$index].landable ? 'yes' : 'no'}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                <div class="col-sm-12" ng-show="current_node[$index].type=='Page'">
+                                    <div class="row">
+                                        <div class="node__title">
+                                            <h5>
+                                                <span style="font-weight:bold;">Page -</span>
+                                                <a href="{{current_node[$index].url}}">{{current_node[$index].url}}</a>
+                                            </h5>
+                                        </div>
+                                        <div class="">
+                                            <div class="page__image col-xs-2" ng-repeat="(browser, screenshot) in current_node[$index].browser_screenshots">
+                                                <img type="button" class="path-node-image"
+                                                        data-toggle="modal" data-target="#exampleModal"
+                                                        src="{{screenshot}}" class="path-node-image"
+                                                        ng-click="openPageModal(current_node[test_idx])" />
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
                                         <div class="col-sm-12" ng-show="current_node[$index].type=='PageElement'">
                                             <div class="row no-gutter">
                                               <div class="node__title">
@@ -332,8 +320,8 @@
                         <span class="browser_name">{{capitalizeFirstLetter(record.browser)}}</span>
                       </div>
                       <div class="col-sm-3">
-													<i class="fa fa-check fa-2x green" ng-show="record.passes" />
-													<i class="fa fa-times fa-2x red" ng-show="!record.passes" />
+													<i class="fa fa-check fa-2x green" ng-show="record.passing" />
+													<i class="fa fa-times fa-2x red" ng-show="!record.passing" />
                       </div>
                       <div class="col-sm-3">
 												{{record.runTime | date: 'm'}} m {{record.runTime | date: 'ss'}} s

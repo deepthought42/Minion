@@ -169,46 +169,46 @@
 
 
 	     <div class="row test__path" ng-show="test.visible">
-              <div class="col-xs-12 vertical__left__int" ng-click="visible_tab='nodedata'+$index">
-                  <div ng-repeat="node in test.path.path track by $index" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-                        <div ng-show="node.browser_screenshots[default_browser]" class="path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
-                              <img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
-                          </div>
-                        <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
-                            <span class="" >
-                            {{node.name}}
-                            </span>
-                        </div>
-                        <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
-                            <span ng-show="node.name=='click'" class="vertical__center__int">
-                            <i class="fa fa-mouse-pointer fa-2x"></i>
-                            </span>
-                            <span ng-show="node.name=='doubleClick'" class="vertical__center__int">
-                                <i class="fa fa-mouse-pointer fa-2x"></i>
-                                <div class=”doubleclick” >
-                                    x2
-                                </div>
-                            </span>
-                            <span ng-show="node.name=='mouseover'" class="vertical__center__int">
-                                <i class="fa fa-hand-pointer-o fa-2x"></i>
-                            </span>
-                            <span ng-show="node.name=='scroll'" class="vertical__center__int">
-                                <i class="fa fa-arrows-v fa-2x"></i>
-                            </span>
-                            <span ng-show="node.name=='sendKeys'" class="vertical__center__int">
-                                <i class="fa fa-i-cursor fa-2x"></i>
-                            </span>
-                        </div>
-                        <div class="path-bar">
-                        </div>
-                    </div>
-                    <div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)" >
-                      <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-node" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
-                          <img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
+          <div class="col-xs-12 vertical__left__int" ng-click="visible_tab='nodedata'+$index">
+              <div ng-repeat="node in test.path.path track by $index" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
+                    <div ng-show="node.browser_screenshots[default_browser]" class="path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
+                          <img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
                       </div>
+                    <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
+                        <span class="" >
+                          {{node.name}}
+                        </span>
+                    </div>
+                    <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
+                        <span ng-show="node.name=='click'" class="vertical__center__int">
+                        <i class="fa fa-mouse-pointer fa-2x"></i>
+                        </span>
+                        <span ng-show="node.name=='doubleClick'" class="vertical__center__int">
+                            <i class="fa fa-mouse-pointer fa-2x"></i>
+                            <div class=”doubleclick” >
+                                x2
+                            </div>
+                        </span>
+                        <span ng-show="node.name=='mouseover'" class="vertical__center__int">
+                            <i class="fa fa-hand-pointer-o fa-2x"></i>
+                        </span>
+                        <span ng-show="node.name=='scroll'" class="vertical__center__int">
+                            <i class="fa fa-arrows-v fa-2x"></i>
+                        </span>
+                        <span ng-show="node.name=='sendKeys'" class="vertical__center__int">
+                            <i class="fa fa-i-cursor fa-2x"></i>
+                        </span>
+                    </div>
+                    <div class="path-bar">
                     </div>
                 </div>
+                <div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, $index)" >
+                  <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-node" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
+                      <img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
+                  </div>
+                </div>
             </div>
+        </div>
 
 
             <div class="row test__data" ng-show="test.visible">

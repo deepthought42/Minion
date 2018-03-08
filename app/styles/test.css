@@ -5,7 +5,7 @@
 	background-color: #ffffff;
 	border-top: 0px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
-    
+
     -webkit-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
     -moz-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
     box-shadow: inset 0 -10px 6px -8px #e7e7e7;
@@ -84,12 +84,6 @@
 
 
 /*-------break this down for each data point,correct,incorrect---------*/
-.test__profile{
-	padding-top: 0px;
-	padding-bottom: 0px;
-	height: 60px;
-	width: 100%;
-}
 
 .status__title{
   text-align: center !important;
@@ -124,8 +118,13 @@
 }
 
 .test__profile {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	height: 60px;
+	width: 100%;
   color: #424242;
   background-color: #ffffff;
+	transition: background-color 1s ease-in-out;
 }
 
 .test__profile:focus,
@@ -449,4 +448,11 @@
 
 .test__history__record:nth-child(even) {
    background-color: #f7f7f7;
+}
+
+.greenBg {
+    background-color: #00ff00;
+}
+.redBg {
+    background-color: #ff0000;
 }
