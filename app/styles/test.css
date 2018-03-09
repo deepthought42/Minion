@@ -71,6 +71,11 @@
 }
 
 
+.empty__state h2{
+  padding-bottom: 30px;
+}
+
+
 .error__message{
 	font-weight: 500;
 	color: #ffffff;
@@ -180,8 +185,12 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
+.path__title{
+  padding-bottom:8px;
+}
+
 .page__image{
-    padding: 10px 10px 6px 0px !important;
+    padding: 10px 10px 0px 0px !important;
 }
 
 .path-node-image {
@@ -418,10 +427,11 @@
 	border: 1px solid #e0e0e0;
     border-radius: 5px;
     margin-bottom: 5px;
+    
 }
 
 .test__history__title{
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 4px;
 }
 

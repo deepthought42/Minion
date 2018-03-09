@@ -262,7 +262,7 @@ a img {border: none; }
 		color:#757575;
 	}
 
-/*--------------------------- [conversational text] ---------------------------*/
+/*--------------------------- [Modal Header] ---------------------------*/
 h2,
 .h2{
 		font-size: 24px;
@@ -285,7 +285,7 @@ letter-spacing:0px;
 display: inline;
 }
 
-/*--------------------------- [Modal Header, Data Headings] ---------------------------*/
+/*--------------------------- [Test Path Title, Data Title, Run History Title] ---------------------------*/
 
 h5,
 .h5{
@@ -367,22 +367,22 @@ h5,
 
 .btn--primary {
   color: #fff;
-  background-color: #66bb6a;
+  background-color: #4241bc;
 }
 .btn--primary:focus,
 .btn--primary.focus {
   color: #fff !important;
-  background-color: #43a047;
+  background-color: #302e9b;
 }
 .btn--primary:hover {
   color: #fff !important;
-  background-color: #43a047;
+  background-color: #302e9b;
 }
 .btn--primary:active,
 .btn--primary.active,
 .open > .dropdown-toggle.btn--primary {
   color: #fff !important;
-  background-color: #43a047;
+  background-color: #302e9b;
 }
 
 .btn--secondary {

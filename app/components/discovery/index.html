@@ -51,6 +51,7 @@
 					</div>
 					<div class="stat_value">
 						{{((current_domain.lastRunTimestamp - current_domain.lastDiscoveryStartedAt ) | date : 'h:mm')  || '00:00'}}
+                        hrs
 					</div>
 				</div>
 			</div>
@@ -88,13 +89,13 @@
 	<div class="test-container">
 		<div class="empty__state vertical__center_empty_state" ng-show="!waitingOnTests && tests.length==0">
 			<div>
-        <h2>Collect your tests by first running a Discovery.</h2>
-      </div>
+                <h2>Collect your tests by first running a Discovery.</h2>
+            </div>
 			<div>
-        <button class="btn btn--primary btn-lg" ng-click="startDiscovery()" ng-show="!isStarted">
-            Start Discovery
-        </button>
-      </div>
+                <button class="btn btn--primary btn-lg" ng-click="startDiscovery()" ng-show="!isStarted">
+                    Start Discovery
+                </button>
+            </div>
 		</div>
 
     <div class="empty__state vertical__center" ng-show="waitingOnTests">
@@ -169,6 +170,9 @@
 
 
 	     <div class="row test__path" ng-show="test.visible">
+            <div class="col-sm-12 path__title">
+                <h5>Test Path</h5>
+            </div>
           <div class="col-xs-12 vertical__left__int" ng-click="visible_tab='nodedata'+$index">
               <div ng-repeat="node in test.path.path track by $index" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
                     <div ng-show="node.browser_screenshots[default_browser]" class="path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
@@ -220,7 +224,7 @@
                                     <div class="row">
                                         <div class="node__title">
                                             <h5>
-                                                <span style="font-weight:bold;">Page -</span>
+                                                <span style="">Page -</span>
                                                 <a href="{{current_node[$index].url}}">{{current_node[$index].url}}</a>
                                             </h5>
                                         </div>
@@ -248,7 +252,7 @@
                                 <div class="col-sm-12" ng-show="current_node[$index].type=='PageElement'">
                                     <div class="row no-gutter">
                                       <div class="node__title">
-                                            <h5><span style="font-weight:bold;">Element</span> - {{current_node[$index].name}}</h5>
+                                            <h5><span style="">Element</span> - {{current_node[$index].name}}</h5>
                                         </div>
                                         <div class="col-sm-12 col-xs-12">
                                             <div class="key--value">
@@ -300,7 +304,7 @@
                                 <div class="col-sm-12" ng-show="current_node[$index].type=='Action'">
                                     <div class="row no-gutter">
                                       <div class="col-xs-12 node__title">
-                                            <h5><span style="font-weight:bold;">Action</span> - {{current_node[$index].name}}</h5>
+                                            <h5><span style="">Action</span> - {{current_node[$index].name}}</h5>
                                         </div>
                                         <div class="col-xs-12">
                                             <div class="key--value" ng-show="current_node[$index].value || current_node[$index].name=='sendKeys'">
