@@ -115,7 +115,7 @@
           </div>
         <div class="col-xs-1 test__btns">
             <div class="btn-group" role="group" aria-label="Test Functions">
-                <button class="btn btn--secondary" ng-click="openBrowserSelectionDialog(test, $index)">
+                <button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)">
                  Run
                 </button>
             </div>
@@ -128,6 +128,9 @@
     </div>
 
             <div class="row test__path" ng-show="test.visible">
+                <div class="col-sm-12 path__title">
+                    <h5>Test Path</h5>
+                </div>
               <div class="col-xs-12 ">
                   <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
                       <div ng-show="node.browser_screenshots[default_browser]" class="path-page" ng-class="current_node[test_idx]==node ? 'active' : ''" >
@@ -177,7 +180,7 @@
                                     <div class="row">
                                         <div class="node__title">
                                             <h5>
-                                                <span style="font-weight:bold;">Page -</span>
+                                                <span style="">Page -</span>
                                                 <a href="{{current_node[$index].url}}">{{current_node[$index].url}}</a>
                                             </h5>
                                         </div>
@@ -194,7 +197,7 @@
                                         <div class="col-sm-12" ng-show="current_node[$index].type=='PageElement'">
                                             <div class="row no-gutter">
                                               <div class="node__title">
-                                                    <h5><span style="font-weight:bold;">Element</span> - {{current_node[$index].name}}</h5>
+                                                    <h5><span style="">Element</span> - {{current_node[$index].name}}</h5>
                                                 </div>
                                                 <div class="col-sm-12 col-xs-12">
                                                     <div class="key--value">
@@ -246,7 +249,7 @@
                                         <div class="col-sm-12" ng-show="current_node[$index].type=='Action'">
                                             <div class="row no-gutter">
                                               <div class="col-xs-12 node__title">
-                                                    <h5><span style="font-weight:bold;">Action</span> - {{current_node[$index].name}}</h5>
+                                                    <h5><span style="">Action</span> - {{current_node[$index].name}}</h5>
                                                 </div>
                                                 <div class="col-xs-12">
                                                     <div class="key--value" ng-show="current_node[$index].value || current_node[$index].name=='sendKeys'">
