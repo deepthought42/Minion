@@ -116,7 +116,7 @@
 						   	<i class="fa fa-check status--symbol white"
 							   	 style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
 								 <br />
-								 Correct
+								 Passing
 							</div>
 						</div>
 						<div class="status col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
@@ -124,7 +124,7 @@
 								<i  class="fa fa-times status--symbol white"
 									style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
 									<br />
-									Incorrect
+									Failing
 							</div>
 						</div>
 				  </div>
