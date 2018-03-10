@@ -85,20 +85,20 @@ height: calc(100% - 20px);
   color: #999999;
 }
 
-.delete__domain:focus,
-.delete__domain.focus {
+.domain_card_action:focus,
+.domain_card_action.focus {
   color: #333333;
 }
-.delete__domain:hover {
+.domain_card_action:hover {
   color: #333333;
 }
-.delete__domain:active,
-.delete__domain.active,
-.open > .dropdown-toggle.delete__domain {
+.domain_card_action:active,
+.domain_card_action.active,
+.open > .dropdown-toggle.domain_card_action {
   color: #333333;
 }
 
-.delete__domain{
+.domain_card_action{
     color: #999999;
 }
 
