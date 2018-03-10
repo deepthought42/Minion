@@ -53,8 +53,11 @@
                   <h6>Upload A Logo <span class="optional">(optional)</span></h6>
                   For best results use a 230px x 100px transparent png.
               </div>
+                <div class="domain_modal_logo">
+                    <i class="fa fa-image" ng-click="openPicker(domain)"></i>
+                    <img ng-src="{{current_domain.logo_url}}" />
+                </div>
               <button class="btn btn--secondary" ng-click="openPicker(domain)">Upload Logo</button>
-              <img ng-src="{{current_domain.logo_url}}" />
             </div>
             <div ng-show="domain_creation_error" class="error">
               Something went wrong, Please try again

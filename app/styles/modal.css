@@ -36,6 +36,20 @@ md-dialog {
     padding-bottom: 15px;
 }
 
+.domain_modal_logo{
+      padding-bottom:15px;
+}
+
+.domain_modal_logo img{
+	  max-width:250px !important;
+     max-height:120px !important;
+}
+
+.domain_modal_logo i{
+    color:#bbb;
+	  font-size:80px;
+}
+
 .modal__title{
 	text-align: center;
 	padding: 30px 30px;
