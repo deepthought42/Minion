@@ -26,19 +26,19 @@ height: calc(100% - 20px);
 }
 
 .domain__icon{
-  padding-bottom:30px !important;
 }
 
 .domain__logo{
-  max-height:100px;
-	width:100%;
   margin: auto;
 	text-align: center;
+	height:200px;
+      padding:10px 15px;
+        padding-bottom:50px !important;
 }
 
 .domain__logo img{
-	width:100%;
-  padding:0px 15px;
+	  max-width:250px !important;
+     max-height:120px !important;
 }
 
 .domain--largeicon{

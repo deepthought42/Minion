@@ -221,15 +221,15 @@ a img {border: none; }
     outline: none;
 	}
 	a {
-		color: #0000ff;
+		color: #4548c1;
 		text-align:left;
 		text-decoration:none;
 		border: none;
 	}
 
-	a:link { color: #3376c6;}
-	a:visited { color: #3376c6;}
-	a:hover { color: #999999;}
+	a:link { color: #2b2e93;}
+	a:visited { color: #4548c1;}
+	a:hover { color: #2b2e93;}
 
 
 /*--------------------------- [2. Text Format] -------------------------------------------------------------------------------*/
@@ -367,22 +367,22 @@ h5,
 
 .btn--primary {
   color: #fff;
-  background-color: #4241bc;
+  background-color: #4144bc;
 }
 .btn--primary:focus,
 .btn--primary.focus {
   color: #fff !important;
-  background-color: #302e9b;
+  background-color: #2b2e93;
 }
 .btn--primary:hover {
   color: #fff !important;
-  background-color: #302e9b;
+  background-color: #2b2e93;
 }
 .btn--primary:active,
 .btn--primary.active,
 .open > .dropdown-toggle.btn--primary {
   color: #fff !important;
-  background-color: #302e9b;
+  background-color: #2b2e93;
 }
 
 .btn--secondary {
