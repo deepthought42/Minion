@@ -52,7 +52,7 @@
 		</div>
 
 		<div class="test"
-				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] track by $index"
+				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','-lastRunTimestamp'] track by $index"
 				 ng-show="tests.length > 0">
 			<div class="test__profile vertical__center__int" ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass}">
         <div class="col-xs-1 test__status" ng-show="test.runStatus">
@@ -127,50 +127,50 @@
         </div>
     </div>
 
-            <div class="row test__path" ng-show="test.visible">
-                <div class="col-sm-12 path__title">
-                    <h5>Test Path</h5>
+    <div class="row test__path" ng-show="test.visible">
+      <div class="col-sm-12 path__title">
+          <h5>Test Path</h5>
+      </div>
+      <div class="col-xs-12 ">
+          <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
+              <div ng-show="node.browser_screenshots[default_browser]" class="path-page path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
+                  <img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
+              </div>
+                <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
+                    <span class="" >
+                    {{node.name}}
+                    </span>
                 </div>
-              <div class="col-xs-12 ">
-                  <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-                      <div ng-show="node.browser_screenshots[default_browser]" class="path-page path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
-                          <img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
-                      </div>
-                        <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
-                            <span class="" >
-                            {{node.name}}
-                            </span>
+                <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
+                    <span ng-show="node.name=='click'" class="vertical__center__int">
+                    <i class="fa fa-mouse-pointer fa-2x"></i>
+                    </span>
+                    <span ng-show="node.name=='doubleClick'" class="vertical__center__int">
+                        <i class="fa fa-mouse-pointer fa-2x"></i>
+                        <div class=”doubleclick” >
+                            x2
                         </div>
-                        <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
-                            <span ng-show="node.name=='click'" class="vertical__center__int">
-                            <i class="fa fa-mouse-pointer fa-2x"></i>
-                            </span>
-                            <span ng-show="node.name=='doubleClick'" class="vertical__center__int">
-                                <i class="fa fa-mouse-pointer fa-2x"></i>
-                                <div class=”doubleclick” >
-                                    x2
-                                </div>
-                            </span>
-                            <span ng-show="node.name=='mouseover'" class="vertical__center__int">
-                                <i class="fa fa-hand-pointer-o fa-2x"></i>
-                            </span>
-                            <span ng-show="node.name=='scroll'" class="vertical__center__int">
-                                <i class="fa fa-arrows-v fa-2x"></i>
-                            </span>
-                            <span ng-show="node.name=='sendKeys'" class="vertical__center__int">
-                                <i class="fa fa-i-cursor fa-2x"></i>
-                            </span>
-                        </div>
-                        <div class="path-bar">
-                        </div>
-                    </div>
-                    <div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)" >
-                      <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-page path-node" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
-                          <img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
-                      </div>
-                    </div>
+                    </span>
+                    <span ng-show="node.name=='mouseover'" class="vertical__center__int">
+                        <i class="fa fa-hand-pointer-o fa-2x"></i>
+                    </span>
+                    <span ng-show="node.name=='scroll'" class="vertical__center__int">
+                        <i class="fa fa-arrows-v fa-2x"></i>
+                    </span>
+                    <span ng-show="node.name=='sendKeys'" class="vertical__center__int">
+                        <i class="fa fa-i-cursor fa-2x"></i>
+                    </span>
+                </div>
+                <div class="path-bar">
                 </div>
             </div>
+            <div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)" >
+              <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-page path-node" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
+                  <img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
+              </div>
+            </div>
+        </div>
+    </div>
             <div class="row test__data" ng-show="test.visible">
                 <div class="col-xs-12 test__info">
                     <div class="row">
