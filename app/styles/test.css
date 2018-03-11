@@ -56,6 +56,10 @@
 	 left: 15px;
 }*/
 
+.accordian{
+	padding-right: 10px;
+}
+
 .empty__state{
   height: 100%;
 	text-align: center;
@@ -128,7 +132,6 @@
 	transition: background-color 1s ease-in-out;
 }
 
-
 .test__profile:focus,
 .test__profile.focus {
 	outline:none;
@@ -143,15 +146,11 @@
 }
 
 .test__btns{
-      display: flex;
-  align-items: center;
-  justify-content: space-between !important;
-    
+	float: right !important;
 }
 
-.accordian{
-	padding: 0px 10px;
-    
+.test__btns > .btn-group{
+	float: right !important;
 }
 
 
