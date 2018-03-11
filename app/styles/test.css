@@ -211,7 +211,6 @@
 
 .path-node-container {
   height: 100%;
-  width:  120px;
   float: left;
 }
 
@@ -221,14 +220,12 @@
 }
 
 .path-node {
-  height: 90px;
-  width:  60px;
   float: left;
   line-height: 50px;
   vertical-align: middle;
   text-align: center;
   color: #424242;
-  border: 1px solid #ffffff;
+  border: 2px solid #ffffff;
 }
 
 .path-page {
@@ -238,7 +235,7 @@
   vertical-align: middle;
   text-align: center;
   color: #424242;
-  border: 1px solid #ffffff;
+  border: 2px solid #ffffff;
 }
 
 .path-node:focus,
@@ -256,12 +253,14 @@
 
 .path-element {
 	height: 60px !important;
+    width:  60px;
 	border: 1px solid #eeeeee;
   padding:8px;
 }
 
 .path-action {
 	height: 60px !important;
+    width:  60px;
 	border: 1px solid #eeeeee;
   border-radius: 50%;
   padding:8px;

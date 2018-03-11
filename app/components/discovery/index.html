@@ -109,9 +109,9 @@
 			  <div class="col-xs-2 test__status text--shadow">
 			   	<div class="row">
 						<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
-              <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
-              <span class="sr-only">Running...</span>
-            </div>
+                          <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+                          <span class="sr-only">Running...</span>
+                        </div>
 					 	<div class="col-xs-6 btn--green select__neutral status vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
 						 	<div class="" >
 						   	<i class="fa fa-check status--symbol white"
@@ -175,7 +175,7 @@
             </div>
           <div class="col-xs-12 vertical__left__int" ng-click="visible_tab='nodedata'+$index">
               <div ng-repeat="node in test.path.path track by $index" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-                    <div ng-show="node.browser_screenshots[default_browser]" class="path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
+                    <div ng-show="node.browser_screenshots[default_browser]" class="path-page path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
                           <img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
                       </div>
                     <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
@@ -207,7 +207,7 @@
                     </div>
                 </div>
                 <div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, $index)" >
-                  <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-node" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
+                  <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-page path-node" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
                       <img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
                   </div>
                 </div>

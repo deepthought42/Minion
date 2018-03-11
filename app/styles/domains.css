@@ -32,12 +32,12 @@ height: calc(100% - 20px);
   margin: auto;
 	text-align: center;
 	height:200px;
-      padding:10px 15px;
+      padding-top:10px;
         padding-bottom:50px !important;
 }
 
 .domain__logo img{
-	  max-width:250px !important;
+	  max-width:220px !important;
      max-height:120px !important;
 }
 
