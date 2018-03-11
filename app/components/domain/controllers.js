@@ -156,6 +156,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         Domain.delete({key: domain.key}).$promise
           .then(function(data){
             $scope.domains.splice(index, 1);
+            $rootScope.$broadcast('domain_updated');
             if(!$scope.domains.length){
               $scope.openCreateDomainDialog();
             }
