@@ -159,6 +159,7 @@
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
 			  </div>
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
+					{{( test.lastRunTimestamp | date : 'M/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
             <div class="col-xs-1" ng-click="toggleTestDataVisibility(test, $index)">
             <div class="pull-right accordian" aria-label="open accordian">
