@@ -136,24 +136,24 @@
 					<div class="row" >
 						<div class="col-xs-12 " ng-show="!test.show_test_name_edit_field">
 							<h4 ng-click="test.show_test_name_edit_field = true"  ng-trim="false">
-                                {{test.name || "Test #"+($index+1)}}
-                              </h4>
+                {{test.name || "Test #"+($index+1)}}
+              </h4>
 							<i class="fa fa-pencil edithover"  ng-click="test.show_test_name_edit_field = true" ></i>
 						</div>
 						<div class="col-xs-12" ng-show="test.show_test_name_edit_field">
-                            <div class="row no-gutter">
-                                <div class="col-md-6 col-sm-8 vertical__left__int">
-                                    <div class="input-group">
-                                        <input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-4">
-                                    <div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
-                                    <div class="" ng-show="test.show_waiting_icon">
-                                        <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="row no-gutter">
+                    <div class="col-md-6 col-sm-8 vertical__left__int">
+                        <div class="input-group">
+                            <input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-4">
+                        <div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
+                        <div class="" ng-show="test.show_waiting_icon">
+                            <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
 						</div>
 					</div>
 				</div>
@@ -164,10 +164,10 @@
 					{{( test.lastRunTimestamp | date : 'M/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
             <div class="col-xs-1" ng-click="toggleTestDataVisibility(test, $index)">
-                <div class="pull-right accordian" aria-label="open accordian">
-                    <i class="fa fa-angle-right fa-2x" />
-                </div>
+            <div class="pull-right accordian" aria-label="open accordian">
+                <i class="fa fa-angle-right fa-2x" />
             </div>
+        </div>
 			</div>
 
 
