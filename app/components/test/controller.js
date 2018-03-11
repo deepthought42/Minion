@@ -117,13 +117,13 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
                     test.failingStatusClass = false;
                   }
                   else{
-                    test.failingStatusClass= true;
+                    test.failingStatusClass = true;
                     test.passingStatusClass = false;
                   }
 
                   setTimeout(function() {
-                    test.passingStatusClass=false;
-                    test.faiingStatusClass=false;
+                    test.passingStatusClass = false;
+                    test.failingStatusClass = false;
                     $scope.$apply();
                   }, 1000);
 

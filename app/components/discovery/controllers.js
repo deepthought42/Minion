@@ -23,7 +23,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         })
         .catch(function(err){
           $scope.errors.push(err.data);
-        });;
+        });
     }
 
     this._init = function(){
@@ -105,12 +105,13 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
      */
     $scope.startDiscovery = function(){
       $scope.isStarted = true;
-      $scope.waitingOnTests = true;
       Discovery.startWork({url:  $scope.discovery_url}).$promise
         .then(function(value){
+          $scope.waitingOnTests = true;
         })
         .catch(function(err){
           $scope.waitingOnTests = false;
+          $scope.isStarted = false;
           $scope.errors.push(err.data);
         });
     }
@@ -159,13 +160,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.stopDiscoveryProcess = function(){
-      $scope.isStarted = false;
 
       WorkAllocation.stopWork().$promise
         .then(function(){
+           $scope.isStarted = false;
         })
         .catch(function(err){
-          $scope.isStarted = true;
           $scope.errors.push(err.data);
         });
     }
