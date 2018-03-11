@@ -37,18 +37,18 @@
               </div>
                  <div class="row browser_buttons">
                   <div class="col-xs-3">
-                    <button class="btn btn-depressed" ng-click="chrome_selected=true;firefox_selected=false;selected_browser='chrome'" ng-class="{active: chrome_selected || domain.discoveryBrowser == 'chrome'}">
+                    <button class="btn btn-depressed" ng-click="selected_browser='chrome'" ng-class="{active: selected_browser=='chrome' || domain.discoveryBrowser == 'chrome'}">
 
-                      <img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="chrome_selected">
-                      <div class="fa-icon" ng-show="!chrome_selected">
+                      <img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="selected_browser=='chrome'">
+                      <div class="fa-icon" ng-show="selected_browser!='chrome'">
                         <i class="fa fa-chrome"></i>
                       </div>
                     </button>
                   </div>
                   <div class="col-xs-3">
-                    <button class="btn btn-depressed" ng-click="firefox_selected=true;chrome_selected=false;selected_browser='firefox'" ng-class="{active: firefox_selected || domain.discoveryBrowser == 'firefox'}">
-                      <img src="/img/firefox.png" class="modal-browser-icon" ng-show="firefox_selected">
-                      <div class="fa-icon" ng-show="!firefox_selected">
+                    <button class="btn btn-depressed" ng-click="selected_browser='firefox'" ng-class="{active: selected_browser=='firefox' || domain.discoveryBrowser == 'firefox'}">
+                      <img src="/img/firefox.png" class="modal-browser-icon" ng-show="selected_browser=='firefox'">
+                      <div class="fa-icon" ng-show="selected_browser!='firefox'">
                         <i class="fa fa-firefox"></i>
                       </div>
                     </button>

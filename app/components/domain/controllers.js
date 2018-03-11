@@ -24,6 +24,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       Domain.query().$promise
         .then(function(data){
           $scope.domains = data;
+          store.remove('domain');
           if($scope.domains == null || !$scope.domains.length){
             $scope.openCreateDomainDialog();
           }
