@@ -133,7 +133,7 @@
                 </div>
               <div class="col-xs-12 ">
                   <div ng-repeat="node in test.path.path" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-                      <div ng-show="node.browser_screenshots[default_browser]" class="path-page" ng-class="current_node[test_idx]==node ? 'active' : ''" >
+                      <div ng-show="node.browser_screenshots[default_browser]" class="path-page path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
                           <img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
                       </div>
                         <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
@@ -165,7 +165,7 @@
                         </div>
                     </div>
                     <div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result)" >
-                      <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-page" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
+                      <div  ng-show="test.result.browser_screenshots[default_browser]" class="path-page path-node" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
                           <img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
                       </div>
                     </div>
