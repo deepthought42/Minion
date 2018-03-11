@@ -23,7 +23,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         })
         .catch(function(err){
           $scope.errors.push(err.data);
-        });;
+        });
     }
 
     this._init = function(){
