@@ -109,7 +109,7 @@
 		<div class="test" ng-repeat="test in tests track by test.key" ng-show="tests.length>0 && !showBrowserSelectionPane">
 			<div class="test__profile vertical__center__int" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 			  <div class="col-xs-2 test__status text--shadow">
-			   	<div class="row test__status__frame">
+			   	<div class="row test__status__frame vertical__center">
 						<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
 							<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
 							<span class="sr-only">Running...</span>
