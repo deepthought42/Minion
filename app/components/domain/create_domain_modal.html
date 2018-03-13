@@ -67,7 +67,7 @@
               <div class="domain_modal_logo" ng-if="!current_domain.logo_url">
                 <i class="fa fa-image" ng-click="openPicker(domain)"></i>
               </div>
-              <div ng-if="current_domain.logo_url">
+              <div class="domain_modal_logo" ng-if="current_domain.logo_url">
                 <img ng-src="{{current_domain.logo_url}}"/>
               </div>
               <button class="btn btn--secondary" ng-click="openPicker(domain)">Upload Logo</button>
