@@ -99,11 +99,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
             $scope.test.runStatus = false;
 
             //use brute force method to find tests with returned keys so they can be updated
-            console.log("data length");
             for(var returned_key in data){
-              console.log("returned key" + returned_key);
               for(var test_idx=0; test_idx < $scope.tests.length; test_idx++){
-                console.log("test index :: "+ test_idx);
                 if($scope.tests[test_idx].key === returned_key){
                   var test_record = data[returned_key];
                   $scope.tests[test_idx].correct = test_record.passing;
@@ -223,7 +220,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         $scope.test.visible = false;
       }
 
-      $scope.test_idx = index;
+      $scope.test_idx = index || 0;
       $scope.test = test;
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
 

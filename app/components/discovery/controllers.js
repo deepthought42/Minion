@@ -120,14 +120,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.test_idx = idx;
     }
 
-    $scope.setCurrentNode = function(node, idx){
-      $scope.setCurrentNode = function(node, index){
-        if(index== null){
-          $scope.current_node[$scope.test_idx] = node;
-        }
-        else{
-          $scope.current_node[index] = node;
-        }
+    $scope.setCurrentNode = function(node, index){
+      if(index==null){
+        $scope.current_node[$scope.test_idx] = node;
+      }
+      else{
+        $scope.current_node[index] = node;
       }
     }
 
@@ -149,7 +147,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       if($scope.test && $scope.test_idx != index){
         $scope.test.visible = false;
       }
-
       $scope.test_idx = index;
       $scope.test = test;
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
