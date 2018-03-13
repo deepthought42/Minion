@@ -158,9 +158,12 @@
 /*--------------------------- [6. Test Status] --------------------------------------------------------------------------------*/
 .status{
 	color: #ffffff !important;
-	height:60px;
+	height:50px;
   border-right: 1px solid #f9f9f9;
 	text-align: center;
+	padding: 5px 0px;
+	max-width: 80px;
+	font-size: 12px;
 }
 
 .status--browser{
@@ -171,7 +174,7 @@
 
 
 .status--symbol{
-	font-size: 30px !important;
+	font-size: 20px !important;
 }
 
 .status--symbol--browser{
@@ -190,7 +193,8 @@
 }
 
 .test__status__frame{
-	padding: 5px;
+	padding: 0px 5px;
+	text-align: center;
 }
 
 .test__status__frame__browser{
