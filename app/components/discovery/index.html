@@ -109,25 +109,25 @@
 		<div class="test" ng-repeat="test in tests track by test.key" ng-show="tests.length>0 && !showBrowserSelectionPane">
 			<div class="test__profile vertical__center__int" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 			  <div class="col-xs-2 test__status text--shadow">
-			   	<div class="row">
+			   	<div class="row test__status__frame">
 						<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
-                          <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
-                          <span class="sr-only">Running...</span>
-                        </div>
-					 	<div class="col-xs-6 btn--green select__neutral status vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
+							<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+							<span class="sr-only">Running...</span>
+						</div>
+					 	<div class="col-xs-6 btn--green select__neutral status-passing status vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
 						 	<div class="" >
-						   	<i class="fa fa-check status--symbol white"
+								Passing 
+								<br />
+								<i class="fa fa-check status--symbol white"
 							   	 style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
-								 <br />
-								 Passing
 							</div>
 						</div>
-						<div class="status col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
+						<div class="status status-failing col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
 							<div class="" >
+									Failing
+								<br />
 								<i  class="fa fa-times status--symbol white"
 									style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
-									<br />
-									Failing
 							</div>
 						</div>
 				  </div>
@@ -141,19 +141,19 @@
 							<i class="fa fa-pencil edithover"  ng-click="test.show_test_name_edit_field = true" ></i>
 						</div>
 						<div class="col-xs-12" ng-show="test.show_test_name_edit_field">
-                            <div class="row no-gutter">
-                                <div class="col-md-6 col-sm-8 vertical__left__int">
-                                    <div class="input-group">
-                                        <input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-4">
-                                    <div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
-                                    <div class="" ng-show="test.show_waiting_icon">
-                                        <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
+							<div class="row no-gutter">
+									<div class="col-md-6 col-sm-8 vertical__left__int">
+											<div class="input-group">
+													<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" />
+											</div>
+									</div>
+									<div class="col-md-6 col-sm-4">
+											<div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
+											<div class="" ng-show="test.show_waiting_icon">
+													<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
+											</div>
+									</div>
+							</div>
 						</div>
 					</div>
 				</div>

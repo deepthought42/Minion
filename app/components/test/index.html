@@ -78,19 +78,19 @@
 							<i class="fa fa-pencil edithover"  ng-click="test.show_test_name_edit_field = true" ></i>
 						</div>
 						<div class="col-xs-12" ng-show="test.show_test_name_edit_field">
-                            <div class="row no-gutter">
-                                <div class="col-md-6 col-sm-8 vertical__left__int">
-                                    <div class="input-group">
-                                        <input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-4">
-                                    <div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
-                                    <div class="" ng-show="test.show_waiting_icon">
-                                        <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
+								<div class="row no-gutter">
+										<div class="col-md-6 col-sm-8 vertical__left__int">
+												<div class="input-group">
+														<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" />
+												</div>
+										</div>
+										<div class="col-md-6 col-sm-4">
+												<div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
+												<div class="" ng-show="test.show_waiting_icon">
+														<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
+												</div>
+										</div>
+								</div>
 						</div>
 					</div>
                 </div>
@@ -109,13 +109,34 @@
                     <div class="row">
                       <div class="col-sm-2" ng-repeat="(browser, status) in test.browserPassingStatuses" ng-dblclick="updateTestCorrectness(test, browser, !status)">
                             <div class="vertical__center">
-                              <img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="browser=='chrome'">
-                              <img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="browser=='firefox'" >
+                              <img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
+                              <img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
                             </div>
                             <div class="vertical__center">
                               <i class="fa fa-check fa-2x green" ng-show="status" />
                               <i class="fa fa-times fa-2x red" ng-show="!status" />
                             </div>
+												
+												
+														<div class="row test__status__frame__browser">
+															<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
+																<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+															</div>
+															<div class="col-xs-6 btn--green select__neutral status-passing status--browser vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
+																<div class="" >
+																	<i class="fa fa-check status--symbol--browser white"
+																		 style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
+																</div>
+															</div>
+															<div class="col-xs-6 btn--red select__neutral status--browser status-failing  vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
+																<div class="" >
+																	<i  class="fa fa-times status--symbol--browser white"
+																		style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
+																</div>
+															</div>
+														</div>
+												
+												
                       </div>
                     </div>
                 </div>
@@ -190,9 +211,9 @@
                                         <div class="">
                                             <div class="page__image col-xs-2" ng-repeat="(browser, screenshot) in current_node[$index].browser_screenshots">
                                                 <img type="button" class="path-node-image"
-                                                        data-toggle="modal" data-target="#exampleModal"
-                                                        src="{{screenshot}}" class="path-node-image"
-                                                        ng-click="openPageModal(current_node[test_idx])" />
+																								data-toggle="modal" data-target="#exampleModal"
+																								src="{{screenshot}}" class="path-node-image"
+																								ng-click="openPageModal(current_node[test_idx])" />
                                             </div>
                                         </div>
                                     </div>
@@ -269,33 +290,33 @@
                             </div>
                         </div>
                         <div class="col-xs-4 test__groups">
-                                <div class="row">
-                                    <div class="col-sm-12 ">
-                                        <h5>Groups</h5>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="input-group groups_input_padding">
-                                            <input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Smoke, Login Form, etc." aria-describedby="basic-addon2" maxlength="20">
-                                            <span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2">
-                                                <i class="fa fa-plus"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="group__tag"
-                                                 ng-repeat="group in test.groups"
-                                                 data-toggle="tooltip"
-                                                 data-placement="top"
-                                                 title="{{group.description}}">
-                                            {{group.name}}
-                                            <span ng-click="removeGroup(test, group, $index)">
-                                                <i class="remove__group fa fa-times"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+														<div class="row">
+																<div class="col-sm-12 ">
+																		<h5>Groups</h5>
+																</div>
+																<div class="col-sm-8">
+																		<div class="input-group groups_input_padding">
+																				<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Smoke, Login Form, etc." aria-describedby="basic-addon2" maxlength="20">
+																				<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2">
+																						<i class="fa fa-plus"></i>
+																				</span>
+																		</div>
+																</div>
+																<div class="col-sm-4">
+																</div>
+																<div class="col-sm-12">
+																		<div class="group__tag"
+																						 ng-repeat="group in test.groups"
+																						 data-toggle="tooltip"
+																						 data-placement="top"
+																						 title="{{group.description}}">
+																				{{group.name}}
+																				<span ng-click="removeGroup(test, group, $index)">
+																						<i class="remove__group fa fa-times"></i>
+																				</span>
+																		</div>
+																</div>
+														</div>
                         </div>
                     </div>
                 </div>
