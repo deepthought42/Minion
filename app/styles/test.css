@@ -158,14 +158,43 @@
 /*--------------------------- [6. Test Status] --------------------------------------------------------------------------------*/
 .status{
 	color: #ffffff !important;
-	font-size: 12px;
 	height:60px;
   border-right: 1px solid #f9f9f9;
 	text-align: center;
 }
 
+.status--browser{
+	color: #ffffff !important;
+  border-right: 1px solid #f9f9f9;
+	text-align: center;
+}
+
+
 .status--symbol{
 	font-size: 30px !important;
+}
+
+.status--symbol--browser{
+	font-size: 18px !important;
+	padding:2px;
+}
+
+.status-passing{
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.status-failing{
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.test__status__frame{
+	padding: 5px;
+}
+
+.test__status__frame__browser{
+	padding-right: 5px;
 }
 
 .test__status{
