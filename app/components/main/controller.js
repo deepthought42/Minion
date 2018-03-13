@@ -66,7 +66,6 @@ angular.module('Qanairy.main', ['ui.router'])
 
     $scope.$on('domain_updated', function(){
       $scope.domain = store.get('domain');
-      $scope.$apply();
     })
 
     $scope.$on('updateFailingCnt', function(){
