@@ -177,7 +177,8 @@
 .status--browser{
 	color: #ffffff !important;
   border-right: 1px solid #f9f9f9;
-	text-align: center;
+
+	max-width:20px;
 }
 
 
@@ -210,7 +211,7 @@
 }
 
 .test__status__frame__browser{
-	padding-right: 5px;
+	padding: 0px 15px;
 }
 
 .test__status{
