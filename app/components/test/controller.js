@@ -26,8 +26,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.test_idx = -1;
       if(store.get('domain')){
         $scope.default_browser = store.get('domain')['discoveryBrowser'];
-        $scope.discovery_url = store.get('domain');
-        $scope.getTestsByUrl(store.get('domain').url);
+        $scope.domain_url = store.get('domain').url;
+        $scope.getTestsByUrl($scope.domain_url);
       }
 
       var pusher = new Pusher('77fec1184d841b55919e', {
@@ -35,7 +35,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         encrypted: true
       });
 
-      var channel = pusher.subscribe('www.qanairy.com');
+      var channel = pusher.subscribe($scope.extractHostname($scope.domain_url));
       channel.bind('test-discovered', function(data) {
         var reported_test = JSON.parse(data);
         for(var idx=0; idx<$scope.tests.length; idx++){

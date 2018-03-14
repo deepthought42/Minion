@@ -116,7 +116,7 @@
 						</div>
 					 	<div class="col-xs-6 btn--green select__neutral status-passing discovery_status vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
 						 	<div class="" >
-								Passing 
+								Passing
 								<br />
 								<i class="fa fa-check discovery--status--symbol white"
 							   	 style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
@@ -306,7 +306,7 @@
                                 <div class="col-sm-12" ng-show="current_node[$index].type=='Action'">
                                     <div class="row no-gutter">
                                       <div class="col-xs-12 node__title">
-                                            <h5><span style="">Action</span> - {{current_node[$index].name}}</h5>
+                                            <h5><span style="">Action</span> -  {{current_node[$index].name != 'sendKeys' ? current_node[$index].name : 'Type'}}</h5>
                                         </div>
                                         <div class="col-xs-12">
                                             <div class="key--value" ng-show="current_node[$index].value || current_node[$index].name=='sendKeys'">
