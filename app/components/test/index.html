@@ -5,7 +5,7 @@
   		  Run All Tests
   		</button>
 	  </div>
-		<div class="offset-sm-8 col-sm-2 stats__bar">
+		<div class="offset-sm-8 col-sm-2 stats__bar text-right">
 			<div class="stat_key_value">
 				<!-- /.dropdown -->
 				<div class="stat_key">
@@ -22,14 +22,14 @@
 	  <div class="col-xs-1 status__title">
 		    Status
 	  </div>
-	  <div class="col-xs-3 test__title">
+	  <div class="col-xs-2 test__title">
 			Test Title
 	  </div>
-	  <div class="col-xs-1">
-		    Time (s)&nbsp;
+	  <div class="col-xs-2">
+		  Time (minutes)
 	  </div>
-	  <div class="col-xs-2"  ng-click="sortLastRun=!sortLastRun">
-		    Date Last Run&nbsp;
+	  <div class="col-xs-2 text-right"  ng-click="sortLastRun=!sortLastRun">
+		    Date Last Run
 	  </div>
 		<div class="col-xs-3">
         Browsers
@@ -69,7 +69,7 @@
             <i  class="fa fa-times-circle red status--symbol"></i>
           </span>
         </div>
-        <div class="col-xs-3 test__title" ng-click="toggleTestDataVisibility(test, $index)">
+        <div class="col-xs-2 test__title" ng-click="toggleTestDataVisibility(test, $index)">
             <div class="row" >
 							<div class="col-xs-12 " ng-show="!test.show_test_name_edit_field">
 								<h4 ng-click="test.show_test_name_edit_field = true"  ng-trim="false">
@@ -94,10 +94,10 @@
 							</div>
 						</div>
           </div>
-				  <div class="col-xs-1" ng-click="toggleTestDataVisibility(test, $index)">
-						{{test.runTime | date: 'm'}} m {{test.runTime | date: 'ss'}} s
-				  </div>
 				  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
+						{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
+				  </div>
+				  <div class="col-xs-2 text-right" ng-click="toggleTestDataVisibility(test, $index)">
 						{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
 				  </div>
           <div class="col-xs-3">
@@ -107,6 +107,14 @@
                     <img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
                     <img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
                   </div>
+                  
+                  <!--
+                  <div class="vertical__center">
+											<i class="fa fa-check fa-circle-o-notch fa-spin fa-2x green" ng-show="status == null" />
+											<i class="fa fa-check fa-2x green" ng-show="status" />
+											<i class="fa fa-times fa-2x red" ng-show="!status" />
+										</div>
+                  -->
 
 									<div class="row test__status__frame__browser">
 										<div class="col-xs-12 test__status" ng-if="status == null">

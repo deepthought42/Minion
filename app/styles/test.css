@@ -42,7 +42,7 @@
 	padding-top: 20px;
 	padding-bottom: 10px;
 	height: 50px;
-    font-weight: 500;
+	font-weight:500;
 }
 
 /*.test-labels{
@@ -158,6 +158,14 @@
 /*--------------------------- [6. Test Status] --------------------------------------------------------------------------------*/
 .status{
 	color: #ffffff !important;
+	height:60px;
+  border-right: 1px solid #f9f9f9;
+	text-align: center;
+	font-size: 12px;
+}
+
+.discovery_status{
+	color: #ffffff !important;
 	height:50px;
   border-right: 1px solid #f9f9f9;
 	text-align: center;
@@ -174,11 +182,15 @@
 
 
 .status--symbol{
+	font-size: 30px !important;
+}
+
+.discovery--status--symbol{
 	font-size: 20px !important;
 }
 
 .status--symbol--browser{
-	font-size: 18px !important;
+	font-size: 16px !important;
 	padding:2px;
 }
 

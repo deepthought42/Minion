@@ -22,7 +22,7 @@
 				Stop Discovery
 			</button>
 	  </div>
-		<div class="col-md-10 col-sm-8 stats__container" >
+		<div class="col-md-10 col-sm-8 stats__container text-right" >
 			<div class="flex-none stats__bar">
 				<div class="stat_key_value">
 					<!-- /.dropdown -->
@@ -79,10 +79,10 @@
 		  Test Title
 		</div>
 		<div class="col-xs-2">
-		  Time (s)&nbsp;
+		  Time (minutes)
 		</div>
-		<div class="col-xs-2">
-		  Date Discovered&nbsp;
+		<div class="col-xs-2 text-right">
+		  Date Discovered
 		</div>
         <div class="col-xs-1">
 		</div>
@@ -114,19 +114,19 @@
 							<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
 							<span class="sr-only">Running...</span>
 						</div>
-					 	<div class="col-xs-6 btn--green select__neutral status-passing status vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
+					 	<div class="col-xs-6 btn--green select__neutral status-passing discovery_status vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
 						 	<div class="" >
 								Passing 
 								<br />
-								<i class="fa fa-check status--symbol white"
+								<i class="fa fa-check discovery--status--symbol white"
 							   	 style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
 							</div>
 						</div>
-						<div class="status status-failing col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
+						<div class="discovery_status status-failing col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
 							<div class="" >
 									Failing
 								<br />
-								<i  class="fa fa-times status--symbol white"
+								<i  class="fa fa-times discovery--status--symbol white"
 									style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
 							</div>
 						</div>
@@ -158,10 +158,10 @@
 					</div>
 				</div>
 			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
-					{{test.runTime | date: 'm'}} m {{test.runTime | date: 'ss'}} s
+					{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 			  </div>
-			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
-					{{( test.lastRunTimestamp | date : 'M/dd/yy h:mm a')  || "Unknown"}}
+			  <div class="col-xs-2 text-right" ng-click="toggleTestDataVisibility(test, $index)">
+					{{( test.lastRunTimestamp | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
             <div class="col-xs-1" ng-click="toggleTestDataVisibility(test, $index)">
                 <div class="pull-right accordian" aria-label="open accordian">

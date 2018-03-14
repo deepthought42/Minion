@@ -157,7 +157,7 @@ input { text-indent: 0px; }
 /*--------------------------- [3. Secondary Nav] -----------------------------------------------------------------------------*/
 
 .secondary-nav{
-	color: #2d2d2d;
+	color: #667;
 	margin: 15px auto;
 	/*border-bottom: 2px solid #eeeeee;*/
 
@@ -169,16 +169,19 @@ input { text-indent: 0px; }
 
 .stats__bar{
 float: right;
+	font-size: 11px;
+	
 }
 
 .stat_key_value{
   float: right;
-	line-height: 20px;
+	line-height: 16px;
 	padding: 0px 15px;
 }
 
 .stat_key{
-font-weight: 500;
+	color: #08091a;
+	font-weight:400;
 }
 
 .stat_value{
