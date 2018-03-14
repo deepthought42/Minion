@@ -26,10 +26,63 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.test_idx = -1;
       if(store.get('domain')){
         $scope.default_browser = store.get('domain')['discoveryBrowser'];
+        $scope.discovery_url = store.get('domain');
         $scope.getTestsByUrl(store.get('domain').url);
       }
+
+      var pusher = new Pusher('77fec1184d841b55919e', {
+        cluster: 'us2',
+        encrypted: true
+      });
+
+      var channel = pusher.subscribe('www.qanairy.com');
+      channel.bind('test-discovered', function(data) {
+        var reported_test = JSON.parse(data);
+        for(var idx=0; idx<$scope.tests.length; idx++){
+          var test = $scope.tests[idx];
+          if(test.key == reported_test.key){
+            console.log(data);
+            $scope.tests[idx] = reported_test;
+            break;
+          }
+        }
+        $scope.waitingOnTests = false;
+        //$scope.tests.push(JSON.parse(data));
+        $scope.$apply();
+      });
     }
 
+
+    $scope.extractHostname =  function(url) {
+        var hostname;
+        //find & remove protocol (http, ftp, etc.) and get hostname
+
+        if (url.indexOf("://") > -1) {
+            hostname = url.split('/')[2];
+        }
+        else {
+            hostname = url.split('/')[0];
+        }
+
+        //find & remove port number
+        hostname = hostname.split(':')[0];
+        //find & remove "?"
+        hostname = hostname.split('?')[0];
+
+        return hostname;
+    }
+    // Enable pusher logging - don't include this in production
+    //Pusher.logToConsole = true;
+
+    $scope.isTestRunning = function(test){
+      for(var browser in test.browserPassingStatuses){
+        if(test.browserPassingStatuses[browser] == null){
+          return true;
+        }
+        //test.browserPassingStatuses['chrome']!=null || test.browserPassingStatuses['firefox']!=null
+      }
+      return false;
+    }
     $scope.setCurrentNodeKey = function(key){
       $scope.node_key=key;
     }

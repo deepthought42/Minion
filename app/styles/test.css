@@ -125,7 +125,7 @@
 	width: 100%;
   color: #424242;
   background-color: #ffffff;
-	transition: background-color 1s ease-in-out;
+	transition: background-color 10s ease-in-out;
 }
 
 
@@ -146,12 +146,12 @@
       display: flex;
   align-items: center;
   justify-content: space-between !important;
-    
+
 }
 
 .accordian{
 	padding: 0px 10px;
-    
+
 }
 
 

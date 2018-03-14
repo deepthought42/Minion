@@ -57,17 +57,17 @@
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] track by $index"
 				 ng-show="tests.length > 0">
 			<div class="test__profile vertical__center__int" ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass}">
-        <div class="col-xs-1 test__status" ng-show="test.browserPassingStatuses['chrome']==null || test.browserPassingStatuses['firefox']==null">
+        <div class="col-xs-1 test__status" ng-if="isTestRunning(test)">
           <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
           <span class="sr-only">Running...</span>
         </div>
-        <div class="col-xs-1 test__status" ng-show="!test.runStatus" ng-click="toggleTestDataVisibility(test, $index)">
-            <span ng-show="test.correct">
-              <i class="fa fa-check-circle green status--symbol"></i>
-            </span>
-            <span ng-show="!test.correct && test.correct != null">
-              <i  class="fa fa-times-circle red status--symbol"></i>
-            </span>
+        <div class="col-xs-1 test__status" ng-if="!isTestRunning(test)" ng-click="toggleTestDataVisibility(test, $index)">
+          <span ng-show="test.correct">
+            <i class="fa fa-check-circle green status--symbol"></i>
+          </span>
+          <span ng-show="!test.correct && test.correct != null">
+            <i  class="fa fa-times-circle red status--symbol"></i>
+          </span>
         </div>
         <div class="col-xs-3 test__title" ng-click="toggleTestDataVisibility(test, $index)">
             <div class="row" >
@@ -107,27 +107,26 @@
                     <img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
                     <img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
                   </div>
-                  <div class="vertical__center">
-                    <i class="fa fa-check fa-circle-o-notch fa-spin fa-2x green" ng-show="status == null" />
-                    <i class="fa fa-check fa-2x green" ng-show="status" />
-                    <i class="fa fa-times fa-2x red" ng-show="!status" />
-                  </div>
-
 
 									<div class="row test__status__frame__browser">
-										<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
-											<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+										<div class="col-xs-12 test__status" ng-if="status == null">
+											<i class="fa fa-circle-o-notch fa-spin fa-lg green fa-fw" aria-hidden="true"></i>
 										</div>
-										<div class="col-xs-6 btn--green select__neutral status-passing status--browser vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
-											<div class="" >
+
+										<div class="col-xs-6 btn--green select__neutral status-passing status--browser vertical__center__int"
+													style="{{status ? 'background-color:green' : 'background-color:#bfbfbf'}}"
+													ng-if="status!=null" ng-click="updateCorrectness(test, true, $index)">
+											<div class="" ></i>
 												<i class="fa fa-check status--symbol--browser white"
-													 style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
+													 style="{{status ? 'color:green' : 'color:#bfbfbf'}}"></i>
 											</div>
 										</div>
-										<div class="col-xs-6 btn--red select__neutral status--browser status-failing  vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
+										<div class="col-xs-6 btn--red select__neutral status--browser status-failing  vertical__center__int"
+													style="{{!status && status != null ? 'background-color:red' : 'background-color:#bfbfbf'}}"
+													ng-if="status!=null" ng-click="updateCorrectness(test, false, $index)">
 											<div class="" >
 												<i  class="fa fa-times status--symbol--browser white"
-													style="{{!test.correct && test.correct != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
+													style="{{!status && status != null ? 'background-color:red' : 'background-color:#bfbfbf'}}"></i>
 											</div>
 										</div>
 									</div>
@@ -341,8 +340,8 @@
                       <span class="browser_name">{{capitalizeFirstLetter(record.browser)}}</span>
                     </div>
                     <div class="col-sm-3">
-												<i class="fa fa-check fa-2x green" ng-show="record.browserPassingStatuses(record.browser)" />
-												<i class="fa fa-times fa-2x red" ng-show="!record.browserPassingStatuses(record.browser)" />
+												<i class="fa fa-check fa-2x green" ng-show="record.passing" />
+												<i class="fa fa-times fa-2x red" ng-show="!record.passing" />
                     </div>
                     <div class="col-sm-3">
 											{{record.runTime | date: 'm'}} m {{record.runTime | date: 'ss'}} s
