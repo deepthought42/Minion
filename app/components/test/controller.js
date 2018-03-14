@@ -41,7 +41,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         for(var idx=0; idx<$scope.tests.length; idx++){
           var test = $scope.tests[idx];
           if(test.key == reported_test.key){
-            console.log(data);
             $scope.tests[idx] = reported_test;
             break;
           }
