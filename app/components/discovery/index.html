@@ -22,7 +22,7 @@
 				Stop Discovery
 			</button>
 	  </div>
-		<div class="col-md-10 col-sm-8 stats__container" >
+		<div class="col-md-10 col-sm-8 stats__container text-right" >
 			<div class="flex-none stats__bar">
 				<div class="stat_key_value">
 					<!-- /.dropdown -->
@@ -78,11 +78,11 @@
 		<div class="col-xs-5 test__title">
 		  Test Title
 		</div>
-		<div class="col-xs-2">
-		  Time (s)&nbsp;
+		<div class="col-xs-2 text-right">
+		  Time
 		</div>
-		<div class="col-xs-2">
-		  Date Discovered&nbsp;
+		<div class="col-xs-2 text-right">
+		  Date Discovered
 		</div>
         <div class="col-xs-1">
 		</div>
@@ -157,10 +157,10 @@
 						</div>
 					</div>
 				</div>
-			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
+			  <div class="col-xs-2 text-right" ng-click="toggleTestDataVisibility(test, $index)">
 					{{test.runTime | date: 'm'}} m {{test.runTime | date: 'ss'}} s
 			  </div>
-			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
+			  <div class="col-xs-2 text-right" ng-click="toggleTestDataVisibility(test, $index)">
 					{{( test.lastRunTimestamp | date : 'M/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
             <div class="col-xs-1" ng-click="toggleTestDataVisibility(test, $index)">
