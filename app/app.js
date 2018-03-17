@@ -20,7 +20,7 @@ angular.module('Qanairy', [
   'ngMaterial',
   'Qanairy.version',
   'AuthInterceptor',
-  'angular-stripe-checkout',
+  'stripe.checkout',
   'Qanairy.authService',
   'Qanairy.user_profile',
   'ngRaven'

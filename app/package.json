@@ -19,7 +19,6 @@
     "shelljs": "^0.2.6"
   },
   "dependencies": {
-    "angular-stripe-checkout": "latest",
     "angular-ui-bootstrap": "latest"
   },
   "scripts": {
