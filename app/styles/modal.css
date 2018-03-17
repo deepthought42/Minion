@@ -1,0 +1,161 @@
+/*--------------------------- [1. ] -----------------------------------------*/
+.dialogue-close{
+  text-align:right !important;
+  padding:15px 15px 5px 15px;
+}
+
+md-dialog {
+    opacity: 0;
+    min-width: 240px;
+    max-width: 80%;
+    max-height: 80%;
+    position: relative;
+    overflow: auto;
+    box-shadow: 0 7px 8px -4px rgba(0,0,0,.2), 0 13px 19px 2px rgba(0,0,0,.14), 0 5px 24px 4px rgba(0,0,0,.12);
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.page_modal{
+}
+
+.page_modal_image{
+}
+
+.page_modal_image img{
+  height: auto;
+  width: 100%;
+}
+
+.page_enlarged{
+}
+
+.form_molecule {
+    padding-bottom: 15px;
+}
+
+.domain_modal_logo{
+      padding-bottom:15px;
+}
+
+.domain_modal_logo img{
+	  max-width:220px !important;
+     max-height:120px !important;
+}
+
+.domain_modal_logo i{
+    color:#bbb;
+	  font-size:80px;
+}
+
+.modal__title{
+	text-align: center;
+	padding: 30px 30px;
+}
+
+.modal-browser-icon{
+    width: 100px;
+    height: 100px;
+	padding: 15px;
+}
+
+.fa-icon{
+	text-shadow: 0px 2px #ffffff;
+	font-size: 64px;
+}
+
+.fa-icon i{
+	padding: 15px;
+}
+
+.browser_buttons{
+	margin-bottom: 15px;
+}
+
+.browser_spacing{
+    padding-right: 5px;
+}
+
+.domain-dialogue {
+  max-width: 600px;
+  margin-bottom: 30px;
+  margin:auto;
+}
+
+.domain-dialogue-close{
+  text-align:right !important;
+  padding:30px 30px;
+}
+.domain-dialogue-header {
+  text-align:center;
+  vertical-align: middle;
+  padding:0px 0px 0px 0px;
+}
+
+.domain-dialogue-input {
+  max-width: 440px;
+    display: flex;
+}
+
+.form_label_description {
+    padding-top: 5px;
+     padding-bottom: 10px;
+}
+
+.form_label_description_domain {
+    padding-top: 5px;
+     padding-bottom: 3px;
+}
+
+.form_label_description h6, .form_label_description_domain h6{
+    font-weight: 500;
+}
+
+.domain_protocol{
+        margin-right: 5px !important;
+}
+
+/* Button Depressed */
+.btn-depressed {
+	background: #eee;
+	color:#cccccc;
+	box-shadow: 0 6px #ccc;
+	border-radius: 5px;
+	-webkit-transition: none;
+	-moz-transition: none;
+	transition: none;
+}
+
+.btn-depressed:focus {
+	color:#bbb;
+	outline: none;
+}
+
+.btn-depressed:hover {
+	color:#bbb;
+	box-shadow: 0 4px #ccc;
+	top: 2px;
+}
+
+.btn-depressed:active {
+	color:#bbb;
+	box-shadow: 0 0 #ccc;
+	top: 8px;
+}
+
+.btn-depressed:active,
+.btn-depressed.active {
+	box-shadow: 0 4px #ccc;
+	top: 2px;
+}
+
+.modal_action_button_container{
+    padding-top: 30px;
+}
+
+.modal_action_button{
+    margin-bottom: 30px;
+    margin-right: 15px;
+}

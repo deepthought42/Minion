@@ -13,10 +13,10 @@ angular.module('Qanairy.main', ['ui.router'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'auth', 'WorkAllocation', 'PathRealtimeService', 'store', '$location', 'Tester',
-  function ($rootScope, $scope, auth, WorkAllocation, PathRealtimeService, store, $location, Tester) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Tester', 'Auth', '$state',
+  function ($rootScope, $scope, PathRealtimeService, store, $location, Tester, Auth, $state) {
     var getFailingCount = function(){
-      Tester.getFailingCount({url: $scope.domain }).$promise
+      Tester.getFailingCount({url: "http://www.qanairy.com" }).$promise
         .then(function(data){
           store.set("failing_tests", data.failing);
           $scope.failingTests = data.failing;
@@ -28,19 +28,18 @@ angular.module('Qanairy.main', ['ui.router'])
 
     this._init = function(){
       $scope.displayUserDropDown = false;
-      $scope.auth = auth;
       $scope.menuToggled = false;
+      $scope.auth = Auth;
       $scope.isAuthenticated = false;
       $scope.paths = [];
       $scope.isStarted = false;
-      $scope.auth = auth;
       $scope.protocols = ["http", "https", "file"];
       $scope.workAllocation = {};
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
       $scope.domain = store.get('domain');
       $scope.errors = [];
 
-      getFailingCount();
+      getFailingCount({url: "http://www.qanairy.com"});
 
       $scope.$location = $location;
       $scope.current_path = $location.path();
@@ -48,25 +47,29 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.navToggledOpen = true;
     }
 
+    $scope.showDomainsPage = function(){
+      $state.go("main.domains");
+    }
+
     $scope.login = function(){
-      $scope.auth.login();
+      Auth.login();
       $scope.isAuthenticated=true;
     }
 
     $scope.logout = function(){
-      $scope.auth.logout();
+      Auth.logout();
       $scope.isAuthenticated=false;
+      Auth.login();
     }
 
     this._init();
 
     $scope.$on('domain_updated', function(){
       $scope.domain = store.get('domain');
-      console.log("domain set in main");
     })
 
     $scope.$on('updateFailingCnt', function(){
-      getFailingCount();
+      getFailingCount({url: "http://www.qanairy.com"});
     })
   }
 ]);

@@ -11,9 +11,10 @@
     "angular-loader": "~1.4.0",
     "angular-mocks": "~1.4.0",
     "html5-boilerplate": "~5.2.0",
+    "angular-material": "1.1.6",
     "angular-resource": "1.5.8",
     "auth0-lock": "latest",
-    "auth0-angular": "latest",
+    "angular-auth0": "3.0.0",
     "angular-lock": "latest",
     "angular-jwt": "latest",
     "a0-angular-storage": "latest",
@@ -25,6 +26,7 @@
     "angular-stripe-checkout": "latest"
   },
   "resolutions": {
-    "angular": "^1.4.9"
+    "angular": "^1.4.9",
+    "auth0.js": "^9.0.0"
   }
 }

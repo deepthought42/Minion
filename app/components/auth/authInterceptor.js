@@ -8,9 +8,7 @@ auth.factory('AuthInterceptor', ['$q', '$rootScope', '$injector', 'store', funct
     // optional method
     'request': function(config) {
       config.headers = config.headers || {};
-
-      config.headers['Authorization'] = "Bearer "+store.get('token');
-
+      config.headers['Authorization'] = "Bearer "+sessionStorage.getItem('token');
         //$httpProvider.defaults.headers.common['Token-Type'] = auth_headers['token-type'];
         //$httpProvider.defaults.headers.common['Client'] = auth_headers['client'];
         //$httpProvider.defaults.headers.common['Expiry'] = auth_headers['expiry'];

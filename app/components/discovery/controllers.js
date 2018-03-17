@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService', 'Qanairy.PathRealtimeService'])
+angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.discovery', {
@@ -13,8 +13,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
   });
 }])
 
-.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'WorkAllocation', 'PathRealtimeService', 'Tester', 'store', '$state',
-  function($rootScope, $scope, WorkAllocation, PathRealtimeService, Tester, store, $state) {
+.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'Discovery', 'PathRealtimeService', 'Tester', 'store', '$state', '$mdDialog',
+  function($rootScope, $scope, Discovery, PathRealtimeService, Tester, store, $state, $mdDialog) {
     var getFailingCount = function(){
       Tester.getFailingCount({url: $scope.domain }).$promise
         .then(function(data){
@@ -23,26 +23,27 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         })
         .catch(function(err){
           $scope.errors.push(err.data);
-        });;
+        });
     }
 
     this._init = function(){
       $scope.errors = [];
       $scope.tests = [];
       $scope.isStarted = false;
-      $scope.current_node = null;
+      $scope.current_node = [];
       $scope.visible = false;
 
       $scope.visible_tab = "nodedata0";
-
+      $scope.default_browser = store.get('domain')['discoveryBrowser'];
       $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
       $scope.group.description = "";
-
-      if(store.get('domain') != null){
+      $scope.test_idx = -1;
+      $scope.current_domain = store.get('domain');
+      if($scope.current_domain != null){
         $scope.waitingOnTests = true;
-        $scope.discovery_url = store.get('domain').url;
+        $scope.discovery_url = $scope.current_domain.url;
         Tester.getUnverified({url: $scope.discovery_url}).$promise
             .then(function(data){
               $scope.tests = data
@@ -99,20 +100,33 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
        $scope.selectedTab.dataTab = currentTabIndex;
      };
 
+     /**
+     *  Starts discovery process for a given domain via Qanairy api
+     */
     $scope.startDiscovery = function(){
-      $scope.waitingOnTests = true;
-      WorkAllocation.query({url:  $scope.discovery_url}).$promise
+      $scope.isStarted = true;
+      Discovery.startWork({url:  $scope.discovery_url}).$promise
         .then(function(value){
-          $scope.isStarted = true;
+          $scope.waitingOnTests = true;
         })
         .catch(function(err){
           $scope.waitingOnTests = false;
+          $scope.isStarted = false;
           $scope.errors.push(err.data);
         });
     }
 
-    $scope.setCurrentNode = function(node){
-      $scope.current_node = node;
+    $scope.setTestIndex = function(idx){
+      $scope.test_idx = idx;
+    }
+
+    $scope.setCurrentNode = function(node, index){
+      if(index==null){
+        $scope.current_node[$scope.test_idx] = node;
+      }
+      else{
+        $scope.current_node[index] = node;
+      }
     }
 
     $scope.setTestName = function(test, new_name){
@@ -129,23 +143,24 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         });
     }
 
-    $scope.showTestData = function(test, node){
-      test.visible = true;
-      setCurrentNode(node);
-    }
-
-    $scope.toggleTestDataVisibility = function(test){
-      test.visible = !test.visible;
+    $scope.toggleTestDataVisibility = function(test, index){
+      if($scope.test && $scope.test_idx != index){
+        $scope.test.visible = false;
+      }
+      $scope.test_idx = index;
+      $scope.test = test;
+      test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
 
       if(test.visible){
-        $scope.setCurrentNode(test.path.path[0]);
+        $scope.setCurrentNode(test.path.path[0], index);
       }
     }
 
-    $scope.stopMappingProcess = function(){
+    $scope.stopDiscoveryProcess = function(){
+
       WorkAllocation.stopWork().$promise
         .then(function(){
-          $scope.isStarted = false;
+           $scope.isStarted = false;
         })
         .catch(function(err){
           $scope.errors.push(err.data);
@@ -162,6 +177,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
                        description: group.description,
                        key: test.key}).$promise
                 .then(function(data){
+                   $scope.group.name = null;
                    test.groups.push(data);
                  })
                  .catch(function(err){
@@ -179,6 +195,21 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
         });
     }
 
+    $scope.openPageModal = function(page) {
+      $scope.current_preview_page = page;
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/test/page_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
+
     /**
     * Displays a info for a selected path object in the drop down that
     * accompanies the error panel for the associated path
@@ -193,7 +224,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
 
     $scope.updateCorrectness = function(test, correctness, idx){
       test.waitingOnStatusChange = true;
-      Tester.updateCorrectness({key: test.key, correct: correctness}).$promise
+      Tester.setDiscoveredPassingStatus({key: test.key, correct: correctness}).$promise
         .then(function(data){
           test.waitingOnStatusChange = false;
           test.correct = data.correct;
@@ -214,6 +245,20 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.WorkAllocationService
           $scope.errors.push(err.data);
         });
     }
+
+    $scope.openBrowserSelectionDialog  = function(event) {
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/discovery/default_browser_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
 
     this._init();
   }

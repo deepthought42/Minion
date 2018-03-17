@@ -1,85 +1,74 @@
-<!-- Sidebar -->
-<input type="checkbox" class="main-nav-check" id="main-nav-check" />
-
-<nav class="side-nav" id="side-nav">
-  <div id="sidepanel">
-    <div class="sidebar-brand">
-		  <img src="./img/qanairy_logo.png" />
-    </div>
-
-    <ul class="sidebar-nav">
-      <li id="notification_li">
-        <a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
-          <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
-          Tests
-          <span id="notification_count" ng-show="failingTests">
-            {{failingTests}}
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="#/discovery"  style="{{$location.path() == '/discovery' ? 'color: #fddb4e;' : 'color:#bfbfbf'}}">
-          <i class="fa fa-map-o sidebar-nav-icons" aria-hidden="true"></i>
-          Discovery
-        </a>
-      </li>
-    </ul>
-    <div class="version">
-      Qanairy
-      <span app-version></span>
-    </div>
-    <label for="main-nav-check" class="toggle-menu"
-       style="{{navToggledOpen ? 'color:#fddb4e' : 'color:#bfbfbf'}}"
-       ng-click="navToggledOpen = !navToggledOpen">
-      ☰
-    </label>
-  </div>
-</nav>
-
 <!-- Page Content -->
-<div class="page-wrap">
-  <div id="nav-bar" class="main-header container-fluid content ">
+<div>
+  <div id="nav-bar" class="main-container container-fluid content ">
     <div id="main-nav" class="vertical__center__int">
-		  <div id="left-main-nav" class="col-xs-6">
-        {{domain.url || "www.yourdomain.com"}}
-        <a ui-sref="main.domains">Change?</a>
-      </div>
+		  <div class="col-lg-5 col-md-5">
+          <div class="left-main-nav main-nav">
+            <div class="flex-none">
+              <div class="brand">
+          		  <img src="./img/qanairy_logo.png" />&nbsp;&nbsp;<span>Beta</span>
+              </div>
+            </div>
+						<!-- 
+            <div class="flex-auto">
+              <div class="input-group search">
+        		 <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                  <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
 
-		  <div id="right-main-nav" class="col-xs-6" ng-show="auth.isAuthenticated">
-        <div class="inline--block">
-          {{user_profile.email}}
-        </div>
-			  <!-- /.dropdown -->
-        <div class="dropdown dropdown-toggle pull-right" data-toggle="dropdown" href="#">
-					<i class="fa fa-user fa-fw"></i>
-          <ul class="dropdown-menu dropdown-user" style="opacity: 1">
-            <li>
-              <a href="#">
+        			</div>
+            </div>
+						-->
+          </div>
+      </div>
+      <div class="col-lg-6 col-md-7 offset-lg-1" ng-show="auth.isAuthenticated">
+        <div class="right-main-nav main-nav">
+          <div class="domain-link dropdown pull-right">
+              <div class="dropdown-toggle" data-toggle="dropdown" id="domainsDropdownMenuButton"  dropdown-toggle>
+                {{domain.url || "www.yourdomain.com"}}
+                <i class="fa fa-caret-down fa-fw"></i>
+              </div>
+              <ul class="dropdown-menu" aria-labelledby="domainsDropdownMenuButton">
+                <li class="dropdown-item" ng-repeat="domain in domains">
+                </li>
+                <li class="dropdown-item" ng-click="showDomainsPage()">
+                    Manage Domains
+                </li>
+              </ul>
+          </div>
+          <div class="divider"></div>
+          <div class="flex-initial main-nav-link" id="notification_li">
+            <a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#ffffff'}}">
+              <i class="fa fa-list-ul main-nav-icons" aria-hidden="true"></i>
+              Tests
+              <span id="notification_count" ng-show="failingTests">
+                {{failingTests}}
+              </span>
+            </a>
+          </div>
+          <div class="flex-initial main-nav-link">
+            <a href="#/discovery"  style="{{$location.path() == '/discovery' ? 'color: #fddb4e;' : 'color:#ffffff'}}">
+              <i class="fa fa-map-o main-nav-icons" aria-hidden="true"></i>
+              Discovery
+            </a>
+          </div>
+          <div class="divider"></div>
+          <div class="flex-none user_settings dropdown pull-right">
+              <div class="dropdown-toggle" id="userDropdownMenuButton" dropdown-toggle  data-toggle="dropdown">
                 <i class="fa fa-user fa-fw"></i>
-                User Profile
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-gear fa-fw"></i>
-                Settings
-              </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a href="#/" ng-click="logout()">
-                <i class="fa fa-sign-out fa-fw"></i>
-                Logout
-              </a>
-            </li>
-          </ul>
+              </div>
+              <ul class="dropdown-menu" aria-labelledby="userDropdownMenuButton">
+                <li class="dropdown-item" ui-sref="main.user_profile">
+                  <i class="fa fa-user"></i>
+                  User Profile
+                </li>
+                <li class="horizontal-divider"></li>
+                <li class="dropdown-item" ng-click="logout()">
+                  <i class="fa fa-sign-out"></i>
+                  Logout
+                </li>
+              </ul>
+          </div>
         </div>
-			</div>
-      <div class="pull-right login__signup" ng-show="!auth.isAuthenticated">
-        <a href="#/" ng-click="signin()">
-          <i class="fa fa-sign-in fa-fw"></i>
-          Login | Sign up
-        </a>
       </div>
     </div>
     <div ui-view class="full__height">

@@ -1,53 +1,44 @@
-<div class="row">
-    <div class="col-md-12 error__message" ng-show="domain_error">
-      {{domain_error}}
-    </div>
-    <div class="col-md-12 error__message" ng-show="show_create_domain_err">
-      {{domain_creation_err}}
-    </div>
-  </div>
-    <div class="domain__button vertical__center" ng-click="openCreateDomainDialog()">
-      <div class="domain__icon">
-        <div class="domain--largeicon">
-          <i class="fa fa-plus fa-5x"></i>
-        </div>
-      </div>
-      <div class="domain__title">
-        <h5>
-            Add Domain
-        </h5>
-      </div>
-    </div>
-    <div class="domain__button" ng-repeat="domain in domains">
-      <div class="" ng-click="removeDomain(domain, $index)" style="text-align:right !important; position: relative;">
-         <h3 style="margin:0px; text-align:right !important; right:0px; position: absolute;">
-           <i class="fa fa-times delete__domain" ></i>
-         </h3>
-      </div>
-      <button ng-click="openPicker(domain)">Upload Logo</button>
-      <div  class="vertical__center domain__icon" ng-click="selectDomain(domain)">
-        <div class="domain__logo">
-          {{domain.logo}}
-          <img class="" src="{{domain.logoUrl || './img/qanairy_logo.png'}}">
-        </div>
-      </div>
-      <div class="domain__title" ng-click="selectDomain(domain)">
-        <h6>
-            {{domain.url}}
-        </h6>
-      </div>
-    </div>
+<div class="error__message" ng-show="domain_error">
+  {{domain_error}}
 </div>
-
-<!--<div>
-  <h4>
-    Start a new project by adding a domain.
-  </h4>
-  <div>
-    <input id="domain_input" ng-model="domain_url" class="" placeholder="yourdomain.com" />
+<div class="error__message" ng-show="show_create_domain_err">
+  {{domain_creation_err}}
+</div>
+<div class="domain__button vertical__center" ng-click="openDisclaimerDomainDialog()">
+  <div class="domain__icon">
+    <div class="domain--largeicon">
+      <i class="fa fa-plus fa-5x"></i>
+    </div>
   </div>
-  <div>
-    <button id="create_domain_button" ng-click="createDomain(domain_url)" class="btn">Create Project</button>
+  <div class="domain__title">
+    <h6>
+        Add Domain
+    </h6>
   </div>
 </div>
--->
+<div class="domain__button" ng-repeat="domain in domains">
+  <div class="row">
+    <div class="col-sm-2" style="text-align:left !important; position: relative;">
+      <img src="/img/Chrome.ico" class="browser-icon"  ng-show="domain.discoveryBrowser=='chrome'">
+      <img src="/img/firefox.png" class="browser-icon"  ng-show="domain.discoveryBrowser=='firefox'" >
+    </div>
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-2" ng-click="openEditDomainDialog(domain)"  style="text-align:right !important; padding:0px; margin:0px; position: relative;">
+       <i class="fa fa-pencil domain_card_action" ></i>
+    </div>
+    <div class="col-sm-2" ng-click="removeDomain(domain, $index)"  style="text-align:right !important; position: relative;">
+       <i class="fa fa-times domain_card_action" ></i>
+    </div>
+  </div>
+  <div class="row vertical__center domain__icon" ng-click="selectDomain(domain)">
+    <div class="domain__logo vertical__center">
+        <img class="" src="{{domain.logoUrl}}" />
+    </div>
+  </div>
+  <div class="domain__title" ng-click="selectDomain(domain)">
+    <h6>
+        {{domain.url}}
+    </h6>
+  </div>
+</div>

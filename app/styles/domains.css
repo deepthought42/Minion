@@ -1,0 +1,113 @@
+
+
+/*--------------------------- [7. Domains Page] ------------------------------------------------------------------------------*/
+
+.domain__button{
+	background-color:#ffffff;
+	margin:15px 15px;
+	padding:15px;
+	height:250px;
+	width:250px;
+	border-radius: 5px;
+  color: #bbbbbb !important;
+  float:left;
+  position: relative;
+	text-align: center;
+}
+
+.domain__button__height{
+	height: -moz-calc(100% - 20px);
+/* WebKit */
+height: -webkit-calc(100% - 20px);
+/* Opera */
+height: -o-calc(100% - 20px);
+/* Standard */
+height: calc(100% - 20px);
+}
+
+.domain__icon{
+}
+
+.domain__logo{
+  margin: auto;
+	text-align: center;
+	height:200px;
+      padding-top:10px;
+        padding-bottom:50px !important;
+}
+
+.domain__logo img{
+	  max-width:220px !important;
+     max-height:120px !important;
+}
+
+.domain--largeicon{
+	font-weight: 700;
+	text-align: center;
+}
+
+.domain__title{
+  position: absolute;
+  padding:0px 15px;
+  bottom:30px;
+  left:0px;
+  width:100%;
+  margin: auto;
+}
+
+.domain__button:focus,
+.domain__button.focus {
+  background-color:#e9e9e9;
+    color: #999999 !important;
+}
+.domain__button:hover {
+  background-color:#e9e9e9;
+    color: #999999 !important;
+}
+.domain__button:active,
+.domain__button.active,
+.open > .dropdown-toggle.domain__button {
+  background-color:#e9e9e9;
+    color: #999999 !important;
+}
+
+
+.domain--largeicon:focus,
+.domain--largeicon.focus {
+  color: #999999;
+}
+.domain--largeicon:hover {
+  color: #999999;
+}
+.domain--largeicon:active,
+.domain--largeicon.active,
+.open > .dropdown-toggle.domain--largeicon {
+  color: #999999;
+}
+
+.domain_card_action:focus,
+.domain_card_action.focus {
+  color: #333333;
+}
+.domain_card_action:hover {
+  color: #333333;
+}
+.domain_card_action:active,
+.domain_card_action.active,
+.open > .dropdown-toggle.domain_card_action {
+  color: #333333;
+}
+
+.domain_card_action{
+    color: #999999;
+}
+
+.disabled_image {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+.browser-icon {
+	width: 25px;
+	height: 25px;
+}

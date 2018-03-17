@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!-->
 <html lang="en" ng-app="Qanairy" class="no-js"> <!--<![endif]-->
   <head>
+    <base href="/">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Qanairy</title>
@@ -16,17 +17,16 @@
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/bootstrap.css"> <!-- THIS NEEDS TO BE REMOVED -->
 		<link rel="stylesheet" type="text/css" href="styles/tabs.css" />
-		<link rel="stylesheet" type="text/css" href="styles/tabstyles.css" />
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/frame.css">
+    <link rel="stylesheet" href="styles/test.css">
+    <link rel="stylesheet" href="styles/domains.css">
+    <link rel="stylesheet" href="styles/modal.css">
     <link rel="stylesheet" href="app.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
-          rel="stylesheet"
-          integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN"
-          crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/tabs.css" />
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -38,6 +38,13 @@
       ga('send', 'pageview');
 
     </script>
+    <script>
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+      analytics.load("DkANikjZ5P3CDa4rahz8PmyawVteNyiX");
+      analytics.page();
+      }}();
+    </script>
+
   </head>
 <body>
 
@@ -51,9 +58,6 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-  <script src="external_scripts/cbpFWTabs.js"></script>
-  <script src="external_scripts/modernizr.custom.js"></script>
-
   <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
   <script
     src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -80,11 +84,10 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
 
-  <script type="text/javascript" src="https://cdn.auth0.com/js/lock-7.js"></script>
-  <script type="text/javascript" src="https://cdn.auth0.com/w2/auth0-angular-4.js"></script>
   <script type="text/javascript" src="bower_components/auth0.js/build/auth0.min.js"></script>
+  <script type="text/javascript" src="bower_components/angular-auth0/dist/angular-auth0.min.js"></script>
   <script src="bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-cookies.js"></script>
   <!-- Angular wrapper for localStorage and sessionStorage. Defaults to ng-cookies if not available -->
@@ -97,7 +100,7 @@
   <script src="serviceConfig.js"></script>
 
   <!-- SERVICES -->
-  <script src="components/services/workAllocationService.js" ></script>
+  <script src="components/discovery/discovery_service.js" ></script>
   <script src="components/services/PastPathService.js" ></script>
   <script src="components/services/PathRealtimeService.js" ></script>
 
@@ -116,6 +119,10 @@
   <script src="components/test/controller.js"></script>
   <script src="components/test/testerService.js"></script>
 
+  <!-- User -->
+  <script src="components/user/controller.js"></script>
+  <script src="components/user/userService.js"></script>
+
   <script src="components/discovery/controllers.js"></script>
   <script src="components/main/controller.js"></script>
   <script src="components/auth/authInterceptor.js"></script>
@@ -126,5 +133,8 @@
   <script src="components/version/interpolate-filter.js"></script>
 
   <script src="https://static.filestackapi.com/v3/filestack.js"></script>
+
+  <script src="external_scripts/cbpFWTabs.js"></script>
+
 </body>
 </html>

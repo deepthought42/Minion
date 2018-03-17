@@ -1,0 +1,277 @@
+
+/*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/
+
+#main-nav{
+	background: #08091a;
+	min-height: 60px;
+	color: #ffffff;
+	border-bottom: 0px solid #eeeeee;
+}
+
+
+
+.main-nav {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  font-size:16px;
+  line-height: 20px;
+  flex: 1;
+  margin: 0;
+  width: 100%;
+  justify-content: flex-end;
+  text-align: center;
+}
+
+
+.left-main-nav{
+    justify-content: flex-start;
+}
+.right-main-nav{
+  justify-content: flex-end;
+}
+
+
+.dropdown-toggle{
+     display: inline;
+}
+
+.user_settings {
+    padding: 0px;
+    margin: 0px;
+    width: 50px;
+}
+
+.divider {
+  width: 2px;
+  margin: 0px 10px;
+  background: #333;
+}
+
+.horizontal-divider{
+  height: 1px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #e0e0e0;
+}
+
+.main-nav-icons{
+  padding-right:10px;
+}
+
+.main-nav-link a {
+    display: inline;
+    text-decoration: none;
+	  padding: 15px 10px;
+    margin: 0px 5px;
+    color: #ffffff;
+}
+
+.main-nav-link a:focus {
+  outline: none;
+	color: #ffee58 !important;
+	border-bottom: 5px solid #ffee58;
+	padding-bottom: 16px !important;
+}
+.main-nav-link a:visited { color: #ffffff;}
+.main-nav-link a:hover {
+    color: #ffee58;
+	border-bottom: 5px solid #ffee58;
+	padding-bottom: 16px !important;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+}
+
+.flex-initial {
+  flex: 0 1 auto;
+}
+
+.flex-none {
+  flex: 0 0 auto;
+}
+
+
+
+.login__signup{
+  padding-right:15px;
+}
+
+#notification_li {
+			position:relative
+			}
+
+#notification_count
+		{
+		padding: 3px 7px 3px 7px;
+		background: #cc0000;
+		color: #ffffff;
+		font-weight: bold;
+		border-radius: 10px;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		font-size: 10px;
+		}
+
+.brand{
+  text-align: left;
+  padding: 10px 30px 0 0;
+}
+
+.brand img{
+  height: 30px;
+}
+
+.brand span{
+  font-size:12px;
+  line-height: 14px;
+}
+
+.search {
+  position: relative;
+  padding: 10px 0 10px 0;
+}
+input { text-indent: 0px; }
+
+
+.main-container {
+  background: #ffffff;
+  padding: 0px;
+  position: fixed;
+	width: 100%;
+}
+
+
+/*--------------------------- [5. Body/ View Frame] --------------------------------------------------------------------------------*/
+
+
+/*--exterior container--*/
+
+/*--interior container--*/
+.content {
+  background-color: #f4f4f5;
+  height:100%;
+  min-width: 612px !important;
+	}
+/*--------------------------- [3. Secondary Nav] -----------------------------------------------------------------------------*/
+
+.secondary-nav{
+	color: #667;
+	margin: 15px auto;
+	/*border-bottom: 2px solid #eeeeee;*/
+
+}
+
+.stats__container{
+  justify-content: flex-end;
+}
+
+.stats__bar{
+float: right;
+	font-size: 11px;
+	
+}
+
+.stat_key_value{
+  float: right;
+	line-height: 16px;
+	padding: 0px 15px;
+}
+
+.stat_key{
+	color: #08091a;
+	font-weight:400;
+}
+
+.stat_value{
+}
+
+/*--------------------------- [7. dropdown] ------------------------------------------------------------------------------*/
+
+.dropdown-item li {
+    text-decoration: none;
+}
+
+.dropdown-item:focus {
+  outline: none;
+}
+.dropdown-item:visited { 
+}
+
+.dropdown-item:hover {
+     background-color:#ffee58;
+  text-decoration: none;
+}
+
+.domain-link {
+  flex: 0 0 auto;
+}
+
+.domain-link .dropdown-toggle::after {
+    display:none
+}
+
+.dropdown-menu li:hover {
+     background-color:#e9e9e9;
+  text-decoration: none;
+    color: #2d2d2d;
+}
+
+
+/*--------------------------- [pulled from dropdown scss] ------------------------------------------------------------------------------*/
+
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: ;
+  display: none;
+  float: left;
+  min-width:;
+  padding: ;
+  margin: ;
+  font-size: ;
+  color:;
+  text-align: left;
+  list-style: none;
+  background-color: ;
+  background-clip: padding-box;
+  border:;
+}
+
+  .dropdown-menu {
+    margin-top: 0;
+    margin-bottom: ;
+  }
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: ;
+  clear: both;
+  font-weight:;
+  color: ;
+  text-align: inherit; 
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+  
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-header {
+  display: block;
+  padding: ;
+  margin-bottom: 0;
+  font-size: ;
+  color:;
+  white-space: nowrap;
+}
+
+
+/*--------------------------- [5. footer] ------------------------------------------------------------------------------*/

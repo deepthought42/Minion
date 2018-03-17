@@ -17,10 +17,18 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   function($rootScope, $scope, Domain,  $mdDialog, store, $state) {
     this._init = function(){
       $scope.errors = [];
+      $scope.domains = [];
       $scope.host = "";
+      $scope.disclaimerOptin = false;
+      $scope.current_domain = {};
+
       Domain.query().$promise
         .then(function(data){
           $scope.domains = data;
+          store.remove('domain');
+          if($scope.domains == null || !$scope.domains.length){
+            $scope.openCreateDomainDialog();
+          }
         })
         .catch(function(err){
           $scope.errors.push(err);
@@ -31,17 +39,45 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_creation_err = "An error occurred while saving the domain";
     }
 
-    $scope.createDomain = function(protocol, host){
-      Domain.save({protocol: protocol, url: host, logo_url: ""}).$promise.then(function(successResult){
-        $scope.show_create_domain_err = false;
-        store.set('domain', successResult);
-        $scope.domains.push(successResult);
-        $scope.closeDialog();
-        $rootScope.$broadcast("domain_updated", successResult);
-      },
-      function(errorResult){
+    $scope.createDomain = function(protocol, host, default_browser, logo_url){
+      if(default_browser){
+        Domain.save({protocol: protocol, url: host, logoUrl: logo_url, discoveryBrowser: default_browser}).$promise
+          .then(function(successResult){
+            $scope.show_create_domain_err = false;
+            store.set('domain', successResult);
+            $scope.domains.push(successResult);
+            $scope.closeDialog();
+            $rootScope.$broadcast("domain_updated", successResult);
+          },
+          function(errorResult){
+            $scope.show_create_domain_err = true;
+          });
+      }
+      else{
         $scope.show_create_domain_err = true;
-      });
+      }
+    }
+
+    $scope.updateDomain = function(key, protocol, host, default_browser, logo_url){
+      if(default_browser){
+        Domain.update({key: key, protocol: protocol, url: host, logoUrl: logo_url, discoveryBrowser: default_browser}).$promise
+          .then(function(successResult){
+            $scope.show_create_domain_err = false;
+            store.set('domain', successResult);
+            for(var idx=0; idx < $scope.domains.length; idx++){
+              if($scope.domains[idx].key == key){
+                $scope.domains[idx] = successResult;
+              }
+            }
+            $scope.closeDialog();
+          },
+          function(errorResult){
+            $scope.show_create_domain_err = true;
+          });
+      }
+      else{
+        $scope.show_create_domain_err = true;
+      }
     }
 
     /**
@@ -49,46 +85,48 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
      */
     $scope.selectDomain = function(domain){
       store.set('domain', domain);
+      //get default browser for domain
+      //if default browser is not set then show default browser selection dialog box
       $rootScope.$broadcast("domain_updated", domain);
-      $state.go("main.tests");
+      $state.go("main.discovery");
     }
 
-    $scope.openCreateDomainDialog  = function(event) {
+    $scope.openCreateDomainDialog  = function(domain) {
+      $scope.current_domain = {};
+       $mdDialog.show({
+          clickOutsideToClose: $scope.domains.length>0,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/domain/create_domain_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
+
+    $scope.openDisclaimerDomainDialog  = function() {
        $mdDialog.show({
           clickOutsideToClose: true,
           scope: $scope,
           preserveScope: true,
-          template: '<md-dialog class="col-sm-4" style="">' +
-                      '<div class="col-sm-12 domain-dialogue-close" ng-click="closeDialog()">' +
-                      '  <md-dialog-content>' +
-                      '     <h3 style="text-align:right;"><i class="fa fa-times"></i></h3>' +
-                      '  </md-dialog-content>' +
-                      '</div>' +
-                      '<div class="col-sm-12 domain-dialogue-header">' +
-                      '  <md-dialog-content>' +
-                      '     <h3>Start a new project by adding a&nbsp;domain.</h3>' +
-                      '  </md-dialog-content>' +
-                      '</div>' +
-                      '<form name="domain_form" ng-submit="domain_form.$valid && createDomain(protocol, host)" novalidate>' +
-                        '<div class ="col-sm-12 domain-dialogue-input" >' +
-                          '<div>' +
-                            '<select id="domain_protocol" class="form-control" ng-model="protocol" required>' +
-                              '<option value="http">http</option>' +
-                              '<option value="https">https</option>' +
-                            '</select>' +
-                          '</div>' +
-                          '<div>' +
-                            '<input id="domain_input" class="form-control" ng-model="host" placeholder="yourdomain.com" required/>' +
-                          '</div>' +
-                        '</div>' +
-                        '<div ng-show="domain_creation_error" class="error">' +
-                          'Something went wrong, Please try again' +
-                        '</div>' +
-                        '<div class="col-sm-12">' +
-                          '<md-button id="create_domain_button" class="md-primary md-raised domain-dialogue-button" type="submit" ng-disabled="domain_form.$invalid">Create Project</md-button>' +
-                        '</div>' +
-                      '</form>' +
-                    '</md-dialog>',
+          templateUrl: "components/domain/domain_disclaimer_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
+
+    $scope.openEditDomainDialog  = function(domain) {
+      $scope.current_domain = domain;
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/domain/edit_domain_modal.html",
           controller: function DialogController($scope, $mdDialog) {
              $scope.closeDialog = function() {
                 $mdDialog.hide();
@@ -106,18 +144,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       }).then(function(response) {
         // declare this function to handle response
         //set filestack url somewhere
-        domain.logoUrl = response.filesUploaded[0].url;
-        Domain.save(domain).$promise
-          .then(function(successResult){
-            $scope.show_create_domain_err = false;
-            store.set('domain', successResult);
-            $rootScope.$broadcast("domain_updated", successResult);
-          })
-          .catch(function(err){
-            $scope.errors.push(err);
-          })
-        console.log("domain url :: "+domain);
-        console.log("response :: "+ Object.keys(response.filesUploaded[0]));
+        $scope.current_domain.logo_url = response.filesUploaded[0].url;
+        $scope.$apply();
       });
     }
 
@@ -128,6 +156,10 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         Domain.delete({key: domain.key}).$promise
           .then(function(data){
             $scope.domains.splice(index, 1);
+            $rootScope.$broadcast('domain_updated');
+            if(!$scope.domains.length){
+              $scope.openCreateDomainDialog();
+            }
           })
           .catch(function(err){
             $scope.errors.push(err);
@@ -138,8 +170,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     this._init();
 
     $scope.$on('domainRequiredError', function(){
-      $scope.domain_error = "A domain must be selected first";
-      //$scope.$apply();
+      $scope.domain_error = "Start by adding and selecting a domain.";
     })
 
   }

@@ -15,7 +15,6 @@
 	position: relative;
 	overflow: hidden;
 	margin: 0 auto;
-	width: 100%;
 	font-weight: 300;
 	font-size: 1.25em;
 }
@@ -34,7 +33,7 @@
 	display: flex;
 	margin: 0 auto;
 	padding: 0;
-	max-width: 1200px;
+	width: 100%;
 	list-style: none;
 	-ms-box-orient: horizontal;
 	-ms-box-pack: center;
@@ -60,7 +59,7 @@
 	flex: 1;
 }
 
-.tabs nav a {
+.tabs nav div.tab {
 	position: relative;
 	display: block;
 	overflow: hidden;
@@ -69,18 +68,77 @@
 	line-height: 2.5;
 }
 
-.tabs nav a span {
+.tabs nav div.tab span {
 	vertical-align: middle;
-	font-size: 0.75em;
 }
 
-.tabs nav li.tab-current a {
+.tabs nav li.tab-current div.tab {
 	color: #74777b;
 }
 
-.tabs nav a:focus {
+.tabs nav div.tab:focus {
 	outline: none;
 }
+
+
+/*****************************/
+/* Top Line */
+/*****************************/
+
+.tabs-style-topline {
+}
+
+.tabs-style-topline nav li {
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.tabs-style-topline nav li.tab-current {
+	border-bottom: none;
+}
+
+.tabs-style-topline nav div.tab {
+	padding: 20px 20px 10px 20px;
+	-webkit-transition: color 0.2s;
+	transition: color 0.2s;
+  color:#757575;
+  font-size: 16px;
+  font-weight:400;
+  letter-spacing:.1px;
+  text-align: center;
+  margin-bottom: 0px;
+  text-transform: capitalize;
+}
+
+.tabs-style-topline nav div.tab:hover,
+.tabs-style-topline nav div.tab:focus {
+	color: #2d2d2d;
+  font-weight: 400;
+}
+
+.tabs-style-topline nav li.tab-current div.tab {
+	background: none;
+	box-shadow: inset 0 3px 0 #ffee58;
+	color: #2d2d2d !important;
+  border-right: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+}
+
+.tabs-style-topline .icon::before {
+	display: block;
+	margin: 0;
+}
+
+.tabs-style-topline nav div.tab span {
+	text-transform: uppercase;
+}
+
+.tab__icon{
+  line-height: 1.0em;
+  padding: 3px 0px 0px 0px;
+  font-size: 1.5em;
+}
+
+
 
 /* Icons */
 .icon::before {
@@ -142,13 +200,15 @@
 /* Content */
 .content-wrap {
 	position: relative;
+  border-right: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .content-wrap section {
 	display: none;
 	margin: 0 auto;
 	padding: 1em;
-	max-width: 1200px;
 	text-align: center;
 }
 
@@ -182,10 +242,10 @@
 }
 
 @media screen and (max-width: 58em) {
-	.tabs nav a.icon span {
+	.tabs nav div.icon span {
 		display: none;
 	}
-	.tabs nav a:before {
+	.tabs nav div.tab:before {
 		margin-right: 0;
 	}
 }
