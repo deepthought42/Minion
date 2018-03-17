@@ -23,7 +23,8 @@
     "ng-stomp": "~0.3.0",
     "event-source-polyfill":"~0.0.8",
     "raven-js": "latest",
-    "angular-stripe-checkout": "latest"
+    "angular-stripe-checkout": "latest",
+    "angularjs-slider": "6.5.0"
   },
   "resolutions": {
     "angular": "^1.4.9",

@@ -23,6 +23,8 @@ angular.module('Qanairy', [
   'stripe.checkout',
   'Qanairy.authService',
   'Qanairy.user_profile',
+  'Qanairy.pricing',
+  'rzModule',
   'ngRaven'
 ]).
 config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider',
