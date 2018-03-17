@@ -21,8 +21,9 @@
     "sockjs": "~0.3.4",
     "stomp-websocket": "~2.3.4",
     "ng-stomp": "~0.3.0",
-    "event-source-polyfill": "~0.0.8",
-    "raven-js": "latest"
+    "event-source-polyfill":"~0.0.8",
+    "raven-js": "latest",
+    "angular-stripe-checkout": "latest"
   },
   "resolutions": {
     "angular": "^1.4.9",

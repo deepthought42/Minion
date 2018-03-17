@@ -1,4 +1,5 @@
 'use strict';
+
 var AUTH0_DOMAIN='qanairy.auth0.com';
 var AUTH0_CLIENT_ID='wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV';
 var API_SERVER_URL='api.qanairy.com:8080';  // default server url for Java Spring Security API sample
@@ -19,14 +20,19 @@ angular.module('Qanairy', [
   'ngMaterial',
   'Qanairy.version',
   'AuthInterceptor',
+  'angular-stripe-checkout',
   'Qanairy.authService',
   'Qanairy.user_profile',
   'ngRaven'
 ]).
-config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider',
-  function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider) {
+config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider',
+  function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider) {
     $urlRouterProvider.otherwise('/domains');
     qanairyAuthProvider = angularAuth0Provider;
+
+    StripeCheckoutProvider.defaults({
+      key: "pk_test_9QwakrlLpcLEYO5Ui0JoYHvC"
+    });
 
     storeProvider.setStore("sessionStorage");
     angularAuth0Provider.init({
