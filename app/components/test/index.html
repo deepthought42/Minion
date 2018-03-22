@@ -71,7 +71,7 @@
         </div>
         <div class="col-xs-3 test__title" ng-click="toggleTestDataVisibility(test, $index)">
             <div class="row" >
-							<div class="col-xs-12 " ng-show="!test.show_test_name_edit_field">
+							<div class="col-xs-12 " ng-show="!test.show_test_name_edit_field" ng-trim="false">
 								<h4 ng-click="test.show_test_name_edit_field = true"  ng-trim="false">
 	                {{test.name || "Test #"+($index+1)}}
 	              </h4>

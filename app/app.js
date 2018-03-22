@@ -36,6 +36,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       key: "pk_test_9QwakrlLpcLEYO5Ui0JoYHvC"
     });
 
+    StripeCheckoutProvider.load;
     storeProvider.setStore("sessionStorage");
     angularAuth0Provider.init({
       clientID: 'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV',
@@ -61,7 +62,6 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
 .run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', 'Auth',
   function($rootScope, store, jwtHelper, $state , $location, Account, $window, Auth){
     Auth.handleAuthentication();
-
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
        if(store.get('domain') == null){
