@@ -45,7 +45,7 @@ angular.module('Qanairy.pricing', ['ui.router'])
               });
 
 
-    this.checkout = function(token, discovery_cnt, test_cnt) {
+    $scope.checkout = function(token, discovery_cnt, test_cnt) {
 
       //set package name based on #-disc-#-test
       var package_name = discovery_cnt+"-disc-"+test_cnt+"-test";
