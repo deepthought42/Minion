@@ -37,7 +37,29 @@ angular.module('Qanairy.subscribe', ['ui.router', 'Qanairy.AccountService', 'Qan
       },
     };
 
-var handler = null;
+    $scope.plans = {
+      '2-disc-1000-test' : 79,
+      '2-disc-10000-test' : 149,
+      '2-disc-20000-test' : 249,
+      '2-disc-30000-test' : 349,
+      '2-disc-40000-test' : 449,
+      '4-disc-1000-test' : 129,
+      '4-disc-10000-test' : 199,
+      '4-disc-20000-test' : 299,
+      '4-disc-30000-test' : 399,
+      '4-disc-40000-test' : 499,
+      '6-disc-1000-test' : 179,
+      '6-disc-10000-test' : 249,
+      '6-disc-20000-test' : 349,
+      '6-disc-30000-test' : 449,
+      '6-disc-40000-test' : 549,
+      '8-disc-1000-test' : 229,
+      '8-disc-10000-test' : 299,
+      '8-disc-20000-test' : 399,
+      '8-disc-30000-test' : 499,
+      '8-disc-40000-test' : 599,
+    }
+    var handler = null;
     StripeCheckout.load()
       .then(function() {
         handler = StripeCheckout.configure();
@@ -47,7 +69,7 @@ var handler = null;
 
       //set package name based on #-disc-#-test
       var package_name = discovery_cnt+"-disc-"+test_cnt+"-test";
-      var cost = (discovery_cnt*25) + (test_cnt/100) - 1;
+      var cost = (discovery_cnt*50) + (test_cnt/100) - 1;
 
       var options = {
         description: package_name,
