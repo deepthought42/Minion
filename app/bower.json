@@ -13,9 +13,7 @@
     "html5-boilerplate": "~5.2.0",
     "angular-material": "1.1.6",
     "angular-resource": "1.5.8",
-    "auth0-lock": "latest",
     "angular-auth0": "3.0.0",
-    "angular-lock": "latest",
     "angular-jwt": "latest",
     "a0-angular-storage": "latest",
     "sockjs": "~0.3.4",
@@ -23,7 +21,8 @@
     "ng-stomp": "~0.3.0",
     "event-source-polyfill":"~0.0.8",
     "raven-js": "latest",
-    "angular-stripe-checkout": "latest"
+    "angular-stripe-checkout": "latest",
+    "angularjs-slider": "6.5.0"
   },
   "resolutions": {
     "angular": "^1.4.9",

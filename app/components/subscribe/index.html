@@ -1,0 +1,21 @@
+<div id="startup_package" >
+  <div>
+    Startup Package
+  </div>
+  <div>
+    <rzslider rz-slider-model="discovery_slider.value"
+              rz-slider-options="discovery_slider.options"></rzslider>
+    <rzslider rz-slider-model="test_slider.value"
+              rz-slider-options="test_slider.options"></rzslider>
+  </div>
+  <div>
+    Total : {{(discovery_slider.value * 25) + (test_slider.value/100) - 1}}
+  </div>
+  <button ng-click="updateSubscription(discovery_slider.value, test_slider.value)">
+    Buy Now!
+  </button>
+</div>
+
+<div id="enterprise_package">
+
+</div>

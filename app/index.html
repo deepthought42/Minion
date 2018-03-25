@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="styles/bootstrap.css"> <!-- THIS NEEDS TO BE REMOVED -->
 		<link rel="stylesheet" type="text/css" href="styles/tabs.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="bower_components/angularjs-slider/dist/rzslider.css"/>
 
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/frame.css">
@@ -88,6 +89,8 @@
   <script type="text/javascript" src="bower_components/angular-auth0/dist/angular-auth0.min.js"></script>
   <script src="bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
   <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+  <script src="bower_components\angular-stripe-checkout\angular-stripe-checkout.min.js"></script>
+  <script src="bower_components/angularjs-slider/dist/rzslider.min.js"></script>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-cookies.js"></script>
   <!-- Angular wrapper for localStorage and sessionStorage. Defaults to ng-cookies if not available -->
@@ -123,8 +126,13 @@
   <script src="components/user/controller.js"></script>
   <script src="components/user/userService.js"></script>
 
+  <!-- Subscribe -->
+  <script src="components/subscribe/controller.js"></script>
+  <script src="components/subscribe/subscribeService.js"></script>
+
   <script src="components/discovery/controllers.js"></script>
   <script src="components/main/controller.js"></script>
+
   <script src="components/auth/authInterceptor.js"></script>
   <script src="components/auth/authService.js"></script>
 
@@ -135,6 +143,5 @@
   <script src="https://static.filestackapi.com/v3/filestack.js"></script>
 
   <script src="external_scripts/cbpFWTabs.js"></script>
-
 </body>
 </html>

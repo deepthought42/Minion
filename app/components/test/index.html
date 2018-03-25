@@ -72,7 +72,7 @@
         <div class="col-xs-3 test__title" ng-click="toggleTestDataVisibility(test, $index)">
             <div class="row" >
 							<div class="col-xs-12 " ng-show="!test.show_test_name_edit_field">
-								<h4 ng-click="test.show_test_name_edit_field = true"  ng-trim="false">
+								<h4 ng-click="test.show_test_name_edit_field = true">
 	                {{test.name || "Test #"+($index+1)}}
 	              </h4>
 								<i class="fa fa-pencil edithover"  ng-click="test.show_test_name_edit_field = true" ></i>
@@ -81,7 +81,7 @@
 	              <div class="row no-gutter">
 	                  <div class="col-md-6 col-sm-8 vertical__left__int">
 	                      <div class="input-group">
-	                          <input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" />
+	                          <input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
 	                      </div>
 	                  </div>
 	                  <div class="col-md-6 col-sm-4">

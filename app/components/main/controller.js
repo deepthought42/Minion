@@ -7,9 +7,9 @@ angular.module('Qanairy.main', ['ui.router'])
     abstract: true,
     templateUrl: 'components/main/index.html',
     controller: 'MainCtrl',
-    data: {
-        requireLogin: true // this property will apply to all children of 'app'
-      }
+    sp: {
+      authenticate: true
+    }
   });
 }])
 
