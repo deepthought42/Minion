@@ -1,20 +1,20 @@
 'use strict';
 
-angular.module('Qanairy.pricing', ['ui.router', 'Qanairy.AccountService'])
+angular.module('Qanairy.subscribe', ['ui.router', 'Qanairy.AccountService', 'Qanairy.SubscribeService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('pricing', {
-    url: "/pricing",
-    templateUrl: 'components/pricing/index.html',
-    controller: 'PricingCtrl',
+  $stateProvider.state('subscribe', {
+    url: "/subscribe",
+    templateUrl: 'components/subscribe/index.html',
+    controller: 'SubscribeCtrl',
     sp: {
       authenticate: true
     }
   });
 }])
 
-.controller('PricingCtrl', ['$rootScope', '$scope','StripeCheckout', 'Account',
-  function($rootScope, $scope, StripeCheckout, Account) {
+.controller('SubscribeCtrl', ['$rootScope', '$scope','StripeCheckout', 'Subscribe',
+  function($rootScope, $scope, StripeCheckout, Subscribe) {
     this._init = function(){
 
     }
@@ -43,12 +43,11 @@ var handler = null;
         handler = StripeCheckout.configure();
       });
 
-    $scope.checkout = function(discovery_cnt, test_cnt) {
-      Account.save();
+    $scope.updateSubscription = function(discovery_cnt, test_cnt) {
 
       //set package name based on #-disc-#-test
       var package_name = discovery_cnt+"-disc-"+test_cnt+"-test";
-      var cost = (discovery_cnt*25) + (test_cnt/100);
+      var cost = (discovery_cnt*25) + (test_cnt/100) - 1;
 
       var options = {
         description: package_name,
@@ -62,9 +61,9 @@ var handler = null;
       // The rejection callback doesn't work in IE6-7.
       handler.open(options)
         .then(function(result) {
-          alert("Got Stripe token on success : " + result[0].id);
+          Subscribe.update({"plan" : package_name});
         },function() {
-          alert("Stripe Checkout closed without making a sale :(");
+          alert("Stripe Checkout closed without processing your payment.");
         });
     };
 

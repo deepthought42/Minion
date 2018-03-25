@@ -1,4 +1,4 @@
-<div id="startup_package" ng-click="checkout(discovery_slider.value, test_slider.value)">
+<div id="startup_package" >
   <div>
     Startup Package
   </div>
@@ -9,8 +9,11 @@
               rz-slider-options="test_slider.options"></rzslider>
   </div>
   <div>
-    Total : {{discovery_slider.value * 25 + test_slider.value/100}}
+    Total : {{(discovery_slider.value * 25) + (test_slider.value/100) - 1}}
   </div>
+  <button ng-click="updateSubscription(discovery_slider.value, test_slider.value)">
+    Buy Now!
+  </button>
 </div>
 
 <div id="enterprise_package">

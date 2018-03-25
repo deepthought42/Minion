@@ -22,7 +22,7 @@ angular.module('Qanairy', [
   'stripe.checkout',
   'Qanairy.authService',
   'Qanairy.user_profile',
-  'Qanairy.pricing',
+  'Qanairy.subscribe',
   'rzModule',
   'ngRaven'
 ]).
@@ -68,7 +68,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
          if(toState.name != 'main.domains' && fromState.name == 'main.domains'){
            e.preventDefault();
          }
-         else if(toState.name != 'main.domains' && fromState.name != 'main.domains'){
+         else if(toState.name != 'main.domains' && fromState.name != 'main.domains' && toState.name != 'subscribe'){
            e.preventDefault();
            $state.go('main.domains');
          }
