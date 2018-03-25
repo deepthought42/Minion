@@ -38,9 +38,7 @@ auth.factory('AuthInterceptor', ['$q', '$rootScope', '$injector', 'store', funct
         $rootScope.$broadcast("auth:unauthorized");
       }
       else if(rejection.status === 404){
-        if(rejection.data.message == "Unable to find account in database"){
-          $rootScope.$emit("account-missing");
-        }
+        
       }
       else if(rejection.status === 500){
       }

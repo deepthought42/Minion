@@ -5,7 +5,6 @@ var AUTH0_CLIENT_ID='wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV';
 var API_SERVER_URL='api.qanairy.com:8080';  // default server url for Java Spring Security API sample
 var DELEGATION_ENABLED=false;
 var API_SERVER_CLIENT_ID='';  // set to '' if DELEGATION_ENABLED=false
-var qanairyAuthProvider = null;
 // Declare app level module which depends on views, and components
 angular.module('Qanairy', [
   'ui.router',
@@ -30,14 +29,11 @@ angular.module('Qanairy', [
 config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider',
   function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider) {
     $urlRouterProvider.otherwise('/domains');
-    qanairyAuthProvider = angularAuth0Provider;
 
     StripeCheckoutProvider.defaults({
       key: "pk_test_9QwakrlLpcLEYO5Ui0JoYHvC"
     });
 
-    StripeCheckoutProvider.load;
-    storeProvider.setStore("sessionStorage");
     angularAuth0Provider.init({
       clientID: 'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV',
       domain: 'qanairy.auth0.com',
@@ -46,6 +42,8 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       redirectUri: 'http://localhost:8001',
       scope: 'openid profile read:domains delete:domains update:domains create:domains create:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery'
     });
+
+    storeProvider.setStore("sessionStorage");
 
       jwtOptionsProvider.config({
         tokenGetter: function(auth) {
@@ -59,9 +57,10 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       $httpProvider.interceptors.push('jwtInterceptor');
   }])
 
-.run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', 'Account', '$window', 'Auth',
-  function($rootScope, store, jwtHelper, $state , $location, Account, $window, Auth){
+.run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', '$window', 'Auth',
+  function($rootScope, store, jwtHelper, $state , $location, $window, Auth){
     Auth.handleAuthentication();
+
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
        if(store.get('domain') == null){
@@ -97,12 +96,6 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
 
       //e.preventDefault();
       //$location.path('/accounts');
-
-      var account = {
-        service_package: "alpha",
-        users: ["test32@qanairy.com"]
-      }
-      Account.save(account);
     })
   // Put the authService on $rootScope so its methods
   // can be accessed from the nav bar

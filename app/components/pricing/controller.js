@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.pricing', ['ui.router'])
+angular.module('Qanairy.pricing', ['ui.router', 'Qanairy.AccountService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('pricing', {
@@ -13,8 +13,8 @@ angular.module('Qanairy.pricing', ['ui.router'])
   });
 }])
 
-.controller('PricingCtrl', ['$rootScope', '$scope','StripeCheckout',
-  function($rootScope, $scope, StripeCheckout) {
+.controller('PricingCtrl', ['$rootScope', '$scope','StripeCheckout', 'Account',
+  function($rootScope, $scope, StripeCheckout, Account) {
     this._init = function(){
 
     }
@@ -37,22 +37,22 @@ angular.module('Qanairy.pricing', ['ui.router'])
       },
     };
 
-    var handler = StripeCheckout.configure({
-                  name: "Plan",
-                  token: function(token, args) {
-                    $log.debug("Got stripe token: " + token.id);
-                  }
-              });
+var handler = null;
+    StripeCheckout.load()
+      .then(function() {
+        handler = StripeCheckout.configure();
+      });
 
-
-    $scope.checkout = function(token, discovery_cnt, test_cnt) {
+    $scope.checkout = function(discovery_cnt, test_cnt) {
+      Account.save();
 
       //set package name based on #-disc-#-test
       var package_name = discovery_cnt+"-disc-"+test_cnt+"-test";
+      var cost = (discovery_cnt*25) + (test_cnt/100);
 
       var options = {
-        description: "Ten dollahs!",
-        amount: 1000
+        description: package_name,
+        amount: cost*100
       };
       // The default handler API is enhanced by having open()
       // return a promise. This promise can be used in lieu of or
@@ -63,7 +63,6 @@ angular.module('Qanairy.pricing', ['ui.router'])
       handler.open(options)
         .then(function(result) {
           alert("Got Stripe token on success : " + result[0].id);
-          Account.save({service_package: account_type, payment_acct: result[0].id});
         },function() {
           alert("Stripe Checkout closed without making a sale :(");
         });
