@@ -44,15 +44,24 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
         $scope.discovery_url = $scope.current_domain.url;
+        Discovery.getStatus({url: $scope.discovery_url}).$promise
+          .then (function(data){
+            console.log("DISCOVERY STATUS DATA :::   "+Object.keys(data));
+            $scope.isStarted = data;
+          })
+          .catch(function(err){
+            $scope.isStarted = false;
+          });
+
         Tester.getUnverified({url: $scope.discovery_url}).$promise
-            .then(function(data){
-              $scope.tests = data
-              $scope.waitingOnTests = false;
-            })
-            .catch(function(err){
-              $scope.errors.push(err.data);
-              $scope.waitingOnTests = false;
-            });
+          .then(function(data){
+            $scope.tests = data
+            $scope.waitingOnTests = false;
+          })
+          .catch(function(err){
+            $scope.errors.push(err.data);
+            $scope.waitingOnTests = false;
+          });
 
         // Enable pusher logging - don't include this in production
         //Pusher.logToConsole = true;

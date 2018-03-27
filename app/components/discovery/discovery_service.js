@@ -6,6 +6,7 @@ WorkAllocationService.factory('Discovery', ['$resource', 'Qanairy.serviceConfig'
   return $resource(config.basePath + '/discovery', {id: '@id'}, {
     update: { method: 'PUT'},
     startWork: {url: config.basePath+"/discovery/start", method: 'GET' },
-    stopWork: {url: config.basePath+"/discovery/stop", method: 'GET' }
+    stopWork: {url: config.basePath+"/discovery/stop", method: 'GET' },
+    getStatus: {url: config.basePath+"/discovery/status", method: 'GET', params: {url : '@url'}}
   });
 }]);
