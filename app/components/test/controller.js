@@ -117,16 +117,11 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         });
     };
 
-    $scope.updateTestCorrectness = function(test, browser, correctness){
-      Tester.updateCorrectness({key: test.key, browser: browser, correct: correctness}).$promise
-        .then(function(data){
-          test.browserPassingStatuses = data.browserPassingStatuses;
-          $rootScope.$broadcast("updateFailingCnt");
-          test.correct = data.correct;
-        })
-        .catch(function(err){
-          $scope.errors.push(err);
-        });
+    /*
+    * updates the passing status for a given browser
+    */
+    $scope.updateBrowserPassingStatus = function(test, browser, isPassing){
+      test.browserPassingStatuses[browser] = isPassing;
     }
 
     $scope.runTest = function(firefox_selected, chrome_selected){
@@ -299,10 +294,20 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       }
     }
 
-    $scope.setTestName = function(test, new_name){
-      test.show_waiting_icon = true;
-      Tester.updateName({key: test.key, name: new_name}).$promise
+    $scope.saveTest = function(test){
+      var status_arr = [];
+      for (var key in test.browserPassingStatuses) {
+          if (test.browserPassingStatuses.hasOwnProperty(key)) {
+              status_arr.push( [ key, test.browserPassingStatuses[key].toString() ] );
+          }
+      }
+      var persistable_test = {};
+      persistable_test.key = test.key;
+      persistable_test.name = test.name;
+      persistable_test.browserPassingStatuses = test.browserPassingStatuses;
+      Tester.update(persistable_test).$promise
         .then(function(data){
+          $scope.editing_test_idx = -1;
           test.show_waiting_icon = false;
           test.show_test_name_edit_field=false;
           test.name = new_name;
@@ -312,15 +317,13 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           $scope.errors.push(err);
           test.show_test_name_edit_field = false;
         });
+      test.show_waiting_icon = true;
     }
 
-    $scope.showTestNameEdit = function(test){
-      test.show_test_name_edit_field = true;
-      test.show_waiting_icon = false;
-    }
-
-    $scope.cancelEditingTestName = function(test){
-      test.show_test_name_edit_field = false;
+    $scope.cancelEditingTest = function(test){
+      $scope.editing_test_idx = -1;
+      $scope.test = $scope.test_copy;
+      $scope.test_copy = null;
     }
 
     $scope.openPageModal = function(page) {
@@ -363,6 +366,11 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
     $scope.capitalizeFirstLetter = function(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    $scope.editTest = function($index){
+      $scope.editing_test_idx = $index;
+      $scope.test_copy = JSON.parse(JSON.stringify(oldObject));
     }
 
     $scope._init();
