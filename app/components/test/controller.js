@@ -118,7 +118,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     };
 
     $scope.updateTestCorrectness = function(test, browser, correctness){
-      Tester.updateCorrectness({key: test.key, browser: browser, correct: correctness}).$promise
+      Tester.updateCorrectness({key: test.key, browser_name: browser, correct: correctness}).$promise
         .then(function(data){
           test.browserPassingStatuses = data.browserPassingStatuses;
           $rootScope.$broadcast("updateFailingCnt");
@@ -299,7 +299,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       }
     }
 
-    $scope.setTestName = function(test, new_name){
+    $scope.saveTest = function(test, new_name){
       test.show_waiting_icon = true;
       Tester.updateName({key: test.key, name: new_name}).$promise
         .then(function(data){
@@ -314,13 +314,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         });
     }
 
-    $scope.showTestNameEdit = function(test){
-      test.show_test_name_edit_field = true;
-      test.show_waiting_icon = false;
-    }
-
-    $scope.cancelEditingTestName = function(test){
-      test.show_test_name_edit_field = false;
+    $scope.cancelEditingTest = function(test){
+      $scope.editing_test_idx = -1;
     }
 
     $scope.openPageModal = function(page) {
@@ -365,6 +360,9 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    $scope.editTest = function($index){
+      $scope.editing_test_idx = $index;
+    }
     $scope._init();
   }
 ]);
