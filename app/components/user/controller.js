@@ -6,14 +6,12 @@ angular.module('Qanairy.user_profile', ['ui.router', 'Qanairy.UserService'])
   $stateProvider.state('main.user_profile', {
     url: "/profile",
     templateUrl: 'components/user/index.html',
-    controller: 'UserProfileCtrl',
-    data: {
-      requiresLogin: true
-    }
+    controller: 'UserProfileCtrl'
   });
 }])
 
 .controller('UserProfileCtrl', ['$rootScope', '$scope', 'User', 'store', '$state',
   function($rootScope, $scope, User, store, $state) {
+    
   }
 ]);

@@ -68,7 +68,7 @@ angular.module('Qanairy.subscribe', ['ui.router', 'Qanairy.AccountService', 'Qan
     $scope.updateSubscription = function(discovery_cnt, test_cnt) {
 
       //set package name based on #-disc-#-test
-      var package_name = discovery_cnt+"-disc-"+test_cnt+"-test";
+      var package_name = discovery_cnt+"-disc-"+test_cnt+"-test-90-trial";
       var cost = (discovery_cnt*50) + (test_cnt/100) - 1;
 
       var options = {

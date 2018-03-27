@@ -31,7 +31,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     $urlRouterProvider.otherwise('/domains');
 
     StripeCheckoutProvider.defaults({
-      key: "pk_test_9QwakrlLpcLEYO5Ui0JoYHvC"
+      key: "pk_live_44mv3UzkcOxPpEk0LSXSQxsE"
     });
 
     angularAuth0Provider.init({
@@ -40,7 +40,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       responseType: 'token id_token',
       audience: 'https://api.qanairy.com',
       redirectUri: 'http://localhost:8001',
-      scope: 'openid profile read:domains delete:domains update:domains create:domains create:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery'
+      scope: 'openid profile read:domains delete:domains update:domains create:domains create:accounts delete:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery'
     });
 
     storeProvider.setStore("sessionStorage");
@@ -63,12 +63,12 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
-       if(store.get('domain') == null){
+       if(store.get('domain') == null && toState.name != 'subscribe' && toState.name != 'main.account'){
          $rootScope.$broadcast('domainRequiredError');
          if(toState.name != 'main.domains' && fromState.name == 'main.domains'){
            e.preventDefault();
          }
-         else if(toState.name != 'main.domains' && fromState.name != 'main.domains' && toState.name != 'subscribe'){
+         else if(toState.name != 'main.domains' && fromState.name != 'main.domains'){
            e.preventDefault();
            $state.go('main.domains');
          }
