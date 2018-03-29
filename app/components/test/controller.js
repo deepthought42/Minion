@@ -169,6 +169,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
                     test.passingStatusClass = false;
                     test.failingStatusClass = false;
                     $scope.$apply();
+                  }, 5000);
 
                   return;
                 }
