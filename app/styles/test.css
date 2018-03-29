@@ -92,6 +92,13 @@
 
 .test__title{
   text-align: left;
+	height: 100%;
+}
+
+.test__title > .row {
+	line-height: 4.5em;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .title__edit__buttons{
@@ -216,6 +223,13 @@
 
 .test__status{
 	text-align: center;
+	height: 100%;
+}
+
+.test__status > .row {
+	line-height: 4.5em;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 /*--------------------------- [6. Test Path] --------------------------------------------------------------------------------*/

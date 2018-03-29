@@ -46,8 +46,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         $scope.discovery_url = $scope.current_domain.url;
         Discovery.getStatus({url: $scope.discovery_url}).$promise
           .then (function(data){
-            console.log("DISCOVERY STATUS DATA :::   "+Object.keys(data));
-            $scope.isStarted = data;
+            $scope.isStarted = data.status;
           })
           .catch(function(err){
             $scope.isStarted = false;

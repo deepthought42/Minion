@@ -2,7 +2,7 @@
 
 var AUTH0_DOMAIN='qanairy.auth0.com';
 var AUTH0_CLIENT_ID='wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV';
-var API_SERVER_URL='api.qanairy.com:8080';  // default server url for Java Spring Security API sample
+var API_SERVER_URL='api.qanairy.com:80';  // default server url for Java Spring Security API sample
 var DELEGATION_ENABLED=false;
 var API_SERVER_CLIENT_ID='';  // set to '' if DELEGATION_ENABLED=false
 // Declare app level module which depends on views, and components
@@ -76,19 +76,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     });
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
-        if(!Auth.isAuthenticated()){
-          Auth.login();
-        }
-        /*auth.signin({
-          authParams: {
-            scope: 'openid profile app_metadata' // This is if you want the full JWT
-          }
-        }, function(profile, idToken, accessToken, state, refreshToken) {
-          console.log("successful sign in")
-          //$state.go('/user-info')
-        }, function(err) {
-          console.log("Sign in Error :(", err);
-        });*/
+        Auth.login();
     });
 
     $rootScope.$on('account-missing', function (e){
