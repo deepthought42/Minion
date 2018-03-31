@@ -6,10 +6,7 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
   $stateProvider.state('main.account', {
     url: "/accounts",
     templateUrl: 'components/accounts/index.html',
-    controller: 'AccountCtrl',
-    sp: {
-      authenticate: true
-    }
+    controller: 'AccountCtrl'
   });
 }])
 

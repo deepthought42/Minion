@@ -38,9 +38,10 @@ auth.factory('AuthInterceptor', ['$q', '$rootScope', '$injector', 'store', funct
         $rootScope.$broadcast("auth:unauthorized");
       }
       else if(rejection.status === 404){
-        
+        $rootScope.$broadcast("missing_resorce_error");
       }
       else if(rejection.status === 500){
+        $rootScope.$broadcast("internal_server_error");
       }
 
       return $q.reject(rejection);

@@ -185,7 +185,7 @@
               </button>
             </div>
             <div class="accordian" aria-label="open accordian" ng-click="toggleTestDataVisibility(test, $index)">
-              <i class="fa fa-angle-right fa-2x" />
+              <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
             </div>
           </div>
       	</div>
@@ -292,19 +292,23 @@
                                           </div>
                                       </div>
                                       <div class="col-sm-8 col-xs-12">
-                                          <div class="key--value">
-                                              <div class="data__key">
-                                                  Attributes
-                                              </div>
-                                              <div class="row attribute__data__value" ng-repeat="attribute in current_node[$index].attributes">
-                                                  <div class="col-sm-5 attribute__key">
-                                                      {{attribute.name}}
-                                                  </div>
-                                                  <div class="col-sm-7 pull-right attribute__value" ng-repeat="value in attribute.vals">
-                                                      {{value}}
-                                                  </div>
-                                              </div>
+                                        <div class="key--value">
+                                          <div class="data__key">
+                                              Attributes
                                           </div>
+                                          <div class="row attribute__data__value" ng-repeat="attribute in current_node[$index].attributes">
+                                            <div class="col-sm-5 attribute__key">
+                                                {{attribute.name}}
+                                            </div>
+																						<div class="attribute_value col-sm-7 pull-right">
+                                              <div class="row" ng-repeat="value in attribute.vals">
+																								<div class="col-sm-12" style="text-align:right">
+                                                  {{value}}
+																								</div>
+                                              </div>
+																						</div>
+                                          </div>
+                                        </div>
                                       </div>
                                   </div>
                               </div>

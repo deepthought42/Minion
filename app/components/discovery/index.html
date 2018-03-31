@@ -6,7 +6,7 @@
   </button>
 -->
     <div class="row">
-        <div class="col-md-12 error__message" ng-repeat="error in errors">
+        <div class="col-md-12 error__message" ng-repeat="error in errors track by error">
             {{error.message}}
         </div>
     </div>
@@ -18,9 +18,10 @@
 			</button>
     </div>
     <div class="col-md-2 col-sm-4" ng-if="isStarted">
-			<button class="btn btn--red pull-left">
+			<div class="pull-left">
 				Running...
-			</button>
+        <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+			</div>
 	  </div>
 		<div class="col-md-10 col-sm-8 stats__container text-right" >
 			<div class="flex-none stats__bar">
@@ -99,8 +100,7 @@
         </button>
       </div>
 		</div>
-
-    <div class="empty__state vertical__center" ng-show="waitingOnTests || isStarted">
+    <div class="empty__state vertical__center" ng-show="waitingOnTests">
       <div style="text-align:center; margin: 0px auto; vertical__center__int">
         <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
         <span class="sr-only">Running...</span>
@@ -169,7 +169,7 @@
 			  </div>
         <div class="col-xs-1" ng-click="toggleTestDataVisibility(test, $index)">
           <div class="pull-right accordian" aria-label="open accordian">
-            <i class="fa fa-angle-right fa-2x" />
+            <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
           </div>
         </div>
 			</div>
@@ -285,7 +285,7 @@
                                                 <div class="data__key">
                                                     CSS
                                                 </div>
-                                                <div class="data__value" ng-repeat="(key, value) in current_node[$index].cssValues">
+                                                <div class="data__value" ng-repeat="(key, value) in current_node[$index].cssValues track by key">
                                                     {{key}}:           {{value}};
                                                 </div>
                                             </div>
@@ -299,9 +299,13 @@
                                                     <div class="col-sm-5 attribute__key">
                                                         {{attribute.name}}
                                                     </div>
-                                                    <div class="col-sm-7 pull-right attribute__value" ng-repeat="value in attribute.vals">
-                                                        {{value}}
-                                                    </div>
+                                                    <div class="attribute_value col-sm-7 pull-right">
+  	                                                  <div class="row" ng-repeat="value in attribute.vals">
+  																											<div class="col-sm-12" style="text-align:right">
+  	                                                      {{value}}
+  																											</div>
+  	                                                  </div>
+  																									</div>
                                                 </div>
                                             </div>
                                         </div>
