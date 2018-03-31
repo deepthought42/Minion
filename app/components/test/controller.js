@@ -36,7 +36,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       });
 
       var channel = pusher.subscribe($scope.extractHostname($scope.domain_url));
-      channel.bind('test-discovered', function(data) {
+      channel.bind('test-run', function(data) {
         var reported_test = JSON.parse(data);
         for(var idx=0; idx<$scope.tests.length; idx++){
           var test = $scope.tests[idx];
@@ -374,5 +374,14 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     }
 
     $scope._init();
+
+    /* EVENTS */
+    $rootScope.$on('missing_resorce_error', function (e){
+      $scope.errors.push("There was an issue finding your resource. We'll find it soon and return it to it's rightful place.");
+    });
+
+    $rootScope.$on('internal_server_error', function (e){
+      $scope.errors.push("There was an error processing your request. Please try again.");
+    });
   }
 ]);

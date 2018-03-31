@@ -23,6 +23,7 @@ angular.module('Qanairy', [
   'Qanairy.authService',
   'Qanairy.user_profile',
   'Qanairy.subscribe',
+  'Qanairy.authCallback',
   'rzModule',
   'ngRaven'
 ]).
@@ -39,7 +40,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       domain: 'qanairy.auth0.com',
       responseType: 'token id_token',
       audience: 'https://api.qanairy.com',
-      redirectUri: 'http://localhost:8001',
+      redirectUri: 'http://localhost:8001/#/authenticate',
       scope: 'openid profile read:domains delete:domains update:domains create:domains create:accounts delete:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery'
     });
 
@@ -49,7 +50,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
         tokenGetter: function(auth) {
           return localStorage.getItem("access-token"); //storeProvider.get("token");
         },
-        whiteListedDomains: ['localhost', 'api.qanairy.com'],
+        whiteListedDomains: ['localhost', 'api.qanairy.com', 'staging-api.qanairy.com'],
       //  unauthenticatedRedirectPath: '/login'
       });
 
@@ -76,7 +77,13 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     });
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
+      if(!Auth.isAuthenticated()){
         Auth.login();
+      }
+    });
+
+    $rootScope.$on('auth:forbidden', function (e, toState, toParams, fromState, fromParams) {
+      $state.go('subscribe');
     });
 
     $rootScope.$on('account-missing', function (e){
