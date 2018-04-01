@@ -269,5 +269,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     };
 
     this._init();
+
+
+    /* EVENTS */
+    $rootScope.$on('missing_resorce_error', function (e){
+      $scope.errors.push("We seem to have misplaced those records. Please try again. I'm sure we have them somewhere.");
+    });
+
+    $rootScope.$on('internal_server_error', function (e){
+      $scope.errors.push("There was an error while processing your request. Please try again.");
+    });
   }
 ]);

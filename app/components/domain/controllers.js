@@ -178,5 +178,13 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_error = "Start by adding and selecting a domain.";
     })
 
+    /* EVENTS */
+    $rootScope.$on('missing_resorce_error', function (e){
+      $scope.errors.push("We seem to have misplaced that ");
+    });
+
+    $rootScope.$on('internal_server_error', function (e){
+      $scope.errors.push("There was an error while processing your request. Please try again.");
+    });
   }
 ]);

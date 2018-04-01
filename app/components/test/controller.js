@@ -377,11 +377,11 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
     /* EVENTS */
     $rootScope.$on('missing_resorce_error', function (e){
-      $scope.errors.push("There was an issue finding your resource. We'll find it soon and return it to it's rightful place.");
+      $scope.errors.push("We seem to have misplaced that ");
     });
 
     $rootScope.$on('internal_server_error', function (e){
-      $scope.errors.push("There was an error processing your request. Please try again.");
+      $scope.errors.push("There was an error while processing your request. Please try again.");
     });
   }
 ]);
