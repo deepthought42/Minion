@@ -89,12 +89,14 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           title: "Begin finding tests by starting a discovery.",
           position: "right",
           description: "Discovery time varies based on the complexity of your domain. If a discovery has been running for longer than 48 hours, please contact support@qanairy.com.",
-          attachTo:"#start_discovery_button"
+          attachTo:"#start_discovery_button",
+          width: 400
         },
         {
           title: "Qanairy’s AI is now working to find and build your tests for you. ",
           position: "centered",
-          description: "Tests will begin returning as they are discovered. This process takes a few minutes, now would be a great time to take a break. You deserve it."
+          description: "Tests will begin returning as they are discovered. This process takes a few minutes, now would be a great time to take a break. You deserve it.",
+          width: 400
         }
       ]
     }

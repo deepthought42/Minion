@@ -43,7 +43,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           title: "Welcome to Qanairy!",
           position: "right",
           description: "Start by adding a domain to begin testing!",
-          attachTo:"#addDomainButton"
+          attachTo:"#addDomainButton",
+          width: 400
         }
       ];
 
@@ -51,7 +52,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         {
           title: "Domain Setup",
           position: "right",
-          description: "Edit your domain settings at any time."
+          description: "Edit your domain settings at any time.",
+          width: 400
         }
       ]
     }
