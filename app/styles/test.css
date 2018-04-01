@@ -429,7 +429,12 @@
 		color:#333333;
     text-align: right;
 }
-
+.accounts{
+	max-width: 800px !important;
+}
+.accounts_btn{
+	margin-top: 15px !important;
+}
 /*--------------------------- [6. Test Groups] --------------------------------------------------------------------------------*/
 
 .test__groups{
