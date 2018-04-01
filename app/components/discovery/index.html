@@ -109,12 +109,12 @@
 		<div class="test" ng-repeat="test in tests track by test.key" ng-show="tests.length>0">
 			<div class="test__profile vertical__center__int" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 			  <div class="col-xs-2 test__status text--shadow">
-			   	<div class="row test__status__frame vertical__center">
+			   	<div class="row test__status__frame">
 						<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
 							<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
 							<span class="sr-only">Running...</span>
 						</div>
-					 	<div class="col-xs-6 btn--green select__neutral status-passing discovery_status vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
+					 	<div class="col-xs-6 btn--green select__neutral status-passing discovery_status" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
 						 	<div class="" >
 								Passing
 								<br />
@@ -122,7 +122,7 @@
 							   	 style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
 							</div>
 						</div>
-						<div class="discovery_status status-failing col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
+						<div class="discovery_status status-failing col-xs-6 btn--red select__neutral " ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
 							<div class="" >
 									Failing
 								<br />
@@ -146,7 +146,7 @@
 					<div class="row" >
 						<div class="col-xs-12">
 							<div class="row no-gutter">
-								<div class="col-md-6 col-sm-8 vertical__left__int">
+								<div class="col-md-6 col-sm-8">
 									<div class="input-group">
 										<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
 									</div>
