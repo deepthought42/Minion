@@ -40,9 +40,9 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
       $scope.onboardingSteps = [
         {
-          title: "Welcome!",
-          position: "centered",
-          description: "Welcome to Qanairy! Start by adding a domain to begin testing!",
+          title: "Welcome to Qanairy!",
+          position: "right",
+          description: "Start by adding a domain to begin testing!",
           width: 300
         },
         {
