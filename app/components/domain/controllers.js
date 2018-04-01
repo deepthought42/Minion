@@ -43,16 +43,17 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           title: "Welcome to Qanairy!",
           position: "right",
           description: "Start by adding a domain to begin testing!",
-          width: 300
-        },
-        {
-          title: "Account Setup",
-          position: "right",
-          description: "This is the form for configuring your account.",
-          attachTo: "#account_form",
-          position: "bottom"
+          attachTo:"#addDomainButton"
         }
       ];
+
+      $scope.domainSettingsOnboardingSteps = [
+        {
+          title: "Domain Setup",
+          position: "right",
+          description: "Edit your domain settings at any time."
+        }
+      ]
     }
 
     $scope.createDomain = function(protocol, host, default_browser, logo_url){

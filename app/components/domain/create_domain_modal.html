@@ -1,4 +1,5 @@
-<md-dialog class="col-sm-6" style="">
+
+<md-dialog class="col-sm-6" id="create_modal">
     <div class="dialogue-close" ng-click="closeDialog()" ng-show="domains.length">
         <md-dialog-content>
            <h2 style="text-align:right;">
@@ -81,3 +82,4 @@
         </div>
     </form>
 </md-dialog>
+<onboarding-popover enabled="true" steps="domainSettingsOnboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>

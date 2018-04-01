@@ -4,7 +4,7 @@
 <div class="error__message" ng-show="show_create_domain_err">
   {{domain_creation_err}}
 </div>
-<div class="domain__button vertical__center" ng-click="openDisclaimerDomainDialog()">
+<div id="addDomainButton" class="domain__button vertical__center" ng-click="openDisclaimerDomainDialog()">
   <div class="domain__icon">
     <div class="domain--largeicon">
       <i class="fa fa-plus fa-5x"></i>
@@ -16,6 +16,8 @@
     </h6>
   </div>
 </div>
+<onboarding-popover enabled="onboardingEnabled" steps="onboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>
+
 <div class="domain__button" ng-repeat="domain in domains">
   <div class="row">
     <div class="col-sm-2" style="text-align:left !important; position: relative;">

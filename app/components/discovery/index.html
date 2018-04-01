@@ -12,11 +12,13 @@
     </div>
 
 	<div class="secondary-nav vertical__center__int" >
-	  <div class="col-md-2 col-sm-4" ng-if="!isStarted">
-			<button class="btn btn--primary pull-left" ng-click="startDiscovery()" >
+	  <div class="col-md-2 col-sm-4" ng-if="!isStarted" >
+			<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
 				Start Discovery
 			</button>
     </div>
+    <onboarding-popover enabled="onboardingEnabled" steps="discoveryOnboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>
+
     <div class="col-md-2 col-sm-4" ng-if="isStarted">
 			<div class="pull-left">
 				Running...

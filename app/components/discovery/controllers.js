@@ -40,6 +40,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.group.name = "";
       $scope.group.description = "";
       $scope.test_idx = -1;
+      $scope.onboardingEnabled = true;
       $scope.current_domain = store.get('domain');
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
@@ -82,6 +83,20 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       }
 
       getFailingCount();
+
+      $scope.discoveryOnboardingSteps = [
+        {
+          title: "Begin finding tests by starting a discovery.",
+          position: "right",
+          description: "Discovery time varies based on the complexity of your domain. If a discovery has been running for longer than 48 hours, please contact support@qanairy.com.",
+          attachTo:"#start_discovery_button"
+        },
+        {
+          title: "Qanairy’s AI is now working to find and build your tests for you. ",
+          position: "centered",
+          description: "Tests will begin returning as they are discovered. This process takes a few minutes, now would be a great time to take a break. You deserve it."
+        }
+      ]
     }
 
     $scope.extractHostname =  function(url) {

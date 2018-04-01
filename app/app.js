@@ -28,8 +28,8 @@ angular.module('Qanairy', [
   'rzModule',
   'ngRaven'
 ]).
-config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider',
-  function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider) {
+config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider', 'ngOnboardingDefaultsProvider',
+  function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider) {
     $urlRouterProvider.otherwise('/domains');
 
     StripeCheckoutProvider.defaults({
@@ -55,6 +55,8 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       //  unauthenticatedRedirectPath: '/login'
       });
 
+      ngOnboardingDefaultsProvider.set('overlay', 'false');
+      ngOnboardingDefaultsProvider.set('overlayOpacity', '0.0');
 
       $httpProvider.interceptors.push('jwtInterceptor');
   }])
