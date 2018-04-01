@@ -113,7 +113,6 @@
 
 .title__edit{
     border-radius: 4px !important;
-    width:100% !important;
     margin-left: 15px;
 }
 
@@ -173,11 +172,8 @@
 
 .discovery_status{
 	color: #ffffff !important;
-	height:50px;
   border-right: 1px solid #f9f9f9;
 	text-align: center;
-	padding: 5px 0px;
-	max-width: 80px;
 	font-size: 12px;
 }
 
@@ -223,11 +219,9 @@
 
 .test__status{
 	text-align: center;
-	height: 100%;
 }
 
 .test__status > .row {
-	line-height: 4.5em;
 	display: inline-block;
 	vertical-align: middle;
 }
