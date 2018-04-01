@@ -99,6 +99,23 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           width: 400
         }
       ]
+
+      $scope.discoveredTestOnboardingSteps = [
+        {
+          title: "Begin finding tests by starting a discovery.",
+          position: "centered",
+          description: "Congratulations, you built your first test! Now it’s time to learn about the test path. Start by clicking on the test bar to open the path details.",
+          attachTo:"#start_discovery_button",
+          width: 400
+        },
+        {
+          position: "top",
+          description: "Test paths are comprised of three parts: page, element, and action. Click on each part to learn more details about the test like destination, xpath, styling, and browser screenshots.",
+          attachTo:"#start_discovery_button",
+          width: 400
+        }
+      ]
+
     }
 
     $scope.extractHostname =  function(url) {

@@ -108,6 +108,8 @@
         <span class="sr-only">Running...</span>
       </div>
     </div>
+
+    <onboarding-popover enabled="onboardingEnabled" steps="discoveredTestOnboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>
 		<div class="test" ng-repeat="test in tests track by test.key" ng-show="tests.length>0">
 			<div class="test__profile vertical__center__int" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 			  <div class="col-xs-2 test__status text--shadow">
