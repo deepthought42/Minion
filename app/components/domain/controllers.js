@@ -37,6 +37,22 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_url = "";
       $scope.domain_error = "";
       $scope.domain_creation_err = "An error occurred while saving the domain";
+
+      $scope.onboardingSteps = [
+        {
+          title: "Welcome!",
+          position: "centered",
+          description: "Welcome to Qanairy! Start by adding a domain to begin testing!",
+          width: 300
+        },
+        {
+          title: "Account Setup",
+          position: "right",
+          description: "This is the form for configuring your account.",
+          attachTo: "#account_form",
+          position: "bottom"
+        }
+      ];
     }
 
     $scope.createDomain = function(protocol, host, default_browser, logo_url){

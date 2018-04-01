@@ -24,6 +24,7 @@ angular.module('Qanairy', [
   'Qanairy.user_profile',
   'Qanairy.subscribe',
   'Qanairy.authCallback',
+  'ngOnboarding',
   'rzModule',
   'ngRaven'
 ]).
