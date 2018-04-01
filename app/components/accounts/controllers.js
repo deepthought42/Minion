@@ -10,8 +10,8 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
   });
 }])
 
-.controller('AccountCtrl', ['$rootScope', '$scope', 'Account',
-  function($rootScope, $scope, Account) {
+.controller('AccountCtrl', ['$rootScope', '$scope', 'Account', 'Auth',
+  function($rootScope, $scope, Account, Auth) {
     this._init = function(){
 
     }
@@ -34,6 +34,14 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
     $scope.deleteAccount = function(){
       console.log("Deleting account maybe..");
       Account.delete();
+    }
+
+    if (Auth.getCachedProfile()) {
+      $scope.profile = Auth.getCachedProfile();
+    } else {
+      Auth.getProfile(function(err, profile) {
+        $scope.profile = profile;
+      });
     }
   }
 ]);

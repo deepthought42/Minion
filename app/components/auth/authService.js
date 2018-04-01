@@ -53,10 +53,36 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
       return new Date().getTime() < expiresAt;
     }
 
+    /******************** User profile **********************/
+    var userProfile;
+
+    function getProfile(cb) {
+      var accessToken = localStorage.getItem('access_token');
+      if (!accessToken) {
+        throw new Error('Access Token must exist to fetch profile');
+      }
+      angularAuth0.client.userInfo(accessToken, function(err, profile) {
+        if (profile) {
+          setUserProfile(profile);
+        }
+        cb(err, profile);
+      });
+    }
+
+    function setUserProfile(profile) {
+      userProfile = profile;
+    }
+
+    function getCachedProfile() {
+      return userProfile;
+    }
+
     return {
       login: login,
       handleAuthentication: handleAuthentication,
       logout: logout,
-      isAuthenticated: isAuthenticated
+      isAuthenticated: isAuthenticated,
+      getProfile: getProfile,
+      getCachedProfile: getCachedProfile
     }
 }]);
