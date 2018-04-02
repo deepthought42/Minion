@@ -83,6 +83,10 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     });
 
     $rootScope.$on('auth:forbidden', function (e, toState, toParams, fromState, fromParams) {
+      
+    });
+
+    $rootScope.$on('resource_conflict', function (e, toState, toParams, fromState, fromParams) {
       $state.go('subscribe');
     });
 
