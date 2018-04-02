@@ -180,7 +180,7 @@
 								</div>
 						</div>
             <div class="btn-group pull-left" role="group" aria-label="Test Functions">
-              <button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)">
+              <button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)" id="run_test_button">
                  Run
               </button>
             </div>
@@ -404,3 +404,6 @@
 	  </div>
 	</div>
 </div>
+
+
+<onboarding-popover enabled="onboardingEnabled" steps="testRunOnboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>

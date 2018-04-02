@@ -109,7 +109,7 @@
       </div>
     </div>
 
-    <onboarding-popover enabled="onboardingEnabled" steps="discoveredTestOnboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>
+    <onboarding-popover enabled="tests.length==1" steps="discoveredTestOnboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>
 		<div class="test" ng-repeat="test in tests track by test.key" ng-show="tests.length>0">
 			<div class="test__profile vertical__center__int" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 			  <div class="col-xs-2 test__status text--shadow">
@@ -136,6 +136,8 @@
 						</div>
 				  </div>
 			  </div>
+        <onboarding-popover enabled="onboardingEnabled" steps="testVerificationSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>
+
 				<div class="col-xs-5 test__title" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
 					<div class="row" >
 						<div class="col-xs-12 " ng-show="!test.show_test_name_edit_field">

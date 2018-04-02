@@ -49,6 +49,23 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         //$scope.tests.push(JSON.parse(data));
         $scope.$apply();
       });
+
+      $scope.testRunOnboardingSteps = [
+        {
+          position: "top",
+          position: "right",
+          description: "Run tests to compare the new run record to the last time the test was ran. If the test fails, but the expected outcome is now correct, you can update the test status by editing the selected test. Otherwise continue to run your test until development has/your engineers have fixed the problem.",
+          attachTo:"#run_test_button",
+          width: 400
+        },
+        {
+          title: "Congratulations, that’s all there is to it!",
+          position: "top",
+          position: "centered",
+          description: "We hope you enjoy your new testing experience with Qanairy. Please contact support@qanairy.com if you have any questions.",
+          width: 400
+        }
+      ]
     }
 
 
