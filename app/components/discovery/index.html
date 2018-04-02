@@ -150,7 +150,7 @@
 							</div>
 						</div>
 						<div class="col-md-6 col-sm-4">
-							<div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
+							<div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div>
 							<div class="" ng-show="test.show_waiting_icon">
 								<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
 							</div>
@@ -164,7 +164,7 @@
 					{{( test.lastRunTimestamp | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
         <div class="col-xs-1" ng-click="toggleTestDataVisibility(test, $index)">
-          <div class="pull-right accordian" aria-label="open accordian">
+          <div class="pull-right accordian" aria-label="open/close accordian">
             <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
           </div>
         </div>

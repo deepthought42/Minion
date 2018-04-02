@@ -404,6 +404,30 @@ h5,
   background-color: #cccccc;
 }
 
+.btn--tertiary {
+	min-height: 40px;
+  min-width: 40px;
+  color: #4144bc;
+  background-color: #ffffff;
+	border: 1px solid #4144bc;
+}
+.btn--tertiary:focus,
+.btn--tertiary.focus {
+  background-color: #f4f4f5;
+	border: 1px solid #2b2e93;
+}
+.btn--tertiary:hover {
+  background-color: #f4f4f5;
+	border: 1px solid #2b2e93;
+}
+.btn--tertiary:active,
+.btn--tertiary.active,
+.open > .dropdown-toggle.btn--gray {
+  color: #2b2e93;
+  background-color: #f4f4f5;
+	border: 1px solid #2b2e93;
+}
+
 .btn--green {
   color: #fff;
   background-color: #66bb6a;
