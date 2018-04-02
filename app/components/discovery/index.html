@@ -132,7 +132,7 @@
 						</div>
 				  </div>
 			  </div>
-				<div class="col-xs-5 test__title" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
+				<div class="col-xs-5 test__title vertical__left" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
 					<div class="row" >
 						<div class="col-xs-12 " ng-show="!test.show_test_name_edit_field">
 							<h4>
@@ -142,21 +142,17 @@
 						</div>
 					</div>
 				</div>
-        <div class="col-xs-5 test__title" ng-if="test.show_test_name_edit_field">
-					<div class="row" >
-						<div class="col-xs-12">
-							<div class="row no-gutter">
-								<div class="col-md-6 col-sm-8">
-									<div class="input-group">
-										<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
-									</div>
-								</div>
-								<div class="col-md-6 col-sm-4">
-									<div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
-									<div class="" ng-show="test.show_waiting_icon">
-										<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-									</div>
-								</div>
+        <div class="col-xs-5 test__title vertical__left" ng-if="test.show_test_name_edit_field">
+					<div class="row no-gutter">
+						<div class="col-md-6 col-sm-8">
+							<div class="input-group">
+								<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-4">
+							<div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
+							<div class="" ng-show="test.show_waiting_icon">
+								<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
 							</div>
 						</div>
 					</div>

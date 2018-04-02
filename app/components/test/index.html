@@ -57,7 +57,7 @@
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] track by $index"
 				 ng-show="tests.length > 0">
 			<div class="test__profile vertical__center__int" ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass}">
-        <div class="col-xs-1 test__status vertical__center__int" ng-if="isTestRunning(test)" ng-click="toggleTestDataVisibility(test, $index)">
+        <div class="col-xs-1 test__status " ng-if="isTestRunning(test)" ng-click="toggleTestDataVisibility(test, $index)">
           <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
           <span class="sr-only">Running...</span>
         </div>
@@ -75,11 +75,10 @@
 							<h4>
                 {{test.name || "Test #"+($index+1)}}
               </h4>
-							<i class="fa fa-pencil edithover"  ng-click="test.show_test_name_edit_field = true" ></i>
 						</div>
 					</div>
         </div>
-				<div class="col-xs-3 test__title" ng-if="editing_test_idx==$index">
+				<div class="col-xs-3" ng-if="editing_test_idx==$index">
           <div class="row">
 						<div class="col-xs-12" ng-if="editing_test_idx==$index">
               <div class="row no-gutter">
@@ -92,20 +91,20 @@
 						</div>
 					</div>
         </div>
-			  <div class="col-xs-2 test__status" ng-click="toggleTestDataVisibility(test, $index)">
-					<div class="row">
+			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
+					<div class="">
 						{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 					</div>
 				</div>
-			  <div class="col-xs-2 test__status" ng-click="toggleTestDataVisibility(test, $index)">
-					<div class="row">
+			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
+					<div class="">
 						{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
 					</div>
 				</div>
-        <div class="col-xs-2 test__status" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
-          <div class="row">
-            <div class="col-sm-6" ng-repeat="(browser, status) in test.browserPassingStatuses">
-              <div class="row vertical__center test__status__frame__browser">
+        <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
+          <div class="">
+            <div class="tests__test__status" ng-repeat="(browser, status) in test.browserPassingStatuses">
+              <div class="vertical__center test__status__frame__browser">
                 <img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
                 <img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
               </div>
@@ -122,16 +121,16 @@
 								<div class="col-xs-12" ng-if="status == null">
 									<i class="fa fa-circle-o-notch fa-spin fa-lg green fa-fw" aria-hidden="true"></i>
 								</div>
-								<div class="col-xs-6 btn--green select__neutral status-passing status--browser vertical__center__int"
-											style="{{status ? 'background-color:green' : 'background-color:#bfbfbf'}}"
+								<div class="col-xs-6 green select__neutral status--browser vertical__center__int"
+											style="{{status ? ''}}"
 											ng-if="status">
 									<div class="" >
 										<i class="fa fa-check status--symbol--browser white"
 											 style="{{status ? 'color:green' : 'color:#bfbfbf'}}"></i>
 									</div>
 								</div>
-								<div class="col-xs-6 btn--red select__neutral status--browser status-failing  vertical__center__int"
-											style="{{!status && status != null ? 'background-color:red' : 'background-color:#bfbfbf'}}"
+								<div class="col-xs-6 red select__neutral status--browser vertical__center__int"
+											style="{{!status && status != null ? ''}}"
 											ng-if="!status && status!=null">
 									<div class="" >
 										<i  class="fa fa-times status--symbol--browser white"
@@ -143,7 +142,7 @@
 					</div>
 				</div>
 
-				<div class="col-xs-2 test__status" ng-if="editing_test_idx==$index">
+				<div class="col-xs-2" ng-if="editing_test_idx==$index">
 					<div class="row">
 						<div class="col-sm-6" ng-repeat="(browser, status) in test.browserPassingStatuses">
 							<div class="row vertical__center test__status__frame__browser">

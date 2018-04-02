@@ -96,7 +96,6 @@
 }
 
 .test__title > .row {
-	line-height: 4.5em;
 	display: inline-block;
 	vertical-align: middle;
 }
@@ -220,6 +219,11 @@
 .test__status{
 	text-align: center;
 }
+.tests__test__status{
+	max-width: 31px;
+	margin-right: 15px;
+}
+
 
 .test__status > .row {
 	display: inline-block;
