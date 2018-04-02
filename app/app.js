@@ -40,7 +40,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       domain: 'qanairy.auth0.com',
       responseType: 'token id_token',
       audience: 'https://api.qanairy.com',
-      redirectUri: 'http://localhost:8001/#/authenticate',
+      redirectUri: 'https://app.qanairy.com/#/authenticate',
       scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts delete:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery'
     });
 
@@ -83,11 +83,11 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     });
 
     $rootScope.$on('auth:forbidden', function (e, toState, toParams, fromState, fromParams) {
-      
+
     });
 
     $rootScope.$on('resource_conflict', function (e, toState, toParams, fromState, fromParams) {
-      $state.go('subscribe');
+      //$state.go('subscribe');
     });
 
     $rootScope.$on('account-missing', function (e){
