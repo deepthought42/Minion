@@ -168,7 +168,7 @@
         </div>
           <div class="col-xs-2 test__btns">
 						<div  ng-if="editing_test_idx!=$index">
-							<i class="fa fa-pencil edithover"  ng-click="editTest($index)" ></i>
+							<i class="fa fa-pencil edithover"  ng-click="editTest(test, $index)" ></i>
 						</div>
 						<div class="col-md-6 col-sm-4" ng-if="editing_test_idx==$index">
 								<div class="title__edit__buttons btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTest(test)" ng-show="!test.show_waiting_icon">Cancel</div>

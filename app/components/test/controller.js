@@ -368,9 +368,9 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    $scope.editTest = function($index){
+    $scope.editTest = function(test, $index){
       $scope.editing_test_idx = $index;
-      $scope.test_copy = JSON.parse(JSON.stringify(oldObject));
+      $scope.test_copy = JSON.parse(JSON.stringify(test));
     }
 
     $scope._init();
