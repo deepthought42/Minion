@@ -207,7 +207,6 @@ width: -webkit-calc(100% - 15px);
 .status--browser{
 	color: #ffffff !important;
   border-right: 1px solid #f9f9f9;
-
 	max-width:20px;
 }
 
@@ -221,7 +220,7 @@ width: -webkit-calc(100% - 15px);
 }
 
 .status--symbol--browser{
-	font-size: 16px !important;
+	font-size: 20px !important;
 	padding:2px;
 }
 
