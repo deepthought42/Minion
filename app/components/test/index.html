@@ -22,26 +22,20 @@
 	  <div class="status__title tests__test__status">
 		    Status
 	  </div>
-		<div class="col-xs-12">
-			<div class="row">
-				<div class="col-xs-3 test__title">
+				<div class="flex-auto test__title test_functions">
 					Test Title
 				</div>
-				<div class="col-xs-2">
+				<div class="flex-initial time_stats">
 					Time (minutes)
 				</div>
-				<div class="col-xs-2"  ng-click="sortLastRun=!sortLastRun">
+				<div class="flex-initial time_stats"  ng-click="sortLastRun=!sortLastRun">
 						Date Last Run
 				</div>
-				<div class="col-xs-2">
+				<div class="flex-auto test_functions">
 						Browsers
 				</div>
-						<div class="col-xs-1">
+						<div class="flex-none test_functions">
 				</div>
-						<div class="col-xs-1">
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<div class="test-container">
@@ -61,6 +55,7 @@
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] track by $index"
 				 ng-show="tests.length > 0">
 			<div class="test__profile vertical__center__int" ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass}">
+				
 				<div class="tests__test__status ">
 					<div class="test__status " ng-if="isTestRunning(test)" ng-click="toggleTestDataVisibility(test, $index)">
 						<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
@@ -76,9 +71,11 @@
 						</span>
 					</div>
 				</div>
-				 <div class="col-xs-12">
-          <div class="row">
-						<div class="col-xs-3" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
+				
+				
+				
+				 
+						<div class="flex-auto test_functions" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
 							<div class="row">
 								<div class="col-xs-12 " ng-if="editing_test_idx!=$index" >
 									<h4>
@@ -100,17 +97,17 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
+						<div class="flex-initial time_stats" ng-click="toggleTestDataVisibility(test, $index)">
 							<div class="">
 								{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 							</div>
 						</div>
-						<div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
+						<div class="flex-initial time_stats" ng-click="toggleTestDataVisibility(test, $index)">
 							<div class="">
 								{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
 							</div>
 						</div>
-						<div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
+						<div class="flex-auto test_functions" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
 							<div class="">
 								<div class="browser__test__status" ng-repeat="(browser, status) in test.browserPassingStatuses">
 									<div class="vertical__center test__status__frame__browser">
@@ -149,7 +146,7 @@
 							</div>
 						</div>
 
-						<div class="col-xs-2" ng-if="editing_test_idx==$index">
+						<div class="flex-auto" ng-if="editing_test_idx==$index">
 							<div class="row">
 								<div class="col-sm-6" ng-repeat="(browser, status) in test.browserPassingStatuses">
 									<div class="row vertical__center test__status__frame__browser">
@@ -175,13 +172,13 @@
 								</div>
 							</div>
 						</div>
-							<div class="col-xs-3 test__btns" aria-label="Test Functions">
-								<div class="btn-group pull-left" role="group" >
+							<div class="flex-none test_functions test__btns" aria-label="Test Functions">
+								<div class="fifteen_right btn-group pull-left" role="group" >
 									<button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)">
 										 Run
 									</button>
 								</div>
-								 <div class="pull-left" ng-if="editing_test_idx!=$index">
+								 <div class="fifteen_right pull-left" ng-if="editing_test_idx!=$index">
 									<button class="btn btn--tertiary" ng-click="editTest($index)">
 										 <i class="fa fa-pencil" ></i>
 									</button>
@@ -196,8 +193,7 @@
 									<i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
 								</div>
 							</div>
-						</div>
-          </div>
+						
       	</div>
         <div class="row test__path" ng-show="test.visible">
           <div class="col-sm-12 path__title">

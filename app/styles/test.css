@@ -43,16 +43,17 @@
 	padding-bottom: 10px;
 	height: 50px;
 	font-weight:500;
+	display: flex;
 }
 
-/*.test-labels{
-  width: -moz-calc(100% - 15px);*/
+.test-labels{
+  width: -moz-calc(100% - 15px);
   /* WebKit */
- /* width: -webkit-calc(100% - 15px);*/
+width: -webkit-calc(100% - 15px);
   /* Opera */
-  /*width: -o-calc(100% - 15px);*/
+  width: -o-calc(100% - 15px);
   /* Standard */
- /* width: calc(100% - 15px);
+ width: calc(100% - 15px);
 	 left: 15px;
 }*/
 
@@ -94,7 +95,6 @@
   text-align: left;
 	height: 100%;
 }
-
 .test__title > .row {
 	display: inline-block;
 	vertical-align: middle;
@@ -132,7 +132,15 @@
   background-color: #ffffff;
 	transition: background-color 10s ease-in-out;
 }
-
+.test__profile .flex-auto,
+.test__profile .flex-initial,
+.test__profile .flex-none,
+.test-labels .flex-auto,
+.test-labels .flex-initial,
+.test-labels .flex-none{
+	margin-right:15px;
+	margin-left:15px;
+}
 
 .test__profile:focus,
 .test__profile.focus {
@@ -155,10 +163,30 @@
 }
 
 .accordian{
-	padding: 0px 10px;
-
+  width:18px;
+	text-align: center;
+}
+.fifteen_right{
+	padding-right:15px;
 }
 
+.flex-auto {
+  flex: 1 1 auto;
+}
+
+.flex-initial {
+  flex: 0 1 auto;
+}
+
+.flex-none {
+  flex: 0 0 auto;
+}
+.time_stats {
+	width:150px;
+}
+.test_functions {
+	width:228px;
+}
 
 /*--------------------------- [6. Test Status] --------------------------------------------------------------------------------*/
 .status{
@@ -224,8 +252,8 @@
 	margin-right: 15px;
 }
 .tests__test__status{
-	display:inline-block;
-	max-width: 80px;
+	flex: 0 0 auto;
+	width: 80px;
 	margin-right: 15px;
 }
 
