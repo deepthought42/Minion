@@ -127,18 +127,16 @@
 										<div class="col-xs-12" ng-if="status == null">
 											<i class="fa fa-circle-o-notch fa-spin fa-lg green fa-fw" aria-hidden="true"></i>
 										</div>
-										<div class="col-xs-6 green select__neutral vertical__center__int"
+										<div class="col-xs-6 green vertical__center__int"
 													ng-if="status">
 											<div class="" >
-												<i class="fa fa-check status--symbol--browser white"
-													 style="{{status ? 'color:green' : 'color:#bfbfbf'}}"></i>
+											<i class="fa fa-check green status--symbol--browser"></i>
 											</div>
 										</div>
-										<div class="col-xs-6 red select__neutral vertical__center__int"
+										<div class="col-xs-6 red vertical__center__int"
 													ng-if="!status && status!=null">
 											<div class="" >
-												<i  class="fa fa-times status--symbol--browser white"
-													style="{{!status && status != null ? 'background-color:red' : 'background-color:#bfbfbf'}}"></i>
+												<i class="fa fa-times red status--symbol--browser"></i>
 											</div>
 										</div>
 									</div>
