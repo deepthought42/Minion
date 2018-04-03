@@ -55,7 +55,7 @@
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] track by $index"
 				 ng-show="tests.length > 0">
 			<div class="test__profile vertical__center__int" ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass}">
-				
+
 				<div class="tests__test__status ">
 					<div class="test__status " ng-if="isTestRunning(test)" ng-click="toggleTestDataVisibility(test, $index)">
 						<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
@@ -71,10 +71,10 @@
 						</span>
 					</div>
 				</div>
-				
-				
-				
-				 
+
+
+
+
 						<div class="flex-auto test_functions" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
 							<div class="row">
 								<div class="col-xs-12 " ng-if="editing_test_idx!=$index" >
@@ -178,8 +178,8 @@
 										 Run
 									</button>
 								</div>
-								 <div class="fifteen_right pull-left" ng-if="editing_test_idx!=$index">
-									<button class="btn btn--tertiary" ng-click="editTest($index)">
+								<div class="fifteen_right pull-left" ng-if="editing_test_idx!=$index">
+									<button class="btn btn--tertiary" ng-click="editTest(test, $index)">
 										 <i class="fa fa-pencil" ></i>
 									</button>
 								</div>
@@ -193,7 +193,7 @@
 									<i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
 								</div>
 							</div>
-						
+
       	</div>
         <div class="row test__path" ng-show="test.visible">
           <div class="col-sm-12 path__title">
