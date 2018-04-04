@@ -167,7 +167,7 @@
 							</div>
 						</div>
 							<div class="flex-none test_functions test__btns" aria-label="Test Functions">
-								<div class="fifteen_right btn-group pull-left" role="group" >
+								<div class="fifteen_right btn-group pull-left" role="group" ng-if="editing_test_idx!=$index" >
 									<button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)">
 										 Run
 									</button>
