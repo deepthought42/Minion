@@ -193,6 +193,7 @@ html {
  	top: 45%;
   align-items: stretch !important;
   justify-content: center !important;
+	text-align: center !important;
 }
 
 .vertical__center,
