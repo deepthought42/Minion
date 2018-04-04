@@ -279,8 +279,7 @@ width: -webkit-calc(100% - 15px);
 	text-align: center;
 }
 .browser__test__status{
-	max-width: 30px;
-	margin-right: 15px;
+	display: inline-block !important;
 }
 .tests__test__status{
 	flex: 0 0 auto;
