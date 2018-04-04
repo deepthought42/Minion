@@ -115,10 +115,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.isStarted = true;
       Discovery.startWork({url:  $scope.discovery_url}).$promise
         .then(function(value){
-          $scope.waitingOnTests = true;
+          //$scope.waitingOnTests = true;
         })
         .catch(function(err){
-          $scope.waitingOnTests = false;
+          //$scope.waitingOnTests = false;
           $scope.isStarted = false;
           $scope.errors.push(err.data);
         });
