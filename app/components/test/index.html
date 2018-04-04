@@ -173,7 +173,7 @@
 										 <i class="fa fa-pencil" ></i>
 									</button>
 								</div>
-								<div class="col-md-6 col-sm-4" ng-if="editing_test_idx==$index">
+								<div class="test_name_edit" ng-if="editing_test_idx==$index">
 										<div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTest(test)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">Save</div>
 										<div class="" ng-show="test.show_waiting_icon">
 												<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
