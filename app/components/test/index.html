@@ -82,13 +82,9 @@
 						</div>
 						<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx==$index">
 							<div class="row">
-								<div class="col-xs-12" ng-if="editing_test_idx==$index">
-									<div class="row no-gutter">
-										<div class="col-md-6 col-sm-8 vertical__left__profile">
-											<div class="input-group">
-												<input class="form-control title__edit" type="text" ng-model="test.name" ng-value="test.name" ng-trim="false"/>
-											</div>
-										</div>
+								<div class="col-xs-12 vertical__left__profile" ng-if="editing_test_idx==$index">
+									<div class="input-group">
+										<input class="form-control title__edit" type="text" ng-model="test.name" ng-value="test.name" ng-trim="false"/>
 									</div>
 								</div>
 							</div>
