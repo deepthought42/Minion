@@ -42,7 +42,8 @@
 		<div class="empty__state vertical__center_empty_state" ng-show="waitingOnTests">
 			<div style="text-align:center; margin: 0px auto;">
 				<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw"></i>
-				<span class="sr-only">Running...</span>
+				<br><br><br>
+				<h2>Servers under heavy load. Loading your tests may take longer than usual.<br>Please stand by.</h2>
 			</div>
 		</div>
 		<div class="empty__state vertical__center_empty_state" ng-show="!waitingOnTests && tests.length==0">
@@ -59,7 +60,6 @@
 				<div class="tests__test__status test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					<div class="test__status " ng-if="isTestRunning(test)">
 						<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
-						<span class="sr-only">Running...</span>
 					</div>
 
 					<div class="test__status vertical__center" ng-if="!isTestRunning(test)">
