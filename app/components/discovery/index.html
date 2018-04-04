@@ -140,14 +140,14 @@
 							<i class="fa fa-pencil edithover" ng-click="test.show_test_name_edit_field = true" ></i>
 						</div>
 				</div>
-        <div class="flex-auto test_functions test__profile_stretch" ng-if="test.show_test_name_edit_field">
-					<div class="row no-gutter">
-						<div class="col-md-6 col-sm-8">
-							<div class="input-group">
+        <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="test.show_test_name_edit_field">
+					<div class="row">
+						<div class="flex-auto fifteen_left">
+							<div class="">
 								<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
 							</div>
 						</div>
-						<div class="col-md-6 col-sm-4">
+						<div class="flex-none test_name_edit fifteen_right">
 							<div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div>
 							<div class="" ng-show="test.show_waiting_icon">
 								<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>

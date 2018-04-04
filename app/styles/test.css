@@ -103,7 +103,6 @@ width: -webkit-calc(100% - 15px);
 
 .title__edit{
     border-radius: 4px !important;
-    margin-left: 15px;
 }
 
 
@@ -153,6 +152,12 @@ width: -webkit-calc(100% - 15px);
 	padding-right:15px;
 	padding-left:15px;
 }
+.time_stats .flex-auto,
+.time_stats .flex-initial,
+.time_stats .flex-none{
+	padding-right:0px;
+	padding-left:0px;
+}
 
 .test__profile:focus,
 .test__profile.focus {
@@ -182,7 +187,10 @@ width: -webkit-calc(100% - 15px);
   width:48px;
 }
 .fifteen_right{
-	padding-right:15px;
+	padding-right:15px !important;
+}
+.fifteen_left{
+	padding-left:15px !important;
 }
 
 .flex-auto {
@@ -201,6 +209,9 @@ width: -webkit-calc(100% - 15px);
 }
 .test_functions {
 	width:258px;
+}
+.test_name_edit {
+	width:152px;
 }
 
 /*--------------------------- [6. Test Status] --------------------------------------------------------------------------------*/
@@ -255,9 +266,10 @@ width: -webkit-calc(100% - 15px);
 	width: 180px;
 }
 
-.test__status__frame__browser{
+.test__status__editable{
+	width:92px;
 	padding: 0px 15px;
-}
+}	
 
 .test__status{
 	text-align: center;

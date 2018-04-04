@@ -110,7 +110,7 @@
 						<div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
 							<div class="">
 								<div class="browser__test__status" ng-repeat="(browser, status) in test.browserPassingStatuses">
-									<div class="vertical__center test__status__frame__browser">
+									<div class="row vertical__center test__status__editable">
 										<img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
 										<img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
 									</div>
@@ -123,7 +123,7 @@
 										</div>
 									-->
 
-									<div class="row vertical__center test__status__frame__browser">
+									<div class="row vertical__center test__status__editable">
 										<div class="col-xs-12" ng-if="status == null">
 											<i class="fa fa-circle-o-notch fa-spin fa-lg green fa-fw" aria-hidden="true"></i>
 										</div>
@@ -146,12 +146,12 @@
 
 						<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx==$index">
 							<div class="row">
-								<div class="col-sm-6" ng-repeat="(browser, status) in test.browserPassingStatuses">
-									<div class="row vertical__center test__status__frame__browser">
+								<div class="flex-none" ng-repeat="(browser, status) in test.browserPassingStatuses">
+									<div class="row vertical__center test__status__editable">
 										<img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
 										<img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
 									</div>
-									<div class="row vertical__center test__status__frame__browser">
+									<div class="row vertical__center test__status__editable">
 										<div class="col-xs-6 btn--green select__neutral status-passing status--browser vertical__center__int"
 													style="{{status ? 'background-color:green' : 'background-color:#bfbfbf'}}"
 													ng-click="updateBrowserPassingStatus(test, browser, true)" ng-if="status!=null">
@@ -176,8 +176,8 @@
 										 Run
 									</button>
 								</div>
-								 <div class="fifteen_right pull-left" ng-if="editing_test_idx!=$index">
-									<button class="btn btn--tertiary" ng-click="editTest($index)">
+								<div class="fifteen_right pull-left" ng-if="editing_test_idx!=$index">
+									<button class="btn btn--tertiary" ng-click="editTest(test, $index)">
 										 <i class="fa fa-pencil" ></i>
 									</button>
 								</div>
