@@ -310,7 +310,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           $scope.editing_test_idx = -1;
           test.show_waiting_icon = false;
           test.show_test_name_edit_field=false;
-          test.name = new_name;
+          test.name = $scope.new_name;
         })
         .catch(function(err){
           test.show_waiting_icon = false;
