@@ -73,19 +73,19 @@
 	</div>
 
 	<div class="test-labels">
-		<div class="col-xs-2 status__title">
+		<div class="status__title test__status__frame">
 		  Status
 		</div>
-		<div class="col-xs-5 test__title">
+		<div class="flex-auto test_functions">
 		  Test Title
 		</div>
-		<div class="col-xs-2">
+		<div class="flex-initial time_stats">
 		  Time (minutes)
 		</div>
-		<div class="col-xs-2">
+		<div class="flex-initial time_stats">
 		  Date Discovered
 		</div>
-        <div class="col-xs-1">
+        <div class="flex-none accordion-flex">
 		</div>
 	</div>
 
@@ -100,15 +100,15 @@
         </button>
       </div>
 		</div>
-    <div class="empty__state vertical__center" ng-show="waitingOnTests">
-      <div style="text-align:center; margin: 0px auto; vertical__center__int">
+    <div class="empty__state vertical__center_empty_state" ng-show="waitingOnTests">
+      <div style="text-align:center; margin: 0px auto;">
         <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
         <span class="sr-only">Running...</span>
       </div>
     </div>
 		<div class="test" ng-repeat="test in tests track by test.key" ng-show="tests.length>0">
-			<div class="test__profile vertical__center__int" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
-			  <div class="col-xs-2 test__status text--shadow">
+			<div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
+			  <div class="test__status test__profile_stretch flex-none text--shadow">
 			   	<div class="row test__status__frame">
 						<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
 							<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
@@ -132,24 +132,22 @@
 						</div>
 				  </div>
 			  </div>
-				<div class="col-xs-5 test__title vertical__left" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
-					<div class="row" >
-						<div class="col-xs-12 " ng-show="!test.show_test_name_edit_field">
+				<div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
+						<div class="" ng-show="!test.show_test_name_edit_field">
 							<h4>
                 {{test.name || "Test #"+($index+1)}}
               </h4>
 							<i class="fa fa-pencil edithover" ng-click="test.show_test_name_edit_field = true" ></i>
 						</div>
-					</div>
 				</div>
-        <div class="col-xs-5 test__title vertical__left" ng-if="test.show_test_name_edit_field">
-					<div class="row no-gutter">
-						<div class="col-md-6 col-sm-8">
-							<div class="input-group">
+        <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="test.show_test_name_edit_field">
+					<div class="row">
+						<div class="flex-auto fifteen_left">
+							<div class="">
 								<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
 							</div>
 						</div>
-						<div class="col-md-6 col-sm-4">
+						<div class="flex-none test_name_edit fifteen_right">
 							<div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div>
 							<div class="" ng-show="test.show_waiting_icon">
 								<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
@@ -157,14 +155,14 @@
 						</div>
 					</div>
 				</div>
-			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
+			  <div class="flex-initial time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 			  </div>
-			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
+			  <div class="flex-initial time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					{{( test.lastRunTimestamp | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
-        <div class="col-xs-1" ng-click="toggleTestDataVisibility(test, $index)">
-          <div class="pull-right accordian" aria-label="open/close accordian">
+        <div class="flex-none accordion-flex test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+          <div class="accordion" aria-label="open/close accordion">
             <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
           </div>
         </div>
