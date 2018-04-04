@@ -188,10 +188,10 @@ html {
 }
 
 
-.vertical__center_empty_state > div{
+.vertical__center_empty_state {
 	position: relative;
- 	top: 40%;
-      align-items: center !important;
+ 	top: 45%;
+  align-items: stretch !important;
   justify-content: center !important;
 }
 
@@ -206,6 +206,11 @@ html {
 .vertical__left__int {
  display: flex;
   align-items: center !important;
+  justify-content: left !important;
+}
+.vertical__left__profile{
+  display: flex;
+  align-items: stretch !important;
   justify-content: left !important;
 }
 
