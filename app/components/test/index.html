@@ -82,13 +82,9 @@
 						</div>
 						<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx==$index">
 							<div class="row">
-								<div class="col-xs-12" ng-if="editing_test_idx==$index">
-									<div class="row no-gutter">
-										<div class="col-md-6 col-sm-8 vertical__left__profile">
-											<div class="input-group">
-												<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
-											</div>
-										</div>
+								<div class="col-xs-12 vertical__left__profile" ng-if="editing_test_idx==$index">
+									<div class="input-group">
+										<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
 									</div>
 								</div>
 							</div>
@@ -166,27 +162,37 @@
 								</div>
 							</div>
 						</div>
-						<div class="flex-none test_functions test__btns" aria-label="Test Functions">
-							<div class="fifteen_right btn-group pull-left" role="group" ng-if="editing_test_idx!=$index" >
-								<button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)">
-									 Run
-								</button>
-							</div>
-							<div class="fifteen_right pull-left" ng-if="editing_test_idx!=$index">
-								<button class="btn btn--tertiary" ng-click="editTest(test, $index)">
-									 <i class="fa fa-pencil" ></i>
-								</button>
-							</div>
-							<div class="col-md-6 col-sm-4" ng-if="editing_test_idx==$index">
-									<div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTest(test)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">Save</div>
-									<div class="" ng-show="test.show_waiting_icon">
-											<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-									</div>
-							</div>
-							<div class="accordion" aria-label="open/close accordion" ng-click="toggleTestDataVisibility(test, $index)">
-								<i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
-							</div>
-						</div>
+            <div class="flex-none test_functions test__btns" aria-label="Test Functions">
+              <div class="fifteen_right btn-group pull-left" role="group" ng-if="editing_test_idx!=$index" >
+                <button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)">
+                   Run
+                </button>
+              </div>
+              <div class="fifteen_right pull-left" ng-if="editing_test_idx!=$index">
+                <button class="btn btn--tertiary" ng-click="editTest(test, $index)">
+                   <i class="fa fa-pencil" ></i>
+                </button>
+              </div>
+              <div class="test_name_edit" ng-if="editing_test_idx==$index">
+                  <div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTest(test)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">Save</div>
+                  <div class="" ng-show="test.show_waiting_icon">
+                      <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
+                  </div>
+              </div>
+              <div class="accordion" aria-label="open/close accordion" ng-click="toggleTestDataVisibility(test, $index)">
+                <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-4" ng-if="editing_test_idx==$index">
+                <div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTest(test)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">Save</div>
+                <div class="" ng-show="test.show_waiting_icon">
+                    <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="accordion" aria-label="open/close accordion" ng-click="toggleTestDataVisibility(test, $index)">
+              <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
+            </div>
+          </div>
 
       	</div>
         <div class="row test__path" ng-show="test.visible">
