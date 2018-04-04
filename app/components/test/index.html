@@ -100,8 +100,8 @@
 							</div>
 						</div>
 						<div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
-							<div class="">
-								<div class="browser__test__status" ng-repeat="(browser, status) in test.browserPassingStatuses">
+							<div class="row">
+								<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserPassingStatuses">
 									<div class="row vertical__center test__status__editable">
 										<img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
 										<img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
@@ -116,16 +116,16 @@
 									-->
 
 									<div class="row vertical__center test__status__editable">
-										<div class="col-xs-12" ng-if="status == null">
-											<i class="fa fa-circle-o-notch fa-spin fa-lg green fa-fw" aria-hidden="true"></i>
+										<div class="" ng-if="status == null">
+											<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
 										</div>
-										<div class="col-xs-6 green vertical__center__int"
+										<div class="green vertical__center__int"
 													ng-if="status">
 											<div class="" >
 											<i class="fa fa-check green status--symbol--browser"></i>
 											</div>
 										</div>
-										<div class="col-xs-6 red vertical__center__int"
+										<div class=" red vertical__center__int"
 													ng-if="!status && status!=null">
 											<div class="" >
 												<i class="fa fa-times red status--symbol--browser"></i>
