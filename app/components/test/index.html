@@ -39,7 +39,7 @@
 	</div>
 
 	<div class="test-container">
-		<div class="empty__state vertical__center_empty_state" ng-show="waitingOnTests">
+		<div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnTests">
 			<div>
 				<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw"></i>
 				<br><br><br>
@@ -47,7 +47,7 @@
 				<p class="empty__state__p">This process may take a while. You may want to leave this window open and go grab a coffee.<br><br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.</p>
 			</div>
 		</div>
-		<div class="empty__state vertical__center_empty_state" ng-show="!waitingOnTests && tests.length==0">
+		<div class="empty__state vertical__center_empty_state_test" ng-show="!waitingOnTests && tests.length==0">
 			<h2>
         No tests here? Visit <a href="#/discovery">Discovery</a> to find all of your tests.
       </h2>

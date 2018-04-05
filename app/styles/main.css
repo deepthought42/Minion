@@ -187,10 +187,23 @@ html {
         font-weight: 400;
 }
 
-
-.vertical__center_empty_state {
+.vertical__center_empty_state_discovery {
 	position: relative;
  	top: 40%;
+  align-items: stretch !important;
+  justify-content: center !important;
+	text-align: center !important;
+}
+.vertical__center_empty_state_test {
+	position: relative;
+ 	top: 45%;
+  align-items: stretch !important;
+  justify-content: center !important;
+	text-align: center !important;
+}
+.vertical__center_empty_state_busy {
+	position: relative;
+ 	top: 30%;
   align-items: stretch !important;
   justify-content: center !important;
 	text-align: center !important;
