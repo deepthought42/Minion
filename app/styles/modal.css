@@ -1,9 +1,21 @@
 /*--------------------------- [1. ] -----------------------------------------*/
+.modal-frame{
+	padding:25px 30px 30px 30px;
+}
 .dialogue-close{
   text-align:right !important;
-  padding:15px 15px 5px 15px;
+  padding:0px 0px 5px 15px;
 }
-
+.dialogue-close{
+  text-align:right !important;
+  padding:0px 0px 5px 15px;
+	
+}
+.dialogue-close h2{
+  line-height: 34px !important;
+	margin:0px;
+	font-size:20px;
+}
 md-dialog {
     opacity: 0;
     min-width: 240px;
@@ -18,6 +30,9 @@ md-dialog {
     flex-direction: column;
 }
 
+.modal-form{
+	padding:20px 0px 30px 0px;
+}
 .page_modal{
 }
 
@@ -51,8 +66,9 @@ md-dialog {
 }
 
 .modal__title{
-	text-align: center;
-	padding: 30px 30px;
+	margin-top:30px;
+	color:#4548c1;
+	border-bottom: 1px solid #4548c1;
 }
 
 .modal-browser-icon{
@@ -79,23 +95,19 @@ md-dialog {
 }
 
 .domain-dialogue {
-  max-width: 600px;
-  margin-bottom: 30px;
-  margin:auto;
 }
 
 .domain-dialogue-close{
   text-align:right !important;
-  padding:30px 30px;
 }
 .domain-dialogue-header {
-  text-align:center;
-  vertical-align: middle;
-  padding:0px 0px 0px 0px;
+  margin-bottom 30px;
+}
+.domain-dialogue-header h2 {
+	padding:0px !important;
 }
 
 .domain-dialogue-input {
-  max-width: 440px;
     display: flex;
 }
 
@@ -156,6 +168,7 @@ md-dialog {
 }
 
 .modal_action_button{
-    margin-bottom: 30px;
-    margin-right: 15px;
+    margin-bottom: 30px !important;
+    margin-right: 15px !important;
+	padding:0px;
 }

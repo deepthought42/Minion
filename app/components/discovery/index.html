@@ -75,24 +75,24 @@
 	</div>
 
 	<div class="test-labels">
-		<div class="col-xs-2 status__title">
+		<div class="status__title test__status__frame">
 		  Status
 		</div>
-		<div class="col-xs-5 test__title">
+		<div class="flex-auto test_functions">
 		  Test Title
 		</div>
-		<div class="col-xs-2">
+		<div class="flex-initial time_stats">
 		  Time (minutes)
 		</div>
-		<div class="col-xs-2 text-right">
+		<div class="flex-initial time_stats">
 		  Date Discovered
 		</div>
-        <div class="col-xs-1">
+        <div class="flex-none accordion-flex">
 		</div>
 	</div>
 
 	<div class="test-container">
-		<div class="empty__state vertical__center_empty_state" ng-show="!isStarted && !waitingOnTests && tests.length==0">
+		<div class="empty__state vertical__center_empty_state_discovery" ng-show="!isStarted && !waitingOnTests && tests.length==0">
 			<div>
         <h2>Collect your tests by first running a Discovery.</h2>
       </div>
@@ -102,23 +102,24 @@
         </button>
       </div>
 		</div>
-    <div class="empty__state vertical__center" ng-show="waitingOnTests">
-      <div style="text-align:center; margin: 0px auto; vertical__center__int">
+    <div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnTests">
+      <div style="text-align:center; margin: 0px auto;">
         <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
-        <span class="sr-only">Running...</span>
+				<br><br><br>
+				<h2>Your tests are loading. Please stand by.</h2>
+				<p class="empty__state__p">This process may take a while. You may want to leave this window open and go grab a coffee.<br><br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.</p>
       </div>
     </div>
 
     <onboarding-popover enabled="tests.length==1" steps="discoveredTestOnboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>
 		<div class="test" ng-repeat="test in tests track by test.key" ng-show="tests.length>0">
-			<div class="test__profile vertical__center__int" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
-			  <div class="col-xs-2 test__status text--shadow">
-			   	<div class="row test__status__frame vertical__center">
+			<div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
+			  <div class="test__status test__profile_stretch flex-none text--shadow">
+			   	<div class="row test__status__frame">
 						<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
 							<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
-							<span class="sr-only">Running...</span>
 						</div>
-					 	<div class="col-xs-6 btn--green select__neutral status-passing discovery_status vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
+					 	<div class="col-xs-6 btn--green select__neutral status-passing discovery_status" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, true, $index)">
 						 	<div class="" >
 								Passing
 								<br />
@@ -126,7 +127,7 @@
 							   	 style="{{test.correct ? 'color:green' : 'color:#bfbfbf'}}"></i>
 							</div>
 						</div>
-						<div class="discovery_status status-failing col-xs-6 btn--red select__neutral vertical__center__int" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
+						<div class="discovery_status status-failing col-xs-6 btn--red select__neutral " ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, false, $index)">
 							<div class="" >
 									Failing
 								<br />
@@ -138,43 +139,37 @@
 			  </div>
         <onboarding-popover enabled="onboardingEnabled" steps="testVerificationSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>
 
-				<div class="col-xs-5 test__title" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
-					<div class="row" >
-						<div class="col-xs-12 " ng-show="!test.show_test_name_edit_field">
-							<h4>
-                {{test.name || "Test #"+($index+1)}}
-              </h4>
-							<i class="fa fa-pencil edithover" ng-click="test.show_test_name_edit_field = true" ></i>
-						</div>
+        <div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
+					<div class="" ng-show="!test.show_test_name_edit_field">
+						<h4>
+              {{test.name || "Test #"+($index+1)}}
+            </h4>
+						<i class="fa fa-pencil edithover" ng-click="test.show_test_name_edit_field = true" ></i>
 					</div>
 				</div>
-        <div class="col-xs-5 test__title" ng-if="test.show_test_name_edit_field">
-					<div class="row" >
-						<div class="col-xs-12">
-							<div class="row no-gutter">
-								<div class="col-md-6 col-sm-8 vertical__left__int">
-									<div class="input-group">
-										<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
-									</div>
-								</div>
-								<div class="col-md-6 col-sm-4">
-									<div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div>
-									<div class="" ng-show="test.show_waiting_icon">
-										<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-									</div>
-								</div>
+        <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="test.show_test_name_edit_field">
+					<div class="row">
+						<div class="flex-auto fifteen_left">
+							<div class="">
+								<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
+							</div>
+						</div>
+						<div class="flex-none test_name_edit fifteen_right">
+							<div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">Save</div>
+							<div class="" ng-show="test.show_waiting_icon">
+								<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
 							</div>
 						</div>
 					</div>
 				</div>
-			  <div class="col-xs-2" ng-click="toggleTestDataVisibility(test, $index)">
+			  <div class="flex-initial time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 			  </div>
-			  <div class="col-xs-2 text-right" ng-click="toggleTestDataVisibility(test, $index)">
+			  <div class="flex-initial time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					{{( test.lastRunTimestamp | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
-        <div class="col-xs-1" ng-click="toggleTestDataVisibility(test, $index)">
-          <div class="pull-right accordian" aria-label="open accordian">
+        <div class="flex-none accordion-flex test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+          <div class="accordion" aria-label="open/close accordion">
             <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
           </div>
         </div>

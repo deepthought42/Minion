@@ -320,14 +320,14 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       }
       var persistable_test = {};
       persistable_test.key = test.key;
-      persistable_test.name = test.name;
+      persistable_test.name = test.new_name;
       persistable_test.browserPassingStatuses = test.browserPassingStatuses;
       Tester.update(persistable_test).$promise
         .then(function(data){
           $scope.editing_test_idx = -1;
           test.show_waiting_icon = false;
           test.show_test_name_edit_field=false;
-          test.name = new_name;
+          test.name = test.new_name;
         })
         .catch(function(err){
           test.show_waiting_icon = false;
@@ -385,9 +385,9 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    $scope.editTest = function($index){
+    $scope.editTest = function(test, $index){
       $scope.editing_test_idx = $index;
-      $scope.test_copy = JSON.parse(JSON.stringify(oldObject));
+      $scope.test_copy = JSON.parse(JSON.stringify(test));
     }
 
     $scope._init();

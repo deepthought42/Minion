@@ -40,6 +40,9 @@ auth.factory('AuthInterceptor', ['$q', '$rootScope', '$injector', 'store', funct
       else if(rejection.status === 404){
         $rootScope.$broadcast("missing_resorce_error");
       }
+      if(rejection.status === 409){
+        $rootScope.$broadcast("resource_conflict");
+      }
       else if(rejection.status === 500){
         $rootScope.$broadcast("internal_server_error");
       }

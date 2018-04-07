@@ -19,35 +19,35 @@
 	</div>
 
 	<div class="test-labels">
-	  <div class="col-xs-1 status__title">
+	  <div class="status__title tests__test__status">
 		    Status
 	  </div>
-	  <div class="col-xs-3 test__title">
-			Test Title
-	  </div>
-	  <div class="col-xs-2">
-		  Time (minutes)
-	  </div>
-	  <div class="col-xs-2"  ng-click="sortLastRun=!sortLastRun">
-		    Date Last Run
-	  </div>
-		<div class="col-xs-2">
-        Browsers
-		</div>
-        <div class="col-xs-1">
-		</div>
-        <div class="col-xs-1">
-		</div>
+				<div class="flex-auto test_functions">
+					Test Title
+				</div>
+				<div class="flex-initial time_stats">
+					Time (minutes)
+				</div>
+				<div class="flex-initial time_stats"  ng-click="sortLastRun=!sortLastRun">
+						Date Last Run
+				</div>
+				<div class="flex-auto test_functions">
+						Browsers
+				</div>
+						<div class="flex-none test_functions">
+				</div>
 	</div>
 
 	<div class="test-container">
-		<div class="empty__state vertical__center" ng-show="waitingOnTests">
-			<div style="text-align:center; margin: 0px auto;">
+		<div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnTests">
+			<div>
 				<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw"></i>
-				<span class="sr-only">Running...</span>
+				<br><br><br>
+				<h2>Your tests are loading. Please stand by.</h2>
+				<p class="empty__state__p">This process may take a while. You may want to leave this window open and go grab a coffee.<br><br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.</p>
 			</div>
 		</div>
-		<div class="empty__state vertical__center" ng-show="!waitingOnTests && tests.length==0">
+		<div class="empty__state vertical__center_empty_state_test" ng-show="!waitingOnTests && tests.length==0">
 			<h2>
         No tests here? Visit <a href="#/discovery">Discovery</a> to find all of your tests.
       </h2>
@@ -56,139 +56,136 @@
 		<div class="test"
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] track by $index"
 				 ng-show="tests.length > 0">
-			<div class="test__profile vertical__center__int" ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass}">
-        <div class="col-xs-1 test__status vertical__center__int" ng-if="isTestRunning(test)" ng-click="toggleTestDataVisibility(test, $index)">
-          <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
-          <span class="sr-only">Running...</span>
-        </div>
-        <div class="col-xs-1 test__status vertical__center__int" ng-if="!isTestRunning(test)" ng-click="toggleTestDataVisibility(test, $index)">
-          <span ng-show="test.correct">
-            <i class="fa fa-check-circle green status--symbol"></i>
-          </span>
-          <span ng-show="!test.correct && test.correct != null">
-            <i  class="fa fa-times-circle red status--symbol"></i>
-          </span>
-        </div>
-        <div class="col-xs-3 test__title" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
-          <div class="row">
-						<div class="col-xs-12 " ng-if="editing_test_idx!=$index" >
-							<h4>
-                {{test.name || "Test #"+($index+1)}}
-              </h4>
-							<i class="fa fa-pencil edithover"  ng-click="test.show_test_name_edit_field = true" ></i>
-						</div>
+			<div class="test__profile vertical__left__profile" ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass}">
+
+				<div class="tests__test__status test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+					<div class="test__status " ng-if="isTestRunning(test)">
+						<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
 					</div>
-        </div>
-				<div class="col-xs-3 test__title" ng-if="editing_test_idx==$index">
-          <div class="row">
-						<div class="col-xs-12" ng-if="editing_test_idx==$index">
-              <div class="row no-gutter">
-                <div class="col-md-6 col-sm-8 vertical__left__int">
-                  <div class="input-group">
-                    <input class="form-control title__edit" type="text" ng-model="test.name" ng-value="test.name" ng-trim="false"/>
+
+					<div class="test__status vertical__center" ng-if="!isTestRunning(test)">
+						<span ng-show="test.correct">
+							<i class="fa fa-check-circle green status--symbol"></i>
+						</span>
+						<span ng-show="!test.correct && test.correct != null">
+							<i  class="fa fa-times-circle red status--symbol"></i>
+						</span>
+					</div>
+				</div>
+						<div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
+							<div class="row">
+								<div class="col-xs-12 " ng-if="editing_test_idx!=$index" >
+									<h4>
+										{{test.name || "Test #"+($index+1)}}
+									</h4>
+								</div>
+							</div>
+						</div>
+						<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx==$index">
+							<div class="row">
+								<div class="col-xs-12 vertical__left__profile" ng-if="editing_test_idx==$index">
+									<div class="input-group">
+										<input class="form-control title__edit" type="text" ng-model="test.new_name" ng-value="test.name" ng-trim="false"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flex-initial time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+							<div class="">
+								{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
+							</div>
+						</div>
+						<div class="flex-initial time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+							<div class="">
+								{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
+							</div>
+						</div>
+						<div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
+							<div class="row">
+								<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserPassingStatuses">
+									<div class="row vertical__center test__status__editable">
+										<img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
+										<img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
+									</div>
+
+									<!--
+									<div class="vertical__center">
+											<i class="fa fa-check fa-circle-o-notch fa-spin fa-2x green" ng-show="status == null" />
+											<i class="fa fa-check fa-2x green" ng-show="status" />
+											<i class="fa fa-times fa-2x red" ng-show="!status" />
+										</div>
+									-->
+
+									<div class="row vertical__center test__status__editable">
+										<div class="" ng-if="status == null">
+											<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
+										</div>
+										<div class="green vertical__center__int"
+													ng-if="status">
+											<div class="" >
+											<i class="fa fa-check green status--symbol--browser"></i>
+											</div>
+										</div>
+										<div class=" red vertical__center__int"
+													ng-if="!status && status!=null">
+											<div class="" >
+												<i class="fa fa-times red status--symbol--browser"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx==$index">
+							<div class="row">
+								<div class="flex-none" ng-repeat="(browser, status) in test.browserPassingStatuses">
+									<div class="row vertical__center test__status__editable">
+										<img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
+										<img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
+									</div>
+									<div class="row vertical__center test__status__editable">
+										<div class="col-xs-6 btn--green select__neutral status-passing status--browser vertical__center__int"
+													style="{{status ? 'background-color:green' : 'background-color:#bfbfbf'}}"
+													ng-click="updateBrowserPassingStatus(test, browser, true)" ng-if="status!=null">
+											<div class="" >
+												<i class="fa fa-check status--symbol--browser white"></i>
+											</div>
+										</div>
+										<div class="col-xs-6 btn--red select__neutral status--browser status-failing  vertical__center__int"
+													style="{{!status && status != null ? 'background-color:red' : 'background-color:#bfbfbf'}}"
+													ng-click="updateBrowserPassingStatus(test, browser, false)" ng-if="status!=null">
+											<div class="" >
+												<i  class="fa fa-times status--symbol--browser white"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+            <div class="flex-none test_functions test__btns" aria-label="Test Functions">
+              <div class="fifteen_right btn-group pull-left" role="group" ng-if="editing_test_idx!=$index" >
+                <button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)">
+                   Run
+                </button>
+              </div>
+              <div class="fifteen_right pull-left" ng-if="editing_test_idx!=$index">
+                <button class="btn btn--tertiary" ng-click="editTest(test, $index)">
+                   <i class="fa fa-pencil" ></i>
+                </button>
+              </div>
+              <div class="test_name_edit" ng-if="editing_test_idx==$index">
+                  <div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTest(test)" ng-show="!test.show_waiting_icon">Cancel</div><div class="title__edit__buttons btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">Save</div>
+                  <div class="" ng-show="test.show_waiting_icon">
+                      <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
                   </div>
-                </div>
               </div>
-						</div>
-					</div>
-        </div>
-			  <div class="col-xs-2 test__status" ng-click="toggleTestDataVisibility(test, $index)">
-					<div class="row">
-						{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
-					</div>
-				</div>
-			  <div class="col-xs-2 test__status" ng-click="toggleTestDataVisibility(test, $index)">
-					<div class="row">
-						{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
-					</div>
-				</div>
-        <div class="col-xs-2 test__status" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
-          <div class="row">
-            <div class="col-sm-6" ng-repeat="(browser, status) in test.browserPassingStatuses">
-              <div class="row vertical__center test__status__frame__browser">
-                <img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
-                <img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
+              <div class="accordion" aria-label="open/close accordion" ng-click="toggleTestDataVisibility(test, $index)">
+                <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
               </div>
-
-              <!--
-              <div class="vertical__center">
-									<i class="fa fa-check fa-circle-o-notch fa-spin fa-2x green" ng-show="status == null" />
-									<i class="fa fa-check fa-2x green" ng-show="status" />
-									<i class="fa fa-times fa-2x red" ng-show="!status" />
-								</div>
-              -->
-
-							<div class="row vertical__center test__status__frame__browser">
-								<div class="col-xs-12" ng-if="status == null">
-									<i class="fa fa-circle-o-notch fa-spin fa-lg green fa-fw" aria-hidden="true"></i>
-								</div>
-								<div class="col-xs-6 btn--green select__neutral status-passing status--browser vertical__center__int"
-											style="{{status ? 'background-color:green' : 'background-color:#bfbfbf'}}"
-											ng-if="status">
-									<div class="" >
-										<i class="fa fa-check status--symbol--browser white"
-											 style="{{status ? 'color:green' : 'color:#bfbfbf'}}"></i>
-									</div>
-								</div>
-								<div class="col-xs-6 btn--red select__neutral status--browser status-failing  vertical__center__int"
-											style="{{!status && status != null ? 'background-color:red' : 'background-color:#bfbfbf'}}"
-											ng-if="!status && status!=null">
-									<div class="" >
-										<i  class="fa fa-times status--symbol--browser white"
-											style="{{!status && status != null ? 'background-color:red' : 'background-color:#bfbfbf'}}"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-xs-2 test__status" ng-if="editing_test_idx==$index">
-					<div class="row">
-						<div class="col-sm-6" ng-repeat="(browser, status) in test.browserPassingStatuses">
-							<div class="row vertical__center test__status__frame__browser">
-                <img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
-                <img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
-              </div>
-							<div class="row vertical__center test__status__frame__browser">
-								<div class="col-xs-6 btn--green select__neutral status-passing status--browser vertical__center__int"
-											style="{{status ? 'background-color:green' : 'background-color:#bfbfbf'}}"
-											ng-click="updateBrowserPassingStatus(test, browser, true)" ng-if="status!=null">
-									<div class="" >
-										<i class="fa fa-check status--symbol--browser white"></i>
-									</div>
-								</div>
-								<div class="col-xs-6 btn--red select__neutral status--browser status-failing  vertical__center__int"
-											style="{{!status && status != null ? 'background-color:red' : 'background-color:#bfbfbf'}}"
-											ng-click="updateBrowserPassingStatus(test, browser, false)" ng-if="status!=null">
-									<div class="" >
-										<i  class="fa fa-times status--symbol--browser white"></i>
-									</div>
-								</div>
-							</div>
             </div>
           </div>
-        </div>
-          <div class="col-xs-2 test__btns">
-						<div  ng-if="editing_test_idx!=$index">
-							<i class="fa fa-pencil edithover"  ng-click="editTest($index)" ></i>
-						</div>
-						<div class="col-md-6 col-sm-4" ng-if="editing_test_idx==$index">
-								<div class="title__edit__buttons btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">Save</div><div class="title__edit__buttons btn--secondary" ng-click="cancelEditingTest(test)" ng-show="!test.show_waiting_icon">Cancel</div>
-								<div class="" ng-show="test.show_waiting_icon">
-										<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-								</div>
-						</div>
-            <div class="btn-group pull-left" role="group" aria-label="Test Functions">
-              <button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)" id="run_test_button">
-                 Run
-              </button>
-            </div>
-            <div class="accordian" aria-label="open accordian" ng-click="toggleTestDataVisibility(test, $index)">
-              <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
-            </div>
-          </div>
-      	</div>
+
         <div class="row test__path" ng-show="test.visible">
           <div class="col-sm-12 path__title">
             <h5>Test Path</h5>
@@ -199,9 +196,9 @@
                 <img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
               </div>
               <div ng-show="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
-                  <span class="" >
-                  {{node.name}}
-                  </span>
+                <span class="" >
+                	{{node.name}}
+                </span>
               </div>
               <div ng-show="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
                   <span ng-show="node.name=='click'" class="vertical__center__int">

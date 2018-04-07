@@ -187,12 +187,26 @@ html {
         font-weight: 400;
 }
 
-
-.vertical__center_empty_state > div{
+.vertical__center_empty_state_discovery {
 	position: relative;
  	top: 40%;
-      align-items: center !important;
+  align-items: stretch !important;
   justify-content: center !important;
+	text-align: center !important;
+}
+.vertical__center_empty_state_test {
+	position: relative;
+ 	top: 45%;
+  align-items: stretch !important;
+  justify-content: center !important;
+	text-align: center !important;
+}
+.vertical__center_empty_state_busy {
+	position: relative;
+ 	top: 30%;
+  align-items: stretch !important;
+  justify-content: center !important;
+	text-align: center !important;
 }
 
 .vertical__center,
@@ -204,8 +218,13 @@ html {
 
 .vertical__left,
 .vertical__left__int {
-  width:100%;
-  align-items: left !important;
+ display: flex;
+  align-items: center !important;
+  justify-content: left !important;
+}
+.vertical__left__profile{
+  display: flex;
+  align-items: stretch !important;
   justify-content: left !important;
 }
 
@@ -402,6 +421,30 @@ h5,
 .open > .dropdown-toggle.btn--gray {
   color: #fff;
   background-color: #cccccc;
+}
+
+.btn--tertiary {
+	min-height: 40px;
+  min-width: 40px;
+  color: #4144bc;
+  background-color: #ffffff;
+	border: 1px solid #4144bc;
+}
+.btn--tertiary:focus,
+.btn--tertiary.focus {
+  background-color: #f4f4f5;
+	border: 1px solid #2b2e93;
+}
+.btn--tertiary:hover {
+  background-color: #f4f4f5;
+	border: 1px solid #2b2e93;
+}
+.btn--tertiary:active,
+.btn--tertiary.active,
+.open > .dropdown-toggle.btn--gray {
+  color: #2b2e93;
+  background-color: #f4f4f5;
+	border: 1px solid #2b2e93;
 }
 
 .btn--green {
