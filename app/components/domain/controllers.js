@@ -35,17 +35,10 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_creation_err = "An error occurred while saving the domain";
 
       //check if domain welcome onboarding has already been seen
-      $scope.welcomeOnboardingEnabled = store.get("onboard").indexOf('domain-welcome') == -1;
-      $scope.welcomeOnboardingIndex = 0;
-      if($scope.welcomeOnboardingEnabled){
-        Account.addOnboardingStep({step_name: "domain-welcome"}).$promise
-          .then(function(data){
-            store.set('onboard', data);
-          })
-          .catch(function(err){
+      //$scope.welcomeOnboardingEnabled = store.get("onboard").indexOf('domain-welcome') == -1;
+      $scope.welcomeOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('domain-welcome');
 
-          });
-      }
+      $scope.welcomeOnboardingIndex = 0;
     }
 
 
@@ -63,7 +56,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       {
         title: "Domain Setup",
         description: "Edit your domain settings at any time.",
-        attachTo:"#edit_domain_settings0"
+        attachTo:"#edit_domain_settings0",
+        position: "left"
       }
     ];
 
@@ -72,20 +66,26 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     */
     $scope.showSettingsOnboarding = function(){
       //check if domain setting onboarding has already been seen
-      $scope.settingsOnboardingEnabled = store.get("onboard").indexOf('domain-settings') == -1;
+      $scope.settingsOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('domain-welcome');
       $scope.settingsOnboardingIndex = 0;
 
-      if($scope.settingsOnboardingEnabled){
-        Account.addOnboardingStep({step_name: "domain-settings"}).$promise
+    }
+
+    $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
+      var onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+      //check if discovery onboarding has already been seen
+      if(onboard){
+        Account.addOnboardingStep({step_name: onboard_step_name}).$promise
           .then(function(data){
-            store.set('onboard', data);
+            store.set("onboard", data);
           })
           .catch(function(err){
 
           });
       }
+      //return onboard;
+      return false;
     }
-
     /**
     *
     */
