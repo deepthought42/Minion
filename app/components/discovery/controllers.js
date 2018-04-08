@@ -40,13 +40,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.group.name = "";
       $scope.group.description = "";
       $scope.test_idx = -1;
-      $scope.discoveryOnboardingEnabled = $scope.hasUserAlreadyOnboarded('discovery');
+      $scope.discoveryOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery');
       $scope.discoveryOnboardingIndex = 0;
 
-      $scope.discoveredTestOnboardingEnabled = $scope.hasUserAlreadyOnboarded('discovered-test');
-      $scope.discoveredTestOnboardingIndex = 0;
-      $scope.testVerificationOnboardingEnabled = $scope.hasUserAlreadyOnboarded('test-verification');
-      $scope.testVerificationOnboardingIndex = 0;
+      $scope.groupOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-group');
+      $scope.groupOnboardingIndex = 0;
+
       $scope.current_domain = store.get('domain');
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
@@ -63,6 +62,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           .then(function(data){
             $scope.tests = data
             $scope.waitingOnTests = false;
+            $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
+            $scope.discoveredTestOnboardingIndex = 0;
           })
           .catch(function(err){
             $scope.errors.push(err.data);
@@ -79,6 +80,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
         var channel = pusher.subscribe($scope.extractHostname($scope.discovery_url));
         channel.bind('test-discovered', function(data) {
+          $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
+          $scope.discoveredTestOnboardingIndex = 0;
           $scope.waitingOnTests = false;
           $scope.tests.push(JSON.parse(data));
           $scope.$apply();
@@ -92,7 +95,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
-      var onboard = store.get("onboard").indexOf(onboard_step_name) == -1;
+      var onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
       //check if discovery onboarding has already been seen
       if(onboard){
         Account.addOnboardingStep({step_name: onboard_step_name}).$promise
@@ -103,7 +106,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
           });
       }
-      return onboard;
+      //return onboard;
+      return false;
     }
 
 
@@ -130,13 +134,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           title: "Congratulations, you built your first test!",
           position: "centered",
           description: "Now it’s time to learn about the test path. Start by clicking on the test bar to open the path details.",
-          attachTo:"#start_discovery_button",
-          width: 400
-        },
-        {
-          position: "top",
-          description: "Test paths are comprised of three parts: page, element, and action. Click on each part to learn more details about the test like destination, xpath, styling, and browser screenshots.",
-          attachTo:"#start_discovery_button",
           width: 400
         }
       ];
@@ -147,8 +144,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           title: "Keep tests organized by adding them to groups.",
           position: "top",
           position: "left",
-          description: "We’ve helped you get started by smart labeling your smoke and form tests.",
-          attachTo:"#groups_label",
+          description: "We’ve helped you get started by smart labeling your form tests.",
+          attachTo:"#group_label",
           width: 400
         }
       ];
@@ -156,13 +153,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     $scope.testVerificationSteps = [
       {
         position: "top",
+        description: "Test paths are comprised of three parts: page, element, and action. Click on each part to learn more details about the test like destination, xpath, styling, and browser screenshots.",
+        attachTo:"#start_discovery_button",
+        width: 400
+      },
+      {
+        position: "top",
         position: "right",
         description: "Use the test details to determine whether the status of a test is passing or failing. Select passing or failing to teach Qanairy the expected/desired outcome of each test. Once a status is selected the test will move to the Tests page where it can be run.",
         attachTo:"#test_status",
         width: 400
-      },
+      }
     ];
-
 
     $scope.extractHostname =  function(url) {
         var hostname;
@@ -193,10 +195,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
      */
     $scope.startDiscovery = function(){
       $scope.isStarted = true;
+      $scope.discoveryRunningOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery-running');
+      $scope.discoveryRunningOnboardingIndex = 0;
       Discovery.startWork({url:  $scope.discovery_url}).$promise
         .then(function(value){
-          $scope.discoveryOnboardingEnabled = $scope.hasUserAlreadyOnboarded('discovery-running');
-          $scope.discoveryOnboardingIndex = 0;
+
         })
         .catch(function(err){
           //$scope.waitingOnTests = false;
@@ -243,13 +246,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.toggleTestDataVisibility = function(test, index){
+      console.log("toggling test data")
       if($scope.test && $scope.test_idx != index){
         $scope.test.visible = false;
       }
       $scope.test_idx = index;
       $scope.test = test;
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
-
+      $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
+      $scope.testVerificationOnboardingIndex = 0;
       if(test.visible){
         $scope.setCurrentNode(test.path.path[0], index);
       }
