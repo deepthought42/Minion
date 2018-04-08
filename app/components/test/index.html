@@ -1,7 +1,10 @@
+
 <div class="content">
 	<div class="secondary-nav vertical__center__int">
+		<onboarding-popover enabled="testRunOnboardingEnabled" steps="testRunOnboardingSteps" step-index="testRunOnboardingIndex"></onboarding-popover>
+
 		<div class="col-sm-2">
-  		<button class="btn btn--primary pull-left" ng-click="openBrowserSelectionDialog()">
+  		<button class="btn btn--primary pull-left" id="run_all_tests_button" ng-click="openBrowserSelectionDialog()">
   		  Run All Tests
   		</button>
 	  </div>
@@ -401,6 +404,3 @@
 	  </div>
 	</div>
 </div>
-
-
-<onboarding-popover enabled="onboardingEnabled" steps="testRunOnboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>

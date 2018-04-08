@@ -4,7 +4,7 @@
 <div class="error__message" ng-show="show_create_domain_err">
   {{domain_creation_err}}
 </div>
-<div class="domain__button vertical__center" ng-click="openCreateDomainDialog()">
+<div class="domain__button vertical__center" id="add_domain_card" ng-click="openCreateDomainDialog()">
   <div class="domain__icon">
     <div class="domain--largeicon">
       <i class="fa fa-plus fa-5x"></i>
@@ -16,9 +16,9 @@
     </h6>
   </div>
 </div>
-<onboarding-popover enabled="onboardingEnabled" steps="onboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>
+<onboarding-popover enabled="welcomeOnboardingEnabled" steps="welcomeSteps" step-index='welcomeIndex'></onboarding-popover>
 
-<div class="domain__button" ng-repeat="domain in domains">
+<div class="domain__button" ng-repeat="domain in domains track by $index">
   <div class="row">
     <div class="col-sm-2" style="text-align:left !important; position: relative;">
       <img src="/img/Chrome.ico" class="browser-icon"  ng-show="domain.discoveryBrowser=='chrome'">
@@ -26,9 +26,11 @@
     </div>
     <div class="col-sm-6">
     </div>
-    <div class="col-sm-2" ng-click="openEditDomainDialog(domain)"  style="text-align:right !important; padding:0px; margin:0px; position: relative;">
-       <i class="fa fa-pencil domain_card_action" ></i>
+    <div class="col-sm-2" ng-click="openEditDomainDialog(domain)"
+         style="text-align:right !important; padding:0px; margin:0px; position: relative;">
+       <i class="fa fa-pencil domain_card_action" id="{{'edit_domain_settings'+$index}}" ></i>
     </div>
+
     <div class="col-sm-2" ng-click="removeDomain(domain, $index)"  style="text-align:right !important; position: relative;">
        <i class="fa fa-times domain_card_action" ></i>
     </div>
@@ -44,3 +46,4 @@
     </h6>
   </div>
 </div>
+<onboarding-popover enabled="settingsOnboardingEnabled" steps="settingsOnboardingSteps" step-index='settingsOnboardingIndex'></onboarding-popover>

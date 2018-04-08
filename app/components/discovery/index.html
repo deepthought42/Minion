@@ -1,4 +1,4 @@
-<div controller="WorkManagementCtrl" class="content">
+<div class="content">
 <!--  <button ng-show="isStarted"
           class="btn btn-danger col-xs-12"
           ng-click="stopMappingProcess('account_key_here')">
@@ -17,7 +17,8 @@
 				Start Discovery
 			</button>
     </div>
-    <onboarding-popover enabled="onboardingEnabled" steps="discoveryOnboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>
+
+    <onboarding-popover enabled="discoveryOnboardingEnabled" steps="discoveryOnboardingSteps" step-index="discoveryOnboardingIndex"></onboarding-popover>
 
     <div class="col-md-2 col-sm-4" ng-if="isStarted">
 			<div class="pull-left">
@@ -111,7 +112,7 @@
       </div>
     </div>
 
-    <onboarding-popover enabled="tests.length==1" steps="discoveredTestOnboardingSteps" on-finish-callback='myCallbackFunction()' step-index='onboardingIndex'></onboarding-popover>
+    <onboarding-popover enabled="tests.length==1" steps="discoveredTestOnboardingSteps" step-index='onboardingIndex'></onboarding-popover>
 		<div class="test" ng-repeat="test in tests track by test.key" ng-show="tests.length>0">
 			<div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 			  <div class="test__status test__profile_stretch flex-none text--shadow">

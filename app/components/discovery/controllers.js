@@ -6,15 +6,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
   $stateProvider.state('main.discovery', {
     url: "/discovery",
     templateUrl: 'components/discovery/index.html',
-    controller: 'WorkManagementCtrl',
+    controller: 'DiscoveryCtrl',
     data: {
       requiresLogin: true
     }
   });
 }])
 
-.controller('WorkManagementCtrl', ['$rootScope', '$scope', 'Discovery', 'PathRealtimeService', 'Tester', 'store', '$state', '$mdDialog',
-  function($rootScope, $scope, Discovery, PathRealtimeService, Tester, store, $state, $mdDialog) {
+.controller('DiscoveryCtrl', ['$rootScope', '$scope', 'Discovery', 'PathRealtimeService', 'Tester', 'store', '$state', '$mdDialog', 'Account',
+  function($rootScope, $scope, Discovery, PathRealtimeService, Tester, store, $state, $mdDialog, Account) {
     var getFailingCount = function(){
       Tester.getFailingCount({url: $scope.domain }).$promise
         .then(function(data){
@@ -40,7 +40,20 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.group.name = "";
       $scope.group.description = "";
       $scope.test_idx = -1;
-      $scope.onboardingEnabled = true;
+      $scope.discoveryOnboardingEnabled = store.get("onboard").indexOf('domain-settings') == -1;
+      //check if discovery onboarding has already been seen
+    
+
+      if($scope.discoveryOnboardingEnabled){
+        Account.addOnboardingStep({step_name: "discovery"}).$promise
+          .then(function(data){
+            $scope.onboard_list = data;
+          })
+          .catch(function(err){
+
+          });
+      }
+
       $scope.current_domain = store.get('domain');
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
@@ -83,63 +96,64 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       }
 
       getFailingCount();
-
-      $scope.discoveryOnboardingSteps = [
-        {
-          title: "Begin finding tests by starting a discovery.",
-          position: "right",
-          description: "Discovery time varies based on the complexity of your domain. If a discovery has been running for longer than 48 hours, please contact support@qanairy.com.",
-          attachTo:"#start_discovery_button",
-          width: 400
-        },
-        {
-          title: "Qanairy’s AI is now working to find and build your tests for you. ",
-          position: "centered",
-          description: "Tests will begin returning as they are discovered. This process takes a few minutes, now would be a great time to take a break. You deserve it.",
-          width: 400
-        }
-      ];
-
-      $scope.discoveredTestOnboardingSteps = [
-        {
-          title: "Congratulations, you built your first test!",
-          position: "centered",
-          description: "Now it’s time to learn about the test path. Start by clicking on the test bar to open the path details.",
-          attachTo:"#start_discovery_button",
-          width: 400
-        },
-        {
-          position: "top",
-          description: "Test paths are comprised of three parts: page, element, and action. Click on each part to learn more details about the test like destination, xpath, styling, and browser screenshots.",
-          attachTo:"#start_discovery_button",
-          width: 400
-        }
-      ];
-
-
-      $scope.testGroupOnboardingSteps = [
-        {
-          title: "Keep tests organized by adding them to groups.",
-          position: "top",
-          position: "left",
-          description: "We’ve helped you get started by smart labeling your smoke and form tests.",
-          attachTo:"#groups_label",
-          width: 400
-        }
-      ];
-
-      $scope.testVerificationSteps = [
-        {
-          position: "top",
-          position: "right",
-          description: "Use the test details to determine whether the status of a test is passing or failing. Select passing or failing to teach Qanairy the expected/desired outcome of each test. Once a status is selected the test will move to the Tests page where it can be run.",
-          attachTo:"#test_status",
-          width: 400
-        },
-      ];
-
-
     }
+
+
+
+          $scope.discoveryOnboardingSteps = [
+            {
+              title: "Begin finding tests by starting a discovery.",
+              position: "right",
+              description: "Discovery time varies based on the complexity of your domain. If a discovery has been running for longer than 48 hours, please contact support@qanairy.com.",
+              attachTo:"#start_discovery_button",
+              width: 400
+            },
+            {
+              title: "Qanairy’s AI is now working to find and build your tests for you. ",
+              position: "centered",
+              description: "Tests will begin returning as they are discovered. This process takes a few minutes, now would be a great time to take a break. You deserve it.",
+              width: 400
+            }
+          ];
+
+          $scope.discoveredTestOnboardingSteps = [
+            {
+              title: "Congratulations, you built your first test!",
+              position: "centered",
+              description: "Now it’s time to learn about the test path. Start by clicking on the test bar to open the path details.",
+              attachTo:"#start_discovery_button",
+              width: 400
+            },
+            {
+              position: "top",
+              description: "Test paths are comprised of three parts: page, element, and action. Click on each part to learn more details about the test like destination, xpath, styling, and browser screenshots.",
+              attachTo:"#start_discovery_button",
+              width: 400
+            }
+          ];
+
+
+          $scope.testGroupOnboardingSteps = [
+            {
+              title: "Keep tests organized by adding them to groups.",
+              position: "top",
+              position: "left",
+              description: "We’ve helped you get started by smart labeling your smoke and form tests.",
+              attachTo:"#groups_label",
+              width: 400
+            }
+          ];
+
+          $scope.testVerificationSteps = [
+            {
+              position: "top",
+              position: "right",
+              description: "Use the test details to determine whether the status of a test is passing or failing. Select passing or failing to teach Qanairy the expected/desired outcome of each test. Once a status is selected the test will move to the Tests page where it can be run.",
+              attachTo:"#test_status",
+              width: 400
+            },
+          ];
+
 
     $scope.extractHostname =  function(url) {
         var hostname;
@@ -212,6 +226,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           test.show_waiting_icon = false;
           test.show_test_name_edit_field = false;
         });
+    }
+
+    $scope.updateOnboardingStep = function(name){
+      console.log("discovery step called :: "+name);
     }
 
     $scope.toggleTestDataVisibility = function(test, index){

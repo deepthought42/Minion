@@ -13,8 +13,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   });
 }])
 
-.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state',
-  function($rootScope, $scope, Domain,  $mdDialog, store, $state) {
+.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state', 'Account',
+  function($rootScope, $scope, Domain,  $mdDialog, store, $state, Account) {
     this._init = function(){
       $scope.errors = [];
       $scope.domains = [];
@@ -34,26 +34,61 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_error = "";
       $scope.domain_creation_err = "An error occurred while saving the domain";
 
-      $scope.onboardingSteps = [
-        {
-          title: "Welcome to Qanairy!",
-          position: "right",
-          description: "Start by adding a domain to begin testing!",
-          attachTo:"#addDomainButton",
-          width: 400
-        }
-      ];
+      //check if domain welcome onboarding has already been seen
+      $scope.welcomeOnboardingEnabled = store.get("onboard").indexOf('domain-welcome') == -1;
+      $scope.welcomeOnboardingIndex = 0;
+      if($scope.welcomeOnboardingEnabled){
+        Account.addOnboardingStep({step_name: "domain-welcome"}).$promise
+          .then(function(data){
+            store.set('onboard', data);
+          })
+          .catch(function(err){
 
-      $scope.domainSettingsOnboardingSteps = [
-        {
-          title: "Domain Setup",
-          position: "right",
-          description: "Edit your domain settings at any time.",
-          width: 400
-        }
-      ]
+          });
+      }
     }
 
+
+    $scope.welcomeSteps = [
+      {
+        title: "Welcome to Qanairy!",
+        position: "right",
+        description: "Start by adding a domain to begin testing!",
+        attachTo:"#add_domain_card",
+        width: 400
+      }
+    ];
+
+    $scope.settingsOnboardingSteps = [
+      {
+        title: "Domain Setup",
+        description: "Edit your domain settings at any time.",
+        attachTo:"#edit_domain_settings0"
+      }
+    ];
+
+    /**
+    * Display onboarding panels for domain settings
+    */
+    $scope.showSettingsOnboarding = function(){
+      //check if domain setting onboarding has already been seen
+      $scope.settingsOnboardingEnabled = store.get("onboard").indexOf('domain-settings') == -1;
+      $scope.settingsOnboardingIndex = 0;
+
+      if($scope.settingsOnboardingEnabled){
+        Account.addOnboardingStep({step_name: "domain-settings"}).$promise
+          .then(function(data){
+            store.set('onboard', data);
+          })
+          .catch(function(err){
+
+          });
+      }
+    }
+
+    /**
+    *
+    */
     $scope.createDomain = function(protocol, host, default_browser, logo_url){
       if(default_browser){
         Domain.save({protocol: protocol, url: host, logoUrl: logo_url, discoveryBrowser: default_browser}).$promise
@@ -63,6 +98,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             $scope.domains.push(successResult);
             $scope.closeDialog();
             $rootScope.$broadcast("domain_updated", successResult);
+            $scope.showSettingsOnboarding();
           },
           function(errorResult){
             if(errorResult.status === 303){
@@ -90,6 +126,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
               }
             }
             $scope.closeDialog();
+            $scope.showSettingsOnboarding();
           },
           function(errorResult){
             $scope.show_create_domain_err = true;
