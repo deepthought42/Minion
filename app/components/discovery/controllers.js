@@ -43,6 +43,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.discoveryOnboardingEnabled = $scope.hasUserAlreadyOnboarded('discovery');
       $scope.discoveryOnboardingIndex = 0;
 
+      $scope.discoveredTestOnboardingEnabled = $scope.hasUserAlreadyOnboarded('discovered-test');
+      $scope.discoveredTestOnboardingIndex = 0;
+      $scope.testVerificationOnboardingEnabled = $scope.hasUserAlreadyOnboarded('test-verification');
+      $scope.testVerificationOnboardingIndex = 0;
       $scope.current_domain = store.get('domain');
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
@@ -103,59 +107,61 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
 
-          $scope.discoveryOnboardingSteps = [
-            {
-              title: "Begin finding tests by starting a discovery.",
-              position: "right",
-              description: "Discovery time varies based on the complexity of your domain. If a discovery has been running for longer than 48 hours, please contact support@qanairy.com.",
-              attachTo:"#start_discovery_button",
-              width: 400
-            },
-            {
-              title: "Qanairy’s AI is now working to find and build your tests for you. ",
-              position: "centered",
-              description: "Tests will begin returning as they are discovered. This process takes a few minutes, now would be a great time to take a break. You deserve it.",
-              width: 400
-            }
-          ];
+    $scope.discoveryOnboardingSteps = [
+      {
+        title: "Begin finding tests by starting a discovery.",
+        position: "right",
+        description: "Discovery time varies based on the complexity of your domain. If a discovery has been running for longer than 48 hours, please contact support@qanairy.com.",
+        attachTo:"#start_discovery_button",
+        width: 400
+      }
+    ];
 
-          $scope.discoveredTestOnboardingSteps = [
-            {
-              title: "Congratulations, you built your first test!",
-              position: "centered",
-              description: "Now it’s time to learn about the test path. Start by clicking on the test bar to open the path details.",
-              attachTo:"#start_discovery_button",
-              width: 400
-            },
-            {
-              position: "top",
-              description: "Test paths are comprised of three parts: page, element, and action. Click on each part to learn more details about the test like destination, xpath, styling, and browser screenshots.",
-              attachTo:"#start_discovery_button",
-              width: 400
-            }
-          ];
+    $scope.discoveryRunningOnboardingSteps = [
+      {
+        title: "Qanairy’s AI is now working to find and build your tests for you. ",
+        position: "centered",
+        description: "Tests will begin returning as they are discovered. This process takes a few minutes, now would be a great time to take a break. You deserve it.",
+        width: 400
+      }
+    ];
+      $scope.discoveredTestOnboardingSteps = [
+        {
+          title: "Congratulations, you built your first test!",
+          position: "centered",
+          description: "Now it’s time to learn about the test path. Start by clicking on the test bar to open the path details.",
+          attachTo:"#start_discovery_button",
+          width: 400
+        },
+        {
+          position: "top",
+          description: "Test paths are comprised of three parts: page, element, and action. Click on each part to learn more details about the test like destination, xpath, styling, and browser screenshots.",
+          attachTo:"#start_discovery_button",
+          width: 400
+        }
+      ];
 
 
-          $scope.testGroupOnboardingSteps = [
-            {
-              title: "Keep tests organized by adding them to groups.",
-              position: "top",
-              position: "left",
-              description: "We’ve helped you get started by smart labeling your smoke and form tests.",
-              attachTo:"#groups_label",
-              width: 400
-            }
-          ];
+      $scope.testGroupOnboardingSteps = [
+        {
+          title: "Keep tests organized by adding them to groups.",
+          position: "top",
+          position: "left",
+          description: "We’ve helped you get started by smart labeling your smoke and form tests.",
+          attachTo:"#groups_label",
+          width: 400
+        }
+      ];
 
-          $scope.testVerificationSteps = [
-            {
-              position: "top",
-              position: "right",
-              description: "Use the test details to determine whether the status of a test is passing or failing. Select passing or failing to teach Qanairy the expected/desired outcome of each test. Once a status is selected the test will move to the Tests page where it can be run.",
-              attachTo:"#test_status",
-              width: 400
-            },
-          ];
+    $scope.testVerificationSteps = [
+      {
+        position: "top",
+        position: "right",
+        description: "Use the test details to determine whether the status of a test is passing or failing. Select passing or failing to teach Qanairy the expected/desired outcome of each test. Once a status is selected the test will move to the Tests page where it can be run.",
+        attachTo:"#test_status",
+        width: 400
+      },
+    ];
 
 
     $scope.extractHostname =  function(url) {
@@ -189,7 +195,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.isStarted = true;
       Discovery.startWork({url:  $scope.discovery_url}).$promise
         .then(function(value){
-          //$scope.waitingOnTests = true;
+          $scope.discoveryOnboardingEnabled = $scope.hasUserAlreadyOnboarded('discovery-running');
+          $scope.discoveryOnboardingIndex = 0;
         })
         .catch(function(err){
           //$scope.waitingOnTests = false;
