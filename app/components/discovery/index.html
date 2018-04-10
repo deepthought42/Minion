@@ -5,21 +5,20 @@
       Stop!
   </button>
 -->
-    <div class="row">
-        <div class="col-md-12 error__message" ng-repeat="error in errors track by $index">
-            {{error.message}}
-        </div>
+
+  <div class="row">
+    <div class="col-md-12 error__message" ng-repeat="error in errors track by $index">
+      {{error.message}}
     </div>
+  </div>
 
 	<div class="secondary-nav vertical__center__int" >
-	  <div class="col-md-2 col-sm-4" ng-if="!isStarted" >
+	  <div class="col-md-2 col-sm-4" ng-show="!isStarted" >
 			<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
 				Start Discovery
 			</button>
     </div>
 
-    <onboarding-popover enabled="discoveryOnboardingEnabled" steps="discoveryOnboardingSteps" step-index="discoveryOnboardingIndex"></onboarding-popover>
-    <onboarding-popover enabled="discoveryRunningOnboardingEnabled" steps="discoveryRunningOnboardingSteps" step-index="discoveryRunningOnboardingIndex"></onboarding-popover>
 
     <div class="col-md-2 col-sm-4" ng-if="isStarted">
 			<div class="pull-left">
@@ -94,13 +93,14 @@
 	</div>
 
 	<div class="test-container">
+
 		<div class="empty__state vertical__center_empty_state_discovery" ng-show="!isStarted && !waitingOnTests && tests.length==0">
 			<div>
         <h2>Collect your tests by first running a Discovery.</h2>
       </div>
 	    <div>
         <button class="btn btn--primary btn-lg" ng-click="startDiscovery()">
-            Start Discovery
+          Start Discovery
         </button>
       </div>
 		</div>
@@ -113,13 +113,11 @@
       </div>
     </div>
 
-    <onboarding-popover enabled="discoveredTestOnboardingEnabled" steps="discoveredTestOnboardingSteps" step-index='discoveredTestOnboardingIndex'></onboarding-popover>
-    <onboarding-popover enabled="testVerificationOnboardingEnabled" steps="testVerificationSteps" step-index='testVerificationOnboardingIndex'></onboarding-popover>
-
     <div class="test" ng-repeat="test in tests track by test.key" ng-show="tests.length>0">
+
 			<div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
-			  <div class="test__status test__profile_stretch flex-none text--shadow">
-			   	<div class="row test__status__frame">
+			  <div class="test__status test__profile_stretch flex-none text--shadow" >
+			   	<div class="row test__status__frame" id="{{'test'+$index+'_status'}}">
 						<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
 							<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
 						</div>
@@ -179,11 +177,11 @@
 			</div>
 
 
-	     <div class="row test__path" ng-show="test.visible">
-            <div class="col-sm-12 path__title">
-                <h5>Test Path</h5>
-            </div>
-          <div class="col-xs-12 vertical__left__int" ng-click="visible_tab='nodedata'+$index">
+	     <div class="row test__path" ng-show="test.visible"  >
+          <div class="col-sm-12 path__title">
+              <h5>Test Path</h5>
+          </div>
+          <div class="col-xs-12 vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
               <div ng-repeat="node in test.path.path track by $index" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
                     <div ng-show="node.browser_screenshots[default_browser]" class="path-page path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
                           <img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
@@ -225,8 +223,8 @@
         </div>
 
 
-            <div class="row test__data" ng-show="test.visible">
-                <div class="col-xs-12 test__info">
+            <div class="row test__data" ng-if="test.visible">
+                <div class="col-xs-12 test__info" >
                     <div class="row">
                         <div class="col-xs-8">
                             <div class="row node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
@@ -336,7 +334,6 @@
                         </div>
                         <div class="col-xs-4 test__groups">
                           <div class="row">
-                            <onboarding-popover enabled="groupOnboardingEnabled" steps="groupOnboardingSteps" step-index="groupOnboardingIndex"></onboarding-popover>
                             <div class="col-sm-12 " id="group_label">
                                 <h5>Groups</h5>
                             </div>
@@ -368,3 +365,8 @@
                 </div>
             </div>
 	</div>
+
+  <onboarding-popover enabled="discoveryOnboardingEnabled" steps="discoveryOnboardingSteps" step-index="discoveryOnboardingIndex"></onboarding-popover>
+  <onboarding-popover enabled="discoveryRunningOnboardingEnabled" steps="discoveryRunningOnboardingSteps" step-index="discoveryRunningOnboardingIndex"></onboarding-popover>
+  <onboarding-popover enabled="discoveredTestOnboardingEnabled" steps="discoveredTestOnboardingSteps" step-index='discoveredTestOnboardingIndex'></onboarding-popover>
+  <onboarding-popover enabled="testVerificationOnboardingEnabled" steps="testVerificationSteps" step-index='testVerificationOnboardingIndex'></onboarding-popover>

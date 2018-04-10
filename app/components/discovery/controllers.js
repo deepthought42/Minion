@@ -42,9 +42,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.test_idx = -1;
       $scope.discoveryOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery');
       $scope.discoveryOnboardingIndex = 0;
+      if($scope.discoveryOnboardingEnabled){
+        Account.addOnboardingStep({step_name: "discovery"}).$promise
+          .then(function(data){
+            $scope.onboard_list = data;
+          })
+          .catch(function(err){
 
-      $scope.groupOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-group');
-      $scope.groupOnboardingIndex = 0;
+          });
+      }
 
       $scope.current_domain = store.get('domain');
       if($scope.current_domain != null){
@@ -62,8 +68,19 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           .then(function(data){
             $scope.tests = data
             $scope.waitingOnTests = false;
-            $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
-            $scope.discoveredTestOnboardingIndex = 0;
+            if(data.length > 0){
+              $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
+              $scope.discoveredTestOnboardingIndex = 0;
+              if($scope.discoveredTestOnboardingEnabled){
+                Account.addOnboardingStep({step_name: "discovered-test"}).$promise
+                  .then(function(data){
+                    $scope.onboard_list = data;
+                  })
+                  .catch(function(err){
+
+                  });
+              }
+            }
           })
           .catch(function(err){
             $scope.errors.push(err.data);
@@ -82,6 +99,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         channel.bind('test-discovered', function(data) {
           $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
           $scope.discoveredTestOnboardingIndex = 0;
+          if($scope.discoveredTestOnboardingEnabled){
+            Account.addOnboardingStep({step_name: "discovered-test"}).$promise
+              .then(function(data){
+                $scope.onboard_list = data;
+              })
+              .catch(function(err){
+
+              });
+          }
           $scope.waitingOnTests = false;
           $scope.tests.push(JSON.parse(data));
           $scope.$apply();
@@ -94,29 +120,13 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       getFailingCount();
     }
 
-    $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
-      var onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
-      //check if discovery onboarding has already been seen
-      if(onboard){
-        Account.addOnboardingStep({step_name: onboard_step_name}).$promise
-          .then(function(data){
-            store.set("onboard", data);
-          })
-          .catch(function(err){
-
-          });
-      }
-      //return onboard;
-      return false;
-    }
-
-
     $scope.discoveryOnboardingSteps = [
       {
         title: "Begin finding tests by starting a discovery.",
         position: "right",
         description: "Discovery time varies based on the complexity of your domain. If a discovery has been running for longer than 48 hours, please contact support@qanairy.com.",
         attachTo:"#start_discovery_button",
+        top: 50,
         width: 400
       }
     ];
@@ -129,39 +139,30 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         width: 400
       }
     ];
-      $scope.discoveredTestOnboardingSteps = [
-        {
-          title: "Congratulations, you built your first test!",
-          position: "centered",
-          description: "Now it’s time to learn about the test path. Start by clicking on the test bar to open the path details.",
-          width: 400
-        }
-      ];
 
-
-      $scope.testGroupOnboardingSteps = [
-        {
-          title: "Keep tests organized by adding them to groups.",
-          position: "top",
-          position: "left",
-          description: "We’ve helped you get started by smart labeling your form tests.",
-          attachTo:"#group_label",
-          width: 400
-        }
-      ];
+    $scope.discoveredTestOnboardingSteps = [
+      {
+        title: "Congratulations, you built your first test!",
+        position: "centered",
+        description: "Now it’s time to learn about the test path. Start by clicking on the test bar to open the path details.",
+        width: 400,
+      }
+    ];
 
     $scope.testVerificationSteps = [
       {
-        position: "top",
+        title: "Review your test",
         description: "Test paths are comprised of three parts: page, element, and action. Click on each part to learn more details about the test like destination, xpath, styling, and browser screenshots.",
-        attachTo:"#start_discovery_button",
+        attachTo:"#test0_data",
+        position: "top",
+        top: 150,
+        left: 100,
         width: 400
       },
       {
         position: "top",
-        position: "right",
         description: "Use the test details to determine whether the status of a test is passing or failing. Select passing or failing to teach Qanairy the expected/desired outcome of each test. Once a status is selected the test will move to the Tests page where it can be run.",
-        attachTo:"#test_status",
+        attachTo:"#test0_status",
         width: 400
       }
     ];
@@ -197,6 +198,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.isStarted = true;
       $scope.discoveryRunningOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery-running');
       $scope.discoveryRunningOnboardingIndex = 0;
+      if($scope.discoveryRunningOnboardingEnabled){
+        Account.addOnboardingStep({step_name: "discovery-running"}).$promise
+          .then(function(data){
+            $scope.onboard_list = data;
+          })
+          .catch(function(err){
+
+          });
+      }
       Discovery.startWork({url:  $scope.discovery_url}).$promise
         .then(function(value){
 
@@ -253,9 +263,19 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.test_idx = index;
       $scope.test = test;
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
-      $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
-      $scope.testVerificationOnboardingIndex = 0;
       if(test.visible){
+        $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
+        $scope.testVerificationOnboardingIndex = 0;
+
+        if($scope.testVerificationOnboardingEnabled){
+          Account.addOnboardingStep({step_name: "test-verification"}).$promise
+            .then(function(data){
+              $scope.onboard_list = data;
+            })
+            .catch(function(err){
+
+            });
+        }
         $scope.setCurrentNode(test.path.path[0], index);
       }
     }
@@ -363,6 +383,22 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           }
        });
     };
+
+    $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
+      var onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+      //check if discovery onboarding has already been seen
+      if(onboard){
+        Account.addOnboardingStep({step_name: onboard_step_name}).$promise
+          .then(function(data){
+            store.set("onboard", data);
+          })
+          .catch(function(err){
+
+          });
+      }
+      return onboard;
+      //return false;
+    }
 
     this._init();
 

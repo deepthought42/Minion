@@ -24,28 +24,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.filteredTests = [];
       $scope.test_idx = -1;
 
-      //check if discovery onboarding has already been seen
-      Account.getOnboardingSteps().$promise
-        .then(function(data){
-          $scope.onboard_list = data;
-          console.log("getting steps :: "+data);
-          $scope.testRunOnboardingEnabled = $scope.onboard_list == null || $scope.onboard_list.indexOf('test-run') == -1;
-          $scope.testRunOnboardingIndex = 0;
-        })
-        .catch(function(err){
-
-        });
-
-      if($scope.testRunOnboardingEnabled){
-        Account.addOnboardingStep({step_name: "test-run"}).$promise
-          .then(function(data){
-            $scope.onboard_list = data;
-          })
-          .catch(function(err){
-
-          });
-      }
-
       if(store.get('domain')){
         $scope.default_browser = store.get('domain')['discoveryBrowser'];
         $scope.domain_url = store.get('domain').url;
@@ -77,11 +55,12 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
 
     $scope.testRunOnboardingSteps = [
       {
-        position: "bottom",
+        position: "left",
         description: "Run tests to compare the new run record to the last time the test was ran. If the test fails, but the expected outcome is now correct, you can update the test status by editing the selected test. Otherwise continue to run your test until your engineers have fixed the problem.",
         attachTo:"#run_test_button-0",
-        width: 400,
-        xOffset: -500,
+        top: 125,
+        right: 280,
+        width: 400
       },
       {
         title: "Congratulations, that’s all there is to it!",
@@ -90,6 +69,22 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         width: 400
       }
     ];
+
+    $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
+      var onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+      //check if discovery onboarding has already been seen
+      if(onboard){
+        Account.addOnboardingStep({step_name: onboard_step_name}).$promise
+          .then(function(data){
+            store.set("onboard", data);
+          })
+          .catch(function(err){
+
+          });
+      }
+      return onboard;
+      //return false;
+    }
 
 
     $scope.updateOnboadingStep = function(step){
@@ -144,6 +139,19 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         .then(function(data){
           $scope.tests = data;
           $scope.waitingOnTests = false;
+          //check if discovery onboarding has already been seen
+          $scope.testRunOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-run');
+          $scope.testRunOnboardingIndex = 0;
+
+          if($scope.testRunOnboardingEnabled){
+            Account.addOnboardingStep({step_name: "test-run"}).$promise
+              .then(function(data){
+                $scope.onboard_list = data;
+              })
+              .catch(function(err){
+
+              });
+          }
         })
         .catch(function(err){
           $scope.tests = [];

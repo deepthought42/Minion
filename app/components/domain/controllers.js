@@ -48,31 +48,15 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         position: "right",
         description: "Start by adding a domain to begin testing!",
         attachTo:"#add_domain_card",
+        top: 100,
         width: 400
       }
     ];
 
-    $scope.settingsOnboardingSteps = [
-      {
-        title: "Domain Setup",
-        description: "Edit your domain settings at any time.",
-        attachTo:"#edit_domain_settings0",
-        position: "left"
-      }
-    ];
-
-    /**
-    * Display onboarding panels for domain settings
-    */
-    $scope.showSettingsOnboarding = function(){
-      //check if domain setting onboarding has already been seen
-      $scope.settingsOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('domain-welcome');
-      $scope.settingsOnboardingIndex = 0;
-
-    }
-
     $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
-      var onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+      if(store.get("onboard")){
+        var onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+      }
       //check if discovery onboarding has already been seen
       if(onboard){
         Account.addOnboardingStep({step_name: onboard_step_name}).$promise
@@ -83,8 +67,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
           });
       }
-      //return onboard;
-      return false;
+      return onboard;
+      //return false;
     }
     /**
     *
@@ -98,7 +82,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             $scope.domains.push(successResult);
             $scope.closeDialog();
             $rootScope.$broadcast("domain_updated", successResult);
-            $scope.showSettingsOnboarding();
           },
           function(errorResult){
             if(errorResult.status === 303){
@@ -126,7 +109,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
               }
             }
             $scope.closeDialog();
-            $scope.showSettingsOnboarding();
           },
           function(errorResult){
             $scope.show_create_domain_err = true;

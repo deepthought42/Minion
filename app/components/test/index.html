@@ -40,6 +40,7 @@
 	</div>
 
 	<div class="test-container">
+
 		<div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnTests">
 			<div>
 				<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw"></i>
@@ -57,6 +58,8 @@
 		<div class="test"
 				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] track by $index"
 				 ng-show="tests.length > 0">
+				 <onboarding-popover ng-if="$index==0" enabled="testRunOnboardingEnabled" steps="testRunOnboardingSteps" step-index="testRunOnboardingIndex"></onboarding-popover>
+
 			<div class="test__profile vertical__left__profile" ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass}">
 
 				<div class="tests__test__status test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
@@ -166,8 +169,8 @@
 						</div>
 
             <div class="flex-none test_functions test__btns" aria-label="Test Functions">
-              <div class="fifteen_right btn-group pull-left" role="group" ng-if="editing_test_idx!=$index" id="{{'run_test_button-'+$index}}" >
-                <button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)">
+              <div class="fifteen_right btn-group pull-left" role="group" ng-show="editing_test_idx!=$index"  >
+                <button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)" id="{{'run_test_button-'+$index}}">
                    Run
                 </button>
               </div>
@@ -404,5 +407,3 @@
 	  </div>
 	</div>
 </div>
-
-<onboarding-popover enabled="tests.length > 0 && testRunOnboardingEnabled" steps="testRunOnboardingSteps" step-index="testRunOnboardingIndex"></onboarding-popover>
