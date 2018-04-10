@@ -35,9 +35,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_creation_err = "An error occurred while saving the domain";
 
       //check if domain welcome onboarding has already been seen
-      //$scope.welcomeOnboardingEnabled = store.get("onboard").indexOf('domain-welcome') == -1;
       $scope.welcomeOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('domain-welcome');
-
       $scope.welcomeOnboardingIndex = 0;
     }
 
