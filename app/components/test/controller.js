@@ -10,10 +10,9 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
   });
 }])
 
-.controller('TesterIndexCtrl', ['$rootScope', '$scope', '$interval', 'Tester', 'store', '$state', '$mdDialog',
-  function($rootScope, $scope, $interval, Tester, store, $state, $mdDialog) {
-    $scope._init= function(){
-      $('[data-toggle="tooltip"]').tooltip()
+.controller('TesterIndexCtrl', ['$rootScope', '$scope', '$interval', 'Tester', 'store', '$state', '$mdDialog', 'Account',
+  function($rootScope, $scope, $interval, Tester, store, $state, $mdDialog, Account) {
+    this._init= function(){
       $scope.errors = [];
       $scope.sortLastRun = false;
 
@@ -24,6 +23,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.current_node = [];
       $scope.filteredTests = [];
       $scope.test_idx = -1;
+
       if(store.get('domain')){
         $scope.default_browser = store.get('domain')['discoveryBrowser'];
         $scope.domain_url = store.get('domain').url;
@@ -49,8 +49,59 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         //$scope.tests.push(JSON.parse(data));
         $scope.$apply();
       });
+
+
     }
 
+    $scope.testRunOnboardingSteps = [
+      {
+        position: "left",
+        description: "Run tests to compare the new run record to the last time the test was ran. If the test fails, but the expected outcome is now correct, you can update the test status by editing the selected test. Otherwise continue to run your test until your engineers have fixed the problem.",
+        attachTo:"#run_test_button-0",
+        top: 125,
+        right: 280,
+        width: 400
+      },
+      {
+        title: "Congratulations, that’s all there is to it!",
+        position: "centered",
+        description: "We hope you enjoy your new testing experience with Qanairy. Please contact support@qanairy.com if you have any questions.",
+        width: 400
+      }
+    ];
+
+    $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
+      var onboard = null;
+      if(store.get("onboard")){
+        onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+      }
+
+      //check if discovery onboarding has already been seen
+      if(onboard){
+        Account.addOnboardingStep({step_name: onboard_step_name}).$promise
+          .then(function(data){
+            store.set("onboard", data);
+          })
+          .catch(function(err){
+
+          });
+      }
+      return onboard;
+      //return false;
+    }
+
+
+    $scope.updateOnboadingStep = function(step){
+      console.log("steps :: "+step);
+      /*Account.addOnboardingStep({step_name: step}).$promise
+        .then(function(data){
+
+        })
+        .catch(function(err){
+
+        })
+        */
+    }
 
     $scope.extractHostname =  function(url) {
         var hostname;
@@ -92,6 +143,19 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
         .then(function(data){
           $scope.tests = data;
           $scope.waitingOnTests = false;
+          //check if discovery onboarding has already been seen
+          $scope.testRunOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-run');
+          $scope.testRunOnboardingIndex = 0;
+
+          if($scope.testRunOnboardingEnabled){
+            Account.addOnboardingStep({step_name: "test-run"}).$promise
+              .then(function(data){
+                $scope.onboard_list = data;
+              })
+              .catch(function(err){
+
+              });
+          }
         })
         .catch(function(err){
           $scope.tests = [];
@@ -373,7 +437,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.test_copy = JSON.parse(JSON.stringify(test));
     }
 
-    $scope._init();
+    this._init();
 
     /* EVENTS */
     $rootScope.$on('missing_resorce_error', function (e){

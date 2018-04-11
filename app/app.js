@@ -24,12 +24,13 @@ angular.module('Qanairy', [
   'Qanairy.user_profile',
   'Qanairy.subscribe',
   'Qanairy.authCallback',
+  'ngOnboarding',
   'Qanairy.AccountService',
   'rzModule',
-  'ngRaven'
+  /*'ngRaven'*/
 ]).
-config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider',
-  function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider) {
+config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider', 'ngOnboardingDefaultsProvider',
+  function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider) {
     $urlRouterProvider.otherwise('/domains');
 
     StripeCheckoutProvider.defaults({
@@ -37,12 +38,12 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     });
 
     angularAuth0Provider.init({
-      clientID: 'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV',
-      domain: 'qanairy.auth0.com',
+      clientID: 'mMomHg1ZhzZkM4Tsz2NGkdJH3eeJqIq6', //'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV',
+      domain: 'staging-qanairy.auth0.com',
       responseType: 'token id_token',
       audience: 'https://staging-api.qanairy.com',
       redirectUri: 'http://localhost:8001/#/authenticate',
-      scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery'
+      scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery'
     });
 
     storeProvider.setStore("sessionStorage");
@@ -55,6 +56,11 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       //  unauthenticatedRedirectPath: '/login'
       });
 
+      //ngOnboardingDefaultsProvider.set('overlay', 'false');
+      ngOnboardingDefaultsProvider.set({
+        overlayOpacity: '0.2',
+        showStepInfo: false
+      });
 
       $httpProvider.interceptors.push('jwtInterceptor');
   }])
@@ -65,8 +71,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
 
     Account.getOnboardingSteps().$promise
       .then(function(data){
-        console.log("data :::    "+data);
-        store.set('onboarded_steps', data);
+        store.set('onboard', data);
       })
       .catch(function(data){
 

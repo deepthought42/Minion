@@ -13,8 +13,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   });
 }])
 
-.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state',
-  function($rootScope, $scope, Domain,  $mdDialog, store, $state) {
+.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state', 'Account',
+  function($rootScope, $scope, Domain,  $mdDialog, store, $state, Account) {
     this._init = function(){
       $scope.errors = [];
       $scope.domains = [];
@@ -33,8 +33,45 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_url = "";
       $scope.domain_error = "";
       $scope.domain_creation_err = "An error occurred while saving the domain";
+
+      //check if domain welcome onboarding has already been seen
+      $scope.welcomeOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('domain-welcome');
+      $scope.welcomeOnboardingIndex = 0;
     }
 
+
+    $scope.welcomeSteps = [
+      {
+        title: "Welcome to Qanairy!",
+        position: "right",
+        description: "Start by adding a domain to begin testing. Once you’re done, select a domain and go to ‘Discovery’ to start finding tests.",
+        attachTo:"#add_domain_card",
+        top: 100,
+        width: 400
+      }
+    ];
+
+    $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
+      var onboard = null;
+      if(store.get("onboard")){
+        onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+      }
+      //check if discovery onboarding has already been seen
+      if(onboard){
+        Account.addOnboardingStep({step_name: onboard_step_name}).$promise
+          .then(function(data){
+            store.set("onboard", data);
+          })
+          .catch(function(err){
+
+          });
+      }
+      return onboard;
+      //return false;
+    }
+    /**
+    *
+    */
     $scope.createDomain = function(protocol, host, default_browser, logo_url){
       if(default_browser){
         Domain.save({protocol: protocol, url: host, logoUrl: logo_url, discoveryBrowser: default_browser}).$promise

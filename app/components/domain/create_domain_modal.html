@@ -1,27 +1,27 @@
 <md-dialog class="col-sm-8 modal-frame" style="">
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-12" >
 			<div class="row ">
 				<div class="col-sm-10">
-						<div class="domain-dialogue-header">
-							<h2 class="modal__title">Start a new project by adding a&nbsp;domain</h2>
-						</div>
+					<div class="domain-dialogue-header">
+						<h2 class="modal__title">Start a new project by adding a&nbsp;domain</h2>
 					</div>
+				</div>
 				<div class="col-sm-2">
 					<div class="dialogue-close" ng-click="closeDialog()" ng-show="domains.length">
 						 <h2 style="text-align:right;">
 							 <i class="fa fa-times"></i>
 						 </h2>
-						</div>
 					</div>
 				</div>
+			</div>
 			<div class="row modal-form">
 				<form name="domain_form" novalidate>
 						<div class ="domain-dialogue" >
 								<div class ="col-sm-12 form_molecule" >
-											 <div class="form_label_description_domain">
-													 <h6>Domain</h6>
-												</div>
+									  <div class="form_label_description_domain">
+											 <h6>Domain</h6>
+										</div>
 										<div class ="domain-dialogue-input" >
 														<div class="domain_protocol">
 												<select id="domain_protocol" class="form-control" ng-model="current_domain.protocol" required>
@@ -88,7 +88,11 @@
 								</div>
 						</div>
 						<div class="modal_action_button">
-							<button id="create_domain_button" class="btn btn--primary pull-right" ng-click="createDomain(current_domain.protocol, current_domain.url, selected_browser, current_domain.logo_url)"  ng-disabled="!selected_browser || domain_form.$invalid">Add Domain</button>
+							<button id="create_domain_button" class="btn btn--primary pull-right"
+                      ng-click="createDomain(current_domain.protocol, current_domain.url, selected_browser, current_domain.logo_url)"
+                      ng-disabled="!selected_browser || domain_form.$invalid">
+                        Add Domain
+              </button>
 						</div>
 				</form>
 			</div>
