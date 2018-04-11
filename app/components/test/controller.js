@@ -71,7 +71,11 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     ];
 
     $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
-      var onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+      var onboard = null;
+      if(store.get("onboard")){
+        onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+      }
+
       //check if discovery onboarding has already been seen
       if(onboard){
         Account.addOnboardingStep({step_name: onboard_step_name}).$promise

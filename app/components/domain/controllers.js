@@ -44,7 +44,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       {
         title: "Welcome to Qanairy!",
         position: "right",
-        description: "Start by adding a domain to begin testing!",
+        description: "Start by adding a domain to begin testing. Once you’re done, select a domain and go to ‘Discovery’ to start finding tests.",
         attachTo:"#add_domain_card",
         top: 100,
         width: 400
@@ -52,8 +52,9 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     ];
 
     $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
+      var onboard = null;
       if(store.get("onboard")){
-        var onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+        onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
       }
       //check if discovery onboarding has already been seen
       if(onboard){

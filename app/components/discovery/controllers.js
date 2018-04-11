@@ -161,7 +161,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       },
       {
         position: "top",
-        description: "Use the test details to determine whether the status of a test is passing or failing. Select passing or failing to teach Qanairy the expected/desired outcome of each test. Once a status is selected the test will move to the Tests page where it can be run.",
+        description: "Examine the test details to determine whether the status of a test is passing or failing. Select passing or failing to teach Qanairy the expected outcome of each test. Once a status is selected the test will move to the 'Tests' page where it can be run.",
         attachTo:"#test0_status",
         width: 400
       }
@@ -385,7 +385,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     };
 
     $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
-      var onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+      var onboard = null;
+      if(store.get("onboard")){
+        onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+      }
       //check if discovery onboarding has already been seen
       if(onboard){
         Account.addOnboardingStep({step_name: onboard_step_name}).$promise

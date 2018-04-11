@@ -104,7 +104,7 @@
         </button>
       </div>
 		</div>
-    <div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnTests">
+    <div class="empty__state vertical__center_empty_state_busy" ng-if="isStarted && tests.length==0">
       <div style="text-align:center; margin: 0px auto;">
         <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
 				<br><br><br>
