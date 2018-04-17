@@ -40,8 +40,8 @@
             <a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#ffffff'}}">
               <i class="fa fa-list-ul main-nav-icons" aria-hidden="true"></i>
               Tests
-              <span id="notification_count" ng-show="failingTests">
-                {{failingTests}}
+              <span id="notification_count" ng-show="approved_test_cnt">
+                {{approved_test_cnt}}
               </span>
             </a>
           </div>

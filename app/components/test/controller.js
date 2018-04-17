@@ -23,7 +23,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.current_node = [];
       $scope.filteredTests = [];
       $scope.test_idx = -1;
-
+      store.set("approved_test_cnt", null);
+      $rootScope.$broadcast("updateApprovedTestCnt", null);
       if(store.get('domain')){
         $scope.default_browser = store.get('domain')['discoveryBrowser'];
         $scope.domain_url = store.get('domain').url;

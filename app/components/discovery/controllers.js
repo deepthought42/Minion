@@ -277,18 +277,13 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
        });
     };
 
-    /**
-    * Displays a info for a selected path object in the drop down that
-    * accompanies the error panel for the associated path
-    */
-    $scope.showInfoPanel = function(obj){
-
-    }
-
     $scope.cancelEditingTestName = function(test){
       test.show_test_name_edit_field = false;
     }
 
+    /**
+     *
+     */
     $scope.updateCorrectness = function(test, correctness, idx){
       test.waitingOnStatusChange = true;
       Tester.setDiscoveredPassingStatus({key: test.key, correct: correctness}).$promise
@@ -298,14 +293,16 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           //remove from list
           $scope.tests.splice(idx, 1);
           //update approved test count
-
+          var approved_cnt = 0;
           if(!store.get('approved_test_cnt')){
-            store.set('approved_test_cnt', 1);
+            approved_cnt = 1;
           }
           else{
-            var approved_cnt = store.get('approved_test_cnt');
-            store.set('approved_test_cnt', approved_cnt);
+            var approved_cnt = store.get('approved_test_cnt')+1;
           }
+          store.set('approved_test_cnt', approved_cnt);
+
+          $rootScope.$broadcast("updateApprovedTestCnt", approved_cnt);
         })
         .catch(function(err){
           test.waitingOnStatusChange = false;
