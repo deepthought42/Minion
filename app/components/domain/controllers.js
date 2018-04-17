@@ -57,7 +57,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
       }
       //check if discovery onboarding has already been seen
-      if(onboard){
+      if(!onboard || onboard == null){
         Account.addOnboardingStep({step_name: onboard_step_name}).$promise
           .then(function(data){
             store.set("onboard", data);
@@ -67,7 +67,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           });
       }
       return onboard;
-      //return false;
     }
     /**
     *
