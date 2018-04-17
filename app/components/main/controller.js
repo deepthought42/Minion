@@ -41,6 +41,7 @@ angular.module('Qanairy.main', ['ui.router'])
 
       getFailingCount({url: "http://www.qanairy.com"});
 
+      $scope.approved_test_cnt = store.get("approved_test_cnt");
       $scope.$location = $location;
       $scope.current_path = $location.path();
       $scope.user_profile = store.get('profile');
@@ -68,8 +69,9 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.domain = store.get('domain');
     })
 
-    $scope.$on('updateFailingCnt', function(){
-      getFailingCount({url: "http://www.qanairy.com"});
+    $scope.$on('updateApprovedTestCnt', function(event, approved_test_cnt){
+      console.log("Approved test count :: "+approved_test_cnt);
+      $scope.approved_test_cnt = approved_test_cnt;
     })
   }
 ]);
