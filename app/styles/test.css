@@ -218,11 +218,10 @@ width: -webkit-calc(100% - 15px);
 .test_name_edit {
 	width:152px;
 }
-.test_name{
+.test_name, .search{
 	padding-right:15px;
 	padding-left:15px;
 }
-
 /*--------------------------- [6. Test Status] --------------------------------------------------------------------------------*/
 .status{
 	color: #ffffff !important;
