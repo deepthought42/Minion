@@ -15,8 +15,10 @@
 	<div class="secondary-nav vertical__center__int" >
   	<div class="flex-auto">
 			<div class="input-group search">
-		 		<span class="input-group-addon"><i class="fa fa-search"></i></span>
-					<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
+		 		<span class="input-group-addon">
+          <i class="fa fa-search"></i>
+        </span>
+        <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
 			</div>
 		</div>
 		<div class="stats__container text-right" >
@@ -38,7 +40,7 @@
 						Last Test Found
 					</div>
 					<div class="stat_value">
-						{{((Date.now() - (tests | orderBy:{'lastRunTimestamp':true})[tests.length-1].lastRunTimestamp) || '00:00') | date : 'h:mm'}} hrs ago
+						{{((Date.now() - (tests | orderBy:{'lastRunTimestamp':true})[tests.length-1].lastRunTimestamp/1000) || '00:00') | date : 'h:mm'}} hrs ago
 					</div>
 				</div>
 			</div>
@@ -49,7 +51,7 @@
 						Total Runtime
 					</div>
 					<div class="stat_value">
-						{{((current_domain.lastRunTimestamp - current_domain.lastDiscoveryStartedAt )/1000 | date : 'h:mm')  || '00:00'}}
+						{{((current_domain.lastRunTimestamp - current_domain.lastDiscoveryStartedAt )  | date : 'h:mm')  || '00:00'}}
                         hrs
 					</div>
 				</div>
@@ -120,7 +122,7 @@
       </div>
     </div>
 
-    <div class="test" ng-repeat="test in tests track by test.key" ng-show="tests.length>0">
+    <div class="test" ng-repeat="test in tests | orderBy:'lastRunTimestamp' track by test.key " ng-show="tests.length>0">
 
 			<div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 			  <div class="test__status test__profile_stretch flex-none text--shadow" >
@@ -178,7 +180,7 @@
 			  </div>
         <div class="flex-none accordion-flex test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
           <div class="accordion" aria-label="open/close accordion">
-            <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
+            <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" ></i>
           </div>
         </div>
 			</div>
