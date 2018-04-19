@@ -6,6 +6,13 @@
   		  Run All Tests
   		</button>
 	  </div>
+		<div class="flex-auto col-md-2 col-sm-4">
+			<div class="input-group search">
+		 <span class="input-group-addon"><i class="fa fa-search"></i></span>
+					<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
+
+			</div>
+		</div>
 		<div class="offset-sm-8 col-sm-2 stats__bar text-right">
 			<div class="stat_key_value">
 				<!-- /.dropdown -->
@@ -16,6 +23,15 @@
 					{{(tests | filter:{correct:false}).length}} of {{tests.length}}
 				</div>
 			</div>
+	  </div>
+	</div>
+	<div class="secondary-nav vertical__center__int">
+		<div class="col-sm-2">
+  		<button class="btn btn--primary pull-left" id="run_all_tests_button" ng-click="openBrowserSelectionDialog()">
+  		  Run All Tests
+  		</button>
+	  </div>
+		<div class="offset-sm-8 col-sm-2 stats__bar text-right">
 	  </div>
 	</div>
 
