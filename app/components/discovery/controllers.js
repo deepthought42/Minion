@@ -172,7 +172,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           //$scope.waitingOnTests = false;
           $scope.errors.push(err.data);
 
-          if(err.data.message == "Discovery is already running"){
+          if(err.data.message == "A discovery is already running"){
             $scope.isStarted = true;
           }
           else{

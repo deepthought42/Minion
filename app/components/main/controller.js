@@ -15,16 +15,6 @@ angular.module('Qanairy.main', ['ui.router'])
 
 .controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Tester', 'Auth', '$state',
   function ($rootScope, $scope, PathRealtimeService, store, $location, Tester, Auth, $state) {
-    var getFailingCount = function(){
-      Tester.getFailingCount({url: "http://www.qanairy.com" }).$promise
-        .then(function(data){
-          store.set("failing_tests", data.failing);
-          $scope.failingTests = data.failing;
-        })
-        .catch(function(err){
-          $scope.errors.push(err);
-        });
-    }
 
     this._init = function(){
       $scope.displayUserDropDown = false;
@@ -38,8 +28,6 @@ angular.module('Qanairy.main', ['ui.router'])
       $scope.workAllocation.urlProtocol = $scope.protocols[0];
       $scope.domain = store.get('domain');
       $scope.errors = [];
-
-      getFailingCount({url: "http://www.qanairy.com"});
 
       $scope.approved_test_cnt = store.get("approved_test_cnt");
       $scope.$location = $location;

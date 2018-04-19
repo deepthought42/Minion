@@ -1,4 +1,7 @@
 <md-dialog class="col-sm-8 modal-frame" style="">
+	<div class="error__message" ng-show="show_create_domain_err">
+	  {{domain_creation_err}}
+	</div>
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="row">
@@ -18,59 +21,58 @@
 			<div class="row modal-form">
 				<form name="domain_form" novalidate>
 						<div class ="domain-dialogue" >
-								<div class ="col-sm-12 form_molecule" >
-											 <div class="form_label_description_domain">
-													 <h6>Domain</h6>
-												</div>
-										<div class ="domain-dialogue-input" >
-											{{current_domain.protocol +"://"+ current_domain.url }}
-										</div>
+							<div class ="col-sm-12 form_molecule" >
+							 <div class="form_label_description_domain">
+								 <h6>Domain</h6>
 								</div>
-								<div class="col-sm-12 form_molecule">
-									<div class="form_label_description">
-											<h6>Selected Browser</h6>
-											This is the default browser this domain uses for discovery.
-									</div>
-										 <div class="row browser_buttons">
-											<div class="col-xs-3">
-												<button class="btn btn-depressed" ng-click="domain.discoveryBrowser = 'chrome'" ng-class="{active: domain.discoveryBrowser == 'chrome'}">
-
-													<img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="domain.discoveryBrowser == 'chrome'">
-													<div class="fa-icon" ng-show="domain.discoveryBrowser != 'chrome'">
-														<i class="fa fa-chrome"></i>
-													</div>
-												</button>
+								<div class ="domain-dialogue-input" >
+									{{current_domain.protocol +"://"+ current_domain.url }}
+								</div>
+							</div>
+							<div class="col-sm-12 form_molecule">
+								<div class="form_label_description">
+									<h6>Selected Browser</h6>
+									This is the default browser this domain uses for discovery.
+								</div>
+								<div class="row browser_buttons">
+									<div class="col-xs-3">
+										<button class="btn btn-depressed" ng-click="domain.discoveryBrowser = 'chrome'" ng-class="{active: domain.discoveryBrowser == 'chrome'}">
+											<img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="domain.discoveryBrowser == 'chrome'">
+											<div class="fa-icon" ng-show="domain.discoveryBrowser != 'chrome'">
+												<i class="fa fa-chrome"></i>
 											</div>
-											<div class="col-xs-3">
-												<button class="btn btn-depressed" ng-click="domain.discoveryBrowser = 'firefox'" ng-class="{active: domain.discoveryBrowser == 'firefox'}">
-													<img src="/img/firefox.png" class="modal-browser-icon" ng-show="domain.discoveryBrowser == 'firefox'">
-													<div class="fa-icon" ng-show="domain.discoveryBrowser != 'firefox'">
-														<i class="fa fa-firefox modal-browser-icon"></i>
-													</div>
-												</button>
+										</button>
+									</div>
+									<div class="col-xs-3">
+										<button class="btn btn-depressed" ng-click="domain.discoveryBrowser = 'firefox'" ng-class="{active: domain.discoveryBrowser == 'firefox'}">
+											<img src="/img/firefox.png" class="modal-browser-icon" ng-show="domain.discoveryBrowser == 'firefox'">
+											<div class="fa-icon" ng-show="domain.discoveryBrowser != 'firefox'">
+												<i class="fa fa-firefox modal-browser-icon"></i>
 											</div>
-											<div class="col-xs-6">
-											</div>
-										</div>
-								</div>
-								<div class="col-sm-12 form_molecule">
-										<div class="form_label_description">
-											<h6>
-												Upload A Logo <span class="optional">(optional)</span>
-											</h6>
-											For best results use a 220px x 100px transparent png.
+										</button>
 									</div>
-									<div class="domain_modal_logo" ng-if="!current_domain.logo_url">
-										<i class="fa fa-image" ng-click="openPicker(domain)"></i>
+									<div class="col-xs-6">
 									</div>
-									<div class="domain_modal_logo" ng-if="current_domain.logo_url">
-										<img ng-src="{{current_domain.logo_url}}"/>
-									</div>
-									<button class="btn btn--secondary" ng-click="openPicker(domain)">Upload Logo</button>
 								</div>
-								<div ng-show="domain_creation_error" class="error">
-									Something went wrong, Please try again
+							</div>
+							<div class="col-sm-12 form_molecule">
+								<div class="form_label_description">
+									<h6>
+										Upload A Logo <span class="optional">(optional)</span>
+									</h6>
+									For best results use a 220px x 100px transparent png.
 								</div>
+								<div class="domain_modal_logo" ng-if="!current_domain.logo_url">
+									<i class="fa fa-image" ng-click="openPicker(domain)"></i>
+								</div>
+								<div class="domain_modal_logo" ng-if="current_domain.logo_url">
+									<img ng-src="{{current_domain.logo_url}}"/>
+								</div>
+								<button class="btn btn--secondary" ng-click="openPicker(domain)">Upload Logo</button>
+							</div>
+							<div ng-show="domain_creation_error" class="error">
+								Something went wrong, Please try again
+							</div>
 						</div>
 						<div class="modal_action_button">
 							<button id="create_domain_button" class="btn btn--primary pull-right" ng-click="updateDomain(current_domain.key, current_domain.protocol, current_domain.url, domain.discoveryBrowser, current_domain.logo_url)"  ng-disabled="!domain.discoveryBrowser">

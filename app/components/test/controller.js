@@ -47,7 +47,6 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
           }
         }
         $scope.waitingOnTests = false;
-        //$scope.tests.push(JSON.parse(data));
         $scope.$apply();
       });
 
@@ -71,6 +70,10 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       }
     ];
 
+    /**
+     *  Checks if onboarding step has already been experienced. if not, it adds
+     *    it to the user account via API call
+     */
     $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
       var onboard = null;
       if(store.get("onboard")){
@@ -91,19 +94,9 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       //return false;
     }
 
-
-    $scope.updateOnboadingStep = function(step){
-      console.log("steps :: "+step);
-      /*Account.addOnboardingStep({step_name: step}).$promise
-        .then(function(data){
-
-        })
-        .catch(function(err){
-
-        })
-        */
-    }
-
+    /**
+     * Extracts host name from a given url
+     */
     $scope.extractHostname =  function(url) {
         var hostname;
         //find & remove protocol (http, ftp, etc.) and get hostname
@@ -134,6 +127,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       }
       return false;
     }
+    
     $scope.setCurrentNodeKey = function(key){
       $scope.node_key=key;
     }
