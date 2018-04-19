@@ -13,12 +13,13 @@
   </div>
 
 	<div class="secondary-nav vertical__center__int" >
-	  <div class="col-md-2 col-sm-4" ng-show="!isStarted" >
-			<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
-				Start Discovery
-			</button>
-    </div>
+  	<div class="flex-auto col-md-2 col-sm-4">
+			<div class="input-group search">
+		 <span class="input-group-addon"><i class="fa fa-search"></i></span>
+					<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
 
+			</div>
+		</div>
 
     <div class="col-md-2 col-sm-4" ng-if="isStarted">
 			<div class="pull-left">
@@ -72,6 +73,22 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="secondary-nav vertical__center__int" >
+	  <div class="col-md-2 col-sm-4" ng-show="!isStarted" >
+			<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
+				Start Discovery
+			</button>
+    </div>
+
+    <div class="col-md-2 col-sm-4" ng-if="isStarted">
+			<div class="pull-left">
+				Running...
+        <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+			</div>
+	  </div>
+		<div class="col-md-10 col-sm-8 stats__container text-right" >
 		</div>
 	</div>
 
