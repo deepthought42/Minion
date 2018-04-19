@@ -131,6 +131,7 @@
 .search {
   position: relative;
   padding: 10px 0 10px 0;
+	max-width:500px;
 }
 input { text-indent: 0px; }
 
@@ -158,9 +159,8 @@ input { text-indent: 0px; }
 
 .secondary-nav{
 	color: #667;
-	margin: 15px auto;
+	margin: 12px auto;
 	/*border-bottom: 2px solid #eeeeee;*/
-
 }
 
 .stats__container{
