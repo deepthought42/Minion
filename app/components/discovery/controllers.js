@@ -20,7 +20,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.errors = [];
       $scope.tests = [];
       $scope.isStarted = false;
-      $scope.current_node = [];
+      $scope.current_group_idx = [];
       $scope.visible = false;
 			$scope.visible_test_nav1 = 'section-linemove-1';
       $scope.visible_tab = "nodedata0";
@@ -132,6 +132,23 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       }
     ];
 
+    /**
+     *  Returns an array containing the start index values for partitioning a path
+     */
+    $scope.getPathIterations = function(path_size){
+      var segment_cnt = Math.trunc(path_size/3);
+      if(segment_cnt == 0 ){
+        segment_cnt = 1;
+      }
+
+      var arr = new Array(segment_cnt);
+      for(var i=0; i<arr.length; i++){
+        arr[i] = i*3;
+      }
+
+      return arr;
+    }
+
     $scope.extractHostname =  function(url) {
         var hostname;
         //find & remove protocol (http, ftp, etc.) and get hostname
@@ -185,13 +202,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.test_idx = idx;
     }
 
-    $scope.setCurrentNode = function(node, index){
-      if(index==null){
-        $scope.current_node[$scope.test_idx] = node;
-      }
-      else{
-        $scope.current_node[index] = node;
-      }
+    $scope.setCurrentGroupIdx = function(index){
+      $scope.current_group_idx[$scope.test_idx] = index;
     }
 
     $scope.setTestName = function(test, new_name){
@@ -219,7 +231,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
         $scope.testVerificationOnboardingIndex = 0;
 
-        $scope.setCurrentNode(test.path.path[0], index);
+        $scope.setCurrentGroupIdx(0);
       }
     }
 

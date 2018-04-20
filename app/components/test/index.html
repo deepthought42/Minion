@@ -200,16 +200,7 @@
             </div>
           </div>
 
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 			 <div class="row test__dropdown" ng-show="test.visible"  >
 				 <div class="col-sm-12">
 						<div class="tabs tabs-style-linemove">
@@ -223,36 +214,41 @@
 							<div class="content-wrap">
 								<div id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
 									<div class="col-xs-12 test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
-										<div ng-repeat="node in test.path.path track by $index" class="path-node-container vertical__center__int" ng-click="setCurrentNode(node)" tooltip-placement="top">
-											<div ng-if="node.browser_screenshots[default_browser]" class="path-page path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
-												<img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
-											</div>
-											<div ng-if="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
-												<span class="" >
-													{{node.name}}
-												</span>
-											</div>
-											<div ng-if="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
-												<span ng-if="node.name=='click'" class="vertical__center__int">
-												<i class="fa fa-mouse-pointer fa-2x"></i>
-												</span>
-												<span ng-if="node.name=='doubleClick'" class="vertical__center__int">
-														<i class="fa fa-mouse-pointer fa-2x"></i>
-														<div class=”doubleclick” >
-																x2
-														</div>
-												</span>
-												<span ng-if="node.name=='mouseover'" class="vertical__center__int">
-														<i class="fa fa-hand-pointer-o fa-2x"></i>
-												</span>
-												<span ng-if="node.name=='scroll'" class="vertical__center__int">
-														<i class="fa fa-arrows-v fa-2x"></i>
-												</span>
-												<span ng-if="node.name=='sendKeys'" class="vertical__center__int">
-														<i class="fa fa-i-cursor fa-2x"></i>
-												</span>
-											</div>
-											<div class="path-bar">
+										<div class="node-group" ng-repeat="group_start_idx in getPathIterations(test.path.path.length)"
+                          ng-class="current_group_idx[$index]==group_start_idx ? 'active' : ''"
+                          ng-click="setCurrentGroupIdx(group_start_idx)" >
+
+  										<div ng-repeat="node in test.path.path | limitTo:3:group_start_idx track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
+												<div ng-if="node.browser_screenshots[default_browser]" class="path-page path-node" ng-class="current_node[test_idx]==node ? 'active' : ''" >
+													<img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
+												</div>
+												<div ng-if="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
+													<span class="" >
+														{{node.name}}
+													</span>
+												</div>
+												<div ng-if="node.type == 'Action'" class="path-node path-action vertical__center__int" tooltip-placement="top" ng-class="current_node[test_idx]==node ? 'active' : ''">
+													<span ng-if="node.name=='click'" class="vertical__center__int">
+													<i class="fa fa-mouse-pointer fa-2x"></i>
+													</span>
+													<span ng-if="node.name=='doubleClick'" class="vertical__center__int">
+															<i class="fa fa-mouse-pointer fa-2x"></i>
+															<div class=”doubleclick” >
+																	x2
+															</div>
+													</span>
+													<span ng-if="node.name=='mouseover'" class="vertical__center__int">
+															<i class="fa fa-hand-pointer-o fa-2x"></i>
+													</span>
+													<span ng-if="node.name=='scroll'" class="vertical__center__int">
+															<i class="fa fa-arrows-v fa-2x"></i>
+													</span>
+													<span ng-if="node.name=='sendKeys'" class="vertical__center__int">
+															<i class="fa fa-i-cursor fa-2x"></i>
+													</span>
+												</div>
+												<div class="path-bar">
+												</div>
 											</div>
 										</div>
 										<div class="path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, $index)" >
@@ -261,154 +257,152 @@
 											</div>
 										</div>
 									</div>
-										<div class="col-xs-12 test__data" >
-												<div class="row">
-														<div class="col-xs-6">
-																<div class="row node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
-																		<div class="col-sm-12" ng-show="current_node[$index].type=='Page'">
-																			<div class="row">
-																				<div class="page__image col-xs-6">
-																					<h5 class="screenshots">Page</h5>
-																					<img type="button" class="path-node-image"
-																									data-toggle="modal" data-target="#exampleModal"
-																									src="{{current_node[$index].browser_screenshots[default_browser]}}" class="path-node-image"
-																									ng-click="openPageModal(current_node[$index])" />
-																				</div>
-																				<div class="element__image col-xs-6">
-																					<h5 class="screenshots">
-																						Element</h5>
-																					<img type="button" class="path-node-image"
-																									data-toggle="modal" data-target="#exampleModal"
-																									src="{{current_node[$index].browser_screenshots[default_browser]}}" class="path-node-image"
-																									ng-click="openPageModal(current_node[$index])" />
-																				</div>
-																			</div>
-																		</div>
-
-																</div>
+									<div class="col-xs-12 test__data" >
+										<div c<div class="col-xs-6">
+											<div class="row node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
+												<div class="col-sm-12">
+													<div class="row">
+														<div class="page__image col-xs-6">
+															<h5 class="screenshots">Page</h5>
+															<img type="button" class="path-node-image"
+																			data-toggle="modal" data-target="#exampleModal"
+																			src="{{test.path.path[current_group_idx[$index]].browser_screenshots[default_browser]}}" class="path-node-image"
+																			ng-click="openPageModal(test.path.path[current_group_idx[$index]])" />
 														</div>
-
-													 <div class="col-sm-6">
-														<div class="tabs tabs-style-linemove">
-															<nav>
-																<ul>
-																	<li ng-click="visible_test_nav1='section-linemove-1'"><h5>Info</h5></li>
-																	<li ng-click="visible_test_nav1='section-linemove-2'"><h5>Attributes</h5></li>
-																	<li ng-click="visible_test_nav1='section-linemove-3'"><h5>CSS</h5></li>
-																</ul>
-															</nav>
-															<div class="content-wrap">
-																<div id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
-																	<div class="col-xs-12">
-																		<div class="key--value">
-																			<div class="data__key">
-																			 URL
-																			</div>
-																			<div class="data__value">
-																			 <a href="{{current_node[$index].url}}">{{current_node[$index].url}}</a>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-xs-12">
-																		<div class="key--value">
-																			<div class="data__key">
-																			 Xpath
-																			</div>
-																			<div class="data__value">
-																			 {{current_node[$index].xpath}}
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-xs-12">
-																		<div class="key--value">
-																			<div class="data__key">
-																			 Action
-																			</div>
-																			<div class="data__value">
-																			 -  {{current_node[$index].name != 'sendKeys' ? current_node[$index].name : 'Type'}}
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-xs-12">
-																		<div class="key--value" ng-show="current_node[$index].value || current_node[$index].name=='sendKeys'">
-																				<div class="data__key">
-																						Text Input
-																				</div>
-																				<div class="data__value">
-																						{{current_node[$index].value}}
-																				</div>
-																		</div>
-																	</div>
-																	<div class="col-xs-12">
-																		<div class="key--value">
-																			<div class="data__key">
-																			 Element Type
-																			</div>
-																			<div class="data__value">
-																			 {{current_node[$index].name}}
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-xs-12">
-																		<div class="key--value">
-																			<div class="data__key">
-																			 Element Link
-																			</div>
-																			<div class="data__value">
-
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-xs-12">
-																		<div class="key--value">
-																			<div class="data__key">
-																				Text
-																			</div>
-																			<div class="data__value">
-																				{{current_node[$index].text}}
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<div id="section-linemove-2" ng-if="visible_test_nav1=='section-linemove-2'">
-																	<div class="col-xs-12">
-																		<div class="key--value">
-																				<div class="data__key">
-																						Attributes
-																				</div>
-																				<div class="row attribute__data__value" ng-repeat="attribute in current_node[$index].attributes track by attribute.key">
-																						<div class="col-sm-5 attribute__key">
-																								{{attribute.name}}
-																						</div>
-																						<div class="attribute_value col-sm-7 pull-right">
-																							<div class="row" ng-repeat="value in attribute.vals track by $index">
-																								<div class="col-sm-12" style="text-align:right">
-																									{{value}}
-																								</div>
-																							</div>
-																						</div>
-																				</div>
-																		</div>
-																	</div>
-																</div>
-																<div id="section-linemove-3" ng-if="visible_test_nav1=='section-linemove-3'">
-																		<div class="col-xs-12">
-																		<div class="key--value">
-																			<div class="data__key">
-																				CSS
-																			</div>
-																			<div class="data__value" ng-repeat="(key, value) in current_node[$index].cssValues track by key">
-																				{{key}}:           {{value}};
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div><!-- /content -->
-														</div><!-- /tabs -->
+														<div class="element__image col-xs-6">
+															<h5 class="screenshots">
+																Element</h5>
+															<img type="button" class="path-node-image"
+																			data-toggle="modal" data-target="#exampleModal"
+																			src="{{test.path.path[current_group_idx[$index]+1].screenshot}}" class="path-node-image" />
+														</div>
 													</div>
 												</div>
+											</div>
 										</div>
-							
+												<div class="col-sm-6">
+													<div class="tabs tabs-style-linemove">
+														<nav>
+															<ul>
+																<li ng-click="visible_test_nav2='section-linemove-1'"><h5>Info</h5></li>
+																<li ng-click="visible_test_nav2='section-linemove-2'"><h5>Attributes</h5></li>
+																<li ng-click="visible_test_nav2='section-linemove-3'"><h5>CSS</h5></li>
+															</ul>
+														</nav>
+														<div class="content-wrap">
+															<div id="section-linemove-1" ng-if="visible_test_nav2=='section-linemove-1'">
+																<div class="col-xs-12">
+																	<div class="key--value">
+																		<div class="data__key">
+																		 URL
+																		</div>
+																		<div class="data__value">
+																		 <a href="{{test.path.path[current_group_idx[$index]].url}}">
+	                                     {{test.path.path[current_group_idx[$index]].url}}
+	                                   </a>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-xs-12">
+																	<div class="key--value">
+																		<div class="data__key">
+																		 Xpath
+																		</div>
+																		<div class="data__value">
+																		 {{test.path.path[current_group_idx[$index]+1].xpath}}
+																		</div>
+																	</div>
+																</div>
+																<div class="col-xs-12">
+																	<div class="key--value">
+																		<div class="data__key">
+																		 Action
+																		</div>
+																		<div class="data__value">
+																		 -  {{test.path.path[current_group_idx[$index]+2].name != 'sendKeys' ? test.path.path[current_group_idx[$index]+2].name : 'Type'}}
+																		</div>
+																	</div>
+																</div>
+																<div class="col-xs-12">
+																	<div class="key--value" ng-show="test.path.path[current_group_idx[$index]+2].value || test.path.path[current_group_idx[$index]+2].name=='sendKeys'">
+																			<div class="data__key">
+																					Text Input
+																			</div>
+																			<div class="data__value">
+																					{{test.path.path[current_group_idx[$index]+2].value}}
+																			</div>
+																	</div>
+																</div>
+																<div class="col-xs-12">
+																	<div class="key--value">
+																		<div class="data__key">
+																		 Element Type
+																		</div>
+																		<div class="data__value">
+																		 {{test.path.path[current_group_idx[$index]+1].name}}
+																		</div>
+																	</div>
+																</div>
+																<div class="col-xs-12" ng-if="test.path.path[current_group_idx[$index]+1].name=='a'">
+																	<div class="key--value">
+																		<div class="data__key">
+																		 Element Link
+																		</div>
+																		<div class="data__value">
+	                                    {{test.path.path[current_group_idx[$index]+1].attributes[0].vals[0]}}
+																		</div>
+																	</div>
+																</div>
+																<div class="col-xs-12">
+																	<div class="key--value">
+																		<div class="data__key">
+																			Text
+																		</div>
+																		<div class="data__value">
+																			{{test.path.path[current_group_idx[$index]+1].text}}
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div id="section-linemove-2" ng-if="visible_test_nav2=='section-linemove-2'">
+																<div class="col-xs-12">
+																	<div class="key--value">
+																			<div class="data__key">
+																					Attributes
+																			</div>
+																			<div class="row attribute__data__value" ng-repeat="attribute in test.path.path[current_group_idx[$index]+1].attributes track by attribute.key">
+																					<div class="col-sm-5 attribute__key">
+																							{{attribute.name}}
+																					</div>
+																					<div class="attribute_value col-sm-7 pull-right">
+																						<div class="row" ng-repeat="value in attribute.vals track by $index">
+																							<div class="col-sm-12" style="text-align:right">
+																								{{value}}
+																							</div>
+																						</div>
+																					</div>
+																			</div>
+																	</div>
+																</div>
+															</div>
+															<div id="section-linemove-3" ng-if="visible_test_nav2=='section-linemove-3'">
+																	<div class="col-xs-12">
+																	<div class="key--value">
+																		<div class="data__key">
+																			CSS
+																		</div>
+																		<div class="data__value" ng-repeat="(key, value) in test.path.path[current_group_idx[$index]+1].cssValues track by key">
+																			{{key}}:           {{value}};
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div><!-- /content -->
+													</div><!-- /tabs -->
+												</div>
+											</div>
+										</div>
+
 								</div>
 								<div id="section-linemove-2" ng-if="visible_test_nav1=='section-linemove-2'">
 									<div class="col-xs-12 test__groups">
@@ -483,18 +477,18 @@
 						</div><!-- /tabs -->
 					</div>
       </div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
+
+
+
+
+
+
 		 </div>
 	</div>
 </div>
