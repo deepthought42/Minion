@@ -10,7 +10,7 @@
 	background: #fff;
 }
 
-.tabs-style-linemove nav li:first-child::before {
+.tabs-style-linemove nav li:first-child::after {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -27,19 +27,19 @@
 
 /* Move the line */
 
-.tabs-style-linemove nav li:nth-child.tab-current ~ li:last-child::before {
-	-webkit-transform: translate3d(300%,0,0);
-	transform: translate3d(300%,0,0);
+.tabs-style-linemove nav li:nth-child.tab-current ~ li:first-child::after {
+	-webkit-transform: translate3d(100%,0,0);
+	transform: translate3d(100%,0,0);
 }
 
-.tabs-style-linemove nav li:nth-child(2).tab-current ~ li:last-child::before {
+.tabs-style-linemove nav li:nth-child(2).tab-current ~ li:first-child::after {
 	-webkit-transform: translate3d(200%,0,0);
 	transform: translate3d(200%,0,0);
 }
 
-.tabs-style-linemove nav li:nth-child(3).tab-current ~ li:last-child::before {
-	-webkit-transform: translate3d(100%,0,0);
-	transform: translate3d(100%,0,0);
+.tabs-style-linemove nav li:nth-child(3).tab-current ~ li:first-child::after {
+	-webkit-transform: translate3d(300%,0,0);
+	transform: translate3d(300%,0,0);
 }
 
 .tabs-style-linemove nav li {
@@ -55,15 +55,15 @@
 .tabs-style-linemove nav li .focus {
 	color: #2b2e93;
 }
-.tabs-style-linemove nav li:visited,
+.tabs-style-linemove nav li :visited,
 .tabs-style-linemove nav li .visited {
 	color: #757575;
 }
 .tabs-style-linemove nav li :hover {
 	color: #2b2e93;
 }
-.tabs-style-linemove nav li:active,
-.tabs-style-linemove nav li.active {
+.tabs-style-linemove nav li :active,
+.tabs-style-linemove nav li .active {
 	color: #2b2e93 !important;
 }
 

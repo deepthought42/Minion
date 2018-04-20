@@ -36,7 +36,7 @@
 		// tabs elems
 		this.tabs = [].slice.call( this.el.querySelectorAll( 'nav > ul > li' ) );
 		// content items
-		this.items = [].slice.call( this.el.querySelectorAll( '.content-wrap > section' ) );
+		this.items = [].slice.call( this.el.querySelectorAll( '.content-wrap > div' ) );
 		// current index
 		this.current = -1;
 		// show current content item
