@@ -20,7 +20,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.groups = [];
       $scope.group = {name: "", description: "" };
       $scope.node_key = "";
-      $scope.current_node = [];
+      $scope.current_group_idx = [];
       $scope.filteredTests = [];
       $scope.test_idx = -1;
       store.set("approved_test_cnt", null);
@@ -127,7 +127,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       }
       return false;
     }
-    
+
     $scope.setCurrentNodeKey = function(key){
       $scope.node_key=key;
     }
@@ -321,17 +321,13 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
 
       if(test.visible){
-        $scope.setCurrentNode(test.path.path[0], index);
+        $scope.visible_test_nav1='section-linemove-1';
+        $scope.setCurrentGroupIdx(0);
       }
     }
 
-    $scope.setCurrentNode = function(node, index){
-      if(index== null){
-        $scope.current_node[$scope.test_idx] = node;
-      }
-      else{
-        $scope.current_node[index] = node;
-      }
+    $scope.setCurrentGroupIdx = function(index){
+      $scope.current_group_idx[$scope.test_idx] = index;
     }
 
     $scope.getDate = function(value){
@@ -420,6 +416,19 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     $scope.editTest = function(test, $index){
       $scope.editing_test_idx = $index;
       $scope.test_copy = JSON.parse(JSON.stringify(test));
+    }
+
+    /**
+     *  Returns an array containing the start index values for partitioning a path
+     */
+    $scope.getPathIterations = function(path_size){
+      console.log("getting path iterations");
+      var arr = new Array((path_size/3));
+      for(var i=0; i < arr.length; i++){
+        arr[i] = i*3;
+      }
+
+      return arr;
     }
 
     this._init();
