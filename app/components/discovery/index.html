@@ -40,7 +40,7 @@
 						Last Test Found
 					</div>
 					<div class="stat_value">
-						{{((Date.now() - (tests | orderBy:{'lastRunTimestamp':true})[tests.length-1].lastRunTimestamp/1000) || '00:00') | date : 'h:mm'}} hrs ago
+						{{((Date.now().getTime() - (tests | orderBy:{'lastRunTimestamp':true})[tests.length-1].lastRunTimestamp) || '00:00') | date : 'h:mm'}} hrs ago
 					</div>
 				</div>
 			</div>
