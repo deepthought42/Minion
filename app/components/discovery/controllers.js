@@ -136,9 +136,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
      *  Returns an array containing the start index values for partitioning a path
      */
     $scope.getPathIterations = function(path_size){
-      var segment_cnt = 1;
-      if(path_size > 0){
-        segment_cnt = path_size/3;
+      var segment_cnt = Math.trunc(path_size/3);
+      if(segment_cnt == 0 ){
+        segment_cnt = 1;
       }
 
       var arr = new Array(segment_cnt);

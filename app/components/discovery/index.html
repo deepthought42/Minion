@@ -199,7 +199,6 @@
                     <div class="node-group" ng-repeat="group_start_idx in getPathIterations(test.path.path.length)"
                           ng-class="current_group_idx[$index]==group_start_idx ? 'active' : ''"
                           ng-click="setCurrentGroupIdx(group_start_idx)" >
-
   										<div ng-repeat="node in test.path.path | limitTo:3:group_start_idx track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
   											<div ng-if="node.browser_screenshots[default_browser]" class="path-page path-node"  >
   												<img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
