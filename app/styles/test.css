@@ -294,24 +294,35 @@ width: -webkit-calc(100% - 15px);
 
 /*--------------------------- [6. Test Path] --------------------------------------------------------------------------------*/
 
-.test__path{
+.content_wrap{
+	margin:15px 0px 20px 0px;
+}
+/*--------------------------- [6. Test Path] --------------------------------------------------------------------------------*/
+
+
+.test__dropdown{
 	border-top: 1px solid #e0e0e0;
 	padding-left: 5px;
 	-webkit-box-shadow: inset 0 10px 6px -8px #e7e7e7;
 		 -moz-box-shadow: inset 0 10px 6px -8px #e7e7e7;
 					box-shadow: inset 0 10px 6px -8px #e7e7e7;
-    padding-top:20px;
-    padding-bottom:20px;
+    padding-top:10px;
     margin:0px 0px 20px 0px;
-  border-bottom: 1px solid #e0e0e0;
+}
+
+.test__path{
+  padding:15px 0px 30px 0px;
+	margin:0px 0px 8px 0px;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .path__title{
   padding-bottom:8px;
 }
 
-.page__image{
-    padding: 10px 10px 0px 0px !important;
+
+.screenshots{
+    padding: 10px 0px 9px 0px;
 }
 
 .path-node-image {
@@ -409,10 +420,7 @@ width: -webkit-calc(100% - 15px);
 
 
 .test__data{
-    margin:0px 20px 15px 20px;
-}
-
-.test__info{
+    margin-bottom:15px;
 }
 
 .node__data{
@@ -498,15 +506,15 @@ width: -webkit-calc(100% - 15px);
 /*--------------------------- [6. Test Groups] --------------------------------------------------------------------------------*/
 
 .test__groups{
-	border-left: 1px solid #e0e0e0;
-    padding-top:0px;
-    padding-bottom:15px;
-    padding-left:20px;
-    border-top-right-radius: 5px;
+	padding:0px;
+	padding-top:15px;
+	border-top-right-radius: 5px;
 }
 
 .groups_input_padding{
 	padding:5px 0px 15px 0px;
+	width: 100%;
+	max-width: 435px;
 }
 
 .input-group-addon{
@@ -549,10 +557,12 @@ width: -webkit-calc(100% - 15px);
 /*--------------------------- [6. Test History] --------------------------------------------------------------------------------*/
 
 .test__history{
+}
+
+.test__history__table{
 	border: 1px solid #e0e0e0;
     border-radius: 5px;
     margin-bottom: 5px;
-
 }
 
 .test__history__title{
