@@ -370,16 +370,25 @@ width: -webkit-calc(100% - 15px);
   border: 2px solid #ffffff;
 }
 
-.path-node:focus,
-.path-node.focus {
+.node-group {
+  float: left;
+  line-height: 50px;
+  vertical-align: middle;
+  text-align: center;
+  color: #424242;
+  border: 2px solid #ffffff;
+}
+
+.node-group:focus,
+.node-group.focus {
 	outline:none;
     border: 2px solid #ffee58;
 }
-.path-node:hover {
+.node-group:hover {
   border: 2px solid #ffee58;
 }
-.path-node:active,
-.path-node.active {
+.node-group:active,
+.node-group.active {
   border: 2px solid #ffee58;
 }
 
