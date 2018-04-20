@@ -28,7 +28,10 @@
     <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" type="text/css" href="node_modules/ng-onboarding/dist/ng-onboarding.css" >
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles/tabs.css" />
+		<link rel="stylesheet" type="text/css" href="styles/demo.css" />
+		<link rel="stylesheet" type="text/css" href="styles/tabs.css" />
+		<link rel="stylesheet" type="text/css" href="styles/tabstyles.css" />
+  		<script src="js/modernizr.custom.js"></script>
 
 <!--
     <script>
@@ -138,5 +141,14 @@
   <script src="https://static.filestackapi.com/v3/filestack.js"></script>
 
   <script src="external_scripts/cbpFWTabs.js"></script>
+	<script>
+			(function() {
+
+				[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+					new CBPFWTabs( el );
+				});
+
+			})();
+	</script>
 </body>
 </html>
