@@ -42,16 +42,16 @@
 	display: flex;
 }
 
-/* .test-labels{
-  width: -moz-calc(100% - 15px);*/
+.test-labels{
+  width: -moz-calc(100% - 15px);
   /* WebKit */
-/* width: -webkit-calc(100% - 15px);*/
+width: -webkit-calc(100% - 15px);
   /* Opera */
- /*  width: -o-calc(100% - 15px);*/
+ width: -o-calc(100% - 15px);
   /* Standard */
- /* width: calc(100% - 15px);
+ width: calc(100% - 15px);
 	 left: 15px;
-}*/
+}
 
 .empty__state{
   height: 100%;
