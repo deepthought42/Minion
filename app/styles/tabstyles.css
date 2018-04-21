@@ -64,12 +64,6 @@
 	margin-bottom: 0px;
 }
 
-.test_tab_icons{
-	border-bottom: none !important;
-	text-decoration: none !important;
-	margin-bottom: -13px;
-}
-
 .element-tabs{
 	margin-top:20px;
 }
@@ -87,12 +81,27 @@
 	color: #2b2e93;
 }
 .tabs-style_active {
-	padding-bottom:15px;
-	margin-bottom: -15px;
+	padding-bottom:8px;
+	margin-bottom: -8px;
 	border-bottom: 3px solid #2b2e93;
-	color: #2b2e93;
+	color: #2b2e93 !important;
 	
 }
 
+.tabs-style_active h5{
+	color: #2b2e93 !important;
+	
+}
 
+.tabs-style_active :hover {
+	padding-bottom:10px ;
+	margin-bottom: -3px ;
+	border-bottom: none;
+}
 
+.test_tab_icons{
+	border-bottom: none !important;
+	text-decoration: none !important;
+		padding-bottom:2px !important;
+	margin-bottom: -18px  !important;
+}
