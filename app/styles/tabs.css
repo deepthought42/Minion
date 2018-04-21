@@ -50,6 +50,10 @@
 	justify-content: center;
 }
 
+.solo-page nav ul {
+	max-width: 200px;
+}
+
 .tabs nav ul li {
 	text-decoration: none !important;
 	position: relative;
