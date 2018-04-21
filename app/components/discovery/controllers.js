@@ -203,6 +203,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.setCurrentGroupIdx = function(index){
+      $scope.tests[$scope.test_idx].result.visible = false;
       $scope.current_group_idx[$scope.test_idx] = index;
     }
 
@@ -227,11 +228,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.test_idx = index;
       $scope.test = test;
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
+      $scope.setCurrentGroupIdx(0);
       if(test.visible){
         $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
         $scope.testVerificationOnboardingIndex = 0;
 
-        $scope.setCurrentGroupIdx(0);
+
       }
     }
 

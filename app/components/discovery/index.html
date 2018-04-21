@@ -189,16 +189,16 @@
 						<div class="tabs tabs-style-linemove">
 							<nav class="path_tabs">
 								<ul>
-									<li class="tabs-style" ng-click="visible_test_nav1='section-linemove-1'"><h5><i class="fa test_tab_icons fa-map-signs"/>&nbsp;  Path</h5></li>
-									<li class="tabs-style" ng-click="visible_test_nav1='section-linemove-2'"><h5><i class="fa test_tab_icons fa-object-group"/>&nbsp;  Groups</h5></li>
+									<li class="tabs-style" ng-click="visible_test_nav1='section-linemove-1'" ng-class="visible_test_nav1=='section-linemove-1' ? 'tabs-style_active' : ''"><h5><i class="fa test_tab_icons fa-map-signs"/>&nbsp;  Path</h5></li>
+									<li class="tabs-style" ng-click="visible_test_nav1='section-linemove-2'" ng-class="visible_test_nav1=='section-linemove-2' ? 'tabs-style_active' : ''"><h5><i class="fa test_tab_icons fa-object-group"/>&nbsp;  Groups</h5></li>
 								</ul>
 							</nav>
 							<div class="content-wrap">
 								<div id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
 									<div class="col-xs-12 test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
                     <div class="node-group" ng-repeat="group_start_idx in getPathIterations(test.path.path.length)"
-                          ng-class="current_group_idx[$index]==group_start_idx ? 'active' : ''"
-                          ng-click="setCurrentGroupIdx(group_start_idx)" >
+                          ng-class="current_group_idx[test_idx]==group_start_idx && !test.result.visible ? 'active' : ''"
+                          ng-click="setCurrentGroupIdx(group_start_idx);test.result.visible=false;" >
   										<div ng-repeat="node in test.path.path | limitTo:3:group_start_idx track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
   											<div ng-if="node.browser_screenshots[default_browser]" class="path-page path-node"  >
   												<img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
@@ -232,14 +232,14 @@
   											</div>
   										</div>
                     </div>
-										<div class="node-group path-node-container vertical__center__int" ng-click="openPageModal(test.result)" >
+										<div class="node-group path-node-container vertical__center__int" ng-click="test.result.visible=true" >
 											<div ng-if="test.path.path.length != 1 && test.result.browser_screenshots[default_browser]" class="path-page path-node">
 												<img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
 											</div>
 										</div>
 									</div>
 
-									<div class="col-xs-12 test__data test_dropdown_bottom_shadow" >
+									<div class="col-xs-12 test__data test_dropdown_bottom_shadow"  ng-if="!test.result.visible && test.path.path.length > 1">
 										<div class="row path__data">
 											<div class="col-xs-4">
 													<div class="row node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
@@ -267,13 +267,13 @@
 												<div class="tabs tabs-style-linemove">
 													<nav>
 														<ul>
-															<li class="tabs-style" ng-click="visible_test_nav1='section-linemove-1'" ng-class="visible_test_nav1=='section-linemove-1' ? 'active' : ''"><h5>Info</h5></li>
-															<li class="tabs-style" ng-click="visible_test_nav1='section-linemove-2'" ng-class="visible_test_nav1=='section-linemove-2' ? 'active' : ''"><h5>Attributes</h5></li>
-															<li class="tabs-style" ng-click="visible_test_nav1='section-linemove-3'" ng-class="visible_test_nav1=='section-linemove-3' ? 'active' : ''"><h5>CSS</h5></li>
+															<li class="tabs-style" ng-click="visible_test_nav2='section-linemove-1'" ng-class="visible_test_nav2=='section-linemove-1' ? 'tabs-style_active' : ''"><h5>Info</h5></li>
+															<li class="tabs-style" ng-click="visible_test_nav2='section-linemove-2'" ng-class="visible_test_nav2=='section-linemove-2' ? 'tabs-style_active' : ''"><h5>Attributes</h5></li>
+															<li class="tabs-style" ng-click="visible_test_nav2='section-linemove-3'" ng-class="visible_test_nav2=='section-linemove-3' ? 'tabs-style_active' : ''"><h5>CSS</h5></li>
 														</ul>
 													</nav>
 													<div class="content-wrap element-tabs">
-														<div id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
+														<div id="section-linemove-1" ng-if="visible_test_nav2=='section-linemove-1'">
 															<div class="col-xs-12">
 																<div class="key--value">
 																	<div class="data__key">
@@ -347,7 +347,7 @@
 																</div>
 															</div>
 														</div>
-														<div id="section-linemove-2" ng-if="visible_test_nav1=='section-linemove-2'">
+														<div id="section-linemove-2" ng-if="visible_test_nav2=='section-linemove-2'">
 															<div class="col-xs-12">
 																<div class="key--value">
 																		<div class="data__key">
@@ -368,7 +368,7 @@
 																</div>
 															</div>
 														</div>
-														<div id="section-linemove-3" ng-if="visible_test_nav1=='section-linemove-3'">
+														<div id="section-linemove-3" ng-if="visible_test_nav2=='section-linemove-3'">
 																<div class="col-xs-12">
 																<div class="key--value">
 																	<div class="data__key">
@@ -385,29 +385,19 @@
 											</div>
 										</div>
 									</div>
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-										<div class="col-xs-12 test__data test_dropdown_bottom_shadow" >
+
+										<div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="test.result.visible || test.path.path.length == 1">
 										<div class="row path__data">
 											<div class="col-xs-4">
-													<div class="row node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
+													<div class="row node__data" id="{{'nodedata'+$index}}">
 															<div class="col-sm-12">
 																<div class="row">
 																	<div class="page__image col-xs-12">
 																		<h5 class="screenshots">Page</h5>
 																		<img type="button" class="path-node-image"
 																						data-toggle="modal" data-target="#exampleModal"
-																						src="{{test.path.path[current_group_idx[$index]].browser_screenshots[default_browser]}}" class="path-node-image"
-																						ng-click="openPageModal(test.path.path[current_group_idx[$index]])" />
+																						src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image"
+																						ng-click="openPageModal(test.result)" />
 																	</div>
 																</div>
 															</div>
@@ -417,19 +407,19 @@
 												<div class="tabs solo-page tabs-style-linemove">
 													<nav>
 														<ul>
-															<li class="tabs-style" ng-click="visible_test_nav1='section-linemove-1'" ng-class="visible_test_nav1=='section-linemove-1' ? 'active' : ''"><h5>Info</h5></li>
+															<li class="tabs-style" ng-click="visible_test_nav2='section-linemove-1'" ng-class="visible_test_nav1=='section-linemove-1' ? 'active' : ''"><h5>Info</h5></li>
 														</ul>
 													</nav>
 													<div class="content-wrap element-tabs">
-														<div id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
+														<div id="section-linemove-1" ng-if="visible_test_nav2=='section-linemove-1'">
 															<div class="col-xs-12">
 																<div class="key--value">
 																	<div class="data__key">
 																	 URL
 																	</div>
 																	<div class="data__value">
-																	 <a href="{{test.path.path[current_group_idx[$index]].url}}">
-                                     {{test.path.path[current_group_idx[$index]].url}}
+																	 <a href="{{test.result.url}}">
+                                     {{test.result.url}}
                                    </a>
 																	</div>
 																</div>
@@ -440,13 +430,6 @@
 											</div>
 										</div>
 									</div>
-									
-									
-									
-									
-									
-									
-									
 								</div>
 								<div id="section-linemove-2" ng-if="visible_test_nav1=='section-linemove-2'">
 									<div class="col-xs-12 test__groups test_dropdown_bottom_shadow">
