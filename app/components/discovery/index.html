@@ -69,14 +69,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="secondary-nav vertical__center__int" >
+	<div class="tertiary-nav vertical__center__int" >
 	  <div class="col-sm-12" ng-show="!isStarted" >
 			<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
 				Start Discovery
 			</button>
     </div>
 
-    <div class="col-sm-12" ng-if="isStarted">
+    <div class="col-sm-12 running_status" ng-if="isStarted">
 			<div class="pull-left">
 				Running...
          <i class="fa fa-circle-o-notch fa-spin fa-2x green fa-fw" aria-hidden="true"></i>

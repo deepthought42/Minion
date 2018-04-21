@@ -2,10 +2,12 @@
 /*--------------------------- [3. Main Nav] -----------------------------------------------------------------------------*/
 
 #main-nav{
-	background: #08091a;
-	min-height: 60px;
-	color: #ffffff;
-	border-bottom: 0px solid #eeeeee;
+	background: #26272b;
+	min-height: 68px;
+	color: #ffff;
+	border-top: 0px solid #fad93b;
+	border-bottom: 8px solid #fad93b;
+	
 }
 
 
@@ -64,19 +66,19 @@
     text-decoration: none;
 	  padding: 15px 10px;
     margin: 0px 5px;
-    color: #ffffff;
+    color: #26272b;
 }
 
 .main-nav-link a:focus {
   outline: none;
-	color: #ffee58 !important;
-	border-bottom: 5px solid #ffee58;
+	color: #fce98b !important;
+	border-bottom: 5px solid #fce98b;
 	padding-bottom: 16px !important;
 }
-.main-nav-link a:visited { color: #ffffff;}
+.main-nav-link a:visited { color: #26272b;}
 .main-nav-link a:hover {
-    color: #ffee58;
-	border-bottom: 5px solid #ffee58;
+    color: #fce98b;
+	border-bottom: 5px solid #fce98b;
 	padding-bottom: 16px !important;
 }
 
@@ -92,7 +94,9 @@
   flex: 0 0 auto;
 }
 
-
+.running_status{
+	height:40px;
+}
 
 .login__signup{
   padding-right:15px;
@@ -151,17 +155,25 @@ input { text-indent: 0px; }
 
 /*--interior container--*/
 .content {
-  background-color: #f4f4f5;
+  background-color: #fff;
   height:100%;
   min-width: 612px !important;
 	}
 /*--------------------------- [3. Secondary Nav] -----------------------------------------------------------------------------*/
 
 .secondary-nav{
-	color: #667;
+	color: #26272b;
+	padding: 12px auto;
+	height: 56px;
+	/*border-bottom: 2px solid #eeeeee;*/
+}
+.tertiary-nav{
+	color: #26272b;
 	margin: 12px auto;
 	/*border-bottom: 2px solid #eeeeee;*/
 }
+
+background: #fbd311;
 
 .stats__container{
   justify-content: flex-end;
@@ -169,7 +181,7 @@ input { text-indent: 0px; }
 
 .stats__bar{
 float: right;
-	font-size: 11px;
+	font-size: 12px;
 	
 }
 
@@ -181,7 +193,7 @@ float: right;
 
 .stat_key{
 	color: #08091a;
-	font-weight:400;
+	font-weight:500;
 }
 
 .stat_value{
