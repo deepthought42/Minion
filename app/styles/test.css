@@ -3,12 +3,7 @@
 
 .test{
 	background-color: #ffffff;
-	border-top: 0px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
-
-    -webkit-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
-    -moz-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
-    box-shadow: inset 0 -10px 6px -8px #e7e7e7;
 }
 
 .test-container{
@@ -46,14 +41,14 @@
 	display: flex;
 }
 
-.test-labels{
-  width: -moz-calc(100% - 15px);
+/* .test-labels{
+  width: -moz-calc(100% - 15px);*/
   /* WebKit */
-width: -webkit-calc(100% - 15px);
+/* width: -webkit-calc(100% - 15px);*/
   /* Opera */
-  width: -o-calc(100% - 15px);
+ /*  width: -o-calc(100% - 15px);*/
   /* Standard */
- width: calc(100% - 15px);
+ /* width: calc(100% - 15px);
 	 left: 15px;
 }*/
 
@@ -233,9 +228,12 @@ width: -webkit-calc(100% - 15px);
 
 .discovery_status{
 	color: #ffffff !important;
-  border-right: 1px solid #f9f9f9;
 	text-align: center;
 	font-size: 12px;
+	padding: 5px;
+}
+.discovery_status_border{
+  border-right: 1px solid #f9f9f9;
 }
 
 .status--browser{
@@ -250,7 +248,7 @@ width: -webkit-calc(100% - 15px);
 }
 
 .discovery--status--symbol{
-	font-size: 20px !important;
+	font-size: 14px !important;
 }
 
 .status--symbol--browser{
@@ -302,17 +300,23 @@ width: -webkit-calc(100% - 15px);
 
 .test__dropdown{
 	border-top: 1px solid #e0e0e0;
-	padding-left: 5px;
 	-webkit-box-shadow: inset 0 10px 6px -8px #e7e7e7;
 		 -moz-box-shadow: inset 0 10px 6px -8px #e7e7e7;
 					box-shadow: inset 0 10px 6px -8px #e7e7e7;
     padding-top:10px;
-    margin:0px 0px 20px 0px;
+    margin:0px 0px 0px 0px;
+	
+}
+
+.test_dropdown_bottom_shadow{
+	border-bottom: 1px solid #e0e0e0;
+    -webkit-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
+    -moz-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
+    box-shadow: inset 0 -10px 6px -8px #e7e7e7;
 }
 
 .test__path{
-  padding:15px 0px 30px 0px;
-	margin:0px 0px 8px 0px;
+  padding:40px 13px 30px 13px;
 	border-bottom: 1px solid #e0e0e0;
 }
 
@@ -427,11 +431,18 @@ width: -webkit-calc(100% - 15px);
 
 /*--------------------------- [6. Test Info] --------------------------------------------------------------------------------*/
 
-
 .test__data{
-    margin-bottom:15px;
+	background-color: #f4f4f5;
 }
 
+.path__data{
+	border-radius: 5px;
+	box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+	background-color: #fff;
+	margin:15px 0px;
+	padding:10px 5px;
+
+}
 .node__data{
     border: 0px;
     margin-top:0px;
@@ -515,9 +526,8 @@ width: -webkit-calc(100% - 15px);
 /*--------------------------- [6. Test Groups] --------------------------------------------------------------------------------*/
 
 .test__groups{
-	padding:0px;
-	padding-top:15px;
 	border-top-right-radius: 5px;
+	padding:39px 15px 30px 15px;
 }
 
 .groups_input_padding{
@@ -566,17 +576,17 @@ width: -webkit-calc(100% - 15px);
 /*--------------------------- [6. Test History] --------------------------------------------------------------------------------*/
 
 .test__history{
+	padding-bottom: 30px;
 }
 
 .test__history__table{
 	border: 1px solid #e0e0e0;
     border-radius: 5px;
-    margin-bottom: 5px;
 }
 
 .test__history__title{
-    margin-top: 20px;
-    margin-bottom: 4px;
+    margin-top: 39px;
+    margin-bottom: 12px;
 }
 
 .browser_name{
