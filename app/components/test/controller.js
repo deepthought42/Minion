@@ -23,6 +23,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.current_group_idx = [];
       $scope.filteredTests = [];
       $scope.test_idx = -1;
+      $scope.visible_test_nav1 = 'section-linemove-1';
+      $scope.visible_test_nav2 = 'section-linemove-1';
       store.set("approved_test_cnt", null);
       $rootScope.$broadcast("updateApprovedTestCnt", null);
       if(store.get('domain')){
@@ -321,7 +323,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
 
       if(test.visible){
-        $scope.visible_test_nav1='section-linemove-1';
+        $scope.visible_test_nav1 = 'section-linemove-1';
+        $scope.visible_test_nav2 = 'section-linemove-1';
         $scope.setCurrentGroupIdx(0);
       }
     }
