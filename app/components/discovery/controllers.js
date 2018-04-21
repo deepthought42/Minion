@@ -23,6 +23,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.current_group_idx = [];
       $scope.visible = false;
 			$scope.visible_test_nav1 = 'section-linemove-1';
+      $scope.visible_test_nav2 = 'section-linemove-1';
       $scope.visible_tab = "nodedata0";
       $scope.default_browser = store.get('domain')['discoveryBrowser'];
       $scope.groups = [];
