@@ -316,7 +316,7 @@
 }
 
 .test__path{
-  padding:15px 13px 30px 13px;
+  padding:40px 13px 30px 13px;
 	border-bottom: 1px solid #e0e0e0;
 }
 
@@ -527,7 +527,7 @@
 
 .test__groups{
 	border-top-right-radius: 5px;
-	padding:15px 15px 30px 15px;
+	padding:39px 15px 30px 15px;
 }
 
 .groups_input_padding{
@@ -585,7 +585,7 @@
 }
 
 .test__history__title{
-    margin-top: 15px;
+    margin-top: 39px;
     margin-bottom: 12px;
 }
 

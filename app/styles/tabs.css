@@ -19,6 +19,9 @@
 	font-weight: 300;
 	font-size: 1.25em;
 }
+.path_tabs{
+		margin: auto 15px;
+}
 
 /* Nav */
 .tabs nav {
@@ -67,11 +70,6 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	line-height: 2.5;
-}
-
-.tabs nav a span {
-	vertical-align: middle;
-	font-size: 0.75em;
 }
 
 .tabs nav li.tab-current a {
