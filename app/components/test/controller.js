@@ -321,15 +321,16 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.test_idx = index || 0;
       $scope.test = test;
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
+      $scope.setCurrentGroupIdx(0);
 
       if(test.visible){
         $scope.visible_test_nav1 = 'section-linemove-1';
         $scope.visible_test_nav2 = 'section-linemove-1';
-        $scope.setCurrentGroupIdx(0);
       }
     }
 
     $scope.setCurrentGroupIdx = function(index){
+      $scope.tests[$scope.test_idx].result.visible = false;
       $scope.current_group_idx[$scope.test_idx] = index;
     }
 
