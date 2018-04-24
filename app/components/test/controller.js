@@ -347,7 +347,7 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       var status_arr = [];
       for (var key in test.browserPassingStatuses) {
           if (test.browserPassingStatuses.hasOwnProperty(key)) {
-              status_arr.push( [ key, test.browserPassingStatuses[key].toString() ] );
+              status_arr.push( [ key, test.browserPassingStatuses[key] ] );
           }
       }
       var persistable_test = {};
