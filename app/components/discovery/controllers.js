@@ -233,8 +233,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       if(test.visible){
         $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
         $scope.testVerificationOnboardingIndex = 0;
-
-
       }
     }
 
@@ -300,13 +298,19 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
      *
      */
     $scope.updateCorrectness = function(test, correctness, idx){
+      console.log("Index :: "+idx);
       test.waitingOnStatusChange = true;
       Tester.setDiscoveredPassingStatus({key: test.key, correct: correctness}).$promise
         .then(function(data){
           test.waitingOnStatusChange = false;
           test.correct = data.correct;
           //remove from list
-          $scope.tests.splice(idx, 1);
+          for(var i=0; i<$scope.tests.length; i++){
+            if($scope.tests[i].key == test.key){
+              $scope.tests.splice(i, 1);
+              break;
+            }
+          }
           //update approved test count
           var approved_cnt = 0;
           if(!store.get('approved_test_cnt')){

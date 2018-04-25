@@ -59,7 +59,6 @@ angular.module('Qanairy.main', ['ui.router'])
     })
 
     $scope.$on('updateApprovedTestCnt', function(event, approved_test_cnt){
-      console.log("Approved test count :: "+approved_test_cnt);
       $scope.approved_test_cnt = approved_test_cnt;
     })
   }
