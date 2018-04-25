@@ -122,7 +122,7 @@
       </div>
     </div>
 
-    <div class="test" ng-repeat="test in tests | orderBy:'lastRunTimestamp' track by test.key " ng-show="tests.length>0">
+    <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy:'lastRunTimestamp' track by test.key " ng-show="tests.length>0">
 
 			<div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 			  <div class="test__status test__profile_stretch flex-none text--shadow" >
