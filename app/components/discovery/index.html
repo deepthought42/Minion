@@ -51,7 +51,7 @@
 						Total Runtime
 					</div>
 					<div class="stat_value">
-						{{((current_domain.lastRunTimestamp - current_domain.lastDiscoveryStartedAt )  | date : 'h:mm')  || '00:00'}}
+						{{getTotalRuntime()}}
                         hrs
 					</div>
 				</div>

@@ -173,6 +173,14 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
     */
     $scope.updateBrowserPassingStatus = function(test, browser, isPassing){
       test.browserPassingStatuses[browser] = isPassing;
+      var test_passing = true;
+      for (var key in test.browserPassingStatuses) {
+          if(test.browserPassingStatuses[key] != null && !test.browserPassingStatuses[key]){
+            test_passing = false;
+            break;
+          }
+      }
+      test.correct = test_passing;
     }
 
     $scope.runTest = function(firefox_selected, chrome_selected){

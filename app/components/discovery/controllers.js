@@ -294,6 +294,16 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       test.show_test_name_edit_field = false;
     }
 
+    $scope.getTotalRuntime = function(){
+        var last_run_date = $scope.current_domain.lastDiscoveryPathRanAt;
+        var discovery_started_date = $scope.current_domain.lastDiscoveryStartedAt;
+
+        var time_diff = (last_run_date-discovery_started_date)/1000/60/60;
+        var hours = Math.trunc(time_diff);
+        var minutes = Math.trunc((time_diff%1).toFixed(2)*60);
+        return hours+":"+minutes;
+    }
+
     /**
      *
      */
