@@ -280,7 +280,7 @@
 																	 URL
 																	</div>
 																	<div class="data__value">
-																	 <a href="{{test.path.path[current_group_idx[$index]].url}}">
+																	 <a href="{{test.path.path[current_group_idx[$index]].url}}" target="_blank">
                                      {{test.path.path[current_group_idx[$index]].url}}
                                    </a>
 																	</div>
@@ -374,9 +374,24 @@
 																	<div class="data__key">
 																		CSS
 																	</div>
-																	<div class="data__value" ng-repeat="(key, value) in test.path.path[current_group_idx[$index]+1].cssValues track by key">
-																		{{key}}:           {{value}};
-																	</div>
+                                  <div class="data__value">
+                                    width: {{test.path.path[current_group_idx[$index]+1].cssValues['width']}}
+                                  </div>
+                                  <div class="data__value">
+                                    height: {{test.path.path[current_group_idx[$index]+1].cssValues['height']}}
+                                  </div>
+                                  <div class="data__value">
+                                    font-family: {{test.path.path[current_group_idx[$index]+1].cssValues['font-family']}}
+                                  </div>
+                                  <div class="data__value">
+                                    color:
+                                    <span style="background-color:{{test.path.path[current_group_idx[$index]+1].cssValues['color']}}"> 
+                                      {{test.path.path[current_group_idx[$index]+1].cssValues['color']}}
+                                    </span>
+                                  </div>
+                                  <div class="data__value">
+                                    position: {{test.path.path[current_group_idx[$index]+1].cssValues['position']}}
+                                  </div>
 																</div>
 															</div>
 														</div>

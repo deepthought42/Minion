@@ -177,7 +177,7 @@
 						</div>
 
             <div class="flex-none test_functions test__btns" aria-label="Test Functions">
-              <div class="fifteen_right btn-group pull-left" role="group" ng-show="editing_test_idx!=$index"  >
+              <div class="fifteen_right btn-group pull-left" role="group" ng-show="!isTestRunning(test)&&editing_test_idx!=$index"  >
                 <button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)" id="{{'run_test_button-'+$index}}">
                    Run
                 </button>
@@ -267,15 +267,14 @@
 																<img type="button" class="path-node-image"
 																				data-toggle="modal" data-target="#exampleModal"
 																				src="{{test.path.path[current_group_idx[$index]].browser_screenshots[default_browser]}}" class="path-node-image"
-																				ng-click="openPageModal(current_node[$index])" />
+																				ng-click="openPageModal(test.path.path[current_group_idx[$index]])" />
 															</div>
 															<div class="element__image col-xs-6">
 																<h5 class="screenshots">
 																	Element</h5>
 																<img type="button" class="path-node-image"
 																				data-toggle="modal" data-target="#exampleModal"
-																				src="{{test.path.path[current_group_idx[$index]+1].screenshot}}" class="path-node-image"
-																				ng-click="openPageModal(current_node[$index])" />
+																				src="{{test.path.path[current_group_idx[$index]+1].screenshot}}" class="path-node-image"/>
 															</div>
 														</div>
 													</div>
@@ -299,7 +298,7 @@
 																			 URL
 																		</div>
 																		<div class="data__value">
-																		 <a href="{{test.path.path[current_group_idx[$index]].url}}">
+																		 <a href="{{test.path.path[current_group_idx[$index]].url}}" target="_blank">
 	                                     {{test.path.path[current_group_idx[$index]].url}}
 	                                   </a>
 																		</div>
@@ -393,9 +392,24 @@
 																		<div class="data__key">
 																			CSS
 																		</div>
-																		<div class="data__value" ng-repeat="(key, value) in test.path.path[current_group_idx[$index]+1].cssValues track by key">
-																			{{key}}:           {{value}};
-																		</div>
+																		<div class="data__value">
+	                                    width: {{test.path.path[current_group_idx[$index]+1].cssValues['width']}}
+	                                  </div>
+	                                  <div class="data__value">
+	                                    height: {{test.path.path[current_group_idx[$index]+1].cssValues['height']}}
+	                                  </div>
+	                                  <div class="data__value">
+	                                    font-family: {{test.path.path[current_group_idx[$index]+1].cssValues['font-family']}}
+	                                  </div>
+	                                  <div class="data__value">
+	                                    color:
+																			<span style="background-color:{{test.path.path[current_group_idx[$index]+1].cssValues['color']}}">
+																				 {{test.path.path[current_group_idx[$index]+1].cssValues['color']}}
+																			 </span>
+	                                  </div>
+	                                  <div class="data__value">
+	                                    position: {{test.path.path[current_group_idx[$index]+1].cssValues['position']}}
+	                                  </div>
 																	</div>
 																</div>
 															</div>
