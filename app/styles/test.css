@@ -13,23 +13,23 @@
 	border-top: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
     overflow-y:scroll;
-	height: -moz-calc(100% - 90px);
+	height: -moz-calc(100% - 161px);
     /* WebKit */
-    height: -webkit-calc(100% - 90px);
+    height: -webkit-calc(100% - 161px);
     /* Opera */
-    height: -o-calc(100% - 90px);
+    height: -o-calc(100% - 161px);
     /* Standard */
-    height: calc(100% - 90px);
+    height: calc(100% - 161px);
 }
 
 .full__height{
-	height: -moz-calc(100% - 90px);
+	height: -moz-calc(100% - 68px);
     /* WebKit */
-    height: -webkit-calc(100% - 90px);
+    height: -webkit-calc(100% - 68px);
     /* Opera */
-    height: -o-calc(100% - 90px);
+    height: -o-calc(100% - 68px);
     /* Standard */
-    height: calc(100% - 90px);
+    height: calc(100% - 68px);
 	padding-bottom: 15px !important;
 }
 
