@@ -13,6 +13,7 @@
 
 
 .main-nav {
+	font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: row;
   list-style: none;
@@ -181,8 +182,11 @@ background: #fbd311;
 
 .stats__bar{
 float: right;
-	font-size: 12px;
-	
+font-size: 12px;
+}
+
+.stat_value{
+font-size: 11px;
 }
 
 .stat_key_value{
@@ -193,15 +197,15 @@ float: right;
 
 .stat_key{
 	color: #08091a;
-	font-weight:400;
+	font-weight:500;
+	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.stat_value{
-}
 
 /*--------------------------- [7. dropdown] ------------------------------------------------------------------------------*/
 
 .dropdown-item li {
+	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-decoration: none;
 }
 
