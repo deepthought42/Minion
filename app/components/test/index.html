@@ -34,16 +34,16 @@
 				<div class="flex-auto test_functions">
 					Test Title
 				</div>
-				<div class="flex-initial time_stats">
-					Time (minutes)
-				</div>
-				<div class="flex-initial time_stats"  ng-click="sortLastRun=!sortLastRun">
-						Date Last Run
-				</div>
-				<div class="flex-auto test_functions">
+				<div class="flex-initial test_browsers">
 						Browsers
 				</div>
-						<div class="flex-none test_functions">
+				<div class="flex-initial time_stats text-right">
+					Time (minutes)
+				</div>
+				<div class="flex-initial date_stats text-right"  ng-click="sortLastRun=!sortLastRun">
+						Date Last Run
+				</div>
+				<div class="flex-none test_functions">
 				</div>
 	</div>
 
@@ -102,17 +102,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="flex-initial time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
-							<div class="">
-								{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
-							</div>
-						</div>
-						<div class="flex-initial time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
-							<div class="">
-								{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
-							</div>
-						</div>
-						<div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
+						<div class="flex-initial test_browsers test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
 							<div class="row">
 								<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserPassingStatuses">
 									<div class="row vertical__center test__status__editable">
@@ -149,7 +139,7 @@
 							</div>
 						</div>
 
-						<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx==$index">
+						<div class="flex-initial test_browsers test__profile_stretch" ng-if="editing_test_idx==$index">
 							<div class="row">
 								<div class="flex-none" ng-repeat="(browser, status) in test.browserPassingStatuses">
 									<div class="row vertical__center test__status__editable">
@@ -173,6 +163,17 @@
 										</div>
 									</div>
 								</div>
+							</div>
+						</div>
+				
+						<div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+							<div class="">
+								{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
+							</div>
+						</div>
+						<div class="flex-initial text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+							<div class="">
+								{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
 							</div>
 						</div>
 
@@ -508,10 +509,10 @@
 												<div class="col-sm-3">
 															Status&nbsp;<i class="fa fa-sort"></i>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-3 text-right">
 															Total Runtime (s)&nbsp;<i class="fa fa-sort"></i>
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-3 text-right">
 															Date Last Run&nbsp;<i class="fa fa-sort"></i>
 												</div>
 											</div>
@@ -525,10 +526,10 @@
 														<i class="fa fa-check fa-2x green" ng-show="record.passing" />
 														<i class="fa fa-times fa-2x red" ng-show="!record.passing" />
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-3 text-right">
 													{{record.runTime | date: 'm'}} m {{record.runTime | date: 'ss'}} s
 												</div>
-												<div class="col-sm-3">
+												<div class="col-sm-3 text-right">
 													{{record.ranAt | date: 'MM/dd/yy h:mm a' | lowercase}}
 												</div>
 											</div>

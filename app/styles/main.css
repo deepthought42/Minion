@@ -254,7 +254,7 @@ a img {border: none; }
 /*--------------------------- [2. Text Format] -------------------------------------------------------------------------------*/
 
 	p{
-		font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+		font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 12px;
 		line-height: 18px;
 		letter-spacing:.1px;
@@ -299,7 +299,7 @@ h2,
 /*--------------------------- [test title] ---------------------------*/
 h4,
 .h4{
-font-size: 20px;
+font-size: 18px;
 letter-spacing:0px;
 display: inline;
 }
@@ -329,6 +329,7 @@ h5,
   margin-bottom: 0;
   min-height: 40px;
   min-width: 140px;
+	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: normal;
   line-height: 1.42857143;

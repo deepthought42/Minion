@@ -91,10 +91,10 @@
 		<div class="flex-auto test_functions">
 		  Test Title
 		</div>
-		<div class="flex-initial time_stats">
+		<div class="flex-initial time_stats text-right">
 		  Time (minutes)
 		</div>
-		<div class="flex-initial time_stats">
+		<div class="flex-initial date_stats text-right">
 		  Date Discovered
 		</div>
         <div class="flex-none accordion-flex">
@@ -172,10 +172,10 @@
 						</div>
 					</div>
 				</div>
-			  <div class="flex-initial time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+			  <div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 			  </div>
-			  <div class="flex-initial time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+			  <div class="flex-initial text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					{{( test.lastRunTimestamp | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
         <div class="flex-none accordion-flex test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">

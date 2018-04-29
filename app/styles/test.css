@@ -34,6 +34,7 @@
 }
 
 .test-labels{
+	font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	border-top: 0px solid #e0e0e0;
 	background-color: #f9f8f4;
 	padding-top: 10px;
@@ -176,8 +177,7 @@ width: -webkit-calc(100% - 15px);
 .test__btns{
   display: flex;
   align-items: center;
-  justify-content: space-between !important;
-
+  justify-content: flex-end !important;
 }
 
 .accordion{
@@ -206,10 +206,16 @@ width: -webkit-calc(100% - 15px);
   flex: 0 0 auto;
 }
 .time_stats {
+	width:180px;
+}
+.date_stats {
 	width:200px;
 }
 .test_functions {
 	width:258px;
+}
+.test_browsers {
+	width:184px;
 }
 .test_name_edit {
 	width:152px;
@@ -232,6 +238,7 @@ width: -webkit-calc(100% - 15px);
 	text-align: center;
 	font-size: 12px;
 	padding: 5px;
+	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .discovery_status_border{
   border-right: 1px solid #f9f9f9;
@@ -463,8 +470,9 @@ width: -webkit-calc(100% - 15px);
 
 .data__key{
 	text-transform: capitalize;
+	font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 16px;
-    font-weight: 700;
+  font-weight: 500;
 	line-height: 20px;
 	letter-spacing:.1px;
 	color:#666666;
@@ -594,6 +602,7 @@ width: -webkit-calc(100% - 15px);
 }
 
 .test__history__labels{
+	  font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #f0f0f0;
     padding-top:15px;
     padding-bottom:15px;
