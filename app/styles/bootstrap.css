@@ -142,6 +142,9 @@ input::-moz-focus-inner {
 }
 input {
   line-height: normal;
+  min-height: 40px;
+	font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+	font-size: 18px !important;
 }
 input[type="checkbox"],
 input[type="radio"] {
