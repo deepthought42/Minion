@@ -265,7 +265,7 @@
 														<div class="row">
 															<div class="page__image col-xs-6">
 																<h5 class="screenshots">Page</h5>
-																<img type="button" class="path-node-image"
+																<img type="button" class="path-node-image page-image"
 																				data-toggle="modal" data-target="#exampleModal"
 																				src="{{test.path.path[current_group_idx[$index]].browser_screenshots[default_browser]}}" class="path-node-image"
 																				ng-click="openPageModal(test.path.path[current_group_idx[$index]])" />
@@ -320,8 +320,7 @@
 															<div class="data__key">
 															 Action
 															</div>
-															<div class="data__value">
-															 -  {{test.path.path[current_group_idx[$index]+2].name != 'sendKeys' ? test.path.path[current_group_idx[$index]+2].name : 'Type'}}
+															<div class="data__value">{{test.path.path[current_group_idx[$index]+2].name != 'sendKeys' ? test.path.path[current_group_idx[$index]+2].name : 'Type'}}
 															</div>
 														</div>
 													</div>
@@ -422,7 +421,7 @@
 														<div class="row">
 															<div class="page__image col-xs-12">
 																<h5 class="screenshots">Page</h5>
-																<img type="button" class="path-node-image"
+																<img type="button" class="path-node-image page-image"
 																				data-toggle="modal" data-target="#exampleModal"
 																				src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image"
 																				ng-click="openPageModal(test.result)" />

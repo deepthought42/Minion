@@ -378,7 +378,9 @@ width: -webkit-calc(100% - 15px);
   max-height: 100%;
   max-width: 100%;
 }
-
+.page-image{
+	  max-height: 300px;
+}
 .path-bar .display_none_right{
   display: none !important;
 }
@@ -484,6 +486,11 @@ width: -webkit-calc(100% - 15px);
 	margin:15px 0px;
 	padding:10px 5px;
 
+}
+.box--shadow{
+	border-radius: 5px;
+	box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+	background-color: #fff;
 }
 .node__data{
     border: 0px;

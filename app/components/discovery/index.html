@@ -247,7 +247,7 @@
 															<div class="row">
 																<div class="page__image col-xs-6">
 																	<h5 class="screenshots">Page</h5>
-																	<img type="button" class="path-node-image"
+																	<img type="button" class="path-node-image page-image"
 																					data-toggle="modal" data-target="#exampleModal"
 																					src="{{test.path.path[current_group_idx[$index]].browser_screenshots[default_browser]}}" class="path-node-image"
 																					ng-click="openPageModal(test.path.path[current_group_idx[$index]])" />
@@ -260,27 +260,7 @@
 																				src="{{test.path.path[current_group_idx[$index]+1].screenshot}}" class="path-node-image"/>
 																</div>
 															</div>
-															<div class="row browser_screenshot_selector">
-																<div class="col-xs-6 btn--primary rounded-left status_border discovery_status">
-																	<div class="" >
-																		Chrome
-																		<br />
-																		<i class="fa fa-chrome discovery--status--symbol white"></i>
-																	</div>
-																</div>
-																<div class="discovery_status btn--primary rounded-right col-xs-6">
-																	<div class="" >
-																			Firefox
-																		<br />
-																		<i  class="fa fa-firefox discovery--status--symbol white"></i>
-																	</div>
-																</div>
-																<div class="col-sm-12">
-																	<div class="row">
-																		<p class="browser_screenshot_text">Select a browser to preview</p>
-																	</div>
-																</div>
-															</div>
+															
 														</div>
 												</div>
 											</div>
@@ -322,8 +302,7 @@
 																	<div class="data__key">
 																	 Action
 																	</div>
-																	<div class="data__value">
-																	 -  {{test.path.path[current_group_idx[$index]+2].name != 'sendKeys' ? test.path.path[current_group_idx[$index]+2].name : 'Type'}}
+																	<div class="data__value"> {{test.path.path[current_group_idx[$index]+2].name != 'sendKeys' ? test.path.path[current_group_idx[$index]+2].name : 'Type'}}
 																	</div>
 																</div>
 															</div>
@@ -424,7 +403,7 @@
 																<div class="row">
 																	<div class="page__image col-xs-12">
 																		<h5 class="screenshots">Page</h5>
-																		<img type="button" class="path-node-image"
+																		<img type="button" class="path-node-image page-image"
 																						data-toggle="modal" data-target="#exampleModal"
 																						src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image"
 																						ng-click="openPageModal(test.result)" />
