@@ -149,7 +149,7 @@
 				  </div>
 			  </div>
 
-        <div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
+        <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
 					<div class="" ng-show="!test.show_test_name_edit_field">
 						<h4>
               {{test.name || "Test #"+($index+1)}}
@@ -240,10 +240,10 @@
 									</div>
 
 									<div class="col-xs-12 test__data test_dropdown_bottom_shadow"  ng-if="!test.result.visible && test.path.path.length > 1">
-										<div class="row path__data">
-											<div class="col-sm-6">
-													<div class="row node__data" id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
-														<div class="col-sm-12">
+										<div class="row">
+											<div class="col-sm-6 box--shadow">
+													<div class="row " id="{{'nodedata'+$index}}" ng-show="visible_tab=='nodedata'+$index">
+														<div class="col-sm-12 node__data">
 															<div class="row">
 																<div class="page__image col-xs-6">
 																	<h5 class="screenshots">Page</h5>
@@ -260,12 +260,27 @@
 																				src="{{test.path.path[current_group_idx[$index]+1].screenshot}}" class="path-node-image"/>
 																</div>
 															</div>
-															
+															<div class="row browser_screenshot_selector">
+																<div class="col-xs-6 btn--primary rounded-left status_border discovery_status">
+																	<div class="" >
+																		Chrome
+																		<br />
+																		<i class="fa fa-chrome discovery--status--symbol white"></i>
+																	</div>
+																</div>
+																<div class="discovery_status btn--primary rounded-right col-xs-6">
+																	<div class="" >
+																			Firefox
+																		<br />
+																		<i  class="fa fa-firefox discovery--status--symbol white"></i>
+																	</div>
+																</div>
+															</div>
 														</div>
 												</div>
 											</div>
-											<div class="col-sm-6">
-												<div class="tabs tabs-style-linemove">
+											<div class="col-sm-6 box--shadow">
+												<div class="node__data tabs tabs-style-linemove">
 													<nav>
 														<ul>
 															<li class="tabs-style" ng-click="visible_test_nav2='section-linemove-1'" ng-class="visible_test_nav2=='section-linemove-1' ? 'tabs-style_active' : ''"><h5>Info</h5></li>
