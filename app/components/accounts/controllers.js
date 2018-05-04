@@ -12,14 +12,9 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
 
 .controller('AccountCtrl', ['$rootScope', '$scope', 'Account', 'Auth',
   function($rootScope, $scope, Account, Auth) {
-    this._init = function(){
-
-    }
-
-    this._init();
-
+    //INITIALIZATION
+    
     $scope.$on('new-account', function(event, args){
-      console.log("NEW ACCOUNT event! WOOO!");
       var account = {
         service_package: "alpha",
         payment_acct: payment_acct

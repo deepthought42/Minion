@@ -383,8 +383,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.test_copy = null;
     }
 
-    $scope.openPageModal = function(page) {
-      $scope.current_preview_page = page;
+    $scope.openPageModal = function(full_screenshot) {
+      $scope.full_page_screenshot = full_screenshot;
        $mdDialog.show({
           clickOutsideToClose: true,
           scope: $scope,

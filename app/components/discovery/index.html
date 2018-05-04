@@ -29,7 +29,7 @@
 						Discovery Start
 					</div>
 					<div class="stat_value">
-						{{(current_domain.lastDiscoveryStartedAt || '00:00') | date : 'M/dd/yy h:mm a'}}
+						{{(discovery_status.startedAt || '00:00') | date : 'M/dd/yy h:mm a'}}
 					</div>
 				</div>
 		  </div>
@@ -40,7 +40,7 @@
 						Last Test Found
 					</div>
 					<div class="stat_value">
-						{{((Date.now().getTime() - (tests | orderBy:{'lastRunTimestamp':true})[tests.length-1].lastRunTimestamp) || '00:00') | date : 'h:mm'}} hrs ago
+						{{timeSinceLastTest() | date : 'h:mm'}} hrs ago
 					</div>
 				</div>
 			</div>
@@ -51,8 +51,7 @@
 						Total Runtime
 					</div>
 					<div class="stat_value">
-						{{getTotalRuntime()}}
-                        hrs
+						{{getTotalRuntime() | date: 'h:mm'}} hrs
 					</div>
 				</div>
 			</div>
@@ -77,8 +76,11 @@
     </div>
 
     <div class="col-sm-12 running_status" ng-if="isStarted">
-			<div class="pull-left">
-				Running...
+      <div class="col-sm-3 pull-left">
+        <md-progress-linear md-mode="determinate" value="{{(discovery_status.examinedPathCount/discovery_status.totalPathCount)*100 || 0 }}"></md-progress-linear>
+      </div>
+      <div class="pull-left">
+				Running...{{(discovery_status.examinedPathCount/discovery_status.totalPathCount)*100 || 0 | number:0 }} %
          <i class="fa fa-circle-o-notch fa-spin fa-2x green fa-fw" aria-hidden="true"></i>
 			</div>
 	  </div>
@@ -200,8 +202,8 @@
                           ng-class="current_group_idx[test_idx]==group_start_idx && !test.result.visible ? 'active' : ''"
                           ng-click="setCurrentGroupIdx(group_start_idx);test.result.visible=false;" >
   										<div ng-repeat="node in test.path.path | limitTo:3:group_start_idx track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
-  											<div ng-if="node.browser_screenshots[default_browser]" class="path-page path-node"  >
-  												<img src="{{node.browser_screenshots[default_browser]}}" class="path-node-image"/>
+  											<div ng-if="node.browser_screenshots.length > 0" class="path-page path-node"  >
+						              <img src="{{node.browser_screenshots[0].viewportScreenshot}}" class="path-node-image" />
   											</div>
   											<div ng-if="node.type == 'PageElement'" class="path-node path-element vertical__center__int" tooltip-placement="top">
   												<span class="" >
@@ -233,8 +235,8 @@
   										</div>
                     </div>
 										<div class="node-group path-node-container vertical__center__int" ng-click="test.result.visible=true" >
-											<div ng-if="test.path.path.length != 1 && test.result.browser_screenshots[default_browser]" class="path-page path-node">
-												<img src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image" tooltip-placement="top"/>
+											<div ng-if="test.path.path.length != 1 && test.result.browser_screenshots[0]" class="path-page path-node">
+												<img src="{{test.result.browser_screenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
 											</div>
 										</div>
 									</div>
@@ -247,10 +249,12 @@
 																<div class="row">
 																	<div class="page__image col-xs-6">
 																		<h5 class="screenshots">Page</h5>
-																		<img type="button" class="path-node-image"
-																						data-toggle="modal" data-target="#exampleModal"
-																						src="{{test.path.path[current_group_idx[$index]].browser_screenshots[default_browser]}}" class="path-node-image"
-																						ng-click="openPageModal(test.path.path[current_group_idx[$index]])" />
+                                    <div ng-repeat="screenshots_set in test.path.path[current_group_idx[$index]].browser_screenshots">
+  																		<img type="button" class="path-node-image"
+  																						data-toggle="modal" data-target="#exampleModal"
+  																						src="{{screenshots_set.viewportScreenshot}}" class="path-node-image"
+  																						ng-click="openPageModal(screenshots_set.fullScreenshot)" />
+                                    </div>
 																	</div>
 																	<div class="element__image col-xs-6">
 																		<h5 class="screenshots">
@@ -409,10 +413,12 @@
 																<div class="row">
 																	<div class="page__image col-xs-12">
 																		<h5 class="screenshots">Page</h5>
-																		<img type="button" class="path-node-image"
-																						data-toggle="modal" data-target="#exampleModal"
-																						src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image"
-																						ng-click="openPageModal(test.result)" />
+                                    <div ng-repeat="screenshot_set in test.result.browser_screenshots">
+  																		<img type="button" class="path-node-image"
+  																						data-toggle="modal"
+  																						src="{{screenshot_set.viewportScreenshot}}" class="path-node-image"
+  																						ng-click="openPageModal(screenshot_set.fullScreenshot)" />
+                                    </div>
 																	</div>
 																</div>
 															</div>

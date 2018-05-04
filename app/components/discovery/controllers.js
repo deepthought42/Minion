@@ -33,14 +33,27 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.test_idx = -1;
       $scope.discoveryOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery');
       $scope.discoveryOnboardingIndex = 0;
-
+      $scope.discovery_status = {};
       $scope.current_domain = store.get('domain');
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
         $scope.discovery_url = $scope.current_domain.url;
         Discovery.getStatus({url: $scope.discovery_url}).$promise
           .then (function(data){
-            $scope.isStarted = data.status;
+            if( data.startedAt == null){
+              $scope.isStarted = false;
+            }
+            else{
+              $scope.discovery_status = data;
+              var diff_time = (Date.now()-(new Date(data.startedAt)))/1000;
+
+              if(diff_time > 1440 || (data.totalPathCount <= data.examinedPathCount)){
+                $scope.isStarted = false
+              }
+              else{
+                $scope.isStarted = true;
+              }
+            }
           })
           .catch(function(err){
             $scope.isStarted = false;
@@ -68,16 +81,17 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           encrypted: true
         });
 
-        var channel = pusher.subscribe($scope.extractHostname($scope.discovery_url));
+        var channel = pusher.subscribe($scope.extractHostname($scope.current_domain.url));
         channel.bind('test-discovered', function(data) {
           $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
           $scope.discoveredTestOnboardingIndex = 0;
           $scope.waitingOnTests = false;
-          //console.log("DATA  ::   "+data);
-          //console.log("DATA from json :: "+JSON.parse(data));
-          //console.log("DATA KEYS :: "+Object.keys(data));
-
           $scope.tests.push(JSON.parse(data));
+          $scope.$apply();
+        });
+
+        channel.bind('discovery-status', function(data) {
+          $scope.discovery_status = JSON.parse(data);
           $scope.$apply();
         });
       }
@@ -184,7 +198,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
       Discovery.startWork({url:  $scope.discovery_url}).$promise
         .then(function(value){
-
+          $scope.discovery_status = value;
         })
         .catch(function(err){
           //$scope.waitingOnTests = false;
@@ -275,8 +289,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
-    $scope.openPageModal = function(page) {
-      $scope.current_preview_page = page;
+    $scope.openPageModal = function(full_screenshot) {
+      $scope.full_page_screenshot = full_screenshot;
        $mdDialog.show({
           clickOutsideToClose: true,
           scope: $scope,
@@ -294,14 +308,26 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       test.show_test_name_edit_field = false;
     }
 
-    $scope.getTotalRuntime = function(){
-        var last_run_date = $scope.current_domain.lastDiscoveryPathRanAt;
-        var discovery_started_date = $scope.current_domain.lastDiscoveryStartedAt;
 
-        var time_diff = (last_run_date-discovery_started_date)/1000/60/60;
-        var hours = Math.trunc(time_diff);
-        var minutes = Math.trunc((time_diff%1).toFixed(2)*60);
-        return hours+":"+minutes;
+    $scope.timeSinceLastTest = function(){
+      return (Date.now() - (new Date($scope.discovery_status.lastPathRanAt)));
+    }
+
+    $scope.getTotalRuntime = function(){
+        var last_run_date = $scope.discovery_status.lastPathRanAt;
+        var discovery_started_date = $scope.discovery_status.startedAt;
+        if(last_run_date != null && discovery_started_date != null){
+          var time_diff = (last_run_date-discovery_started_date)/1000/60/60;
+          var hours = Math.trunc(time_diff);
+          var minutes = Math.trunc((time_diff%1).toFixed(2)*60);
+          if(minutes < 10){
+            minutes = "0"+minutes;
+          }
+          return hours+":"+minutes;
+        }
+        else{
+          return "00:00";
+        }
     }
 
     /**

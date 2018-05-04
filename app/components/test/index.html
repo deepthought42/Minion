@@ -427,10 +427,12 @@
 														<div class="row">
 															<div class="page__image col-xs-12">
 																<h5 class="screenshots">Page</h5>
-																<img type="button" class="path-node-image"
-																				data-toggle="modal" data-target="#exampleModal"
-																				src="{{test.result.browser_screenshots[default_browser]}}" class="path-node-image"
-																				ng-click="openPageModal(test.result)" />
+																<div ng-repeat="screenshot_set in test.result.browser_screenshots">
+																	<img type="button" class="path-node-image"
+																					data-toggle="modal" data-target="#exampleModal"
+																					src="{{screenshot_set.viewportScreenshot}}" class="path-node-image"
+																					ng-click="openPageModal(screenshot_set.fullScreenshot)" />
+																</div>
 															</div>
 														</div>
 													</div>
