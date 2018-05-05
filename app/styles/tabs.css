@@ -20,7 +20,13 @@
 	font-size: 1.25em;
 }
 .path_tabs{
-		margin: auto 15px;
+	margin: auto 15px;
+	max-width: 600px;
+}
+
+.browser_tabs{
+	margin-top: 20px;
+	background-color: #2b2e93 !important;
 }
 
 /* Nav */
@@ -36,7 +42,6 @@
 	display: -ms-flex;
 	display: flex;
 	padding: 0;
-	max-width: 600px;
 	list-style: none;
 	-ms-box-orient: horizontal;
 	-ms-box-pack: center;
@@ -48,6 +53,9 @@
 	-moz-justify-content: center;
 	-ms-justify-content: center;
 	justify-content: center;
+}
+.primary_tabs nav ul{
+	max-width: 600px;
 }
 
 .solo-page nav ul {
