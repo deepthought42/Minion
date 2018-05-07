@@ -106,6 +106,68 @@
 
 
 
+
+
+
+
+
+
+
+
+.browser_tabs:after,
+.browser_tabs:before {
+  content:"";
+  display: table;
+} 
+.browser_tabs:after {
+  clear:both;
+  overflow:hidden;
+}
+.browser_tabs {
+  zoom: 1;
+}
+.browser_tabs li {
+  list-style: none outside none;
+  float: left;
+  position: relative !important;/*This is very important*/
+}
+.tabs-style2_active {
+  z-index: 3 !important;/*The current item is at the top*/
+}
+.browser_tabs li:before,
+.browser_tabs li:after,
+.browser_tabs  a:before,
+.browser_tabs  a:after {
+  content:"";
+  position: absolute;
+  top:0;
+
+}
+.browser_tabs li:before,
+.browser_tabs li:after {
+  background: #fff; /*shows*/
+  width: 5px;
+  height: 5px;
+}
+.browser_tabs li:after {
+  left: 0px;
+	background: #2b2e93; /*shows*/
+}
+.browser_tabs li:before {
+  right: 0px;
+	background: #2b2e93; /*shows*/
+}
+
+
+.browser_tabs li:last-child:after {
+	background-color: #fff !important;
+}
+
+.browser_tabs li:first-child:before {
+	background-color: #fff !important;
+}
+
+
 .tabs-style2 a{
 	text-align: center;
 	color: #fff;
@@ -119,9 +181,9 @@
 
 
 .tabs-style2 {
-		background-color: #2b2e93 !important;
+	background-color: #2b2e93;
 	text-decoration: none;
-	color: #fff;
+	color: #a09dd7;
 	-webkit-transition: color 0.3s, -webkit-transform 0.3s; 
 	transition: color 0.3s, transform 0.3s;
 }
@@ -131,20 +193,20 @@
 }
 
 .tabs-style2 :focus{
-	color: #fff;
+	color: #a09dd7;
 }
 .tabs-style2 :visited{
-	color: #fff;
+	color: #a09dd7;
 }
 
 .tabs-style2 :hover {
 	border-radius: 0 0 5px 5px;
-	color: #a09dd7 !important;
+	color: #fff !important;
 }
 .tabs-style2_active {
 	
 	border-radius: 0 0 5px 5px;
-	background-color: #ffffff  !important;
+	background-color: #ffffff;
 	color: #2b2e93 !important;
 }
 
@@ -153,10 +215,38 @@
 }
 
 .tabs-style2_active :hover {
-	background-color: #ffffff  !important;
+	background-color: #ffffff;
 	color: #2b2e93 !important;
 }
 
 
+
+
+
+
+.browser_tabs  a:before,
+.browser_tabs  a:after {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px  !important;
+  background: #2b2e93;
+  z-index: 2 !important;/*Round above the rectangle*/
+}
+.tabs-style2_active a:before,
+.tabs-style2_active a:after {
+  background: #fff; 
+}
+.browser_tabs  a:before {
+  left:0px; 
+}
+.browser_tabs  a:after {
+  right: 0px;
+}
+
+.tabs-style2_active:before,
+.tabs-style2_active:after {
+  z-index: 1  !important;/*shows The rectangle of the current item is below the circle*/
+  background: #fff !important;
+}
 
 

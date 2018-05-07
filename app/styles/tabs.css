@@ -19,15 +19,6 @@
 	font-weight: 300;
 	font-size: 1.25em;
 }
-.path_tabs{
-	margin: auto 15px;
-	max-width: 600px;
-}
-
-.browser_tabs{
-	margin-top: 20px;
-	background-color: #2b2e93 !important;
-}
 
 /* Nav */
 .tabs nav {
@@ -150,8 +141,12 @@
 }
 
 /* Content */
-.content-wrap {
+.content-wrap{
 	position: relative;
+}
+
+.screenshot-section div{
+	padding-bottom: 30px !important;
 }
 
 .content-wrap section {
@@ -173,6 +168,15 @@
 	font-weight: 900;
 	font-size: 4em;
 	line-height: 1;
+}
+
+.path_tabs{
+	margin: auto 15px;
+	max-width: 600px;
+}
+
+.browser_tabs{
+	background-color: #2b2e93 !important;
 }
 
 /* Fallback */
