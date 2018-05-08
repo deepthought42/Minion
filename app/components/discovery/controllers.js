@@ -44,9 +44,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
               $scope.isStarted = false;
             }
             else{
-              $scope.discovery_status = data;
-              var diff_time = (Date.now()-(new Date(data.startedAt)))/1000;
 
+              $scope.discovery_status = data;
+              var diff_time = (Date.now()-(new Date(data.startedAt)))/1000/60;
               if(diff_time > 1440 || (data.totalPathCount <= data.examinedPathCount)){
                 $scope.isStarted = false
               }
