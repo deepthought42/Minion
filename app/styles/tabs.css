@@ -145,6 +145,10 @@
 	position: relative;
 }
 
+
+.content-wrap div{
+}
+
 .screenshot-section div{
 	padding-bottom: 30px !important;
 }
