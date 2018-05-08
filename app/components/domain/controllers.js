@@ -56,12 +56,9 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       var onboard = null;
       if(store.get("onboard")){
         onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
-        console.log("Onboarded? :: "+onboard);
-        console.log("onboard idx :: "+store.get("onboard").indexOf(onboard_step_name));
       }
       //check if discovery onboarding has already been seen
       if(!onboard || onboard == null){
-        console.log("onboard was either false or null : "+onboard);
         Account.addOnboardingStep({step_name: onboard_step_name}).$promise
           .then(function(data){
             store.set("onboard", data);
