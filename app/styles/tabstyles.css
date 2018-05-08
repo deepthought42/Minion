@@ -52,12 +52,14 @@
 
 */
 
-.tabs-style {
+.tabs-style a{
 	text-decoration: none;
 	color: #757575;
-	padding: 10px 0 0px 0;
+	text-align: center !important;
+	padding: 10px 0px 8px 0px;
 	-webkit-transition: color 0.3s, -webkit-transform 0.3s; 
 	transition: color 0.3s, transform 0.3s;
+	border-bottom: 3px solid #eee;
 }
 
 .tabs-style-linemove > nav > ul {
@@ -68,36 +70,48 @@
 	margin-top:20px;
 }
 
-.tabs-style :focus{
-	color: #2b2e93;
-}
-.tabs-style :visited{
-	color: #757575;
-}
-.tabs-style :hover {
-	padding-bottom:15px;
-	margin-bottom: -15px;
+.tabs-style a:focus{
+	color: #4548c1  !important;
 	border-bottom: 3px solid #4548c1;
-	color: #2b2e93;
 }
-.tabs-style_active {
-	padding-bottom:8px;
-	margin-bottom: -8px;
-	border-bottom: 3px solid #2b2e93;
+.tabs-style a:visited{
+	color: #2b2e93  !important;
+	border-bottom: 3px solid #4548c1;
+}
+.tabs-style a:hover {
+	border-bottom: 3px solid #4548c1;
+	color: #2b2e93  !important;
+}
+
+.tabs-style a:active {
+	border-bottom: 3px solid #2b2e93 !important;
 	color: #2b2e93 !important;
-	
+}
+
+
+.tabs-style a:active h5{
+	color: #2b2e93 !important;
+}
+
+
+.tabs-style_active a {
+	border-bottom: 3px solid #2b2e93  !important;
 }
 
 .tabs-style_active h5{
 	color: #2b2e93 !important;
-	
 }
 
-.tabs-style_active :hover {
-	padding-bottom:10px ;
-	margin-bottom: -3px ;
-	border-bottom: none;
+.tabs-style a:hover h5{
+	color: #2b2e93 !important;
 }
+
+
+
+
+
+
+
 
 
 
