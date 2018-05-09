@@ -149,8 +149,8 @@
 .content-wrap div{
 }
 
-.screenshot-section div{
-	padding-bottom: 30px !important;
+.screenshot-section > div > div{
+	margin-bottom: 95px !important;
 }
 
 .content-wrap section {

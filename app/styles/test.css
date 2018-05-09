@@ -354,6 +354,7 @@ width: -webkit-calc(100% - 15px);
     -webkit-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
     -moz-box-shadow: inset 0 -10px 6px -8px #e7e7e7;
     box-shadow: inset 0 -10px 6px -8px #e7e7e7;
+
 }
 
 .test__path{
@@ -499,12 +500,23 @@ width: -webkit-calc(100% - 15px);
 	border-radius: 5px;
 	box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
 	background-color: #fff;
+	min-height: 350px !important;
 }
+
 .screenshots{
 	
 }
 .node__screenshots{
    padding:10px 0px 0px 0px;
+}
+
+.node__screenshots{
+	  position: relative;
+}
+
+.node__screenshots nav{
+	position: absolute;
+  bottom:0;
 }
 
 .node__data{
