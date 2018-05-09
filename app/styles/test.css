@@ -374,6 +374,8 @@ width: -webkit-calc(100% - 15px);
 	border-bottom: 3px solid #eee;
 }
 
+
+
 .browser_screenshot_text{
   padding: 15px 0px 0px 0px;
 	justify-content: center !important;
@@ -617,11 +619,10 @@ width: -webkit-calc(100% - 15px);
 
 
 .info__title{
-  height: 30px !important;
-  padding: 15px !important;
-  font-size: 16px;
-  text-align: center;
-  line-height: 24px;
+  padding: 10px 0px 15px 0px;
+	margin-bottom: 20px;
+	color:#757575;
+	border-bottom: 3px solid #eee;
 }
 
 /*--------------------------- [6. Test History] --------------------------------------------------------------------------------*/
