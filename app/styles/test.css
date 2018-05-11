@@ -31,6 +31,7 @@
     /* Standard */
     height: calc(100% - 68px);
 	padding-bottom: 15px !important;
+	background-color: #ffffff;
 }
 
 .test-labels-container{
@@ -498,11 +499,16 @@ width: -webkit-calc(100% - 15px);
 	margin:15px 0px;
 
 }
-.box--shadow{
+.test__data__box__shadow{
 	border-radius: 5px;
 	box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
 	background-color: #fff;
 	min-height: 350px !important;
+}
+
+.box--shadow{
+	border-radius: 5px;
+	box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
 }
 
 .screenshots{
