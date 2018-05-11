@@ -225,6 +225,8 @@
                            ng-if="node.type == 'Page'"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
+                        <div class="path-page path-node">
+  					              <img src="{{node.browser_screenshots[0].viewportScreenshot}}" class="path-node-image"/>
   											</div>
                       </div>
                       <div ng-if="node.type == 'PageElement'" class="node-group"
@@ -267,6 +269,7 @@
 											</div>
 										</div>
 									</div>
+									<div class="col-sm-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageElement'">
 										<div class="row">
 											<div class="col-sm-6">
 												<div class="node__screenshots box--shadow tabs tabs-style-linemove">
@@ -440,6 +443,7 @@
 														<div class="page__image col-xs-12"  >
 															<h5 class="screenshots_title">Page</h5>
                               <div ng-repeat="screenshot_set in current_node[test_idx].browser_screenshots" ng-if="visible_browser_screenshot==screenshot_set.browserName">
+																<img class="path-node-image page-image screenshots"
 																			data-toggle="modal" data-target="#exampleModal"
 																			src="{{screenshot_set.fullScreenshot}}" class="path-node-image"
 																			ng-click="openPageModal(screenshot_set.fullScreenshot)" />
