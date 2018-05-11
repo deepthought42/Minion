@@ -20,7 +20,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.errors = [];
       $scope.tests = [];
       $scope.isStarted = false;
-      $scope.current_group_idx = [];
+      $scope.current_node = [];
+      $scope.current_node_idx = 0;
       $scope.visible = false;
 			$scope.visible_test_nav1 = 'section-linemove-1';
       $scope.visible_test_nav2 = 'section-linemove-1';
@@ -217,9 +218,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.test_idx = idx;
     }
 
-    $scope.setCurrentGroupIdx = function(index){
-      $scope.tests[$scope.test_idx].result.visible = false;
-      $scope.current_group_idx[$scope.test_idx] = index;
+    $scope.setCurrentNode = function(node, index){
+      $scope.current_node_idx = index;
+      $scope.current_node[$scope.test_idx] = node;
     }
 
     $scope.setTestName = function(test, new_name){
@@ -243,7 +244,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.test_idx = index;
       $scope.test = test;
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
-      $scope.setCurrentGroupIdx(0);
+      $scope.visible_browser_screenshot = $scope.default_browser;
+      $scope.setCurrentNode({});
       if(test.visible){
         $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
         $scope.testVerificationOnboardingIndex = 0;
