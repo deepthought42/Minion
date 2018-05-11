@@ -42,7 +42,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       domain: 'staging-qanairy.auth0.com',
       responseType: 'token id_token',
       audience: 'https://staging-api.qanairy.com',
-      redirectUri: 'http://localhost:8001/#/authenticate',
+      redirectUri: 'http://localhost:8001/#/domains',
       scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery'
     });
 
@@ -72,6 +72,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     Account.getOnboardingSteps().$promise
       .then(function(data){
         store.set('onboard', data);
+        $rootScope.$broadcast('onboardingStepsAcquired');
       })
       .catch(function(data){
 

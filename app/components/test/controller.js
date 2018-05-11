@@ -20,7 +20,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.groups = [];
       $scope.group = {name: "", description: "" };
       $scope.node_key = "";
-      $scope.current_group_idx = [];
+      $scope.current_node = [];
+      $scope.current_node_idx = 0;
       $scope.filteredTests = [];
       $scope.test_idx = -1;
       $scope.visible_test_nav1 = 'section-linemove-1';
@@ -329,7 +330,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.test_idx = index || 0;
       $scope.test = test;
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
-      $scope.setCurrentGroupIdx(0);
+      $scope.setCurrentNode({}, 0);
+      $scope.visible_browser_screenshot = $scope.default_browser;
 
       if(test.visible){
         $scope.visible_test_nav1 = 'section-linemove-1';
@@ -337,9 +339,9 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       }
     }
 
-    $scope.setCurrentGroupIdx = function(index){
-      $scope.tests[$scope.test_idx].result.visible = false;
-      $scope.current_group_idx[$scope.test_idx] = index;
+    $scope.setCurrentNode = function(node, index){
+      $scope.current_node_idx = index;
+      $scope.current_node[$scope.test_idx] = node;
     }
 
     $scope.getDate = function(value){
@@ -383,8 +385,8 @@ angular.module('Qanairy.tests', ['Qanairy.TesterService'])
       $scope.test_copy = null;
     }
 
-    $scope.openPageModal = function(page) {
-      $scope.current_preview_page = page;
+    $scope.openPageModal = function(full_screenshot) {
+      $scope.full_page_screenshot = full_screenshot;
        $mdDialog.show({
           clickOutsideToClose: true,
           scope: $scope,
