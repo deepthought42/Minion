@@ -19,9 +19,6 @@
 	font-weight: 300;
 	font-size: 1.25em;
 }
-.path_tabs{
-		margin: auto 15px;
-}
 
 /* Nav */
 .tabs nav {
@@ -36,7 +33,6 @@
 	display: -ms-flex;
 	display: flex;
 	padding: 0;
-	max-width: 600px;
 	list-style: none;
 	-ms-box-orient: horizontal;
 	-ms-box-pack: center;
@@ -49,10 +45,10 @@
 	-ms-justify-content: center;
 	justify-content: center;
 }
-
-.solo-page nav ul {
-	max-width: 200px;
+.primary_tabs nav ul{
+	max-width: 600px;
 }
+
 
 .tabs nav ul li {
 	text-decoration: none !important;
@@ -142,8 +138,16 @@
 }
 
 /* Content */
-.content-wrap {
+.content-wrap{
 	position: relative;
+}
+
+
+.content-wrap div{
+}
+
+.screenshot-section > div > div{
+	margin-bottom: 95px !important;
 }
 
 .content-wrap section {
@@ -165,6 +169,15 @@
 	font-weight: 900;
 	font-size: 4em;
 	line-height: 1;
+}
+
+.path_tabs{
+	margin: auto 15px;
+	max-width: 600px;
+}
+
+.browser_tabs{
+	background-color: #2b2e93 !important;
 }
 
 /* Fallback */
