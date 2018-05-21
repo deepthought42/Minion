@@ -1,17 +1,15 @@
 <!-- Page Content -->
-<div>
+<div class="flex-none side-nav">
+	<div class="flex-none">
+		<div class="brand">
+			<img src="./img/qanairy_logo.png" />&nbsp;&nbsp;<span>Beta</span>
+		</div>
+	</div>
+</div>
+<div class="flex-auto">
   <div id="nav-bar" class="main-container container-fluid content ">
     <div id="main-nav" class="vertical__center__int">
-		  <div class="col-lg-3 col-md-3">
-          <div class="left-main-nav main-nav">
-            <div class="flex-none">
-              <div class="brand">
-          		  <img src="./img/qanairy_logo.png" />&nbsp;&nbsp;<span>Beta</span>
-              </div>
-            </div>
-          </div>
-      </div>
-      <div class="col-lg-8 col-md-9 offset-lg-1" ng-show="auth.isAuthenticated">
+      <div class="col-md-12" ng-show="auth.isAuthenticated">
         <div class="right-main-nav main-nav">
           <div class="domain-link dropdown pull-right">
               <div class="dropdown-toggle" data-toggle="dropdown" id="domainsDropdownMenuButton"  dropdown-toggle>
