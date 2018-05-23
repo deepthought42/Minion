@@ -1,17 +1,48 @@
+<!-- Sidebar -->
+<input type="checkbox" class="main-nav-check" id="main-nav-check" />
+
+<nav class="side-nav" id="side-nav">
+  <div id="sidepanel">
+    <div class="brand">
+			<img src="./img/qanairy_logo.png" />&nbsp;&nbsp;<span>Beta</span>
+		</div>
+
+    <ul class="sidebar-nav">
+			<li>
+        <a href="#/dashboard"  style="{{$location.path() == '/dashboard' ? 'color: #fff;' : 'color:#9794d5'}}">
+          <i class="fa fa-dashboard sidebar-nav-icons" aria-hidden="true"></i>
+          Dashboard
+        </a>
+      </li>
+      <li id="notification_li">
+			  <a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fff;' : 'color:#9794d5'}}">
+					<i class="fa fa-list-ul main-nav-icons" aria-hidden="true"></i>
+					Tests&nbsp;
+					<span id="notification_count" ng-show="approved_test_cnt">
+						{{approved_test_cnt}}
+					</span>
+				</a>
+      </li>
+			<li>
+        <a href="#/discovery"  style="{{$location.path() == '/discovery' ? 'color: #fff;' : 'color:#9794d5'}}">
+          <i class="fa fa-map-o sidebar-nav-icons" aria-hidden="true"></i>
+          Discovery
+        </a>
+      </li>
+    </ul>
+    <label for="main-nav-check" class="toggle-menu"
+       style="{{navToggledOpen ? 'color:#9794d5' : 'color:#fff'}}"
+       ng-click="navToggledOpen = !navToggledOpen">
+      ☰
+    </label>
+  </div>
+</nav>
+
 <!-- Page Content -->
-<div>
-  <div id="nav-bar" class="main-container container-fluid content ">
+<div class="page-wrap">
+  <div id="nav-bar" class="main-header container-fluid content ">
     <div id="main-nav" class="vertical__center__int">
-		  <div class="col-lg-3 col-md-3">
-          <div class="left-main-nav main-nav">
-            <div class="flex-none">
-              <div class="brand">
-          		  <img src="./img/qanairy_logo.png" />&nbsp;&nbsp;<span>Beta</span>
-              </div>
-            </div>
-          </div>
-      </div>
-      <div class="col-lg-8 col-md-9 offset-lg-1" ng-show="auth.isAuthenticated">
+      <div class="col-md-12" ng-show="auth.isAuthenticated">
         <div class="right-main-nav main-nav">
           <div class="domain-link dropdown pull-right">
               <div class="dropdown-toggle" data-toggle="dropdown" id="domainsDropdownMenuButton"  dropdown-toggle>
@@ -26,22 +57,6 @@
                     Manage Domains
                 </li>
               </ul>
-          </div>
-          <div class="divider"></div>
-          <div class="flex-initial main-nav-link" id="notification_li">
-            <a href="#/tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fddb4e;' : 'color:#ffffff'}}">
-              <i class="fa fa-list-ul main-nav-icons" aria-hidden="true"></i>
-              Tests
-              <span id="notification_count" ng-show="approved_test_cnt">
-                {{approved_test_cnt}}
-              </span>
-            </a>
-          </div>
-          <div class="flex-initial main-nav-link">
-            <a href="#/discovery"  style="{{$location.path() == '/discovery' ? 'color: #fddb4e;' : 'color:#ffffff'}}">
-              <i class="fa fa-map-o main-nav-icons" aria-hidden="true"></i>
-              Discovery
-            </a>
           </div>
           <div class="divider"></div>
           <div class="flex-none user_settings dropdown pull-right">
