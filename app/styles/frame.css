@@ -3,11 +3,11 @@
 
 #main-nav{
 	background: #fff;
-	min-height: 60px;
+	min-height: 40px;
 	color: #333;
 	border-top: 0px solid #fad93b;
 	border-bottom: 1px solid #e0e0e0;
-	
+	min-width: 800px;
 }
 
 
@@ -31,7 +31,9 @@
     justify-content: flex-start;
 }
 .right-main-nav{
+	font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   justify-content: flex-end;
+  display: flex;
 }
 
 
@@ -121,15 +123,15 @@
 
 .brand{
   text-align: left;
-	padding: 15px 15px 14px 15px;
+	padding: 10px 30px 9px 30px;
 	color: #fff;
-	height: 60px;
+	height: 40px;
   background: #2b2e93;
 }
 
 
 .brand img{
-  height: 30px;
+  height: 20px;
 }
 
 .brand span{
@@ -139,7 +141,7 @@
 
 .search {
   position: relative;
-  padding: 10px 0 10px 0;
+  padding: 5px 0 5px 0;
 	max-width:500px;
 }
 input { text-indent: 0px; }
@@ -234,19 +236,6 @@ width: calc(100% - 200px);
 .toggle-menu a:hover, .side-nav a:focus {
 }
 
-.version {
-  position: absolute;
-	width: 100%;
-	text-align: center;
-  bottom: 60px;
-  padding: 14px 0px 14px 0px;
-  color: #616161;
-  font-size: 12px;
-  line-height: 14px;
-  cursor: pointer;
-  margin-bottom: 0px !important;
-}
-
 .page-wrap {
   float: right;
   width: 100%;
@@ -321,7 +310,6 @@ width: calc(100% - 80px);
 
 /*--interior container--*/
 .content {
-  background-color: #f9f8f4;
   height:100%;
   min-width: 612px !important;
 	}
@@ -338,8 +326,6 @@ width: calc(100% - 80px);
 	margin: 12px auto;
 	/*border-bottom: 2px solid #eeeeee;*/
 }
-
-background: #fbd311;
 
 .stats__container{
   justify-content: flex-end;

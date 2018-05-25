@@ -14,79 +14,30 @@
 
 	<div class="secondary-nav vertical__center__int" >
   	<div class="flex-auto">
-			<div class="input-group search">
-		 		<span class="input-group-addon">
-          <i class="fa fa-search"></i>
-        </span>
-        <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
+			<div class="col-sm-12" ng-show="!isStarted" >
+				<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
+					Start Discovery
+				</button>
+			</div>
+
+			<div class="col-sm-12 running_status" ng-if="isStarted">
+				<div class="col-sm-3 pull-left">
+					<md-progress-linear md-mode="determinate" value="{{(discovery_status.examinedPathCount/discovery_status.totalPathCount)*100 || 0 }}"></md-progress-linear>
+				</div>
+				<div class="pull-left">
+					Running...{{(discovery_status.examinedPathCount/discovery_status.totalPathCount)*100 || 0 | number:0 }} %
+					 <i class="fa fa-circle-o-notch fa-spin fa-2x green fa-fw" aria-hidden="true"></i>
+				</div>
 			</div>
 		</div>
-		<div class="stats__container text-right" >
-			<div class="flex-none stats__bar">
-				<div class="stat_key_value">
-					<!-- /.dropdown -->
-					<div class="stat_key">
-						Discovery Start
-					</div>
-					<div class="stat_value">
-						{{(discovery_status.startedAt || '00:00') | date : 'M/dd/yy h:mm a'}}
-					</div>
+			<div class="flex-auto pull-right right-main-nav ">
+				<div class="input-group search">
+					<span class="input-group-addon"><i class="fa fa-search"></i></span>
+						<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
 				</div>
 		  </div>
-			<div class="flex-none stats__bar">
-				<div class="stat_key_value">
-					<!-- /.dropdown -->
-					<div class="stat_key">
-						Total Runtime
-					</div>
-					<div class="stat_value">
-						{{getTotalRuntime()}}
-                        hrs
-					</div>
-				</div>
-			</div>
-			<div class="flex-none stats__bar">
-				<div class="stat_key_value">
-					<!-- /.dropdown -->
-					<div class="stat_key">
-						Last Test Found
-					</div>
-					<div class="stat_value">
-						{{((Date.now().getTime() - (tests | orderBy:{'lastRunTimestamp':true})[tests.length-1].lastRunTimestamp) || '00:00') | date : 'h:mm'}} hrs ago
-					</div>
-				</div>
-			</div>
-			<div class="flex-none stats__bar">
-				<div class="stat_key_value">
-					<!-- /.dropdown -->
-					<div class="stat_key">
-						Tests Found
-					</div>
-					<div class="stat_value">
-						{{tests.length || 0}} tests
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
-	<div class="tertiary-nav vertical__center__int" >
-	  <div class="col-sm-12" ng-show="!isStarted" >
-			<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
-				Start Discovery
-			</button>
-    </div>
-
-    <div class="col-sm-12 running_status" ng-if="isStarted">
-      <div class="col-sm-3 pull-left">
-        <md-progress-linear md-mode="determinate" value="{{(discovery_status.examinedPathCount/discovery_status.totalPathCount)*100 || 0 }}"></md-progress-linear>
-      </div>
-      <div class="pull-left">
-				Running...{{(discovery_status.examinedPathCount/discovery_status.totalPathCount)*100 || 0 | number:0 }} %
-         <i class="fa fa-circle-o-notch fa-spin fa-2x green fa-fw" aria-hidden="true"></i>
-			</div>
-	  </div>
-	</div>
-
+	
 	<div class="test-labels-container">
 		<div class="test-labels">
 			<div class="status__title test__status__frame">
@@ -157,9 +108,9 @@
 
         <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
 					<div class="" ng-show="!test.show_test_name_edit_field">
-						<h4>
+						<h5 class="test__title">
               {{test.name || "Test #"+($index+1)}}
-            </h4>
+            </h5>
 						<i class="fa fa-pencil edithover" ng-click="test.show_test_name_edit_field = true" ></i>
 					</div>
 				</div>
