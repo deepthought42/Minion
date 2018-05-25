@@ -41,9 +41,10 @@
 <!-- Page Content -->
 <div class="page-wrap">
   <div id="nav-bar" class="main-header container-fluid content ">
-    <div id="main-nav" class="vertical__center__int">
-      <div class="col-md-12" ng-show="auth.isAuthenticated">
-        <div class="right-main-nav main-nav">
+		<div id="main-nav" class="vertical__center__int">
+			<div class="flex-auto">
+			</div>
+		 	<div class="right-main-nav  pull-right">
           <div class="domain-link dropdown pull-right">
               <div class="dropdown-toggle" data-toggle="dropdown" id="domainsDropdownMenuButton"  dropdown-toggle>
                 {{domain.url || "www.yourdomain.com"}}
@@ -76,8 +77,9 @@
               </ul>
           </div>
         </div>
-      </div>
-    </div>
+	</div>
+		
+		
     <div ui-view class="full__height">
     </div>
   </div>

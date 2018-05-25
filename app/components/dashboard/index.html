@@ -1,0 +1,155 @@
+<div class="col-sm-4">
+	<div class="dashboard_card  box--shadow">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card__header">
+					<h4>
+							Discoveries Run
+					</h4>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class=" dashboard_card_med vertical__center">
+					<h3 class="dashboard__stats">
+						2/4
+					</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-sm-4">
+	<div class="dashboard_card  box--shadow">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card__header">
+					<h4>
+							Tests Run
+					</h4>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class=" dashboard_card_med vertical__center">
+					<h3 class="dashboard__stats">
+						359/500
+					</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-sm-4">
+	<div class="dashboard_card  box--shadow">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card__header">
+					<h4>
+							Tests Found
+					</h4>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class=" dashboard_card_med vertical__center">
+					<h3 class="dashboard__stats">
+						{{tests.length || 0}}
+					</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-sm-12">
+	<div class="dashboard_card  box--shadow">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card__header">
+					<h4>
+						Test Usage Coming Soon
+					</h4>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="dashboard_card_large vertical__center">
+					<h3 class="">
+						<i class="dashboard__stats-style fa fa-line-chart"></i>
+					</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-sm-4">
+	<div class="dashboard_card  box--shadow">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card__header">
+					<h4>
+							Current Discovery Start
+					</h4>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="dashboard_card_med vertical__center">
+					<h3 class="dashboard__stats-small">
+						{{(discovery_status.startedAt || '00:00') | date : 'M/dd/yy h:mm a'}}
+					</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-sm-4">
+	<div class="dashboard_card  box--shadow">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card__header">
+					<h4>
+							Current Total Runtime
+					</h4>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="dashboard_card_med vertical__center">
+					<h3 class="dashboard__stats-small">
+						{{getTotalRuntime()}}
+                        hrs
+					</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-sm-4">
+	<div class="dashboard_card  box--shadow">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card__header">
+					<h4>
+							Last Test Found
+					</h4>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="dashboard_card_med vertical__center">
+					<h3 class="dashboard__stats-small">
+						{{((Date.now().getTime() - (tests | orderBy:{'lastRunTimestamp':true})[tests.length-1].lastRunTimestamp) || '00:00') | date : 'h:mm'}} hrs ago
+					</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

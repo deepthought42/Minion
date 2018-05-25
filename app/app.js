@@ -10,6 +10,7 @@ angular.module('Qanairy', [
   'ui.router',
   'Qanairy.discovery',
   'Qanairy.domain',
+  'Qanairy.dashboard',
   'Qanairy.tests',
   'Qanairy.main',
   'Qanairy.account',
