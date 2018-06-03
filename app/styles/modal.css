@@ -30,8 +30,14 @@ md-dialog {
     flex-direction: column;
 }
 
+.thead-light h6{
+	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+	margin-bottom: 0px;
+}
+
 .modal-form{
-	padding:20px 0px 30px 0px;
+	padding:0px 0px 30px 0px;
 }
 .page_modal{
 }
@@ -67,6 +73,7 @@ md-dialog {
 
 .modal__title{
 	margin-top:30px;
+	margin-bottom:20px;
 	color:#2b2e93;
 	border-bottom: 1px solid #2b2e93;
 }

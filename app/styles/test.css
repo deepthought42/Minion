@@ -7,35 +7,35 @@
 }
 
 .test-container{
-    min-width: 600px !important;
+    min-width: 800px !important;
     margin:0px 0px;
 	background-color: #ffffff;
 	border-top: 1px solid #e0e0e0;
-	border-bottom: 1px solid #e0e0e0;
     overflow-y:scroll;
-	height: -moz-calc(100% - 161px);
+	height: -moz-calc(100% - 117px);
     /* WebKit */
-    height: -webkit-calc(100% - 161px);
+    height: -webkit-calc(100% - 117px);
     /* Opera */
-    height: -o-calc(100% - 161px);
+    height: -o-calc(100% - 117px);
     /* Standard */
-    height: calc(100% - 161px);
+    height: calc(100% - 117px);
 }
 
 .full__height{
-	height: -moz-calc(100% - 68px);
+	min-width: 800px !important;
+	height: -moz-calc(100% - 40px);
     /* WebKit */
-    height: -webkit-calc(100% - 68px);
+    height: -webkit-calc(100% - 40px);
     /* Opera */
-    height: -o-calc(100% - 68px);
+    height: -o-calc(100% - 40px);
     /* Standard */
-    height: calc(100% - 68px);
-	padding-bottom: 15px !important;
-	background-color: #ffffff;
+    height: calc(100% - 40px);
+	background-color: #f4f4f8;
 }
 
 .test-labels-container{
-	background-color: #f9f8f4;
+	margin-top:20px;
+	background-color: #f4f4f8;
 }
 
 .test-labels{
@@ -43,7 +43,6 @@
 	border-top: 0px solid #e0e0e0;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	font-weight:500;
 	display: flex;
 }
 
@@ -59,8 +58,14 @@ width: -webkit-calc(100% - 15px);
 }
 
 .empty__state{
-  height: 100%;
 	text-align: center;
+		height: -moz-calc(100% - 178px);
+    /* WebKit */
+    height: -webkit-calc(100% - 178px);
+    /* Opera */
+    height: -o-calc(100% - 178px);
+    /* Standard */
+    height: calc(100% - 178px);
 }
 
 
@@ -74,7 +79,7 @@ width: -webkit-calc(100% - 15px);
 }
 .empty__state__p{
 	word-wrap: break-word !important;
-  max-width: 600px !important;
+  max-width: 800px !important;
 	display: inline-block;
 }
 
@@ -116,6 +121,9 @@ width: -webkit-calc(100% - 15px);
 	font-size: 18px !important;
 }
 
+.test__title{
+	color:#757575 !important;
+}
 
 .edithover{
   text-align: right !important;
@@ -508,7 +516,7 @@ width: -webkit-calc(100% - 15px);
 
 .box--shadow{
 	border-radius: 5px;
-	box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+	box-shadow: 0 1px 5px 0 hsla(238, 69%, 8%, 0.1);
 }
 
 .screenshots{

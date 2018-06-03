@@ -1,29 +1,18 @@
 <div class="content">
-	<div class="secondary-nav vertical__center__int">
-		<div class="flex-auto">
-			<div class="input-group search">
-		 		<span class="input-group-addon"><i class="fa fa-search"></i></span>
-					<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
+	<div class="secondary-nav vertical__center__int" >
+  	<div class="flex-auto">
+			<div class="col-sm-12" ng-show="!isStarted" >
+				<button class="btn btn--primary pull-left" id="run_all_tests_button" ng-click="openBrowserSelectionDialog()">
+					Run All Tests
+				</button>
 			</div>
 		</div>
-		<div class="stats__bar text-right">
-			<div class="stat_key_value">
-				<!-- /.dropdown -->
-				<div class="stat_key">
-					Total Tests Failing
+			<div class="flex-auto pull-right right-main-nav ">
+				<div class="input-group search">
+					<span class="input-group-addon"><i class="fa fa-search"></i></span>
+						<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
 				</div>
-				<div class="stat_value" ng-show="tests.length">
-					{{(tests | filter:{correct:false}).length}} of {{tests.length}}
-				</div>
-			</div>
-	  </div>
-	</div>
-	<div class="tertiary-nav vertical__center__int">
-		<div class="col-sm-12">
-  		<button class="btn btn--primary pull-left" id="run_all_tests_button" ng-click="openBrowserSelectionDialog()">
-  		  Run All Tests
-  		</button>
-	  </div>
+		  </div>
 	</div>
 
 	<div class="test-labels-container">
@@ -88,9 +77,9 @@
 				<div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
 					<div class="row">
 						<div class="col-xs-12 " ng-if="editing_test_idx!=$index" >
-							<h4>
+							<h5 class="test__title">
 								{{test.name || "Test #"+($index+1)}}
-							</h4>
+							</h5>
 						</div>
 					</div>
 				</div>
