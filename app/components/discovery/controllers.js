@@ -13,8 +13,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
   });
 }])
 
-.controller('DiscoveryCtrl', ['$rootScope', '$scope', 'Discovery', 'PathRealtimeService', 'Tester', 'store', '$state', '$mdDialog', 'Account',
-  function($rootScope, $scope, Discovery, PathRealtimeService, Tester, store, $state, $mdDialog, Account) {
+.controller('DiscoveryCtrl', ['$rootScope', '$scope', 'Discovery', 'PathRealtimeService', 'Test', 'store', '$state', '$mdDialog', 'Account',
+  function($rootScope, $scope, Discovery, PathRealtimeService, Test, store, $state, $mdDialog, Account) {
 
     this._init = function(){
       $scope.errors = [];
@@ -26,7 +26,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 			$scope.visible_test_nav1 = 'section-linemove-1';
       $scope.visible_test_nav2 = 'section-linemove-1';
       $scope.visible_tab = "nodedata0";
-      $scope.default_browser = store.get('domain')['discoveryBrowser'];
+      $scope.default_browser = store.get('domain')['browser_name'];
       $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
@@ -60,7 +60,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
             $scope.isStarted = false;
           });
 
-        Tester.getUnverified({url: $scope.discovery_url}).$promise
+        Test.getUnverified({url: $scope.discovery_url}).$promise
           .then(function(data){
             $scope.tests = data
             $scope.waitingOnTests = false;
@@ -82,17 +82,19 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           encrypted: true
         });
 
+        console.log("Current domain url :: "+$scope.current_domain.url);
         var channel = pusher.subscribe($scope.extractHostname($scope.current_domain.url));
         channel.bind('test-discovered', function(data) {
           $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
           $scope.discoveredTestOnboardingIndex = 0;
           $scope.waitingOnTests = false;
-          $scope.tests.push(JSON.parse(data));
+          console.log("TEST :: "+data);
+          $scope.tests.push( JSON.parse(data));
           $scope.$apply();
         });
 
         channel.bind('discovery-status', function(data) {
-          $scope.discovery_status = JSON.parse(data);
+          $scope.discovery_status = data;
           $scope.$apply();
         });
       }
@@ -225,7 +227,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
     $scope.setTestName = function(test, new_name){
       test.show_waiting_icon = true;
-      Tester.updateName({key: test.key, name: new_name}).$promise
+      Test.updateName({key: test.key, name: new_name}).$promise
         .then(function(data){
           test.show_waiting_icon = false;
           test.show_test_name_edit_field=false;
@@ -237,6 +239,24 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
+    $scope.getPageState = function(key){
+      return store.get('page_states').filter(function( page_state ){
+        return page_state.key == key;
+      });
+    }
+
+    $scope.getPageElement = function(key){
+      return store.get('page_elements').filter(function( page_element ){
+        return page_element.key == key;
+      });
+    }
+
+    $scope.getAction = function(key){
+      return store.get('actions').filter(function( action ){
+        return action.key == key;
+      });
+    }
+
     $scope.toggleTestDataVisibility = function(test, index){
       if($scope.test && $scope.test_idx != index){
         $scope.test.visible = false;
@@ -245,15 +265,55 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.test = test;
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
       $scope.visible_browser_screenshot = $scope.default_browser;
-      $scope.setCurrentNode({});
+
+      $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.path_keys);
+      $scope.setCurrentNode($scope.current_path_objects[0], index);
+
       if(test.visible){
         $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
         $scope.testVerificationOnboardingIndex = 0;
       }
     }
 
-    $scope.stopDiscoveryProcess = function(){
+    /**
+     * Constructs a list of PathObjects consisting of PageState, PageElement,
+     *    and Action objects currently stored in session storage
+     */
+    $scope.retrievePathObjectsUsingKeys = function(path_keys){
+      var path_objects = [];
+      console.log("path keys  ::  "+path_keys);
 
+      console.log("path keys size ::  "+path_keys.length);
+      for(var idx = 0; idx < path_keys.length; idx++){
+        console.log("path objects ::  "+path_objects);
+
+        //search all elements
+        var page_state = $scope.getPageState(path_keys[idx]);
+        if(page_state != null && page_state.length > 0){
+          console.log("adding page");
+           path_objects.push(page_state);
+        }
+
+        var page_element = $scope.getPageElement(path_keys[idx]);
+        if(page_element != null && page_element.length > 0){
+          console.log("page element added");
+           path_objects.push(page_element);
+        }
+
+        var action = $scope.getAction(path_keys[idx]);
+        if(action != null && action.length > 0){
+          console.log("action added");
+          path_objects.push(action);
+        }
+      }
+      console.log("path objects :: " + path_objects);
+
+      console.log("path objects size ::  "+path_objects.length);
+
+      return path_objects;
+    }
+
+    $scope.stopDiscoveryProcess = function(){
       WorkAllocation.stopWork().$promise
         .then(function(){
            $scope.isStarted = false;
@@ -269,11 +329,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
          $scope.errors.push("Group name cannot be empty");
          return;
       }
-      Tester.addGroup({name: group.name,
+      Test.addGroup({name: group.name,
                        description: group.description,
                        key: test.key}).$promise
                 .then(function(data){
                    $scope.group.name = null;
+
                    test.groups.push(data);
                  })
                  .catch(function(err){
@@ -282,7 +343,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.removeGroup = function(test, group, $index){
-      Tester.removeGroup({group_key: group.key, test_key: test.key}).$promise
+      Test.removeGroup({group_key: group.key, test_key: test.key}).$promise
         .then(function(data){
           test.groups.splice($index,1);
         })
@@ -312,12 +373,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
 
     $scope.timeSinceLastTest = function(){
-      return (Date.now() - (new Date($scope.discovery_status.lastPathRanAt)));
+      return (Date.now() - (new Date($scope.discovery_status.last_path_ran_at)));
     }
 
     $scope.getTotalRuntime = function(){
-        var last_run_date = $scope.discovery_status.lastPathRanAt;
-        var discovery_started_date = $scope.discovery_status.startedAt;
+        var last_run_date = $scope.discovery_status.last_path_ran_at;
+        var discovery_started_date = $scope.discovery_status.started_at;
         if(last_run_date != null && discovery_started_date != null){
           var time_diff = (last_run_date-discovery_started_date)/1000/60/60;
           var hours = Math.trunc(time_diff);
@@ -338,7 +399,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     $scope.updateCorrectness = function(test, correctness, idx){
       console.log("Index :: "+idx);
       test.waitingOnStatusChange = true;
-      Tester.setDiscoveredPassingStatus({key: test.key, correct: correctness}).$promise
+      Test.setPassingStatus({key: test.key, correct: correctness, browser_name: $scope.default_browser}).$promise
         .then(function(data){
           test.waitingOnStatusChange = false;
           test.correct = data.correct;
@@ -400,7 +461,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     this._init();
-
 
     /* EVENTS */
     $rootScope.$on('missing_resorce_error', function (e){

@@ -1,5 +1,5 @@
 
-angular.module('Qanairy.main', ['ui.router'])
+angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main', {
@@ -13,8 +13,8 @@ angular.module('Qanairy.main', ['ui.router'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Tester', 'Account', 'Auth', '$state',
-  function ($rootScope, $scope, PathRealtimeService, store, $location, Tester, Account, Auth, $state) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Account', 'Action', 'Auth', '$state',
+  function ($rootScope, $scope, PathRealtimeService, store, $location, Account, Action, Auth, $state) {
 
     $scope.displayUserDropDown = false;
     $scope.menuToggled = false;
@@ -39,6 +39,11 @@ angular.module('Qanairy.main', ['ui.router'])
         $scope.usage = data;
       });
 
+    Action.query().$promise.
+      then(function(data){
+        store.set('actions', data);
+      });
+
 
     $scope.showDomainsPage = function(){
       $state.go("main.domains");
@@ -57,10 +62,44 @@ angular.module('Qanairy.main', ['ui.router'])
 
     $scope.$on('domain_updated', function(){
       $scope.domain = store.get('domain');
-    })
+
+      var pusher = new Pusher('77fec1184d841b55919e', {
+        cluster: 'us2',
+        encrypted: true
+      });
+
+      var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
+      channel.bind('page_state', function(data) {
+
+        var page_states = store.get('page_states');
+        page_states.push( JSON.parse(data));
+        store.set('page_states', page_states);
+      });
+    });
 
     $scope.$on('updateApprovedTestCnt', function(event, approved_test_cnt){
       $scope.approved_test_cnt = approved_test_cnt;
-    })
+    });
+
+
+    $scope.extractHostname =  function(url) {
+        var hostname;
+        //find & remove protocol (http, ftp, etc.) and get hostname
+
+        if (url.indexOf("://") > -1) {
+            hostname = url.split('/')[2];
+        }
+        else {
+            hostname = url.split('/')[0];
+        }
+
+        //find & remove port number
+        hostname = hostname.split(':')[0];
+        //find & remove "?"
+        hostname = hostname.split('?')[0];
+
+        return hostname;
+    }
+
   }
 ]);

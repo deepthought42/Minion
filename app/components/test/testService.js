@@ -1,13 +1,13 @@
 'use strict';
 
-var testerService = angular.module('Qanairy.TesterService', ['ngResource', 'Qanairy.serviceConfig']);
+var testerService = angular.module('Qanairy.TestService', ['ngResource', 'Qanairy.serviceConfig']);
 
-testerService.factory('Tester', ['$resource', 'Qanairy.serviceConfig', function ($resource, config) {
+testerService.factory('Test', ['$resource', 'Qanairy.serviceConfig', function ($resource, config) {
   return $resource(config.basePath + '/tests', {key: '@key'}, {
-    update: { method: 'PUT'},
+    update: { method: 'PUT', params:  {key: '@key', name: '@name', firefox: '@firefox', chrome: '@chrome'}},
     findByName: {url : config.basePath + '/tests/name', method: 'GET', isArray: true},
     updateCorrectness: {url : config.basePath + '/tests/updateCorrectness', method: 'PUT', params: {key: '@key', browser_name: '@browser_name', correct: '@correct'}},
-    setDiscoveredPassingStatus: {url : config.basePath + '/tests/setDiscoveredPassingStatus', method: 'PUT', params: {key: '@key', correct: '@correct'}},
+    setPassingStatus: {url : config.basePath + '/tests/setPassingStatus', method: 'PUT', params: {key: '@key', correct: '@correct', browser: '@browser_name'}},
     updateName: {url : config.basePath + '/tests/updateName/:key', method: 'PUT', params: { name: '@name'}},
     runTest: {url : config.basePath + '/tests/run/:key', method: 'POST', params: {browser_type: '@browser_type'}},
     addGroup: {url : config.basePath + '/tests/addGroup', method: 'POST', params: {key: '@key', description: '@description', name: '@name'}},

@@ -29,7 +29,7 @@
 						Discovery Start
 					</div>
 					<div class="stat_value">
-						{{(discovery_status.startedAt || '00:00') | date : 'M/dd/yy h:mm a'}}
+						{{(discovery_status.started_at || '00:00') | date : 'M/dd/yy h:mm a'}}
 					</div>
 				</div>
 		  </div>
@@ -78,10 +78,10 @@
 
     <div class="col-sm-12 running_status" ng-if="isStarted">
       <div class="col-sm-3 pull-left">
-        <md-progress-linear md-mode="determinate" value="{{(discovery_status.examinedPathCount/discovery_status.totalPathCount)*100 || 0 }}"></md-progress-linear>
+        <md-progress-linear md-mode="determinate" value="{{(discovery_status.examined_path_cnt/discovery_status.total_path_cnt)*100 || 0 }}"></md-progress-linear>
       </div>
       <div class="pull-left">
-				Running...{{(discovery_status.examinedPathCount/discovery_status.totalPathCount)*100 || 0 | number:0 }} %
+				Running...{{(discovery_status.examined_path_cnt/discovery_status.total_path_cnt)*100 || 0 | number:0 }} %
          <i class="fa fa-circle-o-notch fa-spin fa-2x green fa-fw" aria-hidden="true"></i>
 			</div>
 	  </div>
@@ -184,10 +184,10 @@
 					</div>
 				</div>
 			  <div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
-					{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
+					{{test.run_time | date: 'm'}}:{{test.run_time | date: 'ss'}} m
 			  </div>
 			  <div class="flex-initial text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
-					{{( test.lastRunTimestamp | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
+					{{( test.last_run_timestamp | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
         <div class="flex-none accordion-flex test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
           <div class="accordion" aria-label="open/close accordion">
@@ -221,52 +221,53 @@
 							<div class="content-wrap">
 								<div id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
 									<div class="col-xs-12 test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
-										<div ng-repeat="node in test.path.path track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
+										<div ng-repeat="node in current_path_objects track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
+
                       <div class="node-group path-node-container vertical__center__int"
-                           ng-if="node.type == 'Page'"
+                           ng-if="node[0].type == 'PageState'"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
-                           ng-click="setCurrentNode(node, $index)">
+                           ng-click="setCurrentNode(node[0], $index)">
                         <div class="path-page path-node">
-  					              <img src="{{node.browser_screenshots[0].viewportScreenshot}}" class="path-node-image"/>
+  					              <img src="{{node[0].screenshot_set[0].viewport_screenshot}}" class="path-node-image"/>
   											</div>
                       </div>
-                      <div ng-if="node.type == 'PageElement'" class="node-group"
+                      <div ng-if="node[0].type == 'PageElement'" class="node-group"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
-                           ng-click="setCurrentNode(node, $index)">
+                           ng-click="setCurrentNode(node[0], $index)">
   											<div class="path-node path-element vertical__center__int" tooltip-placement="top">
   												<span class="" >
-  													{{node.name}}
+  													{{node[0].name}}
   												</span>
   											</div>
                         <div class="path-bar">
                         </div>
   											<div class="path-node path-action vertical__center__int" tooltip-placement="top">
-  												<span ng-if="test.path.path[$index+1].name=='click'" class="vertical__center__int">
+  												<span ng-if="current_path_objects[$index+1][0].name=='click'" class="vertical__center__int">
 							              <i class="fa fa-mouse-pointer fa-2x"></i>
   												</span>
-  												<span ng-if="test.path.path[$index+1].name=='doubleClick'" class="vertical__center__int">
+  												<span ng-if="current_path_objects[$index+1][0].name=='doubleClick'" class="vertical__center__int">
 														<i class="fa fa-mouse-pointer fa-2x"></i>
 														<div class=”doubleclick” >
 																x2
 														</div>
   												</span>
-  												<span ng-if="test.path.path[$index+1].name=='mouseover'" class="vertical__center__int">
+  												<span ng-if="current_path_objects[$index+1][0].name=='mouseover'" class="vertical__center__int">
 														<i class="fa fa-hand-pointer-o fa-2x"></i>
   												</span>
-  												<span ng-if="test.path.path[$index+1].name=='scroll'" class="vertical__center__int">
+  												<span ng-if="current_path_objects[$index+1][0].name=='scroll'" class="vertical__center__int">
 														<i class="fa fa-arrows-v fa-2x"></i>
   												</span>
-  												<span ng-if="test.path.path[$index+1].name=='sendKeys'" class="vertical__center__int">
+  												<span ng-if="current_path_objects[$index+1][0].name=='sendKeys'" class="vertical__center__int">
 														<i class="fa fa-i-cursor fa-2x"></i>
   												</span>
   											</div>
                       </div>
-											<div class="path-bar">
+											<div ng-if="current_path_objects.length > 1" class="path-bar">
 											</div>
 										</div>
 										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
-											<div ng-if="test.path.path.length != 1 && test.result.browser_screenshots[0]" class="path-page path-node">
-												<img src="{{test.result.browser_screenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
+											<div ng-if="current_path_objects.length != 1 && test.result.screenshot_set[0]" class="path-page path-node">
+												<img src="{{test.result.screenshot_set[0].viewport_screenshot}}" class="path-node-image" tooltip-placement="top"/>
 											</div>
 										</div>
 									</div>
@@ -302,9 +303,9 @@
                               </li>
 														</ul>
 													</nav>
-											</div><!-- /tabs -->
-										</div>
-										<div class="col-sm-6">
+  											</div><!-- /tabs -->
+  										</div>
+  										<div class="col-sm-6">
 												<div class="node__data test__data__box__shadow tabs tabs-style-linemove">
 													<nav>
 														<ul>
@@ -343,17 +344,17 @@
 																	  Action
 																	</div>
 																	<div class="data__value">
-                                    {{test.path.path[current_node_idx+1].name != 'sendKeys' ? test.path.path[current_node_idx+1].name : 'Type'}}
+                                    {{current_path_objects[current_node_idx+1].name != 'sendKeys' ? current_path_objects[current_node_idx+1].name : 'Type'}}
 																	</div>
 																</div>
 															</div>
 															<div class="col-xs-12">
-																<div class="key--value" ng-show="test.path.path[current_node_idx+1].value || test.path.path[current_node_idx+1].name=='sendKeys'">
+																<div class="key--value" ng-show="current_path_objects[current_node_idx+1].value || current_path_objects[current_node_idx+1].name=='sendKeys'">
 																	<div class="data__key">
 																		Text Input
 																	</div>
 																	<div class="data__value">
-																		{{test.path.path[current_node_idx+1].value}}
+																		{{current_path_objects[current_node_idx+1].value}}
 																	</div>
 																</div>
 															</div>
@@ -363,11 +364,11 @@
 																	  Element Type
 																	</div>
 																	<div class="data__value">
-																	  {{current_node[$index].name}}
+  																	  {{current_node[$index].name}}
 																	</div>
 																</div>
 															</div>
-															<div class="col-xs-12" ng-if="test.path.path[current_node_idx+1].name=='a'">
+															<div class="col-xs-12" ng-if="current_path_objects[current_node_idx+1].name=='a'">
 																<div class="key--value">
 																	<div class="data__key">
 																	  Element Link
@@ -396,7 +397,7 @@
 																			{{attribute.name}}
 																		</div>
 																		<div class="col-sm-12 data__value">
-																			<div class="row d-inline-block" ng-repeat="value in attribute.vals track by $index">
+																			<div class="row d-inline-block" ng-repeat="value in attribute.values track by $index">
 																				<div class="col-sm-12" style="">
 																					{{value}}&nbsp;&nbsp;
 																				</div>
@@ -410,21 +411,21 @@
 															<div class="col-xs-12">
 																<div class="key--value">
                                   <div class="data__value">
-                                    width: {{current_node[$index].cssValues['width']}};
+                                    width: {{current_node[$index].css_values['width']}};
                                   </div>
                                   <div class="data__value">
-                                    height: {{current_node[$index].cssValues['height']}};
+                                    height: {{current_node[$index].css_values['height']}};
                                   </div>
                                   <div class="data__value">
-                                    font-family: {{current_node[$index].cssValues['font-family']}};
+                                    font-family: {{current_node[$index].css_values['font-family']}};
                                   </div>
                                   <div class="data__value">
-																		position: {{current_node[$index].cssValues['position']}};
+																		position: {{current_node[$index].css_values['position']}};
 																	</div>
 																	<div class="data__value">
 																		background-color:
-																		<span style="background-color:{{current_node[$index].cssValues['color']}}">
-																			{{current_node[$index].cssValues['color']}}
+																		<span style="background-color:{{current_node[$index].css_values['color']}}">
+																			{{current_node[$index].css_values['color']}}
 																		</span>
 																	</div>
 																</div>
@@ -436,18 +437,18 @@
 										</div>
 									</div>
 
-									<div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'Page'">
+									<div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageState'">
 										<div class="row">
 											<div class="col-sm-6">
 												<div class="node__screenshots test__data__box__shadow tabs tabs-style-linemove">
 													<div class="content-wrap screenshot-section">
 														<div class="page__image col-xs-12"  >
 															<h5 class="screenshots_title">Page</h5>
-                              <div ng-repeat="screenshot_set in current_node[test_idx].browser_screenshots" ng-if="visible_browser_screenshot==screenshot_set.browserName">
+                              <div ng-repeat="screenshot_set in current_node[test_idx].screenshot_set" ng-if="visible_browser_screenshot==screenshot_set.browser_name">
 																<img class="path-node-image page-image screenshots"
 																			data-toggle="modal" data-target="#exampleModal"
-																			src="{{screenshot_set.fullScreenshot}}" class="path-node-image"
-																			ng-click="openPageModal(screenshot_set.fullScreenshot)" />
+																			src="{{screenshot_set.full_screenshot}}" class="path-node-image"
+																			ng-click="openPageModal(screenshot_set.full_screenshot)" />
                               </div>
 														</div>
 						              </div><!-- /content -->

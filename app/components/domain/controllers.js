@@ -74,7 +74,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     */
     $scope.createDomain = function(protocol, host, default_browser, logo_url){
       if(default_browser){
-        Domain.save({protocol: protocol, url: host, logoUrl: logo_url, discoveryBrowser: default_browser}).$promise
+        Domain.save({protocol: protocol, url: host, logoUrl: logo_url, browser_name: default_browser}).$promise
           .then(function(successResult){
             $scope.show_create_domain_err = false;
             store.set('domain', successResult);
@@ -96,9 +96,9 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       }
     }
 
-    $scope.updateDomain = function(key, protocol, host, default_browser, logo_url){
+    $scope.updateDomain = function(key, protocol, default_browser, logo_url){
       if(default_browser){
-        Domain.update({key: key, protocol: protocol, url: host, logoUrl: logo_url, discoveryBrowser: default_browser}).$promise
+        Domain.update({key: key, protocol: protocol, logoUrl: logo_url, browser_name: default_browser}).$promise
           .then(function(successResult){
             $scope.show_create_domain_err = false;
             store.set('domain', successResult);
@@ -126,7 +126,21 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       //get default browser for domain
       //if default browser is not set then show default browser selection dialog box
       $rootScope.$broadcast("domain_updated", domain);
+
+      //Load all page states
+      Domain.getAllPageStates({host: domain.url}).$promise
+                .then(function(data){
+                    store.set('page_states', data);
+                });
+
+      //Load all page states
+      Domain.getAllPageElements({host: domain.url}).$promise
+                .then(function(data){
+                    store.set('page_elements', data);
+                });
+
       $state.go("main.discovery");
+
     }
 
     $scope.openCreateDomainDialog  = function(domain) {

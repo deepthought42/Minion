@@ -41,7 +41,7 @@
 				Time (minutes)
 			</div>
 			<div class="flex-initial date_stats text-right"  ng-click="sortLastRun=!sortLastRun">
-					Date Last Run
+				Date Last Run
 			</div>
 			<div class="flex-none test_functions">
 			</div>
@@ -65,7 +65,7 @@
 		</div>
 
 		<div class="test"
-				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','lastRunTimestamp'] track by $index"
+				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','last_run_timestamp'] track by $index"
 				 ng-show="tests.length > 0">
 		  <onboarding-popover ng-if="$index==0" enabled="testRunOnboardingEnabled" steps="testRunOnboardingSteps" step-index="testRunOnboardingIndex"></onboarding-popover>
 
@@ -105,7 +105,7 @@
 				</div>
 				<div class="flex-initial test_browsers test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
 					<div class="row">
-						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserPassingStatuses">
+						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browser_statuses">
 							<div class="row vertical__center test__status__editable">
 								<img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
 								<img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
@@ -142,7 +142,7 @@
 
 				<div class="flex-initial test_browsers test__profile_stretch" ng-if="editing_test_idx==$index">
 					<div class="row">
-						<div class="flex-none" ng-repeat="(browser, status) in test.browserPassingStatuses">
+						<div class="flex-none" ng-repeat="(browser, status) in test.browser_statuses">
 							<div class="row vertical__center test__status__editable">
 								<img src="/img/Chrome.ico" class="browser-icon"  ng-show="browser=='chrome'">
 								<img src="/img/firefox.png" class="browser-icon"  ng-show="browser=='firefox'" >
@@ -169,12 +169,12 @@
 
 				<div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					<div class="">
-						{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
+						{{test.run_time | date: 'm'}}:{{test.run_time | date: 'ss'}} m
 					</div>
 				</div>
 				<div class="flex-initial text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					<div class="">
-						{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
+						{{ (test.last_run_timestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
 					</div>
 				</div>
 
@@ -241,42 +241,42 @@
 							<div class="content-wrap">
 								<div id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
 									<div class="col-xs-12 test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
-										<div ng-repeat="node in test.path.path track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
+										<div ng-repeat="node in current_path_objects track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
 											<div class="node-group path-node-container vertical__center__int"
-                           ng-if="node.type == 'Page'"
+                           ng-if="node[0].type == 'PageState'"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
-                           ng-click="setCurrentNode(node, $index)">
+                           ng-click="setCurrentNode(node[0], $index)">
                         <div class="path-page path-node">
-  					              <img src="{{node.browser_screenshots[0].viewportScreenshot}}" class="path-node-image" />
+  					              <img src="{{node[0].screenshot_set[0].viewport_screenshot}}" class="path-node-image" />
   											</div>
                       </div>
-                      <div ng-if="node.type == 'PageElement'" class="node-group"
+                      <div ng-if="node[0].type == 'PageElement'" class="node-group"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
-                           ng-click="setCurrentNode(node, $index)">
+                           ng-click="setCurrentNode(node[0], $index)">
   											<div class="path-node path-element vertical__center__int" tooltip-placement="top">
   												<span class="" >
-  													{{node.name}}
+  													{{node[0].name}}
   												</span>
   											</div>
 												<div class="path-bar">
 												</div>
 												<div class="path-node path-action vertical__center__int" tooltip-placement="top">
-													<span ng-if="test.path.path[$index+1].name=='click'" class="vertical__center__int">
+													<span ng-if="current_path_objects[$index+1][0].name=='click'" class="vertical__center__int">
 														<i class="fa fa-mouse-pointer fa-2x"></i>
 													</span>
-													<span ng-if="test.path.path[$index+1].name=='doubleClick'" class="vertical__center__int">
+													<span ng-if="current_path_objects[$index+1][0].name=='doubleClick'" class="vertical__center__int">
 														<i class="fa fa-mouse-pointer fa-2x"></i>
 														<div class=”doubleclick” >
 																x2
 														</div>
 													</span>
-													<span ng-if="test.path.path[$index+1].name=='mouseover'" class="vertical__center__int">
+													<span ng-if="current_path_objects[$index+1][0].name=='mouseover'" class="vertical__center__int">
 														<i class="fa fa-hand-pointer-o fa-2x"></i>
 													</span>
-													<span ng-if="test.path.path[$index+1].name=='scroll'" class="vertical__center__int">
+													<span ng-if="current_path_objects[$index+1][0].name=='scroll'" class="vertical__center__int">
 														<i class="fa fa-arrows-v fa-2x"></i>
 													</span>
-													<span ng-if="test.path.path[$index+1].name=='sendKeys'" class="vertical__center__int">
+													<span ng-if="current_path_objects[$index+1][0].name=='sendKeys'" class="vertical__center__int">
 														<i class="fa fa-i-cursor fa-2x"></i>
 													</span>
 												</div>
@@ -285,8 +285,8 @@
 											</div>
 										</div>
 										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
-											<div ng-if="test.path.path.length != 1 && test.result.browser_screenshots[0]" class="path-page path-node">
-												<img src="{{test.result.browser_screenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
+											<div ng-if="current_path_objects.length != 1 && test.result.screenshot_set[0]" class="path-page path-node">
+												<img src="{{test.result.screenshot_set[0].viewport_screenshot}}" class="path-node-image" tooltip-placement="top"/>
 											</div>
 										</div>
 									</div>
@@ -392,7 +392,7 @@
 																	 Element Link
 																	</div>
 																	<div class="data__value">
-                                    {{current_node[$index].attributes[0].vals[0]}}
+                                    {{current_node[$index].attributes[0].values[0]}}
 																	</div>
 																</div>
 															</div>
@@ -410,12 +410,12 @@
 														<div id="section-linemove-2" ng-if="visible_test_nav2=='section-linemove-2'">
 															<div class="col-xs-12">
 																<div class="key--value">
-																	<div class="row" ng-repeat="attribute in current_node[$index].attributes track by attribute.key">
+																	<div class="row" ng-repeat="attribute in current_node[$index].attributes track by $index">
 																		<div class="col-sm-12 data__key">
 																				{{attribute.name}}
 																		</div>
 																		<div class="col-sm-12 data__value">
-																			<div class="row d-inline-block" ng-repeat="value in attribute.vals track by $index">
+																			<div class="row d-inline-block" ng-repeat="value in attribute.values track by $index">
 																				<div class="col-sm-12" style="">
 																					{{value}}&nbsp;&nbsp;
 																				</div>
@@ -429,21 +429,21 @@
 															<div class="col-xs-12">
 																<div class="key--value">
                                   <div class="data__value">
-                                    width: {{current_node[$index].cssValues['width']}};
+                                    width: {{current_node[$index].css_values['width']}};
                                   </div>
                                   <div class="data__value">
-                                    height: {{current_node[$index].cssValues['height']}};
+                                    height: {{current_node[$index].css_values['height']}};
                                   </div>
                                   <div class="data__value">
-                                    font-family: {{current_node[$index].cssValues['font-family']}};
+                                    font-family: {{current_node[$index].css_values['font-family']}};
                                   </div>
                                   <div class="data__value">
-																		position: {{current_node[$index].cssValues['position']}};
+																		position: {{current_node[$index].css_values['position']}};
 																	</div>
 																	<div class="data__value">
 																		background-color:
-																		<span style="background-color:{{current_node[$index].cssValues['color']}}">
-																			 {{current_node[$index].cssValues['color']}}
+																		<span style="background-color:{{current_node[$index].css_values['color']}}">
+																			 {{current_node[$index].css_values['color']}}
 																		 </span>
 																	</div>
 																</div>
@@ -455,7 +455,7 @@
 										</div>
 									</div>
 
-									<div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'Page'">
+									<div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageState'">
 										<div class="row">
 											<div class="col-sm-6">
 												<div class="node__screenshots test__data__box__shadow tabs tabs-style-linemove">
@@ -463,11 +463,13 @@
 														<div id="section-linemove-1">
 															<div class="page__image col-xs-12">
 																<h5 class="screenshots_title">Page</h5>
-																<div ng-repeat="screenshot_set in current_node[test_idx].browser_screenshots" ng-if="visible_browser_screenshot==screenshot_set.browserName">
+
+																<div ng-repeat="screenshot_set in current_node[test_idx].screenshot_set" >
 																	<img class="path-node-image page-image screenshots"
 																				data-toggle="modal" data-target="#exampleModal"
-																				src="{{screenshot_set.fullScreenshot}}"
-																				ng-click="openPageModal(screenshot_set.fullScreenshot)" />
+																				src="{{screenshot_set.full_screenshot}}"
+																				ng-if="visible_browser_screenshot==screenshot_set.browser_name"
+																				ng-click="openPageModal(screenshot_set.full_screenshot)" />
 	                              </div>
 															</div>
 														</div>
@@ -563,21 +565,21 @@
 													Date Last Run&nbsp;<i class="fa fa-sort"></i>
 												</div>
 											</div>
-											<div class="row test__history__record" ng-repeat="record in test.records | orderBy: '-ranAt'">
+											<div class="row test__history__record" ng-repeat="record in test.records | orderBy: '-ran_at'">
 												<div class="col-sm-3">
-													<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="record.browser=='chrome'">
-													<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="record.browser=='firefox'" >
-													<span class="browser_name">{{capitalizeFirstLetter(record.browser)}}</span>
+													<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="record.browser_name=='chrome'">
+													<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="record.browser_name=='firefox'" >
+													<span class="browser_name">{{capitalizeFirstLetter(record.browser_name)}}</span>
 												</div>
 												<div class="col-sm-3">
 													<i class="fa fa-check fa-2x green" ng-show="record.passing" />
 													<i class="fa fa-times fa-2x red" ng-show="!record.passing" />
 												</div>
 												<div class="col-sm-3 text-right">
-													{{record.runTime | date: 'm'}} m {{record.runTime | date: 'ss'}} s
+													{{record.run_time | date: 'm'}} m {{record.run_time | date: 'ss'}} s
 												</div>
 												<div class="col-sm-3 text-right">
-													{{record.ranAt | date: 'MM/dd/yy h:mm a' | lowercase}}
+													{{record.ran_at | date: 'MM/dd/yy h:mm a' | lowercase}}
 												</div>
 											</div>
 										</div>

@@ -36,17 +36,17 @@
 								</div>
 								<div class="row browser_buttons">
 									<div class="col-xs-3">
-										<button class="btn btn-depressed" ng-click="domain.discoveryBrowser = 'chrome'" ng-class="{active: domain.discoveryBrowser == 'chrome'}">
-											<img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="domain.discoveryBrowser == 'chrome'">
-											<div class="fa-icon" ng-show="domain.discoveryBrowser != 'chrome'">
+										<button class="btn btn-depressed" ng-click="domain.browser_name = 'chrome'" ng-class="{active: domain.browser_name == 'chrome'}">
+											<img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="domain.browser_name == 'chrome'">
+											<div class="fa-icon" ng-show="domain.browser_name != 'chrome'">
 												<i class="fa fa-chrome"></i>
 											</div>
 										</button>
 									</div>
 									<div class="col-xs-3">
-										<button class="btn btn-depressed" ng-click="domain.discoveryBrowser = 'firefox'" ng-class="{active: domain.discoveryBrowser == 'firefox'}">
-											<img src="/img/firefox.png" class="modal-browser-icon" ng-show="domain.discoveryBrowser == 'firefox'">
-											<div class="fa-icon" ng-show="domain.discoveryBrowser != 'firefox'">
+										<button class="btn btn-depressed" ng-click="domain.browser_name = 'firefox'" ng-class="{active: domain.browser_name == 'firefox'}">
+											<img src="/img/firefox.png" class="modal-browser-icon" ng-show="domain.browser_name == 'firefox'">
+											<div class="fa-icon" ng-show="domain.browser_name != 'firefox'">
 												<i class="fa fa-firefox modal-browser-icon"></i>
 											</div>
 										</button>
@@ -75,7 +75,7 @@
 							</div>
 						</div>
 						<div class="modal_action_button">
-							<button id="create_domain_button" class="btn btn--primary pull-right" ng-click="updateDomain(current_domain.key, current_domain.protocol, current_domain.url, domain.discoveryBrowser, current_domain.logo_url)"  ng-disabled="!domain.discoveryBrowser">
+							<button id="create_domain_button" class="btn btn--primary pull-right" ng-click="updateDomain(current_domain.key, current_domain.protocol, domain.browser_name, current_domain.logo_url)"  ng-disabled="!domain.browser_name">
 								Update Domain
 							</button>
 						</div>
