@@ -13,7 +13,7 @@
 			<div class="col-sm-12">
 				<div class=" dashboard_card_med vertical__center">
 					<h3 class="dashboard__stats">
-						2/4
+						{{usage.discoveriesUsed}}/{{usage.discoveryLimit}}
 					</h3>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 			<div class="col-sm-12">
 				<div class=" dashboard_card_med vertical__center">
 					<h3 class="dashboard__stats">
-						359/500
+						{{usage.testsUsed}}/{{usage.testLimit}}
 					</h3>
 				</div>
 			</div>
@@ -123,8 +123,7 @@
 			<div class="col-sm-12">
 				<div class="dashboard_card_med vertical__center">
 					<h3 class="dashboard__stats-small">
-						{{getTotalRuntime()}}
-                        hrs
+						{{getTotalRuntime()}} hrs
 					</h3>
 				</div>
 			</div>
@@ -146,7 +145,7 @@
 			<div class="col-sm-12">
 				<div class="dashboard_card_med vertical__center">
 					<h3 class="dashboard__stats-small">
-						{{((Date.now().getTime() - (tests | orderBy:{'lastRunTimestamp':true})[tests.length-1].lastRunTimestamp) || '00:00') | date : 'h:mm'}} hrs ago
+						{{((Date.now().getTime() - (tests | orderBy:{'last_run_timestamp':true})[tests.length-1].last_run_timestamp) || '00:00') | date : 'h:mm'}} hrs ago
 					</h3>
 				</div>
 			</div>
