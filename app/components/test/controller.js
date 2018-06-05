@@ -116,17 +116,25 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
         return hostname;
     }
-    // Enable pusher logging - don't include this in production
-    //Pusher.logToConsole = true;
 
     $scope.isTestRunning = function(test){
       for(var browser in test.browser_statuses){
         if(test.browser_statuses[browser] == null){
           return true;
         }
-        //test.browser_statuses['chrome']!=null || test.browser_statuses['firefox']!=null
       }
       return false;
+    }
+
+    $scope.isTestRunningInAllBrowsers = function(test){
+      var browser_count = 0;
+      for(var browser in test.browser_statuses){
+        if(test.browser_statuses[browser] == null){
+          browser_count++;
+        }
+        //test.browser_statuses['chrome']!=null || test.browser_statuses['firefox']!=null
+      }
+      return browser_count==test.browser_statuses.length;
     }
 
     $scope.setCurrentNodeKey = function(key){
@@ -183,8 +191,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     }
 
     $scope.runTest = function(firefox_selected, chrome_selected){
-      $scope.keys = [];
-      $scope.keys.push($scope.test.key);
+      var keys = [];
+      keys.push($scope.test.key);
       $scope.test.runStatus = true;
       var browsers = [];
 
@@ -199,7 +207,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       $scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
         $scope.current_test_browser = browsers[i];
-        Test.runTests({test_keys: $scope.keys, browser_type: $scope.current_test_browser}).$promise
+        $scope.test.browser_statuses[browsers[i]] = null;
+        Test.runTests({test_keys: keys, browser_type: $scope.current_test_browser}).$promise
           .then(function(data){
             $scope.test.runStatus = false;
 
@@ -209,7 +218,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
                 if($scope.tests[test_idx].key === returned_key){
                   var test_record = data[returned_key];
                   $scope.tests[test_idx].correct = test_record.passing;
-                  $scope.tests[test_idx].browser_statuses[test_record.browser] = test_record.passing;
+                  $scope.tests[test_idx].browser_statuses[test_record.browser_name] = test_record.passing;
                   $scope.tests[test_idx].records.unshift(test_record);
                   //move test to top of list
                   var test = $scope.tests.splice(test_idx, 1)[0];
@@ -242,10 +251,10 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
     $scope.runTests = function(firefox_selected, chrome_selected){
       //get keys for tests and put
-      $scope.keys = [];
+      var keys = [];
       $scope.filteredTests.forEach(function(test){
         test.runStatus = true;
-        $scope.keys.push(test.key);
+        keys.push(test.key);
       });
 
       var browsers = [];
@@ -259,20 +268,37 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
       $scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
-        Test.runTests({test_keys: $scope.keys, browser_type: browsers[i]}).$promise
+        Test.runTests({test_keys: keys, browser_type: browsers[i]}).$promise
           .then(function(data){
-
-            //keys = Object.keys(data);
-            $scope.keys.forEach(function(key){
+            keys.forEach(function(key){
+              console.log("key :: "+key);
               var val = data[key];
 
               //iterate over tests and set correctness based on if test key is present in data
-
               $scope.filteredTests.forEach(function(test){
                 test.runStatus = false;
 
                 if(data[test.key]){
-                  test.correct = data[test.key];
+                  console.log("RETURN DATA :: "+Object.keys(data[test.key].passing));
+                  test.correct = data[test.key].passing;
+                  test.browser_statuses[data[test.key].browser_name] = data[test.key].browser_statuses;
+                  //test.records.unshift(test_record);
+                  $scope.tests.unshift(test);
+                  if(test_record.passing){
+                    test.passingStatusClass = true;
+                    test.failingStatusClass = false;
+                  }
+                  else{
+                    test.failingStatusClass = true;
+                    test.passingStatusClass = false;
+                  }
+
+                  setTimeout(function() {
+                    test.passingStatusClass = false;
+                    test.failingStatusClass = false;
+                    $scope.$apply();
+                  }, 5000);
+
                 }
               })
             })
@@ -471,12 +497,11 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     $scope.openBrowserSelectionDialog  = function(test, $index) {
       $scope.chrome_selected = false;
       $scope.firefox_selected = false;
+      $scope.test = test;
       $scope.runSingleTestFlag = false;
       if(test != null && $index != null){
         $scope.runSingleTestFlag = true;
       }
-
-      $scope.test = test;
       $scope.test_idx = $index;
        $mdDialog.show({
           clickOutsideToClose: true,
