@@ -126,7 +126,8 @@
 	padding: 10px 30px 9px 30px;
 	color: #fff;
 	height: 40px;
-  background: #2b2e93;
+  background: #32286b;
+	margin-bottom: 60px;
 }
 
 
@@ -165,14 +166,6 @@ input { text-indent: 0px; }
 	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.sidebar-nav a:focus {
-    outline: none;
-	color: #fff !important;
-	background: rgba(0,0,0,0.2) !important;
-	border-left: 5px solid #fde441;
-	padding-left: 15px !important;
-}
-
 .sidebar-nav a:visited { color: #ffffff;}
 
 .sidebar-nav li {
@@ -186,6 +179,16 @@ input { text-indent: 0px; }
 	  padding: 20px;
     color: #ffffff;
 }
+
+
+.sidebar-nav a:focus {
+    outline: none;
+	color: #fff !important;
+	background: rgba(0,0,0,0.2) !important;
+	border-left: 5px solid #fde441;
+	padding-left: 15px !important;
+}
+
 
 .sidebar-nav-icons{
    padding-right:14px;
@@ -213,6 +216,7 @@ width: calc(100% - 200px);
   transition: all 0.3s ease;
 }
 .toggle-menu {
+	background: #32286b;
   position: absolute;
 	width: 100%;
 	text-align: center;
@@ -253,7 +257,7 @@ width: calc(100% - 200px);
   top: 0;
   width: 200px;
   height: 100%;
-  background: #191b6e;
+  background: #382d81;
   overflow: hidden;
   transition: width 0.3s ease;
 }
