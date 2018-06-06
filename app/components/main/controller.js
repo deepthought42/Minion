@@ -100,15 +100,18 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       cluster: 'us2',
       encrypted: true
     });
-    var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
 
-    channel.bind('discovery_status', function(data) {
-      store.set('discovery_status', JSON.parse(data));
-    });
+    if($scope.domain != null){
+      var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
 
-    channel.bind('action', function(data) {
-      store.set('action', JSON.parse(data));
-    });
+      channel.bind('discovery_status', function(data) {
+        store.set('discovery_status', JSON.parse(data));
+      });
+
+      channel.bind('action', function(data) {
+        store.set('action', JSON.parse(data));
+      });
+    }
 
     Action.query().$promise.
       then(function(data){
