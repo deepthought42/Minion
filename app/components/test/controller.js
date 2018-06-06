@@ -358,7 +358,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       $scope.visible_browser_screenshot = $scope.default_browser;
       console.log("browser :: "+$scope.visible_browser_screenshot);
       $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.path_keys);
-      $scope.setCurrentNode($scope.current_path_objects[0], index);
+      $scope.setCurrentNode($scope.current_path_objects[0][0], index);
 
       if(test.visible){
         $scope.visible_test_nav1 = 'section-linemove-1';

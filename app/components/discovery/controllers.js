@@ -265,7 +265,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.visible_browser_screenshot = $scope.default_browser;
 
       $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.path_keys);
-      $scope.setCurrentNode($scope.current_path_objects[0], index);
+      $scope.setCurrentNode($scope.current_path_objects[0][0], index);
 
       if(test.visible){
         $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
