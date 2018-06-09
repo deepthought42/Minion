@@ -22,10 +22,10 @@
 
 			<div class="col-sm-12 running_status" ng-if="isStarted">
         <div class="col-sm-3 pull-left">
-          <md-progress-linear md-mode="determinate" value="{{(discovery_status.examined_path_cnt/discovery_status.total_path_cnt)*100 || 0 }}"></md-progress-linear>
+          <md-progress-linear md-mode="determinate" value="{{(discovery_status.examined_path_count/discovery_status.total_path_count)*100 || 0 }}"></md-progress-linear>
         </div>
         <div class="pull-left">
-  				Running...{{(discovery_status.examined_path_cnt/discovery_status.total_path_cnt)*100 || 0 | number:0 }} %
+  				Running...{{(discovery_status.examined_path_count/discovery_status.total_path_count)*100 || 0 | number:0 }} %
            <i class="fa fa-circle-o-notch fa-spin fa-2x green fa-fw" aria-hidden="true"></i>
   			</div>
 			</div>

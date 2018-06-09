@@ -15,13 +15,13 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
           sessionStorage.setItem('token', authResult.accessToken);
 
           setSession(authResult);
-          /*if(store.get('domain')){
-            $state.go('main.tests');
+          if(store.get('domain')){
+            $state.go('main.discovery');
           }
           else{
             $state.go('main.domains');
           }
-          */
+          
         } else if (err) {
           $timeout(function() {
             $state.go('main.domains');

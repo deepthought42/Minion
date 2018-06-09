@@ -22,7 +22,7 @@ angular.module('Qanairy.dashboard', ['ui.router', 'Qanairy.DomainService'])
           $scope.usage = data;
         })
         .catch(function(err){
-          errors.push(err);
+          $scope.errors.push(err);
         });
     }
 
