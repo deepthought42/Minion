@@ -29,7 +29,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       store.set("approved_test_cnt", null);
       $rootScope.$broadcast("updateApprovedTestCnt", null);
       if(store.get('domain')){
-        $scope.default_browser = store.get('domain')['browser_name'];
+        $scope.default_browser = store.get('domain')['discoveryBrowserName'];
         $scope.domain_url = store.get('domain').url;
         $scope.getTestsByUrl($scope.domain_url);
       }
@@ -118,8 +118,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     }
 
     $scope.isTestRunning = function(test){
-      for(var browser in test.browser_statuses){
-        if(test.browser_statuses[browser] == null){
+      for(var browser in test.browserStatuses){
+        if(test.browserStatuses[browser] == null){
           return true;
         }
       }
@@ -128,13 +128,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
     $scope.isTestRunningInAllBrowsers = function(test){
       var browser_count = 0;
-      for(var browser in test.browser_statuses){
-        if(test.browser_statuses[browser] == null){
+      for(var browser in test.browserStatuses){
+        if(test.browserStatuses[browser] == null){
           browser_count++;
         }
-        //test.browser_statuses['chrome']!=null || test.browser_statuses['firefox']!=null
+        //test.browserStatuses['chrome']!=null || test.browserStatuses['firefox']!=null
       }
-      return browser_count==test.browser_statuses.length;
+      return browser_count==test.browserStatuses.length;
     }
 
     $scope.setCurrentNodeKey = function(key){
@@ -179,10 +179,10 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     * updates the passing status for a given browser
     */
     $scope.updateBrowserPassingStatus = function(test, browser, isPassing){
-      test.browser_statuses[browser] = isPassing;
+      test.browserStatuses[browser] = isPassing;
       var test_passing = true;
-      for (var key in test.browser_statuses) {
-          if(test.browser_statuses[key] != null && !test.browser_statuses[key]){
+      for (var key in test.browserStatuses) {
+          if(test.browserStatuses[key] != null && !test.browserStatuses[key]){
             test_passing = false;
             break;
           }
@@ -207,7 +207,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       $scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
         $scope.current_test_browser = browsers[i];
-        $scope.test.browser_statuses[browsers[i]] = null;
+        $scope.test.browserStatuses[browsers[i]] = null;
         Test.runTests({test_keys: keys, browser_type: $scope.current_test_browser}).$promise
           .then(function(data){
             $scope.test.runStatus = false;
@@ -218,7 +218,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
                 if($scope.tests[test_idx].key === returned_key){
                   var test_record = data[returned_key];
                   $scope.tests[test_idx].correct = test_record.passing;
-                  $scope.tests[test_idx].browser_statuses[test_record.browser_name] = test_record.passing;
+                  $scope.tests[test_idx].browserStatuses[test_record.browser_name] = test_record.passing;
                   $scope.tests[test_idx].records.unshift(test_record);
                   //move test to top of list
                   var test = $scope.tests.splice(test_idx, 1)[0];
@@ -281,7 +281,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
                 if(data[test.key]){
                   console.log("RETURN DATA :: "+Object.keys(data[test.key].passing));
                   test.correct = data[test.key].passing;
-                  test.browser_statuses[data[test.key].browser_name] = data[test.key].browser_statuses;
+                  test.browserStatuses[data[test.key].browser_name] = data[test.key].browserStatuses;
                   //test.records.unshift(test_record);
                   $scope.tests.unshift(test);
                   if(test_record.passing){
@@ -357,8 +357,10 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       console.log("default browser :: "+ $scope.default_browser);
       $scope.visible_browser_screenshot = $scope.default_browser;
       console.log("browser :: "+$scope.visible_browser_screenshot);
-      $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.path_keys);
-      $scope.setCurrentNode($scope.current_path_objects[0][0], index);
+      console.log("TEest" + test);
+      console.log("Test path keys :: "+test.pathKeys);
+      $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
+      $scope.setCurrentNode($scope.current_path_objects[0], index);
 
       if(test.visible){
         $scope.visible_test_nav1 = 'section-linemove-1';
@@ -372,34 +374,30 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
      */
     $scope.retrievePathObjectsUsingKeys = function(path_keys){
       var path_objects = [];
-      console.log("path keys  ::  "+path_keys);
-
-      console.log("path keys size ::  "+path_keys.length);
+      console.log("path key length :: "+path_keys.length);
       for(var idx = 0; idx < path_keys.length; idx++){
-        console.log("path objects ::  "+path_objects);
-
         //search all elements
         var page_state = $scope.getPageState(path_keys[idx]);
-        if(page_state != null && page_state.length > 0){
-          console.log("adding page");
+        if(page_state != null){
            path_objects.push(page_state);
         }
 
         var page_element = $scope.getPageElement(path_keys[idx]);
-        if(page_element != null && page_element.length > 0){
-          console.log("page element added");
-           path_objects.push(page_element);
+        if(page_element != null){
+          console.log("Page element :: "+page_element);
+
+          path_objects.push(page_element);
         }
 
         var action = $scope.getAction(path_keys[idx]);
-        if(action != null && action.length > 0){
-          console.log("action added");
+        if(action != null){
+          console.log("loaded action : "+action);
+          console.log("Actions :: "+Object.keys(action));
+
           path_objects.push(action);
         }
       }
-      console.log("path objects :: " + path_objects);
-
-      console.log("path objects size ::  "+path_objects.length);
+      console.log("Page state found :: "+path_objects.length);
 
       return path_objects;
     }
@@ -420,17 +418,17 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
     $scope.saveTest = function(test){
       var status_arr = [];
-      for (var key in test.browser_statuses) {
-          if (test.browser_statuses.hasOwnProperty(key)) {
-              status_arr.push( [ key, test.browser_statuses[key] ] );
+      for (var key in test.browserStatuses) {
+          if (test.browserStatuses.hasOwnProperty(key)) {
+              status_arr.push( [ key, test.browserStatuses[key] ] );
           }
       }
       var persistable_test = {};
       persistable_test.key = test.key;
       persistable_test.name = test.new_name;
-      persistable_test.browser_statuses = test.browser_statuses;
+      persistable_test.browserStatuses = test.browserStatuses;
 
-      Test.update({key: test.key, name: test.name, firefox:  test.browser_statuses.firefox, chrome:  test.browser_statuses.chrome}).$promise
+      Test.update({key: test.key, name: test.name, firefox:  test.browserStatuses.firefox, chrome:  test.browserStatuses.chrome}).$promise
         .then(function(data){
           console.log("data :: "+data);
           test.waitingOnStatusChange = false;
@@ -545,21 +543,25 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     this._init();
 
     $scope.getPageState = function(key){
-      return store.get('page_states').filter(function( page_state ){
+      var page_states = store.get('page_states').filter(function( page_state ){
         return page_state.key == key;
       });
+      return page_states[0];
     }
 
     $scope.getPageElement = function(key){
-      return store.get('page_elements').filter(function( page_element ){
+      var page_elements = store.get('page_elements').filter(function( page_element ){
         return page_element.key == key;
       });
+
+      return page_elements[0];
     }
 
     $scope.getAction = function(key){
-      return store.get('actions').filter(function( action ){
+      var actions = store.get('actions').filter(function( action ){
         return action.key == key;
       });
+      return actions[0];
     }
 
     /* EVENTS */

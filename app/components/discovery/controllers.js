@@ -26,7 +26,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 			$scope.visible_test_nav1 = 'section-linemove-1';
       $scope.visible_test_nav2 = 'section-linemove-1';
       $scope.visible_tab = "nodedata0";
-      $scope.default_browser = store.get('domain')['browser_name'];
+      $scope.default_browser = store.get('domain')['discoveryBrowserName'];
       $scope.groups = [];
       $scope.group = {};
       $scope.group.name = "";
@@ -43,12 +43,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           .then (function(data){
             $scope.discovery_status = data;
 
-            if( data.start_time == null){
+            if( data.startTime == null){
               $scope.isStarted = false;
             }
             else{
-              var diff_time = (Date.now()-(new Date(data.start_time)))/1000/60;
-              if(diff_time > 1440 || (data.total_path_count <= data.examined_path_count)){
+              var diff_time = (Date.now()-(new Date(data.startTime)))/1000/60;
+              if(diff_time > 1440 || (data.totalPathCount <= data.examinedPathCount)){
                 $scope.isStarted = false
               }
               else{
@@ -251,9 +251,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.getAction = function(key){
-      if(store.get('action') == null){
-        return [];
-      }
       var actions = store.get('actions').filter(function( action ){
         return action.key == key;
       });
@@ -269,7 +266,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
       $scope.visible_browser_screenshot = $scope.default_browser;
 
-      $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.path_keys);
+      $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
       $scope.setCurrentNode($scope.current_path_objects[0], index);
 
       if(test.visible){
@@ -285,20 +282,19 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     $scope.retrievePathObjectsUsingKeys = function(path_keys){
       var path_objects = [];
       for(var idx = 0; idx < path_keys.length; idx++){
-
         //search all elements
         var page_state = $scope.getPageState(path_keys[idx]);
-        if(page_state != null && page_state.length > 0){
+        if(page_state != null){
            path_objects.push(page_state);
         }
 
         var page_element = $scope.getPageElement(path_keys[idx]);
-        if(page_element != null && page_element.length > 0){
+        if(page_element != null){
            path_objects.push(page_element);
         }
 
         var action = $scope.getAction(path_keys[idx]);
-        if(action != null && action.length > 0){
+        if(action != null){
           path_objects.push(action);
         }
       }

@@ -16,67 +16,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 .controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Account', 'Action', 'Auth', '$state',
   function ($rootScope, $scope, PathRealtimeService, store, $location, Account, Action, Auth, $state) {
 
-    $scope.extractHostname =  function(url) {
-        var hostname;
-        //find & remove protocol (http, ftp, etc.) and get hostname
-
-        if (url.indexOf("://") > -1) {
-            hostname = url.split('/')[2];
-        }
-        else {
-            hostname = url.split('/')[0];
-        }
-
-        //find & remove port number
-        hostname = hostname.split(':')[0];
-        //find & remove "?"
-        hostname = hostname.split('?')[0];
-
-        return hostname;
-    }
-
-
-    $scope.showDomainsPage = function(){
-      $state.go("main.domains");
-    }
-
-    $scope.login = function(){
-      Auth.login();
-      $scope.isAuthenticated=true;
-    }
-
-    $scope.logout = function(){
-      Auth.logout();
-      $scope.isAuthenticated=false;
-      Auth.login();
-    }
-
-    $scope.$on('domain_updated', function(){
-      $scope.domain = store.get('domain');
-
-      channel.bind('page_state', function(data) {
-        var page_states = store.get('page_states');
-        page_states.push( JSON.parse(data));
-        store.set('page_states', page_states);
-      });
-
-      channel.bind('page_element', function(data) {
-        var page_elements = store.get('page_elements');
-        page_elements.push( JSON.parse(data));
-        store.set('page_elements', page_elements);
-      });
-
-      channel.bind('action', function(data) {
-        var actions = store.get('actions');
-        actions.push( JSON.parse(data));
-        store.set('action', actions);
-      });
-    });
-
-    $scope.$on('updateApprovedTestCnt', function(event, approved_test_cnt){
-      $scope.approved_test_cnt = approved_test_cnt;
-    });
-
     $scope.displayUserDropDown = false;
     $scope.menuToggled = false;
     $scope.auth = Auth;
@@ -101,6 +40,25 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       encrypted: true
     });
 
+    $scope.extractHostname = function(url) {
+        var hostname;
+        //find & remove protocol (http, ftp, etc.) and get hostname
+
+        if (url.indexOf("://") > -1) {
+            hostname = url.split('/')[2];
+        }
+        else {
+            hostname = url.split('/')[0];
+        }
+
+        //find & remove port number
+        hostname = hostname.split(':')[0];
+        //find & remove "?"
+        hostname = hostname.split('?')[0];
+
+        return hostname;
+    }
+
     if($scope.domain != null){
       var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
 
@@ -112,6 +70,50 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
         store.set('action', JSON.parse(data));
       });
     }
+
+    $scope.showDomainsPage = function(){
+      $state.go("main.domains");
+    }
+
+    $scope.login = function(){
+      Auth.login();
+      $scope.isAuthenticated=true;
+    }
+
+    $scope.logout = function(){
+      Auth.logout();
+      $scope.isAuthenticated=false;
+      Auth.login();
+    }
+
+    $scope.$on('domain_updated', function(){
+      $scope.domain = store.get('domain');
+
+      var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
+      $scope.domain = store.get('domain');
+
+      channel.bind('page_state', function(data) {
+        var page_states = store.get('page_states');
+        page_states.push( JSON.parse(data));
+        store.set('page_states', page_states);
+      });
+
+      channel.bind('page_element', function(data) {
+        var page_elements = store.get('page_elements');
+        page_elements.push( JSON.parse(data));
+        store.set('page_elements', page_elements);
+      });
+
+      channel.bind('action', function(data) {
+        var actions = store.get('actions');
+        actions.push( JSON.parse(data));
+        store.set('action', actions);
+      });
+    });
+
+    $scope.$on('updateApprovedTestCnt', function(event, approved_test_cnt){
+      $scope.approved_test_cnt = approved_test_cnt;
+    });
 
     Action.query().$promise.
       then(function(data){
