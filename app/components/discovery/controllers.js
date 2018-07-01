@@ -387,10 +387,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
      */
     $scope.updateCorrectness = function(test, correctness, idx){
       test.waitingOnStatusChange = true;
-      Test.setPassingStatus({key: test.key, correct: correctness, browser_name: $scope.default_browser}).$promise
+      Test.setPassingStatus({key: test.key, status: correctness, browser_name: $scope.default_browser}).$promise
         .then(function(data){
           test.waitingOnStatusChange = false;
-          test.correct = data.correct;
+          test.status = data.status;
           //remove from list
           for(var i=0; i<$scope.tests.length; i++){
             if($scope.tests[i].key == test.key){

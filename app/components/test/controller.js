@@ -187,7 +187,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
             break;
           }
       }
-      test.correct = test_passing;
+      test.failing = test_passing;
     }
 
     $scope.runTest = function(firefox_selected, chrome_selected){
@@ -208,7 +208,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       for(var i=0; i < browsers.length; i++){
         $scope.current_test_browser = browsers[i];
         $scope.test.browserStatuses[browsers[i]] = null;
-        Test.runTests({test_keys: keys, browser_type: $scope.current_test_browser}).$promise
+        Test.runTests({test_keys: keys, browser_name: $scope.current_test_browser}).$promise
           .then(function(data){
             $scope.test.runStatus = false;
 
@@ -217,7 +217,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
               for(var test_idx=0; test_idx < $scope.tests.length; test_idx++){
                 if($scope.tests[test_idx].key === returned_key){
                   var test_record = data[returned_key];
-                  $scope.tests[test_idx].correct = test_record.passing;
+                  $scope.tests[test_idx].failing = test_record.passing;
                   $scope.tests[test_idx].browserStatuses[test_record.browser_name] = test_record.passing;
                   $scope.tests[test_idx].records.unshift(test_record);
                   //move test to top of list
@@ -268,13 +268,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
       $scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
-        Test.runTests({test_keys: keys, browser_type: browsers[i]}).$promise
+        Test.runTests({test_keys: keys, browser_name: browsers[i]}).$promise
           .then(function(data){
             keys.forEach(function(key){
               console.log("key :: "+key);
               var val = data[key];
 
-              //iterate over tests and set correctness based on if test key is present in data
+              //iterate over tests and set status based on if test key is present in data
               $scope.filteredTests.forEach(function(test){
                 test.runStatus = false;
 

@@ -87,8 +87,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     }
 
     $scope.$on('domain_updated', function(){
-      $scope.domain = store.get('domain');
-
       var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
       $scope.domain = store.get('domain');
 
