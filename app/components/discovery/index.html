@@ -215,9 +215,9 @@
                       <div ng-if="test.pathKeys.length > 1 && node.type != 'Action'" class="path-bar">
 											</div>
 										</div>
-										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(getPageState(test.result.key), 0)" >
+										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(getPathObject(test.result.key), 0)" >
 											<div ng-if="test.pathKeys.length > 1" class="path-page path-node">
-												<img src="{{getPageState(test.result.key).browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
+												<img src="{{getPathObject(test.result.key).browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
 											</div>
 										</div>
 									</div>

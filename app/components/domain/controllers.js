@@ -128,15 +128,10 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $rootScope.$broadcast("domain_updated", domain);
 
       //Load all page states
-      Domain.getAllPageStates({host: domain.url}).$promise
-                .then(function(data){
-                    store.set('page_states', data);
-                });
 
-      //Load all page states
-      Domain.getAllPageElements({host: domain.url}).$promise
+      Domain.getAllPathObjects({host: domain.url}).$promise
                 .then(function(data){
-                    store.set('page_elements', data);
+                    store.set('path_objects', data);
                 });
 
       $state.go("main.discovery");
