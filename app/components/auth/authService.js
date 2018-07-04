@@ -15,13 +15,23 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
           sessionStorage.setItem('token', authResult.accessToken);
 
           setSession(authResult);
-          /*if(store.get('domain')){
-            $state.go('main.tests');
-          }
-          else{
-            $state.go('main.domains');
-          }
-          */
+
+          getProfile(function(err, profile) {
+            $scope.profile = profile;
+            console.log("PROFILE :: "+$scope.profile);
+            sessionStorage.setItem('profile', profile);
+          });
+
+          analytics.identify($scope.profile.id, {
+            email : $scope.profile.email
+          }, function(){
+            if(store.get('domain')){
+              $state.go('main.discovery');
+            }
+            else{
+              $state.go('main.domains');
+            }
+          });
         } else if (err) {
           $timeout(function() {
             $state.go('main.domains');

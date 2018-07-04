@@ -28,10 +28,10 @@ angular.module('Qanairy', [
   'ngOnboarding',
   'Qanairy.AccountService',
   'rzModule',
-  /*'ngRaven'*/
+  'ngRaven'
 ]).
-config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider', 'ngOnboardingDefaultsProvider',
-  function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider) {
+config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider', 'ngOnboardingDefaultsProvider', '$locationProvider',
+  function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/domains');
 
     StripeCheckoutProvider.defaults({
@@ -43,27 +43,19 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       domain: 'staging-qanairy.auth0.com',
       responseType: 'token id_token',
       audience: 'https://staging-api.qanairy.com',
-      redirectUri: 'http://localhost:8001',
+      redirectUri: 'https://staging-app.qanairy.com/authenticate',
       scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions'
     });
 
     storeProvider.setStore("sessionStorage");
 
-      jwtOptionsProvider.config({
-        tokenGetter: function(auth) {
-          return localStorage.getItem("access-token"); //storeProvider.get("token");
-        },
-        whiteListedDomains: ['localhost', 'api.qanairy.com', 'staging-api.qanairy.com'],
-      //  unauthenticatedRedirectPath: '/login'
-      });
+    //ngOnboardingDefaultsProvider.set('overlay', 'false');
+    ngOnboardingDefaultsProvider.set({
+      overlayOpacity: '0.2',
+      showStepInfo: false
+    });
 
-      //ngOnboardingDefaultsProvider.set('overlay', 'false');
-      ngOnboardingDefaultsProvider.set({
-        overlayOpacity: '0.2',
-        showStepInfo: false
-      });
-
-      $httpProvider.interceptors.push('jwtInterceptor');
+    $locationProvider.html5Mode(true);
   }])
 
 .run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', '$window', 'Auth', 'Account',
@@ -81,7 +73,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
-       if(store.get('domain') == null && toState.name != 'subscribe' && toState.name != 'main.account'){
+       if(store.get('domain') == null && toState.name != 'subscribe' && toState.name != 'main.account' && toState.name != 'main.dashboard'){
          $rootScope.$broadcast('domainRequiredError');
          if(toState.name != 'main.domains' && fromState.name == 'main.domains'){
            e.preventDefault();

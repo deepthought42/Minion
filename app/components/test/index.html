@@ -54,7 +54,7 @@
 		</div>
 
 		<div class="test"
-				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['correct','last_run_timestamp'] track by $index"
+				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['status','lastRunTimestamp'] track by $index"
 				 ng-show="tests.length > 0">
 		  <onboarding-popover ng-if="$index==0" enabled="testRunOnboardingEnabled" steps="testRunOnboardingSteps" step-index="testRunOnboardingIndex"></onboarding-popover>
 
@@ -65,10 +65,10 @@
 					</div>
 
 					<div class="test__status vertical__center" ng-if="!isTestRunning(test)">
-						<span ng-show="test.correct">
+						<span ng-show="test.status == 'PASSING'">
 							<i class="fa fa-check-circle green status--symbol"></i>
 						</span>
-						<span ng-show="!test.correct && test.correct != null">
+						<span ng-show="test.status=='FAILING' && test.status != 'UNVERIFIED'">
 							<i  class="fa fa-times-circle red status--symbol"></i>
 						</span>
 					</div>
@@ -93,10 +93,10 @@
 				</div>
 				<div class="flex-initial test_browsers test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
 					<div class="row">
-						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browser_statuses">
+						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
 							<div class="row vertical__center test__status__editable">
-								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome' && status!=null">
-								<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox' && status!=null" >
+								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome' && status!='UNVERIFIED'">
+								<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox' && status!='UNVERIFIED'" >
 							</div>
 							<!--
 							<div class="vertical__center">
@@ -107,17 +107,17 @@
 							-->
 
 							<div class="row vertical__center test__status__editable">
-								<div class="" ng-if="status == null">
+								<div class="" ng-if="status == 'UNVERIFIED'">
 									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
 								</div>
 								<div class="green vertical__center__int"
-											ng-if="status">
+											ng-if="status == 'PASSING'">
 									<div class="" >
 										<i class="fa fa-check green status--symbol--browser"></i>
 									</div>
 								</div>
 								<div class=" red vertical__center__int"
-											ng-if="!status && status!=null">
+											ng-if="status == 'FAILING' && status != 'UNVERIFIED'">
 									<div class="" >
 										<i class="fa fa-times red status--symbol--browser"></i>
 									</div>
@@ -129,22 +129,22 @@
 
 				<div class="flex-initial test_browsers test__profile_stretch" ng-if="editing_test_idx==$index">
 					<div class="row">
-						<div class="flex-none" ng-repeat="(browser, status) in test.browser_statuses" ng-if="status!=null">
+						<div class="flex-none" ng-repeat="(browser, status) in test.browserStatuses" ng-if="status!='UNVERIFIED'">
 							<div class="row vertical__center test__status__editable">
 								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
 								<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
 							</div>
 							<div class="row vertical__center test__status__editable">
 								<div class="col-xs-6 btn--green select__neutral status-passing status--browser vertical__center__int"
-											style="{{status ? 'background-color:green' : 'background-color:#bfbfbf'}}"
+											style="{{status=='PASSING' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
 											ng-click="updateBrowserPassingStatus(test, browser, true)" ng-if="status!=null">
 									<div class="" >
 										<i class="fa fa-check status--symbol--browser white"></i>
 									</div>
 								</div>
 								<div class="col-xs-6 btn--red select__neutral status--browser status-failing  vertical__center__int"
-											style="{{!status && status != null ? 'background-color:red' : 'background-color:#bfbfbf'}}"
-											ng-click="updateBrowserPassingStatus(test, browser, false)" ng-if="status!=null">
+											style="{{status=='FAILING' && status != 'UNVERIFIED' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
+											ng-click="updateBrowserPassingStatus(test, browser, false)" ng-if="status!='UNVERIFIED'">
 									<div class="" >
 										<i  class="fa fa-times status--symbol--browser white"></i>
 									</div>
@@ -156,12 +156,12 @@
 
 				<div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					<div class="">
-						{{test.run_time | date: 'm'}}:{{test.run_time | date: 'ss'}} m
+						{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 					</div>
 				</div>
 				<div class="flex-initial text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					<div class="">
-						{{ (test.last_run_timestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
+						{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
 					</div>
 				</div>
 
@@ -230,50 +230,50 @@
 									<div class="col-xs-12 test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
 										<div ng-repeat="node in current_path_objects track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
 											<div class="node-group path-node-container vertical__center__int"
-                           ng-if="node[0].type == 'PageState'"
+                           ng-if="node.type == 'PageState'"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
-                           ng-click="setCurrentNode(node[0], $index)">
+                           ng-click="setCurrentNode(node, $index)">
                         <div class="path-page path-node">
-  					              <img src="{{node[0].screenshot_set[0].viewport_screenshot}}" class="path-node-image" />
+  					              <img src="{{node.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" />
   											</div>
                       </div>
-                      <div ng-if="node[0].type == 'PageElement'" class="node-group"
+                      <div ng-if="node.type == 'PageElement'" class="node-group"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
-                           ng-click="setCurrentNode(node[0], $index)">
+                           ng-click="setCurrentNode(node, $index)">
   											<div class="path-node path-element vertical__center__int" tooltip-placement="top">
   												<span class="" >
-  													{{node[0].name}}
+  													{{node.name}}
   												</span>
   											</div>
 												<div class="path-bar">
 												</div>
 												<div class="path-node path-action vertical__center__int" tooltip-placement="top">
-													<span ng-if="current_path_objects[$index+1][0].name=='click'" class="vertical__center__int">
+													<span ng-if="current_path_objects[$index+1].name=='click'" class="vertical__center__int">
 														<i class="fa fa-mouse-pointer fa-2x"></i>
 													</span>
-													<span ng-if="current_path_objects[$index+1][0].name=='doubleClick'" class="vertical__center__int">
+													<span ng-if="current_path_objects[$index+1].name=='doubleClick'" class="vertical__center__int">
 														<i class="fa fa-mouse-pointer fa-2x"></i>
 														<div class=”doubleclick” >
 																x2
 														</div>
 													</span>
-													<span ng-if="current_path_objects[$index+1][0].name=='mouseover'" class="vertical__center__int">
+													<span ng-if="current_path_objects[$index+1].name=='mouseover'" class="vertical__center__int">
 														<i class="fa fa-hand-pointer-o fa-2x"></i>
 													</span>
-													<span ng-if="current_path_objects[$index+1][0].name=='scroll'" class="vertical__center__int">
+													<span ng-if="current_path_objects[$index+1].name=='scroll'" class="vertical__center__int">
 														<i class="fa fa-arrows-v fa-2x"></i>
 													</span>
-													<span ng-if="current_path_objects[$index+1][0].name=='sendKeys'" class="vertical__center__int">
+													<span ng-if="current_path_objects[$index+1].name=='sendKeys'" class="vertical__center__int">
 														<i class="fa fa-i-cursor fa-2x"></i>
 													</span>
 												</div>
 											</div>
-											<div class="path-bar">
+											<div ng-if="test.pathKeys.length > 1 && node.type != 'Action'" class="path-bar">
 											</div>
 										</div>
 										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
-											<div ng-if="current_path_objects.length != 1 && test.result.screenshot_set[0]" class="path-page path-node">
-												<img src="{{test.result.screenshot_set[0].viewport_screenshot}}" class="path-node-image" tooltip-placement="top"/>
+											<div ng-if="test.pathKeys.length > 1" class="path-page path-node">
+												<img src="{{getPageState(test.result.key).browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
 											</div>
 										</div>
 									</div>
@@ -290,7 +290,7 @@
 																</h5>
 																<img class="path-node-image screenshots"
 																			data-toggle="modal" data-target="#exampleModal"
-																			src="{{current_node[$index].screenshot}}"/>
+																			src="{{current_node[test_idx].screenshot}}" class="path-node-image"/>
 															</div>
 														</div>
 													</div><!-- /content -->
@@ -452,12 +452,12 @@
 															<div class="page__image col-xs-12">
 																<h5 class="screenshots_title">Page</h5>
 
-																<div ng-repeat="screenshot_set in current_node[test_idx].screenshot_set" >
+																<div ng-repeat="browser_screenshot in current_node[test_idx].browserScreenshots" >
 																	<img class="path-node-image page-image screenshots"
 																				data-toggle="modal" data-target="#exampleModal"
-																				src="{{screenshot_set.full_screenshot}}"
-																				ng-if="visible_browser_screenshot==screenshot_set.browser_name"
-																				ng-click="openPageModal(screenshot_set.full_screenshot)" />
+																				src="{{browser_screenshot.viewportScreenshot}}"
+																				ng-if="visible_browser_screenshot==browser_screenshot.browser"
+																				ng-click="openPageModal(browser_screenshot.viewportScreenshot)" />
 	                              </div>
 															</div>
 														</div>
@@ -553,21 +553,21 @@
 													Date Last Run&nbsp;<i class="fa fa-sort"></i>
 												</div>
 											</div>
-											<div class="row test__history__record" ng-repeat="record in test.records | orderBy: '-ran_at'">
+											<div class="row test__history__record" ng-repeat="record in test.records | orderBy: '-ranAt'">
 												<div class="col-sm-3">
-													<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="record.browser_name=='chrome'">
-													<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="record.browser_name=='firefox'" >
-													<span class="browser_name">{{capitalizeFirstLetter(record.browser_name)}}</span>
+													<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="record.browser=='chrome'">
+													<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="record.browser=='firefox'" >
+													<span class="browser">{{capitalizeFirstLetter(record.browser)}}</span>
 												</div>
 												<div class="col-sm-3">
-													<i class="fa fa-check fa-2x green" ng-show="record.passing" />
-													<i class="fa fa-times fa-2x red" ng-show="!record.passing" />
+													<i class="fa fa-check fa-2x green" ng-show="record.passing=='PASSING'" />
+													<i class="fa fa-times fa-2x red" ng-show="record.passing=='FAILING'" />
 												</div>
 												<div class="col-sm-3 text-right">
-													{{record.run_time | date: 'm'}} m {{record.run_time | date: 'ss'}} s
+													{{record.runTime | date: 'm'}} m {{record.runTime | date: 'ss'}} s
 												</div>
 												<div class="col-sm-3 text-right">
-													{{record.ran_at | date: 'MM/dd/yy h:mm a' | lowercase}}
+													{{record.ranAt | date: 'MM/dd/yy h:mm a' | lowercase}}
 												</div>
 											</div>
 										</div>
