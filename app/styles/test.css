@@ -123,6 +123,9 @@ width: -webkit-calc(100% - 15px);
 
 .test__title{
 	color:#757575 !important;
+	
+	display: inline-flex;
+	margin-bottom: 0px;
 }
 
 .edithover{
@@ -235,7 +238,7 @@ width: -webkit-calc(100% - 15px);
 	width:200px;
 }
 .test_functions {
-	width:258px;
+	width:261px;
 }
 .test_browsers {
 	width:184px;
