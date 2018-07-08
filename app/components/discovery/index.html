@@ -6,14 +6,15 @@
   </button>
 -->
 
-  <div class="row">
-    <div class="col-md-12 error__message" ng-repeat="error in errors track by $index">
+  <div class="">
+    <div class="error__message" ng-repeat="error in errors track by $index">
       {{error.message}}
     </div>
   </div>
 
 	<div class="secondary-nav vertical__center__int" >
   	<div class="flex-auto">
+			
 			<div class="col-sm-12" ng-show="!isStarted" >
 				<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
 					Start Discovery
@@ -21,14 +22,17 @@
 			</div>
 
 			<div class="col-sm-12 running_status" ng-if="isStarted">
-        <div class="col-sm-3 pull-left">
-          <md-progress-linear md-mode="determinate" value="{{(discovery_status.examinedPathCount/discovery_status.totalPathCount)*100 || 0 }}"></md-progress-linear>
-        </div>
-        <div class="pull-left">
-  				Running...{{(discovery_status.examinedPathCount/discovery_status.totalPathCount)*100 || 0 | number:0 }} %
-           <i class="fa fa-circle-o-notch fa-spin fa-2x green fa-fw" aria-hidden="true"></i>
-  			</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100)-1 || 0 | number:0 }}%
+						</div>
+						<md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100)-1 || 0 }}"></md-progress-linear>
+						<div class="waiting_text">Testing Tests...
+						</div>
+					</div>
+				</div>
 			</div>
+			
 		</div>
 			<div class="flex-auto pull-right right-main-nav ">
 				<div class="input-group search">
@@ -108,7 +112,7 @@
 
         <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
 					<div class="" ng-show="!test.show_test_name_edit_field">
-						<h5 class="test__title">
+						<h5 class="test__title" ng-click="test.show_test_name_edit_field = true">
               {{test.name || "Test #"+($index+1)}}
             </h5>
 						<i class="fa fa-pencil edithover" ng-click="test.show_test_name_edit_field = true" ></i>
