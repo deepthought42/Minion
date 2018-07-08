@@ -21,6 +21,13 @@
     height: calc(100% - 117px);
 }
 
+.standard-container{
+    min-width: 800px !important;
+    margin:0px 0px;
+    overflow-y:scroll;
+	height: 100%;
+}
+
 .full__height{
 	min-width: 800px !important;
 	height: -moz-calc(100% - 40px);
