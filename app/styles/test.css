@@ -622,6 +622,7 @@ width: -webkit-calc(100% - 15px);
 
 .form-control{
     color: #555555 !important;
+	height: 40px !important;
 }
 
 .group__tag{

@@ -35,19 +35,17 @@
 									This is the default browser this domain uses for discovery.
 								</div>
 								<div class="row browser_buttons">
-									<div class="col-xs-3">
+									<div class="col-xs-12">
 										<button class="btn btn-depressed" ng-click="domain.browser_name = 'chrome'" ng-class="{active: domain.browser_name == 'chrome'}">
-											<img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="domain.browser_name == 'chrome'">
+											<img src="/img/Chrome.ico" class="modal-browser-icon chrome" ng-show="domain.browser_name == 'chrome'">
 											<div class="fa-icon" ng-show="domain.browser_name != 'chrome'">
 												<i class="fa fa-chrome"></i>
 											</div>
 										</button>
-									</div>
-									<div class="col-xs-3">
 										<button class="btn btn-depressed" ng-click="domain.browser_name = 'firefox'" ng-class="{active: domain.browser_name == 'firefox'}">
-											<img src="/img/firefox.png" class="modal-browser-icon" ng-show="domain.browser_name == 'firefox'">
+											<img src="/img/firefox.png" class="modal-browser-icon firefox" ng-show="domain.browser_name == 'firefox'">
 											<div class="fa-icon" ng-show="domain.browser_name != 'firefox'">
-												<i class="fa fa-firefox modal-browser-icon"></i>
+												<i class="fa fa-firefox"></i>
 											</div>
 										</button>
 									</div>
