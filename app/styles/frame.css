@@ -141,10 +141,14 @@
 
 .search {
   position: relative;
-  padding: 5px 0 5px 0;
+  padding: 0px 0 0px 0;
 	max-width:500px;
+	
+
 }
-input { text-indent: 0px; }
+input { text-indent: 0px; 
+		height: 40px !important;
+}
 
 
 .main-container {
@@ -321,7 +325,7 @@ width: calc(100% - 80px);
 .secondary-nav{
 	color: #26272b;
 	padding: 12px auto;
-	height: 56px;
+	height: 70px;
 	/*border-bottom: 2px solid #eeeeee;*/
 }
 .tertiary-nav{

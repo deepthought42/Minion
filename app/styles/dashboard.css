@@ -84,3 +84,10 @@
 	width: 25px;
 	height: 25px;
 }
+
+.standard__title{
+	margin-top:15px;
+	margin-bottom:15px;
+	color:#553fc0;
+	border-bottom: 1px solid #553fc0;
+}

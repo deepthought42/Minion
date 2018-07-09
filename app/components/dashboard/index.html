@@ -1,11 +1,16 @@
 <div class="standard-container">
+	<div class="col-sm-12">
+		<div class="domain-dialogue-header">
+			<h2 class="standard__title">Total Usage</h2>
+		</div>
+	</div>
 	<div class="col-sm-4">
 		<div class="dashboard_card  box--shadow">
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="card__header">
 						<h4>
-								Discoveries Run
+								Total Discoveries Run
 						</h4>
 					</div>
 				</div>
@@ -27,7 +32,78 @@
 				<div class="col-sm-12">
 					<div class="card__header">
 						<h4>
-								Tests Run
+								Total Tests Run
+						</h4>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class=" dashboard_card_med vertical__center">
+						<h3 class="dashboard__stats">
+							{{usage.testsUsed}}
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="dashboard_card  box--shadow">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card__header">
+						<h4>
+								Total Tests Found
+						</h4>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class=" dashboard_card_med vertical__center">
+						<h3 class="dashboard__stats">
+							{{tests.length || 0}}
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div class="col-sm-12">
+		<div class="domain-dialogue-header">
+			<h2 class="standard__title">Domain Usage: {{domain.url || "www.yourdomain.com"}}</h2>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="dashboard_card  box--shadow">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card__header">
+						<h4>
+							Discoveries Run
+						</h4>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class=" dashboard_card_med vertical__center">
+						<h3 class="dashboard__stats">
+							{{usage.discoveriesUsed}}
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="dashboard_card  box--shadow">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card__header">
+						<h4>
+							Tests Run
 						</h4>
 					</div>
 				</div>
@@ -65,7 +141,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-12">
+	<!--
+	<div class="col-sm-8">
 		<div class="dashboard_card  box--shadow">
 			<div class="row">
 				<div class="col-sm-12">
@@ -87,6 +164,7 @@
 			</div>
 		</div>
 	</div>
+-->
 	<div class="col-sm-4">
 		<div class="dashboard_card  box--shadow">
 			<div class="row">
