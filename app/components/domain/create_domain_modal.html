@@ -43,18 +43,16 @@
 											This will be the default browser this domain uses for discovery.
 									</div>
 										 <div class="row browser_buttons">
-											<div class="col-xs-3">
+											<div class="col-xs-12">
 												<button class="btn btn-depressed" ng-click="selected_browser='chrome'" ng-class="{active: selected_browser=='chrome' || domain.discoveryBrowser == 'chrome'}">
 
-													<img src="/img/Chrome.ico" class="modal-browser-icon" ng-show="selected_browser=='chrome'">
+													<img src="/img/Chrome.ico" class="modal-browser-icon chrome" ng-show="selected_browser=='chrome'">
 													<div class="fa-icon" ng-show="selected_browser!='chrome'">
 														<i class="fa fa-chrome"></i>
 													</div>
 												</button>
-											</div>
-											<div class="col-xs-3">
 												<button class="btn btn-depressed" ng-click="selected_browser='firefox'" ng-class="{active: selected_browser=='firefox' || domain.discoveryBrowser == 'firefox'}">
-													<img src="/img/firefox.png" class="modal-browser-icon" ng-show="selected_browser=='firefox'">
+													<img src="/img/firefox.png" class="modal-browser-icon firefox" ng-show="selected_browser=='firefox'">
 													<div class="fa-icon" ng-show="selected_browser!='firefox'">
 														<i class="fa fa-firefox"></i>
 													</div>
@@ -100,5 +98,8 @@
 				</form>
 			</div>
 		</div>
+	</div>
+	<div class="error__message" ng-show="show_create_domain_err">
+	  {{domain_creation_err}}
 	</div>
 </md-dialog>

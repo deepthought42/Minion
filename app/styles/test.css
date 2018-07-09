@@ -21,15 +21,16 @@
     height: calc(100% - 117px);
 }
 
+.standard-container{
+    min-width: 800px !important;
+    margin:0px 0px;
+    overflow-y:scroll;
+	height: 100%;
+}
+
 .full__height{
 	min-width: 800px !important;
-	height: -moz-calc(100% - 40px);
-    /* WebKit */
-    height: -webkit-calc(100% - 40px);
-    /* Opera */
-    height: -o-calc(100% - 40px);
-    /* Standard */
-    height: calc(100% - 40px);
+	height:100%;
 	background-color: #f4f4f8;
 }
 
@@ -123,6 +124,9 @@ width: -webkit-calc(100% - 15px);
 
 .test__title{
 	color:#757575 !important;
+	
+	display: inline-flex;
+	margin-bottom: 0px;
 }
 
 .edithover{
@@ -235,7 +239,7 @@ width: -webkit-calc(100% - 15px);
 	width:200px;
 }
 .test_functions {
-	width:258px;
+	width:261px;
 }
 .test_browsers {
 	width:184px;
@@ -604,8 +608,13 @@ width: -webkit-calc(100% - 15px);
 }
 
 .input-group-addon{
-  width:35px;
+  width:40px;
 }
+
+.input-group-addon i{
+	width: 100%;
+}
+
 
 .remove__group{
   padding-left: 6px;
@@ -613,6 +622,7 @@ width: -webkit-calc(100% - 15px);
 
 .form-control{
     color: #555555 !important;
+	height: 40px !important;
 }
 
 .group__tag{

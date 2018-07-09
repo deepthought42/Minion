@@ -7,7 +7,7 @@
 				</button>
 			</div>
 		</div>
-			<div class="flex-auto pull-right right-main-nav ">
+			<div class="flex-auto pull-right right-secondary-nav ">
 				<div class="input-group search">
 					<span class="input-group-addon"><i class="fa fa-search"></i></span>
 						<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
@@ -84,7 +84,7 @@
 				</div>
 				<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx==$index">
 					<div class="row">
-						<div class="col-xs-12 vertical__left__profile" ng-if="editing_test_idx==$index">
+						<div class="vertical__left__profile" ng-if="editing_test_idx==$index">
 							<div class="input-group">
 								<input class="form-control title__edit" type="text" ng-model="test.new_name" ng-value="test.name" ng-trim="false"/>
 							</div>
@@ -166,13 +166,13 @@
 				</div>
 
         <div class="flex-none test_functions test__btns" aria-label="Test Functions">
-          <div class="fifteen_right btn-group pull-left" role="group" ng-show="!isTestRunningInAllBrowsers(test)&&editing_test_idx!=$index"  >
+          <div class="margin_fifteen_right btn-group pull-left" role="group" ng-show="!isTestRunningInAllBrowsers(test)&&editing_test_idx!=$index"  >
             <button class="btn btn--primary" ng-click="openBrowserSelectionDialog(test, $index)" id="{{'run_test_button-'+$index}}">
                Run
             </button>
           </div>
 
-          <div class="fifteen_right pull-right" ng-if="editing_test_idx!=$index">
+          <div class="margin_fifteen_right pull-right" ng-if="editing_test_idx!=$index">
             <button class="btn btn--tertiary" ng-click="editTest(test, $index)">
                <i class="fa fa-pencil" ></i>
             </button>

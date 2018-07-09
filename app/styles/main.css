@@ -281,11 +281,11 @@ a img {border: none; }
 		color:#757575;
 	}
 
-/*--------------------------- [Modal Header] ---------------------------*/
+/*--------------------------- [Modal Title/Standard Title] ---------------------------*/
 h2,
 .h2{
-		font-size: 24px;
-		line-height: 36px;
+		font-size: 22px;
+		line-height: 34px;
 		letter-spacing:.1px;
 	}
 
