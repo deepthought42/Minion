@@ -66,8 +66,10 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
         store.set('discovery_status', JSON.parse(data));
       });
 
-      channel.bind('action', function(data) {
-        store.set('action', JSON.parse(data));
+      channel.bind('path_object', function(data) {
+        var path_objects = store.get('path_objects');
+        path_objects.push( JSON.parse(data));
+        store.set('path_objects',path_objects);
       });
     }
 
@@ -87,25 +89,18 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     }
 
     $scope.$on('domain_updated', function(){
+      $scope.domain = store.get('domain');
+      $scope.$apply();
+    });
+
+    $scope.$on('domain_selected', function(){
       var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
       $scope.domain = store.get('domain');
 
-      channel.bind('page_state', function(data) {
-        var page_states = store.get('page_states');
-        page_states.push( JSON.parse(data));
-        store.set('page_states', page_states);
-      });
-
-      channel.bind('page_element', function(data) {
-        var page_elements = store.get('page_elements');
-        page_elements.push( JSON.parse(data));
-        store.set('page_elements', page_elements);
-      });
-
-      channel.bind('action', function(data) {
-        var actions = store.get('actions');
-        actions.push( JSON.parse(data));
-        store.set('action', actions);
+      channel.bind('path_object', function(data) {
+        var path_objects = store.get('path_objects');
+        path_objects.push( JSON.parse(data));
+        store.set('path_objects', path_objects);
       });
     });
 

@@ -125,7 +125,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       store.set('domain', domain);
       //get default browser for domain
       //if default browser is not set then show default browser selection dialog box
-      $rootScope.$broadcast("domain_updated", domain);
+      $rootScope.$broadcast("domain_selected", domain);
 
       //Load all page states
 
