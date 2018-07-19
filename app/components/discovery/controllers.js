@@ -90,6 +90,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           $scope.$apply();
         });
 
+        channel.bind('path_object', function(data) {
+          $scope.discovery_status = JSON.parse(data);
+          $scope.$apply();
+        });
+
         channel.bind('discovery-status', function(data) {
           $scope.discovery_status = JSON.parse(data);
           $scope.$apply();

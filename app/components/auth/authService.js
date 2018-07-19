@@ -17,12 +17,17 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
           setSession(authResult);
 
           getProfile(function(err, profile) {
-            $scope.profile = profile;
-            console.log("PROFILE :: "+$scope.profile);
+            console.log("PROFILE :: "+profile);
             sessionStorage.setItem('profile', profile);
           });
 
-          analytics.identify($scope.profile.id, {
+          if(store.get('domain')){
+            $state.go('main.discovery');
+          }
+          else{
+            $state.go('main.domains');
+          }
+          /*analytics.identify($scope.profile.id, {
             email : $scope.profile.email
           }, function(){
             if(store.get('domain')){
@@ -32,6 +37,7 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
               $state.go('main.domains');
             }
           });
+          */
         } else if (err) {
           $timeout(function() {
             $state.go('main.domains');
