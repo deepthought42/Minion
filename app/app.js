@@ -25,6 +25,8 @@ angular.module('Qanairy', [
   'Qanairy.user_profile',
   'Qanairy.subscribe',
   'Qanairy.authCallback',
+  'Qanairy.test_user',
+  'Qanairy.form',
   'ngOnboarding',
   'Qanairy.AccountService',
   'rzModule',
@@ -35,12 +37,12 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     $urlRouterProvider.otherwise('/domains');
 
     StripeCheckoutProvider.defaults({
-      key: "pk_live_44mv3UzkcOxPpEk0LSXSQxsE" /*"pk_test_9QwakrlLpcLEYO5Ui0JoYHvC" */
+      key: "pk_test_9QwakrlLpcLEYO5Ui0JoYHvC" /*"pk_live_44mv3UzkcOxPpEk0LSXSQxsE" */
     });
 
     angularAuth0Provider.init({
-      clientID: 'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV', //'mMomHg1ZhzZkM4Tsz2NGkdJH3eeJqIq6',
-      domain: 'qanairy.auth0.com',
+      clientID: 'mMomHg1ZhzZkM4Tsz2NGkdJH3eeJqIq6', //'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV',
+      domain: 'staging-qanairy.auth0.com',
       responseType: 'token id_token',
       audience: 'https://staging-api.qanairy.com',
       redirectUri: 'http://localhost:8001/#/domains',

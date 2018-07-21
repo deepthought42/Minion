@@ -29,6 +29,18 @@
           Discovery
         </a>
       </li>
+      <li>
+        <a ui-sref="main.test_user"  style="{{$location.path() == '/test_user' ? 'color: #fff;' : 'color:#9794d5'}}">
+          <i class="fa fa-users sidebar-nav-icons" aria-hidden="true"></i>
+          Users
+        </a>
+      </li>
+      <li>
+        <a ui-sref="main.form"  style="{{$location.path() == '/form' ? 'color: #fff;' : 'color:#9794d5'}}">
+          <i class="fa fa-clipboard-list sidebar-nav-icons" aria-hidden="true"></i>
+          Forms
+        </a>
+      </li>
     </ul>
     <label for="main-nav-check" class="toggle-menu"
        style="{{navToggledOpen ? 'color:#9794d5' : 'color:#fff'}}"
@@ -45,8 +57,8 @@
 			<div class="flex-auto">
 			</div>
 		 	<div class="right-main-nav  pull-right">
-				
-					
+
+
           <div class="domain-link dropdown pull-right flex-initial text-right test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 						<div class="dropdown-toggle" data-toggle="dropdown" id="domainsDropdownMenuButton"  dropdown-toggle>
                 {{domain.url || "www.yourdomain.com"}}
