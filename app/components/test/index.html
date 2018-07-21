@@ -111,40 +111,47 @@
 									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
 								</div>
 								<div class="green vertical__center__int"
-											ng-if="status == 'PASSING'">
+											ng-if="status == 'passing'">
 									<div class="" >
 										<i class="fa fa-check green status--symbol--browser"></i>
 									</div>
 								</div>
 								<div class=" red vertical__center__int"
-											ng-if="status == 'FAILING' && status != 'UNVERIFIED'">
+											ng-if="status == 'failing'">
 									<div class="" >
 										<i class="fa fa-times red status--symbol--browser"></i>
+									</div>
+								</div>
+								<div class=" red vertical__center__int"
+											ng-if="status == 'unverified'">
+									<div class="" >
+										<i class="fa fa-icon-question-sign status--symbol--browser"></i>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<div class="flex-initial test_browsers test__profile_stretch" ng-if="editing_test_idx==$index">
 					<div class="row">
-						<div class="flex-none" ng-repeat="(browser, status) in test.browserStatuses" ng-if="status!='UNVERIFIED'">
+						<div class="flex-none" ng-repeat="(browser, status) in test.browserStatuses" ng-if="status!='unverified'">
 							<div class="row vertical__center test__status__editable">
 								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
 								<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
 							</div>
 							<div class="row vertical__center test__status__editable">
+
 								<div class="col-xs-6 btn--green select__neutral status-passing status--browser vertical__center__int"
-											style="{{status=='PASSING' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
-											ng-click="updateBrowserPassingStatus(test, browser, true)" ng-if="status!=null">
+											style="{{status=='passing' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
+											ng-click="updateBrowserPassingStatus(test, browser, 'passing')" ng-if="status!=null">
 									<div class="" >
 										<i class="fa fa-check status--symbol--browser white"></i>
 									</div>
 								</div>
+
 								<div class="col-xs-6 btn--red select__neutral status--browser status-failing  vertical__center__int"
-											style="{{status=='FAILING' && status != 'UNVERIFIED' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
-											ng-click="updateBrowserPassingStatus(test, browser, false)" ng-if="status!='UNVERIFIED'">
+											style="{{status=='failing' && status != 'unverified' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
+											ng-click="updateBrowserPassingStatus(test, browser, 'failing')" ng-if="status!='unverified'">
 									<div class="" >
 										<i  class="fa fa-times status--symbol--browser white"></i>
 									</div>

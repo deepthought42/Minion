@@ -178,8 +178,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     /*
     * updates the passing status for a given browser
     */
-    $scope.updateBrowserPassingStatus = function(test, browser, isPassing){
-      test.browserStatuses[browser] = isPassing;
+    $scope.updateBrowserPassingStatus = function(test, browser, status){
+      test.browserStatuses[browser] = status;
       var test_passing = true;
       for (var key in test.browserStatuses) {
           if(test.browserStatuses[key] != null && !test.browserStatuses[key]){
