@@ -377,24 +377,9 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       console.log("path key length :: "+path_keys.length);
       for(var idx = 0; idx < path_keys.length; idx++){
         //search all elements
-        var page_state = $scope.getPageState(path_keys[idx]);
-        if(page_state != null){
-           path_objects.push(page_state);
-        }
-
-        var page_element = $scope.getPageElement(path_keys[idx]);
-        if(page_element != null){
-          console.log("Page element :: "+page_element);
-
-          path_objects.push(page_element);
-        }
-
-        var action = $scope.getAction(path_keys[idx]);
-        if(action != null){
-          console.log("loaded action : "+action);
-          console.log("Actions :: "+Object.keys(action));
-
-          path_objects.push(action);
+        var path_object  = $scope.getPathObject(path_keys[idx]);
+        if(path_object != null){
+           path_objects.push(path_object);
         }
       }
       console.log("Page state found :: "+path_objects.length);
@@ -542,26 +527,11 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
     this._init();
 
-    $scope.getPageState = function(key){
-      var page_states = store.get('page_states').filter(function( page_state ){
-        return page_state.key == key;
+    $scope.getPathObject = function(key){
+      var path_objecs = store.get('path_objects').filter(function( path_object ){
+        return path_object.key == key;
       });
-      return page_states[0];
-    }
-
-    $scope.getPageElement = function(key){
-      var page_elements = store.get('page_elements').filter(function( page_element ){
-        return page_element.key == key;
-      });
-
-      return page_elements[0];
-    }
-
-    $scope.getAction = function(key){
-      var actions = store.get('actions').filter(function( action ){
-        return action.key == key;
-      });
-      return actions[0];
+      return path_objecs[0];
     }
 
     /* EVENTS */

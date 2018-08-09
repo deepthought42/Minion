@@ -177,6 +177,14 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       }).then(function(response) {
         // declare this function to handle response
         //set filestack url somewhere
+
+        console.log("response :: "+Object.keys(response));
+        console.log("response :: "+Object.keys(response.filesUploaded));
+
+      //  console.log("response failed:: "+Object.keys(response.filesFailed));
+      //  console.log("response failed:: "+Object.keys(response.filesFailed[0]));
+
+        console.log("response :: "+response.filesUploaded[0]);
         $scope.current_domain.logo_url = response.filesUploaded[0].url;
         $scope.$apply();
       });

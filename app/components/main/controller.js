@@ -94,7 +94,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     });
 
     $scope.$on('domain_selected', function(){
-      var channel = pusher.subscribe($scope.extractHostname($store.get('domain').url));
+      var channel = pusher.subscribe($scope.extractHostname(store.get('domain').url));
       $scope.domain = store.get('domain');
 
       channel.bind('path_object', function(data) {
