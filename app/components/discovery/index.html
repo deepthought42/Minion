@@ -14,7 +14,7 @@
 
 	<div class="secondary-nav vertical__center__int" >
   	<div class="flex-auto">
-			
+
 			<div class="col-sm-12" ng-show="!isStarted" >
 				<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
 					Start Discovery
@@ -32,7 +32,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 			<div class="flex-auto pull-right right-secondary-nav ">
 				<div class="input-group search">
@@ -219,9 +219,9 @@
                       <div ng-if="test.pathKeys.length > 1 && node.type != 'Action'" class="path-bar">
 											</div>
 										</div>
-										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(getPathObject(test.result.key), 0)" >
+										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
 											<div ng-if="test.pathKeys.length > 1" class="path-page path-node">
-												<img src="{{getPathObject(test.result.key).browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
+												<img src="{{test.result.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
 											</div>
 										</div>
 									</div>
