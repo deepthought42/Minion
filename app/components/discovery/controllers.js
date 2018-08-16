@@ -236,9 +236,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
-    $scope.archiveTest = function(key){
-      Test.archive({key: key} ).$promise.
+    $scope.archiveTest = function(test){
+      Test.archive({key: test.key} ).$promise.
         then(function(resp){
+          test.archived = key;
           console.log("success!");
         })
         .catch(function(err){

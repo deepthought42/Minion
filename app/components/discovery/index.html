@@ -84,7 +84,7 @@
       </div>
     </div>
 
-    <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy:'lastRunTimestamp' track by test.key " ng-show="tests.length>0">
+    <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy:'lastRunTimestamp' track by test.key " ng-show="tests.length>0">
 			<div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
 			  <div class="test__status test__profile_stretch flex-none text--shadow" >
 			   	<div class="row test__status__frame" id="{{'test'+$index+'_status'}}">
@@ -144,6 +144,13 @@
 			  <div class="flex-initial text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					{{( test.lastRunTimestamp | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
+        <div class="flex-initial text-right date_stats test__profile_stretch">
+          <!---ARCHIVE TEST BUTTON IS HERE -->
+          <button class="btn btn--tertiary" ng-click="archiveTest(test)">
+             <i class="fa fa-times" ></i>
+          </button>
+          <!---ARCHIVE TEST BUTTON ENDS HERE -->
+        </div>
         <div class="flex-none accordion-flex test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
           <div class="accordion" aria-label="open/close accordion">
             <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" ></i>
