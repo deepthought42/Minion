@@ -381,9 +381,10 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           console.log("success!");
         })
         .catch(function(err){
-          console.log("An error occurred while saving test");
+          console.log("An error occurred while archiving test");
         });
     }
+
      /**
       * Constructs a list of PathObjects consisting of PageState, PageElement,
       *    and Action objects currently stored in session storage

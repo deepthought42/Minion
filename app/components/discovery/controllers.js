@@ -236,6 +236,16 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
+    $scope.archiveTest = function(key){
+      Test.archive({key: key} ).$promise.
+        then(function(resp){
+          console.log("success!");
+        })
+        .catch(function(err){
+          console.log("An error occurred while archiving test");
+        });
+    }
+
     $scope.getPathObject = function(key){
       var path_objecs = store.get('path_objects').filter(function( path_object ){
         return path_object.key == key;
