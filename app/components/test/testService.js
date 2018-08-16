@@ -7,6 +7,7 @@ testerService.factory('Test', ['$resource', 'Qanairy.serviceConfig', function ($
     update: { method: 'PUT', params:  {key: '@key', name: '@name', firefox: '@firefox', chrome: '@chrome'}},
     findByName: {url : config.basePath + '/tests/name', method: 'GET', isArray: true},
     setPassingStatus: {url : config.basePath + '/tests/setPassingStatus', method: 'PUT', params: {key: '@key', status: '@status', browser: '@browser_name'}},
+    archive: {url : config.basePath + '/tests/archive', method: 'PUT', params: { key: '@key'}},
     updateName: {url : config.basePath + '/tests/updateName', method: 'PUT', params: { key: '@key', name: '@name'}},
     addGroup: {url : config.basePath + '/tests/addGroup', method: 'POST', params: {key: '@key', description: '@description', name: '@name'}},
     removeGroup: {url : config.basePath + '/tests/remove/group', method: 'POST', params: {group_key: '@group_key', test_key: '@test_key'}},
