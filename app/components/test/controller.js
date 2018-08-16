@@ -375,9 +375,10 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       return path_objecs[0];
     }
 
-    $scope.archiveTest = function(key){
-      Test.archive({key: key} ).$promise.
+    $scope.archiveTest = function(test){
+      Test.archive({key: test.key} ).$promise.
         then(function(resp){
+          test.archive = true;
           console.log("success!");
         })
         .catch(function(err){
