@@ -375,6 +375,15 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       return path_objecs[0];
     }
 
+    $scope.archiveTest = function(key){
+      Test.archive({key: key} ).$promise.
+        then(function(resp){
+          console.log("success!");
+        })
+        .catch(function(err){
+          console.log("An error occurred while saving test");
+        });
+    }
      /**
       * Constructs a list of PathObjects consisting of PageState, PageElement,
       *    and Action objects currently stored in session storage
