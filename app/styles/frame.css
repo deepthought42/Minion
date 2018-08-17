@@ -183,7 +183,6 @@ input { text-indent: 0px;
     color: #ffffff;
 }
 
-
 .sidebar-nav a:focus {
     outline: none;
 	color: #fff !important;
@@ -283,6 +282,10 @@ side-nav a:hover, side-nav a:focus {
 
 #main-nav-check:checked + #side-nav {
   width: 80px;
+}
+
+#main-nav-check:checked ~ .disappear {
+  display: none !important;
 }
 
 #main-nav-check:checked ~ .page-wrap {
