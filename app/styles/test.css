@@ -239,7 +239,10 @@ width: -webkit-calc(100% - 15px);
 	width:200px;
 }
 .test_functions {
-	width:261px;
+	width:316px;
+}
+.discovery_functions {
+	width:70px;
 }
 .test_browsers {
 	width:184px;
