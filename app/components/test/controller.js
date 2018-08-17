@@ -187,7 +187,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
             break;
           }
       }
-      test.failing = test_passing;
+      if(test_passing){
+        test.status = "PASSING";
+      }
+      else{
+        test.status = "FAILING";
+      }
     }
 
     $scope.runTest = function(firefox_selected, chrome_selected){
@@ -418,7 +423,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       persistable_test.name = test.new_name;
       persistable_test.browserStatuses = test.browserStatuses;
 
-      Test.update({key: test.key, name: test.name, firefox:  test.browserStatuses.firefox, chrome:  test.browserStatuses.chrome}).$promise
+      Test.update({key: test.key, name: test.new_name, firefox:  test.browserStatuses.firefox, chrome:  test.browserStatuses.chrome}).$promise
         .then(function(data){
           console.log("data :: "+data);
           test.waitingOnStatusChange = false;
@@ -431,11 +436,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           else{
             var approved_cnt = store.get('approved_test_cnt')+1;
           }
-          store.set('approved_test_cnt', approved_cnt);
+          test.name = test.new_name;
           test.show_test_name_edit_field = false;
           $scope.editing_test_idx = -1;
           test.show_waiting_icon = false;
           test.show_test_name_edit_field=false;
+          store.set('approved_test_cnt', approved_cnt);
 
           $rootScope.$broadcast("updateApprovedTestCnt", approved_cnt);
         })
@@ -479,6 +485,50 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
                 $mdDialog.hide();
              }
           }
+       });
+    };
+
+    $scope.archiveTestDialog = function() {
+      $scope.confirmationDialogConfig = {
+        title: "Select Operation...",
+        message: "Please select which operation you would like to perform.",
+        buttons: [{
+          label: "Reset",
+          action: "reset"
+        }, {
+          label: "Delete",
+          action: "delete"
+        }, {
+          label: "Save",
+          action: "save"
+        }]
+      };
+      $scope.showDialog(true);
+    };
+
+    $scope.archiveTest = function(test){
+      Test.archive({key: test.key} ).$promise.
+        then(function(resp){
+          test.archived = true;
+          console.log("success!");
+        })
+        .catch(function(err){
+          console.log("An error occurred while archiving test");
+        });
+    }
+
+    $scope.askDelete = function(test) {
+       // Appending dialog to document.body to cover sidenav in docs app
+       var confirm = $mdDialog.confirm()
+             .title('Would you like to delete this test?')
+             .targetEvent(test)
+             .ok('Confirm')
+             .cancel('Cancel');
+
+       $mdDialog.show(confirm).then(function() {
+         $scope.archiveTest(test);
+       }, function() {
+         $scope.status = 'You decided to keep your debt.';
        });
     };
 

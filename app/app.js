@@ -35,15 +35,15 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     $urlRouterProvider.otherwise('/domains');
 
     StripeCheckoutProvider.defaults({
-      key: "pk_live_44mv3UzkcOxPpEk0LSXSQxsE" /*"pk_test_9QwakrlLpcLEYO5Ui0JoYHvC" */
+      key: "pk_test_9QwakrlLpcLEYO5Ui0JoYHvC" /*"pk_live_44mv3UzkcOxPpEk0LSXSQxsE" */
     });
 
     angularAuth0Provider.init({
-      clientID: 'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV', //'mMomHg1ZhzZkM4Tsz2NGkdJH3eeJqIq6',
-      domain: 'qanairy.auth0.com',
+      clientID: 'mMomHg1ZhzZkM4Tsz2NGkdJH3eeJqIq6', //'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV',
+      domain: 'staging-qanairy.auth0.com',
       responseType: 'token id_token',
       audience: 'https://staging-api.qanairy.com',
-      redirectUri: 'http://localhost:8001/#/domains',
+      redirectUri: 'http://localhost:8001/#/domains',//'https://app.qanairy.com',
       scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions'
     });
 

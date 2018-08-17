@@ -54,7 +54,7 @@
 		</div>
 
 		<div class="test"
-				 ng-repeat="test in (filteredTests = tests) | filter:searchText | orderBy: ['status','lastRunTimestamp'] track by $index"
+				 ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy: ['status','lastRunTimestamp'] track by $index"
 				 ng-show="tests.length > 0">
 		  <onboarding-popover ng-if="$index==0" enabled="testRunOnboardingEnabled" steps="testRunOnboardingSteps" step-index="testRunOnboardingIndex"></onboarding-popover>
 
@@ -176,6 +176,13 @@
             <button class="btn btn--tertiary" ng-click="editTest(test, $index)">
                <i class="fa fa-pencil" ></i>
             </button>
+          </div>
+          <div class="margin_fifteen_right pull-right" ng-if="editing_test_idx!=$index">
+            <!---ARCHIVE TEST BUTTON IS HERE -->
+	          <button class="btn btn--tertiary" ng-click="askDelete(test)">
+	             <i class="fa fa-trash" ></i>
+	          </button>
+	          <!---ARCHIVE TEST BUTTON ENDS HERE -->
           </div>
           <div class="" ng-if="editing_test_idx==$index">
             <div class="title__edit__buttons margin_fifteen_right btn--secondary" ng-click="cancelEditingTest(test)" ng-show="!test.show_waiting_icon">
