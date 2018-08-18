@@ -241,6 +241,17 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
+    $scope.archiveTest = function(test){
+      Test.archive({key: test.key} ).$promise.
+        then(function(resp){
+          test.archived = key;
+          console.log("success!");
+        })
+        .catch(function(err){
+          console.log("An error occurred while archiving test");
+        });
+    }
+
     $scope.getPathObject = function(key){
       var path_objecs = store.get('path_objects').filter(function( path_object ){
         return path_object.key == key;
@@ -293,7 +304,32 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
+    $scope.archiveTest = function(test){
+      Test.archive({key: test.key} ).$promise.
+        then(function(resp){
+          test.archived = true;
+          console.log("success!");
+        })
+        .catch(function(err){
+          console.log("An error occurred while archiving test");
+        });
+    }
 
+    $scope.askDelete = function(test) {
+       // Appending dialog to document.body to cover sidenav in docs app
+       var confirm = $mdDialog.confirm()
+             .title('Would you like to delete this test?')
+             .targetEvent(test)
+             .ok('Confirm')
+             .cancel('Cancel');
+
+       $mdDialog.show(confirm).then(function() {
+         $scope.archiveTest(test);
+       }, function() {
+         $scope.status = 'You decided to keep your debt.';
+       });
+    };
+    
     $scope.addGroup = function(test, group){
       if(!group.name.length){
          $scope.errors.push("Group name cannot be empty");
