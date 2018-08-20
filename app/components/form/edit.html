@@ -1,0 +1,12 @@
+<div>
+  <label>Form Type:</label>
+  <input type="text" id="form_type" ng-model="form.type"/>
+</div>
+<div>
+  <label>Form Input Fields</label>
+  <div>
+    <div ng-repeat="element in form.elements">
+      {{element}}
+    </div>
+  </div>
+</div>
