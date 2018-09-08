@@ -1,12 +1,97 @@
 <div>
-  <label>Form Type:</label>
+  Form Settings
+</div>
+<div>
+  Qanairy tests all of your radio buttons, checkboxes, and dropdowns. Rules only need to be set for text input fields.
+</div>
+<div>
+  <label>Form Title</label>
+  <input type="text" id="form_type" ng-model="form.name"/>
+</div>
+
+<div>
+  <label>Form Type</label>
   <input type="text" id="form_type" ng-model="form.type"/>
 </div>
 <div>
-  <label>Form Input Fields</label>
-  <div>
-    <div ng-repeat="element in form.elements">
-      {{element}}
+  <div>Form Fields</div>
+  <div>Form Input</div>
+  <div ng-repeat="element in form.elements">
+    <div>{{element}}
+      <div>
+        {{ element.name}}
+      </div>
+      <div>
+        <button class="fa-pencil"></button>
+        <button class="fa-times"></button>
+      </div>
+    </div>
+    <div>
+      <div>
+        Field Input
+        <input type="text" name="" value=""/>
+      </div>
+      Select field rules
+      <div>
+        <div>
+          <input type="checkbox" ng-model=""/>Field required
+        </div>
+        <div>
+          <input type="checkbox" ng-model=""/> Contains a minimum of
+          <select>
+
+          </select>
+          and a maximum of
+          <select>
+
+          </select>
+          characters
+        </div>
+        <div>
+          <input type="checkbox" ng-model=""/> Has a minimum value of
+          <select>
+
+          </select>
+          and a maximum value of
+          <select>
+
+          </select>
+        </div>
+        <div>
+          <button>
+            cancel
+          </button>
+          <button>
+            Update
+          </button>
+        </div>
+      </div>
+      <div>
+        <input type="checkbox" ng-model=""/> Special characters not allowed
+      </div>
+      <div>
+        <input type="checkbox" ng-model=""/> alphabetic characters not allowed
+      </div>
+      <div>
+        <input type="checkbox" ng-model=""/> numbers not allowed
+      </div>
+      <div>
+        <input type="checkbox" ng-model=""/> spaces not allowed
+      </div>
+      <div>
+        <input type="checkbox" ng-model=""/> case-sensitive
+      </div>
+      <div>
+        <input type="checkbox" ng-model=""/> email address expected
+      </div>
     </div>
   </div>
+</div>
+<div>
+  <button>
+    Cancel
+  </button>
+  <button>
+    Save & create tests
+  </button>
 </div>

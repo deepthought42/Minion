@@ -1,23 +1,90 @@
 <div class="content">
   <div class="test-container">
 
-    <div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnTests">
+    <div class="test-labels-container">
+      <div class="test-labels">
+        <div class="status__title test__status__frame">
+          Status
+        </div>
+        <div class="flex-auto test_functions">
+          Form Title
+        </div>
+        <div class="flex-initial time_stats text-right">
+          Time (minutes)
+        </div>
+        <div class="flex-initial date_stats text-right">
+          Date Discovered
+        </div>
+        <div class="flex-none discovery_functions">
+        </div>
+        <div class="flex-none accordion-flex">
+        </div>
+      </div>
+    </div>
+    <div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnForms">
       <div>
         <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw"></i>
         <br><br><br>
-        <h2>Your tests are loading. Please stand by.</h2>
-        <p class="empty__state__p">This process may take a while. You may want to leave this window open and go grab a coffee.<br><br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.</p>
+        <h2>Sorry, we haven't found any forms yet. </h2>
+        <p class="empty__state__p">Please be patient, I'm sure we will find one shortly.<br><br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.</p>
       </div>
     </div>
-    <div class="empty__state vertical__center_empty_state_test" ng-show="!waitingOnTests && tests.length==0">
+    <div class="empty__state vertical__center_empty_state_test" ng-show="!waitingOnForms && tests.length==0">
       <h2>
         No tests here? Visit <a href="#/discovery">Discovery</a> to find all of your tests.
       </h2>
     </div>
 
     <div class="test"
-         ng-repeat="form in (filteredTests = forms) | filter:searchText track by $index"
-         ng-show="tests.length > 0">
+         ng-repeat="form in (filteredForms = forms) | filter:searchText track by $index"
+         ng-show="forms.length > 0">
+      <div class="test__profile vertical__left__profile" ng-click="setFormIndex($index);visible_tab='nodedata'+$index">
+        <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)" ng-if="!form.show_form_name_edit_field">
+          <div class="" ng-show="!form.show_form_name_edit_field">
+            <h5 class="test__title" ng-click="form.show_form_name_edit_field = true">
+               {{form.name || "Form #"+($index+1)}}
+             </h5>
+            <i class="fa fa-pencil edithover" ng-click="form.show_form_name_edit_field = true" ></i>
+          </div>
+        </div>
+         <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="form.show_form_name_edit_field">
+          <div class="row">
+            <div class="flex-auto">
+              <div class="">
+                <input class="form-control title__edit" type="text" ng-model="new_name" ng-value="form.name" ng-trim="false"/>
+              </div>
+            </div>
+            <div class="flex-none test_name_edit">
+              <div class="title__edit__buttons margin_fifteen_left btn--secondary" ng-click="cancelEditingFormName(test)" ng-show="!form.show_waiting_icon">
+                 Cancel
+               </div>
+               <div class="title__edit__buttons margin_fifteen_left btn--primary " ng-click="setFormName(test, new_name)" ng-show="!form.show_waiting_icon">
+                 Save
+               </div>
+              <div class="" ng-show="form.show_waiting_icon">
+                <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)">
+          {{form.type}}
+        </div>
+        <div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)">
+          {{form.status  || "Unknown"}}
+        </div>
+        <div class="flex-initial text-right date_stats test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)">
+          {{( form.dateDiscovered | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
+        </div>
+        <div class="flex-none discovery_functions text-right test__btns" aria-label="Form Functions">
+           <button class="btn btn--tertiary" ng-click="askDelete(test)" ng-show="form.status=='DISCOVERED'||form.status='ACTION_REQUIRED'">
+              <i class="fa fa-exclamation" ></i>
+           </button>
+           <button class="btn btn--tertiary" ng-click="askDelete(test)" ng-show="form.status=='CLASSIFIED'">
+              <i class="fa fa-pencil" ></i>
+           </button>
+         </div>
+       </div>
     </div>
   </div>
 </div>
