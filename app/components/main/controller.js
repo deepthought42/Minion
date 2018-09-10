@@ -42,13 +42,14 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
     $scope.extractHostname = function(url) {
         var hostname;
+        var domain = store.get('domain');
         //find & remove protocol (http, ftp, etc.) and get hostname
-
-        if (url.indexOf("://") > -1) {
-            hostname = url.split('/')[2];
+        console.log("URL :: "+ url);
+        if (domain.url.indexOf("://") > -1) {
+            hostname = domain.url.split('/')[2];
         }
         else {
-            hostname = url.split('/')[0];
+            hostname = domain.url.split('/')[0];
         }
 
         //find & remove port number
@@ -60,6 +61,8 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     }
 
     if($scope.domain != null){
+      console.log("Other PUSHER DOMAIN :: "+$scope.domain.url);
+
       var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
 
       channel.bind('discovery_status', function(data) {
@@ -94,8 +97,11 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     });
 
     $scope.$on('domain_selected', function(){
-      var channel = pusher.subscribe($scope.extractHostname(store.get('domain').url));
+      console.log("PUSHER DOMAIN :: "+store.get('domain'));
+      console.log("1PUSHER DOMAIN :: "+$scope.domain.url);
       $scope.domain = store.get('domain');
+
+      var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
 
       channel.bind('path_object', function(data) {
         var path_objects = store.get('path_objects');

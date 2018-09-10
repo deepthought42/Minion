@@ -4,13 +4,13 @@
     <div class="test-labels-container">
       <div class="test-labels">
         <div class="status__title test__status__frame">
-          Status
-        </div>
-        <div class="flex-auto test_functions">
           Form Title
         </div>
+        <div class="flex-auto test_functions">
+          Form Type
+        </div>
         <div class="flex-initial time_stats text-right">
-          Time (minutes)
+          Status
         </div>
         <div class="flex-initial date_stats text-right">
           Date Discovered
@@ -29,12 +29,6 @@
         <p class="empty__state__p">Please be patient, I'm sure we will find one shortly.<br><br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.</p>
       </div>
     </div>
-    <div class="empty__state vertical__center_empty_state_test" ng-show="!waitingOnForms && tests.length==0">
-      <h2>
-        No tests here? Visit <a href="#/discovery">Discovery</a> to find all of your tests.
-      </h2>
-    </div>
-
     <div class="test"
          ng-repeat="form in (filteredForms = forms) | filter:searchText track by $index"
          ng-show="forms.length > 0">
@@ -67,7 +61,7 @@
             </div>
           </div>
         </div>
-        <div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)">
+        <div class="flex-initial text-left time_stats test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)">
           {{form.type}}
         </div>
         <div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)">
@@ -77,11 +71,9 @@
           {{( form.dateDiscovered | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
         </div>
         <div class="flex-none discovery_functions text-right test__btns" aria-label="Form Functions">
-           <button class="btn btn--tertiary" ng-click="askDelete(test)" ng-show="form.status=='DISCOVERED'||form.status='ACTION_REQUIRED'">
-              <i class="fa fa-exclamation" ></i>
-           </button>
-           <button class="btn btn--tertiary" ng-click="askDelete(test)" ng-show="form.status=='CLASSIFIED'">
-              <i class="fa fa-pencil" ></i>
+           <button class="btn btn--tertiary" ng-click="editForm(form)" >
+              <i class="fa fa-exclamation" ng-show="form.status=='DISCOVERED'||form.status=='ACTION_REQUIRED'"></i>
+              <i class="fa fa-pencil" ng-show="form.status=='CLASSIFIED'"></i>
            </button>
          </div>
        </div>

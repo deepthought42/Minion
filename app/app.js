@@ -27,6 +27,7 @@ angular.module('Qanairy', [
   'Qanairy.authCallback',
   'Qanairy.test_user',
   'Qanairy.form',
+  'Qanairy.form_edit',
   'ngOnboarding',
   'Qanairy.AccountService',
   'rzModule',

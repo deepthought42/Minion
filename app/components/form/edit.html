@@ -11,6 +11,9 @@
 
 <div>
   <label>Form Type</label>
+  <select>
+    <option ng-repeat="x in form.typeOptions"><span>{{x}}</span><span>{{form.prediction[$index]*100 | number:0}}%</span></option>
+  </select>
   <input type="text" id="form_type" ng-model="form.type"/>
 </div>
 <div>
