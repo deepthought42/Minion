@@ -61,13 +61,13 @@
             </div>
           </div>
         </div>
-        <div class="flex-initial text-left time_stats test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)">
+        <div class="flex-initial text-left time_stats test__profile_stretch">
           {{form.type}}
         </div>
-        <div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)">
+        <div class="flex-initial text-right time_stats test__profile_stretch">
           {{form.status  || "Unknown"}}
         </div>
-        <div class="flex-initial text-right date_stats test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)">
+        <div class="flex-initial text-right date_stats test__profile_stretch">
           {{( form.dateDiscovered | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
         </div>
         <div class="flex-none discovery_functions text-right test__btns" aria-label="Form Functions">

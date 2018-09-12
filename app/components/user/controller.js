@@ -3,15 +3,15 @@
 angular.module('Qanairy.user_profile', ['ui.router', 'Qanairy.UserService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('main.user_profile', {
-    url: "/profile",
+  $stateProvider.state('main.test_users', {
+    url: "/users",
     templateUrl: 'components/user/index.html',
-    controller: 'UserProfileCtrl'
+    controller: 'TestUserCtrl'
   });
 }])
 
-.controller('UserProfileCtrl', ['$rootScope', '$scope', 'User', 'store', '$state',
+.controller('TestUserCtrl', ['$rootScope', '$scope', 'User', 'store', '$state',
   function($rootScope, $scope, User, store, $state) {
-    
+
   }
 ]);
