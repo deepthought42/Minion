@@ -1,17 +1,19 @@
 'use strict';
 
-angular.module('Qanairy.user_profile', ['ui.router', 'Qanairy.UserService'])
+angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('main.test_users', {
+  $stateProvider.state('main.users', {
     url: "/users",
     templateUrl: 'components/user/index.html',
     controller: 'TestUserCtrl'
   });
 }])
 
-.controller('TestUserCtrl', ['$rootScope', '$scope', 'User', 'store', '$state',
-  function($rootScope, $scope, User, store, $state) {
-
+.controller('TestUserCtrl', ['$rootScope', '$scope', 'TestUser', 'store', '$state',
+  function($rootScope, $scope, TestUser, store, $state) {
+    $scope.edit_user = function(){
+        $state.go("main.edit_user");
+    }
   }
 ]);

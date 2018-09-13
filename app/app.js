@@ -22,14 +22,14 @@ angular.module('Qanairy', [
   'AuthInterceptor',
   'stripe.checkout',
   'Qanairy.authService',
-  'Qanairy.user_profile',
   'Qanairy.subscribe',
   'Qanairy.authCallback',
-  'Qanairy.test_user',
+  'Qanairy.user',
   'Qanairy.form',
   'Qanairy.form_edit',
   'ngOnboarding',
   'Qanairy.AccountService',
+  'Qanairy.user_edit',
   'rzModule',
   'ngRaven'
 ]).

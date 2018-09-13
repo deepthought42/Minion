@@ -1,6 +1,10 @@
 <div class="content">
   <div class="test-container">
-
+    <div class="col-sm-12" ng-show="!isStarted" >
+      <button class="btn btn--primary pull-left" ng-click="edit_user()" id="start_discovery_button">
+        Create User
+      </button>
+    </div>
     <div class="test-labels-container">
       <div class="test-labels">
         <div class="status__title test__status__frame">

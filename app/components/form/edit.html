@@ -11,8 +11,8 @@
 
 <div>
   <label>Form Type</label>
-  <select>
-    <option ng-repeat="x in form.typeOptions"><span>{{x}}</span><span>{{form.prediction[$index]*100 | number:0}}%</span></option>
+  <select >
+    <option ng-model="form.type" ng-repeat="x in form.typeOptions"><span>{{x}}</span><span>{{form.prediction[$index]*100 | number:0}}%</span></option>
   </select>
   <input type="text" id="form_type" ng-model="form.type"/>
 </div>
@@ -36,10 +36,10 @@
       Select field rules
       <div>
         <div>
-          <input type="checkbox" ng-model=""/>Field required
+          <input type="checkbox" ng-model="required_rule"/>Field required
         </div>
         <div>
-          <input type="checkbox" ng-model=""/> Contains a minimum of
+          <input type="checkbox" ng-model="min_max_characters_rules"/> Contains a minimum of
           <select>
 
           </select>
@@ -50,7 +50,7 @@
           characters
         </div>
         <div>
-          <input type="checkbox" ng-model=""/> Has a minimum value of
+          <input type="checkbox" ng-model="min_max_value_rules"/> Has a minimum value of
           <select>
 
           </select>
@@ -69,22 +69,22 @@
         </div>
       </div>
       <div>
-        <input type="checkbox" ng-model=""/> Special characters not allowed
+        <input type="checkbox" ng-model="special_character_restriction"/> Special characters not allowed
       </div>
       <div>
-        <input type="checkbox" ng-model=""/> alphabetic characters not allowed
+        <input type="checkbox" ng-model="alphabetic_character_restriction"/> alphabetic characters not allowed
       </div>
       <div>
-        <input type="checkbox" ng-model=""/> numbers not allowed
+        <input type="checkbox" ng-model="numeric_restriction"/> numbers not allowed
       </div>
       <div>
-        <input type="checkbox" ng-model=""/> spaces not allowed
+        <input type="checkbox" ng-model="whitespace_restriction"/> spaces not allowed
       </div>
       <div>
-        <input type="checkbox" ng-model=""/> case-sensitive
+        <input type="checkbox" ng-model="case_sensitive"/> case-sensitive
       </div>
       <div>
-        <input type="checkbox" ng-model=""/> email address expected
+        <input type="checkbox" ng-model="email_pattern_rule"/> email address expected
       </div>
     </div>
   </div>
@@ -93,7 +93,7 @@
   <button>
     Cancel
   </button>
-  <button>
+  <button ng-click="updateField()">
     Save & create tests
   </button>
 </div>
