@@ -240,17 +240,17 @@
                            ng-if="node.type == 'PageState'"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
-												<button class="node-depressed">
+												<button class="btn btn--tertiary button--sacnite">
 													<div class="path-page path-node">
 														<img src="{{node.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" />
 													</div>
 												</button>
                       </div>
 
-                      <div ng-if="node.type == 'PageElement'" class="node-group vertical__center__int"
+                      <div ng-if="node.type == 'PageElement'" class="element-action node-group vertical__center__int"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
-												<button class="node-depressed">
+												<button class="btn btn--tertiary button--sacnite">
 													<div class="node__title" >
 															Html Tag
 													</div>
@@ -263,7 +263,7 @@
 
 													<div class="path-bar">
                         	</div>
-												<button class="node-depressed">
+												<button class="btn btn--tertiary button--sacnite">
 													<div class="node__title" >
 															<span ng-if="current_path_objects[$index+1].name=='click'" class="vertical__center__int">
 																Click
@@ -311,7 +311,7 @@
 										</div>
 										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
 											<div ng-if="test.pathKeys.length > 1" class="path-page path-node">
-												<button class="node-depressed">
+												<button class="btn btn--tertiary button--sacnite">
 													<img src="{{test.result.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
 												</button>
 											</div>
@@ -498,6 +498,11 @@
 																				src="{{browser_screenshot.viewportScreenshot}}"
 																				ng-if="visible_browser_screenshot==browser_screenshot.browser"
 																				ng-click="openPageModal(browser_screenshot.viewportScreenshot)" />
+																	<div class="expand" data-toggle="modal" data-target="#exampleModal"
+																				ng-if="visible_browser_screenshot==browser_screenshot.browser"
+																				ng-click="openPageModal(browser_screenshot.viewportScreenshot)">
+																	<h6>Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i></h6>
+                                </div>
 	                              </div>
 															</div>
 														</div>
