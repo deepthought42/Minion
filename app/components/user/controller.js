@@ -10,10 +10,25 @@ angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService'])
   });
 }])
 
-.controller('TestUserCtrl', ['$rootScope', '$scope', 'TestUser', 'store', '$state',
-  function($rootScope, $scope, TestUser, store, $state) {
+.controller('TestUserCtrl', ['$rootScope', '$scope', 'Domain', 'store', '$state',
+  function($rootScope, $scope, Domain, store, $state) {
+    this._init = function(){
+      $scope.domains = null;
+      $scope.domain_id = store.get('domain').id;
+      Domain.getUsers({domain_id: $scope.domain_id}).$promise
+        .then(function(domains){
+          console.log('retreived domain users');
+          $scope.domains = domains;
+        })
+        .catch(function(){
+
+        })
+    }
+
     $scope.edit_user = function(){
         $state.go("main.edit_user");
     }
+
+    this._init();
   }
 ]);
