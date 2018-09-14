@@ -582,8 +582,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
     this._init();
 
-
-
     /* EVENTS */
     $rootScope.$on('missing_resorce_error', function (e){
       $scope.errors.push("There was an issue finding your resource. We'll find it soon and return it to it's rightful place.");

@@ -180,6 +180,74 @@ md-dialog {
 	outline: none;
 }
 
+
+.node-depressed {
+	height: 90px;
+	background: #eee;
+	color:#bbb;
+	box-shadow: 0 6px #ccc;
+	border-radius: 5px;
+	-webkit-transition: none;
+	-moz-transition: none;
+	transition: none;
+  display: inline-block;
+  padding: 0px !important;
+  margin-bottom: 0;
+  min-height: 40px;
+	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 0px solid transparent;
+  border-radius: 4px;
+	position: relative;
+}
+
+.node-depressed:focus {
+	color:#bbb;
+	outline: none !important;
+}
+
+.node-depressed:hover {
+	color:#bbb;
+	box-shadow: 0 4px #ccc;
+	top: 2px;
+	outline: none;
+}
+
+.node-depressed:visited {
+	color:#bbb;
+	box-shadow: 0 4px #ccc;
+	top: 2px;
+	outline: none;
+}
+
+.node-depressed:active {
+	color:#bbb;
+	box-shadow: 0 0 #ccc;
+	top: 8px;
+	outline: none ;
+}
+
+.node-depressed:active,
+.node-depressed.active {
+	box-shadow: 0 4px #ccc;
+	top: 2px;
+	outline: none;
+}
+
+
 .modal_action_button_container{
     padding-top: 30px;
 }
