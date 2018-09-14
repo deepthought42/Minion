@@ -412,6 +412,7 @@ h5,
   background-color: #553fc0;
 }
 
+
 .btn--secondary {
   color: #424242;
   background-color: #e0e0e0;
@@ -432,28 +433,164 @@ h5,
 }
 
 .btn--tertiary {
+	padding: 0px 0px !important;
 	min-height: 40px;
   min-width: 40px;
   color: #6649e4;
   background-color: #ffffff;
 	border: 1px solid #6649e4;
 }
+
+.btn--tertiary img {
+	padding: 5px 5px !important;
+}
+
 .btn--tertiary:focus,
 .btn--tertiary.focus {
-  background-color: #f4f4f5;
+	color: #ffffff;
+  background-color: #553fc0;
 	border: 1px solid #553fc0;
 }
 .btn--tertiary:hover {
-  background-color: #f4f4f5;
+	color: #ffffff;
+  background-color: #553fc0;
 	border: 1px solid #553fc0;
 }
 .btn--tertiary:active,
-.btn--tertiary.active,
-.open > .dropdown-toggle.btn--gray {
-  color: #553fc0;
-  background-color: #f4f4f5;
+.btn--tertiary.active {
+  color: #ffffff;
+  background-color: #553fc0;
 	border: 1px solid #553fc0;
 }
+
+.element-action .btn--tertiary:focus,
+.element-action .btn--tertiary.focus {
+	color: #553fc0;
+  background-color: #ffffff;
+}
+.element-action .btn--tertiary:hover {
+	color: #553fc0;
+  background-color: #ffffff;
+}
+.element-action .btn--tertiary:active,
+.element-action .btn--tertiary.active {
+  color: #553fc0;
+  background-color: #ffffff;
+}
+
+.element-action:focus .node__title,
+.element-action.focus .node__title{
+	color: #ffffff;
+  background-color: #553fc0;
+	border: 1px solid #553fc0;
+	text-shadow: 0px 1px #32286b;
+}
+.element-action:hover .node__title{
+	color: #ffffff;
+  background-color: #553fc0;
+	border: 1px solid #553fc0;
+	text-shadow: 0px 1px #32286b;
+}
+.element-action:active .node__title,
+.element-action.active .node__title{
+  color: #ffffff;
+  background-color: #553fc0;
+	border: 1px solid #553fc0;
+	text-shadow: 0px 1px #32286b;
+}
+
+
+
+/* Ujarak */
+.button--ujarak {
+	-webkit-transition: border-color 0.4s, color 0.4s;
+	transition: border-color 0.4s, color 0.4s;
+}
+.button--ujarak::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #553fc0;
+	z-index: -1;
+	opacity: 0;
+	-webkit-transform: scale3d(0.7, 1, 1);
+	transform: scale3d(0.7, 1, 1);
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+	transition: transform 0.4s, opacity 0.4s;
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+.button--ujarak,
+.button--ujarak::before {
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+.button--ujarak:hover {
+	color: #fff;
+	border-color: #553fc0;
+}
+}
+.button--ujarak:hover::before {
+	opacity: 1;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+
+
+/* Sacnite */
+.button.button--sacnite {
+	width: 70px;
+	height: 70px;
+	min-width: 0;
+	padding: 0;
+	color: #fff;
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+}
+.button--sacnite.button--round-l {
+	border-radius: 50%;
+}
+.button--sacnite.button--inverted {
+	color: #553fc0;
+}
+.button--sacnite::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: inherit;
+	z-index: -1;
+	box-shadow: inset 0 0 0 35px #553fc0;
+	-webkit-transform: scale3d(0.9, 0.9, 1);
+	transform: scale3d(0.9, 0.9, 1);
+	-webkit-transition: box-shadow 0.3s, -webkit-transform 0.3;
+	transition: box-shadow 0.3s, transform 0.3s;
+}
+.button--sacnite .button__icon {
+	font-size: 22px;
+	width: 22px;
+}
+.button--sacnite > span {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+.button--sacnite:hover {
+	color: #553fc0;
+}
+.button--sacnite:hover::before {
+	box-shadow: inset 0 0 0 2px #553fc0;
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+}
+
+
 
 .btn--green {
   color: #fff;

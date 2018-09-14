@@ -148,7 +148,7 @@
 			  </div>
 				<div class="flex-none discovery_functions text-right test__btns" aria-label="Test Functions">
           <!---ARCHIVE TEST BUTTON IS HERE -->
-          <button class="btn btn--tertiary" ng-click="askDelete(test)">
+          <button class="btn btn--tertiary button--ujarak" ng-click="askDelete(test)">
              <i class="fa fa-trash" ></i>
           </button>
           <!---ARCHIVE TEST BUTTON ENDS HERE -->
@@ -190,7 +190,7 @@
                            ng-if="node.type == 'PageState'"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
-												<button class="node-depressed">
+												<button class="btn btn--tertiary button--sacnite">
                         <div class="path-page path-node">
   					              <img src="{{node.browserScreenshots[0].viewportScreenshot}}" class="path-node-image"/>
   											</div>
@@ -198,10 +198,10 @@
                       </div>
 
 
-                      <div ng-if="node.type == 'PageElement'" class="node-group vertical__center__int"
+                      <div ng-if="node.type == 'PageElement'" class="element-action node-group vertical__center__int"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
-												<button class="node-depressed">
+												<button class="btn btn--tertiary button--sacnite">
 													<div class="node__title" >
 															Html Tag
 													</div>
@@ -214,7 +214,7 @@
 
 													<div class="path-bar">
                         	</div>
-												<button class="node-depressed">
+												<button class="btn btn--tertiary button--sacnite">
 													<div class="node__title" >
 															<span ng-if="current_path_objects[$index+1].name=='click'" class="vertical__center__int">
 																Click
@@ -264,7 +264,7 @@
 										</div>
 										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
 											<div ng-if="test.pathKeys.length > 1" class="path-page path-node">
-												<button class="node-depressed">
+												<button class="btn btn--tertiary button--sacnite">
 													<img src="{{test.result.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
 												</button>
 											</div>
@@ -283,6 +283,7 @@
 																<img class="path-node-image"
 																			data-toggle="modal" data-target="#exampleModal"
 																			src="{{current_node[test_idx].screenshot}}" class="path-node-image"/>
+																
   														</div>
   													</div>
   												</div>
@@ -449,6 +450,11 @@
 																			data-toggle="modal" data-target="#exampleModal"
 																			src="{{screenshot_set.viewportScreenshot}}" class="path-node-image"
 																			ng-click="openPageModal(screenshot_set.viewportScreenshot)" />
+																<div class="expand" data-toggle="modal" data-target="#exampleModal"
+																			src="{{screenshot_set.viewportScreenshot}}" class="path-node-image"
+																			ng-click="openPageModal(screenshot_set.viewportScreenshot)">
+																	<h6>Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i></h6>
+                                </div>
                               </div>
 														</div>
 						              </div><!-- /content -->
