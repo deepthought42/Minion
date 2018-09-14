@@ -7,3 +7,16 @@
   <label>Password</label>
   <input type="text" id="test_user_password" ng-model="test_user.password"/>
 </div>
+<div>
+  <label>Role</label>
+  <input type="text" id="test_user_role" ng-model="test_user.role"/>
+</div>
+<div>
+  Status
+  Enabled
+  <input type="checkbox" id="test_user_status" ng-model="test_user.isEnabled" />
+  Disabled
+</div>
+<button ng-click="create_user(test_user)">
+  Create User
+</button>
