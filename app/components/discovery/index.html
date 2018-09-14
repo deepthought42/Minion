@@ -190,7 +190,7 @@
                            ng-if="node.type == 'PageState'"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
-												<button class="btn btn--tertiary button--sacnite">
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
                         <div class="path-page path-node">
   					              <img src="{{node.browserScreenshots[0].viewportScreenshot}}" class="path-node-image"/>
   											</div>
@@ -201,7 +201,7 @@
                       <div ng-if="node.type == 'PageElement'" class="element-action node-group vertical__center__int"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
-												<button class="btn btn--tertiary button--sacnite">
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
 													<div class="node__title" >
 															Html Tag
 													</div>
@@ -214,7 +214,7 @@
 
 													<div class="path-bar">
                         	</div>
-												<button class="btn btn--tertiary button--sacnite">
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
 													<div class="node__title" >
 															<span ng-if="current_path_objects[$index+1].name=='click'" class="vertical__center__int">
 																Click
@@ -258,13 +258,12 @@
 												</button>
                       </div>
 
-
                       <div ng-if="test.pathKeys.length > 1 && node.type != 'Action'" class="path-bar">
 											</div>
 										</div>
 										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
 											<div ng-if="test.pathKeys.length > 1" class="path-page path-node">
-												<button class="btn btn--tertiary button--sacnite">
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
 													<img src="{{test.result.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
 												</button>
 											</div>
@@ -283,7 +282,7 @@
 																<img class="path-node-image"
 																			data-toggle="modal" data-target="#exampleModal"
 																			src="{{current_node[test_idx].screenshot}}" class="path-node-image"/>
-																
+
   														</div>
   													</div>
   												</div>
