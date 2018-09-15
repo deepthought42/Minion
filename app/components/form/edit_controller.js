@@ -13,9 +13,9 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
 
 .controller('FormEditCtrl', ['$rootScope', '$scope', 'Form', 'Domain', 'store', '$state', '$stateParams',
   function($rootScope, $scope, Form, Domain, store, $state, $stateParams) {
-    $scope.forms = [];
 
     this._init = function(){
+      $scope.domain = state.get('domain');
       if($stateParams.form){
         $scope.form = $stateParams.form;
         store.set('current_form', $scope.form);
@@ -25,6 +25,16 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       }
       console.log("form : "+$scope.form);
     };
+
+    $scope.discoverTests = function(form){
+      Domain.updateForm($scope.domain.id, form).$promise
+        then(function(data){
+          console.log("Successfully updated form");
+        })
+        .catch(function(err){
+          console.log("error occured while saving form");
+        })
+    }
 
     $scope.updateField = function(){
       if(required_rule){

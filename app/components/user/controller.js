@@ -16,17 +16,23 @@ angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService'])
       $scope.domains = null;
       $scope.domain_id = store.get('domain').id;
       Domain.getUsers({domain_id: $scope.domain_id}).$promise
-        .then(function(domains){
+        .then(function(users){
           console.log('retreived domain users');
-          $scope.domains = domains;
+          $scope.users = users;
         })
         .catch(function(){
 
         })
     }
 
-    $scope.edit_user = function(){
-        $state.go("main.edit_user");
+    $scope.editUser = function(user){
+      console.log("USER :: "+Object.keys(user));
+        $state.go("main.edit_user", {user: user, state: "update"});
+    }
+
+    $scope.createUser = function(user){
+      console.log("USER :: "+Object.keys(user));
+        $state.go("main.edit_user", {user: null, state: "create"});
     }
 
     this._init();

@@ -24,8 +24,6 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
     };
 
     $scope.editForm = function(form){
-      console.log("form :::: "+form);
-      $scope.form = form;
       $state.go("main.form_edit", {form: form});
     }
 

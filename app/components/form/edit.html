@@ -11,8 +11,8 @@
 
 <div>
   <label>Form Type</label>
-  <select >
-    <option ng-model="form.type" ng-repeat="x in form.typeOptions"><span>{{x}}</span><span>{{form.prediction[$index]*100 | number:0}}%</span></option>
+  <select ng-model="form.type">
+    <option ng-repeat="x in form.typeOptions"><span>{{x}}</span><span>{{form.prediction[$index]*100 | number:0}}%</span></option>
   </select>
   <input type="text" id="form_type" ng-model="form.type"/>
 </div>
@@ -93,7 +93,7 @@
   <button>
     Cancel
   </button>
-  <button ng-click="updateField()">
+  <button ng-click="discoverTests(form)">
     Save & create tests
   </button>
 </div>

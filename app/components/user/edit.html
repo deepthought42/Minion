@@ -1,22 +1,26 @@
+USER ::  {{user}}
 <div>
   <label>Username</label>
-  <input type="text" id="test_user_username" ng-model="test_user.username"/>
+  <input type="text" id="test_user_username" ng-model="user.username"/>
 </div>
 
 <div>
   <label>Password</label>
-  <input type="text" id="test_user_password" ng-model="test_user.password"/>
+  <input type="text" id="test_user_password" ng-model="user.password"/>
 </div>
 <div>
   <label>Role</label>
-  <input type="text" id="test_user_role" ng-model="test_user.role"/>
+  <input type="text" id="test_user_role" ng-model="user.role"/>
 </div>
 <div>
   Status
   Enabled
-  <input type="checkbox" id="test_user_status" ng-model="test_user.isEnabled" />
+  <input type="checkbox" id="test_user_status" ng-model="user.enabled" />
   Disabled
 </div>
-<button ng-click="create_user(test_user)">
+<button ng-if="state=='create'"ng-click="save_user(user)">
   Create User
+</button>
+<button ng-if="state=='update'"ng-click="save_user(user)">
+  Update User
 </button>
