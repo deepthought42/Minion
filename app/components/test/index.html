@@ -247,55 +247,88 @@
                            ng-if="node.type == 'PageState'"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
-                        <div class="path-page path-node">
-  					              <img src="{{node.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" />
-  											</div>
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
+													<div class="path-page path-node">
+														<img src="{{node.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" />
+													</div>
+												</button>
                       </div>
-                      <div ng-if="node.type == 'PageElement'" class="node-group"
+
+                      <div ng-if="node.type == 'PageElement'" class="element-action node-group vertical__center__int"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
-  											<div class="path-node path-element vertical__center__int" tooltip-placement="top">
-  												<span class="" >
-  													{{node.name}}
-  												</span>
-  											</div>
-												<div class="path-bar">
-												</div>
-												<div class="path-node path-action vertical__center__int" tooltip-placement="top">
-													<span ng-if="current_path_objects[$index+1].name=='click'" class="vertical__center__int">
-														<i class="fa fa-mouse-pointer fa-2x"></i>
-													</span>
-													<span ng-if="current_path_objects[$index+1].name=='doubleClick'" class="vertical__center__int">
-														<i class="fa fa-mouse-pointer fa-2x"></i>
-														<div class=”doubleclick” >
-																x2
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
+													<div class="node__title" >
+															Html Tag
+													</div>
+													<div class="path-node path-element vertical__center__int" tooltip-placement="top">
+														<div class="" >
+															{{node.name}}
 														</div>
-													</span>
-													<span ng-if="current_path_objects[$index+1].name=='mouseover'" class="vertical__center__int">
-														<i class="fa fa-hand-pointer-o fa-2x"></i>
-													</span>
-													<span ng-if="current_path_objects[$index+1].name=='scroll'" class="vertical__center__int">
-														<i class="fa fa-arrows-v fa-2x"></i>
-													</span>
-													<span ng-if="current_path_objects[$index+1].name=='sendKeys'" class="vertical__center__int">
-														<i class="fa fa-i-cursor fa-2x"></i>
-													</span>
-												</div>
-											</div>
-											<div ng-if="test.pathKeys.length > 1 && node.type != 'Action'" class="path-bar">
+													</div>
+												</button>
+
+													<div class="path-bar">
+                        	</div>
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
+													<div class="node__title" >
+															<span ng-if="current_path_objects[$index+1].name=='click'" class="vertical__center__int">
+																Click
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='doubleClick'" class="vertical__center__int">
+																<i class="fa fa-mouse-pointer fa-1x"></i>
+																Double Click
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='mouseover'" class="vertical__center__int">
+																Mouseover
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='scroll'" class="vertical__center__int">
+																Scroll
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='sendKeys'" class="vertical__center__int">
+																Type
+															</span>
+													</div>
+													<div  class="path-action">
+														<div class="path-node path-action-content " tooltip-placement="top">
+															<span ng-if="current_path_objects[$index+1].name=='click'" class="vertical__center__int">
+																<i class="fa fa-mouse-pointer fa-2x"></i>
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='doubleClick'" class="vertical__center__int">
+																<i class="fa fa-mouse-pointer fa-1x"></i>
+																<div class=”doubleclick” >
+																		x2
+																</div>
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='mouseover'" class="vertical__center__int">
+																<i class="fa fa-hand-pointer-o fa-1x"></i>
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='scroll'" class="vertical__center__int">
+																<i class="fa fa-arrows-v fa-1x"></i>
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='sendKeys'" class="vertical__center__int">
+																<i class="fa fa-i-cursor fa-1x"></i>
+															</span>
+														</div>
+													</div>
+												</button>
+                      </div>
+					<div ng-if="test.pathKeys.length > 1 && node.type != 'Action'" class="path-bar">
 											</div>
 										</div>
 										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
 											<div ng-if="test.pathKeys.length > 1" class="path-page path-node">
-												<img src="{{test.result.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
+													<img src="{{test.result.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
+												</button>
 											</div>
 										</div>
 									</div>
 
 									<div class="col-sm-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageElement'">
 										<div class="row">
-											<div class="col-sm-6">
-												<div class="node__screenshots test__data__box__shadow tabs tabs-style-linemove">
+											<div class="col-sm-6 equal-height-container">
+												<div class="equal-height node__screenshots test__data__box__shadow tabs tabs-style-linemove">
 													<div class="content-wrap screenshot-section">
 														<div id="section-linemove-1">
 															<div class="element__image col-xs-12">
@@ -326,8 +359,8 @@
 													</nav>
 											</div><!-- /tabs -->
 										</div>
-										<div class="col-sm-6">
-												<div class="node__data test__data__box__shadow tabs tabs-style-linemove">
+										<div class="col-sm-6 equal-height-container">
+												<div class="equal-height node__data test__data__box__shadow tabs tabs-style-linemove">
 													<nav>
 														<ul>
 															<li class="tabs-style" ng-click="visible_test_nav2='section-linemove-1'" ng-class="visible_test_nav2=='section-linemove-1' ? 'tabs-style_active' : ''">
@@ -459,8 +492,8 @@
 
 									<div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageState'">
 										<div class="row">
-											<div class="col-sm-6">
-												<div class="node__screenshots test__data__box__shadow tabs tabs-style-linemove">
+											<div class="col-sm-6 equal-height-container">
+												<div class="equal-height node__screenshots test__data__box__shadow tabs tabs-style-linemove">
 													<div class="content-wrap screenshot-section">
 														<div id="section-linemove-1">
 															<div class="page__image col-xs-12">
@@ -472,6 +505,11 @@
 																				src="{{browser_screenshot.viewportScreenshot}}"
 																				ng-if="visible_browser_screenshot==browser_screenshot.browser"
 																				ng-click="openPageModal(browser_screenshot.viewportScreenshot)" />
+																	<div class="expand" data-toggle="modal" data-target="#exampleModal"
+																				ng-if="visible_browser_screenshot==browser_screenshot.browser"
+																				ng-click="openPageModal(browser_screenshot.viewportScreenshot)">
+																	<h6>Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i></h6>
+                                </div>
 	                              </div>
 															</div>
 														</div>
@@ -494,8 +532,8 @@
 													</nav>
 											</div><!-- /tabs -->
 										</div>
-										<div class="col-sm-6">
-												<div class="node__data test__data__box__shadow tabs tabs-style-linemove">
+										<div class="col-sm-6 equal-height-container">
+												<div class="equal-height node__data test__data__box__shadow tabs tabs-style-linemove">
 													<div class="col-xs-12">
 														<h5 class="info__title">
 															Info
