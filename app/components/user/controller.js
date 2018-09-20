@@ -31,7 +31,6 @@ angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService'])
     }
 
     $scope.createUser = function(user){
-      console.log("USER :: "+Object.keys(user));
         $state.go("main.edit_user", {user: null, state: "create"});
     }
 

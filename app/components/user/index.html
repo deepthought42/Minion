@@ -11,15 +11,17 @@
           Username
         </div>
         <div class="flex-auto test_functions">
-          ???
+          Enabled/Disabled
         </div>
         <div class="flex-initial time_stats text-right">
-          Status
+          Role
         </div>
         <div class="flex-initial date_stats text-right">
           Date Created
         </div>
         <div class="flex-none discovery_functions">
+          <i class="fa fa-pencil"></i>
+          <i class="fa fa-trash"></i>
         </div>
         <div class="flex-none accordion-flex">
         </div>
@@ -44,31 +46,14 @@
             <i class="fa fa-pencil edithover" ng-click="user.show_user_name_edit_field = true" ></i>
           </div>
         </div>
-         <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="user.show_user_name_edit_field">
-          <div class="row">
-            <div class="flex-auto">
-              <div class="">
-                <input class="user-control title__edit" type="text" ng-model="new_name" ng-value="user.name" ng-trim="false"/>
-              </div>
-            </div>
-            <div class="flex-none test_name_edit">
-              <div class="title__edit__buttons margin_fifteen_left btn--secondary" ng-click="cancelEditingUserName(test)" ng-show="!user.show_waiting_icon">
-                 Cancel
-               </div>
-               <div class="title__edit__buttons margin_fifteen_left btn--primary " ng-click="setUserName(test, new_name)" ng-show="!user.show_waiting_icon">
-                 Save
-               </div>
-              <div class="" ng-show="user.show_waiting_icon">
-                <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-              </div>
-            </div>
-          </div>
+        <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="user.show_user_name_edit_field">
+          <input class="user-control title__edit" type="text" ng-model="new_name" ng-value="user.name" ng-trim="false"/>
         </div>
         <div class="flex-initial text-left time_stats test__profile_stretch" >
-          {{}}???
+          {{user.enabled}}
         </div>
         <div class="flex-initial text-right time_stats test__profile_stretch" >
-          {{user.status  || "Unknown"}}
+          {{user.role  || "Unknown"}}
         </div>
         <div class="flex-initial text-right date_stats test__profile_stretch" >
           {{( user.dateCreated | date : 'MM/dd/yy h:mm a')  || "Unknown"}}

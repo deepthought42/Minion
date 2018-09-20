@@ -30,6 +30,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       Domain.updateForm({domain_id: $scope.domain.id, key: form.key, form_type: form.type}).$promise
         .then(function(data){
           console.log("Successfully updated form");
+          $state.go("main.form");
         })
         .catch(function(err){
           console.log("error occured while saving form");
