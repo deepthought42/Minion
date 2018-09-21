@@ -28,10 +28,13 @@ angular.module('Qanairy', [
   'ngOnboarding',
   'Qanairy.AccountService',
   'rzModule',
-  'ngRaven'
+  'ngRaven',
+  'ngSegment'
 ]).
-config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider', 'ngOnboardingDefaultsProvider', '$locationProvider',
-  function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider) {
+config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider', 'ngOnboardingDefaultsProvider', '$locationProvider', 'segmentProvider',
+  function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider, segmentProvider) {
+    segmentProvider.setKey('DkANikjZ5P3CDa4rahz8PmyawVteNyiX');
+
     $urlRouterProvider.otherwise('/domains');
 
     StripeCheckoutProvider.defaults({
@@ -43,7 +46,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       domain: 'staging-qanairy.auth0.com',
       responseType: 'token id_token',
       audience: 'https://staging-api.qanairy.com',
-      redirectUri: 'http://localhost:8001/#/domains',//'https://app.qanairy.com',
+      redirectUri: 'http://localhost:8001',//'https://app.qanairy.com',
       scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions'
     });
 
@@ -62,30 +65,48 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
   function($rootScope, store, jwtHelper, $state , $location, $window, Auth, Account){
     Auth.handleAuthentication();
 
-    Account.getOnboardingSteps().$promise
-      .then(function(data){
-        store.set('onboard', data);
-        $rootScope.$broadcast('onboardingStepsAcquired');
-      })
-      .catch(function(data){
-
-      });
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
        if(store.get('domain') == null && toState.name != 'subscribe' && toState.name != 'main.account' && toState.name != 'main.dashboard'){
          $rootScope.$broadcast('domainRequiredError');
          if(toState.name != 'main.domains' && fromState.name == 'main.domains'){
+           console.log("navigating to nowhere");
            e.preventDefault();
          }
          else if(toState.name != 'main.domains' && fromState.name != 'main.domains'){
+           console.log("navigating to domain page");
            e.preventDefault();
            $state.go('main.domains');
          }
        }
     });
 
+    $rootScope.$on('$stateChangeSuccess', function (e, toState, toParams, fromState, fromParams) {
+      var path = $location.path();
+      var queryString = '';
+      var referrer = '';
+
+      //check if there is a query string
+      if(path.indexOf('?') !== -1){
+        queryString = path.substring(path.indexOf('?'), path.length);
+      }
+
+      //Check if there is a referrer
+      if(fromState.name){
+        referrer = $location.protocol() + "://" + $location.host() + "/#" + fromState.url;
+      }
+
+      analytics.page({
+        path: path,
+        referrer: referrer,
+        search: queryString,
+        url: $location.absUrl()
+      });
+    });
+
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
+      console.log("checking if authenticated");
       if(!Auth.isAuthenticated()){
         Auth.login();
       }

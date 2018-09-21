@@ -13,7 +13,6 @@
     "html5-boilerplate": "~5.2.0",
     "angular-material": "1.1.6",
     "angular-resource": "1.5.8",
-    "angular-auth0": "3.0.0",
     "angular-jwt": "latest",
     "a0-angular-storage": "latest",
     "sockjs": "~0.3.4",

@@ -12,36 +12,29 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
     function handleAuthentication() {
       angularAuth0.parseHash(function(err, authResult) {
         if (authResult && authResult.accessToken && authResult.idToken) {
-          sessionStorage.setItem('token', authResult.accessToken);
 
           setSession(authResult);
 
           getProfile(function(err, profile) {
-            $scope.profile = profile;
-            console.log("PROFILE :: "+$scope.profile);
+            console.log("PROFILE :: "+profile);
             sessionStorage.setItem('profile', profile);
           });
 
-          analytics.identify($scope.profile.id, {
-            email : $scope.profile.email
+          analytics.identify(sessionStorage.get('profile').id, {
+            email : profile.email
           }, function(){
-            if(store.get('domain')){
-              $state.go('main.discovery');
-            }
-            else{
-              $state.go('main.domains');
-            }
+
           });
         } else if (err) {
-          $timeout(function() {
-            $state.go('main.domains');
-          });
           console.log(err);
+          login();
         }
       });
     }
 
     function setSession(authResult) {
+      sessionStorage.setItem('token', authResult.accessToken);
+
       // Set the time that the access token will expire at
       let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
       localStorage.setItem('access_token', authResult.accessToken);
@@ -50,6 +43,8 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
     }
 
     function logout() {
+      sessionStorage.removeItem('token');
+
       // Remove tokens and expiry time from localStorage
       localStorage.removeItem('access_token');
       localStorage.removeItem('id_token');
