@@ -27,6 +27,9 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
               console.log("analytics stuff");
             });
           });
+
+          $state.go('main.domains');
+
         } else if (err) {
           $timeout(function() {
             $state.go('main.domains');

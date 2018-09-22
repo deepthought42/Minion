@@ -7,8 +7,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     url: "/domains",
     templateUrl: 'components/domain/index.html',
     controller: 'DomainCtrl',
-    data: {
-      requiresLogin: true
+    sp: {
+      authenticate: true
     }
   });
 }])
