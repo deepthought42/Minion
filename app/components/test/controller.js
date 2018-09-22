@@ -193,6 +193,11 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       else{
         test.status = "FAILING";
       }
+
+      analytics.track("Update Browser Passing Status", {
+        test_key : test.key,
+        status : test.status
+      }, function(success){});
     }
 
     $scope.runTest = function(firefox_selected, chrome_selected){
@@ -208,6 +213,11 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       if(chrome_selected){
         browsers.push("chrome");
       }
+
+      analytics.track("Run Test", {
+        chrome : chrome_selected,
+        firefox : firefox_selected
+      }, function(success){});
 
       $scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
@@ -271,6 +281,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         browsers.push("chrome");
       }
 
+      analytics.track("Run Tests", {
+        chrome : chrome_selected,
+        firefox : firefox_selected,
+        test_count : keys.length
+      }, function(success){});
+
       $scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
         Test.runTests({test_keys: keys, browser_name: browsers[i]}).$promise
@@ -315,6 +331,11 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     }
 
     $scope.runGroupTests = function(url, group){
+      analytics.track("Run Tests By Group", {
+        group : group,
+        domain : url
+      }, function(success){});
+
       Test.runTestsByGroup({url: url, group: group}).$promise
         .then(function(data){
 
@@ -330,15 +351,21 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
          return;
       }
       Test.addGroup({name: group.name,
-                       description: group.description,
-                       key: test.key}).$promise
-                .then(function(data){
-                   $scope.group.name = null;
-                   test.groups.push(data);
-                 })
-                 .catch(function(err){
-                   $scope.errors.push(err.data);
-                 });
+                     description: group.description,
+                     key: test.key}).$promise
+              .then(function(data){
+                 $scope.group.name = null;
+                 test.groups.push(data);
+               })
+               .catch(function(err){
+                 $scope.errors.push(err.data);
+               });
+
+       analytics.track("Added Group", {
+         group_key: group.key,
+         test_key: test.key,
+         success : !$scope.errors.length
+       }, function(success){});
     }
 
     $scope.removeGroup = function(test, group, $index){
@@ -348,7 +375,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         })
         .catch(function(err){
           $scope.errors.push(err);
-        });;
+        });
+
+        analytics.track("Removed Group", {
+          group_key: group.key,
+          test_key: test.key,
+          success : !$scope.errors.length
+        }, function(success){});
     }
 
     $scope.toggleTestDataVisibility = function(test, index){
@@ -462,20 +495,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           test.waitingOnStatusChange = false;
           $scope.errors.push(err.data);
         });
-/*
-      Test.updateName(persistable_test).$promise
-        .then(function(data){
-          $scope.editing_test_idx = -1;
-          test.show_waiting_icon = false;
-          test.show_test_name_edit_field=false;
-          test.name = test.new_name;
-        })
-        .catch(function(err){
-          test.show_waiting_icon = false;
-          $scope.errors.push(err);
-          test.show_test_name_edit_field = false;
-        });
-        */
+
+      analytics.track("Updated Test", {
+        group_key: group.key,
+        test_key: test.key,
+        success : !$scope.errors.length
+      }, function(success){});
       test.show_waiting_icon = true;
     }
 
@@ -527,6 +552,11 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         .catch(function(err){
           console.log("An error occurred while archiving test");
         });
+
+      analytics.track("Archived Test", {
+        test_key : test.key,
+        success : test.archived
+      }, function(success){});
     }
 
     $scope.askDelete = function(test) {
@@ -573,6 +603,9 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     $scope.editTest = function(test, $index){
       $scope.editing_test_idx = $index;
       $scope.test_copy = JSON.parse(JSON.stringify(test));
+      analytics.track("Clicked Edit Test", {
+        test_key : test.key
+      }, function(success){});
     }
 
     /**

@@ -116,7 +116,7 @@
 						<h5 class="test__title" ng-click="test.show_test_name_edit_field = true">
               {{test.name || "Test #"+($index+1)}}
             </h5>
-						<i class="fa fa-pencil edithover" ng-click="test.show_test_name_edit_field = true" ></i>
+						<i class="fa fa-pencil edithover" ng-click="editTest(test)" ></i>
 					</div>
 				</div>
         <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="test.show_test_name_edit_field">

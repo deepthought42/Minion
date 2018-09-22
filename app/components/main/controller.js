@@ -40,6 +40,15 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       encrypted: true
     });
 
+    Account.getOnboardingSteps().$promise
+      .then(function(data){
+        store.set('onboard', data);
+        $rootScope.$broadcast('onboardingStepsAcquired');
+      })
+      .catch(function(data){
+
+      });
+
     $scope.extractHostname = function(url) {
         var hostname;
         var domain = store.get('domain');
@@ -86,6 +95,9 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     }
 
     $scope.logout = function(){
+      analytics.track("Clicked Logout", {
+      }, function(success){});
+
       Auth.logout();
       $scope.isAuthenticated=false;
       Auth.login();
@@ -93,6 +105,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
     $scope.$on('domain_updated', function(){
       $scope.domain = store.get('domain');
+      
       $scope.$apply();
     });
 
