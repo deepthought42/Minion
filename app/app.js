@@ -111,7 +111,6 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     });
 
     $rootScope.$on('auth:unauthorized', function (e, toState, toParams, fromState, fromParams) {
-      console.log("checking if authenticated");
       if(!Auth.isAuthenticated()){
         Auth.login();
       }
