@@ -105,13 +105,11 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
     $scope.$on('domain_updated', function(){
       $scope.domain = store.get('domain');
-      
+
       $scope.$apply();
     });
 
     $scope.$on('domain_selected', function(){
-      console.log("PUSHER DOMAIN :: "+store.get('domain'));
-      console.log("1PUSHER DOMAIN :: "+$scope.domain.url);
       $scope.domain = store.get('domain');
 
       var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
