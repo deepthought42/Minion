@@ -215,9 +215,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         analytics.track("Started Discovery", {
           domain : $scope.discovery_url,
           success : !$scope.errors.length
-        }, function(success){
-
-        });
+        }, function(success){});
     }
 
     $scope.setTestIndex = function(idx){
@@ -240,18 +238,13 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         .catch(function(err){
           test.show_waiting_icon = false;
           test.show_test_name_edit_field = false;
+          $scope.errors.push("An error occurred while trying to update the test name");
         });
-    }
 
-    $scope.archiveTest = function(test){
-      Test.archive({key: test.key} ).$promise.
-        then(function(resp){
-          test.archived = key;
-          console.log("success!");
-        })
-        .catch(function(err){
-          console.log("An error occurred while archiving test");
-        });
+      analytics.track("Set Test Name", {
+        test_key: test.key,
+        success : !$scope.errors.length
+      }, function(success){});
     }
 
     $scope.getPathObject = function(key){
@@ -315,12 +308,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           $scope.errors.push("An error occurred while archiving test");
         });
 
-        analytics.track("Clicked Archive Test", {
+        analytics.track("Archived Test", {
           test_key : test.key,
           success : test.archived
-        }, function(success){
-
-        });
+        }, function(success){});
     }
 
     $scope.askDelete = function(test) {
@@ -356,9 +347,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
                });
 
        analytics.track("Added Group", {
-         name: group.name,
-         description: group.description,
-         key: test.key,
+         group_key: group.key,
+         test_key: test.key,
          success : !$scope.errors.length
        }, function(success){});
     }
@@ -374,7 +364,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
         analytics.track("Removed Group", {
           group_key: group.key,
-          key: test.key,
+          test_key: test.key,
           success : !$scope.errors.length
         }, function(success){});
     }
@@ -426,6 +416,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         }
     }
 
+    $scope.editTest = function(test){
+      test.show_test_name_edit_field = true;
+      analytics.track("Clicked Edit Test", {
+        test_key : test.key
+      }, function(success){});
+    }
     /**
      *
      */
