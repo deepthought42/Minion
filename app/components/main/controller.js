@@ -92,6 +92,9 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     }
 
     $scope.logout = function(){
+      analytics.track("Clicked Logout", {
+      }, function(success){});
+
       Auth.logout();
       $scope.isAuthenticated=false;
       Auth.login();
@@ -99,6 +102,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
     $scope.$on('domain_updated', function(){
       $scope.domain = store.get('domain');
+      
       $scope.$apply();
     });
 
