@@ -30,7 +30,8 @@ angular.module('Qanairy', [
   'Qanairy.authCallback',
   'rzModule',
   'ngRaven',
-  'ngSegment'
+  'ngSegment',
+  'Qanairy.EventService'
 ]).
 config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider', 'ngOnboardingDefaultsProvider', '$locationProvider', 'segmentProvider',
   function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider, segmentProvider) {
@@ -47,7 +48,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       domain: 'staging-qanairy.auth0.com',
       responseType: 'token id_token',
       audience: 'https://staging-api.qanairy.com',
-      redirectUri: 'http://localhost:8001',//'https://app.qanairy.com',
+      redirectUri: 'http://localhost:8001/#/authenticate',//'https://app.qanairy.com',
       scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions'
     });
 
@@ -59,14 +60,18 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       showStepInfo: false
     });
 
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
   }])
 
-.run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', '$window', 'Auth',
-  function($rootScope, store, jwtHelper, $state , $location, $window, Auth){
+.run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', '$window', 'Auth', 'Events',
+  function($rootScope, store, jwtHelper, $state , $location, $window, Auth, Events){
     Auth.handleAuthentication();
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
+      if(store.get("profile")){
+
+      }
+
      //var requireLogin = toState.data.requireLogin || false;
        if(store.get('domain') == null && toState.name != 'authenticate' && toState.name != 'subscribe' && toState.name != 'main.account' && toState.name != 'main.dashboard'){
          $rootScope.$broadcast('domainRequiredError');

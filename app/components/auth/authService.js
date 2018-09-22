@@ -19,9 +19,9 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
             sessionStorage.setItem('profile', profile);
 
             analytics.identify(profile.id, {
+              name : profile.name,
+              nickname : profile.nickname,
               email : profile.email
-            }, function(){
-              console.log("analytics stuff");
             });
           });
 

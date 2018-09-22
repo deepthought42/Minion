@@ -10,10 +10,10 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
   });
 }])
 
-.controller('AccountCtrl', ['$rootScope', '$scope', 'Account', 'Auth',
-  function($rootScope, $scope, Account, Auth) {
+.controller('AccountCtrl', ['$rootScope', '$scope', 'Account', 'Auth', 'store',
+  function($rootScope, $scope, Account, Auth, store) {
     //INITIALIZATION
-    
+
     $scope.$on('new-account', function(event, args){
       var account = {
         service_package: "alpha",
@@ -26,9 +26,14 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
       Account.save({service_package: account_type, payment_acct: payment_acct});
     }
 
-    $scope.deleteAccount = function(){
+    $scope.deleteAccount = function(acct){
       console.log("Deleting account maybe..");
-      Account.delete();
+      Account.delete(acct);
+      analytics.track("Delete user account", {
+        account_id: acct.id
+      }, function(success){
+
+      });
     }
 
     if (Auth.getCachedProfile()) {
