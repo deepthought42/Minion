@@ -27,6 +27,7 @@ angular.module('Qanairy', [
   'Qanairy.authCallback',
   'ngOnboarding',
   'Qanairy.AccountService',
+  'Qanairy.authCallback',
   'rzModule',
   'ngRaven',
   'ngSegment'
@@ -58,17 +59,16 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       showStepInfo: false
     });
 
-    //$locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
   }])
 
-.run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', '$window', 'Auth', 'Account',
-  function($rootScope, store, jwtHelper, $state , $location, $window, Auth, Account){
+.run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', '$window', 'Auth',
+  function($rootScope, store, jwtHelper, $state , $location, $window, Auth){
     Auth.handleAuthentication();
-
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
-       if(store.get('domain') == null && toState.name != 'subscribe' && toState.name != 'main.account' && toState.name != 'main.dashboard'){
+       if(store.get('domain') == null && toState.name != 'authenticate' && toState.name != 'subscribe' && toState.name != 'main.account' && toState.name != 'main.dashboard'){
          $rootScope.$broadcast('domainRequiredError');
          if(toState.name != 'main.domains' && fromState.name == 'main.domains'){
            console.log("navigating to nowhere");

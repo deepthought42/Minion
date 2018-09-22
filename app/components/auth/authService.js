@@ -16,15 +16,17 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
           setSession(authResult);
 
           getProfile(function(err, profile) {
-            console.log("PROFILE :: "+profile);
             sessionStorage.setItem('profile', profile);
+
+            analytics.identify(profile.id, {
+              email : profile.email
+            }, function(){
+              console.log("analytics stuff");
+            });
           });
 
-          analytics.identify(sessionStorage.get('profile').id, {
-            email : profile.email
-          }, function(){
+          $state.go('main.domains');
 
-          });
         } else if (err) {
           console.log(err);
           login();

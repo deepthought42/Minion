@@ -13,8 +13,10 @@ angular.module('Qanairy.authCallback', ['ui.router'])
 .controller('AuthCallbackCtrl', ['$rootScope', '$scope',
   function($rootScope, $scope) {
     this._init = function(){
-
+      console.log("authenticating view");
     }
+    console.log("authentication panel");
+    
 
     this._init();
   }
