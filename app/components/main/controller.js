@@ -40,6 +40,15 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       encrypted: true
     });
 
+    Account.getOnboardingSteps().$promise
+      .then(function(data){
+        store.set('onboard', data);
+        $rootScope.$broadcast('onboardingStepsAcquired');
+      })
+      .catch(function(data){
+
+      });
+
     $scope.extractHostname = function(url) {
         var hostname;
         //find & remove protocol (http, ftp, etc.) and get hostname
