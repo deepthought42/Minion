@@ -1,26 +1,32 @@
 <div class="content">
-  <div class="test-container">
-
+		
+		<div class="secondary-nav vertical__center__int" >
+			
+		</div>
+		
     <div class="test-labels-container">
       <div class="test-labels">
-        <div class="status__title test__status__frame">
+        <div class="flex-auto test_functions">
           Form Title
         </div>
-        <div class="flex-auto test_functions">
+        <div class="flex-initial date_stats text-left">
           Form Type
         </div>
-        <div class="flex-initial time_stats text-right">
+        <div class="flex-initial date_stats text-left">
           Status
         </div>
         <div class="flex-initial date_stats text-right">
           Date Discovered
         </div>
         <div class="flex-none discovery_functions">
-        </div>
-        <div class="flex-none accordion-flex">
-        </div>
+			</div>
       </div>
     </div>
+	
+	
+			
+		<div class="test-container">
+			
     <div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnForms">
       <div>
         <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw"></i>
@@ -33,6 +39,7 @@
          ng-repeat="form in (filteredForms = forms) | filter:searchText track by $index"
          ng-show="forms.length > 0">
       <div class="test__profile vertical__left__profile" ng-click="setFormIndex($index);visible_tab='nodedata'+$index">
+				
         <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)" ng-if="!form.show_form_name_edit_field">
           <div class="" ng-show="!form.show_form_name_edit_field">
             <h5 class="test__title" ng-click="form.show_form_name_edit_field = true">
@@ -41,6 +48,7 @@
             <i class="fa fa-pencil edithover" ng-click="form.show_form_name_edit_field = true" ></i>
           </div>
         </div>
+				
          <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="form.show_form_name_edit_field">
           <div class="row">
             <div class="flex-auto">
@@ -61,10 +69,11 @@
             </div>
           </div>
         </div>
-        <div class="flex-initial text-left time_stats test__profile_stretch">
+				
+        <div class="flex-initial text-left date_stats test__profile_stretch">
           {{form.type}}
         </div>
-        <div class="flex-initial text-right time_stats test__profile_stretch">
+        <div class="flex-initial text-left date_stats test__profile_stretch">
           {{form.status  || "Unknown"}}
         </div>
         <div class="flex-initial text-right date_stats test__profile_stretch">

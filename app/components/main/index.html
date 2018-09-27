@@ -16,7 +16,7 @@
       </li>
       <li id="notification_li">
 			  <a ui-sref="main.tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fff;' : 'color:#9794d5'}}">
-					<i class="fa fa-list-ul main-nav-icons" aria-hidden="true"></i>
+					<i class="fa fa-check-square-o main-nav-icons" aria-hidden="true"></i>
 					Tests&nbsp;
 					<span id="notification_count" ng-show="approved_test_cnt">
 						{{approved_test_cnt}}
@@ -37,7 +37,7 @@
       </li>
       <li>
         <a ui-sref="main.form"  style="{{$location.path() == '/form' ? 'color: #fff;' : 'color:#9794d5'}}">
-          <i class="fa fa-clipboard-list sidebar-nav-icons" aria-hidden="true"></i>
+          <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
           Forms
         </a>
       </li>

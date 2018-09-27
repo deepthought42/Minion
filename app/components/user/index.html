@@ -1,10 +1,17 @@
 <div class="content">
-  <div class="test-container">
-    <div class="col-sm-12" ng-show="!isStarted" >
-      <button class="btn btn--primary pull-left" ng-click="createUser()" id="start_discovery_button">
-        Create User
-      </button>
-    </div>
+		
+		<div class="secondary-nav vertical__center__int" >
+			<div class="flex-auto">
+				<div class="col-sm-12" ng-show="!isStarted" >
+					<button class="btn btn--primary pull-left" ng-click="createUser()" id="start_discovery_button">
+					Create User
+				</button>
+				</div>
+			</div>
+		</div>
+		
+		
+		
     <div class="test-labels-container">
       <div class="test-labels">
         <div class="status__title test__status__frame">
@@ -20,20 +27,24 @@
           Date Created
         </div>
         <div class="flex-none discovery_functions">
-          <i class="fa fa-pencil"></i>
-          <i class="fa fa-trash"></i>
         </div>
         <div class="flex-none accordion-flex">
         </div>
       </div>
     </div>
+		
+		
+		<div class="test-container">
+			
     <div class="empty__state vertical__center_empty_state_busy" ng-show="users.length == 0">
       <div>
-        <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw"></i>
-        <br><br><br>
-        <h2>No users have been created yet. Click 'Create' to get started </h2>
+      <br><br>
+        <h2>No users have been created yet. Click 'Create User' to get started </h2>
       </div>
     </div>
+		
+		
+		
     <div class="test"
          ng-repeat="user in (filteredUsers = users) | filter:searchText track by $index"
          ng-show="users.length > 0">

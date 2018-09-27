@@ -422,6 +422,11 @@ width: -webkit-calc(100% - 15px);
 .screenshots{
 	  max-height: 200px;
 }
+
+.form-screenshot{
+	  max-height: 400px;
+}
+
 .path-bar .display_none_right{
   display: none !important;
 }
