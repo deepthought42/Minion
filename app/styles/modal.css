@@ -249,8 +249,14 @@ md-dialog {
 
 
 .action_button_container{
+	flex-shrink: 0;
   padding-top: 30px;
-	padding-bottom: 15px;
+	padding-right: 15px;
+	padding-bottom: 55px;
+}
+
+.settings-page{
+	flex: 1 0 auto;
 }
 
 .modal_action_button{

@@ -22,8 +22,22 @@
 }
 
 .standard-container{
-    min-width: 800px !important;
     margin:0px 0px;
+    overflow-y:scroll;
+		height: -moz-calc(100% - 40px);
+    /* WebKit */
+    height: -webkit-calc(100% - 40px);
+    /* Opera */
+    height: -o-calc(100% - 40px);
+    /* Standard */
+    height: calc(100% - 40px);
+}
+
+.sticky-footer-container{
+    margin:0px 0px;
+	   display: flex;
+  min-height: 100vh;
+  flex-direction: column;
     overflow-y:scroll;
 		height: -moz-calc(100% - 40px);
     /* WebKit */
@@ -249,6 +263,9 @@ width: -webkit-calc(100% - 15px);
 }
 .discovery_functions {
 	width:70px;
+}
+.edit_delete_functions {
+	width:125px;
 }
 .test_browsers {
 	width:184px;

@@ -14,22 +14,20 @@
 		
     <div class="test-labels-container">
       <div class="test-labels">
-        <div class="status__title test__status__frame">
+        <div class="flex-auto test_functions">
           Username
         </div>
-        <div class="flex-auto test_functions">
-          Enabled/Disabled
-        </div>
-        <div class="flex-initial time_stats text-right">
+				<div class="flex-initial date_stats text-left">
           Role
+        </div>
+        <div class="flex-initial date_stats text-left">
+          Enabled/Disabled
         </div>
         <div class="flex-initial date_stats text-right">
           Date Created
         </div>
-        <div class="flex-none discovery_functions">
-        </div>
-        <div class="flex-none accordion-flex">
-        </div>
+        <div class="flex-none edit_delete_functions">
+				</div>
       </div>
     </div>
 		
@@ -57,23 +55,24 @@
             <i class="fa fa-pencil edithover" ng-click="user.show_user_name_edit_field = true" ></i>
           </div>
         </div>
+				
         <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="user.show_user_name_edit_field">
           <input class="user-control title__edit" type="text" ng-model="new_name" ng-value="user.name" ng-trim="false"/>
         </div>
-        <div class="flex-initial text-left time_stats test__profile_stretch" >
-          {{user.enabled}}
-        </div>
-        <div class="flex-initial text-right time_stats test__profile_stretch" >
+				<div class="flex-initial date_stats text-left test__profile_stretch" >
           {{user.role  || "Unknown"}}
         </div>
-        <div class="flex-initial text-right date_stats test__profile_stretch" >
+        <div class="flex-initial date_stats text-left test__profile_stretch" >
+          {{user.enabled}}
+        </div>
+        <div class="flex-initial date_stats text-right test__profile_stretch" >
           {{( user.dateCreated | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
         </div>
-        <div class="flex-none discovery_functions text-right test__btns" aria-label="User Functions">
-           <button class="btn btn--tertiary" ng-click="editUser(user)" >
+        <div class="flex-none edit_delete_functions text-right test__btns" aria-label="User Functions">
+           <button class="btn btn--tertiary margin_fifteen_right" ng-click="editUser(user)" >
               <i class="fa fa-pencil"></i>
            </button>
-           <button ng-click="deleteUser()">
+           <button class="btn btn--tertiary" ng-click="deleteUser()">
              <i class="fa fa-trash"></i>
            </button>
          </div>

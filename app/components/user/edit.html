@@ -1,6 +1,6 @@
-<div class="standard-container">
+<div class="sticky-footer-container">
 	
-	<div class="col-sm-12">
+	<div class="col-sm-12 settings-page">
 			<div class="row">
 		<div class="col-sm-12 col-xs-12">
 	
@@ -49,6 +49,19 @@
 			<div class="form_label_description_domain">
 				 <h6>Status</h6>
 			</div>
+		<div class="domain-dialogue-input">
+				<input type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" id="test_user_status" ng-model="user.enabled">
+				<script>
+					$(function() {
+						$('#test_user_status').bootstrapToggle({
+							on: 'Enabled',
+							off: 'Disabled'
+						});
+					})
+				</script>
+			</div>
+		
+		
 			<div class ="domain-dialogue-input" >
 				<div>
 					Enabled
@@ -63,7 +76,11 @@
 <div class="col-sm-6 form_label_description accounts">
 		
 </div>
-<div class="action_button_container col-sm-12 text-right">
+
+	
+</div>
+		</div>
+<div class="action_button_container  text-right">
 	<button class="btn btn--primary title__edit__buttons" ng-if="state=='create'"ng-click="save_user(user)">
 		Create User
 	</button>
@@ -72,6 +89,4 @@
 	</button>
 </div>
 	
-</div>
-		</div>
 </div>
