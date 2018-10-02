@@ -1,14 +1,14 @@
 <div class="sticky-footer-container">
-	
+
 	<div class="col-sm-12 settings-page">
 			<div class="row">
 		<div class="col-sm-12 col-xs-12">
-	
+
 	<h2 class="settings__title">
 		User Settings
 	</h2>
 	<div class="settings_description">
-		  Create a user by adding authentication permissions. 
+		  Create a user by adding authentication permissions.
 	</div>
 				</div></div>
 	<div class="row">
@@ -24,7 +24,7 @@
 				</div>
 			</div>
 	</div>
-					
+
 	<div class ="col-sm-12 form_molecule" >
 			<div class="form_label_description_domain">
 				 <h6>Password</h6>
@@ -44,7 +44,7 @@
 					<input type="text" class="form-control" id="test_user_role" ng-model="user.role"/>
 				</div>
 			</div>
-	</div>	
+	</div>
 	<div class ="col-sm-12 form_molecule" >
 			<div class="form_label_description_domain">
 				 <h6>Status</h6>
@@ -60,8 +60,8 @@
 					})
 				</script>
 			</div>
-		
-		
+
+
 			<div class ="domain-dialogue-input" >
 				<div>
 					Enabled
@@ -74,19 +74,19 @@
 			</div>
 </div>
 <div class="col-sm-6 form_label_description accounts">
-		
+
 </div>
 
-	
+
 </div>
 		</div>
 <div class="action_button_container  text-right">
 	<button class="btn btn--primary title__edit__buttons" ng-if="state=='create'"ng-click="save_user(user)">
 		Create User
 	</button>
-	<button class="btn btn--primary title__edit__buttons" ng-if="state=='update'"ng-click="save_user(user)">
+	<button class="btn btn--primary title__edit__buttons" ng-if="state=='update'"ng-click="update_user(user)">
 		Update User
 	</button>
 </div>
-	
+
 </div>
