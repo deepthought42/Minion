@@ -52,8 +52,8 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
     $scope.update_user = function(user){
       console.log(user);
       console.log($scope.domain);
-      Domain.updateUser({domain_id: $scope.domain.id, user_id: user.id, username: user.username, password: user.password, role: user.role, enabled: user.enabled}).$promise
-        .then(function(){
+      TestUser.update({id: user.id, test_user: user}).$promise
+        .then(function(data){
           store.set('current_user', null);
           console.log("user updated successfully");
           $state.go("main.users")
