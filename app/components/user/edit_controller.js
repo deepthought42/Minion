@@ -39,9 +39,13 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
       console.log(user);
       console.log($scope.domain);
       Domain.saveUser({domain_id: $scope.domain.id, username: user.username, password: user.password, role: user.role, enabled: user.enabled}).$promise
-        .then(function(){
+        .then(function(user){
+          store.set('current_user', null);
           console.log("user saved successfully");
           $state.go("main.users")
+        })
+        .catch(function(err){
+          console.log("an error occurred while creating user :: "+err);
         });
     }
 
@@ -50,8 +54,12 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
       console.log($scope.domain);
       Domain.updateUser({domain_id: $scope.domain.id, user_id: user.id, username: user.username, password: user.password, role: user.role, enabled: user.enabled}).$promise
         .then(function(){
+          store.set('current_user', null);
           console.log("user updated successfully");
           $state.go("main.users")
+        }).
+        catch(function(err){
+          console.log("An error occured while updating user :: "+err);
         });
     }
 
