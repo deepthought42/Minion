@@ -27,7 +27,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
     };
 
     $scope.discoverTests = function(form){
-      Domain.updateForm({domain_id: $scope.domain.id, key: form.key, form_type: form.type}).$promise
+      Domain.updateForm({domain_id: $scope.domain.id, key: form.key, name: form.name, form_type: form.type}).$promise
         .then(function(data){
           console.log("Successfully updated form");
           $state.go("main.form");
