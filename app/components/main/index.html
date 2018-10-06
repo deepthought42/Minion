@@ -65,8 +65,8 @@
 							<i class="fa fa-caret-down fa-fw"></i>
               </div>
               <ul class="dropdown-menu" aria-labelledby="domainsDropdownMenuButton">
-                <li class="dropdown-item" ng-repeat="domain_item in domain_list" ng-if="domain_item.url != domain.url">
-                  {{domain_item.url}}
+                <li class="dropdown-item" ng-repeat="domain in domain_list" ng-if="domain_item.url != domain.url" ng-click="selectDomain(domain)">
+                  {{domain.url}}
                 </li>
                 <li class="manage_domains dropdown-item" ng-click="showDomainsPage()">
                     Manage Domains

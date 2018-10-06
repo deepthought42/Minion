@@ -13,8 +13,8 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Account', 'Action', 'Auth', '$state',
-  function ($rootScope, $scope, PathRealtimeService, store, $location, Account, Action, Auth, $state) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Account', 'Action', 'Domain', 'Auth', '$state',
+  function ($rootScope, $scope, PathRealtimeService, store, $location, Account, Action, Domain, Auth, $state) {
 
     $scope.displayUserDropDown = false;
     $scope.menuToggled = false;
@@ -83,6 +83,31 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
         path_objects.push( JSON.parse(data));
         store.set('path_objects',path_objects);
       });
+    }
+
+    /**
+     * Sets domain for session
+     */
+    $scope.selectDomain = function(domain){
+      store.set('domain', domain);
+      //get default browser for domain
+      //if default browser is not set then show default browser selection dialog box
+      $rootScope.$broadcast("domain_selected", domain);
+
+      //Load all page states
+
+      Domain.getAllPathObjects({host: domain.url}).$promise
+                .then(function(data){
+                    store.set('path_objects', data);
+                });
+
+      analytics.track("Updated Domain", {
+        domain, domain,
+        successful: !$scope.show_create_domain_err
+      }, function(success){  });
+
+      $state.go("main.discovery");
+
     }
 
     $scope.showDomainsPage = function(){
