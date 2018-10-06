@@ -635,6 +635,10 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     }
 
     /* EVENTS */
+    $rootScope.$on('reload_tests', function(e){
+      $scope.getTestsByUrl(store.get('domain').url);
+    });
+
     $rootScope.$on('missing_resorce_error', function (e){
       $scope.errors.push("There was an issue finding your resource. We'll find it soon and return it to it's rightful place.");
     });

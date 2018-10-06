@@ -93,6 +93,9 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       //get default browser for domain
       //if default browser is not set then show default browser selection dialog box
       $rootScope.$broadcast("domain_selected", domain);
+      console.log("selected domain/");
+
+      $rootScope.$broadcast("reload_tests", domain);
 
       //Load all page states
 
@@ -100,11 +103,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
                 .then(function(data){
                     store.set('path_objects', data);
                 });
-
-      analytics.track("Updated Domain", {
-        domain, domain,
-        successful: !$scope.show_create_domain_err
-      }, function(success){  });
 
       $state.go("main.discovery");
 
@@ -136,7 +134,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
     $scope.$on('domain_selected', function(){
       $scope.domain = store.get('domain');
-
       var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
 
       channel.bind('path_object', function(data) {

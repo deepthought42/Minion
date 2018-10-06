@@ -503,6 +503,44 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     this._init();
 
     /* EVENTS */
+    $rootScope.$on('reload_tests', function(e){
+      Discovery.getStatus({url: store.get('domain').url}).$promise
+        .then (function(data){
+          $scope.discovery_status = data;
+
+          if( data.startTime == null){
+            $scope.isStarted = false;
+          }
+          else{
+            var diff_time = (Date.now()-(new Date(data.startTime)))/1000/60;
+            if(diff_time > 1440 || (data.totalPathCount <= data.examinedPathCount)){
+              $scope.isStarted = false
+            }
+            else{
+              $scope.isStarted = true;
+            }
+          }
+        })
+        .catch(function(err){
+          $scope.isStarted = false;
+        });
+
+      Test.getUnverified({url:  store.get('domain').url}).$promise
+        .then(function(data){
+          $scope.tests = data
+          $scope.waitingOnTests = false;
+          console.log("$scope.tests :: "+data);
+          if(data.length > 0){
+            $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
+            $scope.discoveredTestOnboardingIndex = 0;
+          }
+        })
+        .catch(function(err){
+          $scope.errors.push(err.data);
+          $scope.waitingOnTests = false;
+        });
+    });
+
     $rootScope.$on('missing_resorce_error', function (e){
       $scope.errors.push("We seem to have misplaced those records. Please try again. I'm sure we have them somewhere.");
     });
