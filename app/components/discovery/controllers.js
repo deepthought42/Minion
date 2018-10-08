@@ -38,8 +38,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.current_domain = store.get('domain');
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
-        $scope.discovery_url = $scope.current_domain.url;
-        Discovery.getStatus({url: $scope.discovery_url}).$promise
+        Discovery.getStatus({url: $scope.current_domain.url}).$promise
           .then (function(data){
             $scope.discovery_status = data;
 
@@ -60,7 +59,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
             $scope.isStarted = false;
           });
 
-        Test.getUnverified({url: $scope.discovery_url}).$promise
+        Test.getUnverified({url: $scope.current_domain.url}).$promise
           .then(function(data){
             $scope.tests = data
             $scope.waitingOnTests = false;
@@ -202,7 +201,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.discoveryRunningOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery-running');
       $scope.discoveryRunningOnboardingIndex = 0;
 
-      Discovery.startWork({url:  $scope.discovery_url}).$promise
+      Discovery.startWork({url:  $scope.current_domain.url}).$promise
         .then(function(value){
           $scope.discovery_status = value;
         })
@@ -219,7 +218,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
 
         analytics.track("Started Discovery", {
-          domain : $scope.discovery_url,
+          domain : $scope.current_domain.url,
           success : !$scope.errors.length
         }, function(success){});
     }
@@ -504,7 +503,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
     /* EVENTS */
     $rootScope.$on('reload_tests', function(e){
-      Discovery.getStatus({url: store.get('domain').url}).$promise
+      $scope.current_domain =  store.get('domain');
+      Discovery.getStatus({url: $scope.current_domain.url}).$promise
         .then (function(data){
           $scope.discovery_status = data;
 

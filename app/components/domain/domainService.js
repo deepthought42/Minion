@@ -4,6 +4,7 @@ var domainService = angular.module('Qanairy.DomainService', ['ngResource', 'Qana
 
 domainService.factory('Domain', ['$resource', 'Qanairy.serviceConfig', function ($resource, config) {
   return $resource(config.basePath + '/domains', {domain_id: '@domain_id'}, {
+    delete: { url: config.basePath + '/domains/:domain_id', method: 'DELETE'},
     update: { method: 'PUT', params: {key: '@key', protocol: '@protocol', browser_name: '@browser_name', logoUrl: '@logoUrl'}},
     save: { method: 'POST', params: {protocol: '@protocol', browser_name: '@browser_name', url: '@url', logoUrl: '@logoUrl'}},
     addUser:{url: config.basePath + '/domains/:domain_id/users', method: 'POST', params: {username: '@username', password: '@password', role: '@role', enabled: '@enabled'}},

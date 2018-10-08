@@ -220,7 +220,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       var confirmed_delete = confirm("Are you sure you want to remove "+domain.url);
 
       if(confirmed_delete){
-        Domain.delete({key: domain.key}).$promise
+        Domain.delete({domain_id: domain.id}).$promise
           .then(function(data){
             $scope.domains.splice(index, 1);
             $rootScope.$broadcast('domain_updated');
