@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService'])
+angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService', 'ui.toggle'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.users', {

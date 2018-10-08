@@ -63,7 +63,7 @@
           {{user.role  || "Unknown"}}
         </div>
         <div class="flex-initial date_stats text-left test__profile_stretch" >
-          {{user.enabled}}
+          <toggle id="test_user_status" ng-model="user.enabled" ng-change="changed()" on="Enabled" off="Disabled"></toggle>
         </div>
         <div class="flex-initial date_stats text-right test__profile_stretch" >
           {{( user.dateCreated | date : 'MM/dd/yy h:mm a')  || "Unknown"}}

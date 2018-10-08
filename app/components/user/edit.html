@@ -46,29 +46,12 @@
 			</div>
 	</div>
 	<div class ="col-sm-12 form_molecule" >
-			<div class="form_label_description_domain">
-				 <h6>Status</h6>
-			</div>
+		<div class="form_label_description_domain">
+			 <h6>Status</h6>
+		</div>
 		<div class="domain-dialogue-input">
-				<input type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" id="test_user_status" ng-model="user.enabled">
-				<script>
-					$(function() {
-						$('#test_user_status').bootstrapToggle({
-							on: 'Enabled',
-							off: 'Disabled'
-						});
-					})
-				</script>
-			</div>
-
-
-			<div class ="domain-dialogue-input" >
-				<div>
-					Enabled
-					<input type="checkbox" id="test_user_status" ng-model="user.enabled" />
-					Disabled
-				</div>
-			</div>
+			<toggle id="test_user_status" ng-model="user.enabled" ng-change="changed()" on="Enabled" off="Disabled"></toggle>
+		</div>
 	</div>
 
 			</div>
