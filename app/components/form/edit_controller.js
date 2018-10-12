@@ -26,6 +26,10 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       console.log("form : "+$scope.form);
     };
 
+    $scope.cancel = function(){
+      $state.go("main.form");
+    }
+
     $scope.discoverTests = function(form){
       Domain.updateForm({domain_id: $scope.domain.id, key: form.key, name: form.name, form_type: form.type}).$promise
         .then(function(data){
