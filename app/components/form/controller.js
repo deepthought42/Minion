@@ -21,6 +21,17 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
           $scope.forms = response;
           console.log("forms :: "+$scope.forms);
         });
+
+      $scope.domain_id = store.get('domain').id;
+      Domain.getUsers({domain_id: $scope.domain_id}).$promise
+        .then(function(users){
+          console.log('retreived domain users');
+          $scope.users = users;
+          store.set('users', users);
+        })
+        .catch(function(){
+
+        })
     };
 
     $scope.editForm = function(form){
@@ -46,6 +57,7 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
         }
       }
       if(!already_exists){
+        console.log("pushing form onto forms stack")
         $scope.forms.push(reported_form);
       }
       $scope.waitingOnForms = false;
