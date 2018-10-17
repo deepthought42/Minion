@@ -147,6 +147,10 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       $scope.approved_test_cnt = approved_test_cnt;
     });
 
+    $scope.$on('updateFormClassificationAlert', function(event, status){
+      $scope.forms_need_classifying = status;
+    })
+
     Action.query().$promise.
       then(function(data){
         store.set('actions', data);

@@ -35,7 +35,7 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
           Domain.updateForm({domain_id: $scope.domain.id, key: $scope.form.key, name: $scope.form.name, form_type: $scope.form.type}).$promise
             .then(function(data){
               console.log("Successfully updated form");
-              $state.go("main.form");
+              $state.go("main.discovery");
             })
             .catch(function(err){
               alert("error occurred while initiating login/registration form discovery");
