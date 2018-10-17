@@ -203,6 +203,14 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           }, function(success){  });
         // declare this function to handle response
         //set filestack url somewhere
+
+        console.log("response :: "+Object.keys(response));
+        console.log("response :: "+Object.keys(response.filesUploaded));
+
+      //  console.log("response failed:: "+Object.keys(response.filesFailed));
+      //  console.log("response failed:: "+Object.keys(response.filesFailed[0]));
+
+        console.log("response :: "+response.filesUploaded[0]);
         $scope.current_domain.logo_url = response.filesUploaded[0].url;
         $scope.$apply();
       });
@@ -212,7 +220,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       var confirmed_delete = confirm("Are you sure you want to remove "+domain.url);
 
       if(confirmed_delete){
-        Domain.delete({key: domain.key}).$promise
+        Domain.delete({domain_id: domain.id}).$promise
           .then(function(data){
             $scope.domains.splice(index, 1);
             $rootScope.$broadcast('domain_updated');

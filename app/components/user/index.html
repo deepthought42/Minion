@@ -1,1 +1,82 @@
-<button ng-click="deleteAccount()">Delete Account</button>
+<div class="content">
+
+		<div class="secondary-nav vertical__center__int" >
+			<div class="flex-auto">
+				<div class="col-sm-12" ng-show="!isStarted" >
+					<button class="btn btn--primary pull-left" ng-click="createUser()" id="start_discovery_button">
+					Create User
+				</button>
+				</div>
+			</div>
+		</div>
+
+
+
+    <div class="test-labels-container">
+      <div class="test-labels">
+        <div class="flex-auto test_functions">
+          Username
+        </div>
+				<div class="flex-initial date_stats text-left">
+          Role
+        </div>
+        <div class="flex-initial date_stats text-left">
+          Enabled/Disabled
+        </div>
+        <div class="flex-initial date_stats text-right">
+          Date Created
+        </div>
+        <div class="flex-none edit_delete_functions">
+				</div>
+      </div>
+    </div>
+
+
+		<div class="test-container">
+
+    <div class="empty__state vertical__center_empty_state_busy" ng-show="users.length == 0">
+      <div>
+      <br><br>
+        <h2>No users have been created yet. Click 'Create User' to get started </h2>
+      </div>
+    </div>
+
+
+
+    <div class="test"
+         ng-repeat="user in (filteredUsers = users) | filter:searchText track by $index"
+         ng-show="users.length > 0">
+      <div class="test__profile vertical__left__profile" ng-click="setUserIndex($index);visible_tab='nodedata'+$index">
+        <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleUserDataVisibility(test, $index)" ng-if="!user.show_user_name_edit_field">
+          <div class="" ng-show="!user.show_user_name_edit_field">
+            <h5 class="test__title" ng-click="user.show_user_name_edit_field = true">
+               {{user.username || "User #"+($index+1)}}
+             </h5>
+            <i class="fa fa-pencil edithover" ng-click="user.show_user_name_edit_field = true" ></i>
+          </div>
+        </div>
+
+        <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="user.show_user_name_edit_field">
+          <input class="user-control title__edit" type="text" ng-model="new_name" ng-value="user.name" ng-trim="false"/>
+        </div>
+				<div class="flex-initial date_stats text-left test__profile_stretch" >
+          {{user.role  || "Unknown"}}
+        </div>
+        <div class="flex-initial date_stats text-left test__profile_stretch" >
+          <toggle id="test_user_status" ng-model="user.enabled" ng-change="changed()" on="Enabled" off="Disabled"></toggle>
+        </div>
+        <div class="flex-initial date_stats text-right test__profile_stretch" >
+          {{( user.dateCreated | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
+        </div>
+        <div class="flex-none edit_delete_functions text-right test__btns" aria-label="User Functions">
+           <button class="btn btn--tertiary margin_fifteen_right" ng-click="editUser(user)" >
+              <i class="fa fa-pencil"></i>
+           </button>
+           <button class="btn btn--tertiary" ng-click="deleteUser()">
+             <i class="fa fa-trash"></i>
+           </button>
+         </div>
+       </div>
+    </div>
+  </div>
+</div>

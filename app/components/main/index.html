@@ -16,7 +16,7 @@
       </li>
       <li id="notification_li">
 			  <a ui-sref="main.tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fff;' : 'color:#9794d5'}}">
-					<i class="fa fa-list-ul main-nav-icons" aria-hidden="true"></i>
+					<i class="fa fa-check-square-o main-nav-icons" aria-hidden="true"></i>
 					Tests&nbsp;
 					<span id="notification_count" ng-show="approved_test_cnt">
 						{{approved_test_cnt}}
@@ -27,6 +27,18 @@
         <a ui-sref="main.discovery"  style="{{$location.path() == '/discovery' ? 'color: #fff;' : 'color:#9794d5'}}">
           <i class="fa fa-map-o sidebar-nav-icons" aria-hidden="true"></i>
           Discovery
+        </a>
+      </li>
+      <li>
+        <a ui-sref="main.users"  style="{{$location.path() == '/users' ? 'color: #fff;' : 'color:#9794d5'}}">
+          <i class="fa fa-users sidebar-nav-icons" aria-hidden="true"></i>
+          Users
+        </a>
+      </li>
+      <li>
+        <a ui-sref="main.form"  style="{{$location.path() == '/form' ? 'color: #fff;' : 'color:#9794d5'}}">
+          <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
+          Forms
         </a>
       </li>
     </ul>
@@ -45,16 +57,16 @@
 			<div class="flex-auto">
 			</div>
 		 	<div class="right-main-nav  pull-right">
-				
-					
+
+
           <div class="domain-link dropdown pull-right flex-initial text-right test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 						<div class="dropdown-toggle" data-toggle="dropdown" id="domainsDropdownMenuButton"  dropdown-toggle>
                 {{domain.url || "www.yourdomain.com"}}
 							<i class="fa fa-caret-down fa-fw"></i>
               </div>
               <ul class="dropdown-menu" aria-labelledby="domainsDropdownMenuButton">
-                <li class="dropdown-item" ng-repeat="domain_item in domain_list" ng-if="domain_item.url != domain.url">
-                  {{domain_item.url}}
+                <li class="dropdown-item" ng-repeat="domain in domain_list" ng-if="domain_item.url != domain.url" ng-click="selectDomain(domain)">
+                  {{domain.url}}
                 </li>
                 <li class="manage_domains dropdown-item" ng-click="showDomainsPage()">
                     Manage Domains

@@ -1,17 +1,38 @@
 'use strict';
 
-angular.module('Qanairy.user_profile', ['ui.router', 'Qanairy.UserService'])
+angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService', 'ui.toggle'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('main.user_profile', {
-    url: "/profile",
+  $stateProvider.state('main.users', {
+    url: "/users",
     templateUrl: 'components/user/index.html',
-    controller: 'UserProfileCtrl'
+    controller: 'TestUserCtrl'
   });
 }])
 
-.controller('UserProfileCtrl', ['$rootScope', '$scope', 'User', 'store', '$state',
-  function($rootScope, $scope, User, store, $state) {
-    
+.controller('TestUserCtrl', ['$rootScope', '$scope', 'Domain', 'store', '$state',
+  function($rootScope, $scope, Domain, store, $state) {
+    this._init = function(){
+      $scope.domains = null;
+      $scope.domain_id = store.get('domain').id;
+      Domain.getUsers({domain_id: $scope.domain_id}).$promise
+        .then(function(users){
+          console.log('retreived domain users');
+          $scope.users = users;
+        })
+        .catch(function(){
+
+        })
+    }
+
+    $scope.editUser = function(user){
+      $state.go("main.edit_user", {user: user, state: "update"});
+    }
+
+    $scope.createUser = function(user){
+        $state.go("main.edit_user", {user: null, state: "create"});
+    }
+
+    this._init();
   }
 ]);

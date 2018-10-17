@@ -248,8 +248,15 @@ md-dialog {
 }
 
 
-.modal_action_button_container{
-    padding-top: 30px;
+.action_button_container{
+	flex-shrink: 0;
+  padding-top: 30px;
+	padding-right: 15px;
+	padding-bottom: 55px;
+}
+
+.settings-page{
+	flex: 1 0 auto;
 }
 
 .modal_action_button{

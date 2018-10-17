@@ -13,8 +13,8 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Account', 'Action', 'Auth', '$state',
-  function ($rootScope, $scope, PathRealtimeService, store, $location, Account, Action, Auth, $state) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Account', 'Action', 'Domain', 'Auth', '$state',
+  function ($rootScope, $scope, PathRealtimeService, store, $location, Account, Action, Domain, Auth, $state) {
 
     $scope.displayUserDropDown = false;
     $scope.menuToggled = false;
@@ -51,13 +51,14 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
     $scope.extractHostname = function(url) {
         var hostname;
+        var domain = store.get('domain');
         //find & remove protocol (http, ftp, etc.) and get hostname
-
-        if (url.indexOf("://") > -1) {
-            hostname = url.split('/')[2];
+        console.log("URL :: "+ url);
+        if (domain.url.indexOf("://") > -1) {
+            hostname = domain.url.split('/')[2];
         }
         else {
-            hostname = url.split('/')[0];
+            hostname = domain.url.split('/')[0];
         }
 
         //find & remove port number
@@ -69,6 +70,8 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     }
 
     if($scope.domain != null){
+      console.log("Other PUSHER DOMAIN :: "+$scope.domain.url);
+
       var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
 
       channel.bind('discovery_status', function(data) {
@@ -80,6 +83,29 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
         path_objects.push( JSON.parse(data));
         store.set('path_objects',path_objects);
       });
+    }
+
+    /**
+     * Sets domain for session
+     */
+    $scope.selectDomain = function(domain){
+      store.set('domain', domain);
+      //get default browser for domain
+      //if default browser is not set then show default browser selection dialog box
+      $rootScope.$broadcast("domain_selected", domain);
+      console.log("selected domain/");
+
+      $rootScope.$broadcast("reload_tests", domain);
+
+      //Load all page states
+
+      Domain.getAllPathObjects({host: domain.url}).$promise
+                .then(function(data){
+                    store.set('path_objects', data);
+                });
+
+      $state.go("main.discovery");
+
     }
 
     $scope.showDomainsPage = function(){
@@ -102,13 +128,13 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
     $scope.$on('domain_updated', function(){
       $scope.domain = store.get('domain');
-      
+
       $scope.$apply();
     });
 
     $scope.$on('domain_selected', function(){
-      var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
       $scope.domain = store.get('domain');
+      var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
 
       channel.bind('path_object', function(data) {
         var path_objects = store.get('path_objects');

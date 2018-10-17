@@ -18,7 +18,8 @@
     "protractor": "^2.1.0",
     "shelljs": "^0.2.6",
     "angular-segment-analytics": "^1.2.0",
-    "angular-auth0": "^3.0.0"
+    "angular-auth0": "^3.0.0",
+    "angular-bootstrap-toggle": "latest"
   },
   "dependencies": {
     "angular-ui-bootstrap": "latest",

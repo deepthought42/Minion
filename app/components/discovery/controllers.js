@@ -38,8 +38,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.current_domain = store.get('domain');
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
-        $scope.discovery_url = $scope.current_domain.url;
-        Discovery.getStatus({url: $scope.discovery_url}).$promise
+        Discovery.getStatus({url: $scope.current_domain.url}).$promise
           .then (function(data){
             $scope.discovery_status = data;
 
@@ -60,10 +59,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
             $scope.isStarted = false;
           });
 
-        Test.getUnverified({url: $scope.discovery_url}).$promise
+        Test.getUnverified({url: $scope.current_domain.url}).$promise
           .then(function(data){
             $scope.tests = data
             $scope.waitingOnTests = false;
+            console.log("$scope.tests :: "+data);
             if(data.length > 0){
               $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
               $scope.discoveredTestOnboardingIndex = 0;
@@ -87,6 +87,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           $scope.discoveredTestOnboardingIndex = 0;
           $scope.waitingOnTests = false;
           $scope.tests.push( JSON.parse(data));
+          $scope.$apply();
+        });
+
+        channel.bind('path_object', function(data) {
+          $scope.discovery_status = JSON.parse(data);
           $scope.$apply();
         });
 
@@ -196,7 +201,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.discoveryRunningOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery-running');
       $scope.discoveryRunningOnboardingIndex = 0;
 
-      Discovery.startWork({url:  $scope.discovery_url}).$promise
+      Discovery.startWork({url:  $scope.current_domain.url}).$promise
         .then(function(value){
           $scope.discovery_status = value;
         })
@@ -213,7 +218,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
 
         analytics.track("Started Discovery", {
-          domain : $scope.discovery_url,
+          domain : $scope.current_domain.url,
           success : !$scope.errors.length
         }, function(success){});
     }
@@ -497,6 +502,45 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     this._init();
 
     /* EVENTS */
+    $rootScope.$on('reload_tests', function(e){
+      $scope.current_domain =  store.get('domain');
+      Discovery.getStatus({url: $scope.current_domain.url}).$promise
+        .then (function(data){
+          $scope.discovery_status = data;
+
+          if( data.startTime == null){
+            $scope.isStarted = false;
+          }
+          else{
+            var diff_time = (Date.now()-(new Date(data.startTime)))/1000/60;
+            if(diff_time > 1440 || (data.totalPathCount <= data.examinedPathCount)){
+              $scope.isStarted = false
+            }
+            else{
+              $scope.isStarted = true;
+            }
+          }
+        })
+        .catch(function(err){
+          $scope.isStarted = false;
+        });
+
+      Test.getUnverified({url:  store.get('domain').url}).$promise
+        .then(function(data){
+          $scope.tests = data
+          $scope.waitingOnTests = false;
+          console.log("$scope.tests :: "+data);
+          if(data.length > 0){
+            $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
+            $scope.discoveredTestOnboardingIndex = 0;
+          }
+        })
+        .catch(function(err){
+          $scope.errors.push(err.data);
+          $scope.waitingOnTests = false;
+        });
+    });
+
     $rootScope.$on('missing_resorce_error', function (e){
       $scope.errors.push("We seem to have misplaced those records. Please try again. I'm sure we have them somewhere.");
     });

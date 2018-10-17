@@ -178,8 +178,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     /*
     * updates the passing status for a given browser
     */
-    $scope.updateBrowserPassingStatus = function(test, browser, isPassing){
-      test.browserStatuses[browser] = isPassing;
+    $scope.updateBrowserPassingStatus = function(test, browser, status){
+      test.browserStatuses[browser] = status;
       var test_passing = true;
       for (var key in test.browserStatuses) {
           if(test.browserStatuses[key] != null && !test.browserStatuses[key]){
@@ -406,11 +406,23 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       }
     }
 
-    $scope.getPathObject = function(key){
-      var path_objecs = store.get('path_objects').filter(function( path_object ){
-        return path_object.key == key;
-      });
-      return path_objecs[0];
+    /**
+     * Constructs a list of PathObjects consisting of PageState, PageElement,
+     *    and Action objects currently stored in session storage
+     */
+    $scope.retrievePathObjectsUsingKeys = function(path_keys){
+      var path_objects = [];
+      console.log("path key length :: "+path_keys.length);
+      for(var idx = 0; idx < path_keys.length; idx++){
+        //search all elements
+        var path_object  = $scope.getPathObject(path_keys[idx]);
+        if(path_object != null){
+           path_objects.push(path_object);
+        }
+      }
+      console.log("Page state found :: "+path_objects.length);
+
+      return path_objects;
     }
 
      /**
@@ -615,7 +627,18 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
     this._init();
 
+    $scope.getPathObject = function(key){
+      var path_objecs = store.get('path_objects').filter(function( path_object ){
+        return path_object.key == key;
+      });
+      return path_objecs[0];
+    }
+
     /* EVENTS */
+    $rootScope.$on('reload_tests', function(e){
+      $scope.getTestsByUrl(store.get('domain').url);
+    });
+
     $rootScope.$on('missing_resorce_error', function (e){
       $scope.errors.push("There was an issue finding your resource. We'll find it soon and return it to it's rightful place.");
     });
