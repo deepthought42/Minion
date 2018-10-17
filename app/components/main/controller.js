@@ -70,6 +70,8 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     }
 
     if($scope.domain != null){
+      console.log("Other PUSHER DOMAIN :: "+$scope.domain.url);
+
       var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
 
       channel.bind('discovery_status', function(data) {

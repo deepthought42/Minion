@@ -19,7 +19,6 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
       Domain.getForms({domain_id: domain_id}).$promise.
         then(function(response){
           $scope.forms = response;
-
           var needs_attention = false;
           $scope.forms.forEach(form => {
             if(form.status == "DISCOVERED"){
@@ -78,7 +77,6 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
       })
 
       $rootScope.$broadcast("updateFormClassificationAlert", needs_attention);
-
       $scope.waitingOnForms = false;
       $scope.$apply();
     });
