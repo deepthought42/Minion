@@ -10,8 +10,8 @@ angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService', 'ui.togg
   });
 }])
 
-.controller('TestUserCtrl', ['$rootScope', '$scope', 'Domain', 'store', '$state',
-  function($rootScope, $scope, Domain, store, $state) {
+.controller('TestUserCtrl', ['$rootScope', '$scope', 'Domain', 'store', '$state', 'segment',
+  function($rootScope, $scope, Domain, store, $state, segment) {
     this._init = function(){
       $scope.domains = null;
       $scope.domain_id = store.get('domain').id;

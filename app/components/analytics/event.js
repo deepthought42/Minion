@@ -2,7 +2,7 @@
 
 var pastPathService = angular.module('Qanairy.EventService', []);
 
-pastPathService.factory('Events', [function () {
+pastPathService.factory('Events', ['segment', function (segment) {
   return {
     identify: function(profile){
       segment.identify(profile.id, {

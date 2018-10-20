@@ -11,8 +11,8 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
   });
 }])
 
-.controller('UserFormDiscoveryCtrl', ['$rootScope', '$scope', 'TestUser', 'Domain', 'store', '$state', '$stateParams',
-  function($rootScope, $scope, TestUser, Domain, store, $state, $stateParams) {
+.controller('UserFormDiscoveryCtrl', ['$rootScope', '$scope', 'TestUser', 'Domain', 'store', '$state', '$stateParams', 'segment',
+  function($rootScope, $scope, TestUser, Domain, store, $state, $stateParams, segment) {
 
     this._init = function(){
       $scope.user = {

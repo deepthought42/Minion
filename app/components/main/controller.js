@@ -13,8 +13,8 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
   });
 }])
 
-.controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Account', 'Action', 'Domain', 'Auth', '$state',
-  function ($rootScope, $scope, PathRealtimeService, store, $location, Account, Action, Domain, Auth, $state) {
+.controller('MainCtrl', ['$rootScope', '$scope', 'PathRealtimeService', 'store', '$location', 'Account', 'Action', 'Domain', 'Auth', '$state', 'segment',
+  function ($rootScope, $scope, PathRealtimeService, store, $location, Account, Action, Domain, Auth, $state, segment) {
 
     $scope.displayUserDropDown = false;
     $scope.menuToggled = false;

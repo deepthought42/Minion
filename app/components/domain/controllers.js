@@ -13,8 +13,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
   });
 }])
 
-.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state', 'Account',
-  function($rootScope, $scope, Domain,  $mdDialog, store, $state, Account) {
+.controller('DomainCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state', 'Account', 'segment',
+  function($rootScope, $scope, Domain,  $mdDialog, store, $state, Account, segment) {
     this._init = function(){
       $scope.errors = [];
       $scope.domains = [];

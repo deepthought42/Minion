@@ -10,8 +10,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
   });
 }])
 
-.controller('TestIndexCtrl', ['$rootScope', '$scope', '$interval', 'Test', 'store', '$state', '$mdDialog', 'Account',
-  function($rootScope, $scope, $interval, Test, store, $state, $mdDialog, Account) {
+.controller('TestIndexCtrl', ['$rootScope', '$scope', '$interval', 'Test', 'store', '$state', '$mdDialog', 'Account', 'segment',
+  function($rootScope, $scope, $interval, Test, store, $state, $mdDialog, Account, segment) {
     this._init= function(){
       $scope.errors = [];
       $scope.sortLastRun = false;

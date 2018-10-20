@@ -11,8 +11,8 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
   });
 }])
 
-.controller('UserEditCtrl', ['$rootScope', '$scope', 'TestUser', 'Domain', 'store', '$state', '$stateParams',
-  function($rootScope, $scope, TestUser, Domain, store, $state, $stateParams) {
+.controller('UserEditCtrl', ['$rootScope', '$scope', 'TestUser', 'Domain', 'store', '$state', '$stateParams', 'segment',
+  function($rootScope, $scope, TestUser, Domain, store, $state, $stateParams, segment) {
 
     this._init = function(){
       $scope.user = null;

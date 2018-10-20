@@ -13,8 +13,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
   });
 }])
 
-.controller('DiscoveryCtrl', ['$rootScope', '$scope', 'Discovery', 'PathRealtimeService', 'Test', 'store', '$state', '$mdDialog', 'Account',
-  function($rootScope, $scope, Discovery, PathRealtimeService, Test, store, $state, $mdDialog, Account) {
+.controller('DiscoveryCtrl', ['$rootScope', '$scope', 'Discovery', 'PathRealtimeService', 'Test', 'store', '$state', '$mdDialog', 'Account', 'segment',
+  function($rootScope, $scope, Discovery, PathRealtimeService, Test, store, $state, $mdDialog, Account, segment) {
 
     this._init = function(){
       $scope.errors = [];

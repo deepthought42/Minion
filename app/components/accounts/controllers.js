@@ -10,8 +10,8 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
   });
 }])
 
-.controller('AccountCtrl', ['$rootScope', '$scope', 'Account', 'Auth', 'store',
-  function($rootScope, $scope, Account, Auth, store) {
+.controller('AccountCtrl', ['$rootScope', '$scope', 'Account', 'Auth', 'store', 'segment',
+  function($rootScope, $scope, Account, Auth, store, segment) {
     //INITIALIZATION
 
     $scope.$on('new-account', function(event, args){
