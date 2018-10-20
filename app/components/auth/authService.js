@@ -18,7 +18,7 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
           getProfile(function(err, profile) {
             sessionStorage.setItem('profile', profile);
 
-            analytics.identify(profile.id, {
+            segment.identify(profile.id, {
               name : profile.name,
               nickname : profile.nickname,
               email : profile.email

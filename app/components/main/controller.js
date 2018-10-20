@@ -118,7 +118,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     }
 
     $scope.logout = function(){
-      analytics.track("Clicked Logout", {
+      segment.track("Clicked Logout", {
       }, function(success){});
 
       Auth.logout();

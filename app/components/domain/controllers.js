@@ -93,7 +93,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           }
         });
 
-      analytics.track("Created Domain", {
+      segment.track("Created Domain", {
         successful: !$scope.show_create_domain_err
       }, function(success){  });
 
@@ -115,7 +115,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           $scope.show_create_domain_err = true;
         });
 
-        analytics.track("Updated Domain", {
+        segment.track("Updated Domain", {
           key : key,
           successful: !$scope.show_create_domain_err
         }, function(success){  });
@@ -137,7 +137,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
                     store.set('path_objects', data);
                 });
 
-      analytics.track("Updated Domain", {
+      segment.track("Updated Domain", {
         domain, domain,
         successful: !$scope.show_create_domain_err
       }, function(success){  });
@@ -147,7 +147,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     }
 
     $scope.openCreateDomainDialog  = function(domain) {
-      analytics.track("Clicked Create Domain", {
+      segment.track("Clicked Create Domain", {
           domain: domain
         }, function(success){  });
 
@@ -168,7 +168,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     };
 
     $scope.openEditDomainDialog  = function(domain) {
-      analytics.track("Clicked Edit Domain", {
+      segment.track("Clicked Edit Domain", {
           domain : domain
         }, function(success){  });
 
@@ -190,7 +190,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
     var fsClient = filestack.init('AZ3Vgj49DQyOMFzbi5BsHz');
     $scope.openPicker = function(domain) {
-      analytics.track("Clicked Logo Upload", {
+      segment.track("Clicked Logo Upload", {
           domain: domain
         }, function(success){  });
 
@@ -199,7 +199,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         accept:["image/*"],
         transformations:{}
       }).then(function(response) {
-        analytics.track("Uploaded Logo", {
+        segment.track("Uploaded Logo", {
           }, function(success){  });
         // declare this function to handle response
         //set filestack url somewhere
@@ -233,7 +233,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           })
       }
 
-      analytics.track("Deleted Domain", {
+      segment.track("Deleted Domain", {
           confirmed: confirmed_delete,
           successful : !$scope.errors.length,
           domain : domain

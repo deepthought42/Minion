@@ -29,7 +29,7 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
     $scope.deleteAccount = function(acct){
       console.log("Deleting account maybe..");
       Account.delete(acct);
-      analytics.track("Delete user account", {
+      segment.track("Delete user account", {
         account_id: acct.id
       }, function(success){
 

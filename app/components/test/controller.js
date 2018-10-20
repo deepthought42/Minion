@@ -194,7 +194,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         test.status = "FAILING";
       }
 
-      analytics.track("Update Browser Passing Status", {
+      segment.track("Update Browser Passing Status", {
         test_key : test.key,
         status : test.status
       }, function(success){});
@@ -214,7 +214,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         browsers.push("chrome");
       }
 
-      analytics.track("Run Test", {
+      segment.track("Run Test", {
         chrome : chrome_selected,
         firefox : firefox_selected
       }, function(success){});
@@ -281,7 +281,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         browsers.push("chrome");
       }
 
-      analytics.track("Run Tests", {
+      segment.track("Run Tests", {
         chrome : chrome_selected,
         firefox : firefox_selected,
         test_count : keys.length
@@ -331,7 +331,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     }
 
     $scope.runGroupTests = function(url, group){
-      analytics.track("Run Tests By Group", {
+      segment.track("Run Tests By Group", {
         group : group,
         domain : url
       }, function(success){});
@@ -361,7 +361,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
                  $scope.errors.push(err.data);
                });
 
-       analytics.track("Added Group", {
+       segment.track("Added Group", {
          group_key: group.key,
          test_key: test.key,
          success : !$scope.errors.length
@@ -377,7 +377,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           $scope.errors.push(err);
         });
 
-        analytics.track("Removed Group", {
+        segment.track("Removed Group", {
           group_key: group.key,
           test_key: test.key,
           success : !$scope.errors.length
@@ -496,7 +496,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           $scope.errors.push(err.data);
         });
 
-      analytics.track("Updated Test", {
+      segment.track("Updated Test", {
         group_key: group.key,
         test_key: test.key,
         success : !$scope.errors.length
@@ -553,7 +553,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           console.log("An error occurred while archiving test");
         });
 
-      analytics.track("Archived Test", {
+      segment.track("Archived Test", {
         test_key : test.key,
         success : test.archived
       }, function(success){});
@@ -603,7 +603,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     $scope.editTest = function(test, $index){
       $scope.editing_test_idx = $index;
       $scope.test_copy = JSON.parse(JSON.stringify(test));
-      analytics.track("Clicked Edit Test", {
+      segment.track("Clicked Edit Test", {
         test_key : test.key
       }, function(success){});
     }
