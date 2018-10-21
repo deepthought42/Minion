@@ -41,10 +41,23 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
         Domain.updateForm({domain_id: $scope.domain.id, key: form.key, name: form.name, form_type: form.type}).$promise
           .then(function(data){
             console.log("Successfully updated form");
+            segment.track("Updated form", {
+                form_key: form.key,
+                successful : true
+              }, function(success){  });
+
+            segment.track("Start form discovery", {
+                form_key: form.key,
+                successful : true
+              }, function(success){  });
             $state.go("main.form");
           })
           .catch(function(err){
-            console.log("error occured while saving form");
+            segment.track("Updated form", {
+                form_key: form.key,
+                domain: $scope.domain.id,
+                successful : false
+              }, function(success){  });
           })
       }
     }

@@ -10,8 +10,8 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
   });
 }])
 
-.controller('FormCtrl', ['$rootScope', '$scope', 'Form', 'Domain', 'store', '$state',
-  function($rootScope, $scope, Form, Domain, store, $state) {
+.controller('FormCtrl', ['$rootScope', '$scope', 'Form', 'Domain', 'store', '$state', 'segment',
+  function($rootScope, $scope, Form, Domain, store, $state, segment) {
     $scope.forms = [];
 
     this._init = function(){

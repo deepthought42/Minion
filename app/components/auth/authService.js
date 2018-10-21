@@ -3,7 +3,8 @@
 
 var authService = angular.module('Qanairy.authService', []);
 
-authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', function ($state, angularAuth0, $timeout, store) {
+authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'segment',
+  function ($state, angularAuth0, $timeout, store, segment) {
 
     function login() {
       angularAuth0.authorize();
@@ -18,7 +19,7 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', func
           getProfile(function(err, profile) {
             sessionStorage.setItem('profile', profile);
 
-            analytics.identify(profile.id, {
+            segment.identify(profile.id, {
               name : profile.name,
               nickname : profile.nickname,
               email : profile.email
