@@ -82,9 +82,15 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           $scope.closeDialog();
           created_successfully = true;
           $rootScope.$broadcast("domain_updated", successResult);
+          segment.track("Created Domain", {
+            successful: true
+          }, function(success){  });
         },
         function(errorResult){
           created_successfully = false
+          segment.track("Created Domain", {
+            successful: false
+          }, function(success){  });
           if(errorResult.status === 303){
             $scope.closeDialog();
           }
@@ -92,11 +98,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             $scope.show_create_domain_err = true;
           }
         });
-
-      segment.track("Created Domain", {
-        successful: !$scope.show_create_domain_err
-      }, function(success){  });
-
     }
 
     $scope.updateDomain = function(key, protocol, default_browser, logo_url){
@@ -110,15 +111,18 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             }
           }
           $scope.closeDialog();
+
+          segment.track("Updated Domain", {
+            key : key,
+            successful: true
+          }, function(success){  });
         },
         function(errorResult){
-          $scope.show_create_domain_err = true;
+          segment.track("Updated Domain", {
+            key : key,
+            successful: false
+          }, function(success){  });
         });
-
-        segment.track("Updated Domain", {
-          key : key,
-          successful: !$scope.show_create_domain_err
-        }, function(success){  });
     }
 
     /**
@@ -147,10 +151,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     }
 
     $scope.openCreateDomainDialog  = function(domain) {
-      segment.track("Clicked Create Domain", {
-          domain: domain
-        }, function(success){  });
-
       $scope.current_domain = {};
        $mdDialog.show({
           clickOutsideToClose: $scope.domains.length>0,
@@ -168,10 +168,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     };
 
     $scope.openEditDomainDialog  = function(domain) {
-      segment.track("Clicked Edit Domain", {
-          domain : domain
-        }, function(success){  });
-
       $scope.current_domain = domain;
        $mdDialog.show({
           clickOutsideToClose: true,
@@ -190,16 +186,13 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
     var fsClient = filestack.init('AZ3Vgj49DQyOMFzbi5BsHz');
     $scope.openPicker = function(domain) {
-      segment.track("Clicked Logo Upload", {
-          domain: domain
-        }, function(success){  });
-
       fsClient.pick({
         fromSources:["local_file_system","url","imagesearch","facebook","instagram","googledrive","dropbox","onedrive","clouddrive"],
         accept:["image/*"],
         transformations:{}
       }).then(function(response) {
         segment.track("Uploaded Logo", {
+            successful : true
           }, function(success){  });
         // declare this function to handle response
         //set filestack url somewhere
@@ -213,6 +206,11 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         console.log("response :: "+response.filesUploaded[0]);
         $scope.current_domain.logo_url = response.filesUploaded[0].url;
         $scope.$apply();
+      })
+      .catch(function(error){
+        segment.track("Uploaded Logo", {
+            successful : true
+          }, function(success){  });
       });
     }
 
@@ -222,9 +220,19 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       if(confirmed_delete){
         Domain.delete({domain_id: domain.id}).$promise
           .then(function(data){
+            segment.track("Deleted Domain", {
+                confirmed: confirmed_delete,
+                successful : true,
+                domain : domain
+              }, function(success){  });
             $scope.domains.splice(index, 1);
             $rootScope.$broadcast('domain_updated');
             if(!$scope.domains.length){
+              segment.track("Deleted Domain", {
+                  confirmed: confirmed_delete,
+                  successful : false,
+                  domain : domain
+                }, function(success){  });
               $scope.openCreateDomainDialog();
             }
           })
@@ -233,11 +241,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           })
       }
 
-      segment.track("Deleted Domain", {
-          confirmed: confirmed_delete,
-          successful : !$scope.errors.length,
-          domain : domain
-        }, function(success){  });
+
     }
 
     this._init();

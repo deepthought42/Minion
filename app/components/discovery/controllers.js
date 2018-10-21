@@ -204,6 +204,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       Discovery.startWork({url:  $scope.current_domain.url}).$promise
         .then(function(value){
           $scope.discovery_status = value;
+          segment.track("Started Discovery", {
+            domain : $scope.current_domain.url,
+            success : true
+          }, function(success){});
         })
         .catch(function(err){
           //$scope.waitingOnTests = false;
@@ -215,12 +219,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           else{
             $scope.isStarted = false;
           }
+          segment.track("Started Discovery", {
+            domain : $scope.current_domain.url,
+            success : false
+          }, function(success){});
         });
-
-        segment.track("Started Discovery", {
-          domain : $scope.current_domain.url,
-          success : !$scope.errors.length
-        }, function(success){});
     }
 
     $scope.setTestIndex = function(idx){
@@ -245,11 +248,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           test.show_test_name_edit_field = false;
           $scope.errors.push("An error occurred while trying to update the test name");
         });
-
-      segment.track("Set Test Name", {
-        test_key: test.key,
-        success : !$scope.errors.length
-      }, function(success){});
     }
 
     $scope.getPathObject = function(key){
@@ -308,15 +306,18 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       Test.archive({key: test.key} ).$promise.
         then(function(resp){
           test.archived = true;
+          segment.track("Archived Test", {
+            test_key : test.key,
+            success : true
+          }, function(success){});
         })
         .catch(function(err){
           $scope.errors.push("An error occurred while archiving test");
+          segment.track("Archived Test", {
+            test_key : test.key,
+            success : false
+          }, function(success){});
         });
-
-        segment.track("Archived Test", {
-          test_key : test.key,
-          success : test.archived
-        }, function(success){});
     }
 
     $scope.askDelete = function(test) {
@@ -339,6 +340,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
          $scope.errors.push("Group name cannot be empty");
          return;
       }
+
+
       Test.addGroup({name: group.name,
                      description: group.description,
                      key: test.key}).$promise
@@ -346,16 +349,22 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
                  $scope.group.name = null;
 
                  test.groups.push(data);
+                 segment.track("Added Group", {
+                   group_key: group.key,
+                   test_key: test.key,
+                   success : true
+                 }, function(success){});
                })
                .catch(function(err){
                  $scope.errors.push(err.data);
+                 segment.track("Added Group", {
+                   group_key: group.key,
+                   test_key: test.key,
+                   success : false
+                 }, function(success){});
                });
 
-       segment.track("Added Group", {
-         group_key: group.key,
-         test_key: test.key,
-         success : !$scope.errors.length
-       }, function(success){});
+
     }
 
     $scope.removeGroup = function(test, group, $index){
@@ -366,12 +375,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         .catch(function(err){
           $scope.errors.push(err);
         });
-
-        segment.track("Removed Group", {
-          group_key: group.key,
-          test_key: test.key,
-          success : !$scope.errors.length
-        }, function(success){});
     }
 
     $scope.openPageModal = function(full_screenshot) {
@@ -385,18 +388,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
              $scope.closeDialog = function() {
                 $mdDialog.hide();
              }
-
-             segment.track("View Full Page Screenshot", {
-             }, function(success){});
           }
        });
     };
 
     $scope.cancelEditingTestName = function(test){
       test.show_test_name_edit_field = false;
-      segment.track("Cancelled Editing Test Name", {
-        test_key : test.key
-      }, function(success){});
     }
 
 
@@ -423,9 +420,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
     $scope.editTest = function(test){
       test.show_test_name_edit_field = true;
-      segment.track("Clicked Edit Test", {
-        test_key : test.key
-      }, function(success){});
     }
     /**
      *
@@ -454,17 +448,21 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           store.set('approved_test_cnt', approved_cnt);
 
           $rootScope.$broadcast("updateApprovedTestCnt", approved_cnt);
+          segment.track("Classified Test", {
+            test_key : test.key,
+            correctness : correctness,
+            success : true
+          }, function(success){});
         })
         .catch(function(err){
           test.waitingOnStatusChange = false;
           $scope.errors.push(err.data);
+          segment.track("Classified Test", {
+            test_key : test.key,
+            correctness : correctness,
+            success : false
+          }, function(success){});
         });
-
-        segment.track("Classified Test", {
-          test_key : test.key,
-          correctness : correctness,
-          success : !$scope.errors.length
-        }, function(success){});
     }
 
     $scope.openBrowserSelectionDialog  = function(event) {

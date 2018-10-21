@@ -30,14 +30,32 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
       console.log("scope.form : "+$scope.form);
       Domain.addUser({domain_id: $scope.domain.id, username: user.username, password: user.password, role: user.role, enabled: user.enabled}).$promise
         .then(function(user){
+          segment.track("Created user", {
+            domain: $scope.domain.id,
+            user: user.username,
+            succeeded : true;
+          }, function(success){});
+
           store.set('current_user', null);
           console.log("user saved successfully");
           Domain.updateForm({domain_id: $scope.domain.id, key: $scope.form.key, name: $scope.form.name, form_type: $scope.form.type}).$promise
             .then(function(data){
+              segment.track("Updated form", {
+                form_key: form.key,
+                domain: $scope.domain.id,
+                succeeded : true;
+              }, function(success){});
+
               console.log("Successfully updated form");
               $state.go("main.discovery");
             })
             .catch(function(err){
+              segment.track("Updated form", {
+                form_key: form.key,
+                domain: $scope.domain.id,
+                succeeded : false;
+              }, function(success){});
+              
               alert("error occurred while initiating login/registration form discovery");
               console.log("error occured while saving form");
             })

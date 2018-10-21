@@ -42,10 +42,21 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
         .then(function(user){
           store.set('current_user', null);
           console.log("user saved successfully");
-          $state.go("main.users")
+
+          segment.track("Created user", {
+            domain: $scope.domain.id,
+            user: user.username,
+            succeeded : true;
+          }, function(success){});
+          $state.go("main.users");
         })
         .catch(function(err){
           console.log("an error occurred while creating user :: "+err);
+          segment.track("Created user", {
+            domain: $scope.domain.id,
+            user: user.username,
+            succeeded : false;
+          }, function(success){});
         });
     }
 
@@ -54,11 +65,19 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
       console.log($scope.domain);
       TestUser.update({id: user.id, test_user: user}).$promise
         .then(function(data){
+          segment.track("Updated user", {
+            user: user.username,
+            succeeded : true;
+          }, function(success){});
           store.set('current_user', null);
           console.log("user updated successfully");
           $state.go("main.users")
         }).
         catch(function(err){
+          segment.track("Updated user", {
+            user: user.username,
+            succeeded : false;
+          }, function(success){});
           console.log("An error occured while updating user :: "+err);
         });
     }
