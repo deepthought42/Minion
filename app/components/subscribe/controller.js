@@ -3,18 +3,18 @@
 angular.module('Qanairy.subscribe', ['ui.router', 'Qanairy.AccountService', 'Qanairy.SubscribeService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('subscribe', {
-    url: "/subscribe",
+  $stateProvider.state('main.subscription', {
+    url: "/upgrade",
     templateUrl: 'components/subscribe/index.html',
-    controller: 'SubscribeCtrl',
+    controller: 'SubscriptionCtrl',
     sp: {
       authenticate: true
     }
   });
 }])
 
-.controller('SubscribeCtrl', ['$rootScope', '$scope','StripeCheckout', 'Subscribe',
-  function($rootScope, $scope, StripeCheckout, Subscribe) {
+.controller('SubscriptionCtrl', ['$rootScope', '$scope','StripeCheckout', 'Subscription',
+  function($rootScope, $scope, StripeCheckout, Subscription) {
     this._init = function(){
 
     }

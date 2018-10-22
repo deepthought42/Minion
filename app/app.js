@@ -40,7 +40,6 @@ angular.module('Qanairy', [
 config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider', 'ngOnboardingDefaultsProvider', '$locationProvider', 'segmentProvider',
   function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider, segmentProvider) {
     segmentProvider.setKey('DkANikjZ5P3CDa4rahz8PmyawVteNyiX');
-
     $urlRouterProvider.otherwise('/domains');
 
     StripeCheckoutProvider.defaults({
@@ -49,10 +48,10 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
 
     angularAuth0Provider.init({
       clientID: 'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV', //'mMomHg1ZhzZkM4Tsz2NGkdJH3eeJqIq6',
-      domain: 'qanairy.auth0.com',
+      domain: 'staging-qanairy.auth0.com',
       responseType: 'token id_token',
-      audience: 'https://api.qanairy.com',
-      redirectUri: 'https://app.qanairy.com/authenticate',//http://localhost:8001/#/authenticate
+      audience: 'https://staging-api.qanairy.com',
+      redirectUri: 'http://localhost:8001/#/authenticate'//'https://app.qanairy.com/authenticate',
       scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions'
     });
 
