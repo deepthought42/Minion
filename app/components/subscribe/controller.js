@@ -4,7 +4,7 @@ angular.module('Qanairy.subscribe', ['ui.router', 'Qanairy.AccountService', 'Qan
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.subscription', {
-    url: "/upgrade",
+    url: "/subscribe",
     templateUrl: 'components/subscribe/index.html',
     controller: 'SubscriptionCtrl',
     sp: {

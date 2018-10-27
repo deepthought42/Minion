@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanairy.SubscribeService'])
+angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('subscribe', {
+  $stateProvider.state('main.upgrade', {
     url: "/upgrade",
     templateUrl: 'components/upgrade/index.html',
     controller: 'UpgradeCtrl',
@@ -13,8 +13,8 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
   });
 }])
 
-.controller('UpgradeCtrl', ['$rootScope', '$scope','StripeCheckout', 'Subscribe',
-  function($rootScope, $scope, StripeCheckout, Subscribe) {
+.controller('UpgradeCtrl', ['$rootScope', '$scope','StripeCheckout',
+  function($rootScope, $scope, StripeCheckout) {
     this._init = function(){
 
     }
