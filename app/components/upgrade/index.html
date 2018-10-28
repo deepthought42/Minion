@@ -2,7 +2,7 @@
   <div class="col-sm-12">
     <div id="pro_package" class="col-sm-4">
       <div class="planframe">
-        <h2>Pro</h2>
+        <h2>Free</h2>
         <div>
           <ul>
             <li>20 Generated Tests</li>
@@ -10,24 +10,24 @@
             <li>Email support</li>
           </ul>
         </div>
-        <button>
-          Downgrade
+        <button onClick="freeAccess()">
+          Select Plan
         </button>
       </div>
     </div>
     <div id="pro_package" class="col-sm-4">
   		<div class="planframe">
-  			<h2>Pro</h2>
+  			<h2>Pro $99</h2>
   			<div>
           <ul>
-            <li>200 Generated Tests</li>
+            <li>250 Generated Tests</li>
             <li>5000 Test Runs</li>
             <li>Auto Auth Testing</li>
             <li>Email support</li>
           </ul>
         </div>
-        <button>
-          $99
+        <button ng-click="updateSubscription('pro')">
+          Select Plan
         </button>
   		</div>
     </div>
@@ -43,7 +43,7 @@
           </ul>
         </div>
         <button>
-          Contact us!
+          <a href="mailto:qanairy@qanairy.com?&subject=Qanairy%20Enterprise%20Plan%20Upgrade&body=Hi%20Qanairy,%0d%0dI%20would%20like%20to%20request%20a%20quote%20please%20have%20a%20sales%20representative%20reach%20out%20to%20me.%20Here%20are%20my%20details:%0d%0dName:" rel="EMAIL">Contact Us</a>
         </button>
   		</div>
     </div>
