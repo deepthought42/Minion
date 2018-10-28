@@ -35,7 +35,8 @@ angular.module('Qanairy', [
   'ngRaven',
   'ngSegment',
   'Qanairy.EventService',
-  'Qanairy.user_form_discovery'
+  'Qanairy.user_form_discovery',
+  'Qanairy.upgrade'
 ]).
 config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider', 'ngOnboardingDefaultsProvider', '$locationProvider', 'segmentProvider',
   function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider, segmentProvider) {
@@ -43,15 +44,15 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     $urlRouterProvider.otherwise('/domains');
 
     StripeCheckoutProvider.defaults({
-      key: "pk_live_44mv3UzkcOxPpEk0LSXSQxsE" /*"pk_test_9QwakrlLpcLEYO5Ui0JoYHvC" */
+      key: "pk_test_9QwakrlLpcLEYO5Ui0JoYHvC" /*"pk_live_44mv3UzkcOxPpEk0LSXSQxsE" */
     });
 
     angularAuth0Provider.init({
-      clientID: 'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV', //'mMomHg1ZhzZkM4Tsz2NGkdJH3eeJqIq6',
+      clientID: 'mMomHg1ZhzZkM4Tsz2NGkdJH3eeJqIq6', //'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV',
       domain: 'staging-qanairy.auth0.com',
       responseType: 'token id_token',
       audience: 'https://staging-api.qanairy.com',
-      redirectUri: 'http://localhost:8001/#/authenticate'//'https://app.qanairy.com/authenticate',
+      redirectUri: 'http://localhost:8001/#/authenticate',//'https://app.qanairy.com/authenticate',
       scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions'
     });
 
@@ -63,7 +64,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       showStepInfo: false
     });
 
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
   }])
 
 .run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', '$window', 'Auth', 'Events',
@@ -74,9 +75,9 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       if(store.get("profile")){
 
       }
-
+      console.log("to state :: "+toState.name);
      //var requireLogin = toState.data.requireLogin || false;
-       if(store.get('domain') == null && toState.name != 'authenticate' && toState.name != 'subscribe' && toState.name != 'main.account' && toState.name != 'main.dashboard'){
+       if(store.get('domain') == null && toState.name != 'main.upgrade' && toState.name != 'authenticate' && toState.name != 'subscribe' && toState.name != 'main.account' && toState.name != 'main.dashboard'){
          $rootScope.$broadcast('domainRequiredError');
          if(toState.name != 'main.domains' && fromState.name == 'main.domains'){
            console.log("navigating to nowhere");
