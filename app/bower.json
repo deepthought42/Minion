@@ -1,5 +1,5 @@
 {
-  "name": "Minion",
+  "name": "Qanairy",
   "description": "A starter project for AngularJS",
   "version": "0.0.1",
   "homepage": "",
@@ -24,7 +24,6 @@
     "angularjs-slider": "6.5.0"
   },
   "resolutions": {
-    "angular": "^1.4.9",
-    "auth0.js": "^9.0.0"
+    "angular": "^1.4.9"
   }
 }

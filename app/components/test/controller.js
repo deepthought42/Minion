@@ -296,7 +296,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
               chrome : chrome_selected,
               firefox : firefox_selected,
               test_count : keys.length,
-              succeeded : true;
+              succeeded : true
             }, function(success){});
 
             keys.forEach(function(key){
@@ -339,7 +339,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
               chrome : chrome_selected,
               firefox : firefox_selected,
               test_count : keys.length,
-              succeeded : true;
+              succeeded : true
             }, function(success){});
           });
         }

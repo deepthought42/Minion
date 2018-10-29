@@ -1,6 +1,6 @@
 'use strict';
 
-var AUTH0_DOMAIN='qanairy.auth0.com';
+var AUTH0_DOMAIN='staging-qanairy.auth0.com';
 var AUTH0_CLIENT_ID='wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV';
 var API_SERVER_URL='api.qanairy.com:80';  // default server url for Java Spring Security API sample
 var DELEGATION_ENABLED=false;
@@ -14,7 +14,7 @@ angular.module('Qanairy', [
   'Qanairy.tests',
   'Qanairy.main',
   'Qanairy.account',
-  'auth0.auth0',
+  'auth0.lock',
   'angular-jwt',
   'angular-storage',
   'ngMaterial',
@@ -37,16 +37,48 @@ angular.module('Qanairy', [
   'Qanairy.EventService',
   'Qanairy.user_form_discovery'
 ]).
-config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider', 'ngOnboardingDefaultsProvider', '$locationProvider', 'segmentProvider',
-  function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider, segmentProvider) {
+config(['$urlRouterProvider', 'lockProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider','storeProvider', 'StripeCheckoutProvider', 'ngOnboardingDefaultsProvider', '$locationProvider', 'segmentProvider',
+  function($urlRouterProvider, lockProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider, segmentProvider) {
     segmentProvider.setKey('DkANikjZ5P3CDa4rahz8PmyawVteNyiX');
 
     $urlRouterProvider.otherwise('/domains');
 
     StripeCheckoutProvider.defaults({
-      key: "pk_live_44mv3UzkcOxPpEk0LSXSQxsE" /*"pk_test_9QwakrlLpcLEYO5Ui0JoYHvC" */
+      key: "pk_test_9QwakrlLpcLEYO5Ui0JoYHvC" /*"pk_live_44mv3UzkcOxPpEk0LSXSQxsE" */
     });
 
+    // Configure Auth0 Lock instance
+    // Read more about configuration here:
+    // https://auth0.com/docs/libraries/lock/v11
+    lockProvider.init({
+       domain: AUTH0_DOMAIN,
+       clientID: 'mMomHg1ZhzZkM4Tsz2NGkdJH3eeJqIq6',
+       options: {
+         languageDictionary: {
+           title: "",
+           signUpTerms: "I agree to the <a href='https://app.qanairy.com/terms.html' target='_blank'>terms of use</a> and <a href='https://app.qanairy.com/privacy.html' target='_blank'>privacy policy</a>"
+         },
+         autoclose: true,
+         auth: {
+           responseType: 'token id_token',
+           audience: 'https://staging-api.qanairy.com',
+           params: {
+             scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions'
+           }
+         },
+         theme: {
+           logo: 'https://qanairy.com/assets/images/qanairy_logo_small.png',
+           primaryColor: '#ffdc05',
+           foregroundColor: '#111111'
+         },
+         mustAcceptTerms: true,
+         closable: true,
+         rememberLastLogin: true
+      }
+
+     });
+
+   /*
     angularAuth0Provider.init({
       clientID: 'wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV', //'mMomHg1ZhzZkM4Tsz2NGkdJH3eeJqIq6',
       domain: 'qanairy.auth0.com',
@@ -55,7 +87,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       redirectUri: 'https://app.qanairy.com/authenticate',//http://localhost:8001/#/authenticate
       scope: 'openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions'
     });
-
+*/
     storeProvider.setStore("sessionStorage");
 
     //ngOnboardingDefaultsProvider.set('overlay', 'false');
@@ -64,7 +96,7 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
       showStepInfo: false
     });
 
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
   }])
 
 .run(['$rootScope', 'store', 'jwtHelper', '$state', '$location', '$window', 'Auth', 'Events',
@@ -72,9 +104,6 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     Auth.handleAuthentication();
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
-      if(store.get("profile")){
-
-      }
 
      //var requireLogin = toState.data.requireLogin || false;
        if(store.get('domain') == null && toState.name != 'authenticate' && toState.name != 'subscribe' && toState.name != 'main.account' && toState.name != 'main.dashboard'){
