@@ -1,7 +1,49 @@
 
 /*--------------------------- [Formatting] -----------------------------------------------------------------------------*/
 
+.package{
+
+}
+
 .planframe{
-	padding:20px;
+padding:20px;
 	background-color: #f5f5f5;
+	border-radius: 5px;
+	box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+	background-color: #fff;
+	margin-top: 15px;
+	width:100%;
+}
+
+.planframe button{
+	width:100%;
+}
+
+.equal-height-container {
+   display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.equal-height {
+   display: flex;
+  flex-direction: column;
+}
+
+.price{
+	font-size: 90px;
+		line-height: 105px;
+		letter-spacing:.4px;
+		color:#757575;
+}
+
+.pricing-list{
+margin-left: 10px;
+}
+
+.pricing-list li{
+	padding:5px;
+		font-size: 16px;
+		line-height: 20px;
 }
