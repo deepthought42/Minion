@@ -23,14 +23,22 @@ authService.factory('Auth', ['$state', 'lock', '$timeout', 'store', 'segment',
     }
 
     function handleAuthentication() {
-      //lock.interceptHash();
+      lock.interceptHash();
       console.log("handling authentication");
       lock.on('authenticated', function(authResult) {
-
-        console.log("user was authenticated");
         _setSession(authResult);
-        localStorage.setItem('id_token', authResult.idToken);
 
+        lock.getProfile(authResult.idToken, function(error, profile) {
+          if (error) {
+            console.log(error);
+          }
+          localStorage.setItem('profile', JSON.stringify(profile));
+          segment.identify(profile.id, {
+            name : profile.name,
+            nickname : profile.nickname,
+            email : profile.email
+          });
+        });
 
         if(store.get('domain')){
           console.log("going to discovery");
@@ -44,27 +52,35 @@ authService.factory('Auth', ['$state', 'lock', '$timeout', 'store', 'segment',
 
       lock.on('authorization_error', function(err) {
         console.log(err);
+        segment.track("Auth error", {
+          err : err,
+        }, function(success){});
         login();
       });
 
       lock.on('signup submit', function(authResult) {
-        _setSession(authResult);
+        console.log("sign up submit "+authResult);
 
-        console.log("Lock returned a signup submitted event");
+        console.log("Lock returned a signup submitted event" + Object.keys(authResult));
         localStorage.setItem('id_token', authResult.idToken);
+        _setSession(authResult);
 
         lock.getProfile(authResult.idToken, function(error, profile) {
           if (error) {
             console.log(error);
           }
           localStorage.setItem('profile', JSON.stringify(profile));
+          segment.identify(profile.id, {
+            name : profile.name,
+            nickname : profile.nickname,
+            email : profile.email
+          });
         });
       });
     }
 
     function _setSession(authResult) {
       sessionStorage.setItem('token', authResult.accessToken);
-      console.log("Setting session");
       // Set the time that the access token will expire at
       let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
 
