@@ -33,7 +33,7 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
           segment.track("Created user", {
             domain: $scope.domain.id,
             user: user.username,
-            succeeded : true;
+            succeeded : true
           }, function(success){});
 
           store.set('current_user', null);
@@ -43,7 +43,7 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
               segment.track("Updated form", {
                 form_key: form.key,
                 domain: $scope.domain.id,
-                succeeded : true;
+                succeeded : true
               }, function(success){});
 
               console.log("Successfully updated form");
@@ -53,7 +53,7 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
               segment.track("Updated form", {
                 form_key: form.key,
                 domain: $scope.domain.id,
-                succeeded : false;
+                succeeded : false
               }, function(success){});
 
               alert("error occurred while initiating login/registration form discovery");
@@ -64,7 +64,7 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
           segment.track("Created user", {
             domain: $scope.domain.id,
             user: user.username,
-            succeeded : false;
+            succeeded : false
           }, function(success){});
 
           alert("Error occurred while creating user");
