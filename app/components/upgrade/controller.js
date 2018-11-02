@@ -25,10 +25,10 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
         handler = StripeCheckout.configure();
       });
 
-    $scope.freeAccess = function() {
+    $scope.getFreeAccess = function() {
       console.log("free access");
       Subscribe.update({"plan" : "free"});
-    }
+    };
 
     $scope.updateSubscription = function(plan_name) {
       console.log("update subscription ");

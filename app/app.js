@@ -71,9 +71,6 @@ config(['$urlRouterProvider', 'angularAuth0Provider', '$httpProvider', 'jwtOptio
     Auth.handleAuthentication();
 
     $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
-      if(store.get("profile")){
-
-      }
       console.log("to state :: "+toState.name);
      //var requireLogin = toState.data.requireLogin || false;
        if(store.get('domain') == null && toState.name != 'main.upgrade' && toState.name != 'authenticate' && toState.name != 'subscribe' && toState.name != 'main.account' && toState.name != 'main.dashboard'){
