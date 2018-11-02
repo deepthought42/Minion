@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService'])
+angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanairy.SubscribeService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.upgrade', {
@@ -13,8 +13,8 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService'])
   });
 }])
 
-.controller('UpgradeCtrl', ['$rootScope', '$scope','StripeCheckout',
-  function($rootScope, $scope, StripeCheckout) {
+.controller('UpgradeCtrl', ['$rootScope', '$scope','StripeCheckout','Subscribe',
+  function($rootScope, $scope, StripeCheckout, Subscribe) {
     this._init = function(){
 
     }
@@ -25,8 +25,13 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService'])
         handler = StripeCheckout.configure();
       });
 
-    $scope.updateSubscription = function(plan_name) {
+    $scope.freeAccess = function() {
+      console.log("free access");
+      Subscribe.update({"plan" : "free"});
+    }
 
+    $scope.updateSubscription = function(plan_name) {
+      console.log("update subscription ");
       //set package name based on #-disc-#-test
       var package_name = "pro";
 

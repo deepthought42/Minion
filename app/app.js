@@ -22,7 +22,6 @@ angular.module('Qanairy', [
   'AuthInterceptor',
   'stripe.checkout',
   'Qanairy.authService',
-  'Qanairy.subscribe',
   'Qanairy.authCallback',
   'Qanairy.user',
   'Qanairy.form',
