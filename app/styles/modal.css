@@ -132,6 +132,10 @@ md-dialog {
     font-weight: 500;
 }
 
+.disclaimer{
+	font-size: 10px;
+	display: inline;
+}
 .domain_protocol{
         margin-right: 5px !important;
 }

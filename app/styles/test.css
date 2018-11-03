@@ -7,7 +7,6 @@
 }
 
 .test-container{
-    min-width: 800px !important;
     margin:0px 0px;
 	background-color: #ffffff;
 	border-top: 1px solid #e0e0e0;
@@ -49,7 +48,6 @@
 }
 
 .full__height{
-	min-width: 800px !important;
 	height:100%;
 	background-color: #f4f4f8;
 }
@@ -111,6 +109,20 @@ width: -webkit-calc(100% - 15px);
 	text-align: center;
 	padding: 5px;
 	background-color:#F44336;
+}
+
+.error__text {
+	text-align: right !important;
+	padding: 5px 0px  !important;
+	background-color:#ffffff !important;
+}
+
+.error__text p{
+	font-weight: 500;
+	color: #F44336 !important;
+	text-align: right !important;
+	padding: 5px 0px;
+	background-color:#ffffff;
 }
 
 

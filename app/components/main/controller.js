@@ -32,8 +32,31 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     $scope.approved_test_cnt = store.get("approved_test_cnt");
     $scope.$location = $location;
     $scope.current_path = $location.path();
-    $scope.user_profile = store.get('profile');
+
+
+    if (Auth.getCachedProfile()) {
+      $scope.profile = Auth.getCachedProfile();
+      $scope.getAccount($scope.profile.email);
+    } else {
+      Auth.getProfile(function(err, profile) {
+        $scope.profile = profile;
+        $scope.getAccount(profile.email);
+      });
+    }
+
+
+    $scope.getAccount = function(email){
+      Account.getAccount().$promise
+        .then(function(data){
+          store.set("account", data);
+        })
+        .catch(function(err){
+          //console.log("account :: "+err);
+        })
+    }
+
     $scope.navToggledOpen = true;
+
 
     var pusher = new Pusher('77fec1184d841b55919e', {
       cluster: 'us2',
@@ -49,11 +72,15 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
       });
 
+    Action.query().$promise.
+      then(function(data){
+        store.set('actions', data);
+      });
+
     $scope.extractHostname = function(url) {
         var hostname;
         var domain = store.get('domain');
         //find & remove protocol (http, ftp, etc.) and get hostname
-        console.log("URL :: "+ url);
         if (domain.url.indexOf("://") > -1) {
             hostname = domain.url.split('/')[2];
         }
@@ -70,8 +97,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     }
 
     if($scope.domain != null){
-      console.log("Other PUSHER DOMAIN :: "+$scope.domain.url);
-
       var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
 
       channel.bind('discovery_status', function(data) {
@@ -93,7 +118,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       //get default browser for domain
       //if default browser is not set then show default browser selection dialog box
       $rootScope.$broadcast("domain_selected", domain);
-      console.log("selected domain/");
 
       $rootScope.$broadcast("reload_tests", domain);
 
@@ -149,11 +173,8 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
     $scope.$on('updateFormClassificationAlert', function(event, status){
       $scope.forms_need_classifying = status;
-    })
+    });
 
-    Action.query().$promise.
-      then(function(data){
-        store.set('actions', data);
-      });
+    $scope.$on('updateAccount',$scope.getAccount());
   }
 ]);
