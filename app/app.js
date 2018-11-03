@@ -1,6 +1,8 @@
 'use strict';
 
 var AUTH0_DOMAIN='qanairy.auth0.com';
+var DEV_AUTH0_DOMAIN='qanairy.auth0.com';
+
 var AUTH0_CLIENT_ID='wT7Phjs9BpwEfnZeFLvK1hwHWP2kU7LV';
 var API_SERVER_URL='api.qanairy.com:80';  // default server url for Java Spring Security API sample
 var DELEGATION_ENABLED=false;
