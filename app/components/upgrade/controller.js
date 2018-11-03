@@ -13,10 +13,13 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
   });
 }])
 
-.controller('UpgradeCtrl', ['$rootScope', '$scope','StripeCheckout','Subscribe',
-  function($rootScope, $scope, StripeCheckout, Subscribe) {
+.controller('UpgradeCtrl', ['$rootScope', '$scope','StripeCheckout','Subscribe', 'store',
+  function($rootScope, $scope, StripeCheckout, Subscribe, store) {
     this._init = function(){
+      console.log("setting current plan");
+      $scope.current_plan = store.get('account').subscriptionType;
 
+      console.log("setting current plan ::  "+$scope.current_plan);
     }
 
     var handler = null;

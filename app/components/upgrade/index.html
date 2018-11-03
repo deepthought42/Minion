@@ -11,25 +11,27 @@
             <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>Email support</li>
           </ul>
         </div>
-        <button class="btn btn--primary" onClick="freeAccess()">
-          Select Plan
+
+        {{current_plan}}
+        <button class="btn btn--primary" onClick="freeAccess()" ng-disabled="current_plan=='FREE'">
+          {{current_plan=='FREE' ? "Current Plan" : "Select Plan"  }}
         </button>
       </div>
     </div>
     <div id="pro_package" class="package equal-height-container col-sm-12 col-md-4">
-      		<div class="planframe equal-height">
-      			<h1 class="mb-2 mt-2 text-center">Pro</h1>
-    				<h3 class=" dashboard__stats text-center">$99</h3>
-      			<div class="mb-4" style="flex-grow: 1;">
-              <ul class="fa-ul pricing-list">
-                <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>250 Generated Tests</li>
-                <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>5000 Test Runs</li>
-                <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>Auto Auth Testing</li>
-                <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>Email support</li>
-              </ul>
-            </div>
-            <button class="btn btn--primary" ng-click="updateSubscription('pro')">
-          Select Plan
+  		<div class="planframe equal-height">
+  			<h1 class="mb-2 mt-2 text-center">Pro</h1>
+				<h3 class=" dashboard__stats text-center">$99</h3>
+  			<div class="mb-4" style="flex-grow: 1;">
+          <ul class="fa-ul pricing-list">
+            <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>250 Generated Tests</li>
+            <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>5000 Test Runs</li>
+            <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>Auto Auth Testing</li>
+            <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>Email support</li>
+          </ul>
+        </div>
+        <button class="btn btn--primary" ng-click="updateSubscription('pro')" ng-disabled="current_plan=='PRO'">
+          {{current_plan=='PRO' ? "Current Plan" : "Select Plan"  }}
         </button>
   		</div>
     </div>
