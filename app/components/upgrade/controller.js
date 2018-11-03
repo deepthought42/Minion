@@ -17,8 +17,8 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
   function($rootScope, $scope, StripeCheckout, Subscribe, store) {
     this._init = function(){
       console.log("setting current plan");
-      $scope.current_plan = store.get('account').subscriptionType;
-
+      $scope.current_plan = store.get("account").subscriptionType;
+      $scope.user_email = store.get("account").username;
       console.log("setting current plan ::  "+$scope.current_plan);
     }
 
@@ -30,7 +30,14 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
 
     $scope.getFreeAccess = function() {
       console.log("free access");
-      Subscribe.update({plan : "free", "source_token": ""});
+      Subscribe.update({plan : "free", "source_token": ""}).$promise
+        .then(function(){
+          $scope.current_plan = "FREE";
+          $scope.$broadcast("updateAccount");
+        })
+        .catch(function(){
+          console.log("error updating subscription");
+        });;
     };
 
     $scope.updateSubscription = function(plan_name) {
@@ -39,6 +46,7 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
       var package_name = "pro";
 
       var options = {
+        email: $scope.user_email,
         description: package_name,
         amount: 9900
       };
@@ -52,7 +60,15 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
         .then(function(result) {
           console.log("result :: "+JSON.stringify(result));
           console.log("payment token : "+result[0].id);
-          Subscribe.update({"plan" : package_name, "source_token": result[0].id});
+          Subscribe.update({"plan" : package_name, "source_token": result[0].id}).$promise
+            .then(function(){
+              console.log("subscription updated");
+              $scope.current_plan = "PRO";
+              $scope.$broadcast("updateAccount");
+            })
+            .catch(function(){
+              console.log("error updating subscription");
+            });
         },function() {
           alert("Stripe Checkout closed without processing your payment.");
         });
