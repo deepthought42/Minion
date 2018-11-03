@@ -33,6 +33,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     $scope.$location = $location;
     $scope.current_path = $location.path();
 
+
     if (Auth.getCachedProfile()) {
       $scope.profile = Auth.getCachedProfile();
       $scope.getAccount($scope.profile.email);
@@ -45,9 +46,8 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
 
     $scope.getAccount = function(email){
-      Account.query({username: email}).$promise
+      Account.getAccount().$promise
         .then(function(data){
-          console.log("account :: "+JSON.stringify(data));
           store.set("account", data);
         })
         .catch(function(err){

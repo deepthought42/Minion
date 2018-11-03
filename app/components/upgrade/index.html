@@ -1,8 +1,11 @@
+<div class="standard-container">
+
+
 <div class="col-sm-12">
 	<div class="row">
-    <div id="pro_package" class="package equal-height-container col-sm-12 col-md-4">
+    <div id="pro_package" class="package equal-height-container col-md-12 col-lg-4">
       <div class="planframe equal-height">
-        <h1 class="mb-2 mt-2 text-center">Freemium</h1>
+        <h1 class="mb-2 mt-2 text-center">Starter</h1>
 				<h3 class=" dashboard__stats text-center">$0</h3>
   			<div class="mb-4" style="flex-grow: 1;">
           <ul class="fa-ul pricing-list">
@@ -11,14 +14,19 @@
             <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>Email support</li>
           </ul>
         </div>
-        <button class="btn btn--primary" onClick="freeAccess()">
-          Select Plan
+
+        {{current_plan}}
+        <button class="btn btn--primary" onClick="freeAccess()" ng-disabled="current_plan=='FREE'">
+          {{current_plan=='FREE' ? "Current Plan" : "Select Plan"  }}
         </button>
       </div>
     </div>
-    <div id="pro_package" class="package equal-height-container col-sm-12 col-md-4">
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <div id="pro_package" class="package equal-height-container col-md-12 col-lg-4">
       		<div class="planframe equal-height">
-      			<h1 class="mb-2 mt-2 text-center">Pro</h1>
+      			<h1 class="mb-2 mt-2 text-center">Basic</h1>
     				<h3 class=" dashboard__stats text-center">$99</h3>
       			<div class="mb-4" style="flex-grow: 1;">
               <ul class="fa-ul pricing-list">
@@ -30,16 +38,40 @@
             </div>
             <button class="btn btn--primary" ng-click="updateSubscription('pro')">
           Select Plan
+=======
+=======
+>>>>>>> 86b6248b13de7fa9f2afd8455737c98a5e83ce8e
+=======
+>>>>>>> 86b6248b13de7fa9f2afd8455737c98a5e83ce8e
+    <div id="pro_package" class="package equal-height-container col-sm-12 col-md-4">
+  		<div class="planframe equal-height">
+  			<h1 class="mb-2 mt-2 text-center">Pro</h1>
+				<h3 class=" dashboard__stats text-center">$99</h3>
+  			<div class="mb-4" style="flex-grow: 1;">
+          <ul class="fa-ul pricing-list">
+            <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>250 Generated Tests</li>
+            <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>5000 Test Runs</li>
+            <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>Auto Auth Testing</li>
+            <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>Email support</li>
+          </ul>
+        </div>
+        <button class="btn btn--primary" ng-click="updateSubscription('pro')" ng-disabled="current_plan=='PRO'">
+          {{current_plan=='PRO' ? "Current Plan" : "Select Plan"  }}
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 86b6248b13de7fa9f2afd8455737c98a5e83ce8e
+=======
+>>>>>>> 86b6248b13de7fa9f2afd8455737c98a5e83ce8e
+=======
+>>>>>>> 86b6248b13de7fa9f2afd8455737c98a5e83ce8e
         </button>
   		</div>
     </div>
-    <div id="enterprise_package" class="package equal-height-container col-sm-12 col-md-4">
+    <div id="enterprise_package" class="package equal-height-container col-md-12 col-lg-4">
   		<div class="planframe equal-height ">
-  			<h1 class="mb-2 mt-2 text-center">Enterprise</h1>
-				<a class="mt-4 mb-5 align-middle" href="mailto:qanairy@qanairy.com?&subject=Qanairy%20Enterprise%20Plan%20Upgrade&body=Hi%20Qanairy,%0d%0dI%20would%20like%20to%20request%20a%20quote%20please%20have%20a%20sales%20representative%20reach%20out%20to%20me.%20Here%20are%20my%20details:%0d%0dName:" rel="EMAIL"><button class="btn btn--primary">
-         Request A Quote
-        </button></a>
-				<div class="mb-4 " style="flex-grow: 1;">
+  			<h1 class="mb-2 mt-2 text-center">Premium</h1>
+    				<h3 class=" dashboard__stats text-center">&nbsp;</h3>
+      			<div class="mb-4" style="flex-grow: 1;">
           <ul class="fa-ul pricing-list">
             <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>Unlimited Generated Tests</li>
             <li style="list-style-type: none;"><i class="green pr-2 fa fa-check"></i>Unlimited Test Runs</li>
@@ -48,80 +80,9 @@
           </ul>
         </div>
         <a href="mailto:qanairy@qanairy.com?&subject=Qanairy%20Enterprise%20Plan%20Upgrade&body=Hi%20Qanairy,%0d%0dI%20would%20like%20to%20request%20a%20quote%20please%20have%20a%20sales%20representative%20reach%20out%20to%20me.%20Here%20are%20my%20details:%0d%0dName:" rel="EMAIL"><button class=" align-middle btn btn--primary">
-        Contact Us
+        Request A Quote
        </button></a>
      </div>
    </div>
  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="row">
-  <div class="col-sm-12">
-    <div id="pro_package" class="col-sm-4">
-      <div class="planframe">
-        <h2>Free</h2>
-        <div>
-          <ul>
-            <li>20 Generated Tests</li>
-            <li>50 Test Runs</li>
-            <li>Email support</li>
-          </ul>
-        </div>
-        <button ng-click="getFreeAccess()">
-          Select Plan
-        </button>
-      </div>
-    </div>
-    <div id="pro_package" class="col-sm-4">
-  		<div class="planframe">
-  			<h2>Pro $99</h2>
-  			<div>
-          <ul>
-            <li>250 Generated Tests</li>
-            <li>5000 Test Runs</li>
-            <li>Auto Auth Testing</li>
-            <li>Email support</li>
-          </ul>
-        </div>
-        <button ng-click="updateSubscription('pro')">
-          Select Plan
-        </button>
-  		</div>
-    </div>
-    <div id="enterprise_package" class="col-sm-4">
-  		<div class="planframe">
-  			<h2>Enterprise</h2>
-  			<div>
-          <ul>
-            <li>Unlimited Generated Tests</li>
-            <li>Unlimited Test Runs</li>
-            <li>Auto Auth Testing</li>
-            <li>24/7 phone support</li>
-          </ul>
-        </div>
-        <a href="mailto:qanairy@qanairy.com?&subject=Qanairy%20Enterprise%20Plan%20Upgrade&body=Hi%20Qanairy,%0d%0dI%20would%20like%20to%20request%20a%20quote%20please%20have%20a%20sales%20representative%20reach%20out%20to%20me.%20Here%20are%20my%20details:%0d%0dName:" rel="EMAIL">
-          <button>Contact Us</button>
-        </a>
-  		</div>
-    </div>
-  </div>
-</div>
+	</div>
