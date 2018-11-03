@@ -75,13 +75,13 @@ config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptio
     $rootScope.$on("$stateChangeStart", function (e, toState, toParams, fromState, fromParams) {
       console.log("to state :: "+toState.name);
      //var requireLogin = toState.data.requireLogin || false;
-       if(store.get("domain") == null && toState.name != "main.upgrade" && toState.name != "authenticate" && toState.name != "subscribe" && toState.name != "main.account" && toState.name != "main.dashboard"){
+       if(store.get("domain") == null && toState.name !== "main.upgrade" && toState.name !== "authenticate" && toState.name !== "subscribe" && toState.name !== "main.account" && toState.name !== "main.dashboard"){
          $rootScope.$broadcast("domainRequiredError");
-         if(toState.name != "main.domains" && fromState.name == "main.domains"){
+         if(toState.name !== "main.domains" && fromState.name == "main.domains"){
            console.log("navigating to nowhere");
            e.preventDefault();
          }
-         else if(toState.name != "main.domains" && fromState.name != "main.domains"){
+         else if(toState.name !== "main.domains" && fromState.name !== "main.domains"){
            console.log("navigating to domain page");
            e.preventDefault();
            $state.go("main.domains");
