@@ -51,7 +51,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
           store.set("account", data);
         })
         .catch(function(err){
-          console.log("account :: "+err);
+          //console.log("account :: "+err);
         })
     }
 
@@ -81,7 +81,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
         var hostname;
         var domain = store.get('domain');
         //find & remove protocol (http, ftp, etc.) and get hostname
-        console.log("URL :: "+ url);
         if (domain.url.indexOf("://") > -1) {
             hostname = domain.url.split('/')[2];
         }
@@ -98,8 +97,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     }
 
     if($scope.domain != null){
-      console.log("Other PUSHER DOMAIN :: "+$scope.domain.url);
-
       var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
 
       channel.bind('discovery_status', function(data) {
@@ -121,7 +118,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       //get default browser for domain
       //if default browser is not set then show default browser selection dialog box
       $rootScope.$broadcast("domain_selected", domain);
-      console.log("selected domain/");
 
       $rootScope.$broadcast("reload_tests", domain);
 
