@@ -27,7 +27,7 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
 
     $scope.getFreeAccess = function() {
       console.log("free access");
-      Subscribe.update({"plan" : "free"});
+      Subscribe.update({plan : "free", "source_token": ""});
     };
 
     $scope.updateSubscription = function(plan_name) {
@@ -47,7 +47,9 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
       // The rejection callback doesn't work in IE6-7.
       handler.open(options)
         .then(function(result) {
-          Subscribe.update({"plan" : package_name});
+          console.log("result :: "+JSON.stringify(result));
+          console.log("payment token : "+result[0].id);
+          Subscribe.update({"plan" : package_name, "source_token": result[0].id});
         },function() {
           alert("Stripe Checkout closed without processing your payment.");
         });

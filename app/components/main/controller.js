@@ -32,8 +32,31 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     $scope.approved_test_cnt = store.get("approved_test_cnt");
     $scope.$location = $location;
     $scope.current_path = $location.path();
-    $scope.user_profile = store.get('profile');
+
+    if (Auth.getCachedProfile()) {
+      $scope.profile = Auth.getCachedProfile();
+      $scope.getAccount($scope.profile.email);
+    } else {
+      Auth.getProfile(function(err, profile) {
+        $scope.profile = profile;
+        $scope.getAccount(profile.email);
+      });
+    }
+
+
+    $scope.getAccount = function(email){
+      Account.query({username: email}).$promise
+        .then(function(data){
+          console.log("account :: "+JSON.stringify(data));
+          store.set("account", data);
+        })
+        .catch(function(err){
+          console.log("account :: "+err);
+        })
+    }
+
     $scope.navToggledOpen = true;
+
 
     var pusher = new Pusher('77fec1184d841b55919e', {
       cluster: 'us2',

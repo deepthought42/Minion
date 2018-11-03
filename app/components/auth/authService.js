@@ -3,8 +3,8 @@
 
 var authService = angular.module('Qanairy.authService', []);
 
-authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'segment',
-  function ($state, angularAuth0, $timeout, store, segment) {
+authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'segment', 'Account',
+  function ($state, angularAuth0, $timeout, store, segment, Account) {
 
     function login() {
       angularAuth0.authorize();
