@@ -152,8 +152,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
     $scope.$on('domain_updated', function(){
       $scope.domain = store.get('domain');
-
-      $scope.$apply();
     });
 
     $scope.$on('domain_selected', function(){

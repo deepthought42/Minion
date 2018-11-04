@@ -41,7 +41,7 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
           Domain.updateForm({domain_id: $scope.domain.id, key: $scope.form.key, name: $scope.form.name, form_type: $scope.form.type}).$promise
             .then(function(data){
               segment.track("Updated form", {
-                form_key: form.key,
+                form_key: $scope.form.key,
                 domain: $scope.domain.id,
                 succeeded : true
               }, function(success){});
@@ -51,7 +51,7 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
             })
             .catch(function(err){
               segment.track("Updated form", {
-                form_key: form.key,
+                form_key: $scope.form.key,
                 domain: $scope.domain.id,
                 succeeded : false
               }, function(success){});

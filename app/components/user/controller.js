@@ -17,7 +17,6 @@ angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService', 'ui.togg
       $scope.domain_id = store.get('domain').id;
       Domain.getUsers({domain_id: $scope.domain_id}).$promise
         .then(function(users){
-          console.log('retreived domain users');
           $scope.users = users;
         })
         .catch(function(){
@@ -30,7 +29,7 @@ angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService', 'ui.togg
     }
 
     $scope.createUser = function(user){
-        $state.go("main.edit_user", {user: null, state: "create"});
+      $state.go("main.edit_user", {user: null, state: "create"});
     }
 
     this._init();
