@@ -82,6 +82,9 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
         });
     }
 
+    $scope.cancel = function(){
+      $state.go("main.users");
+    }
     this._init();
   }
 ]);
