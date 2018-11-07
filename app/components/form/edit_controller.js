@@ -11,8 +11,8 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
   });
 }])
 
-.controller('FormEditCtrl', ['$rootScope', '$scope', 'Form', 'Domain', 'store', '$state', '$stateParams',
-  function($rootScope, $scope, Form, Domain, store, $state, $stateParams) {
+.controller('FormEditCtrl', ['$rootScope', '$scope', 'Form', 'Domain', 'store', '$state', '$stateParams', 'segment',
+  function($rootScope, $scope, Form, Domain, store, $state, $stateParams,segment) {
 
     this._init = function(){
       $scope.domain = store.get('domain');

@@ -38,14 +38,13 @@
     <div class="test"
          ng-repeat="form in (filteredForms = forms) | filter:searchText track by $index"
          ng-show="forms.length > 0">
-      <div class="test__profile vertical__left__profile" ng-click="setFormIndex($index);visible_tab='nodedata'+$index">
+      <div class="test__profile vertical__left__profile"">
 
-        <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)">
+        <div class="flex-auto test__title test_functions test__profile_stretch"">
           <div class="">
             <h5 class="test__title">
                {{form.name || "Form #"+($index+1)}}
              </h5>
-            <i class="fa fa-pencil edithover"></i>
           </div>
         </div>
 
