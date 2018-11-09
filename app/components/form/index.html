@@ -1,9 +1,9 @@
 <div class="content">
-		
+
 		<div class="secondary-nav vertical__center__int" >
-			
+
 		</div>
-		
+
     <div class="test-labels-container">
       <div class="test-labels">
         <div class="flex-auto test_functions">
@@ -22,11 +22,11 @@
 			</div>
       </div>
     </div>
-	
-	
-			
+
+
+
 		<div class="test-container">
-			
+
     <div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnForms">
       <div>
         <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw"></i>
@@ -38,38 +38,16 @@
     <div class="test"
          ng-repeat="form in (filteredForms = forms) | filter:searchText track by $index"
          ng-show="forms.length > 0">
-      <div class="test__profile vertical__left__profile" ng-click="setFormIndex($index);visible_tab='nodedata'+$index">
-				
-        <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleFormDataVisibility(test, $index)" ng-if="!form.show_form_name_edit_field">
-          <div class="" ng-show="!form.show_form_name_edit_field">
-            <h5 class="test__title" ng-click="form.show_form_name_edit_field = true">
+      <div class="test__profile vertical__left__profile"">
+
+        <div class="flex-auto test__title test_functions test__profile_stretch"">
+          <div class="">
+            <h5 class="test__title">
                {{form.name || "Form #"+($index+1)}}
              </h5>
-            <i class="fa fa-pencil edithover" ng-click="form.show_form_name_edit_field = true" ></i>
           </div>
         </div>
-				
-         <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="form.show_form_name_edit_field">
-          <div class="row">
-            <div class="flex-auto">
-              <div class="">
-                <input class="form-control title__edit" type="text" ng-model="new_name" ng-value="form.name" ng-trim="false"/>
-              </div>
-            </div>
-            <div class="flex-none test_name_edit">
-              <div class="title__edit__buttons margin_fifteen_left btn--secondary" ng-click="cancelEditingFormName(test)" ng-show="!form.show_waiting_icon">
-                 Cancel
-               </div>
-               <div class="title__edit__buttons margin_fifteen_left btn--primary " ng-click="setFormName(test, new_name)" ng-show="!form.show_waiting_icon">
-                 Save
-               </div>
-              <div class="" ng-show="form.show_waiting_icon">
-                <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-				
+
         <div class="flex-initial text-left date_stats test__profile_stretch">
           {{form.type}}
         </div>
