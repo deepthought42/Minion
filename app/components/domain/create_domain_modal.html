@@ -80,11 +80,12 @@
 							  <div class ="col-sm-12 form_molecule" >
 								<div class="form_label_description">
 											<h6>Domain Disclaimer</h6>
-											<div>
+											<div class="disclaimer-checkbox">
 												<input type="checkbox" ng-model="disclaimer_checkbox" required>
 											</div>
 											<div class="disclamer">
-											I understand that by providing a domain name via Qanairy's services, that Qanairy will utilize certain technology to, “scrape,” “crawl” or “spider” the pages including in such domain name and may collect my user credentials such that the services can access such domain names. I grant Qanairy all rights necessary to do so and represent and warrant that I own or have all necessary rights to permit Qanairy to do so and that such actions will not violate any third party rights.
+											<p >I understand that by providing a domain name via Qanairy's services, that Qanairy will utilize certain technology to, “scrape,” “crawl” or “spider” the pages including in such domain name and may collect my user credentials such that the services can access such domain names. I grant Qanairy all rights necessary to do so and represent and warrant that I own or have all necessary rights to permit Qanairy to do so and that such actions will not violate any third party rights.
+												</p>
 											</div>
 									</div>
 								</div>
@@ -97,7 +98,7 @@
               </button>
 						</div>
 				</form>
-				<div class="error__text error__message" ng-show="show_create_domain_err">
+				<div class="col-sm-12 error__text error__message" ng-show="show_create_domain_err">
 				<p>{{domain_creation_err}}</p>
 				</div>
 			</div>
