@@ -54,7 +54,7 @@ config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptio
       responseType: "token id_token",
       audience: "https://staging-api.qanairy.com",
       redirectUri: "http://localhost:8001/#/authenticate",//"https://app.qanairy.com/authenticate",
-      scope: "openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions"
+      scope: "openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions create:test_user"
     });
 
     storeProvider.setStore("sessionStorage");
