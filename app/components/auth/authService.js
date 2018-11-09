@@ -72,7 +72,8 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
     function getProfile(cb) {
       var accessToken = localStorage.getItem('access_token');
       if (!accessToken) {
-        throw new Error('Access Token must exist to fetch profile');
+        login();
+        //throw new Error('Access Token must exist to fetch profile');
       }
       angularAuth0.client.userInfo(accessToken, function(err, profile) {
         if (profile) {

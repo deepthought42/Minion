@@ -46,19 +46,15 @@
     <div class="test"
          ng-repeat="user in (filteredUsers = users) | filter:searchText track by $index"
          ng-show="users.length > 0">
-      <div class="test__profile vertical__left__profile" ng-click="setUserIndex($index);visible_tab='nodedata'+$index">
-        <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleUserDataVisibility(test, $index)" ng-if="!user.show_user_name_edit_field">
-          <div class="" ng-show="!user.show_user_name_edit_field">
-            <h5 class="test__title" ng-click="user.show_user_name_edit_field = true">
+      <div class="test__profile vertical__left__profile">
+        <div class="flex-auto test__title test_functions test__profile_stretch">
+          <div class="">
+            <h5 class="test__title">
                {{user.username || "User #"+($index+1)}}
              </h5>
-            <i class="fa fa-pencil edithover" ng-click="user.show_user_name_edit_field = true" ></i>
           </div>
         </div>
 
-        <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="user.show_user_name_edit_field">
-          <input class="user-control title__edit" type="text" ng-model="new_name" ng-value="user.name" ng-trim="false"/>
-        </div>
 				<div class="flex-initial date_stats text-left test__profile_stretch" >
           {{user.role  || "Unknown"}}
         </div>
