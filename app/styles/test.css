@@ -113,8 +113,8 @@ width: -webkit-calc(100% - 15px);
 
 .error__text {
 	text-align: right !important;
-	padding: 5px 0px  !important;
 	background-color:#ffffff !important;
+	padding: 5px 15px;
 }
 
 .error__text p{
