@@ -219,7 +219,9 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       for(var i=0; i < browsers.length; i++){
         $scope.current_test_browser = browsers[i];
         $scope.test.browserStatuses[browsers[i]] = null;
-        Test.runTests({test_keys: keys, browser_name: $scope.current_test_browser}).$promise
+        var url = store.get('domain').url;
+        console.log("URL "+url);
+        Test.runTests({test_keys: keys, browser: $scope.current_test_browser, host_url: url}).$promise
           .then(function(data){
             $scope.test.runStatus = false;
 
@@ -289,8 +291,11 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       }
 
       $scope.closeDialog();
+      console.log("URL ");
+
+      var url = store.get('domain').url;
       for(var i=0; i < browsers.length; i++){
-        Test.runTests({test_keys: keys, browser_name: browsers[i]}).$promise
+        Test.runTests({test_keys: keys, browser: browsers[i], host_url: store.get('domain').url}).$promise
           .then(function(data){
             segment.track("Run Tests", {
               chrome : chrome_selected,
@@ -476,7 +481,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       persistable_test.key = test.key;
       persistable_test.name = test.new_name;
       persistable_test.browserStatuses = test.browserStatuses;
-
       Test.update({key: test.key, name: test.new_name, firefox:  test.browserStatuses.firefox, chrome:  test.browserStatuses.chrome}).$promise
         .then(function(data){
           console.log("data :: "+data);
@@ -490,7 +494,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           else{
             var approved_cnt = store.get('approved_test_cnt')+1;
           }
-          test.name = test.new_name;
+          test.name = test.name;
           test.show_test_name_edit_field = false;
           $scope.editing_test_idx = -1;
           test.show_waiting_icon = false;
@@ -506,7 +510,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         });
 
       segment.track("Updated Test", {
-        group_key: group.key,
         test_key: test.key,
         success : !$scope.errors.length
       }, function(success){});
