@@ -1,21 +1,21 @@
 <div class="standard-container">
-		
+
 		<div class="offset-md-2 col-md-8">
 	<h2 class="modal__title  mt-3">
 		User Settings
 	</h2>
-  
+
 	<div class="form_label_description">
 			<h6>Email Address</h6>
 			{{ profile.email }}
 	</div>
 	<br>
 	<div class="form_label_description accounts">
-		<h6>Deactivate your user account</h6>
-		Deactivating your account will disable your profile and remove your email address from Qanairy, but it will not remove any information related to your domain. For questions please contact <a href="mailto:support@qanairy.com" >support@qanairy.com</a>.
+		<h6>Delete your user account</h6>
+		Deleting your account will permanently remove your profile and email address from Qanairy, but it will not remove any information related to your domain. For questions please contact <a href="mailto:support@qanairy.com" >support@qanairy.com</a>.
 		<div class="accounts_btn">
-			<button class="btn btn--primary" ng-click="deleteAccount()">
-				Deactivate My Account
+			<button class="btn btn--primary" ng-click="askDelete()">
+				Delete My Account
 			</button>
 		</div>
 	</div>
