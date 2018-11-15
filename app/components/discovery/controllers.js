@@ -306,18 +306,14 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       Test.archive({key: test.key} ).$promise.
         then(function(resp){
           test.archived = true;
-          segment.track("Archived Test", {
-            test_key : test.key,
-            success : true
-          }, function(success){});
         })
         .catch(function(err){
           $scope.errors.push("An error occurred while archiving test");
-          segment.track("Archived Test", {
-            test_key : test.key,
-            success : false
-          }, function(success){});
         });
+
+        segment.track("Archived Test", {
+          test_key : test.key
+        }, function(success){});
     }
 
     $scope.askDelete = function(test) {
@@ -331,7 +327,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
        $mdDialog.show(confirm).then(function() {
          $scope.archiveTest(test);
        }, function() {
-         $scope.status = 'You decided to keep your debt.';
+         $scope.status = 'You decided to keep your test.';
        });
     };
 

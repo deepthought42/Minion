@@ -10,8 +10,8 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
   });
 }])
 
-.controller('AccountCtrl', ['$rootScope', '$scope', 'Account', 'Auth', 'store', 'segment',
-  function($rootScope, $scope, Account, Auth, store, segment) {
+.controller('AccountCtrl', ['$rootScope', '$scope', 'Account', 'Auth', 'store', 'segment', '$mdDialog',
+  function($rootScope, $scope, Account, Auth, store, segment, $mdDialog) {
     //INITIALIZATION
 
     $scope.$on('new-account', function(event, args){
@@ -26,11 +26,33 @@ angular.module('Qanairy.account', ['ui.router', 'Qanairy.AccountService'])
       Account.save({service_package: account_type, payment_acct: payment_acct});
     }
 
-    $scope.deleteAccount = function(acct){
-      console.log("Deleting account maybe..");
-      Account.delete(acct);
+    $scope.askDelete = function() {
+       // Appending dialog to document.body to cover sidenav in docs app
+       var confirm = $mdDialog.confirm()
+             .title('Are you sure you would like to delete your account?')
+             .targetEvent()
+             .ok('Confirm')
+             .cancel('Cancel');
+
+       $mdDialog.show(confirm).then(function() {
+         $scope.deleteAccount();
+       }, function() {
+         $scope.status = 'You decided to keep your account.';
+       });
+    };
+
+    $scope.deleteAccount = function(){
+      Account.delete().$promise
+        .then(function(response){
+          //logout
+          Auth.logout();
+          Auth.login();
+        })
+        .catch(function(err){
+          alert("Error occurred deleting user");
+        });
       segment.track("Delete user account", {
-        account_id: acct.id
+        email: $scope.profile.email
       }, function(success){
 
       });

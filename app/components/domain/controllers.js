@@ -82,15 +82,11 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           $scope.closeDialog();
           created_successfully = true;
           $rootScope.$broadcast("domain_updated", successResult);
-          segment.track("Created Domain", {
-            successful: true
-          }, function(success){  });
+
         },
         function(errorResult){
           created_successfully = false
-          segment.track("Created Domain", {
-            successful: false
-          }, function(success){  });
+
           if(errorResult.status === 303){
             $scope.closeDialog();
           }
@@ -98,6 +94,10 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             $scope.show_create_domain_err = true;
           }
         });
+
+        segment.track("Created Domain", {
+          domain: host
+        }, function(success){  });
     }
 
     $scope.updateDomain = function(key, protocol, default_browser, logo_url){
@@ -111,18 +111,14 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             }
           }
           $scope.closeDialog();
-
-          segment.track("Updated Domain", {
-            key : key,
-            successful: true
-          }, function(success){  });
         },
         function(errorResult){
-          segment.track("Updated Domain", {
-            key : key,
-            successful: false
-          }, function(success){  });
+
         });
+
+        segment.track("Updated Domain", {
+          key : key
+        }, function(success){  });
     }
 
     /**
@@ -139,11 +135,13 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       Domain.getAllPathObjects({host: domain.url}).$promise
                 .then(function(data){
                     store.set('path_objects', data);
+                })
+                .catch(function(err){
+                  console.log("An error occurred retrieving domains");
                 });
 
-      segment.track("Updated Domain", {
-        domain, domain,
-        successful: !$scope.show_create_domain_err
+      segment.track("Selected Domain", {
+        domain: domain.url
       }, function(success){  });
 
       $state.go("main.discovery");
@@ -191,9 +189,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         accept:["image/*"],
         transformations:{}
       }).then(function(response) {
-        segment.track("Uploaded Logo", {
-            successful : true
-          }, function(success){  });
         // declare this function to handle response
         //set filestack url somewhere
 
@@ -208,10 +203,11 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         $scope.$apply();
       })
       .catch(function(error){
-        segment.track("Uploaded Logo", {
-            successful : true
-          }, function(success){  });
+
       });
+      segment.track("Uploaded Logo", {
+          domain : domain
+        }, function(success){  });
     }
 
     $scope.removeDomain = function(domain, index){
@@ -220,17 +216,10 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       if(confirmed_delete){
         Domain.delete({domain_id: domain.id}).$promise
           .then(function(data){
-            segment.track("Deleted Domain", {
-                confirmed: confirmed_delete,
-                successful : true,
-                domain : domain
-              }, function(success){  });
             $scope.domains.splice(index, 1);
             $rootScope.$broadcast('domain_updated');
             if(!$scope.domains.length){
               segment.track("Deleted Domain", {
-                  confirmed: confirmed_delete,
-                  successful : false,
                   domain : domain
                 }, function(success){  });
               $scope.openCreateDomainDialog();
@@ -239,6 +228,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           .catch(function(err){
             $scope.errors.push(err);
           })
+
+
       }
 
 
