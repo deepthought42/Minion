@@ -405,12 +405,10 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
       $scope.test_idx = index || 0;
       $scope.test = test;
+      test.new_name = test.name;
       test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
       console.log("default browser :: "+ $scope.default_browser);
       $scope.visible_browser_screenshot = $scope.default_browser;
-      console.log("browser :: "+$scope.visible_browser_screenshot);
-      console.log("TEest" + test);
-      console.log("Test path keys :: "+test.pathKeys);
       $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
       $scope.setCurrentNode($scope.current_path_objects[0], index);
 
