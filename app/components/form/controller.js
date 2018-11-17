@@ -35,9 +35,17 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
           $scope.users = users;
           store.set('users', users);
         })
-        .catch(function(){
+        .catch(function(err){
+          if(err.data){
+            $scope.errors.push(err.data);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
+        });
 
-        })
+        //ERRORS
+        $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
     };
 
     $scope.editForm = function(form){

@@ -51,12 +51,12 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
           $state.go("main.users");
         })
         .catch(function(err){
-          console.log("an error occurred while creating user :: "+err);
-          segment.track("Created user", {
-            domain: $scope.domain.id,
-            user: user.username,
-            succeeded : false
-          }, function(success){});
+          if(err.data){
+            $scope.errors.push("Error occurred while creating test user");
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
     }
 
@@ -74,11 +74,12 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
           $state.go("main.users")
         }).
         catch(function(err){
-          segment.track("Updated user", {
-            user: user.username,
-            succeeded : false
-          }, function(success){});
-          console.log("An error occured while updating user :: "+err);
+          if(err.data){
+            $scope.errors.push("An error occured while updating user");
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
     }
 

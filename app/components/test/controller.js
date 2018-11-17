@@ -34,6 +34,9 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         $scope.getTestsByUrl($scope.domain_url);
       }
 
+      //ERRORS
+      $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
+
       var pusher = new Pusher('77fec1184d841b55919e', {
         cluster: 'us2',
         encrypted: true
