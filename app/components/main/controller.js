@@ -26,7 +26,15 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     $scope.workAllocation = {};
     $scope.workAllocation.urlProtocol = $scope.protocols[0];
     $scope.domain = store.get('domain');
-    $scope.domain_list = store.get('domains');
+
+    Domain.query().$promise
+      .then(function(data){
+        $scope.domain_list = data;
+        store.set("domains", data);
+      })
+      .catch(function(err){
+        $scope.errors.push(err);
+      });
     $scope.errors = [];
 
     $scope.approved_test_cnt = store.get("approved_test_cnt");
