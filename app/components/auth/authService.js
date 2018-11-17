@@ -47,8 +47,6 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
       localStorage.setItem('access_token', authResult.accessToken);
       localStorage.setItem('id_token', authResult.idToken);
       localStorage.setItem('expires_at', expiresAt);
-
-      sessionStorage.clear();
     }
 
     function logout() {
@@ -58,6 +56,8 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
       localStorage.removeItem('access_token');
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
+
+      sessionStorage.clear();
     }
 
     function isAuthenticated() {
