@@ -50,12 +50,11 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
     }
 
     function logout() {
-      sessionStorage.removeItem('token');
-
       // Remove tokens and expiry time from localStorage
       localStorage.removeItem('access_token');
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
+      sessionStorage.clear();
     }
 
     function isAuthenticated() {
