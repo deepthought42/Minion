@@ -1,3 +1,6 @@
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c7cb0073a1814667a40879dc093ea8a5)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=deepthought42/Minion&amp;utm_campaign=Badge_Grade)
+
 # Qanairy UI (aka Minion)
 
 This project is the User Interface(Client) layer for the Qanairy API.
