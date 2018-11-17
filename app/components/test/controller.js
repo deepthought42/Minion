@@ -219,15 +219,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         $scope.current_test_browser = browsers[i];
         $scope.test.browserStatuses[browsers[i]] = null;
         var url = store.get('domain').url;
-        console.log("URL "+url);
         Test.runTests({test_keys: keys, browser: $scope.current_test_browser, host_url: url}).$promise
           .then(function(data){
             $scope.test.runStatus = false;
 
             segment.track("Run Test", {
               chrome : chrome_selected,
-              firefox : firefox_selected,
-              succeeded : true
+              firefox : firefox_selected
             }, function(success){});
 
             //use brute force method to find tests with returned keys so they can be updated
@@ -236,11 +234,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
                 if($scope.tests[test_idx].key === returned_key){
                   var test_record = data[returned_key];
                   $scope.tests[test_idx].failing = test_record.passing;
-                  $scope.tests[test_idx].browserStatuses[test_record.browser_name] = test_record.passing;
+                  $scope.tests[test_idx].browserStatuses[test_record.browser] = test_record.passing.toLowerCase();
                   $scope.tests[test_idx].records.unshift(test_record);
                   //move test to top of list
                   var test = $scope.tests.splice(test_idx, 1)[0];
                   $scope.tests.unshift(test);
+
+                  //shade bar either red or green depending on passing/failing status
                   if(test_record.passing){
                     test.passingStatusClass = true;
                     test.failingStatusClass = false;
