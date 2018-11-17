@@ -192,7 +192,7 @@
 	          <!---ARCHIVE TEST BUTTON ENDS HERE -->
           </div>
           <div class="" ng-if="editing_test_idx==$index">
-            <div class="title__edit__buttons margin_fifteen_right btn--secondary" ng-click="cancelEditingTest(test)" ng-show="!test.show_waiting_icon">
+            <div class="title__edit__buttons margin_fifteen_right btn--secondary" ng-click="cancelEditingTest($index)" ng-show="!test.show_waiting_icon">
 							Cancel
 						</div>
 						<div class="title__edit__buttons margin_fifteen_right btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">

@@ -196,8 +196,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
       segment.track("Update Browser Passing Status", {
         test_key : test.key,
-        status : test.status,
-        succeeded: true
+        status : test.status
       }, function(success){});
     }
 
@@ -475,7 +474,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
               status_arr.push( [ key, test.browserStatuses[key] ] );
           }
       }
-      if(test.new_name.length > 0){
+      if(test.new_name && test.new_name.length > 0){
         test.name = test.new_name;
       }
       else{
@@ -516,9 +515,9 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       test.show_waiting_icon = true;
     }
 
-    $scope.cancelEditingTest = function(test){
+    $scope.cancelEditingTest = function(index){
       $scope.editing_test_idx = -1;
-      $scope.test = $scope.test_copy;
+      $scope.tests[index] = JSON.parse(JSON.stringify($scope.test_copy));
       $scope.test_copy = null;
     }
 
@@ -582,7 +581,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
        $mdDialog.show(confirm).then(function() {
          $scope.archiveTest(test);
        }, function() {
-         $scope.status = 'You decided to keep your debt.';
+         $scope.status = 'You decided to keep your test.';
        });
     };
 
@@ -614,7 +613,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
     $scope.editTest = function(test, $index){
       $scope.editing_test_idx = $index;
-      $scope.test_copy = JSON.parse(JSON.stringify(test));
+      $scope.test_copy = JSON.parse(JSON.stringify(test));;
     }
 
     /**
