@@ -475,10 +475,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
               status_arr.push( [ key, test.browserStatuses[key] ] );
           }
       }
-      var persistable_test = {};
-      persistable_test.key = test.key;
-      persistable_test.name = test.new_name;
-      persistable_test.browserStatuses = test.browserStatuses;
+      if(test.new_name.length > 0){
+        test.name = test.new_name;
+      }
+      else{
+        test.new_name = test.name
+      }
       Test.update({key: test.key, name: test.new_name, firefox:  test.browserStatuses.firefox, chrome:  test.browserStatuses.chrome}).$promise
         .then(function(data){
           console.log("data :: "+data);
