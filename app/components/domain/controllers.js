@@ -220,7 +220,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         $scope.current_domain.logo_url = response.filesUploaded[0].url;
         $scope.$apply();
       })
-      .catch(function(error){
+      .catch(function(err){
         if(err.data){
           $scope.errors.push(err.data);
         }

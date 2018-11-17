@@ -527,7 +527,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         test.name = test.new_name;
       }
       else{
-        test.new_name = test.name
+        test.new_name = test.name;
       }
       Test.update({key: test.key, name: test.new_name, firefox:  test.browserStatuses.firefox, chrome:  test.browserStatuses.chrome}).$promise
         .then(function(data){
