@@ -70,10 +70,23 @@ config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptio
 
 .run(["$rootScope", "store", "jwtHelper", "$state", "$location", "$window", "Auth", "Events",
   function($rootScope, store, jwtHelper, $state , $location, $window, Auth, Events){
+
+    var searchObject = $location.search();
+    if(searchObject.accessToken && searchObject.idToken){
+      sessionStorage.setItem('token', searchObject.accessToken);
+
+      // Set the time that the access token will expire at
+      let expiresAt = JSON.stringify((searchObject.expiresIn * 1000) + new Date().getTime());
+      localStorage.setItem('access_token', searchObject.accessToken);
+      localStorage.setItem('id_token', searchObject.idToken);
+      localStorage.setItem('expires_at', expiresAt);
+    }
+
     Auth.handleAuthentication();
 
     $rootScope.$on("$stateChangeStart", function (e, toState, toParams, fromState, fromParams) {
       console.log("to state :: "+toState.name);
+
      //var requireLogin = toState.data.requireLogin || false;
        if(store.get("domain") == null && toState.name !== "main.upgrade" && toState.name !== "authenticate" && toState.name !== "subscribe" && toState.name !== "main.account" && toState.name !== "main.dashboard"){
          $rootScope.$broadcast("domainRequiredError");
