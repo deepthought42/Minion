@@ -4,6 +4,6 @@ var domainService = angular.module('Qanairy.TestUserService', ['ngResource', 'Qa
 
 domainService.factory('TestUser', ['$resource', 'Qanairy.serviceConfig', function ($resource, config) {
   return $resource(config.basePath + '/test_user', {id: '@id'}, {
-    update:{url: config.basePath + '/test_users/:id', method: 'PUT', params: {username: '@username', password: '@password', role: '@role', isEnabled: '@isEnabled'}},
+    update: {url: config.basePath + '/test_users/:id', method: 'PUT', params: {username: '@username', password: '@password', role: '@role', isEnabled: '@isEnabled'}},
   });
 }]);
