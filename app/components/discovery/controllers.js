@@ -36,6 +36,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.discoveryOnboardingIndex = 0;
       $scope.discovery_status = {};
       $scope.current_domain = store.get('domain');
+
+      //ERRORS
+      $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
+
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
         Discovery.getStatus({url: $scope.current_domain.url}).$promise
@@ -70,7 +74,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
             }
           })
           .catch(function(err){
-            $scope.errors.push(err.data);
+            if(err.data){
+              $scope.errors.push(err.data);
+            }
+            else{
+              $scope.errors.push({message: $scope.unresponsive_server_err });
+            }
             $scope.waitingOnTests = false;
           });
 
@@ -211,18 +220,23 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         })
         .catch(function(err){
           //$scope.waitingOnTests = false;
-          $scope.errors.push(err.data);
+          if(err.data){
+            $scope.errors.push(err.data);
 
-          if(err.data.message == "A discovery is already running"){
-            $scope.isStarted = true;
+            if(err.data.message == "A discovery is already running"){
+              $scope.isStarted = true;
+            }
+            else{
+              $scope.isStarted = false;
+            }
+            segment.track("Started Discovery", {
+              domain : $scope.current_domain.url,
+              success : false
+            }, function(success){});
           }
           else{
-            $scope.isStarted = false;
+            $scope.errors.push({message: $scope.unresponsive_server_err});
           }
-          segment.track("Started Discovery", {
-            domain : $scope.current_domain.url,
-            success : false
-          }, function(success){});
         });
     }
 

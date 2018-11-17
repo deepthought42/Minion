@@ -1,6 +1,6 @@
 <div class="standard-container">
-	<div class="error__message" ng-show="domain_error">
-  {{domain_error}}
+	<div class="error__message" ng-repeat="error in errors track by $index">
+		{{error.message}}
 	</div>
 	<div class="domain__button box--shadow vertical__center" id="add_domain_card" ng-click="openCreateDomainDialog()">
 		<div class="domain__icon">
