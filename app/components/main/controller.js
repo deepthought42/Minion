@@ -51,7 +51,12 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
           store.set("account", data);
         })
         .catch(function(err){
-          //console.log("account :: "+err);
+          if(err.data){
+            $scope.errors.push("Error occurred retrieving account");
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         })
     }
 
@@ -68,13 +73,26 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
         store.set('onboard', data);
         $rootScope.$broadcast('onboardingStepsAcquired');
       })
-      .catch(function(data){
-
+      .catch(function(err){
+        if(err.data){
+          $scope.errors.push("Error occurred checking onboarding steps");
+        }
+        else{
+          $scope.errors.push({message: $scope.unresponsive_server_err });
+        }
       });
 
     Action.query().$promise.
       then(function(data){
         store.set('actions', data);
+      })
+      .catch(function(err){
+        if(err.data){
+          $scope.errors.push("Error occurred retrieving test data");
+        }
+        else{
+          $scope.errors.push({message: $scope.unresponsive_server_err });
+        }
       });
 
     $scope.extractHostname = function(url) {
@@ -126,7 +144,15 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       Domain.getAllPathObjects({host: domain.url}).$promise
                 .then(function(data){
                     store.set('path_objects', data);
-                });
+                })
+                .catch(function(err){
+                  if(err.data){
+                    $scope.errors.push("Error occurred retrieving test data");
+                  }
+                  else{
+                    $scope.errors.push({message: $scope.unresponsive_server_err });
+                  }
+                });;
 
       $state.go("main.discovery");
 

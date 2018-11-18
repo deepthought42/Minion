@@ -61,8 +61,7 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
     }
 
     $scope.update_user = function(user){
-      console.log(user);
-      console.log($scope.domain);
+      console.log(JSON.stringify(user));
       TestUser.update({id: user.id, username: user.username, password: user.password, role: user.role, isEnabled: user.enabled}).$promise
         .then(function(data){
           segment.track("Updated user", {

@@ -63,7 +63,7 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
               //console.log("error updating subscription");
             });
         },function() {
-          alert("Stripe Checkout closed without processing your payment.");
+          console.log("Stripe Checkout closed without processing your payment.");
         });
     };
 
