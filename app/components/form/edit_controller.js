@@ -25,7 +25,10 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       else{
         $scope.form = store.get('current_form');
       }
-      console.log("form : "+$scope.form);
+
+      //ERRORS
+      $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
+
     };
 
     $scope.cancel = function(){
@@ -41,24 +44,24 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
         Domain.updateForm({domain_id: $scope.domain.id, key: form.key, name: form.name, form_type: form.type}).$promise
           .then(function(data){
             console.log("Successfully updated form");
-            segment.track("Updated form", {
-                form_key: form.key,
-                successful : true
-              }, function(success){  });
 
             segment.track("Start form discovery", {
                 form_key: form.key,
-                successful : true
               }, function(success){  });
             $state.go("main.form");
           })
           .catch(function(err){
-            segment.track("Updated form", {
-                form_key: form.key,
-                domain: $scope.domain.id,
-                successful : false
-              }, function(success){  });
-          })
+            if(err.data){
+              $scope.errors.push(err.data);
+            }
+            else{
+              $scope.errors.push({message: $scope.unresponsive_server_err });
+            }
+          });
+          segment.track("Updated form", {
+              form_key: form.key,
+              successful : true
+            }, function(success){  });
       }
     }
 

@@ -13,15 +13,24 @@ angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService', 'ui.togg
 .controller('TestUserCtrl', ['$rootScope', '$scope', 'Domain', 'store', '$state', 'segment', '$mdDialog',
   function($rootScope, $scope, Domain, store, $state, segment, $mdDialog) {
     this._init = function(){
+
       $scope.domains = null;
       $scope.domain_id = store.get('domain').id;
       Domain.getUsers({domain_id: $scope.domain_id}).$promise
         .then(function(users){
           $scope.users = users;
         })
-        .catch(function(){
-
+        .catch(function(err){
+          if(err.data){
+            $scope.errors.push(err.data);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         })
+
+        //ERRORS
+        $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
     }
 
     $scope.askDelete = function(user, index) {
@@ -49,8 +58,13 @@ angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService', 'ui.togg
               domain : store.get('domain').url
             }, function(success){  });
         })
-        .catch(function(error){
-          console.log("error deleting test user");
+        .catch(function(err){
+          if(err.data){
+            $scope.errors.push("Error deleting test user");
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
     }
 
