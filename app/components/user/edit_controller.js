@@ -38,7 +38,7 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
     $scope.save_user = function(user){
       console.log(user);
       console.log($scope.domain);
-      Domain.addUser({domain_id: $scope.domain.id, username: user.username, password: user.password, role: user.role, enabled: user.enabled}).$promise
+      Domain.addUser({domain_id: $scope.domain.id, username: user.username, password: user.password, role: user.role, enabled: true}).$promise
         .then(function(user){
           store.set('current_user', null);
           console.log("user saved successfully");
@@ -61,8 +61,6 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
     }
 
     $scope.update_user = function(user){
-      console.log(user);
-      console.log($scope.domain);
       TestUser.update({id: user.id, username: user.username, password: user.password, role: user.role, isEnabled: user.enabled}).$promise
         .then(function(data){
           segment.track("Updated user", {

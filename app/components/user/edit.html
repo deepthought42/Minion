@@ -50,7 +50,7 @@
 							</div>
 						</div>
 					</div>
-					<div class ="col-sm-12 form_molecule" >
+					<div class ="col-sm-12 form_molecule"  ng-show="state==='update'">
 						<div class="form_label_description_domain">
 							 <h6>Status</h6>
 						</div>
@@ -67,8 +67,8 @@
 		</div>
 	</div>
 	<div class="action_button_container  text-right">
-		<button class="btn btn--primary title__edit__buttons" ng-click="cancel()">
-			Cancel User
+		<button class="btn btn--tertiary title__edit__buttons" ng-click="cancel()">
+			Cancel
 		</button>
 
 		<button class="btn btn--primary title__edit__buttons" ng-if="state=='create'"ng-click="save_user(user)">

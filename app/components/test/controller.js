@@ -92,7 +92,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           })
           .catch(function(err){
             if(err.data){
-              $scope.errors.push(err.data);
+              $scope.errors.push("error updating onboarding process");
             }
             else{
               $scope.errors.push({message: $scope.unresponsive_server_err });
@@ -163,7 +163,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           $scope.tests = [];
           $scope.waitingOnTests = false;
           if(err.data){
-            $scope.errors.push(err.data);
+            $scope.errors.push("An error occurred while retriving tests");
           }
           else{
             $scope.errors.push({message: $scope.unresponsive_server_err });
@@ -176,7 +176,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         })
         .catch(function(err){
           if(err.data){
-            $scope.errors.push(err.data);
+            $scope.errors.push("An error occurred while retrieving test groups");
           }
           else{
             $scope.errors.push({message: $scope.unresponsive_server_err });
@@ -190,7 +190,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         })
         .catch(function(err){
           if(err.data){
-            $scope.errors.push(err.data);
+            $scope.errors.push("An error occurred while retrieving tests");
           }
           else{
             $scope.errors.push({message: $scope.unresponsive_server_err });
@@ -205,7 +205,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       test.browserStatuses[browser] = status;
       var test_passing = true;
       for (var key in test.browserStatuses) {
-          if(test.browserStatuses[key] != null && !test.browserStatuses[key]){
+          if(test.browserStatuses[key] != null && test.browserStatuses[key].toLowerCase()==='failing'){
             test_passing = false;
             break;
           }
@@ -286,7 +286,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           })
           .catch(function(err){
             if(err.data){
-              $scope.errors.push(err.data);
+              $scope.errors.push("An error occurred while running test");
             }
             else{
               $scope.errors.push({message: $scope.unresponsive_server_err });
@@ -302,13 +302,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     }
 
     $scope.runTests = function(firefox_selected, chrome_selected){
-      //get keys for tests and put
-      var keys = [];
-      $scope.filteredTests.forEach(function(test){
-        test.runStatus = true;
-        keys.push(test.key);
-      });
-
       var browsers = [];
       if(firefox_selected){
         browsers.push("firefox");
@@ -317,6 +310,16 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       if(chrome_selected){
         browsers.push("chrome");
       }
+
+      //get keys for tests and put
+      var keys = [];
+      $scope.filteredTests.forEach(function(test){
+        browsers.forEach(function(browser){
+          test.browserStatuses[browser] = null;
+          status = null;
+        });
+        keys.push(test.key);
+      });
 
       $scope.closeDialog();
       console.log("URL ");
@@ -395,7 +398,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         })
         .catch(function(err){
           if(err.data){
-            $scope.errors.push(err.data);
+            $scope.errors.push("An error occurred while running tests by group");
           }
           else{
             $scope.errors.push({message: $scope.unresponsive_server_err });
@@ -417,7 +420,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
                })
                .catch(function(err){
                  if(err.data){
-                   $scope.errors.push(err.data);
+                   $scope.errors.push("An error occurred while adding group");
                  }
                  else{
                    $scope.errors.push({message: $scope.unresponsive_server_err });
@@ -438,7 +441,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         })
         .catch(function(err){
           if(err.data){
-            $scope.errors.push(err.data);
+            $scope.errors.push("An error occurred while removing group");
           }
           else{
             $scope.errors.push({message: $scope.unresponsive_server_err });
@@ -531,7 +534,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       }
       Test.update({key: test.key, name: test.new_name, firefox:  test.browserStatuses.firefox, chrome:  test.browserStatuses.chrome}).$promise
         .then(function(data){
-          console.log("data :: "+data);
           test.waitingOnStatusChange = false;
 
           //update approved test count
@@ -555,7 +557,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           test.show_waiting_icon = false;
           test.waitingOnStatusChange = false;
           if(err.data){
-            $scope.errors.push(err.data);
+            $scope.errors.push("Error updating test");
           }
           else{
             $scope.errors.push({message: $scope.unresponsive_server_err });

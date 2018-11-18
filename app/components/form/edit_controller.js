@@ -36,7 +36,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
     }
 
     $scope.discoverTests = function(form){
-      if($scope.users.length == 0){
+      if($scope.users.length == 0 && (form.type.toLowerCase()==="login" || form.type.toLowerCase()==="registration")){
         console.log("sending form :: "+form);
         $state.go('main.user_form_discovery', {form: form});
       }
