@@ -182,7 +182,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       test.browserStatuses[browser] = status;
       var test_passing = true;
       for (var key in test.browserStatuses) {
-          if(test.browserStatuses[key] != null && !test.browserStatuses[key]){
+          if(test.browserStatuses[key] != null && test.browserStatuses[key].toLowerCase()==='failing'){
             test_passing = false;
             break;
           }

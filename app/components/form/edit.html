@@ -60,8 +60,12 @@
     <button class="btn btn--tertiary margin_fifteen_right title__edit__buttons" ng-click="cancel()">
       Cancel
     </button>
-		<button class="btn btn--primary title__edit__buttons" ng-click="discoverTests(form)">
-      Save &amp; create tests
+		<button class="btn btn--primary title__edit__buttons" ng-click="discoverTests(form)" ng-show="!users.length" >
+			Save &amp; Add A User
+		</button>
+
+		<button class="btn btn--primary title__edit__buttons" ng-click="discoverTests(form)" ng-show="users.length">
+      Save &amp; Start Discovery
     </button>
   </div>
 
