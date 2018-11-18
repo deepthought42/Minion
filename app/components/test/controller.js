@@ -273,13 +273,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     }
 
     $scope.runTests = function(firefox_selected, chrome_selected){
-      //get keys for tests and put
-      var keys = [];
-      $scope.filteredTests.forEach(function(test){
-        test.runStatus = true;
-        keys.push(test.key);
-      });
-
       var browsers = [];
       if(firefox_selected){
         browsers.push("firefox");
@@ -288,6 +281,16 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       if(chrome_selected){
         browsers.push("chrome");
       }
+
+      //get keys for tests and put
+      var keys = [];
+      $scope.filteredTests.forEach(function(test){
+        browsers.forEach(function(browser){
+          test.browserStatuses[browser] = null;
+          status = null;
+        });
+        keys.push(test.key);
+      });
 
       $scope.closeDialog();
       console.log("URL ");
