@@ -152,7 +152,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
                   else{
                     $scope.errors.push({message: $scope.unresponsive_server_err });
                   }
-                });;
+                });
 
       $state.go("main.discovery");
 

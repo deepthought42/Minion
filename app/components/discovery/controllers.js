@@ -318,7 +318,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         })
         .catch(function(err){
           if(err.data){
-            $scope.errors.push("An error occurred deleting "+domain.url);
+            $scope.errors.push("An error occurred stopping discovery");
           }
           else{
             $scope.errors.push({message: $scope.unresponsive_server_err });
