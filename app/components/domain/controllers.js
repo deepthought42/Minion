@@ -22,13 +22,21 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.disclaimerOptin = false;
       $scope.current_domain = {};
 
+      //ERRORS
+      $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
+
       Domain.query().$promise
         .then(function(data){
           $scope.domains = data;
           store.set("domains", data);
         })
         .catch(function(err){
-          $scope.errors.push(err);
+          if(err.data){
+            $scope.errors.push(err.data);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
       $scope.protocol = "";
       $scope.domain_url = "";
@@ -64,7 +72,12 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             store.set("onboard", data);
           })
           .catch(function(err){
-
+            if(err.data){
+              $scope.errors.push(err.data);
+            }
+            else{
+              $scope.errors.push({message: $scope.unresponsive_server_err });
+            }
           });
       }
       return onboard;
@@ -137,7 +150,12 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
                     store.set('path_objects', data);
                 })
                 .catch(function(err){
-                  console.log("An error occurred retrieving domains");
+                  if(err.data){
+                    $scope.errors.push("An error occurred retrieving domains");
+                  }
+                  else{
+                    $scope.errors.push({message: $scope.unresponsive_server_err });
+                  }
                 });
 
       segment.track("Selected Domain", {
@@ -202,8 +220,13 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         $scope.current_domain.logo_url = response.filesUploaded[0].url;
         $scope.$apply();
       })
-      .catch(function(error){
-
+      .catch(function(err){
+        if(err.data){
+          $scope.errors.push(err.data);
+        }
+        else{
+          $scope.errors.push({message: $scope.unresponsive_server_err });
+        }
       });
       segment.track("Uploaded Logo", {
           domain : domain
@@ -226,7 +249,12 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             }
           })
           .catch(function(err){
-            $scope.errors.push(err);
+            if(err.data){
+              $scope.errors.push("An error occurred deleting "+domain.url);
+            }
+            else{
+              $scope.errors.push({message: $scope.unresponsive_server_err });
+            }
           })
 
 

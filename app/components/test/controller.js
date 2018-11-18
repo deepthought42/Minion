@@ -34,6 +34,9 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         $scope.getTestsByUrl($scope.domain_url);
       }
 
+      //ERRORS
+      $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
+
       var pusher = new Pusher('77fec1184d841b55919e', {
         cluster: 'us2',
         encrypted: true
@@ -88,7 +91,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
             store.set("onboard", data);
           })
           .catch(function(err){
-
+            if(err.data){
+              $scope.errors.push(err.data);
+            }
+            else{
+              $scope.errors.push({message: $scope.unresponsive_server_err });
+            }
           });
       }
       return onboard;
@@ -153,8 +161,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         })
         .catch(function(err){
           $scope.tests = [];
-          $scope.errors.push(err);
           $scope.waitingOnTests = false;
+          if(err.data){
+            $scope.errors.push(err.data);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
 
       Test.getGroups({url: url}).$promise
@@ -162,7 +175,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           $scope.groups = data;
         })
         .catch(function(err){
-          $scope.errors.push(err);
+          if(err.data){
+            $scope.errors.push(err.data);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
     };
 
@@ -171,7 +189,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         .then(function(data){
         })
         .catch(function(err){
-          $scope.errors.push(err);
+          if(err.data){
+            $scope.errors.push(err.data);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
     };
 
@@ -262,6 +285,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
             }
           })
           .catch(function(err){
+            if(err.data){
+              $scope.errors.push(err.data);
+            }
+            else{
+              $scope.errors.push({message: $scope.unresponsive_server_err });
+            }
             $scope.test.runStatus = false;
             segment.track("Run Test", {
               chrome : chrome_selected,
@@ -337,7 +366,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
             })
           })
           .catch(function(err){
-            $scope.errors.push("Test failed to run successfully");
+            if(err.data){
+              $scope.errors.push("Test failed to run successfully");
+            }
+            else{
+              $scope.errors.push({message: $scope.unresponsive_server_err });
+            }
 
             segment.track("Run Tests", {
               chrome : chrome_selected,
@@ -360,8 +394,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
         })
         .catch(function(err){
-          $scope.errors.push(err);
-        });
+          if(err.data){
+            $scope.errors.push(err.data);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
+      });
     }
 
     $scope.addGroup = function(test, group){
@@ -377,7 +416,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
                  test.groups.push(data);
                })
                .catch(function(err){
-                 $scope.errors.push(err.data);
+                 if(err.data){
+                   $scope.errors.push(err.data);
+                 }
+                 else{
+                   $scope.errors.push({message: $scope.unresponsive_server_err });
+                 }
                });
 
        segment.track("Added Group", {
@@ -393,7 +437,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           test.groups.splice($index,1);
         })
         .catch(function(err){
-          $scope.errors.push(err);
+          if(err.data){
+            $scope.errors.push(err.data);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
     }
 
@@ -478,7 +527,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         test.name = test.new_name;
       }
       else{
-        test.new_name = test.name
+        test.new_name = test.name;
       }
       Test.update({key: test.key, name: test.new_name, firefox:  test.browserStatuses.firefox, chrome:  test.browserStatuses.chrome}).$promise
         .then(function(data){
@@ -505,7 +554,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         .catch(function(err){
           test.show_waiting_icon = false;
           test.waitingOnStatusChange = false;
-          $scope.errors.push(err.data);
+          if(err.data){
+            $scope.errors.push(err.data);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
 
       segment.track("Updated Test", {
@@ -561,7 +615,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           console.log("success!");
         })
         .catch(function(err){
-          console.log("An error occurred while archiving test");
+          if(err.data){
+            $scope.errors.push("An error occurred while archiving test");
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
 
       segment.track("Archived Test", {
