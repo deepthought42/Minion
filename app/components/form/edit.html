@@ -61,8 +61,9 @@
       Cancel
     </button>
 		<button class="btn btn--primary title__edit__buttons" ng-click="discoverTests(form)">
-			<span  ng-show="!users.length && (form.type.toLowerCase()==='login' || form.type.toLowerCase()==='registration')" >Save &amp; Add User</span>
-			<span  ng-show="users.length || (form.type.toLowerCase()!=='login' && form.type.toLowerCase()!=='registration')">Save &amp; Continue Discovery</span>
+			<span  ng-show="form.status!='CLASSIFIED' && (!users.length && (form.type.toLowerCase()==='login' || form.type.toLowerCase()==='registration'))" >Save &amp; Add User</span>
+			<span  ng-show="form.status!='CLASSIFIED' && (users.length || (form.type.toLowerCase()!=='login' && form.type.toLowerCase()!=='registration'))">Save &amp; Continue Discovery</span>
+			<span  ng-show="form.status=='CLASSIFIED'">Update Form</span>
 		</button>
 
   </div>
