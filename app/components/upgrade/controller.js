@@ -29,7 +29,7 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
     $scope.getFreeAccess = function() {
       Subscribe.update({plan : "free", "source_token": ""}).$promise
         .then(function(){
-          $scope.current_plan = "FREE";
+          $scope.current_plan = "Basic - $99";
           $scope.$broadcast("updateAccount");
         })
         .catch(function(){
@@ -39,7 +39,7 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
 
     $scope.updateSubscription = function(plan_name) {
       //set package name based on #-disc-#-test
-      var package_name = "pro";
+      var package_name = "Basic";
 
       var options = {
         email: $scope.user_email,
