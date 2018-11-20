@@ -120,17 +120,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         position: "right",
         description: "Discovery time varies based on the complexity of your domain. If a discovery has been running for longer than 48 hours, please contact support@qanairy.com.",
         attachTo:"#start_discovery_button",
-        top: 50,
-        width: 400
-      }
-    ];
-
-    $scope.discoveryRunningOnboardingSteps = [
-      {
-        title: "Qanairy’s AI is now working to find and build your tests for you. ",
-        position: "centered",
-        description: "Tests will begin returning as they are discovered. This process takes a few minutes, now would be a great time to take a break. You deserve it.",
-        width: 400
+        top: -1,
+        width: 400,
+        left: 200
       }
     ];
 
@@ -146,7 +138,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     $scope.testVerificationSteps = [
       {
         title: "Review your test",
-        description: "Test paths are comprised of three parts: page, element, and action. Click on each part to learn more details about the test like destination, xpath, styling, and browser screenshots.",
+        description: "Tests paths are comprised of three parts: page, element, and action. Single page tests like this one here indicate that the page has successfully loaded.",
         attachTo:"#test0_data",
         position: "top",
         top: 150,
@@ -207,8 +199,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
      */
     $scope.startDiscovery = function(){
       $scope.isStarted = true;
-      $scope.discoveryRunningOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery-running');
-      $scope.discoveryRunningOnboardingIndex = 0;
 
       Discovery.startWork({url:  $scope.current_domain.url}).$promise
         .then(function(value){

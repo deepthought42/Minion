@@ -839,3 +839,7 @@ h5,
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+
+.onboarding-popover-title {
+  color: black;
+}
