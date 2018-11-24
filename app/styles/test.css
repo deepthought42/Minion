@@ -733,6 +733,9 @@ width: -webkit-calc(100% - 15px);
     color: #555555 !important;
 	height: 40px !important;
 }
+.domain-dialogue-input > div{
+	width:100% !important;
+}
 
 .group__tag{
   margin-right: 15px;
