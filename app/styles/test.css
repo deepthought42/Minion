@@ -680,6 +680,9 @@ width: -webkit-calc(100% - 15px);
 	letter-spacing:.1px;
 	padding-bottom: 4px !important;
 	color:#333333;
+	overflow-wrap:break-word;
+	overflow-y: scroll;
+  max-height: 255px;
 }
 
 /*
