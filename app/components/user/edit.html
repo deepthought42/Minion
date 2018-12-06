@@ -1,3 +1,7 @@
+<div class="error__message" ng-repeat="error in errors track by $index">
+	{{error.message}}
+</div>
+
 <div class="sticky-footer-container">
 
 	<div class="col-sm-12 settings-page">
@@ -13,7 +17,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-8">
+			<div class="col-xl-4 col-lg-6 col-md-8 col-sm-10 col-xs-12">
 				<div class="row">
 					<div class ="col-sm-12 form_molecule" >
 						<div class="form_label_description_domain">
@@ -46,7 +50,7 @@
 							</div>
 						</div>
 					</div>
-					<div class ="col-sm-12 form_molecule" >
+					<div class ="col-sm-12 form_molecule"  ng-show="state==='update'">
 						<div class="form_label_description_domain">
 							 <h6>Status</h6>
 						</div>
@@ -63,8 +67,8 @@
 		</div>
 	</div>
 	<div class="action_button_container  text-right">
-		<button class="btn btn--primary title__edit__buttons" ng-click="cancel()">
-			Cancel User
+		<button class="btn btn--tertiary title__edit__buttons" ng-click="cancel()">
+			Cancel
 		</button>
 
 		<button class="btn btn--primary title__edit__buttons" ng-if="state=='create'"ng-click="save_user(user)">

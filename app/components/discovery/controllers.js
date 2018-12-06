@@ -36,6 +36,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.discoveryOnboardingIndex = 0;
       $scope.discovery_status = {};
       $scope.current_domain = store.get('domain');
+
+      //ERRORS
+      $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
+
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
         Discovery.getStatus({url: $scope.current_domain.url}).$promise
@@ -70,7 +74,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
             }
           })
           .catch(function(err){
-            $scope.errors.push(err.data);
+            if(err.data){
+              $scope.errors.push(err.data);
+            }
+            else{
+              $scope.errors.push({message: $scope.unresponsive_server_err });
+            }
             $scope.waitingOnTests = false;
           });
 
@@ -211,18 +220,23 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         })
         .catch(function(err){
           //$scope.waitingOnTests = false;
-          $scope.errors.push(err.data);
+          if(err.data){
+            $scope.errors.push(err.data);
 
-          if(err.data.message == "A discovery is already running"){
-            $scope.isStarted = true;
+            if(err.data.message == "A discovery is already running"){
+              $scope.isStarted = true;
+            }
+            else{
+              $scope.isStarted = false;
+            }
+            segment.track("Started Discovery", {
+              domain : $scope.current_domain.url,
+              success : false
+            }, function(success){});
           }
           else{
-            $scope.isStarted = false;
+            $scope.errors.push({message: $scope.unresponsive_server_err});
           }
-          segment.track("Started Discovery", {
-            domain : $scope.current_domain.url,
-            success : false
-          }, function(success){});
         });
     }
 
@@ -246,7 +260,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         .catch(function(err){
           test.show_waiting_icon = false;
           test.show_test_name_edit_field = false;
-          $scope.errors.push("An error occurred while trying to update the test name");
+          if(err.data){
+            $scope.errors.push("An error occurred while trying to update the test name");          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
+
         });
     }
 
@@ -298,7 +317,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
            $scope.isStarted = false;
         })
         .catch(function(err){
-          $scope.errors.push(err.data);
+          if(err.data){
+            $scope.errors.push("An error occurred stopping discovery");
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
     }
 
@@ -308,7 +332,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           test.archived = true;
         })
         .catch(function(err){
-          $scope.errors.push("An error occurred while archiving test");
+          if(err.data){
+            $scope.errors.push("An error occurred while archiving test");
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
 
         segment.track("Archived Test", {
@@ -352,7 +381,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
                  }, function(success){});
                })
                .catch(function(err){
-                 $scope.errors.push(err.data);
+                 if(err.data){
+                   $scope.errors.push("An error occurred while adding group ");
+                 }
+                 else{
+                   $scope.errors.push({message: $scope.unresponsive_server_err });
+                 }
                  segment.track("Added Group", {
                    group_key: group.key,
                    test_key: test.key,
@@ -369,7 +403,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           test.groups.splice($index,1);
         })
         .catch(function(err){
-          $scope.errors.push(err);
+          if(err.data){
+            $scope.errors.push("An error occurred deleting group "+group.key);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
     }
 
@@ -452,7 +491,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         })
         .catch(function(err){
           test.waitingOnStatusChange = false;
-          $scope.errors.push(err.data);
+          if(err.data){
+            $scope.errors.push("An error occurred updating test "+test.name);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
           segment.track("Classified Test", {
             test_key : test.key,
             correctness : correctness,
@@ -487,7 +531,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
             store.set("onboard", data);
           })
           .catch(function(err){
-
+            if(err.data){
+              $scope.errors.push("An error occurred updating onboarding step");
+            }
+            else{
+              $scope.errors.push({message: $scope.unresponsive_server_err });
+            }
           });
       }
       return onboard;

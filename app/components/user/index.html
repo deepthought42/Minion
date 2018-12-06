@@ -1,3 +1,7 @@
+<div class="error__message" ng-repeat="error in errors track by $index">
+	{{error.message}}
+</div>
+
 <div class="content">
 
 		<div class="secondary-nav vertical__center__int" >
@@ -9,8 +13,6 @@
 				</div>
 			</div>
 		</div>
-
-
 
     <div class="test-labels-container">
       <div class="test-labels">
@@ -59,7 +61,7 @@
           {{user.role  || "Unknown"}}
         </div>
         <div class="flex-initial date_stats text-left test__profile_stretch" >
-          <toggle id="test_user_status" ng-model="user.enabled" ng-change="changed()" on="Enabled" off="Disabled"></toggle>
+          <toggle id="test_user_status" ng-model="user.enabled" ng-change="changed()" on="Enabled" off="Disabled" ng-disabled="true"></toggle>
         </div>
         <div class="flex-initial date_stats text-right test__profile_stretch" >
           {{( user.dateCreated | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
@@ -68,7 +70,7 @@
            <button class="btn btn--tertiary margin_fifteen_right" ng-click="editUser(user)" >
               <i class="fa fa-pencil"></i>
            </button>
-           <button class="btn btn--tertiary" ng-click="deleteUser()">
+           <button class="btn btn--tertiary" ng-click="askDelete(user, $index)">
              <i class="fa fa-trash"></i>
            </button>
          </div>

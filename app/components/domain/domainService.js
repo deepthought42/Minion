@@ -9,6 +9,7 @@ domainService.factory('Domain', ['$resource', 'Qanairy.serviceConfig', function 
     save: { method: 'POST', params: {protocol: '@protocol', browser_name: '@browser_name', url: '@url', logoUrl: '@logoUrl'}},
     addUser:{url: config.basePath + '/domains/:domain_id/users', method: 'POST', params: {username: '@username', password: '@password', role: '@role', enabled: '@enabled'}},
     updateUser:{url: config.basePath + '/domains/:domain_id/users', method: 'PUT', params: {user_id: '@user_id', username: '@username', password: '@password', role: '@role', enabled: '@enabled'}},
+    deleteUser: { url: config.basePath + '/domains/test_users/:user_id', method: 'DELETE', params: {domain_key: '@domain_key', username: '@username'}},
     getUsers: {url: config.basePath + '/domains/:domain_id/users', method: 'GET',  params: {key: '@key'}, isArray: true},
     getForms: {url: config.basePath + '/domains/:domain_id/forms', method: 'GET', isArray: true},
     updateForm: {url: config.basePath + '/domains/:domain_id/forms', method: 'PUT', params: {key: '@key',name: '@name', type: '@form_type'}},

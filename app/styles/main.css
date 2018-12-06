@@ -358,6 +358,32 @@ h5,
 	transition: all 0.3s;
 }
 
+.toggle.btn {
+	min-width: 120px !important;
+	width: 120px !important;
+}
+
+.toggle-off-pad{
+	margin-left:20px !important;
+}
+.toggle-group > label {
+	min-width: 100px !important;
+	width: 100px !important;
+	font-size: 14px;
+	line-height: 1.5;
+	padding:10px 12px !important;
+}
+
+.toggle-on {  
+	color: #fff;
+  background-color: #6649e4  !important;
+}
+
+.toggle-group > span {
+	min-width: 40px !important;
+	width: 40px !important;
+}
+
 .btn:after {
 	content: '';
 	position: absolute;

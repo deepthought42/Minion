@@ -38,7 +38,7 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
     $scope.save_user = function(user){
       console.log(user);
       console.log($scope.domain);
-      Domain.addUser({domain_id: $scope.domain.id, username: user.username, password: user.password, role: user.role, enabled: user.enabled}).$promise
+      Domain.addUser({domain_id: $scope.domain.id, username: user.username, password: user.password, role: user.role, enabled: true}).$promise
         .then(function(user){
           store.set('current_user', null);
           console.log("user saved successfully");
@@ -51,18 +51,16 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
           $state.go("main.users");
         })
         .catch(function(err){
-          console.log("an error occurred while creating user :: "+err);
-          segment.track("Created user", {
-            domain: $scope.domain.id,
-            user: user.username,
-            succeeded : false
-          }, function(success){});
+          if(err.data){
+            $scope.errors.push("Error occurred while creating test user");
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
     }
 
     $scope.update_user = function(user){
-      console.log(user);
-      console.log($scope.domain);
       TestUser.update({id: user.id, username: user.username, password: user.password, role: user.role, isEnabled: user.enabled}).$promise
         .then(function(data){
           segment.track("Updated user", {
@@ -74,11 +72,12 @@ angular.module('Qanairy.user_edit', ['ui.router', 'Qanairy.TestUserService', 'Qa
           $state.go("main.users")
         }).
         catch(function(err){
-          segment.track("Updated user", {
-            user: user.username,
-            succeeded : false
-          }, function(success){});
-          console.log("An error occured while updating user :: "+err);
+          if(err.data){
+            $scope.errors.push("An error occured while updating user");
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
         });
     }
 

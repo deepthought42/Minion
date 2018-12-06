@@ -1,3 +1,7 @@
+<div class="error__message" ng-repeat="error in errors track by $index">
+	{{error.message}}
+</div>
+
 <div class="sticky-footer-container">
 	<div class="col-sm-12 settings-page">
 		<div class="row">
@@ -13,7 +17,7 @@
     <div class="row">
 		  <div class="col-sm-6">
 				<div class="row">
-        	<div class ="col-sm-12 form_molecule" >
+        	<div class ="col-sm-10 form_molecule" >
         			<div class="form_label_description_domain">
         				 <h6>Form Title</h6>
         			</div>
@@ -61,8 +65,11 @@
       Cancel
     </button>
 		<button class="btn btn--primary title__edit__buttons" ng-click="discoverTests(form)">
-      Save &amp; create tests
-    </button>
+			<span  ng-show="form.status!='CLASSIFIED' && (!users.length && (form.type.toLowerCase()==='login' || form.type.toLowerCase()==='registration'))" >Save &amp; Add User</span>
+			<span  ng-show="form.status!='CLASSIFIED' && (users.length || (form.type.toLowerCase()!=='login' && form.type.toLowerCase()!=='registration'))">Save &amp; Continue Discovery</span>
+			<span  ng-show="form.status=='CLASSIFIED'">Update Form</span>
+		</button>
+
   </div>
 
 </div>
