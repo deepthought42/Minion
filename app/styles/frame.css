@@ -562,11 +562,7 @@ font-size: 11px;
   z-index: 100001;
   display: none;
   float: left;
-  min-width:;
   padding: 0px;
-  margin: ;
-  font-size: ;
-  color:;
   text-align: left;
   list-style: none;
   border-color: #e0e0e0;
@@ -579,7 +575,6 @@ font-size: 11px;
 
   .dropdown-menu {
     margin-top: 0;
-    margin-bottom: ;
   }
   
 
@@ -589,10 +584,7 @@ font-size: 11px;
 
 .dropdown-header {
   display: block;
-  padding: ;
   margin-bottom: 0;
-  font-size: ;
-  color:;
   white-space: nowrap;
 }
 

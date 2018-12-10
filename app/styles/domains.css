@@ -25,6 +25,9 @@ height: -o-calc(100% - 20px);
 height: calc(100% - 20px);
 }
 
+#domain_input{
+	max-width: 360px;
+}
 .domain__icon{
 }
 
@@ -55,6 +58,12 @@ height: calc(100% - 20px);
   margin: auto;
 }
 
+.domain-protocol{
+	font-size: 14px;
+	line-height: 1.5em;
+	margin-top: 9px;
+	margin-bottom: 0px;
+}
 .domain__button:focus,
 .domain__button.focus {
   background-color:#e6e6ec;
