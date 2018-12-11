@@ -1,4 +1,5 @@
 'use strict';
+/* global angular */
 
 var domainService = angular.module('Qanairy.FormService', ['ngResource', 'Qanairy.serviceConfig']);
 
