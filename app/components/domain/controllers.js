@@ -114,7 +114,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     }
 
     $scope.updateDomain = function(key, protocol, default_browser, logo_url){
-      Domain.update({key: key, protocol: protocol, logoUrl: logo_url, browser_name: default_browser}).$promise
+      Domain.update({key: key, protocol: "http", logoUrl: logo_url, browser_name: default_browser}).$promise
         .then(function(successResult){
           $scope.show_create_domain_err = false;
           store.set('domain', successResult);
