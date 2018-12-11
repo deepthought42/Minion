@@ -1,7 +1,4 @@
 <md-dialog class="col-sm-8 modal-frame" style="">
-	<div class="error__message" ng-show="show_create_domain_err">
-		{{domain_creation_err}}
-	</div>
 	<div class="row">
 		<div class="col-sm-12" >
 			<div class="row ">
@@ -26,12 +23,7 @@
 											 <h6>Domain</h6>
 										</div>
 										<div class ="domain-dialogue-input" >
-														<div class="domain_protocol">
-												<select id="domain_protocol" class="form-control" ng-model="current_domain.protocol" required>
-													<option value="http">http</option>
-													<option value="https">https</option>
-												</select>
-											</div>
+											<p class="domain-protocol">http://&nbsp;</p>
 											<div>
 												<input id="domain_input" class="form-control" ng-model="current_domain.url" placeholder="yourdomain.com" required/>
 											</div>
@@ -98,6 +90,9 @@
               </button>
 						</div>
 				</form>
+				<div class="col-sm-12 error__message error__text" ng-show="show_create_domain_err">
+				<p>{{domain_creation_err}}</p>
+				</div>
 			</div>
 		</div>
 	</div>

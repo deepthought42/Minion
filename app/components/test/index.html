@@ -21,19 +21,19 @@
 
 	<div class="test-labels-container">
 		<div class="test-labels">
-			<div class="status__title tests__test__status">
+			<div class="flex-none status__title tests__test__status">
 				Status
 			</div>
 			<div class="flex-auto test_functions">
 				Test Title
 			</div>
-			<div class="flex-initial test_browsers">
+			<div class="flex-none test_browsers_edit">
 				Browsers
 			</div>
-			<div class="flex-initial time_stats text-right">
+			<div class="flex-none time_stats text-right">
 				Time (minutes)
 			</div>
-			<div class="flex-initial date_stats text-right"  ng-click="sortLastRun=!sortLastRun">
+			<div class="flex-none date_stats text-right"  ng-click="sortLastRun=!sortLastRun">
 				Date Last Run
 			</div>
 			<div class="flex-none test_functions">
@@ -88,15 +88,15 @@
 				</div>
 				<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx==$index">
 					<div class="row">
-						<div class="vertical__left__profile" ng-if="editing_test_idx==$index">
+						<div class="vertical__left__profile test_name_edit_tests" ng-if="editing_test_idx==$index">
 							<div class="input-group">
 								<input class="form-control title__edit" type="text" ng-model="test.new_name" ng-value="test.name" ng-trim="false"/>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="flex-initial test_browsers test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
-					<div class="row">
+				<div class="flex-none test_browsers_edit test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
+					<div class="">
 						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
 							<div class="row vertical__center test__status__editable">
 								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome' && status!='UNVERIFIED'">
@@ -140,18 +140,18 @@
 						</div>
 					</div>
 				</div>
-				<div class="flex-initial test_browsers test__profile_stretch" ng-if="editing_test_idx==$index">
-					<div class="row">
-						<div class="flex-none" ng-repeat="(browser, status) in test.browserStatuses" ng-if="status!='unverified'">
-							<div class="row vertical__center test__status__editable">
+				<div class="flex-none test_browsers_edit test__profile_stretch" ng-if="editing_test_idx==$index">
+					<div class="">
+						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses" ng-if="status!='unverified'">
+							<div class="row vertical__center test__status__edit">
 								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
 								<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
 							</div>
-							<div class="row vertical__center test__status__editable">
+							<div class="row vertical__center test__status__edit">
 								<div class="" ng-if="status == 'running'">
 									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
 								</div>
-								<div class="col-xs-6 btn--green select__neutral status-passing status--browser vertical__center__int"
+								<div class="btn--green select__neutral status-passing status--browser vertical__center__int"
 											style="{{status=='passing' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
 											ng-click="updateBrowserPassingStatus(test, browser, 'passing')" ng-if="status!='unverified' && status!='running'">
 									<div class="" >
@@ -159,7 +159,7 @@
 									</div>
 								</div>
 
-								<div class="col-xs-6 btn--red select__neutral status--browser status-failing  vertical__center__int"
+								<div class="btn--red select__neutral status--browser status-failing  vertical__center__int"
 											style="{{status=='failing' && status != 'unverified' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
 											ng-click="updateBrowserPassingStatus(test, browser, 'failing')" ng-if="status!='unverified'  && status!='running'">
 									<div class="" >
@@ -171,12 +171,12 @@
 					</div>
 				</div>
 
-				<div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+				<div class="flex-none text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					<div class="">
 						{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 					</div>
 				</div>
-				<div class="flex-initial text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+				<div class="flex-none text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					<div class="">
 						{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
 					</div>
