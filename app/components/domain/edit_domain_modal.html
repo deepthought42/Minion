@@ -36,15 +36,16 @@
 								</div>
 								<div class="row browser_buttons">
 									<div class="col-xs-12">
-										<button class="btn btn-depressed" ng-click="domain.discoveryBrowserName = 'chrome'" ng-class="{active: domain.discoveryBrowserName === 'chrome'}">
-											<img src="/img/Chrome.ico" class="modal-browser-icon chrome" ng-show="domain.discoveryBrowserName === 'chrome'">
-											<div class="fa-icon" ng-show="domain.discoveryBrowserName !== 'chrome'">
+										{{domain}}
+										<button class="btn btn-depressed" ng-click="current_domain.discoveryBrowserName = 'chrome'" ng-class="{active: current_domain.discoveryBrowserName === 'chrome'}">
+											<img src="/img/Chrome.ico" class="modal-browser-icon chrome" ng-show="current_domain.discoveryBrowserName === 'chrome'">
+											<div class="fa-icon" ng-show="current_domain.discoveryBrowserName !== 'chrome'">
 												<i class="fa fa-chrome"></i>
 											</div>
 										</button>
-										<button class="btn btn-depressed" ng-click="domain.discoveryBrowserName = 'firefox'" ng-class="{active: domain.discoveryBrowserName === 'firefox'}">
-											<img src="/img/firefox.png" class="modal-browser-icon firefox" ng-show="domain.discoveryBrowserName === 'firefox'">
-											<div class="fa-icon" ng-show="domain.discoveryBrowserName !== 'firefox'">
+										<button class="btn btn-depressed" ng-click="current_domain.discoveryBrowserName = 'firefox'" ng-class="{active: current_domain.discoveryBrowserName === 'firefox'}">
+											<img src="/img/firefox.png" class="modal-browser-icon firefox" ng-show="current_domain.discoveryBrowserName === 'firefox'">
+											<div class="fa-icon" ng-show="current_domain.discoveryBrowserName !== 'firefox'">
 												<i class="fa fa-firefox"></i>
 											</div>
 										</button>
@@ -60,11 +61,11 @@
 									</h6>
 									For best results use a 220px x 100px transparent png.
 								</div>
-								<div class="domain_modal_logo" ng-if="!current_domain.logo_url">
+								<div class="domain_modal_logo" ng-if="!current_domain.logoUrl">
 									<i class="fa fa-image" ng-click="openPicker(domain)"></i>
 								</div>
-								<div class="domain_modal_logo" ng-if="current_domain.logo_url">
-									<img ng-src="{{current_domain.logo_url}}"/>
+								<div class="domain_modal_logo" ng-if="current_domain.logoUrl">
+									<img ng-src="{{current_domain.logoUrl}}"/>
 								</div>
 								<button class="btn btn--secondary" ng-click="openPicker(domain)">Upload Logo</button>
 							</div>
