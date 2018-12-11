@@ -27,7 +27,7 @@
 						<div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 | number:0 }}%
 						</div>
 						<md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 }}"></md-progress-linear>
-						<div class="waiting_text">Testing Tests...
+						<div class="waiting_text">
 						</div>
 					</div>
 				</div>
@@ -44,16 +44,16 @@
 
 	<div class="test-labels-container">
 		<div class="test-labels">
-			<div class="status__title test__status__frame">
+			<div class="flex-none status__title test__status__frame">
 				Status
 			</div>
 			<div class="flex-auto test_functions">
 				Test Title
 			</div>
-			<div class="flex-initial time_stats text-right">
+			<div class="flex-none time_stats text-right">
 				Time (minutes)
 			</div>
-			<div class="flex-initial date_stats text-right">
+			<div class="flex-none date_stats text-right">
 				Date Discovered
 			</div>
 			<div class="flex-none discovery_functions">
@@ -81,7 +81,7 @@
 				<br><br><br>
 				<h2>Your tests are loading. Please stand by.</h2>
 				<p class="empty__state__p">
-          This process may take a while. You may want to leave this window open and go grab a coffee.<br><br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.
+          This process may take a while.<br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.
         </p>
       </div>
     </div>
@@ -123,7 +123,7 @@
 					<div class="row">
 						<div class="flex-auto">
 							<div class="">
-								<input class="form-control title__edit" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
+								<input class="form-control title__edit title__edit__margin" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
 							</div>
 						</div>
 						<div class="flex-none test_name_edit">
@@ -139,10 +139,10 @@
 						</div>
 					</div>
 				</div>
-			  <div class="flex-initial text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+			  <div class="flex-none text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 			  </div>
-			  <div class="flex-initial text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+			  <div class="flex-none text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					{{( test.lastRunTimestamp | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
 				<div class="flex-none discovery_functions text-right test__btns" aria-label="Test Functions">
