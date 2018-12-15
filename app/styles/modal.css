@@ -9,7 +9,7 @@
 .dialogue-close{
   text-align:right !important;
   padding:0px 0px 5px 15px;
-	
+
 }
 .dialogue-close h2{
   line-height: 34px !important;
@@ -18,7 +18,7 @@
 }
 md-dialog {
     opacity: 0;
-    min-width: 240px; 
+    min-width: 240px;
     max-width: 80%;
     max-height: 96% !important;
     position: relative;
@@ -67,7 +67,7 @@ md-dialog {
 
 .modal-browser-icon{
 	bottom:0;
-	
+
 }
 
 .modal-flat-icon{
@@ -148,7 +148,7 @@ md-dialog {
 .disclaimer p{
 	font-size: 10px  !important;
 	line-height:14px;
-	
+
 }
 
 
@@ -283,4 +283,9 @@ md-dialog {
     margin-bottom: 30px !important;
     margin-right: 15px !important;
 	padding:0px;
+}
+
+.page_modal_image img {
+	width:100%;
+	height: auto;
 }
