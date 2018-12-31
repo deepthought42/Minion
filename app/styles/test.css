@@ -361,6 +361,11 @@ width: -webkit-calc(100% - 15px);
 	padding:2px;
 }
 
+.browser_placeholder{
+	font-size: 200px !important;
+	 text-align: center;
+}
+
 .status-passing{
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
