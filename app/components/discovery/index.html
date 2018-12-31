@@ -460,6 +460,12 @@
                                     Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
                                   </h6>
                                 </div>
+                              </div>
+
+                              <div ng-if="!doesScreenshotExistForBrowser(visible_browser_screenshot,  current_node[test_idx].browserScreenshots)">
+                                <i class="browser_placeholder fa fa-image"></i>
+                                <div class="text-center">
+                                  A test has not been run in this&nbsp;browser.
                                 </div>
                               </div>
 														</div>
