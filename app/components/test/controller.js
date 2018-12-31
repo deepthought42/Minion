@@ -220,7 +220,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     $scope.runTest = function(test, firefox_selected, chrome_selected){
       var keys = [];
       keys.push(test.key);
-      test.runStatus = true;
+      $scope.test = test;
+      $scope.test.runStatus = true;
       var browsers = [];
 
       if(firefox_selected){
@@ -234,11 +235,11 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       //$scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
         $scope.current_test_browser = browsers[i];
-        test.browserStatuses[browsers[i]] = "running";
+        $scope.test.browserStatuses[browsers[i]] = "running";
         var url = store.get('domain').url;
         Test.runTests({test_keys: keys, browser: $scope.current_test_browser, host_url: url}).$promise
           .then(function(data){
-            test.runStatus = false;
+            $scope.test.runStatus = false;
 
             segment.track("Run Test", {
               chrome : chrome_selected,
@@ -258,7 +259,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
                   $scope.tests.unshift(test);
 
                   //shade bar either red or green depending on passing/failing status
-                  if(test_record.passing){
+                  if(test_record.passing==="PASSING"){
                     test.passingStatusClass = true;
                     test.failingStatusClass = false;
                   }
