@@ -217,10 +217,10 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       }, function(success){});
     }
 
-    $scope.runTest = function(firefox_selected, chrome_selected){
+    $scope.runTest = function(test, firefox_selected, chrome_selected){
       var keys = [];
-      keys.push($scope.test.key);
-      $scope.test.runStatus = true;
+      keys.push(test.key);
+      test.runStatus = true;
       var browsers = [];
 
       if(firefox_selected){
@@ -231,14 +231,14 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         browsers.push("chrome");
       }
 
-      $scope.closeDialog();
+      //$scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
         $scope.current_test_browser = browsers[i];
-        $scope.test.browserStatuses[browsers[i]] = "running";
+        test.browserStatuses[browsers[i]] = "running";
         var url = store.get('domain').url;
         Test.runTests({test_keys: keys, browser: $scope.current_test_browser, host_url: url}).$promise
           .then(function(data){
-            $scope.test.runStatus = false;
+            test.runStatus = false;
 
             segment.track("Run Test", {
               chrome : chrome_selected,
@@ -250,7 +250,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
               for(var test_idx=0; test_idx < $scope.tests.length; test_idx++){
                 if($scope.tests[test_idx].key === returned_key){
                   var test_record = data[returned_key];
-                  $scope.tests[test_idx].failing = test_record.passing;
+                  $scope.tests[test_idx].status = test_record.passing;
                   $scope.tests[test_idx].browserStatuses[test_record.browser] = test_record.passing.toLowerCase();
                   $scope.tests[test_idx].records.unshift(test_record);
                   //move test to top of list
