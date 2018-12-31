@@ -5,5 +5,5 @@ angular.module('Qanairy.serviceConfig', [])
     basePath: 'https://dev.qanairy.com' // Set your base path here
     //basePath: 'https://dev2.qanairy.com' // Set your base path here
     //basePath: 'https://api.qanairy.com' // Set your base path here
-    //basePath: 'https://staging-api.qanairy.com' // Set your base path here
+  //  basePath: 'https://staging-api.qanairy.com' // Set your base path here
 });
