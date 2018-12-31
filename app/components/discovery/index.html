@@ -443,14 +443,23 @@
 															<h5 class="screenshots_title">
                                 Page
                               </h5>
-                              <div ng-repeat="screenshot_set in current_node[test_idx].browserScreenshots" ng-if="visible_browser_screenshot==screenshot_set.browser">
+                              <div ng-repeat="screenshot_set in current_node[test_idx].browserScreenshots"
+                                   ng-if="visible_browser_screenshot==screenshot_set.browser">
 																<img class="path-node-image page-image screenshots"
-																			data-toggle="modal" data-target="#exampleModal"
-																			src="{{screenshot_set.viewportScreenshot}}" class="path-node-image"
+																			data-toggle="modal"
+                                      data-target="#exampleModal"
+																			src="{{screenshot_set.viewportScreenshot}}"
+                                      class="path-node-image"
+                                      ng-if="screenshot_set.viewportScreenshot"
 																			ng-click="openPageModal(screenshot_set.viewportScreenshot)" />
-																<div class="expand" data-toggle="modal" data-target="#exampleModal" class="path-node-image"
+																<div class="expand" data-toggle="modal" data-target="#exampleModal"
+                                      class="path-node-image"
+                                      ng-if="screenshot_set.viewportScreenshot"
 																			ng-click="openPageModal(screenshot_set.viewportScreenshot)">
-																	<h6>Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i></h6>
+																	<h6>
+                                    Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
+                                  </h6>
+                                </div>
                                 </div>
                               </div>
 														</div>
@@ -466,7 +475,7 @@
 															</li>
 															<li class="tabs-style2" ng-click="visible_browser_screenshot='firefox'"
                                   ng-class="visible_browser_screenshot=='firefox' ? 'tabs-style2_active' : ''">
-                                
+
 																<a>
 							                    <i class="fa fa-firefox "></i>
                                   &nbsp;&nbsp;&nbsp;Firefox

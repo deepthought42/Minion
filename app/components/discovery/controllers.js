@@ -587,6 +587,16 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     });
 
+    $scope.doesScreenshotExistForBrowser = function(browser,  screenshots){
+      console.log("Screenshot :: "+screenshots);
+      for(var idx=0; idx< screenshots.length; idx++){
+        if( screenshots[idx].browser === browser){
+          return  true;
+        }
+      }
+      return false;
+    }
+
     $rootScope.$on('missing_resorce_error', function (e){
       $scope.errors.push("We seem to have misplaced those records. Please try again. I'm sure we have them somewhere.");
     });

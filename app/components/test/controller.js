@@ -689,6 +689,17 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       return path_objecs[0];
     }
 
+
+    $scope.doesScreenshotExistForBrowser = function(browser,  screenshots){
+      console.log("Screenshot :: "+screenshots);
+      for(var idx=0; idx< screenshots.length; idx++){
+        if( screenshots[idx].browser === browser){
+          return  true;
+        }
+      }
+      return false;
+    }
+    
     /* EVENTS */
     $rootScope.$on('reload_tests', function(e){
       $scope.getTestsByUrl(store.get('domain').url);
