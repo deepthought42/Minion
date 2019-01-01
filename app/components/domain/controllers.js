@@ -94,8 +94,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           $scope.domains.push(successResult);
           $scope.closeDialog();
           created_successfully = true;
-          $rootScope.$broadcast("domain_updated", successResult);
-
+          $rootScope.$broadcast("domain_added", successResult);
         },
         function(errorResult){
           created_successfully = false
