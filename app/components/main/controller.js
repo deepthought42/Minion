@@ -184,8 +184,13 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       Auth.login();
     }
 
-    $scope.$on('domain_updated', function(){
+    $scope.$on('domain_updated', function(event, opts){
       $scope.domain = store.get('domain');
+    });
+
+    $scope.$on('domain_added', function(event, domain){
+      $scope.domain_list = store.get('domains');
+      store.set('domains', $scope.domain_list);
     });
 
     $scope.$on('domain_selected', function(){
