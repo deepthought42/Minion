@@ -137,15 +137,17 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         description: "Tests paths are comprised of three parts: page, element, and action. Single page tests like this one here indicate that the page has successfully loaded.",
         attachTo:"#test0_data",
         position: "top",
-        top: 150,
-        left: 100,
+        top: 120,
+        left: 10,
         width: 400
       },
       {
-        position: "top",
+        position: "right",
         description: "Examine the test details to determine whether the status of a test is passing or failing. Select passing or failing to teach Qanairy the expected outcome of each test. Once a status is selected the test will move to the 'Tests' page where it can be run.",
         attachTo:"#test0_status",
-        width: 400
+        width: 430,
+        top: 125,
+        left: 175
       }
     ];
 
