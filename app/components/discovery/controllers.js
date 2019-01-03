@@ -98,7 +98,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
 
         channel.bind('path_object', function(data) {
-        
+
         });
 
         channel.bind('discovery-status', function(data) {
@@ -122,15 +122,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       }
     ];
 
-    $scope.discoveryRunningOnboardingSteps = [
-      {
-        title: "Qanairy’s AI is now working to find and build your tests for you. ",
-        position: "centered",
-        description: "Tests will begin returning as they are discovered. This process takes a few minutes, now would be a great time to take a break. You deserve it.",
-        width: 400
-      }
-    ];
-
     $scope.discoveredTestOnboardingSteps = [
       {
         title: "Congratulations, you built your first test!",
@@ -143,7 +134,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     $scope.testVerificationSteps = [
       {
         title: "Review your test",
-        description: "Test paths are comprised of three parts: page, element, and action. Click on each part to learn more details about the test like destination, xpath, styling, and browser screenshots.",
+        description: "Tests paths are comprised of three parts: page, element, and action. Single page tests like this one here indicate that the page has successfully loaded.",
         attachTo:"#test0_data",
         position: "top",
         top: 150,
