@@ -87,8 +87,8 @@
     </div>
     <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy:'lastRunTimestamp' track by test.key " ng-show="tests.length>0">
       <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
-			  <div class="test__status test__profile_stretch flex-none text--shadow" >
-			   	<div class="row test__status__frame" id="{{'test'+$index+'_status'}}">
+			  <div class="test__status test__profile_stretch flex-none text--shadow"  id="{{'test'+$index+'_status'}}" >
+			   	<div class="row test__status__frame">
 						<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
 							<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
 						</div>
