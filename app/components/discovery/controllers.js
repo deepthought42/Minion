@@ -32,7 +32,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.group.name = "";
       $scope.group.description = "";
       $scope.test_idx = -1;
-      $scope.discoveryOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery');
       $scope.discoveryOnboardingIndex = 0;
       $scope.discovery_status = {};
       $scope.current_domain = store.get('domain');
@@ -67,6 +66,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           .then(function(data){
             $scope.tests = data
             $scope.waitingOnTests = false;
+            console.log("$scope.tests :: "+data);
             if(data.length > 0){
               $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
               $scope.discoveredTestOnboardingIndex = 0;
@@ -91,6 +91,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
         var channel = pusher.subscribe($scope.extractHostname($scope.current_domain.url));
         channel.bind('test-discovered', function(data) {
+          console.log("RECEIVED TEST FROM DISCOVERY");
           $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
           $scope.discoveredTestOnboardingIndex = 0;
           $scope.waitingOnTests = false;
@@ -99,11 +100,13 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
 
         channel.bind('path_object', function(data) {
+          console.log("received path object");
           $scope.discovery_status = JSON.parse(data);
           $scope.$apply();
         });
 
         channel.bind('discovery-status', function(data) {
+          console.log("discovery status");
           $scope.discovery_status = JSON.parse(data);
           $scope.$apply();
         });
@@ -206,7 +209,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
      */
     $scope.startDiscovery = function(){
       $scope.isStarted = true;
-      $scope.discoveryRunningOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery-running');
+      $scope.discoveryOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery');
       $scope.discoveryRunningOnboardingIndex = 0;
 
       Discovery.startWork({url:  $scope.current_domain.url}).$promise
@@ -571,6 +574,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         .then(function(data){
           $scope.tests = data
           $scope.waitingOnTests = false;
+          console.log("$scope.tests :: "+data);
           if(data.length > 0){
             $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
             $scope.discoveredTestOnboardingIndex = 0;
@@ -581,15 +585,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           $scope.waitingOnTests = false;
         });
     });
-
-    $scope.doesScreenshotExistForBrowser = function(browser,  screenshots){
-      for(var idx=0; idx< screenshots.length; idx++){
-        if( screenshots[idx].browser === browser){
-          return  true;
-        }
-      }
-      return false;
-    }
 
     $rootScope.$on('missing_resorce_error', function (e){
       $scope.errors.push("We seem to have misplaced those records. Please try again. I'm sure we have them somewhere.");
