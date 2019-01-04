@@ -151,6 +151,15 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       }
     ];
 
+    $scope.doesScreenshotExistForBrowser = function(browser,  screenshots){
+      for(var idx=0; idx< screenshots.length; idx++){
+        if( screenshots[idx].browser === browser){
+          return  true;
+        }
+      }
+      return false;
+    }
+
     /**
      *  Returns an array containing the start index values for partitioning a path
      */
