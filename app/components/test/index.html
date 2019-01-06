@@ -119,19 +119,19 @@
 									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
 								</div>
 								<div class="green vertical__center__int"
-											ng-if="status == 'passing'">
+											ng-if="status == 'PASSING'">
 									<div class="" >
 										<i class="fa fa-check green status--symbol--browser"></i>
 									</div>
 								</div>
 								<div class=" red vertical__center__int"
-											ng-if="status == 'failing'">
+											ng-if="status == 'FAILING'">
 									<div class="" >
 										<i class="fa fa-times red status--symbol--browser"></i>
 									</div>
 								</div>
 								<div class=" red vertical__center__int"
-											ng-if="status == 'unverified'">
+											ng-if="status == 'UNVERIFIED'">
 									<div class="" >
 										<i class="fa fa-icon-question-sign status--symbol--browser"></i>
 									</div>
@@ -142,7 +142,7 @@
 				</div>
 				<div class="flex-none test_browsers_edit test__profile_stretch" ng-if="editing_test_idx==$index">
 					<div class="">
-						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses" ng-if="status!='unverified'">
+						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses" ng-if="status!='UNVERIFIED'">
 							<div class="row vertical__center test__status__edit">
 								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
 								<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
@@ -152,16 +152,16 @@
 									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
 								</div>
 								<div class="btn--green select__neutral status-passing status--browser vertical__center__int"
-											style="{{status=='passing' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
-											ng-click="updateBrowserPassingStatus(test, browser, 'passing')" ng-if="status!='unverified' && status!='running'">
+											style="{{status=='PASSING' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
+											ng-click="updateBrowserPassingStatus(test, browser, 'PASSING')" ng-if="status!='UNVERIFIED' && status!='running'">
 									<div class="" >
 										<i class="fa fa-check status--symbol--browser white"></i>
 									</div>
 								</div>
 
 								<div class="btn--red select__neutral status--browser status-failing  vertical__center__int"
-											style="{{status=='failing' && status != 'unverified' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
-											ng-click="updateBrowserPassingStatus(test, browser, 'failing')" ng-if="status!='unverified'  && status!='running'">
+											style="{{status=='FAILING' && status != 'UNVERIFIED' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
+											ng-click="updateBrowserPassingStatus(test, browser, 'FAILING')" ng-if="status!='UNVERIFIED'  && status!='running'">
 									<div class="" >
 										<i  class="fa fa-times status--symbol--browser white"></i>
 									</div>
@@ -628,8 +628,8 @@
 													<span class="browser">{{capitalizeFirstLetter(record.browser)}}</span>
 												</div>
 												<div class="col-sm-3">
-													<i class="fa fa-check fa-2x green" ng-show="record.passing=='PASSING'" />
-													<i class="fa fa-times fa-2x red" ng-show="record.passing=='FAILING'" />
+													<i class="fa fa-check fa-2x green" ng-show="record.status=='PASSING'" />
+													<i class="fa fa-times fa-2x red" ng-show="record.status=='FAILING'" />
 												</div>
 												<div class="col-sm-3 text-right">
 													{{record.runTime | date: 'm'}} m {{record.runTime | date: 'ss'}} s
