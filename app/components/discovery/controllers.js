@@ -220,13 +220,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         .catch(function(err){
           //$scope.waitingOnTests = false;
           if(err.data){
-            $scope.errors.push(err.data);
-
             if(err.data.message == "A discovery is already running"){
               $scope.isStarted = true;
             }
             else{
               $scope.isStarted = false;
+              $scope.errors.push(err.data);
             }
             segment.track("Started Discovery", {
               domain : $scope.current_domain.url,
