@@ -127,7 +127,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
     $scope.isTestRunning = function(test){
       for(var browser in test.browserStatuses){
-        if(test.browserStatuses[browser] == "running"){
+        if(test.browserStatuses[browser] === "RUNNING"){
           return true;
         }
       }
@@ -137,7 +137,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
     $scope.isTestRunningInAllBrowsers = function(test){
       var browser_count = 0;
       for(var browser in test.browserStatuses){
-        if(test.browserStatuses[browser] === "running"){
+        if(test.browserStatuses[browser] === "RUNNING"){
           browser_count++;
         }
         //test.browserStatuses['chrome']!=null || test.browserStatuses['firefox']!=null
@@ -235,7 +235,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       //$scope.closeDialog();
       for(var i=0; i < browsers.length; i++){
         $scope.current_test_browser = browsers[i];
-        $scope.test.browserStatuses[browsers[i]] = "running";
+        $scope.test.browserStatuses[browsers[i]] = "RUNNING";
         var url = store.get('domain').url;
         Test.runTests({test_keys: keys, browser: $scope.current_test_browser, host_url: url}).$promise
           .then(function(data){
@@ -310,38 +310,34 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       var keys = [];
       $scope.filteredTests.forEach(function(test){
         browsers.forEach(function(browser){
-          test.browserStatuses[browser] = 'running';
-          test.status = "running";
+          test.browserStatuses[browser] = 'RUNNING';
+          test.status = "RUNNING";
         });
         keys.push(test.key);
       });
 
-      $scope.closeDialog();
+      //$scope.closeDialog();
 
       var url = store.get('domain').url;
       for(var i=0; i < browsers.length; i++){
         Test.runTests({test_keys: keys, browser: browsers[i], host_url: store.get('domain').url}).$promise
           .then(function(data){
-            segment.track("Run Tests", {
-              chrome : chrome_selected,
-              firefox : firefox_selected,
-              test_count : keys.length,
-              succeeded : true
-            }, function(success){});
-
-            keys.forEach(function(key){
-              var val = data[key];
 
               //iterate over tests and set status based on if test key is present in data
               $scope.filteredTests.forEach(function(test){
+                console.log("setting status for test");
                 test.runStatus = false;
 
+                console.log("Checking for key in data :: "+test.key);
                 if(data[test.key]){
-                  test.correct = data[test.key].status;
-                  test.browserStatuses[data[test.key].browser_name] = data[test.key].browserStatuses;
+                  console.log("STATUS :: " + data[test.key].status);
+                  test.status = data[test.key].status;
+                  test.browserStatuses[data[test.key].browser] = data[test.key].status;
+                  test.records.unshift(data[test.key]);
+                  console.log("test data is set to data");
                   //test.records.unshift(test_record);
-                  $scope.tests.unshift(test);
-                  if(test_record.status){
+                  //$scope.tests.unshift(test);
+                  if(data[test.key].status==="PASSING"){
                     test.passingStatusClass = true;
                     test.failingStatusClass = false;
                   }
@@ -357,8 +353,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
                   }, 5000);
 
                 }
-              })
-            })
+              });
           })
           .catch(function(err){
             if(err.data){
@@ -368,13 +363,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
               $scope.errors.push({message: $scope.unresponsive_server_err });
             }
 
-            segment.track("Run Tests", {
-              chrome : chrome_selected,
-              firefox : firefox_selected,
-              test_count : keys.length,
-              succeeded : true
-            }, function(success){});
           });
+          segment.track("Run Tests", {
+            chrome : chrome_selected,
+            firefox : firefox_selected,
+            test_count : keys.length,
+          }, function(success){});
+
         }
     }
 
