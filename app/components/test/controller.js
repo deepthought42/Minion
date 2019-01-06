@@ -251,15 +251,15 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
               for(var test_idx=0; test_idx < $scope.tests.length; test_idx++){
                 if($scope.tests[test_idx].key === returned_key){
                   var test_record = data[returned_key];
-                  $scope.tests[test_idx].status = test_record.passing;
-                  $scope.tests[test_idx].browserStatuses[test_record.browser] = test_record.passing.toLowerCase();
+                  $scope.tests[test_idx].status = test_record.status;
+                  $scope.tests[test_idx].browserStatuses[test_record.browser] = test_record.status.toLowerCase();
                   $scope.tests[test_idx].records.unshift(test_record);
                   //move test to top of list
                   var test = $scope.tests.splice(test_idx, 1)[0];
                   $scope.tests.unshift(test);
 
                   //shade bar either red or green depending on passing/failing status
-                  if(test_record.passing==="PASSING"){
+                  if(test_record.status==="PASSING"){
                     test.passingStatusClass = true;
                     test.failingStatusClass = false;
                   }
@@ -337,11 +337,11 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
                 test.runStatus = false;
 
                 if(data[test.key]){
-                  test.correct = data[test.key].passing;
+                  test.correct = data[test.key].status;
                   test.browserStatuses[data[test.key].browser_name] = data[test.key].browserStatuses;
                   //test.records.unshift(test_record);
                   $scope.tests.unshift(test);
-                  if(test_record.passing){
+                  if(test_record.status){
                     test.passingStatusClass = true;
                     test.failingStatusClass = false;
                   }
@@ -533,14 +533,15 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
           else{
             var approved_cnt = store.get('approved_test_cnt')+1;
           }
-          test.name = test.name;
+          test.name = data.name;
+          test.status = data.status;
+          test.records = data.records;
+          test.browserStatuses = data.browserStatuses;
           test.show_test_name_edit_field = false;
           $scope.editing_test_idx = -1;
           test.show_waiting_icon = false;
           test.show_test_name_edit_field=false;
           store.set('approved_test_cnt', approved_cnt);
-
-          $rootScope.$broadcast("updateApprovedTestCnt", approved_cnt);
         })
         .catch(function(err){
           test.show_waiting_icon = false;
