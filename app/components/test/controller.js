@@ -325,18 +325,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
 
               //iterate over tests and set status based on if test key is present in data
               $scope.filteredTests.forEach(function(test){
-                console.log("setting status for test");
                 test.runStatus = false;
 
-                console.log("Checking for key in data :: "+test.key);
                 if(data[test.key]){
-                  console.log("STATUS :: " + data[test.key].status);
                   test.status = data[test.key].status;
                   test.browserStatuses[data[test.key].browser] = data[test.key].status;
                   test.records.unshift(data[test.key]);
-                  console.log("test data is set to data");
-                  //test.records.unshift(test_record);
-                  //$scope.tests.unshift(test);
+
                   if(data[test.key].status==="PASSING"){
                     test.passingStatusClass = true;
                     test.failingStatusClass = false;
