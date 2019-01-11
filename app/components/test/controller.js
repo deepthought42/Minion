@@ -47,8 +47,15 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         var reported_test = JSON.parse(data);
         for(var idx=0; idx<$scope.tests.length; idx++){
           var test = $scope.tests[idx];
-          if(test.key == reported_test.key){
-            $scope.tests[idx] = reported_test;
+          if(test.key == reported_test.testKey){
+            $scope.tests[idx].records.unshift(reported_test);
+            $scope.tests[idx].browserStatuses[reported_test.browser] = reported_test.status.toUpperCase();
+
+            for(var key in $scope.tests[idx].browserStatuses){
+              if($scope.tests[idx].browserStatuses[key] === "FAILING"){
+                $scope.tests[idx].status = "FAILING";
+              }
+            }
             break;
           }
         }
@@ -205,7 +212,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       test.browserStatuses[browser] = status;
       var test_passing = "PASSING";
       for (var key in test.browserStatuses) {
-          if(test.browserStatuses[key] != null && test.browserStatuses[key].toLowerCase()==='failing'){
+          if(test.browserStatuses[key] != null && test.browserStatuses[key].toLowerCase()==='FAILING'){
             test_passing = "FAILING";
             break;
           }
