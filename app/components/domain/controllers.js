@@ -176,8 +176,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
              $scope.closeDialog = function() {
                 $mdDialog.hide();
              }
-
-
           }
        });
     };

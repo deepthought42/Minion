@@ -5,7 +5,7 @@
 <div class="content">
 	<div class="secondary-nav vertical__center__int" >
   	<div class="flex-auto">
-			<div class="col-sm-12" ng-show="!isStarted" >
+			<div class="col-sm-12" ng-show="!isStarted && tests.length" >
 				<button class="btn btn--primary pull-left" id="run_all_tests_button" ng-click="runTests( default_browser==='firefox', default_browser==='chrome')">
 					Run All Tests
 				</button>
@@ -53,7 +53,7 @@
 		</div>
 		<div class="empty__state vertical__center_empty_state_test" ng-show="!waitingOnTests && tests.length==0">
 			<h2>
-        No tests here? Visit <a href="#/discovery">Discovery</a> to find all of your tests.
+        No tests here? Visit <a ui-sref="main.discovery">Discovery</a> to find all of your tests.
       </h2>
 		</div>
 
