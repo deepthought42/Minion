@@ -52,8 +52,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
             $scope.tests[idx].browserStatuses[reported_test.browser] = reported_test.status.toUpperCase();
 
             for(var key in $scope.tests[idx].browserStatuses){
-              if($scope.tests[idx].browserStatuses[key] === "FAILING"){
+              if($scope.tests[idx].browserStatuses[key].toUpperCase() === "FAILING"){
                 $scope.tests[idx].status = "FAILING";
+                break;
+              }
+              else if($scope.tests[idx].browserStatuses[key].toUpperCase() === "UNVERIFIED"){
+                $scope.tests[idx].status = "UNVERIFIED";
+                break;
               }
             }
             break;
@@ -258,8 +263,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
               for(var test_idx=0; test_idx < $scope.tests.length; test_idx++){
                 if($scope.tests[test_idx].key === returned_key){
                   var test_record = data[returned_key];
-                  $scope.tests[test_idx].status = test_record.status;
-                  $scope.tests[test_idx].browserStatuses[test_record.browser] = test_record.status.toLowerCase();
+                  $scope.tests[test_idx].status = test_record.status.toUpperCase();
+                  $scope.tests[test_idx].browserStatuses[test_record.browser] = test_record.status.toUpperCase();
                   $scope.tests[test_idx].records.unshift(test_record);
                   //move test to top of list
                   var test = $scope.tests.splice(test_idx, 1)[0];
