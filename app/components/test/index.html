@@ -5,7 +5,7 @@
 <div class="content">
 	<div class="secondary-nav vertical__center__int" >
   	<div class="flex-auto">
-			<div class="col-sm-12" ng-show="!isStarted" >
+			<div class="col-sm-12" ng-show="!isStarted && tests.length" >
 				<button class="btn btn--primary pull-left" id="run_all_tests_button" ng-click="runTests( default_browser==='firefox', default_browser==='chrome')">
 					Run All Tests
 				</button>
@@ -53,7 +53,7 @@
 		</div>
 		<div class="empty__state vertical__center_empty_state_test" ng-show="!waitingOnTests && tests.length==0">
 			<h2>
-        No tests here? Visit <a href="#/discovery">Discovery</a> to find all of your tests.
+        No tests here? Visit <a ui-sref="main.discovery">Discovery</a> to find all of your tests.
       </h2>
 		</div>
 
@@ -69,11 +69,14 @@
 					</div>
 
 					<div class="test__status vertical__center" ng-if="!isTestRunning(test)">
-						<span ng-show="test.status == 'PASSING'">
+						<span ng-show="test.status.toUpperCase() == 'PASSING'">
 							<i class="fa fa-check-circle green status--symbol"></i>
 						</span>
-						<span ng-show="test.status=='FAILING' && test.status != 'UNVERIFIED'">
+						<span ng-show="test.status.toUpperCase() == 'FAILING'">
 							<i  class="fa fa-times-circle red status--symbol"></i>
+						</span>
+						<span ng-show="test.status.toUpperCase() == 'UNVERIFIED'">
+							<i class="fa fa-question-circle status--symbol--browser purple fa-fw" aria-hidden="true"></i>
 						</span>
 					</div>
 				</div>
@@ -99,41 +102,27 @@
 					<div class="">
 						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
 							<div class="row vertical__center test__status__editable">
-								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome' && status!='UNVERIFIED'">
-								<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox' && status!='UNVERIFIED'" >
+								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
+								<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
 							</div>
-							<!--
-							<div class="vertical__center">
-									<i class="fa fa-check fa-circle-o-notch fa-spin fa-2x green" ng-show="status == null" />
-									<i class="fa fa-check fa-2x green" ng-show="status" />
-									<i class="fa fa-times fa-2x red" ng-show="!status" />
-								</div>
-							-->
 
 							<div class="row vertical__center test__status__editable">
-								<div class="" ng-if="status == 'UNVERIFIED'">
-									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
-								</div>
-
 								<div class="" ng-if="status == 'RUNNING'">
 									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
 								</div>
-								<div class="green vertical__center__int"
-											ng-if="status == 'PASSING'">
+								<div class="green vertical__center__int" ng-if="status.toUpperCase() == 'PASSING'">
 									<div class="" >
 										<i class="fa fa-check green status--symbol--browser"></i>
 									</div>
 								</div>
-								<div class=" red vertical__center__int"
-											ng-if="status == 'FAILING'">
+								<div class="red vertical__center__int" ng-if="status.toUpperCase() == 'FAILING'">
 									<div class="" >
 										<i class="fa fa-times red status--symbol--browser"></i>
 									</div>
 								</div>
-								<div class=" red vertical__center__int"
-											ng-if="status == 'UNVERIFIED'">
+								<div class="red vertical__center__int"	ng-if="status.toUpperCase() == 'UNVERIFIED'">
 									<div class="" >
-										<i class="fa fa-icon-question-sign status--symbol--browser"></i>
+										<i class="fa fa-question-circle purple status--symbol--browser"></i>
 									</div>
 								</div>
 							</div>
@@ -142,7 +131,7 @@
 				</div>
 				<div class="flex-none test_browsers_edit test__profile_stretch" ng-if="editing_test_idx==$index">
 					<div class="">
-						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses" ng-if="status!='UNVERIFIED'">
+						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
 							<div class="row vertical__center test__status__edit">
 								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
 								<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
@@ -152,16 +141,16 @@
 									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
 								</div>
 								<div class="btn--green select__neutral status-passing status--browser vertical__center__int"
-											style="{{status=='PASSING' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
-											ng-click="updateBrowserPassingStatus(test, browser, 'PASSING')" ng-if="status!='UNVERIFIED' && status!='RUNNING'">
+											style="{{status.toUpperCase() =='PASSING' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
+											ng-click="updateBrowserPassingStatus(test, browser, 'PASSING')" ng-if="status!='RUNNING'">
 									<div class="" >
 										<i class="fa fa-check status--symbol--browser white"></i>
 									</div>
 								</div>
 
 								<div class="btn--red select__neutral status--browser status-failing  vertical__center__int"
-											style="{{status=='FAILING' && status != 'UNVERIFIED' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
-											ng-click="updateBrowserPassingStatus(test, browser, 'FAILING')" ng-if="status!='UNVERIFIED'  && status!='RUNNING'">
+											style="{{status.toUpperCase()=='FAILING' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
+											ng-click="updateBrowserPassingStatus(test, browser, 'FAILING')" ng-if="status!='RUNNING'">
 									<div class="" >
 										<i  class="fa fa-times status--symbol--browser white"></i>
 									</div>
@@ -630,6 +619,7 @@
 												<div class="col-sm-3">
 													<i class="fa fa-check fa-2x green" ng-show="record.status=='PASSING'" />
 													<i class="fa fa-times fa-2x red" ng-show="record.status=='FAILING'" />
+													<i class="fa fa-question-circle fa-2x purple" ng-show="record.status=='UNVERIFIED'" />
 												</div>
 												<div class="col-sm-3 text-right">
 													{{record.runTime | date: 'm'}} m {{record.runTime | date: 'ss'}} s

@@ -47,8 +47,20 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         var reported_test = JSON.parse(data);
         for(var idx=0; idx<$scope.tests.length; idx++){
           var test = $scope.tests[idx];
-          if(test.key == reported_test.key){
-            $scope.tests[idx] = reported_test;
+          if(test.key == reported_test.testKey){
+            $scope.tests[idx].records.unshift(reported_test);
+            $scope.tests[idx].browserStatuses[reported_test.browser] = reported_test.status.toUpperCase();
+
+            for(var key in $scope.tests[idx].browserStatuses){
+              if($scope.tests[idx].browserStatuses[key].toUpperCase() === "FAILING"){
+                $scope.tests[idx].status = "FAILING";
+                break;
+              }
+              else if($scope.tests[idx].browserStatuses[key].toUpperCase() === "UNVERIFIED"){
+                $scope.tests[idx].status = "UNVERIFIED";
+                break;
+              }
+            }
             break;
           }
         }
@@ -205,7 +217,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       test.browserStatuses[browser] = status;
       var test_passing = "PASSING";
       for (var key in test.browserStatuses) {
-          if(test.browserStatuses[key] != null && test.browserStatuses[key].toLowerCase()==='failing'){
+          if(test.browserStatuses[key] != null && test.browserStatuses[key].toLowerCase()==='FAILING'){
             test_passing = "FAILING";
             break;
           }
@@ -251,8 +263,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
               for(var test_idx=0; test_idx < $scope.tests.length; test_idx++){
                 if($scope.tests[test_idx].key === returned_key){
                   var test_record = data[returned_key];
-                  $scope.tests[test_idx].status = test_record.status;
-                  $scope.tests[test_idx].browserStatuses[test_record.browser] = test_record.status.toLowerCase();
+                  $scope.tests[test_idx].status = test_record.status.toUpperCase();
+                  $scope.tests[test_idx].browserStatuses[test_record.browser] = test_record.status.toUpperCase();
                   $scope.tests[test_idx].records.unshift(test_record);
                   //move test to top of list
                   var test = $scope.tests.splice(test_idx, 1)[0];
