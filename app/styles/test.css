@@ -362,8 +362,10 @@ width: -webkit-calc(100% - 15px);
 }
 
 .browser_placeholder{
-	font-size: 200px !important;
+	font-size: 140px !important;
 	 text-align: center;
+	color:#757575;
+	padding-bottom: 10px;
 }
 
 .status-passing{
