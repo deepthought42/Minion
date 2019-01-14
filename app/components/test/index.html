@@ -69,14 +69,14 @@
 					</div>
 
 					<div class="test__status vertical__center" ng-if="!isTestRunning(test)">
-						<span ng-show="test.status == 'PASSING'">
+						<span ng-show="test.status.toUpperCase() == 'PASSING'">
 							<i class="fa fa-check-circle green status--symbol"></i>
 						</span>
-						<span ng-show="test.status=='FAILING'">
+						<span ng-show="test.status.toUpperCase() == 'FAILING'">
 							<i  class="fa fa-times-circle red status--symbol"></i>
 						</span>
-						<span ng-show="test.status == 'UNVERIFIED'">
-							<i class="fa fa-question-circle status--symbol--browser green fa-fw" aria-hidden="true"></i>
+						<span ng-show="test.status.toUpperCase() == 'UNVERIFIED'">
+							<i class="fa fa-question-circle status--symbol--browser purple fa-fw" aria-hidden="true"></i>
 						</span>
 					</div>
 				</div>
@@ -110,18 +110,20 @@
 								<div class="" ng-if="status == 'RUNNING'">
 									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
 								</div>
-								<div class="green vertical__center__int" ng-if="status == 'PASSING'">
+								<div class="green vertical__center__int" ng-if="status.toUpperCase() == 'PASSING'">
 									<div class="" >
 										<i class="fa fa-check green status--symbol--browser"></i>
 									</div>
 								</div>
-								<div class="red vertical__center__int" ng-if="status == 'FAILING'">
+								<div class="red vertical__center__int" ng-if="status.toUpperCase() == 'FAILING'">
 									<div class="" >
 										<i class="fa fa-times red status--symbol--browser"></i>
 									</div>
 								</div>
-								<div class="red vertical__center__int"	ng-if="status == 'UNVERIFIED'">
-									<i class="fa fa-question-circle status--symbol--browser"></i>
+								<div class="red vertical__center__int"	ng-if="status.toUpperCase() == 'UNVERIFIED'">
+									<div class="" >
+										<i class="fa fa-question-circle purple status--symbol--browser"></i>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -139,7 +141,7 @@
 									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
 								</div>
 								<div class="btn--green select__neutral status-passing status--browser vertical__center__int"
-											style="{{status=='PASSING' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
+											style="{{status.toUpperCase() =='PASSING' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
 											ng-click="updateBrowserPassingStatus(test, browser, 'PASSING')" ng-if="status!='RUNNING'">
 									<div class="" >
 										<i class="fa fa-check status--symbol--browser white"></i>
@@ -147,7 +149,7 @@
 								</div>
 
 								<div class="btn--red select__neutral status--browser status-failing  vertical__center__int"
-											style="{{status=='FAILING' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
+											style="{{status.toUpperCase()=='FAILING' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
 											ng-click="updateBrowserPassingStatus(test, browser, 'FAILING')" ng-if="status!='RUNNING'">
 									<div class="" >
 										<i  class="fa fa-times status--symbol--browser white"></i>
@@ -617,6 +619,7 @@
 												<div class="col-sm-3">
 													<i class="fa fa-check fa-2x green" ng-show="record.status=='PASSING'" />
 													<i class="fa fa-times fa-2x red" ng-show="record.status=='FAILING'" />
+													<i class="fa fa-question-circle fa-2x purple" ng-show="record.status=='UNVERIFIED'" />
 												</div>
 												<div class="col-sm-3 text-right">
 													{{record.runTime | date: 'm'}} m {{record.runTime | date: 'ss'}} s
