@@ -183,6 +183,11 @@
                <i class="fa fa-pencil" ></i>
             </button>
           </div>
+					<div class="margin_fifteen_right pull-right" ng-if="editing_test_idx!=$index">
+            <button class="btn btn--tertiary" ng-click="sendTestToIde(test)">
+               <i class="fa fa-download" ></i>
+            </button>
+          </div>
           <div class="margin_fifteen_right pull-right" ng-if="editing_test_idx!=$index">
             <!---ARCHIVE TEST BUTTON IS HERE -->
 	          <button class="btn btn--tertiary" ng-click="askDelete(test)">

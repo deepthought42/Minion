@@ -667,6 +667,18 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
       $scope.test_copy = JSON.parse(JSON.stringify(test));;
     }
 
+    $scope.sendTestToIde = function(test){
+      $scope.test_copy = JSON.parse(JSON.stringify(test));
+
+      Test.sendTestToIde({test_key: test.key}).$promise
+        .then(function(data){
+          console.log("test successfully sent to ide ::   "+JSON.stringify(data));
+        })
+        .catch(function(err){
+          console.log("error occurred while sending test to ide : "+err);
+        });
+    }
+
     /**
      *  Returns an array containing the start index values for partitioning a path
      */
