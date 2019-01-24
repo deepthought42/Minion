@@ -630,11 +630,10 @@
 													{{record.ranAt | date: 'MM/dd/yy h:mm a' | lowercase}}
 												</div>
 												<div class="col-sm-3 text-right">
-													 <button class="btn btn--tertiary" style="padding: 0px 15px !important;" data-toggle="modal" data-target="#exampleModal"
-														
-														ng-click="openPageModal(browser_screenshot.viewportScreenshot)">
+													<button class="btn btn--tertiary" style="padding: 0px 15px !important;" data-toggle="modal" data-target="#exampleModal"
+																	 ng-click="getScreenshot(record)">
 														 Screenshot
-															</button>
+													</button>
 												</div>
 											</div>
 										</div>
