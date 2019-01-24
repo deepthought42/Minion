@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.tests', ['Qanairy.TestService'])
+angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.tests', {
@@ -10,8 +10,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
   });
 }])
 
-.controller('TestIndexCtrl', ['$rootScope', '$scope', '$interval', 'Test', 'store', '$state', '$mdDialog', 'Account', 'segment',
-  function($rootScope, $scope, $interval, Test, store, $state, $mdDialog, Account, segment) {
+.controller('TestIndexCtrl', ['$rootScope', '$scope', '$interval', 'Test', 'store', '$state', '$mdDialog', 'Account', 'segment', 'TestRecord',
+  function($rootScope, $scope, $interval, Test, store, $state, $mdDialog, Account, segment, TestRecord) {
     this._init= function(){
       $scope.errors = [];
       $scope.sortLastRun = false;
@@ -85,6 +85,17 @@ angular.module('Qanairy.tests', ['Qanairy.TestService'])
         width: 400
       }
     ];
+
+    $scope.getScreenshot = function(record){
+      var browser_idx = 0;
+      for(var i=0; i<record.result.browserScreenshots.length; i++){
+        if(record.result.browserScreenshots.browser === "firefox"){
+          browser_idx = i;
+          break;
+        }
+      }
+      $scope.openPageModal(record.result.browserScreenshots[browser_idx].viewportScreenshot);
+    }
 
     /**
      *  Checks if onboarding step has already been experienced. if not, it adds

@@ -119,4 +119,10 @@ height: calc(100% - 20px);
 .browser-icon {
 	width: 25px;
 	height: 25px;
+
+}
+
+.browser{
+	padding-left:8px;
+	line-height:14px;
 }
