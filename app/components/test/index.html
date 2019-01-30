@@ -177,23 +177,25 @@
                Run
             </button>
           </div>
-
-          <div class="margin_fifteen_right pull-right" ng-if="editing_test_idx!=$index">
-            <button class="btn btn--tertiary" ng-click="editTest(test, $index)">
-               <i class="fa fa-pencil" ></i>
+					
+					 <div class="ellipses-dropdown  margin_fifteen_right pull-right dropdown text-right" ng-if="editing_test_idx!=$index">
+            <button class="btn btn--tertiary dropdown-toggle" id="userDropdownMenuButton" dropdown-toggle>
+               <i class="fa fa-ellipsis-h" ></i>
             </button>
-          </div>
-					<div class="margin_fifteen_right pull-right" ng-if="editing_test_idx!=$index">
-            <button class="btn btn--tertiary" ng-click="sendTestToIde(test)">
-               <i class="fa fa-download" ></i>
-            </button>
-          </div>
-          <div class="margin_fifteen_right pull-right" ng-if="editing_test_idx!=$index">
-            <!---ARCHIVE TEST BUTTON IS HERE -->
-	          <button class="btn btn--tertiary" ng-click="askDelete(test)">
-	             <i class="fa fa-trash" ></i>
-	          </button>
-	          <!---ARCHIVE TEST BUTTON ENDS HERE -->
+						 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdownMenuButton">
+                <li class="dropdown-item" ng-click="editTest(test, $index)">
+                  Edit
+                </li>
+                <li class="dropdown-item" ng-click="sendTestToIde(test)">
+                  Open in Test Recorder
+                </li>
+							 <div class="dropdown-divider"></div>
+							  <!---ARCHIVE TEST BUTTON IS HERE -->
+                <li class="dropdown-item" ng-click="askDelete(test)">
+                  Delete
+                </li>
+							 <!---ARCHIVE TEST BUTTON ENDS HERE -->
+              </ul>
           </div>
           <div class="" ng-if="editing_test_idx==$index">
             <div class="title__edit__buttons margin_fifteen_right btn--secondary" ng-click="cancelEditingTest($index)" ng-show="!test.show_waiting_icon">
