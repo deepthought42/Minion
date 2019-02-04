@@ -499,7 +499,6 @@
 											</div>
 										</div>
 									</div>
-
 									<div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageState'">
 										<div class="row">
 											<div class="col-sm-6 equal-height-container">
@@ -508,27 +507,27 @@
 														<div id="section-linemove-1">
 															<div class="page__image col-xs-12">
 																<h5 class="screenshots_title">Page</h5>
-
 																<div ng-repeat="browser_screenshot in current_node[test_idx].browserScreenshots" >
 																	<img class="path-node-image page-image screenshots"
-																				data-toggle="modal" data-target="#exampleModal"
-																				src="{{browser_screenshot.viewportScreenshot}}"
-																				ng-if="visible_browser_screenshot===browser_screenshot.browser && browser_screenshot.viewportScreenshot"
-																				ng-click="openPageModal(browser_screenshot.viewportScreenshot)" />
+																	data-toggle="modal" data-target="#exampleModal"
+																	src="{{browser_screenshot.viewportScreenshot}}"
+																	ng-if="visible_browser_screenshot===browser_screenshot.browser && browser_screenshot.viewportScreenshot"
+																	ng-click="openPageModal(browser_screenshot.viewportScreenshot)" />
 																	<div class="expand" data-toggle="modal" data-target="#exampleModal"
-																				ng-if="visible_browser_screenshot===browser_screenshot.browser && browser_screenshot.viewportScreenshot"
-																				ng-click="openPageModal(browser_screenshot.viewportScreenshot)">
+																		ng-if="visible_browser_screenshot===browser_screenshot.browser && browser_screenshot.viewportScreenshot"
+																		ng-click="openPageModal(browser_screenshot.viewportScreenshot)">
 																		<h6>Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i></h6>
-	                                </div>
-	                              </div>
+																	</div>
+																</div>
 																<div ng-if="!doesScreenshotExistForBrowser(visible_browser_screenshot,  current_node[test_idx].browserScreenshots)">
-																	 <div class="text-center">
-																			<div>
-																			<i class=" browser_placeholder fa fa-image"></i></div>
+																	<div class="text-center">
 																		<div>
-																			A test has not been run in this&nbsp;browser.
-																		 </div>
-                                </div>
+																			<i class=" browser_placeholder fa fa-image"></i>
+																		</div>
+																		<div>
+																		A test has not been run in this&nbsp;browser.
+																		</div>
+																	</div>
 																</div>
 															</div>
 														</div>
