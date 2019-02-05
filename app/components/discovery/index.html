@@ -89,16 +89,14 @@
 						 	<div class="" >
 								Passing
 								<br />
-								<i class="fa fa-check discovery--status--symbol white"
-							   	 style="{{test.status == "PASSING" ? 'color:green' : 'color:#bfbfbf'}}"></i>
+								<i class="fa fa-check discovery--status--symbol white" style="{{test.status == "PASSING" ? 'color:green' : 'color:#bfbfbf'}}"></i>
 							</div>
 						</div>
 						<div class="discovery_status status-failing col-xs-6 btn--red " ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, 'FAILING', $index)">
 							<div class="" >
 								Failing
 								<br />
-								<i  class="fa fa-times discovery--status--symbol white"
-									style="{{!test.status == "FAILING" && test.status != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
+								<i class="fa fa-times discovery--status--symbol white" style="{{!test.status == "FAILING" && test.status != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
 							</div>
 						</div>
 				  </div>
