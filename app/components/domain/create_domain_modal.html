@@ -8,11 +8,11 @@
 					</div>
 				</div>
 				<div class="col-sm-2">
-					<div class="dialogue-close" ng-click="closeDialog()" ng-show="domains.length">
-						 <h2 style="text-align:right;">
-							 <i class="fa fa-times"></i>
-						 </h2>
-					</div>
+          <div class="dialogue-close" ng-click="closeDialog()" ng-show="domains.length">
+            <h2 style="text-align:right;">
+             <i class="fa fa-times"></i>
+            </h2>
+          </div>
 				</div>
 			</div>
 			<div class="row modal-form">
@@ -86,7 +86,7 @@
 						<button id="create_domain_button" class="btn btn--primary pull-right"
 						ng-click="createDomain(current_domain.protocol, current_domain.url, selected_browser, current_domain.logo_url)"
 						ng-disabled="!selected_browser || domain_form.$invalid">
-						  Add Domain
+						Add Domain
 						</button>
 					</div>
 				</form>

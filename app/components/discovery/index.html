@@ -5,13 +5,13 @@
       Stop!
   </button>
 -->
-  <div class="">
-    <div class="error__message" ng-repeat="error in errors track by $index">
-      {{error.message}}
-    </div>
-  </div>
+	<div class="">
+		<div class="error__message" ng-repeat="error in errors track by $index">
+		  {{error.message}}
+		</div>
+	</div>
 	<div class="secondary-nav vertical__center__int" >
-  	<div class="flex-auto">
+  		<div class="flex-auto">
 			<div class="col-sm-12" ng-show="!isStarted" >
 				<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
 					Start Discovery
@@ -32,8 +32,8 @@
 		<div class="flex-auto pull-right right-secondary-nav ">
 			<div class="input-group search">
 				<span class="input-group-addon"><i class="fa fa-search"></i>
-        </span>
-        <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
+				</span>
+				<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
 			</div>
 		</div>
 	</div>
@@ -60,13 +60,13 @@
 	<div class="test-container">
 		<div class="empty__state vertical__center_empty_state_discovery" ng-show="!isStarted && !waitingOnTests && tests.length==0">
 			<div>
-        <h2>Collect your tests by first running a Discovery.</h2>
-      </div>
-	    <div>
-        <button class="btn btn--primary btn-lg" ng-click="startDiscovery()">
-          Start Discovery
-        </button>
-      </div>
+			<h2>Collect your tests by first running a Discovery.</h2>
+			</div>
+			<div>
+			<button class="btn btn--primary btn-lg" ng-click="startDiscovery()">
+			Start Discovery
+			</button>
+			</div>
 		</div>
     <div class="empty__state vertical__center_empty_state_busy" ng-if="(isStarted && tests.length==0) || waitingOnTests">
       <div style="text-align:center; margin: 0px auto;">
