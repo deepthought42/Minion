@@ -17,78 +17,78 @@
 			</div>
 			<div class="row modal-form">
 				<form name="domain_form" novalidate>
-						<div class ="domain-dialogue" >
-								<div class ="col-sm-12 form_molecule" >
-									<div class="form_label_description_domain">
-										<h6>Domain</h6>
-										Running a discovery will send a large amount of temporary traffic to your domain in the form of testing bots. Using a staging environment is recommended.
-									</div>
-									<div class ="domain-dialogue-input" >
-										<p class="domain-protocol">http://&nbsp;</p>
-										<div>
-											<input id="domain_input" class="form-control" ng-model="current_domain.url" placeholder="www.yourdomain.com" required/>
-										</div>
-									</div>
+					<div class ="domain-dialogue" >
+						<div class ="col-sm-12 form_molecule" >
+							<div class="form_label_description_domain">
+							<h6>Domain</h6>
+							Running a discovery will send a large amount of temporary traffic to your domain in the form of testing bots. Using a staging environment is recommended.
+							</div>
+							<div class ="domain-dialogue-input" >
+								<p class="domain-protocol">http://&nbsp;</p>
+								<div>
+									<input id="domain_input" class="form-control" ng-model="current_domain.url" placeholder="www.yourdomain.com" required/>
 								</div>
-								<div class="col-sm-12 form_molecule">
-								  <div class="form_label_description">
-										<h6>Select A Browser</h6>
-										This will be the default browser this domain uses for discovery.
-									</div>
-									<div class="row browser_buttons">
-										<div class="col-xs-12">
-											<button class="btn btn-depressed" ng-click="selected_browser='chrome'" ng-class="{active: selected_browser=='chrome' || domain.discoveryBrowser == 'chrome'}">
-												<img src="/img/Chrome.ico" class="modal-browser-icon chrome" ng-show="selected_browser=='chrome'">
-												<div class="fa-icon" ng-show="selected_browser!='chrome'">
-													<i class="fa fa-chrome"></i>
-												</div>
-											</button>
-											<button class="btn btn-depressed" ng-click="selected_browser='firefox'" ng-class="{active: selected_browser=='firefox' || domain.discoveryBrowser == 'firefox'}">
-												<img src="/img/firefox.png" class="modal-browser-icon firefox" ng-show="selected_browser=='firefox'">
-												<div class="fa-icon" ng-show="selected_browser!='firefox'">
-													<i class="fa fa-firefox"></i>
-												</div>
-											</button>
-										</div>
-										<div class="col-xs-6">
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-12 form_molecule">
-									<div class="form_label_description">
-										<h6>
-											Upload A Logo <span class="optional">(optional)</span>
-										</h6>
-										<p>For best results use a 220px x 100px transparent png.</p>
-									</div>
-									<div class="domain_modal_logo" ng-if="!current_domain.logo_url">
-										<i class="fa fa-image" ng-click="openPicker(domain)"></i>
-									</div>
-									<div class="domain_modal_logo" ng-if="current_domain.logo_url">
-										<img ng-src="{{current_domain.logo_url}}"/>
-									</div>
-									<button class="btn btn--secondary" ng-click="openPicker(domain)">Upload Logo</button>
-								</div>
-							  <div class ="col-sm-12 form_molecule" >
-								<div class="form_label_description">
-											<h6>Domain Disclaimer</h6>
-											<div class="disclaimer-checkbox">
-												<input type="checkbox" ng-model="disclaimer_checkbox" required>
-											</div>
-											<div class="disclamer">
-												<p >I understand that by providing a domain name via Qanairy's services, that Qanairy will utilize certain technology to, “scrape,” “crawl” or “spider” the pages including in such domain name and may collect my user credentials such that the services can access such domain names. I grant Qanairy all rights necessary to do so and represent and warrant that I own or have all necessary rights to permit Qanairy to do so and that such actions will not violate any third party rights.
-												</p>
-											</div>
-									</div>
-								</div>
+							</div>
 						</div>
-						<div class="modal_action_button">
-							<button id="create_domain_button" class="btn btn--primary pull-right"
+						<div class="col-sm-12 form_molecule">
+							<div class="form_label_description">
+							<h6>Select A Browser</h6>
+							This will be the default browser this domain uses for discovery.
+							</div>
+							<div class="row browser_buttons">
+								<div class="col-xs-12">
+									<button class="btn btn-depressed" ng-click="selected_browser='chrome'" ng-class="{active: selected_browser=='chrome' || domain.discoveryBrowser == 'chrome'}">
+										<img src="/img/Chrome.ico" class="modal-browser-icon chrome" ng-show="selected_browser=='chrome'">
+										<div class="fa-icon" ng-show="selected_browser!='chrome'">
+											<i class="fa fa-chrome"></i>
+										</div>
+									</button>
+									<button class="btn btn-depressed" ng-click="selected_browser='firefox'" ng-class="{active: selected_browser=='firefox' || domain.discoveryBrowser == 'firefox'}">
+										<img src="/img/firefox.png" class="modal-browser-icon firefox" ng-show="selected_browser=='firefox'">
+										<div class="fa-icon" ng-show="selected_browser!='firefox'">
+											<i class="fa fa-firefox"></i>
+										</div>
+									</button>
+								</div>
+								<div class="col-xs-6">
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12 form_molecule">
+							<div class="form_label_description">
+								<h6>
+									Upload A Logo <span class="optional">(optional)</span>
+								</h6>
+								<p>For best results use a 220px x 100px transparent png.</p>
+							</div>
+							<div class="domain_modal_logo" ng-if="!current_domain.logo_url">
+								<i class="fa fa-image" ng-click="openPicker(domain)"></i>
+							</div>
+							<div class="domain_modal_logo" ng-if="current_domain.logo_url">
+								<img ng-src="{{current_domain.logo_url}}"/>
+							</div>
+							<button class="btn btn--secondary" ng-click="openPicker(domain)">Upload Logo</button>
+						</div>
+						<div class ="col-sm-12 form_molecule" >
+							<div class="form_label_description">
+								<h6>Domain Disclaimer</h6>
+								<div class="disclaimer-checkbox">
+									<input type="checkbox" ng-model="disclaimer_checkbox" required>
+								</div>
+								<div class="disclamer">
+									<p >I understand that by providing a domain name via Qanairy's services, that Qanairy will utilize certain technology to, “scrape,” “crawl” or “spider” the pages including in such domain name and may collect my user credentials such that the services can access such domain names. I grant Qanairy all rights necessary to do so and represent and warrant that I own or have all necessary rights to permit Qanairy to do so and that such actions will not violate any third party rights.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal_action_button">
+						<button id="create_domain_button" class="btn btn--primary pull-right"
                       ng-click="createDomain(current_domain.protocol, current_domain.url, selected_browser, current_domain.logo_url)"
                       ng-disabled="!selected_browser || domain_form.$invalid">
                         Add Domain
-              </button>
-						</div>
+              			</button>
+					</div>
 				</form>
 				<div class="col-sm-12 error__message error__text" ng-show="show_create_domain_err">
 				<p>{{domain_creation_err}}</p>
