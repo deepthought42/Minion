@@ -10,33 +10,33 @@
       {{error.message}}
     </div>
   </div>
-	<div class="secondary-nav vertical__center__int" >
-  		<div class="flex-auto">
-			<div class="col-sm-12" ng-show="!isStarted" >
-				<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
-					Start Discovery
-				</button>
-			</div>
-			<div class="col-sm-12 running_status" ng-if="isStarted">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 | number:0 }}%
-						</div>
-						<md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 }}"></md-progress-linear>
-						<div class="waiting_text">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="flex-auto pull-right right-secondary-nav ">
-			<div class="input-group search">
-				<span class="input-group-addon"><i class="fa fa-search"></i>
-				</span>
-				<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
-			</div>
-		</div>
-	</div>
+  <div class="secondary-nav vertical__center__int" >
+    <div class="flex-auto">
+      <div class="col-sm-12" ng-show="!isStarted" >
+        <button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
+          Start Discovery
+        </button>
+      </div>
+      <div class="col-sm-12 running_status" ng-if="isStarted">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 | number:0 }}%
+            </div>
+            <md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 }}"></md-progress-linear>
+            <div class="waiting_text">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-auto pull-right right-secondary-nav ">
+      <div class="input-group search">
+        <span class="input-group-addon"><i class="fa fa-search"></i>
+        </span>
+        <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
+      </div>
+    </div>
+  </div>
 	<div class="test-labels-container">
 		<div class="test-labels">
 			<div class="flex-none status__title test__status__frame">
