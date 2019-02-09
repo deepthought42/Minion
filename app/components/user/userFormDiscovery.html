@@ -1,71 +1,65 @@
 <div class="sticky-footer-container">
-
-	<div class="col-sm-12 settings-page">
-			<div class="row">
-		<div class="col-sm-12 col-xs-12">
-
-			<h2 class="settings__title">
-				User Settings
-			</h2>
-			<div class="settings_description">
-				  Create a user by adding authentication permissions.
-			</div>
-						</div></div>
-			<div class="row">
-				<div class="col-sm-8">
-						<div class="row">
-			<div class ="col-sm-12 form_molecule" >
-					<div class="form_label_description_domain">
-						 <h6>Username</h6>
-					</div>
-					<div class ="domain-dialogue-input" >
-						<div>
-							<input type="text" class="form-control" id="test_user_username" ng-model="user.username"/>
-						</div>
-					</div>
-			</div>
-
-			<div class ="col-sm-12 form_molecule" >
-					<div class="form_label_description_domain">
-						 <h6>Password</h6>
-					</div>
-					<div class ="domain-dialogue-input" >
-						<div>
-							<input type="text" class="form-control"  id="test_user_password" ng-model="user.password"/>
-						</div>
-					</div>
-			</div>
-			<div class ="col-sm-12 form_molecule" >
-					<div class="form_label_description_domain">
-						 <h6>Role</h6>
-					</div>
-					<div class ="domain-dialogue-input" >
-						<div>
-							<input type="text" class="form-control" id="test_user_role" ng-model="user.role"/>
-						</div>
-					</div>
-			</div>
-			<div class ="col-sm-12 form_molecule" >
-				<div class="form_label_description_domain">
-					 <h6>Status</h6>
-				</div>
-				<div class="domain-dialogue-input">
-					<toggle id="test_user_status" ng-model="user.enabled" ng-change="changed()" on="Enabled" off="Disabled"></toggle>
-				</div>
-			</div>
+  <div class="col-sm-12 settings-page">
+    <div class="row">
+      <div class="col-sm-12 col-xs-12">
+        <h2 class="settings__title">
+          User Settings
+        </h2>
+        <div class="settings_description">
+          Create a user by adding authentication permissions.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10 col-xs-12">
+        <div class="row">
+          <div class ="col-sm-12 form_molecule" >
+            <div class="form_label_description_domain">
+              <h6>Username</h6>
+            </div>
+            <div class ="domain-dialogue-input" >
+              <div>
+                <input type="text" class="form-control" id="test_user_username" ng-model="user.username"/>
+              </div>
+            </div>
+          </div>
+          <div class ="col-sm-12 form_molecule" >
+            <div class="form_label_description_domain">
+              <h6>Password</h6>
+            </div>
+            <div class ="domain-dialogue-input" >
+              <div>
+                <input type="text" class="form-control"  id="test_user_password" ng-model="user.password"/>
+              </div>
+            </div>
+          </div>
+          <div class ="col-sm-12 form_molecule" >
+            <div class="form_label_description_domain">
+              <h6>Role</h6>
+            </div>
+            <div class ="domain-dialogue-input" >
+              <div>
+                <input type="text" class="form-control" id="test_user_role" ng-model="user.role"/>
+              </div>
+            </div>
+          </div>
+          <div class ="col-sm-12 form_molecule"  ng-show="state==='update'">
+            <div class="form_label_description_domain">
+              <h6>Status</h6>
+            </div>
+            <div class="domain-dialogue-input">
+              <toggle id="test_user_status" ng-model="user.enabled" ng-change="changed()" on="Enabled" off="Disabled"></toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 form_label_description accounts">
+      </div>
+    </div>
   </div>
-</div>
-<div class="col-sm-6 form_label_description accounts">
-
-</div>
-
-
-</div>
-</div>
-<div class="action_button_container  text-right">
-	<button class="btn btn--primary title__edit__buttons" ng-click="save_user(user)">
-		Create User & Continue discovery
-	</button>
-</div>
-
+  <div class="action_button_container  text-right">
+    <button class="btn btn--primary title__edit__buttons" ng-click="save_user(user)">
+      Create User &amp; Continue Discovery
+    </button>
+  </div>
 </div>
