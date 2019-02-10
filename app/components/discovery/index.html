@@ -5,140 +5,130 @@
       Stop!
   </button>
 -->
-
   <div class="">
     <div class="error__message" ng-repeat="error in errors track by $index">
       {{error.message}}
     </div>
   </div>
-
-	<div class="secondary-nav vertical__center__int" >
-  	<div class="flex-auto">
-
-			<div class="col-sm-12" ng-show="!isStarted" >
-				<button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
-					Start Discovery
-				</button>
-			</div>
-
-			<div class="col-sm-12 running_status" ng-if="isStarted">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 | number:0 }}%
-						</div>
-						<md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 }}"></md-progress-linear>
-						<div class="waiting_text">
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-			<div class="flex-auto pull-right right-secondary-nav ">
-				<div class="input-group search">
-					<span class="input-group-addon"><i class="fa fa-search"></i></span>
-						<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
-				</div>
-		  </div>
-	</div>
-
-	<div class="test-labels-container">
-		<div class="test-labels">
-			<div class="flex-none status__title test__status__frame">
-				Status
-			</div>
-			<div class="flex-auto test_functions">
-				Test Title
-			</div>
-			<div class="flex-none time_stats text-right">
-				Time (minutes)
-			</div>
-			<div class="flex-none date_stats text-right">
-				Date Discovered
-			</div>
-			<div class="flex-none discovery_functions">
-			</div>
-			<div class="flex-none accordion-flex">
-			</div>
-		</div>
-	</div>
-
+  <div class="secondary-nav vertical__center__int" >
+    <div class="flex-auto">
+      <div class="col-sm-12" ng-show="!isStarted" >
+        <button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
+          Start Discovery
+        </button>
+      </div>
+      <div class="col-sm-12 running_status" ng-if="isStarted">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 | number:0 }}%
+            </div>
+            <md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 }}"></md-progress-linear>
+            <div class="waiting_text">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-auto pull-right right-secondary-nav ">
+      <div class="input-group search">
+        <span class="input-group-addon"><i class="fa fa-search"></i>
+        </span>
+        <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
+      </div>
+    </div>
+  </div>
+  <div class="test-labels-container">
+    <div class="test-labels">
+      <div class="flex-none status__title test__status__frame">
+        Status
+      </div>
+      <div class="flex-auto test_functions">
+        Test Title
+      </div>
+      <div class="flex-none time_stats text-right">
+        Time (minutes)
+      </div>
+      <div class="flex-none date_stats text-right">
+        Date Discovered
+      </div>
+      <div class="flex-none discovery_functions">
+      </div>
+      <div class="flex-none accordion-flex">
+      </div>
+    </div>
+  </div>
 	<div class="test-container">
-
-		<div class="empty__state vertical__center_empty_state_discovery" ng-show="!isStarted && !waitingOnTests && tests.length==0">
-			<div>
+    <div class="empty__state vertical__center_empty_state_discovery" ng-show="!isStarted && !waitingOnTests && tests.length==0">
+      <div>
         <h2>Collect your tests by first running a Discovery.</h2>
       </div>
-	    <div>
+      <div>
         <button class="btn btn--primary btn-lg" ng-click="startDiscovery()">
           Start Discovery
         </button>
       </div>
-		</div>
+    </div>
     <div class="empty__state vertical__center_empty_state_busy" ng-if="(isStarted && tests.length==0) || waitingOnTests">
       <div style="text-align:center; margin: 0px auto;">
         <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
-				<br><br><br>
-				<h2>Your tests are loading. Please stand by.</h2>
-				<p class="empty__state__p">
-          This process may take a while.<br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.
+        <br><br><br>
+        <h2>Your tests are loading. Please stand by.</h2>
+        <p class="empty__state__p">
+        This process may take a while.<br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.
         </p>
       </div>
     </div>
     <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy:'lastRunTimestamp' track by test.key " ng-show="tests.length>0">
       <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
-			  <div class="test__status test__profile_stretch flex-none text--shadow"  id="{{'test'+$index+'_status'}}" >
-			   	<div class="row test__status__frame">
-						<div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
-							<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
-						</div>
-					 	<div class="col-xs-6 status-passing btn--green discovery_status discovery_status_border" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, 'PASSING', $index)">
-						 	<div class="" >
-								Passing
-								<br />
-								<i class="fa fa-check discovery--status--symbol white"
-							   	 style="{{test.status == "PASSING" ? 'color:green' : 'color:#bfbfbf'}}"></i>
-							</div>
-						</div>
-						<div class="discovery_status status-failing col-xs-6 btn--red " ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, 'FAILING', $index)">
-							<div class="" >
-									Failing
-								<br />
-								<i  class="fa fa-times discovery--status--symbol white"
-									style="{{!test.status == "FAILING" && test.status != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
-							</div>
-						</div>
-				  </div>
-			  </div>
-
+        <div class="test__status test__profile_stretch flex-none text--shadow"  id="{{'test'+$index+'_status'}}" >
+          <div class="row test__status__frame">
+            <div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
+              <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-6 status-passing btn--green discovery_status discovery_status_border" ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, 'PASSING', $index)">
+              <div class="" >
+                Passing
+                <br />
+                <i class="fa fa-check discovery--status--symbol white" style="{{test.status == "PASSING" ? 'color:green' : 'color:#bfbfbf'}}"></i>
+              </div>
+            </div>
+            <div class="discovery_status status-failing col-xs-6 btn--red " ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, 'FAILING', $index)">
+              <div class="" >
+                Failing
+                <br />
+                <i class="fa fa-times discovery--status--symbol white" style="{{!test.status == "FAILING" && test.status != null ? 'color:red' : 'color:#bfbfbf'}}"></i>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
-					<div class="" ng-show="!test.show_test_name_edit_field">
-						<h5 class="test__title" ng-click="test.show_test_name_edit_field = true">
-              {{test.name || "Test #"+($index+1)}}
+          <div class="" ng-show="!test.show_test_name_edit_field">
+            <h5 class="test__title" ng-click="test.show_test_name_edit_field = true">
+            {{test.name || "Test #"+($index+1)}}
             </h5>
-						<i class="fa fa-pencil edithover" ng-click="editTest(test)" ></i>
-					</div>
-				</div>
+            <i class="fa fa-pencil edithover" ng-click="editTest(test)" ></i>
+          </div>
+        </div>
         <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="test.show_test_name_edit_field">
-					<div class="row">
-						<div class="flex-auto">
-							<div class="">
-								<input class="form-control title__edit title__edit__margin" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
-							</div>
-						</div>
-						<div class="flex-none test_name_edit">
-							<div class="title__edit__buttons margin_fifteen_left btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">
+          <div class="row">
+            <div class="flex-auto">
+              <div class="">
+                <input class="form-control title__edit title__edit__margin" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
+              </div>
+            </div>
+            <div class="flex-none test_name_edit">
+              <div class="title__edit__buttons margin_fifteen_left btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">
                 Cancel
               </div>
               <div class="title__edit__buttons margin_fifteen_left btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">
                 Save
               </div>
-							<div class="" ng-show="test.show_waiting_icon">
-								<i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-							</div>
-						</div>
-					</div>
-				</div>
+              <div class="" ng-show="test.show_waiting_icon">
+                <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
 			  <div class="flex-none text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 			  </div>
@@ -195,8 +185,6 @@
   											</div>
 												</button>
                       </div>
-
-
                       <div ng-if="node.type == 'PageElement'" class="element-action node-group vertical__center__int"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
@@ -210,7 +198,6 @@
 														</div>
 													</div>
 												</button>
-
 													<div class="path-bar">
                         	</div>
 						              <button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
@@ -256,7 +243,6 @@
 													</div>
 												</button>
                       </div>
-
                       <div ng-if="test.pathKeys.length > 1 && node.type != 'Action'" class="path-bar">
 											</div>
 										</div>
@@ -281,7 +267,6 @@
 																<img class="path-node-image"
 																			data-toggle="modal" data-target="#exampleModal"
 																			src="{{current_node[test_idx].screenshot}}" class="path-node-image"/>
-
   														</div>
   													</div>
   												</div>
@@ -461,10 +446,11 @@
                                   </h6>
                                 </div>
                               </div>
-
                               <div ng-if="!doesScreenshotExistForBrowser(visible_browser_screenshot,  current_node[test_idx].browserScreenshots)">
-                                <i class="browser_placeholder fa fa-image"></i>
                                 <div class="text-center">
+                                  <div>
+                                    <i class=" browser_placeholder fa fa-image"></i>
+                                  </div>
                                   A test has not been run in this&nbsp;browser.
                                 </div>
                               </div>
@@ -481,7 +467,6 @@
 															</li>
 															<li class="tabs-style2" ng-click="visible_browser_screenshot='firefox'"
                                   ng-class="visible_browser_screenshot=='firefox' ? 'tabs-style2_active' : ''">
-
 																<a>
 							                    <i class="fa fa-firefox "></i>
                                   &nbsp;&nbsp;&nbsp;Firefox
@@ -547,6 +532,5 @@
 				</div>
       </div>
 	</div>
-
   <onboarding-popover enabled="discoveryOnboardingEnabled" steps="discoveryOnboardingSteps" step-index="discoveryOnboardingIndex"></onboarding-popover>
   <onboarding-popover enabled="testVerificationOnboardingEnabled" steps="testVerificationSteps" step-index='testVerificationOnboardingIndex'></onboarding-popover>
