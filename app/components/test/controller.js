@@ -10,8 +10,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
   });
 }])
 
-.controller('TestIndexCtrl', ['$rootScope', '$scope', '$interval', 'Test', 'store', '$state', '$mdDialog', 'Account', 'segment', 'TestRecord',
-  function($rootScope, $scope, $interval, Test, store, $state, $mdDialog, Account, segment, TestRecord) {
+.controller('TestIndexCtrl', ['$rootScope', '$scope', '$interval', 'Test', 'store', '$state', '$mdDialog', 'Account', 'segment', 'TestRecord', '$window',
+  function($rootScope, $scope, $interval, Test, store, $state, $mdDialog, Account, segment, TestRecord, $window) {
     this._init= function(){
       $scope.errors = [];
       $scope.sortLastRun = false;
@@ -28,17 +28,17 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       $scope.visible_test_nav2 = 'section-linemove-1';
       store.set("approved_test_cnt", null);
       $rootScope.$broadcast("updateApprovedTestCnt", null);
-      if(store.get('domain')){
-        $scope.default_browser = store.get('domain')['discoveryBrowserName'];
-        $scope.domain_url = store.get('domain').url;
+      if(store.get("domain")){
+        $scope.default_browser = store.get("domain")["discoveryBrowserName"];
+        $scope.domain_url = store.get("domain").url;
         $scope.getTestsByUrl($scope.domain_url);
       }
 
       //ERRORS
       $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
 
-      var pusher = new Pusher('77fec1184d841b55919e', {
-        cluster: 'us2',
+      var pusher = new Pusher("77fec1184d841b55919e", {
+        cluster: "us2",
         encrypted: true
       });
 
@@ -259,7 +259,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       for(var i=0; i < browsers.length; i++){
         $scope.current_test_browser = browsers[i];
         $scope.test.browserStatuses[browsers[i]] = "RUNNING";
-        var url = store.get('domain').url;
+        var url = store.get("domain").url;
         Test.runTests({test_keys: keys, browser: $scope.current_test_browser, host_url: url}).$promise
           .then(function(data){
             $scope.test.runStatus = false;
@@ -341,9 +341,9 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
       //$scope.closeDialog();
 
-      var url = store.get('domain').url;
+      var url = store.get("domain").url;
       for(var i=0; i < browsers.length; i++){
-        Test.runTests({test_keys: keys, browser: browsers[i], host_url: store.get('domain').url}).$promise
+        Test.runTests({test_keys: keys, browser: browsers[i], host_url: store.get("domain").url}).$promise
           .then(function(data){
 
               //iterate over tests and set status based on if test key is present in data
@@ -540,11 +540,11 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
           //update approved test count
           var approved_cnt = 0;
-          if(!store.get('approved_test_cnt')){
+          if(!store.get("approved_test_cnt")){
             approved_cnt = 1;
           }
           else{
-            var approved_cnt = store.get('approved_test_cnt')+1;
+            var approved_cnt = store.get("approved_test_cnt")+1;
           }
           test.name = data.name;
           test.status = data.status;
@@ -681,8 +681,28 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
     $scope.sendTestToIde = function(test){
       $scope.test_copy = JSON.parse(JSON.stringify(test));
 
+      //get first url in test
+      var url = "";
+      for(var idx=0; idx< test.pathKeys.length; idx++){
+        var path_obj = $scope.getPathObject(test.pathKeys[idx]);
+        if(path_obj.url){
+          url = path_obj.url;
+          break;
+        }
+      }
+      const new_tab = $window.open(url, "_blank");
+
       Test.sendTestToIde({test_key: test.key}).$promise
-        .then(function(data){
+        .then(function(returned_test){
+          for(var idx=0; idx< returned_test.path.length; idx++){
+            if(returned_test.path[idx].url){
+              const new_tab = $window.open(returned_test.path[idx].url, "_blank");
+              break;
+            }
+          }
+          setTimeout(function(){
+            new_tab.postMessage(JSON.stringify({status: "editing", accessToken: localStorage.getItem("access_token"), test: returned_test}), "*");
+          }, 1000);
           console.log("test successfully sent to ide ::   "+JSON.stringify(data));
         })
         .catch(function(err){
@@ -710,7 +730,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
     this._init();
 
     $scope.getPathObject = function(key){
-      var path_objecs = store.get('path_objects').filter(function( path_object ){
+      var path_objecs = store.get("path_objects").filter(function( path_object ){
         return path_object.key == key;
       });
       return path_objecs[0];
@@ -726,15 +746,15 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
     }
 
     /* EVENTS */
-    $rootScope.$on('reload_tests', function(e){
-      $scope.getTestsByUrl(store.get('domain').url);
+    $rootScope.$on("reload_tests", function(e){
+      $scope.getTestsByUrl(store.get("domain").url);
     });
 
-    $rootScope.$on('missing_resorce_error', function (e){
+    $rootScope.$on("missing_resorce_error", function (e){
       $scope.errors.push({message: "There was an issue finding your resource. We'll find it soon and return it to it's rightful place."});
     });
 
-    $rootScope.$on('internal_server_error', function (e){
+    $rootScope.$on("internal_server_error", function (e){
       $scope.errors.push({message: "There was an error processing your request. Please try again."});
     });
   }
