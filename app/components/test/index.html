@@ -1,85 +1,181 @@
 <div class="error__message" ng-repeat="error in errors track by $index">
-  {{error.message}}
+	{{error.message}}
 </div>
+
 <div class="content">
-  <div class="secondary-nav vertical__center__int" >
-    <div class="flex-auto">
-      <div class="col-sm-12" ng-show="!isStarted && tests.length" >
-        <button class="btn btn--primary pull-left" id="run_all_tests_button" ng-click="runTests( default_browser==='firefox', default_browser==='chrome')">
-          Run All Tests
-        </button>
-      </div>
-    </div>
-    <div class="flex-auto pull-right right-secondary-nav ">
-      <div class="input-group search">
-        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-        <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
-      </div>
-    </div>
-  </div>
-<div class="test-labels-container">
-  <div class="test-labels">
-    <div class="flex-none status__title tests__test__status">
-      Status
-    </div>
-    <div class="flex-auto test_functions">
-      Test Title
-    </div>
-    <div class="flex-none test_browsers_edit">
-      Browsers
-    </div>
-    <div class="flex-none time_stats text-right">
-      Time (minutes)
-    </div>
-    <div class="flex-none date_stats text-right"  ng-click="sortLastRun=!sortLastRun">
-      Date Last Run
-    </div>
-    <div class="flex-none test_functions">
-    </div>
-  </div>
-</div>
-<div class="test-container">
-  <div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnTests">
-    <div>
-      <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw"></i>
-      <br><br><br>
-      <h2>Your tests are loading. Please stand by.</h2>
-      <p class="empty__state__p">
-        This process may take a while.<br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.
-      </p>
-    </div>
-  </div>
-  <div class="empty__state vertical__center_empty_state_test" ng-show="!waitingOnTests && tests.length==0">
-    <h2>No tests here? Visit <a ui-sref="main.discovery">Discovery</a> to find all of your tests.
-    </h2>
-  </div>
-  <div class="test"
-    ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy: ['status','lastRunTimestamp'] track by $index"
-    ng-show="tests.length > 0">
-    <onboarding-popover ng-if="$index==0" enabled="testRunOnboardingEnabled" steps="testRunOnboardingSteps" step-index="testRunOnboardingIndex"></onboarding-popover>
-    <div class="test__profile vertical__left__profile" ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass}">
-      <div class="tests__test__status test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
-        <div class="test__status " ng-if="isTestRunning(test)">
-          <i class="fa fa-circle-o-notch fa-spin status--symbol fa-3x green fa-fw"></i>
-        </div>
-        <div class="test__status vertical__center" ng-if="!isTestRunning(test)">
-          <span ng-show="test.status.toUpperCase() == 'PASSING'">
-            <i class="fa fa-check-circle green status--symbol"></i>
-          </span>
-          <span ng-show="test.status.toUpperCase() == 'FAILING'">
-            <i  class="fa fa-times-circle red status--symbol"></i>
-          </span>
-          <span ng-show="test.status.toUpperCase() == 'UNVERIFIED'">
-            <i class="fa fa-question-circle status--symbol--browser purple fa-fw" aria-hidden="true"></i>
-          </span>
-        </div>
-      </div>
-      <div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
-        <div class="row">
-          <div class="col-xs-12 " ng-if="editing_test_idx!=$index" >
-            <h5 class="test__title">
-              {{test.name || "Test #"+($index+1)}}
-            </h5>
+	<div class="secondary-nav vertical__center__int" >
+  	<div class="flex-auto">
+			<div class="col-sm-12" ng-show="!isStarted && tests.length" >
+				<button class="btn btn--primary pull-left" id="run_all_tests_button" ng-click="runTests( default_browser==='firefox', default_browser==='chrome')">
+					Run All Tests
+				</button>
+			</div>
+		</div>
+			<div class="flex-auto pull-right right-secondary-nav ">
+				<div class="input-group search">
+					<span class="input-group-addon"><i class="fa fa-search"></i></span>
+						<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
+				</div>
+		  </div>
+	</div>
+
+	<div class="test-labels-container">
+		<div class="test-labels">
+			<div class="flex-none status__title tests__test__status">
+				Status
+			</div>
+			<div class="flex-auto test_functions">
+				Test Title
+			</div>
+			<div class="flex-none test_browsers_edit">
+				Browsers
+			</div>
+			<div class="flex-none time_stats text-right">
+				Time (minutes)
+			</div>
+			<div class="flex-none date_stats text-right"  ng-click="sortLastRun=!sortLastRun">
+				Date Last Run
+			</div>
+			<div class="flex-none test_functions">
+			</div>
+		</div>
+	</div>
+
+	<div class="test-container">
+
+		<div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnTests">
+			<div>
+				<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw"></i>
+				<br><br><br>
+				<h2>Your tests are loading. Please stand by.</h2>
+				<p class="empty__state__p">This process may take a while. You may want to leave this window open and go grab a coffee.<br><br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.</p>
+			</div>
+		</div>
+		<div class="empty__state vertical__center_empty_state_test" ng-show="!waitingOnTests && tests.length==0">
+			<h2>
+        No tests here? Visit <a ui-sref="main.discovery">Discovery</a> to find all of your tests.
+      </h2>
+		</div>
+
+		<div class="test"
+				 ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy: ['status','lastRunTimestamp'] track by $index"
+				 ng-show="tests.length > 0">
+		  <onboarding-popover ng-if="$index==0" enabled="testRunOnboardingEnabled" steps="testRunOnboardingSteps" step-index="testRunOnboardingIndex"></onboarding-popover>
+
+			<div class="test__profile vertical__left__profile" ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass}">
+				<div class="tests__test__status test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+					<div class="test__status " ng-if="isTestRunning(test)">
+						<i class="fa fa-circle-o-notch fa-spin status--symbol fa-3x green fa-fw"></i>
+					</div>
+
+					<div class="test__status vertical__center" ng-if="!isTestRunning(test)">
+						<span ng-show="test.status.toUpperCase() == 'PASSING'">
+							<i class="fa fa-check-circle green status--symbol"></i>
+						</span>
+						<span ng-show="test.status.toUpperCase() == 'FAILING'">
+							<i  class="fa fa-times-circle red status--symbol"></i>
+						</span>
+						<span ng-show="test.status.toUpperCase() == 'UNVERIFIED'">
+							<i class="fa fa-question-circle status--symbol--browser purple fa-fw" aria-hidden="true"></i>
+						</span>
+					</div>
+				</div>
+				<div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
+					<div class="row">
+						<div class="col-xs-12 " ng-if="editing_test_idx!=$index" >
+							<h5 class="test__title">
+								{{test.name || "Test #"+($index+1)}}
+							</h5>
+						</div>
+					</div>
+				</div>
+				<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx==$index">
+					<div class="row">
+						<div class="vertical__left__profile test_name_edit_tests" ng-if="editing_test_idx==$index">
+							<div class="input-group">
+								<input class="form-control title__edit" type="text" ng-model="test.new_name" ng-value="test.name" ng-trim="false"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="flex-none test_browsers_edit test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
+					<div class="">
+						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
+							<div class="row vertical__center test__status__editable">
+								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
+								<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
+							</div>
+
+							<div class="row vertical__center test__status__editable">
+								<div class="" ng-if="status == 'RUNNING'">
+									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
+								</div>
+								<div class="green vertical__center__int" ng-if="status.toUpperCase() == 'PASSING'">
+									<div class="" >
+										<i class="fa fa-check green status--symbol--browser"></i>
+									</div>
+								</div>
+								<div class="red vertical__center__int" ng-if="status.toUpperCase() == 'FAILING'">
+									<div class="" >
+										<i class="fa fa-times red status--symbol--browser"></i>
+									</div>
+								</div>
+								<div class="red vertical__center__int"	ng-if="status.toUpperCase() == 'UNVERIFIED'">
+									<div class="" >
+										<i class="fa fa-question-circle purple status--symbol--browser"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="flex-none test_browsers_edit test__profile_stretch" ng-if="editing_test_idx==$index">
+					<div class="">
+						<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
+							<div class="row vertical__center test__status__edit">
+								<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
+								<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
+							</div>
+							<div class="row vertical__center test__status__edit">
+								<div class="" ng-if="status == 'RUNNING'">
+									<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
+								</div>
+								<div class="btn--green select__neutral status-passing status--browser vertical__center__int"
+											style="{{status.toUpperCase() =='PASSING' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
+											ng-click="updateBrowserPassingStatus(test, browser, 'PASSING')" ng-if="status!='RUNNING'">
+									<div class="" >
+										<i class="fa fa-check status--symbol--browser white"></i>
+									</div>
+								</div>
+
+								<div class="btn--red select__neutral status--browser status-failing  vertical__center__int"
+											style="{{status.toUpperCase()=='FAILING' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
+											ng-click="updateBrowserPassingStatus(test, browser, 'FAILING')" ng-if="status!='RUNNING'">
+									<div class="" >
+										<i  class="fa fa-times status--symbol--browser white"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="flex-none text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+					<div class="">
+						{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
+					</div>
+				</div>
+				<div class="flex-none text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+					<div class="">
+						{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
+					</div>
+				</div>
+
+        <div class="flex-none test_functions test__btns" aria-label="Test Functions">
+          <div class="margin_fifteen_right btn-group pull-left" role="group" ng-show="!isTestRunningInAllBrowsers(test) && editing_test_idx!=$index"  >
+            <button class="btn btn--primary" ng-click="runTest(test, default_browser==='firefox', default_browser==='chrome')" id="{{'run_test_button-'+$index}}">
+               Run
+            </button>
           </div>
 
 					 <div class="ellipses-dropdown  margin_fifteen_right pull-right dropdown text-right" ng-if="editing_test_idx!=$index">
@@ -101,514 +197,459 @@
 							 <!---ARCHIVE TEST BUTTON ENDS HERE -->
               </ul>
           </div>
-        </div>
-      </div>
-      <div class="flex-none test_browsers_edit test__profile_stretch" ng-if="editing_test_idx==$index">
-        <div class="">
-          <div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
-            <div class="row vertical__center test__status__edit">
-              <img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
-              <img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
-            </div>
-            <div class="row vertical__center test__status__edit">
-              <div class="" ng-if="status == 'RUNNING'">
-                <i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
-              </div>
-              <div class="btn--green select__neutral status-passing status--browser vertical__center__int"
-              style="{{status.toUpperCase() =='PASSING' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
-              ng-click="updateBrowserPassingStatus(test, browser, 'PASSING')" ng-if="status!='RUNNING'">
-                <div class="" >
-                  <i class="fa fa-check status--symbol--browser white"></i>
-                </div>
-              </div>
-              <div class="btn--red select__neutral status--browser status-failing  vertical__center__int"
-              style="{{status.toUpperCase()=='FAILING' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
-              ng-click="updateBrowserPassingStatus(test, browser, 'FAILING')" ng-if="status!='RUNNING'">
-                <div class="" >
-                  <i  class="fa fa-times status--symbol--browser white"></i>
-                </div>
-              </div>
+          <div class="" ng-if="editing_test_idx==$index">
+            <div class="title__edit__buttons margin_fifteen_right btn--secondary" ng-click="cancelEditingTest($index)" ng-show="!test.show_waiting_icon">
+							Cancel
+						</div>
+						<div class="title__edit__buttons margin_fifteen_right btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">
+							Save
+						</div>
+            <div class="" ng-show="test.show_waiting_icon">
+              <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="flex-none text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
-        <div class="">
-          {{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
-        </div>
-      </div>
-      <div class="flex-none text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
-        <div class="">
-          {{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
-        </div>
-      </div>
-      <div class="flex-none test_functions test__btns" aria-label="Test Functions">
-        <div class="margin_fifteen_right btn-group pull-left" role="group" ng-show="!isTestRunningInAllBrowsers(test) && editing_test_idx!=$index"  >
-          <button class="btn btn--primary" ng-click="runTest(test, default_browser==='firefox', default_browser==='chrome')" id="{{'run_test_button-'+$index}}">
-            Run
-          </button>
-        </div>
-        <div class="margin_fifteen_right pull-right" ng-if="editing_test_idx!=$index">
-          <button class="btn btn--tertiary" ng-click="editTest(test, $index)">
-            <i class="fa fa-pencil" ></i>
-          </button>
-        </div>
-        <div class="margin_fifteen_right pull-right" ng-if="editing_test_idx!=$index">
-          <!---ARCHIVE TEST BUTTON IS HERE -->
-          <button class="btn btn--tertiary" ng-click="askDelete(test)">
-            <i class="fa fa-trash" ></i>
-          </button>
-          <!---ARCHIVE TEST BUTTON ENDS HERE -->
-        </div>
-        <div class="" ng-if="editing_test_idx==$index">
-          <div class="title__edit__buttons margin_fifteen_right btn--secondary" ng-click="cancelEditingTest($index)" ng-show="!test.show_waiting_icon">
-            Cancel
-          </div>
-          <div class="title__edit__buttons margin_fifteen_right btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">
-            Save
-          </div>
-          <div class="" ng-show="test.show_waiting_icon">
-            <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
+          <div class="accordion" aria-label="open/close accordion" ng-click="toggleTestDataVisibility(test, $index)">
+            <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
           </div>
         </div>
-        <div class="accordion" aria-label="open/close accordion" ng-click="toggleTestDataVisibility(test, $index)">
-          <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
-        </div>
       </div>
-    </div>
-    <div class="row no-gutter test__dropdown" ng-show="test.visible" >
-      <div class="col-sm-12">
-        <div class="tabs tabs-style-linemove">
-          <nav class="path_tabs">
-            <ul>
-              <li class="tabs-style" ng-click="visible_test_nav1='section-linemove-1'" ng-class="visible_test_nav1=='section-linemove-1' ? 'tabs-style_active' : ''">
-                <a>
-                  <h5>
-                  <i class="fa test_tab_icons fa-map-signs"/>
-                  &nbsp;  Path
-                  </h5>
-                </a>
-              </li>
-              <li class="tabs-style" ng-click="visible_test_nav1='section-linemove-2'" ng-class="visible_test_nav1=='section-linemove-2' ? 'tabs-style_active' : ''">
-                <a>
-                  <h5>
-                  <i class="fa test_tab_icons fa-object-group"/>
-                  &nbsp;  Groups
-                  </h5>
-                </a>
-              </li>
-              <li class="tabs-style" ng-click="visible_test_nav1='section-linemove-3'" ng-class="visible_test_nav1=='section-linemove-3' ? 'tabs-style_active' : ''">
-                <a>
-                  <h5>
-                  <i class=" fa test_tab_icons fa-history"/>
-                  &nbsp;  History
-                  </h5>
-                </a>
-              </li>
-            </ul>
-          </nav>
-            <div class="content-wrap">
-              <div id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
-                <div class="col-xs-12 test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
-                  <div ng-repeat="node in current_path_objects track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
-                    <div class="node-group path-node-container vertical__center__int"
-                    ng-if="node.type == 'PageState'"
-                    ng-class="current_node[test_idx]==node ? 'active' : ''"
-                    ng-click="setCurrentNode(node, $index)">
-                      <button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
-                        <div class="path-page path-node">
-                          <img src="{{node.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" />
-                        </div>
-                      </button>
-                    </div>
-                    <div ng-if="node.type == 'PageElement'" class="element-action node-group vertical__center__int"
-                    ng-class="current_node[test_idx]==node ? 'active' : ''"
-                    ng-click="setCurrentNode(node, $index)">
-                      <button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
-                        <div class="node__title" >
-                          Html Tag
-                        </div>
-                        <div class="path-node path-element vertical__center__int" tooltip-placement="top">
-                          <div class="" >
-                            {{node.name}}
-                          </div>
-                        </div>
-                      </button>
-                      <div class="path-bar">
+
+			 <div class="row no-gutter test__dropdown" ng-show="test.visible" >
+				 <div class="col-sm-12">
+						<div class="tabs tabs-style-linemove">
+							<nav class="path_tabs">
+								<ul>
+									<li class="tabs-style" ng-click="visible_test_nav1='section-linemove-1'" ng-class="visible_test_nav1=='section-linemove-1' ? 'tabs-style_active' : ''">
+										<a>
+											<h5>
+												<i class="fa test_tab_icons fa-map-signs"/>
+												&nbsp;  Path
+											</h5>
+										</a>
+									</li>
+									<li class="tabs-style" ng-click="visible_test_nav1='section-linemove-2'" ng-class="visible_test_nav1=='section-linemove-2' ? 'tabs-style_active' : ''">
+										<a>
+											<h5>
+												<i class="fa test_tab_icons fa-object-group"/>
+												&nbsp;  Groups
+											</h5>
+										</a>
+									</li>
+									<li class="tabs-style" ng-click="visible_test_nav1='section-linemove-3'" ng-class="visible_test_nav1=='section-linemove-3' ? 'tabs-style_active' : ''">
+										<a>
+											<h5>
+												<i class=" fa test_tab_icons fa-history"/>
+												&nbsp;  History
+											</h5>
+										</a>
+									</li>
+								</ul>
+							</nav>
+							<div class="content-wrap">
+								<div id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
+									<div class="col-xs-12 test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
+										<div ng-repeat="node in current_path_objects track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
+											<div class="node-group path-node-container vertical__center__int"
+                           ng-if="node.type == 'PageState'"
+                           ng-class="current_node[test_idx]==node ? 'active' : ''"
+                           ng-click="setCurrentNode(node, $index)">
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
+													<div class="path-page path-node">
+														<img src="{{node.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" />
+													</div>
+												</button>
                       </div>
-                      <button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
-                        <div class="node__title" >
-                          <span ng-if="current_path_objects[$index+1].name=='click'" class="vertical__center__int">
-                            Click
-                          </span>
-                          <span ng-if="current_path_objects[$index+1].name=='doubleClick'" class="vertical__center__int">
-                            <i class="fa fa-mouse-pointer fa-1x"></i>
-                            Double Click
-                          </span>
-                          <span ng-if="current_path_objects[$index+1].name=='mouse_over'" class="vertical__center__int">
-                            Mouseover
-                          </span>
-                          <span ng-if="current_path_objects[$index+1].name=='scroll'" class="vertical__center__int">
-                            Scroll
-                          </span>
-                          <span ng-if="current_path_objects[$index+1].name=='sendKeys'" class="vertical__center__int">
-                            Type
-                          </span>
-                        </div>
-                        <div  class="path-action">
-                          <div class="path-node path-action-content " tooltip-placement="top">
-                            <span ng-if="current_path_objects[$index+1].name=='click'" class="vertical__center__int">
-                              <i class="fa fa-mouse-pointer fa-2x"></i>
-                            </span>
-                            <span ng-if="current_path_objects[$index+1].name=='doubleClick'" class="vertical__center__int">
-                              <i class="fa fa-mouse-pointer fa-1x"></i>
-                              <div class="doubleclick" >
-                                x2
-                              </div>
-                            </span>
-                            <span ng-if="current_path_objects[$index+1].name=='mouse_over'" class="vertical__center__int">
-                              <i class="fa fa-hand-pointer-o fa-1x"></i>
-                            </span>
-                            <span ng-if="current_path_objects[$index+1].name=='scroll'" class="vertical__center__int">
-                              <i class="fa fa-arrows-v fa-1x"></i>
-                            </span>
-                            <span ng-if="current_path_objects[$index+1].name=='sendKeys'" class="vertical__center__int">
-                              <i class="fa fa-i-cursor fa-1x"></i>
-                            </span>
-                          </div>
-                        </div>
-                      </button>
-                    </div>
-                    <div ng-if="test.pathKeys.length > 1 && node.type != 'Action'" class="path-bar">
-                    </div>
-                  </div>
-                  <div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
-                    <div ng-if="test.pathKeys.length > 1" class="path-page path-node">
-                      <button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
-                        <img src="{{test.result.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageElement'">
-                  <div class="row">
-                    <div class="col-sm-6 equal-height-container">
-                      <div class="equal-height node__screenshots test__data__box__shadow tabs tabs-style-linemove">
-                        <div class="content-wrap screenshot-section">
-                          <div id="section-linemove-1">
-                            <div class="element__image col-xs-12">
-                              <h5 class="screenshots_title">
-                              Element
-                              </h5>
-                              <img class="path-node-image screenshots"
-                              data-toggle="modal" data-target="#exampleModal"
-                              src="{{current_node[test_idx].screenshot}}"/>
-                            </div>
-                          </div>
-                        </div><!-- /content -->
-                        <nav class="col-sm-12">
-                          <ul class="row browser_tabs ">
-                            <li class="tabs-style2" ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot==='chrome' ? 'tabs-style2_active' : ''">
-                              <a>
-                                <i class="fa fa-chrome"></i>
-                                &nbsp;&nbsp;&nbsp;Chrome
-                              </a>
-                            </li>
-                            <li class="tabs-style2" ng-click="visible_browser_screenshot='firefox'" ng-class="visible_browser_screenshot==='firefox' ? 'tabs-style2_active' : ''">
-                              <a>
-                                <i class="fa fa-firefox "></i>
-                                &nbsp;&nbsp;&nbsp;Firefox
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
-                      </div><!-- /tabs -->
-                    </div>
-                    <div class="col-sm-6 equal-height-container">
-                      <div class="equal-height node__data test__data__box__shadow tabs tabs-style-linemove">
-                        <nav>
-                          <ul>
-                            <li class="tabs-style" ng-click="visible_test_nav2='section-linemove-1'" ng-class="visible_test_nav2=='section-linemove-1' ? 'tabs-style_active' : ''">
-                              <a>
-                                <h5>Info</h5>
-                              </a>
-                            </li>
-                            <li class="tabs-style" ng-click="visible_test_nav2='section-linemove-2'" ng-class="visible_test_nav2=='section-linemove-2' ? 'tabs-style_active' : ''">
-                              <a>
-                                <h5>Attributes</h5>
-                              </a>
-                            </li>
-                            <li class="tabs-style" ng-click="visible_test_nav2='section-linemove-3'" ng-class="visible_test_nav2=='section-linemove-3' ? 'tabs-style_active' : ''">
-                              <a>
-                                <h5>CSS</h5>
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
-                        <div class="content-wrap element-tabs">
-                          <div id="section-linemove-1" ng-if="visible_test_nav2=='section-linemove-1'">
-                            <div class="col-xs-12">
-                              <div class="key--value">
-                                <div class="data__key">
-                                  Xpath
-                                </div>
-                                <div class="data__value">
-                                  {{current_node[$index].xpath}}
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-xs-12">
-                              <div class="key--value">
-                                <div class="data__key">
-                                  Action
-                                </div>
-                                <div class="data__value"> {{current_node[$index+1].name != 'sendKeys' ? current_node[$index+1].name : 'Type'}}
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-xs-12">
-                              <div class="key--value" ng-show="current_node[$index+1].value || current_node[$index+1].name=='sendKeys'">
-                                <div class="data__key">
-                                  Text Input
-                                </div>
-                                <div class="data__value">
-                                  {{current_node[$index+1].value}}
-                                </div>
-                              </div>
-                              </div>
-                              <div class="col-xs-12">
-                                <div class="key--value">
-                                  <div class="data__key">
-                                  Element Type
-                                  </div>
-                                  <div class="data__value">
-                                  {{current_node[$index].name}}
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-xs-12" ng-if="current_node[$index].name=='a'">
-                                <div class="key--value">
-                                  <div class="data__key">
-                                  Element Link
-                                  </div>
-                                  <div class="data__value">
-                                  {{current_node[$index].attributes[0].values[0]}}
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-xs-12">
-                                <div class="key--value">
-                                  <div class="data__key">
-                                  Text
-                                  </div>
-                                  <div class="data__value">
-                                  {{current_node[$index].text}}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div id="section-linemove-2" ng-if="visible_test_nav2=='section-linemove-2'">
-                              <div class="col-xs-12">
-                                <div class="key--value">
-                                  <div class="row" ng-repeat="attribute in current_node[$index].attributes track by $index">
-                                  <div class="col-sm-12 data__key">
-                                  {{attribute.name}}
-                                  </div>
-                                  <div class="col-sm-12 data__value">
-                                  <div class="row d-inline-block" ng-repeat="value in attribute.values track by $index">
-                                  <div class="col-sm-12" style="">
-                                  {{value}}&nbsp;&nbsp;
-                                  </div>
-                                  </div>
-                                  </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div id="section-linemove-3" ng-if="visible_test_nav2=='section-linemove-3'">
-                              <div class="col-xs-12">
-                                <div class="key--value">
-                                  <div class="data__value">
-                                  width: {{current_node[$index].css_values['width']}};
-                                  </div>
-                                  <div class="data__value">
-                                  height: {{current_node[$index].css_values['height']}};
-                                  </div>
-                                  <div class="data__value">
-                                  font-family: {{current_node[$index].css_values['font-family']}};
-                                  </div>
-                                  <div class="data__value">
-                                  position: {{current_node[$index].css_values['position']}};
-                                  </div>
-                                  <div class="data__value">
-                                  background-color:
-                                  <span style="background-color:{{current_node[$index].css_values['color']}}">
-                                  {{current_node[$index].css_values['color']}}
-                                  </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div><!-- /content -->
-                        </div><!-- /tabs -->
+
+                      <div ng-if="node.type == 'PageElement'" class="element-action node-group vertical__center__int"
+                           ng-class="current_node[test_idx]==node ? 'active' : ''"
+                           ng-click="setCurrentNode(node, $index)">
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
+													<div class="node__title" >
+															Html Tag
+													</div>
+													<div class="path-node path-element vertical__center__int" tooltip-placement="top">
+														<div class="" >
+															{{node.name}}
+														</div>
+													</div>
+												</button>
+
+												<div class="path-bar">
+                      	</div>
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
+													<div class="node__title" >
+															<span ng-if="current_path_objects[$index+1].name=='click'" class="vertical__center__int">
+																Click
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='doubleClick'" class="vertical__center__int">
+																<i class="fa fa-mouse-pointer fa-1x"></i>
+																Double Click
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='mouse_over'" class="vertical__center__int">
+																Mouseover
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='scroll'" class="vertical__center__int">
+																Scroll
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='sendKeys'" class="vertical__center__int">
+																Type
+															</span>
+													</div>
+													<div  class="path-action">
+														<div class="path-node path-action-content " tooltip-placement="top">
+															<span ng-if="current_path_objects[$index+1].name=='click'" class="vertical__center__int">
+																<i class="fa fa-mouse-pointer fa-2x"></i>
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='doubleClick'" class="vertical__center__int">
+																<i class="fa fa-mouse-pointer fa-1x"></i>
+																<div class=”doubleclick” >
+																		x2
+																</div>
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='mouse_over'" class="vertical__center__int">
+																<i class="fa fa-hand-pointer-o fa-1x"></i>
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='scroll'" class="vertical__center__int">
+																<i class="fa fa-arrows-v fa-1x"></i>
+															</span>
+															<span ng-if="current_path_objects[$index+1].name=='sendKeys'" class="vertical__center__int">
+																<i class="fa fa-i-cursor fa-1x"></i>
+															</span>
+														</div>
+													</div>
+												</button>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageState'">
-                    <div class="row">
-                      <div class="col-sm-6 equal-height-container">
-                        <div class="equal-height node__screenshots test__data__box__shadow tabs tabs-style-linemove">
-                          <div class="content-wrap screenshot-section">
-                            <div id="section-linemove-1">
-                              <div class="page__image col-xs-12">
-                                <h5 class="screenshots_title">Page</h5>
-                                <div ng-repeat="browser_screenshot in current_node[test_idx].browserScreenshots" >
-                                  <img class="path-node-image page-image screenshots"
-                                  data-toggle="modal" data-target="#exampleModal"
-                                  src="{{browser_screenshot.viewportScreenshot}}"
-                                  ng-if="visible_browser_screenshot===browser_screenshot.browser && browser_screenshot.viewportScreenshot"
-                                  ng-click="openPageModal(browser_screenshot.viewportScreenshot)" />
-                                  <div class="expand" data-toggle="modal" data-target="#exampleModal"
-                                  ng-if="visible_browser_screenshot===browser_screenshot.browser && browser_screenshot.viewportScreenshot"
-                                  ng-click="openPageModal(browser_screenshot.viewportScreenshot)">
-                                  <h6>Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i></h6>
-                                  </div>
-                                </div>
-                                <div ng-if="!doesScreenshotExistForBrowser(visible_browser_screenshot,  current_node[test_idx].browserScreenshots)">
-                                  <div class="text-center">
-                                    <div>
-                                      <i class=" browser_placeholder fa fa-image"></i>
-                                    </div>
-                                    A test has not been run in this&nbsp;browser.
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div><!-- /content -->
-                          <nav class="col-sm-12">
-                            <ul class="row browser_tabs">
-                              <li class="tabs-style2" ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''">
-                              <a>
-                              <i class="fa fa-chrome"></i>
-                              &nbsp;&nbsp;&nbsp;Chrome
-                              </a>
+												<div ng-if="test.pathKeys.length > 1 && node.type != 'Action'" class="path-bar">
+											</div>
+										</div>
+										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
+											<div ng-if="test.pathKeys.length > 1" class="path-page path-node">
+												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
+													<img src="{{test.result.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
+												</button>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageElement'">
+										<div class="row">
+											<div class="col-sm-6 equal-height-container">
+												<div class="equal-height node__screenshots test__data__box__shadow tabs tabs-style-linemove">
+													<div class="content-wrap screenshot-section">
+														<div id="section-linemove-1">
+															<div class="element__image col-xs-12">
+																<h5 class="screenshots_title">
+																	Element
+																</h5>
+																<img class="path-node-image screenshots"
+																			data-toggle="modal" data-target="#exampleModal"
+																			src="{{current_node[test_idx].screenshot}}" class="path-node-image"/>
+															</div>
+														</div>
+													</div><!-- /content -->
+													<nav class="col-sm-12">
+														<ul class="row browser_tabs ">
+															<li class="tabs-style2" ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot==='chrome' ? 'tabs-style2_active' : ''">
+                                <a>
+			                            <i class="fa fa-chrome"></i>
+                                  &nbsp;&nbsp;&nbsp;Chrome
+                                </a>
+															</li>
+															<li class="tabs-style2" ng-click="visible_browser_screenshot='firefox'" ng-class="visible_browser_screenshot==='firefox' ? 'tabs-style2_active' : ''">
+                                <a>
+							                    <i class="fa fa-firefox "></i>
+                                  &nbsp;&nbsp;&nbsp;Firefox
+                                </a>
                               </li>
-                              <li class="tabs-style2" ng-click="visible_browser_screenshot='firefox'" ng-class="visible_browser_screenshot=='firefox' ? 'tabs-style2_active' : ''">
-                              <a>
-                              <i class="fa fa-firefox "></i>
-                              &nbsp;&nbsp;&nbsp;Firefox
-                              </a>
+														</ul>
+													</nav>
+											</div><!-- /tabs -->
+										</div>
+										<div class="col-sm-6 equal-height-container">
+												<div class="equal-height node__data test__data__box__shadow tabs tabs-style-linemove">
+													<nav>
+														<ul>
+															<li class="tabs-style" ng-click="visible_test_nav2='section-linemove-1'" ng-class="visible_test_nav2=='section-linemove-1' ? 'tabs-style_active' : ''">
+                                <a>
+                                  <h5>Info</h5>
+                                </a>
                               </li>
-                            </ul>
-                          </nav>
-                        </div><!-- /tabs -->
-                      </div>
-                      <div class="col-sm-6 equal-height-container">
-                        <div class="equal-height node__data test__data__box__shadow tabs tabs-style-linemove">
-                          <div class="col-xs-12">
-                          <h5 class="info__title">
-                          Info
-                          </h5>
-                          <div class="key--value">
-                            <div class="data__key">
-                            URL
-                            </div>
-                            <div class="data__value">
-                            <a href="{{current_node[$index].url}}" target="_blank">
-                            {{current_node[$index].url}}
-                            </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div><!-- /tabs -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="section-linemove-2" ng-if="visible_test_nav1=='section-linemove-2'">
-                <div class="col-xs-12 test__groups test_dropdown_bottom_shadow">
-                  <div class="row">
-                    <div class="col-sm-12 " id="group_label">
-                    <h5>Groups</h5>
-                    </div>
-                    <div class="col-sm-12 ">
-                      <div class="input-group groups_input_padding">
-                      <input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Smoke, Login Form, etc." aria-describedby="basic-addon2" maxlength="20">
-                      <span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2">
-                      <i class="fa fa-plus"></i>
-                      </span>
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <div class="group__tag"
-                      ng-repeat="group in test.groups track by group.key"
-                      data-toggle="tooltip"
-                      data-placement="top"
-                      title="{{group.description}}">
-                      {{group.name}}
-                      <span ng-click="removeGroup(test, group, $index)">
-                      <i class="remove__group fa fa-times"></i>
-                      </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="section-linemove-3" ng-if="visible_test_nav1=='section-linemove-3'">
-                <div class="col-xs-12 test__history test_dropdown_bottom_shadow">
-                  <div class="test__history__title">
-                  <h5>
-                  Run History
-                  </h5>
-                  </div>
-                  <div class="col-xs-12 test__history__table">
-                  <div class="row test__history__labels">
-                  <div class="col-sm-2">
-                  Browser
-                  </div>
-                  <div class="col-sm-2">
-                  Status&nbsp;
-                  </div>
-                  <div class="col-sm-2 text-right">
-                  Total Runtime (s)&nbsp;
-                  </div>
-                  <div class="col-sm-3 text-right">
-                  Date Last Run&nbsp;
-                  </div>
-                  <div class="col-sm-3 text-right">
-                  &nbsp;
-                  </div>
-                  </div>
-                    <div class="row test__history__record" ng-repeat="record in test.records | orderBy: '-ranAt'">
-                      <div class="col-sm-2">
-                        <img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="record.browser=='chrome'">
-                        <img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="record.browser=='firefox'" ><span class="browser">{{capitalizeFirstLetter(record.browser)}}</span>
-                      </div>
-                      <div class="col-sm-2 test__profile_stretch">
-                        <i class="fa fa-check fa-2x green" ng-show="record.status=='PASSING'" />
-                        <i class="fa fa-times fa-2x red" ng-show="record.status=='FAILING'" />
-                        <i class="fa fa-question-circle fa-2x purple" ng-show="record.status=='UNVERIFIED'" />
-                      </div>
-                      <div class="col-sm-2 test__profile_stretch text-right">
-                        {{record.runTime | date: 'm'}} m {{record.runTime | date: 'ss'}} s
-                      </div>
-                      <div class="col-sm-3 test__profile_stretch text-right">
-                        {{record.ranAt | date: 'MM/dd/yy h:mm a' | lowercase}}
-                      </div>
-                      <div class="col-sm-3 text-right">
-                        <button class="btn btn--tertiary" style="padding: 0px 15px !important;" data-toggle="modal" data-target="#exampleModal"
-                        ng-click="getScreenshot(record)">
-                          View Screenshot
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div><!-- /content -->
-          </div><!-- /tabs -->
-        </div>
-      </div>
-    </div>
-  </div>
+															<li class="tabs-style" ng-click="visible_test_nav2='section-linemove-2'" ng-class="visible_test_nav2=='section-linemove-2' ? 'tabs-style_active' : ''">
+                                <a>
+                                  <h5>Attributes</h5>
+                                </a>
+                              </li>
+															<li class="tabs-style" ng-click="visible_test_nav2='section-linemove-3'" ng-class="visible_test_nav2=='section-linemove-3' ? 'tabs-style_active' : ''">
+                                <a>
+                                  <h5>CSS</h5>
+                                </a>
+                              </li>
+														</ul>
+													</nav>
+													<div class="content-wrap element-tabs">
+														<div id="section-linemove-1" ng-if="visible_test_nav2=='section-linemove-1'">
+															<div class="col-xs-12">
+																<div class="key--value">
+																	<div class="data__key">
+																	 Xpath
+																	</div>
+																	<div class="data__value">
+																	 {{current_node[$index].xpath}}
+																	</div>
+																</div>
+															</div>
+															<div class="col-xs-12">
+																<div class="key--value">
+																	<div class="data__key">
+																	 Action
+																	</div>
+																	<div class="data__value"> {{current_node[$index+1].name != 'sendKeys' ? current_node[$index+1].name : 'Type'}}
+																	</div>
+																</div>
+															</div>
+															<div class="col-xs-12">
+																<div class="key--value" ng-show="current_node[$index+1].value || current_node[$index+1].name=='sendKeys'">
+																	<div class="data__key">
+																		Text Input
+																	</div>
+																	<div class="data__value">
+																		{{current_node[$index+1].value}}
+																	</div>
+																</div>
+															</div>
+															<div class="col-xs-12">
+																<div class="key--value">
+																	<div class="data__key">
+																	 Element Type
+																	</div>
+																	<div class="data__value">
+																	 {{current_node[$index].name}}
+																	</div>
+																</div>
+															</div>
+															<div class="col-xs-12" ng-if="current_node[$index].name=='a'">
+																<div class="key--value">
+																	<div class="data__key">
+																	 Element Link
+																	</div>
+																	<div class="data__value">
+                                    {{current_node[$index].attributes[0].values[0]}}
+																	</div>
+																</div>
+															</div>
+															<div class="col-xs-12">
+																<div class="key--value">
+																	<div class="data__key">
+																		Text
+																	</div>
+																	<div class="data__value">
+																		{{current_node[$index].text}}
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div id="section-linemove-2" ng-if="visible_test_nav2=='section-linemove-2'">
+															<div class="col-xs-12">
+																<div class="key--value">
+																	<div class="row" ng-repeat="attribute in current_node[$index].attributes track by $index">
+																		<div class="col-sm-12 data__key">
+																				{{attribute.name}}
+																		</div>
+																		<div class="col-sm-12 data__value">
+																			<div class="row d-inline-block" ng-repeat="value in attribute.values track by $index">
+																				<div class="col-sm-12" style="">
+																					{{value}}&nbsp;&nbsp;
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div id="section-linemove-3" ng-if="visible_test_nav2=='section-linemove-3'">
+															<div class="col-xs-12">
+																<div class="key--value">
+                                  <div class="data__value">
+                                    width: {{current_node[$index].css_values['width']}};
+                                  </div>
+                                  <div class="data__value">
+                                    height: {{current_node[$index].css_values['height']}};
+                                  </div>
+                                  <div class="data__value">
+                                    font-family: {{current_node[$index].css_values['font-family']}};
+                                  </div>
+                                  <div class="data__value">
+																		position: {{current_node[$index].css_values['position']}};
+																	</div>
+																	<div class="data__value">
+																		background-color:
+																		<span style="background-color:{{current_node[$index].css_values['color']}}">
+																			 {{current_node[$index].css_values['color']}}
+																		 </span>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div><!-- /content -->
+												</div><!-- /tabs -->
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageState'">
+										<div class="row">
+											<div class="col-sm-6 equal-height-container">
+												<div class="equal-height node__screenshots test__data__box__shadow tabs tabs-style-linemove">
+													<div class="content-wrap screenshot-section">
+														<div id="section-linemove-1">
+															<div class="page__image col-xs-12">
+																<h5 class="screenshots_title">Page</h5>
+
+																<div ng-repeat="browser_screenshot in current_node[test_idx].browserScreenshots" >
+																	<img class="path-node-image page-image screenshots"
+																				data-toggle="modal" data-target="#exampleModal"
+																				src="{{browser_screenshot.viewportScreenshot}}"
+																				ng-if="visible_browser_screenshot===browser_screenshot.browser && browser_screenshot.viewportScreenshot"
+																				ng-click="openPageModal(browser_screenshot.viewportScreenshot)" />
+																	<div class="expand" data-toggle="modal" data-target="#exampleModal"
+																				ng-if="visible_browser_screenshot===browser_screenshot.browser && browser_screenshot.viewportScreenshot"
+																				ng-click="openPageModal(browser_screenshot.viewportScreenshot)">
+																		<h6>Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i></h6>
+	                                </div>
+	                              </div>
+																<div ng-if="!doesScreenshotExistForBrowser(visible_browser_screenshot,  current_node[test_idx].browserScreenshots)">
+																	<i class="browser_placeholder fa fa-image"></i>
+																	<div class="text-center">
+																		A test has not been run in this&nbsp;browser.
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div><!-- /content -->
+													<nav class="col-sm-12">
+														<ul class="row browser_tabs">
+															<li class="tabs-style2" ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''">
+                                <a>
+			                            <i class="fa fa-chrome"></i>
+                                  &nbsp;&nbsp;&nbsp;Chrome
+                                </a>
+															</li>
+															<li class="tabs-style2" ng-click="visible_browser_screenshot='firefox'" ng-class="visible_browser_screenshot=='firefox' ? 'tabs-style2_active' : ''">
+                                <a>
+							                    <i class="fa fa-firefox "></i>
+                                  &nbsp;&nbsp;&nbsp;Firefox
+                                </a>
+                              </li>
+														</ul>
+													</nav>
+											</div><!-- /tabs -->
+										</div>
+										<div class="col-sm-6 equal-height-container">
+												<div class="equal-height node__data test__data__box__shadow tabs tabs-style-linemove">
+													<div class="col-xs-12">
+														<h5 class="info__title">
+															Info
+														</h5>
+														<div class="key--value">
+															<div class="data__key">
+															  URL
+															</div>
+															<div class="data__value">
+															  <a href="{{current_node[$index].url}}" target="_blank">
+                                  {{current_node[$index].url}}
+                                </a>
+															</div>
+														</div>
+													</div>
+												</div><!-- /tabs -->
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="section-linemove-2" ng-if="visible_test_nav1=='section-linemove-2'">
+									<div class="col-xs-12 test__groups test_dropdown_bottom_shadow">
+										<div class="row">
+											<div class="col-sm-12 " id="group_label">
+												<h5>Groups</h5>
+											</div>
+											<div class="col-sm-12 ">
+												<div class="input-group groups_input_padding">
+													<input type="text" class="form-control pull-right" ng-model="group.name" placeholder="Smoke, Login Form, etc." aria-describedby="basic-addon2" maxlength="20">
+													<span class="input-group-addon btn--gray" ng-click="addGroup(test, group)" id="basic-addon2">
+														<i class="fa fa-plus"></i>
+													</span>
+												</div>
+											</div>
+											<div class="col-sm-12">
+												<div class="group__tag"
+																 ng-repeat="group in test.groups track by group.key"
+																 data-toggle="tooltip"
+																 data-placement="top"
+																 title="{{group.description}}">
+													{{group.name}}
+													<span ng-click="removeGroup(test, group, $index)">
+														<i class="remove__group fa fa-times"></i>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="section-linemove-3" ng-if="visible_test_nav1=='section-linemove-3'">
+									<div class="col-xs-12 test__history test_dropdown_bottom_shadow">
+										<div class="test__history__title">
+											<h5>
+												Run History
+											</h5>
+										</div>
+										<div class="col-xs-12 test__history__table">
+											<div class="row test__history__labels">
+												<div class="col-sm-2">
+													Browser
+												</div>
+												<div class="col-sm-2">
+													Status&nbsp;<i class="fa fa-sort"></i>
+												</div>
+												<div class="col-sm-2 text-right">
+													Total Runtime (s)&nbsp;<i class="fa fa-sort"></i>
+												</div>
+												<div class="col-sm-3 text-right">
+													Date Last Run&nbsp;<i class="fa fa-sort"></i>
+												</div>
+												<div class="col-sm-3 text-right">
+													&nbsp;
+												</div>
+											</div>
+											<div class="row test__history__record" ng-repeat="record in test.records | orderBy: '-ranAt'">
+												<div class="col-sm-2">
+													<img src="/img/Chrome.ico" class="browser-icon browser-icon"  ng-show="record.browser=='chrome'">
+													<img src="/img/firefox.png" class="browser-icon browser-icon"  ng-show="record.browser=='firefox'" ><span class="browser">{{capitalizeFirstLetter(record.browser)}}</span>
+												</div>
+												<div class="col-sm-2 test__profile_stretch">
+													<i class="fa fa-check fa-2x green" ng-show="record.status=='PASSING'" />
+													<i class="fa fa-times fa-2x red" ng-show="record.status=='FAILING'" />
+													<i class="fa fa-question-circle fa-2x purple" ng-show="record.status=='UNVERIFIED'" />
+												</div>
+												<div class="col-sm-2 test__profile_stretch text-right">
+													{{record.runTime | date: 'm'}} m {{record.runTime | date: 'ss'}} s
+												</div>
+												<div class="col-sm-3 test__profile_stretch text-right">
+													{{record.ranAt | date: 'MM/dd/yy h:mm a' | lowercase}}
+												</div>
+												<div class="col-sm-3 text-right">
+													<button class="btn btn--tertiary" style="padding: 0px 15px !important;" data-toggle="modal" data-target="#exampleModal"
+																	 ng-click="getScreenshot(record)">
+														 Screenshot
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><!-- /content -->
+						</div><!-- /tabs -->
+					</div>
+      	</div>
+		 </div>
+	</div>
 </div>
