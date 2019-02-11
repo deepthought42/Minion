@@ -703,7 +703,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
           setTimeout(function(){
             new_tab.postMessage(JSON.stringify({status: "editing", accessToken: localStorage.getItem("access_token"), test: returned_test}), "*");
           }, 1000);
-          console.log("test successfully sent to ide ::   "+JSON.stringify(data));
         })
         .catch(function(err){
           console.log("error occurred while sending test to ide : "+err);
