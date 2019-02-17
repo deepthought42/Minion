@@ -679,29 +679,31 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
     }
 
     $scope.sendTestToIde = function(test){
-      $scope.test_copy = JSON.parse(JSON.stringify(test));
-
       //get first url in test
+      /*
       var url = "";
       for(var idx=0; idx< test.pathKeys.length; idx++){
         var path_obj = $scope.getPathObject(test.pathKeys[idx]);
-        if(path_obj.url){
+        if(path_obj.url && !url.length){
           url = path_obj.url;
           break;
         }
       }
       const new_tab = $window.open(url, "_blank");
-
+      */
       Test.sendTestToIde({test_key: test.key}).$promise
         .then(function(returned_test){
+          var url = "";
           for(var idx=0; idx< returned_test.path.length; idx++){
             if(returned_test.path[idx].url){
-              const new_tab = $window.open(returned_test.path[idx].url, "_blank");
+              url = returned_test.path[idx].url;
               break;
             }
           }
+          console.log("url :: "+url);
+          const new_tab = $window.open(url, "_blank");
           setTimeout(function(){
-            new_tab.postMessage(JSON.stringify({status: "editing", accessToken: localStorage.getItem("access_token"), test: returned_test}), "*");
+            new_tab.postMessage(JSON.stringify({status: "editing", accessToken: localStorage.getItem("access_token"), test: returned_test, profile: JSON.parse(sessionStorage.getItem("profile"))}), "*");
           }, 1000);
         })
         .catch(function(err){
@@ -730,7 +732,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
     $scope.getPathObject = function(key){
       var path_objecs = store.get("path_objects").filter(function( path_object ){
-        return path_object.key == key;
+        return path_object.key === key;
       });
       return path_objecs[0];
     }
