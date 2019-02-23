@@ -70,7 +70,7 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
 
     function getProfile(cb) {
       var accessToken = localStorage.getItem('access_token');
-      if (accessToken === undefined || accessToken === null || !accessToken.length) {
+      if (!authToken || !accessToken.length) {
         login();
         //throw new Error('Access Token must exist to fetch profile');
       }

@@ -544,7 +544,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
             approved_cnt = 1;
           }
           else{
-            var approved_cnt = store.get("approved_test_cnt")+1;
+            approved_cnt = store.get("approved_test_cnt")+1;
           }
           test.name = data.name;
           test.status = data.status;
