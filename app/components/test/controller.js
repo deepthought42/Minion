@@ -700,7 +700,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
               break;
             }
           }
-          console.log("url :: "+url);
           const new_tab = $window.open(url, "_blank");
           setTimeout(function(){
             new_tab.postMessage(JSON.stringify({status: "editing", accessToken: localStorage.getItem("access_token"), test: returned_test, profile: JSON.parse(sessionStorage.getItem("profile"))}), "*");
