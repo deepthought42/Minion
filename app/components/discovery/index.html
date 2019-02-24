@@ -45,9 +45,6 @@
       <div class="flex-auto test_functions">
         Test Title
       </div>
-      <div class="flex-none time_stats text-right">
-        Time (minutes)
-      </div>
       <div class="flex-none date_stats text-right">
         Date Discovered
       </div>
@@ -129,9 +126,6 @@
             </div>
           </div>
         </div>
-			  <div class="flex-none text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
-					{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
-			  </div>
 			  <div class="flex-none text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
 					{{( test.lastRunTimestamp | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
 			  </div>
