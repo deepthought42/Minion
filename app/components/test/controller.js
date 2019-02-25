@@ -706,7 +706,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
           }, 1000);
         })
         .catch(function(err){
-          console.log("error occurred while sending test to ide : "+err);
+          $scope.errors.push({message: "Oops something went wrong while sending test to the test recorder. Please try again."});
         });
     }
 
