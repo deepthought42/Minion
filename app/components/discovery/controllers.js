@@ -588,5 +588,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     $rootScope.$on('internal_server_error', function (e){
       $scope.errors.push("There was an error while processing your request. Please try again.");
     });
+
+    $scope.$on('domain_selected', function(){
+      $scope.default_browser = store.get('domain')['discoveryBrowserName'];
+    });
   }
 ]);

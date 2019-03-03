@@ -168,11 +168,12 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     $scope.openCreateDomainDialog  = function(domain) {
       $scope.current_domain = {};
        $mdDialog.show({
-          clickOutsideToClose: $scope.domains.length>0,
+          clickOutsideToClose: true,
           scope: $scope,
           preserveScope: true,
           templateUrl: "components/domain/create_domain_modal.html",
           controller: function DialogController($scope, $mdDialog) {
+             $scope.show_create_domain_err = false;
              $scope.closeDialog = function() {
                 $mdDialog.hide();
              }
@@ -190,7 +191,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           controller: function DialogController($scope, $mdDialog) {
              $scope.closeDialog = function() {
                 $mdDialog.hide();
-
              }
           }
        });
@@ -253,11 +253,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
               $scope.errors.push({message: $scope.unresponsive_server_err });
             }
           })
-
-
       }
-
-
     }
 
     this._init();
