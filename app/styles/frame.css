@@ -568,7 +568,9 @@ font-size: 11px;
     color: #2d2d2d;
 }
 
-
+.dropdown-divider{
+	margin: 0px;
+}
 
 
 /*--------------------------- [pulled from dropdown scss] ------------------------------------------------------------------------------*/
@@ -595,6 +597,11 @@ font-size: 11px;
   border-top-left-radius: 0px;
 	border-top-right-radius: 0px;
 	box-shadow: 0 1px 5px 0 hsla(238, 69%, 8%, 0.1);
+}
+
+.ellipses-dropdown > .dropdown-menu {
+  top: 40px;
+	border-radius: 5px !important;
 }
 
   .dropdown-menu {

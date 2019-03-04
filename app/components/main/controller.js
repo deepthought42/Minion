@@ -131,6 +131,11 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
 
       channel.bind('path_object', function(data) {
         var path_objects = store.get('path_objects');
+        for(var idx=0; idx<path_objects.length; idx++){
+          if(path_objects[idx].key === JSON.parse(data).key){
+            return;
+          }
+        }
         path_objects.push( JSON.parse(data));
         store.set('path_objects',path_objects);
       });

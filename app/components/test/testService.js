@@ -14,6 +14,7 @@ testerService.factory('Test', ['$resource', 'Qanairy.serviceConfig', function ($
     getGroups: {url: config.basePath + '/tests/groups', method: 'GET', isArray: true, params: {url: '@url'}},
     runTestsByGroup: {url: config.basePath + '/tests/runTestGroup/:group', method: 'POST', params: { group: '@group', url: '@url'}},
     runTests: {url: config.basePath + '/tests/run', method: 'POST', params: {test_keys: '@test_keys', browser: '@browser', host_url: '@host_url'}},
+    sendTestToIde: {url: config.basePath + '/tests/:test_key/edit', method: 'POST', params: {test_key: '@test_key'}},
     getUnverified: {url: config.basePath + '/tests/unverified', method: 'GET', isArray: true, params: {url : '@url'}},
     getFailingCount: {url: config.basePath + '/tests/failing', method: 'GET', params: {url : '@url'}},
     getPath: {url: config.basePath + '/tests/paths', method: 'GET', params: {key : '@key'}}

@@ -17,7 +17,7 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
           setSession(authResult);
 
           getProfile(function(err, profile) {
-            sessionStorage.setItem('profile', profile);
+            sessionStorage.setItem('profile', JSON.stringify(profile));
 
             segment.identify(profile.id, {
               name : profile.name,
@@ -70,7 +70,7 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
 
     function getProfile(cb) {
       var accessToken = localStorage.getItem('access_token');
-      if (!accessToken) {
+      if (!accessToken || !accessToken.length) {
         login();
         //throw new Error('Access Token must exist to fetch profile');
       }
