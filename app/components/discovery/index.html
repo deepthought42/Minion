@@ -20,7 +20,7 @@
       <div class="col-sm-12 running_status" ng-if="isStarted">
         <div class="row">
           <div class="col-sm-12">
-            <div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 | number:0 }}%
+            <div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 | number:1 }}%
             </div>
             <md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 }}"></md-progress-linear>
             <div class="waiting_text">
