@@ -260,7 +260,7 @@
 												</button>
                       </div>
 
-                      <div ng-if="node.type == 'PageElementState'" class="element-action node-group vertical__center__int"
+                      <div ng-if="node.type == 'ElementState'" class="element-action node-group vertical__center__int"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
 												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
@@ -331,7 +331,7 @@
 										</div>
 									</div>
 
-									<div class="col-sm-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageElementState'">
+									<div class="col-sm-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'ElementState'">
 										<div class="row">
 											<div class="col-sm-6 equal-height-container">
 												<div class="equal-height node__screenshots test__data__box__shadow tabs tabs-style-linemove">

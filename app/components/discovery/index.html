@@ -175,11 +175,11 @@
                            ng-click="setCurrentNode(node, $index)">
 												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
                         <div class="path-page path-node">
-  					              <img src="{{node.browserScreenshots[0].viewportScreenshot}}" class="path-node-image"/>
+  					              <img src="{{node.screenshotUrl}}" class="path-node-image"/>
   											</div>
 												</button>
                       </div>
-                      <div ng-if="node.type == 'PageElementState'" class="element-action node-group vertical__center__int"
+                      <div ng-if="node.type == 'ElementState'" class="element-action node-group vertical__center__int"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
 												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
@@ -243,12 +243,12 @@
 										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
 											<div ng-if="test.pathKeys.length > 1" class="path-page path-node">
 												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
-													<img src="{{test.result.browserScreenshots[0].viewportScreenshot}}" class="path-node-image" tooltip-placement="top"/>
+													<img src="{{test.result.screenshotUrl}}" class="path-node-image" tooltip-placement="top"/>
 												</button>
 											</div>
 										</div>
 									</div>
-									<div class="col-sm-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageElementState'">
+									<div class="col-sm-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'ElementState'">
 										<div class="row">
 											<div class="col-sm-6 equal-height-container">
 												<div class="equal-height node__screenshots test__data__box__shadow tabs tabs-style-linemove">
@@ -422,25 +422,24 @@
 															<h5 class="screenshots_title">
                                 Page
                               </h5>
-                              <div ng-repeat="screenshot_set in current_node[test_idx].browserScreenshots"
-                                   ng-if="visible_browser_screenshot==screenshot_set.browser">
+                              <div ng-if="visible_browser_screenshot==current_node[test_idx].browser">
 																<img class="path-node-image page-image screenshots"
 																			data-toggle="modal"
                                       data-target="#exampleModal"
-																			src="{{screenshot_set.viewportScreenshot}}"
+																			src="{{current_node[test_idx].screenshotUrl}}"
                                       class="path-node-image"
-                                      ng-if="screenshot_set.viewportScreenshot"
-																			ng-click="openPageModal(screenshot_set.viewportScreenshot)" />
+                                      ng-if="current_node[test_idx].screenshotUrl"
+																			ng-click="openPageModal(current_node[test_idx].screenshotUrl)" />
 																<div class="expand" data-toggle="modal" data-target="#exampleModal"
                                       class="path-node-image"
-                                      ng-if="screenshot_set.viewportScreenshot"
-																			ng-click="openPageModal(screenshot_set.viewportScreenshot)">
+                                      ng-if="current_node[test_idx].screenshotUrl"
+																			ng-click="openPageModal(current_node[test_idx].screenshotUrl)">
 																	<h6>
                                     Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
                                   </h6>
                                 </div>
                               </div>
-                              <div ng-if="!doesScreenshotExistForBrowser(visible_browser_screenshot,  current_node[test_idx].browserScreenshots)">
+                              <div ng-if="!visible_browser_screenshot==current_node[test_idx].browser">
                                 <div class="text-center">
                                   <div>
                                     <i class=" browser_placeholder fa fa-image"></i>
