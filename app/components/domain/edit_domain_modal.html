@@ -22,11 +22,14 @@
 				<form name="domain_form" novalidate>
 						<div class ="domain-dialogue" >
 							<div class ="col-sm-12 form_molecule" >
-							 <div class="form_label_description_domain">
+							  <div class="form_label_description_domain">
 								 <h6>Domain</h6>
 								</div>
+								<select ng-model="current_domain.protocol">
+									<option ng-repeat="x in protocols" value="{{x}}" class="dropdown-item">{{x}}</option>
+								</select>
 								<div class ="domain-dialogue-input" >
-									{{current_domain.protocol +"://"+ current_domain.url }}
+									{{"://"+ current_domain.url }}
 								</div>
 							</div>
 							<div class="col-sm-12 form_molecule">
