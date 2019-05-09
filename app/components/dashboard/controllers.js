@@ -17,7 +17,7 @@ angular.module('Qanairy.dashboard', ['ui.router', 'Qanairy.DomainService'])
   function($rootScope, $scope, Domain,  $mdDialog, store, $state, Account) {
     this._init = function(){
       $scope.errors = [];
-      Account.usageStats().$promise.
+      Account.usageStats({domain_host: store.get("domain").url}).$promise.
         then(function(data){
           $scope.usage = data;
         })

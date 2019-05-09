@@ -513,7 +513,7 @@
                               Redirect
                             </h5>
                             <div >
-                              <div ng-repeat="screenshot_url in current_node[test_idx].imageUrls">
+                              <div ng-repeat="screenshot_url in current_node[$index]['imageUrls'] track by $index">
                                 <img class="path-node-image page-image screenshots"
                                       data-toggle="modal"
                                       data-target="#exampleModal"

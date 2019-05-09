@@ -10,7 +10,7 @@
 				<div class="col-sm-12">
 					<div class="card__header">
 						<h4>
-								Total Discoveries Run
+						  Total Discoveries Run
 						</h4>
 					</div>
 				</div>
@@ -32,7 +32,7 @@
 				<div class="col-sm-12">
 					<div class="card__header">
 						<h4>
-								Total Tests Run
+							Total Tests Run
 						</h4>
 					</div>
 				</div>
@@ -63,7 +63,7 @@
 				<div class="col-sm-12">
 					<div class=" dashboard_card_med vertical__center">
 						<h3 class="dashboard__stats">
-							{{tests.length || 0}}
+							{{usage.totalDiscoveredTestCount || 0}}
 						</h3>
 					</div>
 				</div>
@@ -90,7 +90,7 @@
 				<div class="col-sm-12">
 					<div class=" dashboard_card_med vertical__center">
 						<h3 class="dashboard__stats">
-							{{usage.discoveriesUsed}}
+							{{usage.domainDiscoveryCount}}
 						</h3>
 					</div>
 				</div>
@@ -112,7 +112,7 @@
 				<div class="col-sm-12">
 					<div class=" dashboard_card_med vertical__center">
 						<h3 class="dashboard__stats">
-							{{usage.testsUsed}}
+							{{usage.domainTotalTestsRun}}
 						</h3>
 					</div>
 				</div>
@@ -134,7 +134,7 @@
 				<div class="col-sm-12">
 					<div class=" dashboard_card_med vertical__center">
 						<h3 class="dashboard__stats">
-							{{tests.length || 0}}
+							{{usage.domainTotalDiscoveredTestCount || 0}}
 						</h3>
 					</div>
 				</div>
@@ -180,7 +180,7 @@
 				<div class="col-sm-12">
 					<div class="dashboard_card_med vertical__center">
 						<h3 class="dashboard__stats-small">
-							{{(discovery_status.startedAt || '00:00') | date : 'M/dd/yy h:mm a'}}
+							{{(usage.currentDiscoveryStart || '00:00') | date : 'MMM d, h:mm a'}}
 						</h3>
 					</div>
 				</div>
@@ -202,7 +202,7 @@
 				<div class="col-sm-12">
 					<div class="dashboard_card_med vertical__center">
 						<h3 class="dashboard__stats-small">
-							{{getTotalRuntime()}} hrs
+							{{ (usage.discoveryRunTime / 3600000) || 0 | number:0}} hrs
 						</h3>
 					</div>
 				</div>
@@ -224,7 +224,7 @@
 				<div class="col-sm-12">
 					<div class="dashboard_card_med vertical__center">
 						<h3 class="dashboard__stats-small">
-							{{((Date.now().getTime() - (tests | orderBy:{'last_run_timestamp':true})[tests.length-1].last_run_timestamp) || '00:00') | date : 'h:mm'}} hrs ago
+							{{ (usage.timestampOfLastDiscoveredTest || '00:00') | date : 'MMM d, h:mm a'}}
 						</h3>
 					</div>
 				</div>

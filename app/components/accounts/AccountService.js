@@ -9,6 +9,6 @@ pastPathService.factory('Account', ['$resource', 'Qanairy.serviceConfig', functi
     save: { method: 'POST' , params: {token: '@token'}},
     getOnboardingSteps: {url: config.basePath + '/accounts/onboarding_steps_completed', method: 'GET', isArray: true},
     addOnboardingStep: {url: config.basePath + '/accounts/onboarding_step', method: 'POST', params: {step_name: '@step_name'}, isArray: true},
-    usageStats: {url: config.basePath + '/accounts/usage', method: 'GET'}
+    usageStats: {url: config.basePath + '/accounts/usage', method: 'GET', params: {domain_host: '@dmain_host'}}
   });
 }]);
