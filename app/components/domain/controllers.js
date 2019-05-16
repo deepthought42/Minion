@@ -84,6 +84,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       }
       return onboard;
     }
+
     /**
     *
     */
@@ -127,7 +128,14 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           $scope.closeDialog();
         },
         function(errorResult){
+          created_successfully = false
 
+          if(errorResult.status === 303){
+            $scope.closeDialog();
+          }
+          else{
+            $scope.show_create_domain_err = true;
+          }
         });
 
         segment.track("Updated Domain", {
@@ -191,6 +199,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           preserveScope: true,
           templateUrl: "components/domain/edit_domain_modal.html",
           controller: function DialogController($scope, $mdDialog) {
+             $scope.show_create_domain_err = false;
              $scope.closeDialog = function() {
                 $mdDialog.hide();
              }
@@ -261,7 +270,9 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     this._init();
 
     $scope.$on('domainRequiredError', function(){
-      $scope.domain_error = "Start by adding and selecting a domain.";
+      var domain_error = "Start by adding and selecting a domain.";
+      $scope.errors.push({message: domain_error});
+      setTimeout(function(errors){ errors.pop(); }, 30, $scope.errors);
     });
 
     $scope.$on('onboardingStepsAcquired', function(){

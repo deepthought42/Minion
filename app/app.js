@@ -86,8 +86,8 @@ config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptio
 
     $rootScope.$on("$stateChangeStart", function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
-       if(store.get("domain") == null && toState.name !== "main.upgrade" && toState.name !== "authenticate" && toState.name !== "subscribe" && toState.name !== "main.account" && toState.name !== "main.dashboard"){
          $rootScope.$broadcast("domainRequiredError");
+         if(store.get("domain") == null && toState.name !== "main.upgrade" && toState.name !== "authenticate" && toState.name !== "subscribe" && toState.name !== "main.account"){
          if(toState.name !== "main.domains" && fromState.name == "main.domains"){
            e.preventDefault();
          }
