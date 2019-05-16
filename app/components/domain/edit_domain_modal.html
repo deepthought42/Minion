@@ -15,9 +15,9 @@
 						 <h2 style="text-align:right;">
 							 <i class="fa fa-times"></i>
 						 </h2>
-						</div>
 					</div>
 				</div>
+			</div>
 			<div class="row modal-form">
 				<form name="domain_form" novalidate>
 						<div class ="domain-dialogue" >
@@ -63,12 +63,12 @@
 									</h6>
 									For best results use a 220px x 100px transparent png.
 								</div>
-								<div class="domain_modal_logo" ng-if="!current_domain.logoUrl">
+								<div class="domain_modal_logo" ng-if="!current_domain.logo_url">
 									<i class="fa fa-image" ng-click="openPicker(domain)"></i>
 								</div>
-								<div class="domain_modal_logo" ng-if="current_domain.logoUrl">
-									<img ng-src="{{current_domain.logoUrl}}"/>
-								</div>
+								<div class="domain_modal_logo" ng-if="current_domain.logo_url">
+	                <img ng-src="{{current_domain.logo_url}}"/>
+	              </div>
 								<button class="btn btn--secondary" ng-click="openPicker(domain)">Upload Logo</button>
 							</div>
 							<div ng-show="domain_creation_error" class="error">
