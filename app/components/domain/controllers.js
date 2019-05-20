@@ -90,7 +90,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     */
     $scope.createDomain = function(protocol, host, default_browser, logo_url){
       var created_successfully = false;
-      Domain.save({protocol: "http", url: host, logoUrl: logo_url, browser_name: default_browser}).$promise
+      Domain.save({protocol: protocol, url: host, logoUrl: logo_url, browser_name: default_browser}).$promise
         .then(function(successResult){
           $scope.show_create_domain_err = false;
           store.set('domain', successResult);
