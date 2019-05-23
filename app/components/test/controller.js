@@ -88,13 +88,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
     $scope.getScreenshot = function(record){
       var browser_idx = 0;
-      for(var i=0; i<record.result.browserScreenshots.length; i++){
-        if(record.result.browserScreenshots.browser === "firefox"){
+      for(var i=0; i < record.result.screenshots.length; i++){
+        if(record.result.screenshots[i].browser === "firefox"){
           browser_idx = i;
           break;
         }
       }
-      $scope.openPageModal(record.result.browserScreenshots[browser_idx].viewportScreenshot);
+      $scope.openPageModal(record.result.screenshots[browser_idx].screenshotUrl);
     }
 
     /**

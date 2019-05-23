@@ -71,7 +71,7 @@
         <br><br><br>
         <h2>Your tests are loading. Please stand by.</h2>
         <p class="empty__state__p">
-        This process may take a while.<br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.
+          This process may take a while.<br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.
         </p>
       </div>
     </div>
@@ -101,7 +101,7 @@
         <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
           <div class="" ng-show="!test.show_test_name_edit_field">
             <h5 class="test__title" ng-click="test.show_test_name_edit_field = true">
-            {{test.name || "Test #"+($index+1)}}
+              {{test.name || "Test #"+($index+1)}}
             </h5>
             <i class="fa fa-pencil edithover" ng-click="editTest(test)" ></i>
           </div>
@@ -387,7 +387,7 @@
 																			{{attribute.name}}
 																		</div>
 																		<div class="col-sm-12 data__value">
-																			<div class="row d-inline-block" ng-repeat="value in attribute.values track by $index">
+																			<div class="row d-inline-block" ng-repeat="value in attribute.vals track by $index">
 																				<div class="col-sm-12" style="">
 																					{{value}}&nbsp;&nbsp;
 																				</div>
@@ -435,29 +435,31 @@
 															<h5 class="screenshots_title">
                                 Page
                               </h5>
-                              <div ng-if="visible_browser_screenshot==current_node[test_idx].browser">
-																<img class="path-node-image page-image screenshots"
-																			data-toggle="modal"
-                                      data-target="#exampleModal"
-																			src="{{current_node[test_idx].screenshotUrl}}"
-                                      class="path-node-image"
-                                      ng-if="current_node[test_idx].screenshotUrl"
-																			ng-click="openPageModal(current_node[test_idx].screenshotUrl)" />
-																<div class="expand" data-toggle="modal" data-target="#exampleModal"
-                                      class="path-node-image"
-                                      ng-if="current_node[test_idx].screenshotUrl"
-																			ng-click="openPageModal(current_node[test_idx].screenshotUrl)">
-																	<h6>
-                                    Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
-                                  </h6>
-                                </div>
-                              </div>
-                              <div ng-if="!visible_browser_screenshot==current_node[test_idx].browser">
-                                <div class="text-center">
-                                  <div>
-                                    <i class=" browser_placeholder fa fa-image"></i>
+                              <div ng-repeat="screenshot in current_node[test_idx].screenshots">
+                                <div ng-if="visible_browser_screenshot == screenshot.browser">
+  																<img class="path-node-image page-image screenshots"
+  																			data-toggle="modal"
+                                        data-target="#exampleModal"
+  																			src="{{screenshot.screenshotUrl}}"
+                                        class="path-node-image"
+                                        ng-if="screenshot.screenshotUrl"
+  																			ng-click="openPageModal(screenshot.screenshotUrl)" />
+  																<div class="expand" data-toggle="modal" data-target="#exampleModal"
+                                        class="path-node-image"
+                                        ng-if="screenshot.screenshotUrl"
+  																			ng-click="openPageModal(screenshot.screenshotUrl)">
+  																	<h6>
+                                      Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
+                                    </h6>
                                   </div>
-                                  A test has not been run in this&nbsp;browser.
+                                </div>
+                                <div ng-if="visible_browser_screenshot != screenshot.browser">
+                                  <div class="text-center">
+                                    <div>
+                                      <i class=" browser_placeholder fa fa-image"></i>
+                                    </div>
+                                    A test has not been run in this&nbsp;browser.
+                                  </div>
                                 </div>
                               </div>
 														</div>

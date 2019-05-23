@@ -469,7 +469,7 @@
 																				{{attribute.name}}
 																		</div>
 																		<div class="col-sm-12 data__value">
-																			<div class="row d-inline-block" ng-repeat="value in attribute.values track by $index">
+																			<div class="row d-inline-block" ng-repeat="value in attribute.vals track by $index">
 																				<div class="col-sm-12" style="">
 																					{{value}}&nbsp;&nbsp;
 																				</div>
@@ -517,26 +517,29 @@
 														<div id="section-linemove-1">
 															<div class="page__image col-xs-12">
 																<h5 class="screenshots_title">Page</h5>
-
-																<img class="path-node-image page-image screenshots"
-																			data-toggle="modal"
-                                      data-target="#exampleModal"
-																			src="{{current_node[test_idx].screenshotUrl}}"
-                                      class="path-node-image"
-                                      ng-if="current_node[test_idx].screenshotUrl"
-																			ng-click="openPageModal(current_node[test_idx].screenshotUrl)" />
-																<div class="expand" data-toggle="modal" data-target="#exampleModal"
-                                      class="path-node-image"
-                                      ng-if="current_node[test_idx].screenshotUrl"
-																			ng-click="openPageModal(current_node[test_idx].screenshotUrl)">
-																	<h6>
-                                    Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
-                                  </h6>
-                                </div>
-																<div ng-if="!doesScreenshotExistForBrowser(visible_browser_screenshot,  current_node[test_idx].browserScreenshots)">
-																	<i class="browser_placeholder fa fa-image"></i>
-																	<div class="text-center">
-																		A test has not been run in this&nbsp;browser.
+																<div ng-repeat="screenshot in current_node[test_idx].screenshots">
+																	<div ng-if="visible_browser_screenshot == screenshot.browser">
+																		<img class="path-node-image page-image screenshots"
+																					data-toggle="modal"
+		                                      data-target="#exampleModal"
+																					src="{{screenshot.screenshotUrl}}"
+		                                      class="path-node-image"
+		                                      ng-if="screenshot.screenshotUrl"
+																					ng-click="openPageModal(screenshot.screenshotUrl)" />
+																		<div class="expand" data-toggle="modal" data-target="#exampleModal"
+		                                      class="path-node-image"
+		                                      ng-if="screenshot.screenshotUrl"
+																					ng-click="openPageModal(screenshot.screenshotUrl)">
+																			<h6>
+		                                    Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
+		                                  </h6>
+		                                </div>
+																	</div>
+																	<div ng-if="visible_browser_screenshot != screenshot.browser">
+																		<i class="browser_placeholder fa fa-image"></i>
+																		<div class="text-center">
+																			A test has not been run in this&nbsp;browser.
+																		</div>
 																	</div>
 																</div>
 															</div>
