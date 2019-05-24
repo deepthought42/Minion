@@ -169,7 +169,7 @@
 								<div id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
 									<div class="col-xs-12 test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
 										<div ng-repeat="node in current_path_objects track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
-                      <div class="node-group path-node-container vertical__center__int"
+                      <div class="node-group element-action vertical__center__int"
                            ng-if="node.type == 'Redirect'"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
@@ -177,8 +177,10 @@
                           <div class="node__title" >
                             Redirect
                           </div>
-                          <div class="path-node path-element vertical__center__int">
-                            <i class="fa fa-repeat fa-2x"></i>
+                          <div class="path-node path-element vertical__center__int" tooltip-placement="top">
+                            <div class="" >
+                              <i class="fa fa-repeat fa-2x"></i>
+                            </div>
                           </div>
                         </button>
                       </div>
