@@ -5,6 +5,8 @@ var authService = angular.module('Qanairy.authService', []);
 
 authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'segment', 'Account',
   function ($state, angularAuth0, $timeout, store, segment, Account) {
+    /******************** User profile **********************/
+    var userProfile;
 
     function login() {
       angularAuth0.authorize();
@@ -65,8 +67,14 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
       return new Date().getTime() < expiresAt;
     }
 
-    /******************** User profile **********************/
-    var userProfile;
+    function setUserProfile(profile) {
+      userProfile = profile;
+    }
+
+    function getCachedProfile() {
+      return userProfile;
+    }
+
 
     function getProfile(cb) {
       var accessToken = localStorage.getItem('access_token');
@@ -82,14 +90,6 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
           cb(err, profile);
         });
       }
-    }
-
-    function setUserProfile(profile) {
-      userProfile = profile;
-    }
-
-    function getCachedProfile() {
-      return userProfile;
     }
 
     return {
