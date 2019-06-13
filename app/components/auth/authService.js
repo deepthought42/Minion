@@ -74,12 +74,14 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
         login();
         //throw new Error('Access Token must exist to fetch profile');
       }
-      angularAuth0.client.userInfo(accessToken, function(err, profile) {
-        if (profile) {
-          setUserProfile(profile);
-        }
-        cb(err, profile);
-      });
+      else {
+        angularAuth0.client.userInfo(accessToken, function(err, profile) {
+          if (profile) {
+            setUserProfile(profile);
+          }
+          cb(err, profile);
+        });
+      }
     }
 
     function setUserProfile(profile) {

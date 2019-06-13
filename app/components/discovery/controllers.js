@@ -301,11 +301,19 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.stopDiscoveryProcess = function(){
-      WorkAllocation.stopWork().$promise
+      Discovery.stopWork({url:  $scope.current_domain.url}).$promise
         .then(function(){
            $scope.isStarted = false;
+           segment.track("Stop Discovery", {
+             domain : $scope.current_domain.url,
+             success : true
+           }, function(success){});
         })
         .catch(function(err){
+          segment.track("Stop Discovery", {
+            domain : $scope.current_domain.url,
+            success : false
+          }, function(success){});
           if(err.data){
             $scope.errors.push("An error occurred stopping discovery");
           }
