@@ -14,14 +14,20 @@
       <div class="col-sm-12 running_status" ng-if="isStarted">
         <div class="row">
           <div class="col-sm-12">
-            <button class="btn btn-danger pull-left"
-                    ng-click="stopDiscoveryProcess()">
-                Stop!
-            </button>
-            <div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 | number:1 }}%
-            </div>
-            <md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 }}"></md-progress-linear>
-            <div class="waiting_text">
+            <div class="row">
+              <div class="progress_bar">
+                <div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 | number:1 }}%
+                </div>
+                <md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 }}"></md-progress-linear>
+                <div class="waiting_text">
+                </div>
+              </div>
+              <div class="stop_button">
+                <button class="btn btn-danger"
+                        ng-click="stopDiscoveryProcess()">
+                    Stop!
+                </button>
+              </div>
             </div>
           </div>
         </div>
