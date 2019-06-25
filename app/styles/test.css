@@ -274,7 +274,9 @@ width: -webkit-calc(100% - 15px);
 .margin_fifteen_left{
 	margin-left:15px !important;
 }
-
+.row:before, row:after{ 
+  display: inline-block !important;
+}
 .flex-auto {
   flex: 1 1 auto;
 }
