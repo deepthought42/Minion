@@ -17,20 +17,21 @@
 
 	<div class="domain__button box--shadow" ng-repeat="domain in domains track by $index">
 		<div class="row">
-			<div class="col-sm-2" style="text-align:left !important; position: relative;">
-				<img src="/img/Chrome.ico" class="browser-icon"  ng-show="domain.discoveryBrowserName=='chrome'">
-				<img src="/img/firefox.png" class="browser-icon"  ng-show="domain.discoveryBrowserName=='firefox'" >
-			</div>
-			<div class="col-sm-6">
-			</div>
-			<div class="col-sm-2" ng-click="openEditDomainDialog(domain)"
-					 style="text-align:right !important; padding:0px; margin:0px; position: relative;" id="{{'edit_domain_settings'+$index}}" >
-				 <i class="fa fa-pencil domain_card_action" ></i>
-			</div>
-
-			<div class="col-sm-2" ng-click="removeDomain(domain, $index)"  style="text-align:right !important; position: relative;">
-				 <i class="fa fa-times domain_card_action" ></i>
-			</div>
+			<div class="col-sm-12" style="position: relative; display: flex;">
+          <div class="flex-auto" style="text-align:left !important; justify-content: flex-start; align-items: center;">
+            <img src="/img/Chrome.ico" alt="Chrome Browser" class="browser-icon"  ng-show="domain.discoveryBrowserName=='chrome'">
+            <img src="/img/firefox.png" alt="Firefox Browser" class="browser-icon"  ng-show="domain.discoveryBrowserName=='firefox'" >
+          </div>
+         <div class="flex-none" style="justify-content: flex-end; display: flex;" >
+          <div class="fifteen_left" ng-click="openEditDomainDialog(domain)"
+               style="text-align:right !important; padding:0px; margin:0px; position: relative;" id="{{'edit_domain_settings'+$index}}" >
+             <i class="fa fa-pencil domain_card_action" ></i>
+          </div>
+          <div class="fifteen_left" ng-click="removeDomain(domain, $index)"  style="text-align:right !important; position: relative;">
+             <i class="fa fa-times domain_card_action" ></i>
+          </div>
+        </div>
+      </div>
 		</div>
 		<div class="row vertical__center domain__icon" ng-click="selectDomain(domain)">
 			<div class="domain__logo vertical__center">
