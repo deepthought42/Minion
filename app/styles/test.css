@@ -216,12 +216,16 @@ width: -webkit-calc(100% - 15px);
   flex-direction: column;
 }
 
-.test__profile .flex-auto,
-.test__profile .flex-initial,
-.test__profile .flex-none,
 .test-labels .flex-auto,
 .test-labels .flex-initial,
 .test-labels .flex-none{
+	padding-right:15px;
+	padding-left:15px;
+}
+
+
+.test__profile .flex-initial,
+.test__profile .flex-none{
 	padding-right:15px;
 	padding-left:15px;
 }
@@ -337,7 +341,6 @@ width: -webkit-calc(100% - 15px);
 	padding: 5px 5px 4px 5px;
 	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	min-height: 40px;
-	max-width: 75px;
 }
 .discovery_status_border{
   border-right: 1px solid #f9f9f9;
