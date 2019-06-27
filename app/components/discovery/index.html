@@ -189,7 +189,7 @@
                         </button>
                       </div>
                       <div class="node-group path-node-container vertical__center__int"
-                           ng-if="node.type == 'LoadingAnimation'"
+                           ng-if="node.type == 'PageLoadAnimation'"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
                         <button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
@@ -273,7 +273,7 @@
 											</div>
 										</div>
 										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
-											<div ng-if="!test.pathKeys[test.pathKeys.length-1].includes('pagestate')" class="path-page path-node">
+											<div ng-if="test.pathKeys.length > 1 && !(test.pathKeys.length == 2 && (test.pathKeys[0].includes('redirect') || test.pathKeys[0].includes('PageLoadAnimation')))" class="path-page path-node">
 												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
 													<img src="{{test.result.screenshotUrl}}" class="path-node-image" tooltip-placement="top"/>
 												</button>
@@ -524,7 +524,7 @@
 										</div>
 									</div>
 								</div>
-                <div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'LoadingAnimation'">
+                <div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'PageLoadAnimation'">
                   <div class="row">
                     <div class="col-sm-6 equal-height-container">
                       <div class="node__screenshots equal-height test__data__box__shadow tabs tabs-style-linemove">
@@ -602,7 +602,6 @@
                       </div><!-- /tabs -->
                     </div>
                   </div>
-                </div>
                 </div>
                 <div class="col-xs-12 test__data test_dropdown_bottom_shadow" ng-if="current_node[test_idx].type == 'Redirect'">
                   <div class="row">
