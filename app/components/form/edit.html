@@ -39,16 +39,7 @@
         			</div>
         	</div>
 
-  <!--
-      		<div class="col-sm-12 form_label_description accounts">
-      		  <h6>Form Fields</h6>
-      		  <div ng-repeat="element in form.formFields">
-              <div>
-                {{ element.name}}
-              </div>
-            </div>
-          </div>
-  -->
+
       	</div>
       </div>
       <div class="col-sm-6 form_label_description accounts">
@@ -56,6 +47,39 @@
     		<div>
       		<img class="form-screenshot" ng-src="{{form.formTag.screenshot}}" />
       	</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 form_label_description accounts">
+        <h6>Form Fields</h6>
+        <div ng-repeat="element in form.formFields">
+          <div>
+            {{ element.name }}
+          </div>
+          <div>
+            <h1>Rules</h1>
+            <div ng-repeat="rule in element.rules">
+              {{rule}}
+            </div>
+            <div>
+              <div>
+                <label>
+                  Type
+                </label>
+                <select ng-model="rule_form.type">
+                  <option ng-repeat="x in rule_types" value="{{x}}" class="dropdown-item">{{x}}</option>
+                </select>
+              </div>
+              <div>
+                <label>
+                    Value
+                </label>
+                <input type="text" ng-model="rule_form.type" />
+                <button> + Rule </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

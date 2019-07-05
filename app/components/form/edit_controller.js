@@ -17,6 +17,8 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
     this._init = function(){
       $scope.domain = store.get('domain');
       $scope.users = store.get('users');
+      $scope.rule_form = {};
+      $scope.form_types = ["required", "disabled", "alphabetic_restriciton", "special_character_restriction", "read_only", "min_value", "max_value", "min_length", "max_length", "email_pattern", "pattern"];
 
       if($stateParams.form){
         $scope.form = $stateParams.form;
