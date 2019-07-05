@@ -59,24 +59,25 @@
           <div>
             <h1>Rules</h1>
             <div ng-repeat="rule in element.rules">
-              {{rule}}
+              {{ rule.type }}
+            </div>
+
+          </div>
+          <div>
+            <div>
+              <label>
+                Type
+              </label>
+              <select ng-model="element.rule_form.type">
+                <option ng-repeat="x in rule_types" value="{{x}}" class="dropdown-item">{{x}}</option>
+              </select>
             </div>
             <div>
-              <div>
-                <label>
-                  Type
-                </label>
-                <select ng-model="rule_form.type">
-                  <option ng-repeat="x in rule_types" value="{{x}}" class="dropdown-item">{{x}}</option>
-                </select>
-              </div>
-              <div>
-                <label>
-                    Value
-                </label>
-                <input type="text" ng-model="rule_form.type" />
-                <button> + Rule </div>
-              </div>
+              <label>
+                  Value
+              </label>
+              <input type="text" ng-model="element.rule_form.value" />
+              <button ng-click="createRule(element.id, element.rule_form.type, element.rule_form.value)"> + Rule </div>
             </div>
           </div>
         </div>
