@@ -56,11 +56,18 @@
     <div id="nav-bar" class="main-header container-fluid content ">
       <div id="main-nav" class="vertical__center__int">
         <div class="flex-auto">
-         <!--  <a ui-sref="main.upgrade" style="text-decoration: underline;" class="margin_fifteen_left">
-            Upgrade Plan!
+         <!--<a href="https://chrome.google.com/webstore/detail/qanairy-test-recorder/gaeciehbbgjmpkpeeojblplhcpemnlpo" target="_blank" style="text-decoration: underline; font-size: 12px;" class="margin_fifteen_left">
+            Chrome Test Recorder
           </a>-->
         </div>
         <div class="right-main-nav  pull-right">
+          <div class="pull-right flex-initial text-right test__profile_stretch" >
+            <a href="https://chrome.google.com/webstore/detail/qanairy-test-recorder/gaeciehbbgjmpkpeeojblplhcpemnlpo" target="_blank" style="text-decoration: underline; font-size: 12px;" class="margin_fifteen_right">
+            Chrome Test Recorder
+            </a>
+          </div>
+          <div class="divider">
+          </div>
           <div class="domain-link dropdown pull-right flex-initial text-right test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
             <div class="dropdown-toggle" id="domainsDropdownMenuButton"  dropdown-toggle>
               {{domain.url || "www.yourdomain.com"}}
