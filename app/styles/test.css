@@ -222,7 +222,14 @@ width: -webkit-calc(100% - 15px);
 	padding-right:15px;
 	padding-left:15px;
 }
-
+.test__profile .flex-auto{
+	padding-right:15px;
+	padding-left:15px;
+}
+.test__profile .flex-auto-no-padding{
+	padding-right:0px;
+	padding-left:0px;
+}
 
 .test__profile .flex-initial,
 .test__profile .flex-none{
@@ -279,6 +286,9 @@ width: -webkit-calc(100% - 15px);
 }
 .flex-auto {
   flex: 1 1 auto;
+}
+.flex-auto-no-padding {
+  flex: 1;
 }
 
 .flex-initial {
@@ -343,6 +353,7 @@ width: -webkit-calc(100% - 15px);
 	padding: 5px 5px 4px 5px;
 	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	min-height: 40px;
+  max-width: 75px;
 }
 .discovery_status_border{
   border-right: 1px solid #f9f9f9;
