@@ -357,6 +357,21 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
        });
     };
 
+    $scope.askStopDiscovery = function(test) {
+       // Appending dialog to document.body to cover sidenav in docs app
+       var confirm = $mdDialog.confirm()
+             .title('Are you sure you want to stop discovery?')
+             .targetEvent(test)
+             .ok('Confirm')
+             .cancel('Cancel');
+
+       $mdDialog.show(confirm).then(function() {
+         $scope.stopDiscoveryProcess();
+       }, function() {
+         //user canceled 'stop discovery' process
+       });
+    };
+
     $scope.addGroup = function(test, group){
       if(!group.name.length){
          $scope.errors.push("Group name cannot be empty");
