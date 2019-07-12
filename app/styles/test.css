@@ -199,7 +199,6 @@ width: -webkit-calc(100% - 15px);
   align-items: stretch !important;
   justify-content: left !important;
 }
-
 .test__profile {
 	padding-top: 0px;
 	padding-bottom: 0px;
@@ -207,21 +206,22 @@ width: -webkit-calc(100% - 15px);
 	width: 100%;
   color: #424242;
   background-color: #ffffff;
-	transition: background-color 10s ease-in-out;
 }
-
+.greenBg, .redBg{
+	transition: background-color 8s ease-in-out;
+}
 .test__profile_stretch {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-
 .test-labels .flex-auto,
 .test-labels .flex-initial,
 .test-labels .flex-none{
 	padding-right:15px;
 	padding-left:15px;
 }
+
 .test__profile .flex-auto{
 	padding-right:15px;
 	padding-left:15px;
@@ -230,7 +230,6 @@ width: -webkit-calc(100% - 15px);
 	padding-right:0px;
 	padding-left:0px;
 }
-
 .test__profile .flex-initial,
 .test__profile .flex-none{
 	padding-right:15px;
@@ -242,26 +241,23 @@ width: -webkit-calc(100% - 15px);
 	padding-right:0px;
 	padding-left:0px;
 }
-
 .test__profile:focus,
 .test__profile.focus {
 	outline:none;
-  background-color: #f9f9f9;
+  background-color: #f6f6fa;
 }
 .test__profile:hover {
-  background-color: #f9f9f9;
+  background-color: #f6f6fa;
 }
 .test__profile:active,
 .test__profile.active {
-  background-color: #f9f9f9;
+  background-color: #f6f6fa;
 }
-
 .test__btns{
   display: flex;
   align-items: center;
   justify-content: flex-end !important;
 }
-
 .accordion{
   width:18px;
 	text-align: center;
