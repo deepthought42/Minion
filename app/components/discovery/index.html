@@ -86,14 +86,14 @@
             <div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
               <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
             </div>
-            <div class="flex-auto status-passing btn--green discovery_status discovery_status_border"  ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, 'PASSING', $index)">
+            <div class="flex-auto-no-padding status-passing btn--green discovery_status discovery_status_border"  ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, 'PASSING', $index)">
               <div class="" >
                 Passing
                 <br />
                 <i class="fa fa-check discovery--status--symbol white" style="{{test.status == "PASSING" ? 'color:green' : 'color:#bfbfbf'}}"></i>
               </div>
             </div>
-            <div class="discovery_status status-failing flex-auto btn--red " ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, 'FAILING', $index)">
+            <div class="discovery_status status-failing flex-auto-no-padding btn--red " ng-show="!test.waitingOnStatusChange" ng-click="updateCorrectness(test, 'FAILING', $index)">
               <div class="" >
                 Failing
                 <br />
