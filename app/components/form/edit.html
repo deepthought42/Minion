@@ -15,9 +15,11 @@
 		  </div>
     </div>
     <div class="row">
-		  <div class="col-sm-6">
+		  <div class="col-12 col-sm-6">
 				<div class="row">
-        	<div class ="col-sm-10 form_molecule" >
+          
+          
+        	<div class ="col-12 col-sm-10 form_molecule" >
         			<div class="form_label_description_domain">
         				 <h6>Form Title</h6>
         			</div>
@@ -27,8 +29,7 @@
         				</div>
         			</div>
         	</div>
-
-        	<div class ="col-sm-6 form_molecule" >
+        	<div class ="col-12 col-sm-6 form_molecule" >
         			<div class="form_label_description_domain">
         				 <h6>Form Type</h6>
         			</div>
@@ -38,20 +39,25 @@
         				</select>
         			</div>
         	</div>
-
-
+          <div class="col-12 col-sm-12 form_label_description accounts">
+            <h6>Screenshot</h6>
+            <div>
+              <img class="form-screenshot" ng-src="{{form.formTag.screenshot}}" />
+            </div>
+          </div>
       	</div>
       </div>
-      <div class="col-sm-6 form_label_description accounts">
-			  <h6>Screenshot</h6>
-    		<div>
-      		<img class="form-screenshot" ng-src="{{form.formTag.screenshot}}" />
-      	</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 form_label_description accounts">
+      <div class="col-12 col-sm-6 form_label_description accounts">
         <h6>Form Fields</h6>
+        <div class="form__field__profile">
+          <div>
+            form field name
+          </div>
+          <button class="btn btn--tertiary margin_fifteen_right" ng-click="" >
+              <i class="fa fa-pencil"></i>
+           </button>
+        </div>
+        <!-- move this to a separate page and have the edit button open it-->
         <div ng-repeat="element in form.formFields">
           <div>
             {{ element.name }}
@@ -76,8 +82,9 @@
               <label>
                   Value
               </label>
-              <input type="text" ng-model="element.rule_form.value" />
-              <button ng-click="createRule(element.id, element.rule_form.type, element.rule_form.value)"> + Rule </div>
+              <input class="form-control" type="text" ng-model="element.rule_form.value" />
+              <button ng-click="createRule(element.id, element.rule_form.type, element.rule_form.value)"> + Rule 
+                </button>
             </div>
           </div>
         </div>
