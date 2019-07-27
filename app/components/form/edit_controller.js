@@ -11,14 +11,16 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
   });
 }])
 
-.controller('FormEditCtrl', ['$rootScope', '$scope', 'Form', 'Domain', 'store', '$state', '$stateParams', 'segment', 'Element',
-  function($rootScope, $scope, Form, Domain, store, $state, $stateParams,segment, Element) {
+.controller('FormEditCtrl', ['$rootScope', '$scope', 'Form', 'Domain', 'store', '$state', '$stateParams', 'segment', 'Element', '$mdDialog',
+  function($rootScope, $scope, Form, Domain, store, $state, $stateParams,segment, Element, $mdDialog) {
 
     this._init = function(){
       $scope.domain = store.get('domain');
       $scope.users = store.get('users');
       $scope.rule_form = {};
       $scope.rule_types = ["required", "disabled", "alphabetic_restriciton", "special_character_restriction", "read_only", "min_value", "max_value", "min_length", "max_length", "email_pattern", "pattern"];
+      $scope.show_update_element_err = false;
+      $scope.current_field = null;
 
       if($stateParams.form){
         $scope.form = $stateParams.form;
@@ -77,6 +79,22 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
           console.log("error occurred :: " + err);
         })
     }
+
+    $scope.openEditElementDialog  = function(element) {
+      $scope.current_field = element;
+      $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/form/edit_element_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.show_edit_element_err = false;
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
 
     this._init();
   }
