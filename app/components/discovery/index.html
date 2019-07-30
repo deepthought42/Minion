@@ -612,7 +612,7 @@
                             <h5 class="screenshots_title">
                               Redirect
                             </h5>
-                            <div >
+                            <div>
                               <div ng-repeat="screenshot_url in current_node[$index]['imageUrls'] track by $index">
                                 <img class="path-node-image page-image screenshots"
                                       data-toggle="modal"
@@ -671,9 +671,9 @@
                             <div class="data__key">
                               URL
                             </div>
-                            <div class="data__value">
-                             <a href="{{current_node[$index].url}}" target="_blank">
-                               {{current_node[$index].url}}
+                            <div class="data__value" ng-repeat="url in current_node[$index].urls">
+                             <a href="{{url}}" target="_blank">
+                               {{url}}
                              </a>
                             </div>
                           </div>
