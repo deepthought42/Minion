@@ -10,7 +10,7 @@
       		<div class="row">
       	    <div class="col-sm-12 col-xs-12">
               <h2 class="settings__title">
-      		      Form Settings
+      		      Field Settings
               </h2>
               <div class="settings_description">
       		      Qanairy tests all of your text&nbsp;input&nbsp;fields, radio buttons, checkboxes, and dropdowns.
@@ -23,7 +23,7 @@
 
               	<div class ="col-12 col-sm-10 form_molecule" >
               			<div class="form_label_description_domain">
-              				 <h6>Form Title</h6>
+              				 <h6>Field Title</h6>
               			</div>
               			<div class ="domain-dialogue-input" >
               				<div>
@@ -33,7 +33,27 @@
               	</div>
               	<div class ="col-12 col-sm-6 form_molecule" >
               			<div class="form_label_description_domain">
-              				 <h6>Form Type</h6>
+              				 <h6>Element Name</h6>
+              			</div>
+              			<div class ="domain-dialogue-input" >
+              				<div>
+                        {{ element.name }}
+                      </div>
+              			</div>
+              	</div>
+                <div class ="col-12 col-sm-6 form_molecule" >
+              			<div class="form_label_description_domain">
+              				 <h6>Rules</h6>
+              			</div>
+              			<div class ="domain-dialogue-input" >
+              				<div ng-repeat="rule in element.rules">
+                        {{ rule.type }}
+                      </div>
+              			</div>
+              	</div>
+                <div class ="col-12 col-sm-6 form_molecule" >
+              			<div class="form_label_description_domain">
+              				 <h6>Field Type</h6>
               			</div>
               			<div class ="domain-dialogue-input" >
               				<select class="form-control" ng-model="form.type">
@@ -42,7 +62,7 @@
               			</div>
               	</div>
                 <div class="col-12 col-sm-12 form_label_description accounts">
-                  <h6>Screenshot</h6>
+                  <h6>Field Screenshot</h6>
                   <div>
                     <img class="form-screenshot" ng-src="{{form.formTag.screenshot}}" />
                   </div>
@@ -50,30 +70,9 @@
             	</div>
             </div>
             <div class="col-12 col-sm-6 form_label_description accounts">
-              <h6>Form Fields</h6>
-
-              <!-- move this to a separate page and have the edit button open it-->
-              <div ng-repeat="element in form.formFields">
-                <div class="row no-gutters form__field__profile">
-                  <div>
-                    form field name
-                  </div>
-                  <div>
-                    {{ element.name }}
-                  </div>
-                  <div>
-                    <h3>Rules</h3>
-                    <div ng-repeat="rule in element.rules">
-                      {{ rule.type }}
-                    </div>
-                  </div>
-                  <div>
-                    <div class="fifteen_left" ng-click="openEditElementDialog(element)"
-                         style="text-align:right !important; padding:0px; margin:0px; position: relative;" id="{{'edit_element_settings'+$index}}" >
-                       <i class="fa fa-pencil domain_card_action" ></i>
-                    </div>
-                  </div>
-                </div>
+              <h6>Field Screenshot</h6>
+              <div>
+                <img class="form-screenshot" ng-src="{{form.formTag.screenshot}}" />
               </div>
             </div>
           </div>

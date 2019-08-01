@@ -205,7 +205,7 @@
                            ng-if="node.type == 'PageState'"
                            ng-class="current_node[test_idx]==node ? 'active' : ''"
                            ng-click="setCurrentNode(node, $index)">
-												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
+												<button class="path-page-node btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==node ? 'active' : ''">
                           <div class="path-page path-node">
     					              <img src="{{node.screenshotUrl}}" class="path-node-image"/>
     											</div>
@@ -274,7 +274,7 @@
 										</div>
 										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
 											<div ng-if="test.pathKeys.length > 1 && !(test.pathKeys.length == 2 && (test.pathKeys[0].includes('redirect') || test.pathKeys[0].includes('PageLoadAnimation')))" class="path-page path-node">
-												<button class="btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
+												<button class="path-page-node btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
 													<img src="{{test.result.screenshotUrl}}" class="path-node-image" tooltip-placement="top"/>
 												</button>
 											</div>
@@ -292,7 +292,7 @@
                                 </h5>
 																<img class="path-node-image"
 																			data-toggle="modal" data-target="#exampleModal"
-																			src="{{current_node[test_idx].screenshot}}" class="path-node-image"/>
+																			src="{{current_node[test_idx].screenshot}}"/>
   														</div>
   													</div>
   												</div>
@@ -460,11 +460,9 @@
   																			data-toggle="modal"
                                         data-target="#exampleModal"
   																			src="{{screenshot.screenshotUrl}}"
-                                        class="path-node-image"
                                         ng-if="screenshot.screenshotUrl"
   																			ng-click="openPageModal(screenshot.screenshotUrl)" />
-  																<div class="expand" data-toggle="modal" data-target="#exampleModal"
-                                        class="path-node-image"
+  																<div class="expand path-node-image" data-toggle="modal" data-target="#exampleModal"
                                         ng-if="screenshot.screenshotUrl"
   																			ng-click="openPageModal(screenshot.screenshotUrl)">
   																	<h6>
@@ -539,11 +537,9 @@
                                       data-toggle="modal"
                                       data-target="#exampleModal"
                                       src="{{screenshot_url}}"
-                                      class="path-node-image"
                                       ng-if="screenshot_url"
                                       ng-click="openPageModal(screenshot_url)" />
-                                <div class="expand" data-toggle="modal" data-target="#exampleModal"
-                                      class="path-node-image"
+                                <div class="expand path-node-image" data-toggle="modal" data-target="#exampleModal"
                                       ng-if="screenshot_url"
                                       ng-click="openPageModal(screenshot_url)">
                                   <h6>
@@ -618,11 +614,9 @@
                                       data-toggle="modal"
                                       data-target="#exampleModal"
                                       src="{{screenshot_url}}"
-                                      class="path-node-image"
                                       ng-if="screenshot_url"
                                       ng-click="openPageModal(screenshot_url)" />
-                                <div class="expand" data-toggle="modal" data-target="#exampleModal"
-                                      class="path-node-image"
+                                <div class="expand path-node-image" data-toggle="modal" data-target="#exampleModal"
                                       ng-if="screenshot_url"
                                       ng-click="openPageModal(screenshot_url)">
                                   <h6>
@@ -716,6 +710,8 @@
 					</div><!-- /tabs -->
 				</div>
       </div>
-	</div>
+	  </div>
+  </div>
   <onboarding-popover enabled="discoveryOnboardingEnabled" steps="discoveryOnboardingSteps" step-index="discoveryOnboardingIndex"></onboarding-popover>
-  <onboarding-popover enabled="testVerificationOnboardingEnabled" steps="testVerificationSteps" step-index='testVerificationOnboardingIndex'></onboarding-popover>
+  <onboarding-popover enabled="testVerificationOnboardingEnabled" steps="testVerificationSteps" step-index="testVerificationOnboardingIndex"></onboarding-popover>
+</div>

@@ -48,26 +48,43 @@
       </div>
       <div class="col-12 col-sm-6 form_label_description accounts">
         <h6>Form Fields</h6>
-
-        <!-- move this to a separate page and have the edit button open it-->
-        <div ng-repeat="element in form.formFields">
-          <div class="row no-gutters form__field__profile">
-            <div>
-              form field name
-            </div>
-            <div>
-              {{ element.name }}
-            </div>
-            <div>
-              <h3>Rules</h3>
-              <div ng-repeat="rule in element.rules">
-                {{ rule.type }}
+        <div class="row">
+          <div class="test-labels-container">
+            <div class="test-labels">
+              <div class="flex-auto test_functions">
+                Field Title
+              </div>
+              <div class="flex-initial date_stats text-left">
+                Element Name
+              </div>
+              <div class="flex-initial date_stats text-left">
+                Rules
+              </div>
+              <div class="flex-none discovery_functions">
               </div>
             </div>
-            <div>
-              <div class="fifteen_left" ng-click="openEditElementDialog(element)"
-                   style="text-align:right !important; padding:0px; margin:0px; position: relative;" id="{{'edit_element_settings'+$index}}" >
-                 <i class="fa fa-pencil domain_card_action" ></i>
+          </div>
+          <div class="test-container">
+            <!-- move this to a separate page and have the edit button open it-->
+            <div ng-repeat="element in form.formFields">
+              <div class="row no-gutters form__field__profile">
+                <div class="flex-auto test_functions">
+                  form field name
+                </div>
+                <div class="flex-initial date_stats text-left">
+                  {{ element.name }}
+                </div>
+                <div class="flex-initial date_stats text-left">
+                  <div ng-repeat="rule in element.rules">
+                    {{ rule.type }}
+                  </div>
+                </div>
+                <div class="flex-none discovery_functions">
+                  <div class="fifteen_left" ng-click="openEditElementDialog(element)"
+                       style="text-align:right !important; padding:0px; margin:0px; position: relative;" id="{{'edit_element_settings'+$index}}" >
+                     <i class="fa fa-pencil domain_card_action" ></i>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -520,7 +520,9 @@ width: -webkit-calc(100% - 15px);
 .path-page {
     padding: 10px 10px -10px 0px !important;
 }
-
+.path-page-node{
+  height:78px;
+}
 .path-node-container {
   height: 100%;
   float: left;
