@@ -1,3 +1,6 @@
+<div ng-click="previous()">
+  <i class="fas fa-caret-left"></i>
+</div>
 <div ng-repeat="page_interaction in path track by $index"
      ng-show="pathIdx == $index"
      style="position:relative">
@@ -9,4 +12,7 @@
          ng-style="getOutlineStyle(interaction.element, $index, page_interaction.page)">
     </div>
   </div>
+</div>
+<div ng-click="next()">
+  <i class="fas fa-caret-right"></i>
 </div>

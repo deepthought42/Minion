@@ -465,23 +465,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
              $scope.closeDialog = function() {
                 $mdDialog.hide();
              }
-
-             $scope.nextStep = function() {
-               $scope.current_path_idx += 1;
-               if($scope.current_path_idx >= $scope.preview_path.length){
-                 $scope.current_path_idx = 0;
-               }
-
-               //if object at new index is a page state then show page state index
-               //otherwise show interaction index
-             }
-
-             $scope.previousStep = function() {
-               $scope.current_path_idx -= 1;
-               if($scope.current_path_idx < 0){
-                 $scope.current_path_idx = $scope.preview_path.length - 1;
-               }
-             }
           }
        });
     };
