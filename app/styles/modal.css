@@ -288,4 +288,5 @@ md-dialog {
 .page_modal_image img {
 	width:100%;
 	height: auto;
+  position: relative;
 }

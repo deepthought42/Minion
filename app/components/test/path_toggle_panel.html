@@ -1,0 +1,12 @@
+<div ng-repeat="page_interaction in path track by $index"
+     ng-show="pathIdx == $index"
+     style="position:relative">
+  <div class="page_modal_image" id="{{'interaction'+$index}}">
+    <img src="{{page_interaction.page.screenshotUrl}}"  />
+    <div ng-repeat="interaction in page_interaction.interactions track by $index"
+         id="{{'element-outline'+$index}}"
+         class="element__outline"
+         ng-style="getOutlineStyle(interaction.element, $index, page_interaction.page)">
+    </div>
+  </div>
+</div>
