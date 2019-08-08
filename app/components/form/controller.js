@@ -75,7 +75,7 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
       }
 
       var discovered_form_count = 0;
-      $scope.forms.forEach(form => {
+      $scope.forms.forEach((form) => {
         if(form.status === "DISCOVERED"){
           discovered_form_count += 1;
         }

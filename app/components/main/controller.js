@@ -171,12 +171,11 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
         then(function(response){
           $scope.forms = response;
           var form_count = 0;
-          $scope.forms.forEach(form => {
+          $scope.forms.forEach((form) => {
             if(form.status === "DISCOVERED"){
               form_count += 1;
             }
           });
-          console.log("form cnt  :: "+$scope.discovered_forms_cnt);
 
           $rootScope.$broadcast("updateFormDiscoveredCountAlert", form_count);
         });
@@ -230,7 +229,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     $scope.$on('updateFormDiscoveredCountAlert', function(event, discovered_form_count){
       $scope.discovered_forms_cnt = discovered_form_count;
       store.set('discovered_forms_cnt', $scope.discovered_forms_cnt);
-      console.log("discovered forms count :: "+$scope.discovered_forms_cnt);
     });
 
     $scope.$on('updateAccount',$scope.getAccount());
