@@ -1,18 +1,20 @@
-<div ng-click="previous()">
+<div ng-click="previous()" class="col-md-1">
   <i class="fas fa-caret-left"></i>
 </div>
-<div ng-repeat="page_interaction in path track by $index"
-     ng-show="pathIdx == $index"
-     style="position:relative">
-  <div class="page_modal_image" id="{{'interaction'+$index}}">
+<div class="col-md-10" >
+  <div ng-repeat="page_interaction in path track by $index"
+       ng-init="page_idx = $index"
+       ng-show="pathIdx == $index"
+       class="page_modal_image"
+       id="{{'interaction'+$index}}" style="position:relative">
     <img src="{{page_interaction.page.screenshotUrl}}"  />
     <div ng-repeat="interaction in page_interaction.interactions track by $index"
-         id="{{'element-outline'+$index}}"
+         id="{{'element-outline'+page_idx+$index}}"
          class="element__outline"
-         ng-style="getOutlineStyle(interaction.element, $index, page_interaction.page)">
+         style="top: {{interaction.outline.top}}px;left: {{interaction.outline.left}}px; width: {{interaction.outline.width}}px; height:{{interaction.outline.height}}px">
     </div>
   </div>
 </div>
-<div ng-click="next()">
+<div ng-click="next()" class="col-md-1">
   <i class="fas fa-caret-right"></i>
 </div>

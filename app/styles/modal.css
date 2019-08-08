@@ -285,6 +285,10 @@ md-dialog {
 	padding:0px;
 }
 
+.page_modal_image {
+  position: relative;
+}
+
 .page_modal_image img {
 	width:100%;
 	height: auto;

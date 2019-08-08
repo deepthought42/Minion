@@ -436,14 +436,14 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       //create object consisting of a page and it's list of interactions
       //iterate over path and combine elements and actions into single object named interaction
       var new_path = [];
-      var page_interactions = {};
+      var page_interaction = {};
       for(var i=0; i < path_objects.length; i++){
         if(path_objects[i].key.includes("pagestate")){
-          page_interactions.page = path_objects[i];
-          page_interactions.page_key = path_objects[i].key;
-          page_interactions.interactions = [];
-          new_path.push(page_interactions);
-          page_interactions = {}
+          page_interaction.page = path_objects[i];
+          page_interaction.page_key = path_objects[i].key;
+          page_interaction.interactions = [];
+          new_path.push(page_interaction);
+          page_interaction = {}
         }
         else if(path_objects[i].key.includes("elementstate")){
           var interaction = {element: path_objects[i], action: path_objects[i+1], key: path_objects[i].key};
