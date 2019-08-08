@@ -38,9 +38,9 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
     $scope.errors = [];
 
     $scope.approved_test_cnt = store.get("approved_test_cnt");
+    $scope.discovered_forms_cnt = store.get("discovered_forms_cnt") || 0;
     $scope.$location = $location;
     $scope.current_path = $location.path();
-
 
     if (Auth.getCachedProfile()) {
       $scope.profile = Auth.getCachedProfile();
@@ -51,7 +51,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
         $scope.getAccount(profile.email);
       });
     }
-
 
     $scope.getAccount = function(email){
       Account.getAccount().$promise
@@ -167,6 +166,21 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
                   }
                 });
 
+      //get all forms
+      Domain.getForms({domain_id: domain.id}).$promise.
+        then(function(response){
+          $scope.forms = response;
+          var form_count = 0;
+          $scope.forms.forEach(form => {
+            if(form.status === "DISCOVERED"){
+              form_count += 1;
+            }
+          });
+          console.log("form cnt  :: "+$scope.discovered_forms_cnt);
+
+          $rootScope.$broadcast("updateFormDiscoveredCountAlert", form_count);
+        });
+
       $state.go("main.discovery");
 
     }
@@ -213,8 +227,10 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       $scope.approved_test_cnt = approved_test_cnt;
     });
 
-    $scope.$on('updateFormClassificationAlert', function(event, status){
-      $scope.forms_need_classifying = status;
+    $scope.$on('updateFormDiscoveredCountAlert', function(event, discovered_form_count){
+      $scope.discovered_forms_cnt = discovered_form_count;
+      store.set('discovered_forms_cnt', $scope.discovered_forms_cnt);
+      console.log("discovered forms count :: "+$scope.discovered_forms_cnt);
     });
 
     $scope.$on('updateAccount',$scope.getAccount());
