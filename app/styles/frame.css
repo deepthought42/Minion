@@ -513,12 +513,12 @@ md-progress-linear  .md-bar {
 }
 
 .stats__bar{
-float: right;
-font-size: 12px;
+  float: right;
+  font-size: 12px;
 }
 
 .stat_value{
-font-size: 11px;
+  font-size: 11px;
 }
 
 .stat_key_value{
@@ -542,8 +542,6 @@ font-size: 11px;
   padding-top: 10px;
 	padding-bottom: 10px;
   clear: both;
-  font-weight:;
-  color: ;
   text-align: inherit;
   white-space: nowrap;
   background-color: transparent;

@@ -11,5 +11,5 @@ pastPathService.factory('Events', ['segment', function (segment) {
         email : profile.email
       });
     }
-  }
+  };
 }]);
