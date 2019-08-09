@@ -37,7 +37,7 @@
               			</div>
               			<div class ="domain-dialogue-input" >
               				<div>
-                        {{ element.name }}
+                        {{ current_field.name }}
                       </div>
               			</div>
               	</div>
@@ -46,7 +46,7 @@
               				 <h6>Rules</h6>
               			</div>
               			<div class ="domain-dialogue-input" >
-              				<div ng-repeat="rule in element.rules">
+              				<div ng-repeat="rule in current_field.rules">
                         {{ rule.type }}
                       </div>
               			</div>
@@ -56,15 +56,13 @@
               				 <h6>Field Type</h6>
               			</div>
               			<div class ="domain-dialogue-input" >
-              				<select class="form-control" ng-model="form.type">
-              					<option ng-repeat="x in form.typeOptions"><span>{{x}}</span></option>
-              				</select>
+              				{{getFieldType(current_field)}}
               			</div>
               	</div>
                 <div class="col-12 col-sm-12 form_label_description accounts">
                   <h6>Field Screenshot</h6>
                   <div>
-                    <img class="form-screenshot" ng-src="{{form.formTag.screenshot}}" />
+                    <img class="form-screenshot" ng-src="{{current_field.screenshot}}" />
                   </div>
                 </div>
             	</div>
@@ -72,7 +70,7 @@
             <div class="col-12 col-sm-6 form_label_description accounts">
               <h6>Field Screenshot</h6>
               <div>
-                <img class="form-screenshot" ng-src="{{form.formTag.screenshot}}" />
+                <img class="form-screenshot" ng-src="{{current_field.screenshot}}" />
               </div>
             </div>
           </div>

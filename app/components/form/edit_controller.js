@@ -96,6 +96,14 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
        });
     };
 
+    $scope.getFieldType = function(element){
+      for(var i = 0;i<element.attributes.length; i++){
+        if(element.attributes[i].name == "type"){
+          return element.attributes[i].vals[0];
+        }
+      }
+    }
+
     this._init();
   }
 ]);
