@@ -612,5 +612,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           $scope.waitingOnTests = false;
         });
     });
+
+    $scope.$on("$destroy", function() {
+      $scope.pusher.unsubscribe($scope.extractHostname($scope.current_domain.url));
+    });
   }
 ]);
