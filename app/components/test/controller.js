@@ -757,5 +757,9 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
     $rootScope.$on("internal_server_error", function (e){
       $scope.errors.push({message: "There was an error processing your request. Please try again."});
     });
+
+    $scope.$on("$destroy", function() {
+      $scope.pusher.unsubscribe($scope.extractHostname($scope.domain_url));
+    });
   }
 ]);

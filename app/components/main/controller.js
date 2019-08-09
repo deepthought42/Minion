@@ -149,7 +149,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
       //if default browser is not set then show default browser selection dialog box
       $rootScope.$broadcast("domain_selected", domain);
 
-      $rootScope.$broadcast("reload_tests", domain);
+      //$rootScope.$broadcast("reload_tests", domain);
 
       //Load all page states
 

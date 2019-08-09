@@ -83,12 +83,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
         // Enable pusher logging - don't include this in production
         //Pusher.logToConsole = true;
-        var pusher = new Pusher('77fec1184d841b55919e', {
+        $scope.pusher = new Pusher('77fec1184d841b55919e', {
           cluster: 'us2',
           encrypted: true
         });
 
-        var channel = pusher.subscribe($scope.extractHostname($scope.current_domain.url));
+        var channel = $scope.pusher.subscribe($scope.extractHostname($scope.current_domain.url));
         channel.bind('test-discovered', function(data) {
           $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
           $scope.discoveredTestOnboardingIndex = 0;
@@ -588,7 +588,25 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
     /* EVENTS */
     $rootScope.$on('reload_tests', function(e){
+
+    });
+
+    $rootScope.$on('missing_resorce_error', function (e){
+      $scope.errors.push("We seem to have misplaced those records. Please try again. I'm sure we have them somewhere.");
+    });
+
+    $rootScope.$on('internal_server_error', function (e){
+      $scope.errors.push("There was an error while processing your request. Please try again.");
+    });
+
+    $scope.$on('domain_selected', function(domain){
+      //close previous pusher subscript
+      $scope.pusher.unsubscribe($scope.extractHostname($scope.current_domain.url));
       $scope.current_domain =  store.get('domain');
+      $scope.pusher.subscribe($scope.extractHostname($scope.current_domain.url));
+
+      $scope.default_browser = $scope.current_domain.discoveryBrowserName;
+
       Discovery.getStatus({url: $scope.current_domain.url}).$promise
         .then (function(data){
           $scope.discovery_status = data;
@@ -610,7 +628,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           $scope.isStarted = false;
         });
 
-      Test.getUnverified({url:  store.get('domain').url}).$promise
+      Test.getUnverified({url: $scope.current_domain.url}).$promise
         .then(function(data){
           $scope.tests = data
           $scope.waitingOnTests = false;
@@ -625,16 +643,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     });
 
-    $rootScope.$on('missing_resorce_error', function (e){
-      $scope.errors.push("We seem to have misplaced those records. Please try again. I'm sure we have them somewhere.");
-    });
-
-    $rootScope.$on('internal_server_error', function (e){
-      $scope.errors.push("There was an error while processing your request. Please try again.");
-    });
-
-    $scope.$on('domain_selected', function(){
-      $scope.default_browser = store.get('domain')['discoveryBrowserName'];
+    $scope.$on("$destroy", function() {
+      $scope.pusher.unsubscribe($scope.extractHostname($scope.current_domain.url));
     });
   }
 ]);
