@@ -156,7 +156,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
      */
     $scope.getPathIterations = function(path_size){
       var segment_cnt = Math.trunc(path_size/3);
-      if(segment_cnt == 0 ){
+      if(segment_cnt === 0 ){
         segment_cnt = 1;
       }
 
@@ -490,7 +490,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
             approved_cnt = 1;
           }
           else{
-            var approved_cnt = store.get('approved_test_cnt')+1;
+            approved_cnt = store.get('approved_test_cnt')+1;
           }
           store.set('approved_test_cnt', approved_cnt);
 

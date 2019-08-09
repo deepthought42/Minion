@@ -109,12 +109,6 @@ width: -webkit-calc(100% - 15px);
 	text-align: center;
 	padding: 5px;
 	background-color:#F44336;
-
-	-webkit-transition: opacity 3s ease-in-out;
-  -moz-transition: opacity 3s ease-in-out;
-  -ms-transition: opacity 3s ease-in-out;
-  -o-transition: opacity 3s ease-in-out;
-   opacity: 1;
 }
 
 .error__text {
@@ -277,7 +271,7 @@ width: -webkit-calc(100% - 15px);
 .margin_fifteen_left{
 	margin-left:15px !important;
 }
-.row:before, row:after{ 
+.row:before, row:after{
   display: inline-block !important;
 }
 .flex-auto {

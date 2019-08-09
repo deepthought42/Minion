@@ -23,6 +23,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.current_domain = {};
       $scope.protocols = ['http', 'https'];
       $scope.current_domain.protocol = 'http';
+      $scope.show_create_domain_err = false;
+      $scope.show_edit_domain_err = false;
 
       //ERRORS
       $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
@@ -44,6 +46,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       $scope.domain_url = "";
       $scope.domain_error = "";
       $scope.domain_creation_err = "An error occurred while saving the domain";
+      $scope.domain_edit_err = "An error occurred while saving the domain";
 
       //check if domain welcome onboarding has already been seen
       $scope.welcomeOnboardingEnabled = false;
@@ -118,7 +121,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     $scope.updateDomain = function(key, protocol, default_browser, logo_url){
       Domain.update({key: key, protocol: protocol, logoUrl: logo_url, browser_name: default_browser}).$promise
         .then(function(successResult){
-          $scope.show_create_domain_err = false;
+          $scope.show_edit_domain_err = false;
           store.set('domain', successResult);
           for(var idx=0; idx < $scope.domains.length; idx++){
             if($scope.domains[idx].key == key){
@@ -134,7 +137,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             $scope.closeDialog();
           }
           else{
-            $scope.show_create_domain_err = true;
+            $scope.show_edit_domain_err = true;
           }
         });
 
@@ -199,7 +202,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           preserveScope: true,
           templateUrl: "components/domain/edit_domain_modal.html",
           controller: function DialogController($scope, $mdDialog) {
-             $scope.show_create_domain_err = false;
+             $scope.show_edit_domain_err = false;
              $scope.closeDialog = function() {
                 $mdDialog.hide();
              }
@@ -217,13 +220,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       }).then(function(response) {
         // declare this function to handle response
         //set filestack url somewhere
-
-        console.log("response :: "+Object.keys(response));
-        console.log("response :: "+Object.keys(response.filesUploaded));
-
-      //  console.log("response failed:: "+Object.keys(response.filesFailed));
-      //  console.log("response failed:: "+Object.keys(response.filesFailed[0]));
-
         segment.track("Uploaded Logo", {
           domain : domain
         }, function(success){  });
