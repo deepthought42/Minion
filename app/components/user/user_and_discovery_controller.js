@@ -20,14 +20,9 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
       };
       $scope.domain = store.get('domain');
       $scope.form = $stateParams.form;
-      console.log("USER  ::: "+$stateParams.form);
-
     }
 
     $scope.save_user = function(user){
-      console.log(user);
-      console.log("Scope.domain : "+$scope.domain);
-      console.log("scope.form : "+$scope.form);
       Domain.addUser({domain_id: $scope.domain.id, username: user.username, password: user.password, role: user.role, enabled: user.enabled}).$promise
         .then(function(user){
           segment.track("Created user", {
@@ -37,7 +32,6 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
           }, function(success){});
 
           store.set('current_user', null);
-          console.log("user saved successfully");
           Domain.updateForm({domain_id: $scope.domain.id, key: $scope.form.key, name: $scope.form.name, form_type: $scope.form.type}).$promise
             .then(function(data){
               segment.track("Updated form", {
@@ -46,7 +40,6 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
                 succeeded : true
               }, function(success){});
 
-              console.log("Successfully updated form");
               $state.go("main.discovery");
             })
             .catch(function(err){
@@ -57,7 +50,6 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
               }, function(success){});
 
               alert("error occurred while initiating login/registration form discovery");
-              console.log("error occured while saving form");
             })
         })
         .catch(function(err){
@@ -68,7 +60,6 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
           }, function(success){});
 
           alert("Error occurred while creating user");
-          console.log("an error occurred while creating user :: "+err);
         });
     }
 

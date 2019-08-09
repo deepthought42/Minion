@@ -74,14 +74,14 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
         $scope.forms.push(reported_form);
       }
 
-      var needs_attention = false;
-      $scope.forms.forEach(form => {
+      var discovered_form_count = 0;
+      $scope.forms.forEach((form) => {
         if(form.status === "DISCOVERED"){
-          needs_attention = true;
+          discovered_form_count += 1;
         }
       })
 
-      $rootScope.$broadcast("updateFormClassificationAlert", needs_attention);
+      $rootScope.$broadcast("updateFormDiscoveredCountAlert", discovered_form_count);
       $scope.waitingOnForms = false;
       $scope.$apply();
     });

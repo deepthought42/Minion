@@ -20,7 +20,7 @@
           <a ui-sref="main.tests" id="notificationLink" style="{{$location.path() == '/tests' ? 'color: #fff;' : 'color:#9794d5'}}">
             <i class="fa fa-check-square-o sidebar-nav-icons" aria-hidden="true"></i>
             <span class="sidebar_remove_title">Tests</span>
-            <span id="notification_count" ng-show="approved_test_cnt">
+            <span class="notification_count" ng-show="approved_test_cnt">
               {{approved_test_cnt}}
             </span>
           </a>
@@ -35,6 +35,9 @@
           <a ui-sref="main.form"  style="{{$location.path() == '/form' ? 'color: #fff;' : 'color:#9794d5'}}">
             <i class="fa fa-list-ul sidebar-nav-icons" aria-hidden="true"></i>
             <span class="sidebar_remove_title">Forms</span>
+            <span class="notification_count" ng-show="discovered_forms_cnt">
+              {{discovered_forms_cnt}}
+            </span>
           </a>
         </li>
         <li>

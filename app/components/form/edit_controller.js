@@ -37,14 +37,11 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
 
     $scope.discoverTests = function(form){
       if($scope.users.length == 0 && (form.type.toLowerCase()==="login" || form.type.toLowerCase()==="registration")){
-        console.log("sending form :: "+form);
         $state.go('main.user_form_discovery', {form: form});
       }
       else{
         Domain.updateForm({domain_id: $scope.domain.id, key: form.key, name: form.name, form_type: form.type}).$promise
           .then(function(data){
-            console.log("Successfully updated form");
-
             segment.track("Start form discovery", {
                 form_key: form.key,
               }, function(success){  });
@@ -63,7 +60,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
               successful : true
             }, function(success){  });
       }
-    }
+    };
 
     this._init();
   }

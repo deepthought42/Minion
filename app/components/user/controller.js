@@ -27,7 +27,7 @@ angular.module('Qanairy.user', ['ui.router', 'Qanairy.TestUserService', 'ui.togg
           else{
             $scope.errors.push({message: $scope.unresponsive_server_err });
           }
-        })
+        });
 
         //ERRORS
         $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
