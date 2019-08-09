@@ -24,7 +24,7 @@ angular.module('Qanairy.dashboard', ['ui.router', 'Qanairy.DomainService'])
         .catch(function(err){
           $scope.errors.push(err);
         });
-    }
+    };
 
     this._init();
   }
