@@ -4,12 +4,8 @@
 }
 .dialogue-close{
   text-align:right !important;
-  padding:0px 0px 5px 15px;
-}
-.dialogue-close{
-  text-align:right !important;
-  padding:0px 0px 5px 15px;
-
+  padding:0px 10px 0px 14px;
+  margin-bottom: 5px;
 }
 .dialogue-close h2{
   line-height: 34px !important;
@@ -284,7 +280,9 @@ md-dialog {
     margin-right: 15px !important;
 	padding:0px;
 }
-
+.page_modal .dialogue-close{
+  background-color: #f4f4f8;
+}
 .page_modal_image {
   position: relative;
 }
@@ -293,4 +291,20 @@ md-dialog {
 	width:100%;
 	height: auto;
   position: relative;
+}
+.toggle-arrow{
+  font-size: 44px;
+  color: #6649e4;
+}
+.toggle-arrow:focus,
+.toggle-arrow.focus {
+  color: #553fc0;
+}
+.toggle-arrow:hover {
+  color: #553fc0;
+}
+.toggle-arrow:active,
+.toggle-arrow.active,
+.open > .dropdown-toggle.btn--primary {
+  color: #553fc0;
 }
