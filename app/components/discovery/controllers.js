@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService'])
+angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService', 'Qanairy.ElementStateOutline'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.discovery', {
@@ -35,7 +35,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.discoveryOnboardingIndex = 0;
       $scope.discovery_status = {};
       $scope.current_domain = store.get('domain');
-
+      $scope.outline = {'x': 0, 'y':0};
       //ERRORS
       $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
 
@@ -259,10 +259,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.getPathObject = function(key){
-      var path_objecs = store.get('path_objects').filter(function( path_object ){
+      var path_objects = store.get('path_objects').filter(function( path_object ){
         return path_object.key == key;
       });
-      return path_objecs[0];
+      return path_objects[0];
     }
 
     $scope.toggleTestDataVisibility = function(test, index){
@@ -275,7 +275,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.visible_browser_screenshot = $scope.default_browser;
 
       $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-      $scope.setCurrentNode($scope.current_path_objects[0], index);
+      $scope.setCurrentNode($scope.current_path_objects[0], 0);
 
       if(test.visible){
         $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
@@ -424,8 +424,38 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
-    $scope.openPageModal = function(full_screenshot) {
-      $scope.full_page_screenshot = full_screenshot;
+
+    $scope.openPathSlider = function(test, index) {
+      $scope.current_test = test;
+
+      //iterate over keys and load path PathObjects
+      var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
+      path_objects.push($scope.test.result)
+      //add result to end of path
+
+      //create object consisting of a page and it's list of interactions
+      //iterate over path and combine elements and actions into single object named interaction
+      var new_path = [];
+      var page_interaction = {};
+      for(var i=0; i < path_objects.length; i++){
+        if(path_objects[i].key.includes("pagestate")){
+          page_interaction.page = path_objects[i];
+          page_interaction.page_key = path_objects[i].key;
+          page_interaction.interactions = [];
+          new_path.push(page_interaction);
+          page_interaction = {}
+        }
+        else if(path_objects[i].key.includes("elementstate")){
+          var interaction = {element: path_objects[i], action: path_objects[i+1], key: path_objects[i].key};
+          //create interaction object and add it to page interactions
+          console.log("pushing interaction onto interactions   :  "+Object.keys(interaction));
+          new_path[new_path.length-1].interactions.push(interaction);
+          console.log("new path interaction  ::  " + JSON.stringify(new_path[new_path.length-1].interactions));
+        }
+      }
+
+       $scope.current_path_idx = index;
+       $scope.preview_path = new_path;
        $mdDialog.show({
           clickOutsideToClose: true,
           scope: $scope,
