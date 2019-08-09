@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanairy.DomainService'])
+angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanairy.DomainService', 'Qanairy.ElementService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.form_edit', {
@@ -11,12 +11,16 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
   });
 }])
 
-.controller('FormEditCtrl', ['$rootScope', '$scope', 'Form', 'Domain', 'store', '$state', '$stateParams', 'segment',
-  function($rootScope, $scope, Form, Domain, store, $state, $stateParams,segment) {
+.controller('FormEditCtrl', ['$rootScope', '$scope', 'Form', 'Domain', 'store', '$state', '$stateParams', 'segment', 'Element', '$mdDialog',
+  function($rootScope, $scope, Form, Domain, store, $state, $stateParams,segment, Element, $mdDialog) {
 
     this._init = function(){
       $scope.domain = store.get('domain');
       $scope.users = store.get('users');
+      $scope.rule_form = {};
+      $scope.rule_types = ["required", "disabled", "alphabetic_restriciton", "special_character_restriction", "read_only", "min_value", "max_value", "min_length", "max_length", "email_pattern", "pattern"];
+      $scope.show_update_element_err = false;
+      $scope.current_field = null;
 
       if($stateParams.form){
         $scope.form = $stateParams.form;
@@ -61,6 +65,41 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
             }, function(success){  });
       }
     };
+
+    $scope.createRule = function(element_id, type, value){
+      console.log("creating rule " + element_id + " : " + type + " : " + value);
+      Element.addRule({id: element_id, type: type, value: value}).$promise
+        .then(function(data){
+          console.log("DATA RETURNED :: "+data);
+        })
+        .catch(function(err){
+          console.log("error occurred :: " + err);
+        })
+    }
+
+    $scope.openEditElementDialog  = function(element) {
+      $scope.current_field = element;
+      $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/form/edit_element_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.show_edit_element_err = false;
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
+
+    $scope.getFieldType = function(element){
+      for(var i = 0;i<element.attributes.length; i++){
+        if(element.attributes[i].name == "type"){
+          return element.attributes[i].vals[0];
+        }
+      }
+    }
 
     this._init();
   }

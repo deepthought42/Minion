@@ -48,16 +48,14 @@
     <div class="test"
          ng-repeat="form in (filteredForms = forms) | filter:searchText track by $index"
          ng-show="forms.length > 0">
-      <div class="test__profile vertical__left__profile"">
-
-        <div class="flex-auto test__title test_functions test__profile_stretch"">
+      <div class="test__profile vertical__left__profile">
+        <div class="flex-auto test__title test_functions test__profile_stretch">
           <div class="">
             <h5 class="test__title">
                {{form.name || "Form #"+($index+1)}}
              </h5>
           </div>
         </div>
-
         <div class="flex-initial text-left date_stats test__profile_stretch">
           {{form.type}}
         </div>
