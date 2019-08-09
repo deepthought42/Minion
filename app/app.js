@@ -37,8 +37,7 @@ angular.module("Qanairy", [
   "ngSegment",
   "Qanairy.EventService",
   "Qanairy.user_form_discovery",
-  "Qanairy.upgrade",
-  "Qanairy.ElementService"
+  "Qanairy.upgrade"
 ]).
 config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptionsProvider", "jwtInterceptorProvider","storeProvider", "StripeCheckoutProvider", "ngOnboardingDefaultsProvider", "$locationProvider", "segmentProvider",
   function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider, segmentProvider) {
@@ -54,7 +53,7 @@ config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptio
       domain: "staging-qanairy.auth0.com",
       responseType: "token id_token",
       audience: "https://staging-api.qanairy.com",
-      redirectUri: "http://localhost:8001/#/authenticate", //"https://staging-app.qanairy.com/authenticate",
+      redirectUri: "http://localhost:8001/#/authenticate",//"https://app.qanairy.com/authenticate",
       scope: "openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions create:test_user"
     });
 
@@ -87,8 +86,8 @@ config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptio
 
     $rootScope.$on("$stateChangeStart", function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
-       $rootScope.$broadcast("domainRequiredError");
-       if(store.get("domain") == null && toState.name !== "main.upgrade" && toState.name !== "authenticate" && toState.name !== "subscribe" && toState.name !== "main.account"){
+         $rootScope.$broadcast("domainRequiredError");
+         if(store.get("domain") == null && toState.name !== "main.upgrade" && toState.name !== "authenticate" && toState.name !== "subscribe" && toState.name !== "main.account"){
          if(toState.name !== "main.domains" && fromState.name == "main.domains"){
            e.preventDefault();
          }
