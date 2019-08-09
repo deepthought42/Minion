@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService'])
+angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService', 'Qanairy.ElementStateOutline'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.discovery', {
@@ -35,7 +35,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.discoveryOnboardingIndex = 0;
       $scope.discovery_status = {};
       $scope.current_domain = store.get('domain');
-
+      $scope.outline = {'x': 0, 'y':0};
       //ERRORS
       $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
 
@@ -83,12 +83,12 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
         // Enable pusher logging - don't include this in production
         //Pusher.logToConsole = true;
-        var pusher = new Pusher('77fec1184d841b55919e', {
+        $scope.pusher = new Pusher('77fec1184d841b55919e', {
           cluster: 'us2',
           encrypted: true
         });
 
-        var channel = pusher.subscribe($scope.extractHostname($scope.current_domain.url));
+        var channel = $scope.pusher.subscribe($scope.extractHostname($scope.current_domain.url));
         channel.bind('test-discovered', function(data) {
           $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
           $scope.discoveredTestOnboardingIndex = 0;
@@ -259,10 +259,10 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.getPathObject = function(key){
-      var path_objecs = store.get('path_objects').filter(function( path_object ){
+      var path_objects = store.get('path_objects').filter(function( path_object ){
         return path_object.key == key;
       });
-      return path_objecs[0];
+      return path_objects[0];
     }
 
     $scope.toggleTestDataVisibility = function(test, index){
@@ -275,7 +275,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.visible_browser_screenshot = $scope.default_browser;
 
       $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-      $scope.setCurrentNode($scope.current_path_objects[0], index);
+      $scope.setCurrentNode($scope.current_path_objects[0], 0);
 
       if(test.visible){
         $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
@@ -424,8 +424,38 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
-    $scope.openPageModal = function(full_screenshot) {
-      $scope.full_page_screenshot = full_screenshot;
+
+    $scope.openPathSlider = function(test, index) {
+      $scope.current_test = test;
+
+      //iterate over keys and load path PathObjects
+      var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
+      path_objects.push($scope.test.result)
+      //add result to end of path
+
+      //create object consisting of a page and it's list of interactions
+      //iterate over path and combine elements and actions into single object named interaction
+      var new_path = [];
+      var page_interaction = {};
+      for(var i=0; i < path_objects.length; i++){
+        if(path_objects[i].key.includes("pagestate")){
+          page_interaction.page = path_objects[i];
+          page_interaction.page_key = path_objects[i].key;
+          page_interaction.interactions = [];
+          new_path.push(page_interaction);
+          page_interaction = {}
+        }
+        else if(path_objects[i].key.includes("elementstate")){
+          var interaction = {element: path_objects[i], action: path_objects[i+1], key: path_objects[i].key};
+          //create interaction object and add it to page interactions
+          console.log("pushing interaction onto interactions   :  "+Object.keys(interaction));
+          new_path[new_path.length-1].interactions.push(interaction);
+          console.log("new path interaction  ::  " + JSON.stringify(new_path[new_path.length-1].interactions));
+        }
+      }
+
+       $scope.current_path_idx = index;
+       $scope.preview_path = new_path;
        $mdDialog.show({
           clickOutsideToClose: true,
           scope: $scope,
@@ -558,7 +588,25 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
     /* EVENTS */
     $rootScope.$on('reload_tests', function(e){
+
+    });
+
+    $rootScope.$on('missing_resorce_error', function (e){
+      $scope.errors.push("We seem to have misplaced those records. Please try again. I'm sure we have them somewhere.");
+    });
+
+    $rootScope.$on('internal_server_error', function (e){
+      $scope.errors.push("There was an error while processing your request. Please try again.");
+    });
+
+    $scope.$on('domain_selected', function(domain){
+      //close previous pusher subscript
+      $scope.pusher.unsubscribe($scope.extractHostname($scope.current_domain.url));
       $scope.current_domain =  store.get('domain');
+      $scope.pusher.subscribe($scope.extractHostname($scope.current_domain.url));
+
+      $scope.default_browser = $scope.current_domain.discoveryBrowserName;
+
       Discovery.getStatus({url: $scope.current_domain.url}).$promise
         .then (function(data){
           $scope.discovery_status = data;
@@ -580,7 +628,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           $scope.isStarted = false;
         });
 
-      Test.getUnverified({url:  store.get('domain').url}).$promise
+      Test.getUnverified({url: $scope.current_domain.url}).$promise
         .then(function(data){
           $scope.tests = data
           $scope.waitingOnTests = false;
@@ -595,16 +643,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     });
 
-    $rootScope.$on('missing_resorce_error', function (e){
-      $scope.errors.push("We seem to have misplaced those records. Please try again. I'm sure we have them somewhere.");
-    });
-
-    $rootScope.$on('internal_server_error', function (e){
-      $scope.errors.push("There was an error while processing your request. Please try again.");
-    });
-
-    $scope.$on('domain_selected', function(){
-      $scope.default_browser = store.get('domain')['discoveryBrowserName'];
+    $scope.$on("$destroy", function() {
+      $scope.pusher.unsubscribe($scope.extractHostname($scope.current_domain.url));
     });
   }
 ]);

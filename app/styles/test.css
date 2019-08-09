@@ -753,6 +753,11 @@ width: -webkit-calc(100% - 15px);
 .accounts_btn{
 	margin-top: 15px !important;
 }
+
+.element__outline{
+  position: absolute;
+  border: 2px solid #f0c344;
+}
 /*--------------------------- [6. Test Groups] --------------------------------------------------------------------------------*/
 
 .test__groups{
