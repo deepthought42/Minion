@@ -37,7 +37,8 @@ angular.module("Qanairy", [
   "ngSegment",
   "Qanairy.EventService",
   "Qanairy.user_form_discovery",
-  "Qanairy.upgrade"
+  "Qanairy.upgrade",
+  "Qanairy.comingSoon"
 ]).
 config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptionsProvider", "jwtInterceptorProvider","storeProvider", "StripeCheckoutProvider", "ngOnboardingDefaultsProvider", "$locationProvider", "segmentProvider",
   function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider, segmentProvider) {
@@ -86,8 +87,8 @@ config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptio
 
     $rootScope.$on("$stateChangeStart", function (e, toState, toParams, fromState, fromParams) {
      //var requireLogin = toState.data.requireLogin || false;
-         $rootScope.$broadcast("domainRequiredError");
-         if(store.get("domain") == null && toState.name !== "main.upgrade" && toState.name !== "authenticate" && toState.name !== "subscribe" && toState.name !== "main.account"){
+       $rootScope.$broadcast("domainRequiredError");
+       if(store.get("domain") == null && toState.name !== "main.upgrade" && toState.name !== "authenticate" && toState.name !== "subscribe" && toState.name !== "main.account" && toState.name !== "main.comingSoon"){
          if(toState.name !== "main.domains" && fromState.name == "main.domains"){
            e.preventDefault();
          }
