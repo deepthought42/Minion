@@ -751,6 +751,13 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       return false;
     }
 
+    $scope.loadPageInteraction = function(interaction){
+      var page_interaction = {};
+      page_interaction.page = interaction;
+      page_interaction.page_key = interaction.key;
+      page_interaction.interactions = [];
+      return page_interaction;
+    }
 
     $scope.openPathSlider = function(test, index) {
       $scope.current_test = test;
@@ -763,33 +770,14 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       //create object consisting of a page and it's list of interactions
       //iterate over path and combine elements and actions into single object named interaction
       var new_path = [];
-      var page_interaction = {};
       for(var i=0; i < path_objects.length; i++){
-        if(path_objects[i].key.includes("pagestate")){
-          page_interaction.page = path_objects[i];
-          page_interaction.page_key = path_objects[i].key;
-          page_interaction.interactions = [];
-          new_path.push(page_interaction);
-          page_interaction = {}
+        if(path_objects[i].key.includes("pagestate") || path_objects[i].key.includes("redirect") || path_objects[i].key.includes("loadpageanimation")){
+          new_path.push( $scope.loadPageInteraction(path_objects[i]));
         }
         else if(path_objects[i].key.includes("elementstate")){
           var interaction = {element: path_objects[i], action: path_objects[i+1], key: path_objects[i].key};
           //create interaction object and add it to page interactions
           new_path[new_path.length-1].interactions.push(interaction);
-        }
-        else if(path_objects[i].key.includes("redirect")){
-          page_interaction.page = path_objects[i];
-          page_interaction.page_key = path_objects[i].key;
-          page_interaction.interactions = [];
-          new_path.push(page_interaction);
-          page_interaction = {}
-        }
-        else if(path_objects[i].key.includes("animation")){
-          page_interaction.page = path_objects[i];
-          page_interaction.page_key = path_objects[i].key;
-          page_interaction.interactions = [];
-          new_path.push(page_interaction);
-          page_interaction = {}
         }
       }
 
