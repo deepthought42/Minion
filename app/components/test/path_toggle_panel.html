@@ -1,7 +1,7 @@
 <div ng-click="previous()" class="col-md-1">
-  <i class="fas toggle-arrow fa-chevron-circle-left"></i>
+  <i class="fas fa-caret-left"></i>
 </div>
-<div class="col-md-10">
+<div class="col-md-10" >
   <div ng-repeat="page_interaction in path track by $index"
        ng-init="page_idx = $index"
        ng-show="pathIdx == $index"
@@ -16,5 +16,5 @@
   </div>
 </div>
 <div ng-click="next()" class="col-md-1">
-  <i class="fas toggle-arrow fa-chevron-circle-right"></i>
+  <i class="fas fa-caret-right"></i>
 </div>
