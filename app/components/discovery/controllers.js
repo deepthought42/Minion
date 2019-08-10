@@ -463,7 +463,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           new_path.push(page_interaction);
           page_interaction = {}
         }
-        else if(path_objects[i].key.includes("animation")){
+        else if(path_objects[i].key.includes("PageLoadAnimation")){
           page_interaction.page = path_objects[i];
           page_interaction.page_key = path_objects[i].key;
           page_interaction.interactions = [];
