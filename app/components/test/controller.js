@@ -508,6 +508,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
      }
 
     $scope.setCurrentNode = function(node, index){
+      if(index > 3){
+        index = (index % 3) + 1;
+      }
+      else{
+        index = (index % 3);
+      }
       $scope.current_node_idx = index;
       $scope.current_node[$scope.test_idx] = node;
     }
@@ -769,9 +775,21 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         else if(path_objects[i].key.includes("elementstate")){
           var interaction = {element: path_objects[i], action: path_objects[i+1], key: path_objects[i].key};
           //create interaction object and add it to page interactions
-          console.log("pushing interaction onto interactions   :  "+Object.keys(interaction));
           new_path[new_path.length-1].interactions.push(interaction);
-          console.log("new path interaction  ::  " + JSON.stringify(new_path[new_path.length-1].interactions));
+        }
+        else if(path_objects[i].key.includes("redirect")){
+          page_interaction.page = path_objects[i];
+          page_interaction.page_key = path_objects[i].key;
+          page_interaction.interactions = [];
+          new_path.push(page_interaction);
+          page_interaction = {}
+        }
+        else if(path_objects[i].key.includes("animation")){
+          page_interaction.page = path_objects[i];
+          page_interaction.page_key = path_objects[i].key;
+          page_interaction.interactions = [];
+          new_path.push(page_interaction);
+          page_interaction = {}
         }
       }
 

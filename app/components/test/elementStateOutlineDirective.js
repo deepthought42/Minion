@@ -7,7 +7,7 @@ angular.module('Qanairy.ElementStateOutline', [])
     controller: function($scope){
       console.log($scope.path);
       $scope.preview_path = $scope.path;
-      console.log("path_index :: "+$scope.pathIdx);
+      console.log("path_index :: "+ Object.keys($scope.path));
 
       $scope.next = function() {
         console.log("getting next");
@@ -32,7 +32,7 @@ angular.module('Qanairy.ElementStateOutline', [])
         var parent_elem = element.children().eq(1);
         var scale_height = parent_elem.height()/page.viewportHeight;
         var scale_width = parent_elem.width()/page.viewportWidth;
-
+/*
         console.log("parent element   ::   "+Object.keys(parent_elem));
         console.log("parent height   :::   "+parent_elem.height());
         console.log("parent width   :::   "+parent_elem.width());
@@ -44,6 +44,7 @@ angular.module('Qanairy.ElementStateOutline', [])
         console.log("element state x :: "+element_state.element.xlocation);
         //add outline styling object to elements
         console.log("path idx :: "+$scope.pathIdx);
+*/
         return {
           top: element_state.element.ylocation * scale_width,
           left: element_state.element.xlocation * scale_width,
