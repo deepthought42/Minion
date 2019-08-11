@@ -12,7 +12,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
 }])
 
 .controller('FormEditCtrl', ['$rootScope', '$scope', 'Form', 'Domain', 'store', '$state', '$stateParams', 'segment', 'Element', '$mdDialog',
-  function($rootScope, $scope, Form, Domain, store, $state, $stateParams,segment, Element, $mdDialog) {
+  function($rootScope, $scope, Form, Domain, store, $state, $stateParams, segment, Element, $mdDialog) {
 
     this._init = function(){
       $scope.domain = store.get('domain');
@@ -96,6 +96,17 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
         }
       }
     };
+
+    $scope.saveElement = function(elementstate){
+      Element.update(elementstate).$promise
+        .then(function(data){
+          console.log("element data :: "+data);
+          elementstate = data;
+        })
+        .catch(function(err){
+          console.log("element update err  :  "+err);
+        })
+    }
 
     $scope.addRuleToElement = function(current_field, new_rule) {
       var exists = false;
