@@ -33,7 +33,85 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       //ERRORS
       $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
 
+      //Rules declarartion
+      $scope.rule_options = [
+        {
+          type:"EMAIL_PATTERN",
+          value: "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$",
+          key:"email_pattern::^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$",
+        },
+        {
+          type: "ALPHABETIC_RESTRICTION",
+          value: "[a-zA-Z]",
+          key: "alphabetic_restriciton::[a-zA-Z]"
+        },
+        {
+          type: "NUMERIC_RESTRICTION",
+          value: "[0-9]",
+          key: "numeric_restriction::[0-9]"
+        },
+        {
+          type: "READ_ONLY",
+          value: "",
+          key: "read_only::"
+        },
+        {
+          type: "REQUIRED",
+          value: "",
+          key: "required::"
+        },
+        {
+          type: "SPECIAL_CHARACTER_RESTRICTION",
+          value: "[^<>!@#$%&*()]",
+          key: "special_character_restriction::[^<>!@#$%&*()]"
+        },
+        {
+          type: "MIN_LENGTH",
+          value: "",
+          key: ""
+        },
+        {
+          type: "MAX_LENGTH",
+          value: "",
+          key: ""
+        },
+        {
+          type: "MIN_VALUE",
+          value: "",
+          key: ""
+        },
+        {
+          type: "MAX_VALUE",
+          value: "",
+          key: ""
+        }
+      ]
     };
+
+    $scope.removeRule = function(rule) {
+      for(var i = 0; i< $scope.current_field.rules.length; i++){
+        if($scope.current_field.rules[i].type == rule.type){
+            //remove rule at idx
+            $scope.current_field.rules.splice(i, 1);
+        }
+      }
+    };
+
+    $scope.addRuleToElement = function(current_field, new_rule) {
+      var exists = false;
+      for(var i = 0; i< $scope.current_field.rules.length; i++){
+
+        console.log("$scope.rule options   ::  "+JSON.stringify($scope.current_field.rules[i].type));
+        console.log("$scope.rule options   ::  "+(JSON.stringify($scope.current_field.rules[i].type  == new_rule.type)));
+        if($scope.current_field.rules[i].type == new_rule.type){
+            exists = true;
+        }
+      }
+
+      if(!exists){
+        $scope.current_field.rules.push(new_rule);
+      }
+    }
 
     $scope.cancel = function(){
       $state.go("main.form");

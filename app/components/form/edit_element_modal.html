@@ -42,14 +42,30 @@
               			</div>
               	</div>
                 <div class ="col-12 col-sm-6 form_molecule" >
-              			<div class="form_label_description_domain">
-              				 <h6>Rules</h6>
-              			</div>
-              			<div class ="domain-dialogue-input" >
-              				<div ng-repeat="rule in current_field.rules">
-                        {{ rule.type }}
+            			<div class="form_label_description_domain">
+          				  <h6>Rules</h6>
+            			</div>
+            			<div class ="domain-dialogue-input" >
+            				<div class="col-sm-12" ng-repeat="rule in current_field.rules">
+                      <span>{{ rule.type }}</span>
+                      <span>{{ rule.value}}</span>
+                      <span ng-click="removeRule(rule)">
+                        <i class="fa fa-times red"></i>
+                      </span>
+                    </div>
+            			</div>
+                  <div>
+                    <div>
+                      <select ng-options="rule as rule.type for rule in rule_options" ng-model="new_rule">
+                      </select>
+                      <div ng-show="new_rule && new_rule.type && (new_rule.type=='MAX_VALUE' || new_rule.type=='MIN_VALUE' || new_rule.type=='MAX_LENGTH' || new_rule.type=='MIN_LENGTH')">
+                        <input type="text" ng-model="new_rule.value"/>
                       </div>
-              			</div>
+                    </div>
+                    <div ng-click="addRuleToElement(current_field, new_rule)">
+                      <i class="fa fa-plus-circle fa-2x"></i>
+                    </div>
+                  </div>
               	</div>
                 <div class ="col-12 col-sm-6 form_molecule" >
               			<div class="form_label_description_domain">
@@ -81,9 +97,7 @@
             Cancel
           </button>
       		<button class="btn btn--primary title__edit__buttons" ng-click="discoverTests(form)">
-      			<span  ng-show="form.status!='CLASSIFIED' && (!users.length && (form.type.toLowerCase()==='login' || form.type.toLowerCase()==='registration'))" >Save &amp; Add User</span>
-      			<span  ng-show="form.status!='CLASSIFIED' && (users.length || (form.type.toLowerCase()!=='login' && form.type.toLowerCase()!=='registration'))">Save &amp; Continue Discovery</span>
-      			<span  ng-show="form.status=='CLASSIFIED'">Update Form</span>
+      			Update Form Field
       		</button>
 
         </div>
