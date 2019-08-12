@@ -97,17 +97,6 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       }
     };
 
-    $scope.saveElement = function(elementstate){
-      Element.update(elementstate).$promise
-        .then(function(data){
-          console.log("element data :: "+data);
-          elementstate = data;
-        })
-        .catch(function(err){
-          console.log("element update err  :  "+err);
-        })
-    }
-
     $scope.addRuleToElement = function(current_field, new_rule) {
       var exists = false;
       for(var i = 0; i< $scope.current_field.rules.length; i++){
@@ -177,6 +166,18 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
              $scope.show_edit_element_err = false;
              $scope.closeDialog = function() {
                 $mdDialog.hide();
+             }
+
+             $scope.saveElement = function(elementstate){
+               Element.update(elementstate).$promise
+                 .then(function(data){
+                   console.log("element data :: "+data);
+                   elementstate = data;
+                   $scope.closeDialog();
+                 })
+                 .catch(function(err){
+                   console.log("element update err  :  "+err);
+                 })
              }
           }
        });
