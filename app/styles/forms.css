@@ -9,3 +9,9 @@
 	transition: background-color 10s ease-in-out;
   border: 1px solid #e0e0e0;
 }
+.form__field__label{
+  flex-grow: 2;
+}
+.form__field__functions {
+	width:40px;
+}

@@ -41,28 +41,28 @@
               <div class="">
                 <div class="test-labels-container">
                   <div class="test-labels">
-                    <div class="flex-initial text-left">
+                    <div class="flex-auto text-left">
                       Field Title
                     </div>
-                    <div class="flex-initial text-left">
+                    <div class="flex-auto text-left">
                       Rules
                     </div>
-                    <div class="flex-none discovery_functions">
+                    <div class="flex-none form__field__functions">
                     </div>
                   </div>
                 </div>
                 <div class="">
                   <div ng-repeat="element in form.formFields">
                     <div class="row no-gutters form__field__profile">
-                      <div class="flex-initial text-left">
+                      <div class="flex-auto text-left">
                         {{ element.name }}
                       </div>
-                      <div class="flex-initial text-left">
+                      <div class="flex-auto text-left">
                         <div ng-repeat="rule in element.rules">
                           {{ rule.type }}
                         </div>
                       </div>
-                      <div class="flex-none discovery_functions">
+                      <div class="flex-none form__field__functions">
                         <div class="fifteen_left" ng-click="openEditElementDialog(element)"
                              style="text-align:right !important; padding:0px; margin:0px; position: relative;" id="{{'edit_element_settings'+$index}}" >
                            <i class="fa fa-pencil domain_card_action" ></i>

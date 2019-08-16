@@ -274,17 +274,16 @@ width: -webkit-calc(100% - 15px);
 .row:before, row:after{
   display: inline-block !important;
 }
-.flex-auto {
-  flex: 1 1 auto;
-}
+
 .flex-auto-no-padding {
   flex: 1;
 }
-
+.flex-auto {
+  flex: 1 1 auto;
+}
 .flex-initial {
   flex: 0 1 auto;
 }
-
 .flex-none {
   flex: 0 0 auto;
 }
