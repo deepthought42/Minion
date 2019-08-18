@@ -21,6 +21,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       $scope.rule_types = ["required", "disabled", "alphabetic_restriciton", "special_character_restriction", "read_only", "min_value", "max_value", "min_length", "max_length", "email_pattern", "pattern"];
       $scope.show_update_element_err = false;
       $scope.current_field = null;
+      $scope.errors = [];
 
       if($stateParams.form){
         $scope.form = $stateParams.form;
@@ -100,15 +101,47 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
     $scope.addRuleToElement = function(current_field, new_rule) {
       var exists = false;
       for(var i = 0; i< $scope.current_field.rules.length; i++){
-
-        console.log("$scope.rule options   ::  "+JSON.stringify($scope.current_field.rules[i].type));
-        console.log("$scope.rule options   ::  "+(JSON.stringify($scope.current_field.rules[i].type  == new_rule.type)));
         if($scope.current_field.rules[i].type == new_rule.type){
             exists = true;
         }
       }
 
       if(!exists){
+        //check if rule is min or max value and that both min and max are isDefined and that min is not greater than or equal to max value
+        if((new_rule.type == "MIN_VALUE" || new_rule.type == "MAX_VALUE")){
+              if(new_rule.value.length == 0){
+                $scope.addError("Value is required for Min/Max value rules");
+                return;
+              }
+              if(new_rule.value < 0){
+                $scope.addError("Min/Max value rule cannot be negative ");
+                return;
+              }
+
+              if(!$scope.bothMinMaxValueRulesExistAndMinIsLessThanMax($scope.current_field.rules, new_rule)){
+                  $scope.addError("Minimum value rule cannot be greater than max value rule");
+                  return;
+              }
+        }
+
+
+        //check if rule is min or max length and that both min and max are isDefined and that min is not greater than or equal to max length
+        if( (new_rule.type == "MIN_LENGTH" || new_rule.type == "MAX_LENGTH")){
+            if(new_rule.value.length == 0){
+              $scope.addError("Value is required for Min/Max length rules");
+              return;
+            }
+            if(new_rule.value < 0){
+              $scope.addError("Min/Max length rule value cannot be negative ");
+              return;
+            }
+
+            if(!$scope.bothMinMaxLengthRulesExistAndMinIsLessThanMax($scope.current_field.rules, new_rule)){
+              $scope.addError("Minimum length rule value cannot be greater than max length rule value");
+              return;
+            }
+        }
+
         $scope.current_field.rules.push(new_rule);
       }
     }
@@ -145,13 +178,12 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
     };
 
     $scope.createRule = function(element_id, type, value){
-      console.log("creating rule " + element_id + " : " + type + " : " + value);
       Element.addRule({id: element_id, type: type, value: value}).$promise
         .then(function(data){
-          console.log("DATA RETURNED :: "+data);
+          //$scope.successes.push("Successfully saved rule");
         })
         .catch(function(err){
-          console.log("error occurred :: " + err);
+          $scope.errors.push("Error occurred while saving rule")
         })
     }
 
@@ -171,7 +203,6 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
              $scope.saveElement = function(elementstate){
                Element.update(elementstate).$promise
                  .then(function(data){
-                   console.log("element data :: "+data);
                    elementstate = data;
                    $scope.closeDialog();
                  })
@@ -189,6 +220,68 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
           return element.attributes[i].vals[0];
         }
       }
+    }
+
+    $scope.addError = function(err){
+      $scope.errors.push(err);
+      setTimeout(function(){
+          $scope.errors.shift();
+          $scope.$apply();
+        }, 10000);
+    }
+
+    $scope.bothMinMaxValueRulesExistAndMinIsLessThanMax = function(rules, new_rule){
+      //get min and max rules
+      var min_rule = null;
+      var max_rule = null;
+
+      for(var i=0; i< rules.length; i++){
+        if(rules[i].type == "MIN_VALUE"){
+          min_rule = rules[i];
+        }
+        if(rules[i].type == "MAX_VALUE"){
+          max_rule = rules[i];
+        }
+      }
+      if(min_rule !== null ){
+        max_rule = new_rule;
+      }
+      else if(max_rule !== null ){
+        min_rule = new_rule;
+      }
+
+      if(min_rule !== null && max_rule !== null && min_rule.value > max_rule.value){
+        return false;
+      }
+      return true;
+    }
+
+    $scope.bothMinMaxLengthRulesExistAndMinIsLessThanMax = function(rules, new_rule){
+      var min_rule = null;
+      var max_rule = null;
+
+      //get min and max rules
+      for(var i=0; i< rules.length; i++){
+        if(rules[i].type == "MIN_LENGTH"){
+          min_rule = rules[i];
+        }
+        if(rules[i].type == "MAX_LENGTH"){
+          max_rule = rules[i];
+        }
+      }
+
+      if(min_rule !== null ){
+        max_rule = new_rule;
+      }
+      else if(max_rule !== null ){
+        min_rule = new_rule;
+      }
+
+      if(min_rule !== null && max_rule !== null && min_rule.value > max_rule.value){
+        return false;
+      }
+
+      return true;
     }
 
     this._init();

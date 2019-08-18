@@ -22,6 +22,7 @@
                     <img class="form-screenshot" ng-src="{{current_field.screenshot}}" />
                   </div>
                 </div>
+                <!--
               	<div class ="col-12 col-sm-10 col-lg-8 col-xl-6 form_molecule" >
               			<div class="form_label_description_domain">
               				 <h6>Field Title</h6>
@@ -32,20 +33,21 @@
               				</div>
               			</div>
               	</div>
+                -->
                 <div class ="col-12 col-sm-12 form_molecule" >
             			<div class="form_label_description_domain">
           				  <h6>Rules</h6>
             			</div>
-                  
+
             			<div class ="domain-dialogue-input" >
             				<div class="col-sm-12" >
-                      <div ng-repeat="rule in current_field.rules">
+                      <div ng-repeat="rule in current_field.rules track by $index">
                         <div class="row form__field__profile">
                           <div class="col-5">
                             <span>{{ rule.type }}</span>
                           </div>
                           <div class="col-6">
-                            <span>{{ rule.value}}</span>
+                            <span>{{ rule.value }}</span>
                           </div>
                           <div class="col-1">
                             <span ng-click="removeRule(rule)">
@@ -75,6 +77,11 @@
                     </div>
                   </div>
               	</div>
+                <div id="rule_errors" class="col-md-12 error__message" ng-show="errors.length > 0">
+                  <div ng-repeat="error in errors track by $index">
+                    {{error}}
+                  </div>
+                </div>
             	</div>
             </div>
           </div>
