@@ -86,13 +86,9 @@ width: -webkit-calc(100% - 15px);
     /* Standard */
     height: calc(100% - 178px);
 }
-
-
 .empty__state div{
   display:block;
 }
-
-
 .empty__state h2{
   padding-bottom: 30px;
 }
@@ -101,8 +97,10 @@ width: -webkit-calc(100% - 15px);
   max-width: 800px !important;
 	display: inline-block;
 }
-
-
+.empty_state_card{
+  border-radius: 5px;
+  border: 1px solid #f9f9f9;
+}
 .error__message{
 	font-weight: 500;
 	color: #ffffff;
