@@ -42,7 +42,7 @@
                 <div class="test-labels-container">
                   <div class="test-labels">
                     <div class="flex-auto text-left">
-                      Field Title
+                      Element Name
                     </div>
                     <div class="flex-auto text-left">
                       Rules
@@ -58,6 +58,10 @@
                         {{ element.name }}
                       </div>
                       <div class="flex-auto text-left">
+                        <div ng-show="!element.rules.length">
+                          -
+                        </div>
+
                         <div ng-repeat="rule in element.rules">
                           {{ rule.type }}
                         </div>
