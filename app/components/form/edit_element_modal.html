@@ -37,18 +37,23 @@
           				  <h6>Rules</h6>
             			</div>
 
-            			<div class ="domain-dialogue-input" >
-            				<div class="col-sm-12" >
-                      <div ng-repeat="rule in current_field.rules track by $index">
-                        <div class="row form__field__profile">
-                          <div class="col-5">
-                            <span>{{ rule.type }}</span>
-                          </div>
-                          <div class="col-6">
-                            <span>{{ rule.value }}</span>
-                          </div>
-                          <div class="col-1">
-                            <span ng-click="removeRule(rule)">
+            			<div class ="" >
+            				<div class="" >
+                      <div class="" >
+                      <div class="form__field__profile form-field-labels" ng-repeat="rule in current_field.rules track by $index">
+
+                        <div class="flex-none form_field_rule">
+                          <span>{{ rule.type }}</span>
+                        </div>
+                        <div class="flex-auto">
+                          <span>{{ rule.value }}</span>
+                        </div>
+                        <div class="flex-none form_field_controls justify-content-end">
+                            <div class="fifteen_left" ng-click="openEditElementDialog(element)"
+                             style="" id="{{'edit_element_settings'+$index}}" >
+                             <i class="fa fa-pencil domain_card_action" ></i>
+                            </div>
+                            <span class="fifteen_left" ng-click="removeRule(rule)">
                               <i class="fa fa-times red"></i>
                             </span>
                           </div>

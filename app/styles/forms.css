@@ -1,7 +1,8 @@
 /* Form Styles */
 
 .form__field__profile {
-	padding: 15px 0px;
+	padding-top: 15px;
+  padding-bottom: 15px;
 	width: 100%;
   color: #424242;
   background-color: #ffffff;
@@ -14,6 +15,15 @@
 .form__field__functions {
 	width:50px;
 }
+.form_field_controls{
+  width: 120px;
+      display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
 .form_field_element{
   width: 140px;
+}
+.form_field_rule{
+  width: 280px;
 }

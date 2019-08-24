@@ -223,6 +223,12 @@ width: -webkit-calc(100% - 15px);
 	padding-right:15px;
 	padding-left:15px;
 }
+.form-field-labels .flex-auto,
+.form-field-labels .flex-initial,
+.form-field-labels .flex-none{
+	padding-right:15px;
+	padding-left:15px;
+}
 .test__profile .flex-auto{
 	padding-right:15px;
 	padding-left:15px;
