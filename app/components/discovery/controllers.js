@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService', 'Qanairy.ElementStateOutline', 'Qanairy.DiscoveryTestDataPanel'])
+angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService', 'Qanairy.ElementStateOutline', 'Qanairy.DiscoveryTestDataPanel', 'ng-split'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.discovery', {

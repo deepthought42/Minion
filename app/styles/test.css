@@ -8,9 +8,20 @@
 
 .test-container{
     margin:0px 0px;
+    overflow-y:scroll;
+  	height: -moz-calc(100% - 160px);
+    /* WebKit */
+    height: -webkit-calc(100% - 160px);
+    /* Opera */
+    height: -o-calc(100% - 160px);
+    /* Standard */
+    height: calc(100% - 160px);
+}
+
+.test-list-container{
+    margin:0px 0px;
 	background-color: #ffffff;
 	border-top: 1px solid #e0e0e0;
-    overflow-y:scroll;
 	height: -moz-calc(100% - 160px);
     /* WebKit */
     height: -webkit-calc(100% - 160px);
