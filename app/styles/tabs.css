@@ -18,8 +18,11 @@
 	width: 100%;
 	font-weight: 300;
 	font-size: 1.25em;
+  background: #fff;
 }
-
+.tabs-style{
+  padding-top:5px;
+}
 /* Nav */
 .tabs nav {
 	text-align: center;
@@ -172,8 +175,6 @@
 }
 
 .path_tabs{
-	margin: auto 15px;
-	max-width: 600px;
 }
 
 .browser_tabs{
