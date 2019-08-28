@@ -485,7 +485,12 @@ width: -webkit-calc(100% - 15px);
 	border-bottom: 3px solid #eee;
 }
 
-
+.screenshot-section > div > div{
+	margin-bottom: 75px !important;
+}
+.screenshot-height{
+  min-height:200px;
+}
 
 .browser_screenshot_text{
   padding: 15px 0px 0px 0px;
@@ -663,10 +668,6 @@ width: -webkit-calc(100% - 15px);
 .box--shadow{
 	border-radius: 5px;
 	box-shadow: 0 1px 5px 0 hsla(238, 69%, 8%, 0.1);
-}
-
-.screenshots{
-
 }
 .node__screenshots{
    padding:10px 0px 0px 0px;

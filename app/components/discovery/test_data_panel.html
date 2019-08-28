@@ -144,9 +144,11 @@
                              <h5 class="screenshots_title">
                                Element
                              </h5>
-                             <img class="path-node-image"
+                             <div class="screenshot-height">
+                               <img class="path-node-image"
                                    data-toggle="modal" data-target="#exampleModal"
-                                   src="{{current_node[test_idx].screenshot}}" class="path-node-image"/>
+                                   src="{{current_node[test_idx].screenshot}}"/>
+                            </div>
                            </div>
                          </div>
                        </div>
@@ -312,6 +314,7 @@
                            <h5 class="screenshots_title">
                              Page
                            </h5>
+                           <div class="screenshot-height">
                            <div ng-repeat="screenshot in current_node[test_idx].screenshots">
                              <div ng-if="visible_browser_screenshot == screenshot.browser">
                                <img class="path-node-image page-image screenshots"
@@ -338,6 +341,7 @@
                                </div>
                              </div>
                            </div>
+                         </div>
                          </div>
                        </div><!-- /content -->
                        <nav class="col-sm-12">
@@ -391,7 +395,7 @@
                          <h5 class="screenshots_title">
                            Animation
                          </h5>
-                         <div >
+                         <div class="screenshot-height">
                            <div ng-repeat="screenshot_url in current_node[$index]['imageUrls'] track by $index">
                              <img class="path-node-image page-image screenshots"
                                    data-toggle="modal"
@@ -471,7 +475,7 @@
                          <h5 class="screenshots_title">
                            Redirect
                          </h5>
-                         <div>
+                         <div class="screenshot-height">
                            <div ng-repeat="screenshot_url in current_node[$index]['imageUrls'] track by $index">
                              <img class="path-node-image page-image screenshots"
                                    data-toggle="modal"
