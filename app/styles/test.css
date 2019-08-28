@@ -496,7 +496,7 @@ width: -webkit-calc(100% - 15px);
 	margin-bottom: 75px !important;
 }
 .screenshot-height{
-  min-height:200px;
+  min-height:0px;
 }
 
 .browser_screenshot_text{
@@ -657,6 +657,13 @@ width: -webkit-calc(100% - 15px);
 }
 
 .test__data{
+  border-bottom: 4px solid #45e0e0;
+  	height: 100% !important;
+}
+.info-container{
+  border-bottom: 1px solid #e045e0;
+  height: 100% !important;
+  overflow-y: scroll;
 }
 
 .path__data{
@@ -746,8 +753,6 @@ width: -webkit-calc(100% - 15px);
 	padding-bottom: 4px !important;
 	color:#333333;
 	overflow-wrap:break-word;
-	overflow-y: scroll;
-  max-height: 255px;
 }
 
 /*
