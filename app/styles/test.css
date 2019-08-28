@@ -470,6 +470,7 @@ width: -webkit-calc(100% - 15px);
 .test__path{
   padding:10px 13px 10px 13px;
   overflow-y: hidden;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .path__title{
