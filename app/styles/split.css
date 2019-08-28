@@ -4,7 +4,6 @@
           box-sizing: border-box;
 
   overflow-y: auto;
-  overflow-x: hidden;
 }
 
 .gutter {
@@ -12,7 +11,7 @@
 
   background-repeat: no-repeat;
   background-position: 50%;
-  height: 500px !important;
+  height: 100% !important;
 }
 
 .gutter.gutter-horizontal {
@@ -24,8 +23,11 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCAMAAABl/6zIAAAABlBMVEUAAADMzMzIT8AyAAAAAXRSTlMAQObYZgAAABRJREFUeAFjYGRkwIMJSeMHlBkOABP7AEGzSuPKAAAAAElFTkSuQmCC');
     cursor: ns-resize;
   }
-
-.split.split-horizontal, .gutter.gutter-horizontal {
+.gutter.gutter-horizontal {
   height: 100%;
+  float: left;
+}
+
+.split.split-horizontal {
   float: left;
 }

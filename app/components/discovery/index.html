@@ -55,7 +55,7 @@
       </div>
     </div>
   </div>
-  <div class="full__height">
+  <div class="test-container">
       <div class="empty__state vertical__center_empty_state_discovery" ng-show="!isStarted && !waitingOnTests && tests.length==0">
         <div>
           <h2>Collect your tests by first running a Discovery.</h2>
@@ -78,7 +78,7 @@
       </div>
     <split direction="horizontal" ng-transclude>
       <split-area size="50" ng-transclude >
-        <div class="test-list-container">
+        <div class="">
           <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy:'lastRunTimestamp' track by test.key" ng-show="tests.length>0">
             <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
               <div class="test__status test__profile_stretch flex-none text--shadow"  id="{{'test'+$index+'_status'}}" >

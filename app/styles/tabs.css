@@ -143,7 +143,7 @@
 /* Content */
 .content-data{
   height: 100% !important;
-  overflow-y: scroll;
+  overflow-y: scroll  !important;
 }
 .content-wrap{
   height: 100% !important;
