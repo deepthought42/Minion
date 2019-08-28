@@ -7,6 +7,7 @@
 }
 
 .test-container{
+  border-top: 1px solid #e0e0e0;
     margin:0px 0px;
     overflow-y:scroll;
   	height: -moz-calc(100% - 160px);
@@ -16,20 +17,20 @@
     height: -o-calc(100% - 160px);
     /* Standard */
     height: calc(100% - 160px);
-  border-bottom: 1px solid #e0e0e0;
 }
 
 .test-list-container{
     margin:0px 0px;
 	background-color: #ffffff;
 	border-top: 1px solid #e0e0e0;
-	height: -moz-calc(100% - 160px);
+	height: -moz-calc(100% - 160px) !important;
     /* WebKit */
-    height: -webkit-calc(100% - 160px);
+    height: -webkit-calc(100% - 160px) !important;
     /* Opera */
-    height: -o-calc(100% - 160px);
+    height: -o-calc(100% - 160px) !important;
     /* Standard */
-    height: calc(100% - 160px);
+    height: calc(100% - 160px) !important;
+  overflow-y: scroll !important;
 }
 
 .standard-container{
@@ -467,9 +468,7 @@ width: -webkit-calc(100% - 15px);
 }
 
 .test__path{
-  padding:25px 13px 20px 13px;
-	border-bottom: 1px solid #e0e0e0;
-	overflow-x: scroll;
+  padding:10px 13px 10px 13px;
   overflow-y: hidden;
 }
 
@@ -645,9 +644,6 @@ width: -webkit-calc(100% - 15px);
 }
 
 .test__data{
-	background-color: #f4f4f5;
-	padding-top:10px;
-	padding-bottom:10px;
 }
 
 .path__data{
