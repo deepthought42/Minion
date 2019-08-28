@@ -106,9 +106,9 @@
               </div>
               <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
                 <div class="" ng-show="!test.show_test_name_edit_field">
-                  <h5 class="test__title" ng-click="test.show_test_name_edit_field = true">
+                  <h3 class="test__title" ng-click="test.show_test_name_edit_field = true">
                     {{test.name || "Test #"+($index+1)}}
-                  </h5>
+                  </h3>
                   <i class="fa fa-pencil edithover" ng-click="editTest(test)" ></i>
                 </div>
               </div>

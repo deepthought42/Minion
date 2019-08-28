@@ -37,10 +37,19 @@
   margin-bottom:0px;
 }
 
-.dashboard__stats{
+
+.dashboard__stats, .dashboard__stats-small{
+  font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 60px;
 	line-height: 100px;
-}
+			font-weight:600 !important;
+			  background-color: #4548c1 !important;
+  color: transparent !important;
+  text-shadow: 0px 2px 3px rgba(255,255,255,0.2) !important;
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text;
+  	}
 
 .dashboard__stats-small{
 	font-size: 30px;

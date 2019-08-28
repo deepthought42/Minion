@@ -1,4 +1,4 @@
-<div class="standard-container row">
+<div class="standard-container-reg-height row">
 
   <!--
 	<div class="col-sm-12">
@@ -20,9 +20,9 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class=" dashboard_card_med vertical__center">
-						<h3 class="dashboard__stats">
+						<div class="dashboard__stats">
 							{{usage.discoveriesUsed}}
-						</h3>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -42,9 +42,9 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class=" dashboard_card_med vertical__center">
-						<h3 class="dashboard__stats">
+						<div class="dashboard__stats">
 							{{usage.testsUsed}}
-						</h3>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -64,9 +64,9 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class=" dashboard_card_med vertical__center">
-						<h3 class="dashboard__stats">
+						<div class="dashboard__stats">
 							{{usage.totalDiscoveredTestCount || 0}}
-						</h3>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -78,7 +78,7 @@
 			<h2 class="standard__title">Domain Usage: {{domain.url || "www.yourdomain.com"}}</h2>
 		</div>
 	</div>
-	<div class="col-sm-12 col-md-4">
+	<div class="col-sm-12 col-md-6 col-lg-4">
 		<div class="dashboard_card  box--shadow">
 			<div class="row">
 				<div class="col-sm-12">
@@ -92,15 +92,15 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class=" dashboard_card_med vertical__center">
-						<h3 class="dashboard__stats">
+						<div class="dashboard__stats">
 							{{usage.domainDiscoveryCount}}
-						</h3>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-12 col-md-4">
+	<div class="col-sm-12 col-md-6 col-lg-4">
 		<div class="dashboard_card  box--shadow">
 			<div class="row">
 				<div class="col-sm-12">
@@ -114,15 +114,15 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class=" dashboard_card_med vertical__center">
-						<h3 class="dashboard__stats">
+						<div class="dashboard__stats">
 							{{usage.domainTotalTestsRun}}
-						</h3>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-12 col-md-4">
+	<div class="col-sm-12 col-md-6 col-lg-4">
 		<div class="dashboard_card  box--shadow">
 			<div class="row">
 				<div class="col-sm-12">
@@ -136,9 +136,9 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class=" dashboard_card_med vertical__center">
-						<h3 class="dashboard__stats">
+						<div class="dashboard__stats">
 							{{usage.domainTotalDiscoveredTestCount || 0}}
-						</h3>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -159,16 +159,16 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="dashboard_card_large vertical__center">
-						<h3 class="">
+						<div class="">
 							<i class="dashboard__stats-style fa fa-line-chart"></i>
-						</h3>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 -->
-	<div class="col-sm-12 col-md-4">
+	<div class="col-sm-12 col-md-6 col-lg-4">
 		<div class="dashboard_card  box--shadow">
 			<div class="row">
 				<div class="col-sm-12">
@@ -182,15 +182,15 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="dashboard_card_med vertical__center">
-						<h3 class="dashboard__stats-small">
+						<div class="dashboard__stats-small">
 							{{(usage.currentDiscoveryStart || '00:00') | date : 'MMM d, h:mm a'}}
-						</h3>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-12 col-md-4">
+	<div class="col-sm-12 col-md-6 col-lg-4">
 		<div class="dashboard_card  box--shadow">
 			<div class="row">
 				<div class="col-sm-12">
@@ -204,15 +204,15 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="dashboard_card_med vertical__center">
-						<h3 class="dashboard__stats-small">
+						<div class="dashboard__stats-small">
 							{{ (usage.discoveryRunTime / 3600000) || 0 | number:0}} hrs
-						</h3>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-12 col-md-4">
+	<div class="col-sm-12 col-md-6 col-lg-4">
 		<div class="dashboard_card  box--shadow">
 			<div class="row">
 				<div class="col-sm-12">
@@ -226,9 +226,9 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="dashboard_card_med vertical__center">
-						<h3 class="dashboard__stats-small">
+						<div class="dashboard__stats-small">
 							{{ (usage.timestampOfLastDiscoveredTest || '00:00') | date : 'MMM d, h:mm a'}}
-						</h3>
+						</div>
 					</div>
 				</div>
 			</div>
