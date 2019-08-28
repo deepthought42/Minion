@@ -37,8 +37,7 @@ angular.module("Qanairy", [
   "ngSegment",
   "Qanairy.EventService",
   "Qanairy.user_form_discovery",
-  "Qanairy.upgrade",
-  "Qanairy.comingSoon"
+  "Qanairy.upgrade"
 ]).
 config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptionsProvider", "jwtInterceptorProvider","storeProvider", "StripeCheckoutProvider", "ngOnboardingDefaultsProvider", "$locationProvider", "segmentProvider",
   function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider, segmentProvider) {
