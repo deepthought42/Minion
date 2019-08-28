@@ -188,25 +188,16 @@ html {
 }
 
 .vertical__center_empty_state_discovery {
-	position: relative;
- 	top: 40%;
-  align-items: stretch !important;
-  justify-content: center !important;
-	text-align: center !important;
 }
 .vertical__center_empty_state_test {
-	position: relative;
- 	top: 45%;
-  align-items: stretch !important;
+  display: flex;
+  align-items: center !important;
   justify-content: center !important;
-	text-align: center !important;
 }
 .vertical__center_empty_state_busy {
-	position: relative;
- 	top: 30%;
-  align-items: stretch !important;
+  display: flex;
+  align-items: center !important;
   justify-content: center !important;
-	text-align: center !important;
 }
 
 .vertical__center,
@@ -274,7 +265,7 @@ a img {border: none; }
   h1,
   .h1{
 		font-size: 30px;
-		line-height: 35px;
+		line-height: 36px;
 		letter-spacing:.4px;
 		margin-bottom: 15px;
 		color:#757575;
