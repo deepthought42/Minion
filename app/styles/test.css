@@ -46,7 +46,14 @@
 }
 .standard-container-reg-height{
     margin:0px 0px;
-    overflow-y:scroll;
+    overflow-y:scroll !important;
+  		height: -moz-calc(100% - 40px);
+    /* WebKit */
+    height: -webkit-calc(100% - 40px);
+    /* Opera */
+    height: -o-calc(100% - 40px);
+    /* Standard */
+    height: calc(100% - 40px);
 }
 
 .sticky-footer-container{
