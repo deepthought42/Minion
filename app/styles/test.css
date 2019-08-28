@@ -16,6 +16,7 @@
     height: -o-calc(100% - 160px);
     /* Standard */
     height: calc(100% - 160px);
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .test-list-container{
@@ -167,7 +168,6 @@ width: -webkit-calc(100% - 15px);
 	padding-left: 14px !important;
 	padding-right: 14px !important;
 	min-height: 40px;
-	font-size: 18px !important;
 }
 .title__edit__margin{
 		margin-top: 10px;

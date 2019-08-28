@@ -80,7 +80,7 @@
     </div>
     <split direction="horizontal" ng-transclude>
       <split-area size="50" ng-transclude >
-        <div class="test-container">
+        <div class="test-list-container">
           <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy:'lastRunTimestamp' track by test.key" ng-show="tests.length>0">
             <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
               <div class="test__status test__profile_stretch flex-none text--shadow"  id="{{'test'+$index+'_status'}}" >
@@ -106,10 +106,10 @@
               </div>
               <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
                 <div class="" ng-show="!test.show_test_name_edit_field">
-                  <h3 class="test__title" ng-click="test.show_test_name_edit_field = true">
+                  <h3 class="test__title" >
                     {{test.name || "Test #"+($index+1)}}
                   </h3>
-                  <i class="fa fa-pencil edithover" ng-click="editTest(test)" ></i>
+                  <i class="fa fa-pencil edithover" ng-click="test.show_test_name_edit_field = true" ng-click="editTest(test)" ></i>
                 </div>
               </div>
               <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="test.show_test_name_edit_field">
@@ -150,4 +150,4 @@
   </div>
 </div>
 <onboarding-popover enabled="discoveryOnboardingEnabled" steps="discoveryOnboardingSteps" step-index="discoveryOnboardingIndex"></onboarding-popover>
-<onboarding-popover enabled="testVerificationOnboardingEnabled" steps="testVerificationSteps" step-index='testVerificationOnboardingIndex'></onboarding-popover>
+<onboarding-popover enabled="testVerificationOnboardingEnabled" steps="testVerificationSteps" step-index="testVerificationOnboardingIndex"></onboarding-popover>
