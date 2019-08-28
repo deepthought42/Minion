@@ -18,6 +18,17 @@
     /* Standard */
     height: calc(100% - 160px);
 }
+.test-container-split{
+  border-top: 1px solid #e0e0e0;
+    margin:0px 0px;
+  	height: -moz-calc(100% - 160px);
+    /* WebKit */
+    height: -webkit-calc(100% - 160px);
+    /* Opera */
+    height: -o-calc(100% - 160px);
+    /* Standard */
+    height: calc(100% - 160px);
+}
 
 .test-list-container{
     margin:0px 0px;
@@ -658,7 +669,6 @@ width: -webkit-calc(100% - 15px);
 
 .test__data{
   border-bottom: 4px solid #45e0e0;
-  	height: 100% !important;
 }
 .info-container{
   border-bottom: 1px solid #e045e0;
