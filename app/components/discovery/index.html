@@ -56,31 +56,71 @@
     </div>
   </div>
   <div class="test-container-split">
-      <div class="empty__state vertical__center_empty_state_discovery" ng-show="!isStarted && !waitingOnTests && tests.length==0">
-        <div>
-          <h2>Collect your tests by first running a Discovery.</h2>
-        </div>
-        <div>
-          <button class="btn btn--primary btn-lg" ng-click="startDiscovery()">
-            Start Discovery
-          </button>
+    <div class="empty__state vertical__center_empty_state_discovery" ng-show="!isStarted && !waitingOnTests && tests.length==0">
+      <div class="col-sm-12 split--oboard--title">
+        <h1>Choose a way to start building&nbsp;tests.</h1>
+      </div>
+      <div class="col-sm-12 split--oboard--container">
+        <div class="row no-gutters">
+          <div class="col-sm-12 col-md-5 empty_state_card">
+            <div class="empty_state_icon">
+              <i class="fad fa-brain"></i>
+            </div>
+            <div>
+              <h2>AI Auto Test&nbsp;Creation</h2>
+              <p>
+                Qanairy uses an AI opera of canaries to autogenerate your UI tests by mapping your domain's&nbsp;paths. Start a “Discovery” on your domain to find and create your tests automatically. You can learn more about <a href="http://blog.qanairy.com/2019/07/getting-started-with-qanairy-part-one.html" target="_blank">Getting&nbsp;Started&nbsp;here</a>.
+              </p>
+            </div>
+            <div>
+              <button class="btn btn--split--onboard btn--primary btn-lg" ng-click="startDiscovery()">
+                Start Discovery
+              </button>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-2">
+            <div class="split--oboard--or">
+              OR
+              </div>
+          </div>
+          <a class="text-center" style="text-decoration: none;" href="https://chrome.google.com/webstore/detail/qanairy-test-recorder/gaeciehbbgjmpkpeeojblplhcpemnlpo" target="_blank">
+            <div class="col-sm-12 col-md-5 empty_state_card">
+              <div class="empty_state_icon">
+                <i class="fad fa-bullseye-pointer"></i>
+              </div>
+              <div>
+                <h2>Manually Build Tests</h2>
+                <p>
+                  Get started right away by using Qanairy's Test Recorder&nbsp;tool. Record and build tests right from your&nbsp;browser. Create your most complex tests while Qanairy's Auto Test Creation automates the&nbsp;rest. Available&nbsp;for&nbsp;Google&nbsp;Chrome.
+                </p>
+              </div>
+              <div>
+                <a href="https://chrome.google.com/webstore/detail/qanairy-test-recorder/gaeciehbbgjmpkpeeojblplhcpemnlpo" target="_blank">
+                  <button class="btn btn--split--onboard btn--primary btn-lg">
+                    Get The Test&nbsp;Recorder
+                  </button>
+                </a>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
-      <div class="empty__state vertical__center_empty_state_busy" ng-if="(isStarted && tests.length==0) || waitingOnTests">
-        <div style="text-align:center; margin: 0px auto;">
-          <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
-          <br><br><br>
-          <h2>Your tests are loading. Please stand by.</h2>
-          <p class="empty__state__p">
-            This process may take a while.<br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.
-          </p>
-        </div>
+    </div>
+    <div class="empty__state vertical__center_empty_state_busy" ng-if="(isStarted && tests.length==0) || waitingOnTests">
+      <div style="text-align:center; margin: 0px auto;">
+        <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
+        <br><br><br>
+        <h2>Your tests are loading. Please stand by.</h2>
+        <p class="empty__state__p">
+          This process may take a while.<br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.
+        </p>
       </div>
-    <split direction="horizontal" ng-transclude>
+    </div>
+    <split direction="horizontal" ng-transclude ng-if="isStarted && tests.length>0">
       <split-area size="50" ng-transclude >
         <div class="">
-          <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy:'lastRunTimestamp' track by test.key" ng-show="tests.length>0">
-            <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index);visible_tab='nodedata'+$index">
+          <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy:'lastRunTimestamp' track by test.key" ng-show="tests.length>0" >
+            <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index, test);visible_tab='nodedata'+$index" ng-class="current_test.key==test.key ? 'active' : ''">
               <div class="test__status test__profile_stretch flex-none text--shadow"  id="{{'test'+$index+'_status'}}" >
                 <div class="row test__status__frame">
                   <div class="col-xs-12 test__status" ng-show="test.waitingOnStatusChange">
@@ -139,7 +179,7 @@
               </div>
         	  </div>
           </div>
-        </div> 
+        </div>
       </split-area>
       <split-area size="50" ng-transclude style="overflow-x:hidden; overflow-y:scroll;">
         <discovery-test-data-panel ></discovery-test-data-panel>

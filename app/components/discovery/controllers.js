@@ -36,6 +36,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.discovery_status = {};
       $scope.current_domain = store.get('domain');
       $scope.outline = {'x': 0, 'y':0};
+      $scope.current_test = null;
+
       //ERRORS
       $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
 
@@ -229,7 +231,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
-    $scope.setTestIndex = function(idx){
+    $scope.setTestIndex = function(idx, test){
+      $scope.current_test = test;
       $scope.test_idx = idx;
     }
 
