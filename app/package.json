@@ -22,7 +22,8 @@
     },
     "dependencies": {
         "angular-ui-bootstrap": "latest",
-        "ng-onboarding": "latest"
+        "ng-onboarding": "latest",
+        "ng-split": "^0.2.0"
     },
     "scripts": {
         "postinstall": "bower install",

@@ -190,12 +190,12 @@ html {
 .vertical__center_empty_state_discovery {
 }
 .vertical__center_empty_state_test {
-  display: flex;
+	display:flex;
   align-items: center !important;
   justify-content: center !important;
 }
 .vertical__center_empty_state_busy {
-  display: flex;
+	display:flex;
   align-items: center !important;
   justify-content: center !important;
 }
@@ -279,16 +279,13 @@ h2,
 		letter-spacing:.1px;
 	}
 
-/*--------------------------- [dashboard stats] ---------------------------*/
+/*--------------------------- [Test Path Title] ---------------------------*/
     h3,
     .h3{
-			font-weight:600;
-			  background-color: #4548c1;
-  color: transparent;
-  text-shadow: 0px 2px 3px rgba(255,255,255,0.2);
-  -webkit-background-clip: text;
-     -moz-background-clip: text;
-          background-clip: text;
+		font-size: 14px;
+		line-height: 18px;
+		letter-spacing:.1px;
+		color:#757575;
   	}
 
 
@@ -301,7 +298,7 @@ letter-spacing:0px;
 color:#757575;
 }
 
-/*--------------------------- [Tabs, Test Path Title, Data Title, Run History Title] ---------------------------*/
+/*--------------------------- [Tabs, Data Title, Run History Title] ---------------------------*/
 
 h5,
 .h5{

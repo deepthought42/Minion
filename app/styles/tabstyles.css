@@ -68,6 +68,7 @@
 
 .element-tabs{
 	margin-top:15px;
+  height: 100%;
 }
 
 .tabs-style a:focus{
