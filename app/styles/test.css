@@ -488,6 +488,7 @@ width: -webkit-calc(100% - 15px);
 .test__path{
   padding:10px 13px 10px 13px;
   overflow-y: hidden;
+  height: 100px;
   border-bottom: 1px solid #e0e0e0;
 }
 
@@ -506,9 +507,7 @@ width: -webkit-calc(100% - 15px);
 .screenshot-section > div > div{
 	margin-bottom: 75px !important;
 }
-.screenshot-height{
-  min-height:0px;
-}
+
 
 .browser_screenshot_text{
   padding: 15px 0px 0px 0px;
@@ -537,8 +536,11 @@ width: -webkit-calc(100% - 15px);
   max-height: 100%;
   max-width: 100%;
 }
+.screenshot-height{
+  min-height:180px;
+}
 .screenshots{
-	  max-height: 200px;
+	  max-height: 180px;
 }
 
 .form-screenshot{
@@ -666,14 +668,12 @@ width: -webkit-calc(100% - 15px);
    display: flex;
   flex-direction: column;
 }
-
 .test__data{
-  border-bottom: 4px solid #45e0e0;
 }
 .info-container{
-  border-bottom: 1px solid #e045e0;
+  border-bottom: 0px solid #e0e0e0;
   height: 100% !important;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .path__data{
