@@ -24,8 +24,8 @@
          </nav>
          <div class="content-data">
            <div id="section-linemove-1"  style="height: 100% !important;" ng-if="visible_test_nav1=='section-linemove-1'">
-             
-             
+
+
              <div class="col-xs-12 test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
                <div ng-repeat="node in current_path_objects track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
                  <div class="node-group element-action vertical__center__int"
@@ -135,9 +135,9 @@
                  </div>
                </div>
              </div>
-             
-             
-             
+
+
+
              <div class="col-sm-12 test__data" style=""  ng-if="current_node[test_idx].type == 'ElementState'">
                <div class="row">
                  <div class="col-sm-12 screenshot-container">
@@ -186,7 +186,7 @@
                                  Xpath
                                </div>
                                <div class="data__value" style="overflow-y: scroll;">
-                                 {{current_node[$index].xpath}}
+                                 {{current_path_objects[current_node_idx].xpath}}
                                </div>
                              </div>
                            </div>
@@ -216,7 +216,7 @@
                                  Element Type
                                </div>
                                <div class="data__value">
-                                   {{current_node[$index].name}}
+                                   {{current_node[current_node_idx].name}}
                                </div>
                              </div>
                            </div>
@@ -226,7 +226,7 @@
                                  Element Link
                                </div>
                                <div class="data__value">
-                                 {{current_node[$index].attributes[0].vals[0]}}
+                                 {{current_path_objects[current_node_idx].attributes[0].vals[0]}}
                                </div>
                              </div>
                            </div>
@@ -236,13 +236,13 @@
                                  Text
                                </div>
                                <div class="data__value">
-                                 {{current_node[$index].text}}
+                                 {{current_path_objects[current_node_idx].text}}
                                </div>
                              </div>
                            </div>
                            <div class="col-xs-12">
                              <div class="key--value">
-                               <div class="row" ng-repeat="attribute in current_node[$index].attributes track by attribute.key">
+                               <div class="row" ng-repeat="attribute in current_path_objects[current_node_idx].attributes track by attribute.key">
                                  <div class="col-sm-12 data__key">
                                    {{attribute.name}}
                                  </div>
@@ -332,8 +332,8 @@
                            URL
                          </div>
                          <div class="data__value">
-                          <a href="{{current_node[$index].url}}" target="_blank">
-                            {{current_node[$index].url}}
+                          <a href="{{current_path_objects[current_node_idx].url}}" target="_blank">
+                            {{current_path_objects[current_node_idx].url}}
                           </a>
                          </div>
                        </div>
@@ -412,8 +412,8 @@
                            URL
                          </div>
                          <div class="data__value">
-                          <a href="{{current_node[$index].url}}" target="_blank">
-                            {{current_node[$index].url}}
+                          <a href="{{current_path_objects[current_node_idx].url}}" target="_blank">
+                            {{current_path_objects[current_node_idx].url}}
                           </a>
                          </div>
                        </div>
