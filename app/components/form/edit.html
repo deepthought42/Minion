@@ -61,7 +61,7 @@
                         </div>
 
                         <div ng-repeat="rule in element.rules">
-                          {{ rule.type }}
+                          {{ toTitleCase(rule.type) }}
                         </div>
                       </div>
                       <div class="flex-none form__field__functions">
