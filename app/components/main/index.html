@@ -46,6 +46,12 @@
             <span class="sidebar_remove_title">Test Users</span>
           </a>
         </li>
+        <li>
+          <a ui-sref="main.feedback"  style="{{$location.path() == '/feedback' ? 'color: #fff;' : 'color:#9794d5'}}">
+            <i class="fa fa-question-square sidebar-nav-icons" aria-hidden="true"></i>
+            <span class="sidebar_remove_title">Feedback</span>
+          </a>
+        </li>
       </ul>
       <label for="main-nav-check" class="toggle-menu"
       style="{{navToggledOpen ? 'color:#9794d5' : 'color:#fff'}}"

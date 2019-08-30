@@ -83,9 +83,9 @@
 				<div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
 					<div class="row">
 						<div class="col-xs-12 " ng-if="editing_test_idx!=$index" >
-							<h5 class="test__title">
+							<h3 class="test__title">
 								{{test.name || "Test #"+($index+1)}}
-							</h5>
+							</h3>
 						</div>
 					</div>
 				</div>
@@ -347,10 +347,10 @@
 													</div>
 												</button>
                       </div>
-												<div ng-if="test.pathKeys.length > 1 && node.type != 'Action'" class="path-bar">
+											<div ng-if="test.pathKeys.length > 1 && node.type != 'Action'" class="path-bar">
 											</div>
 										</div>
-										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, 0)" >
+										<div class="node-group path-node-container vertical__center__int" ng-click="setCurrentNode(test.result, test.pathKeys.length)" >
 											<div ng-if="test.pathKeys.length > 1 && !(test.pathKeys.length == 2 && (test.pathKeys[0].includes('redirect') || test.pathKeys[0].includes('PageLoadAnimation')))" class="path-page path-node">
 												<button class="path-page-node btn btn--tertiary button--sacnite" ng-class="current_node[test_idx]==test.result ? 'active' : ''">
 													<img src="{{test.result.screenshotUrl}}" class="path-node-image" tooltip-placement="top"/>
@@ -539,10 +539,10 @@
 		                                      data-target="#exampleModal"
 																					src="{{screenshot.screenshotUrl}}"
 		                                      ng-if="screenshot.screenshotUrl"
-																					ng-click="openPageModal(screenshot.screenshotUrl)" />
+																					ng-click="openPathSlider(test, current_node_idx)" />
 																		<div class="expand path-node-image" data-toggle="modal" data-target="#exampleModal"
 		                                      ng-if="screenshot.screenshotUrl"
-																					ng-click="openPageModal(screenshot.screenshotUrl)">
+																					ng-click="openPathSlider(test, current_node_idx)">
 																			<h6>
 		                                    Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
 		                                  </h6>
@@ -613,10 +613,12 @@
                                         data-target="#exampleModal"
                                         src="{{screenshot_url}}"
                                         ng-if="screenshot_url"
-                                        ng-click="openPageModal(screenshot_url)" />
-                                  <div class="expand path-node-image" data-toggle="modal" data-target="#exampleModal"
+
+                                        ng-click="openPathSlider(test, current_node_idx)" />
+                                  <div class="expand" data-toggle="modal" data-target="#exampleModal"
+                                        class="path-node-image"
                                         ng-if="screenshot_url"
-                                        ng-click="openPageModal(screenshot_url)">
+                                        ng-click="openPathSlider(test, current_node_idx)">
                                     <h6>
                                       Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
                                     </h6>
@@ -690,10 +692,11 @@
 	                                      data-target="#exampleModal"
 	                                      src="{{screenshot_url}}"
 	                                      ng-if="screenshot_url"
-	                                      ng-click="openPageModal(screenshot_url)" />
-	                                <div class="expand path-node-image" data-toggle="modal" data-target="#exampleModal"
+	                                      ng-click="openPathSlider(test, current_node_idx)" />
+	                                <div class="expand" data-toggle="modal" data-target="#exampleModal"
+	                                      class="path-node-image"
 	                                      ng-if="screenshot_url"
-	                                      ng-click="openPageModal(screenshot_url)">
+	                                      ng-click="openPathSlider(test, current_node_idx)">
 	                                  <h6>
 	                                    Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
 	                                  </h6>

@@ -508,6 +508,12 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
      }
 
     $scope.setCurrentNode = function(node, index){
+      if(index > 3){
+        index = (index % 3) + 1;
+      }
+      else{
+        index = (index % 3);
+      }
       $scope.current_node_idx = index;
       $scope.current_node[$scope.test_idx] = node;
     }
@@ -744,6 +750,51 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       }
       return false;
     }
+
+    $scope.loadPageInteraction = function(interaction){
+      var page_interaction = {};
+      page_interaction.page = interaction;
+      page_interaction.page_key = interaction.key;
+      page_interaction.interactions = [];
+      return page_interaction;
+    }
+
+    $scope.openPathSlider = function(test, index) {
+      $scope.current_test = test;
+
+      //iterate over keys and load path PathObjects
+      var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
+      path_objects.push($scope.test.result)
+      //add result to end of path
+
+      //create object consisting of a page and it's list of interactions
+      //iterate over path and combine elements and actions into single object named interaction
+      var new_path = [];
+      for(var i=0; i < path_objects.length; i++){
+        if(path_objects[i].key.includes("pagestate") || path_objects[i].key.includes("redirect") || path_objects[i].key.includes("loadpageanimation")){
+          new_path.push( $scope.loadPageInteraction(path_objects[i]));
+        }
+        else if(path_objects[i].key.includes("elementstate")){
+          var interaction = {element: path_objects[i], action: path_objects[i+1], key: path_objects[i].key};
+          //create interaction object and add it to page interactions
+          new_path[new_path.length-1].interactions.push(interaction);
+        }
+      }
+
+       $scope.current_path_idx = index;
+       $scope.preview_path = new_path;
+       $mdDialog.show({
+          clickOutsideToClose: true,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: "components/test/page_modal.html",
+          controller: function DialogController($scope, $mdDialog) {
+             $scope.closeDialog = function() {
+                $mdDialog.hide();
+             }
+          }
+       });
+    };
 
     /* EVENTS */
     $rootScope.$on("reload_tests", function(e){

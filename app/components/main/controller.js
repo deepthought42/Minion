@@ -1,5 +1,5 @@
 
-angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService'])
+angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.feedback"])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main', {
