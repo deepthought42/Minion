@@ -22,6 +22,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       $scope.show_update_element_err = false;
       $scope.current_field = null;
       $scope.errors = [];
+      $scope.new_rule = $scope.newRule();
 
       if($stateParams.form){
         $scope.form = $stateParams.form;
@@ -98,6 +99,13 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       }
     };
 
+    $scope.newRule = function(){
+      return {
+        type: "",
+        value: ""
+      }
+    }
+
     $scope.addRuleToElement = function(current_field, new_rule) {
       var exists = false;
       for(var i = 0; i< $scope.current_field.rules.length; i++){
@@ -107,6 +115,16 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       }
 
       if(!exists){
+        if((new_rule.type == "MIN_LENGTH" || new_rule.type == "MAX_LENGTH" || new_rule.type == "MIN_VALUE" || new_rule.type == "MAX_VALUE")){
+          if(isNaN(new_rule.value)){
+            $scope.addError($scope.toTitleCase(new_rule.type)+" rule value must be a number");
+            return;
+          }
+          else if(new_rule.value < 0){
+            $scope.addError($scope.toTitleCase(new_rule.type)+" rule value cannot be negative");
+            return;
+          }
+        }
         //check if rule is min or max value and that both min and max are isDefined and that min is not greater than or equal to max value
         if((new_rule.type == "MIN_VALUE" || new_rule.type == "MAX_VALUE")){
               if(new_rule.value.length == 0){
@@ -143,7 +161,26 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
         }
 
         $scope.current_field.rules.push(new_rule);
+        $scope.new_rule = $scope.newRule();
       }
+      else{
+        //show duplicate record error
+        $scope.addError("Cannot add duplicate rules")
+      }
+    }
+
+    $scope.isRuleValueEditable = function(rule){
+      return rule.type == "MIN_LENGTH" || rule.type == "MAX_LENGTH" || rule.type == "MIN_VALUE" || rule.type == "MAX_VALUE";
+    }
+
+    $scope.toTitleCase = function(str) {
+      str = str.replace(/_/g, " ");
+      return str.replace(
+          /\w\S*/g,
+          function(txt) {
+              return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+          }
+      );
     }
 
     $scope.cancel = function(){
@@ -187,8 +224,9 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
         })
     }
 
-    $scope.openEditElementDialog  = function(element) {
-      $scope.current_field = element;
+    $scope.openEditElementDialog  = function(element, idx) {
+      $scope.selected_element_idx = idx;
+      $scope.current_field =  JSON.parse(JSON.stringify(element));
       $mdDialog.show({
           clickOutsideToClose: true,
           scope: $scope,
@@ -203,11 +241,11 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
              $scope.saveElement = function(elementstate){
                Element.update(elementstate).$promise
                  .then(function(data){
-                   elementstate = data;
+                   $scope.form.formFields[$scope.selected_element_idx] = data;
                    $scope.closeDialog();
                  })
                  .catch(function(err){
-                   console.log("element update err  :  "+err);
+                   $scope.addError("Error occurred while updating element");
                  })
              }
           }
