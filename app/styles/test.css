@@ -96,7 +96,6 @@
  .test-labels, .form-field-labels{
 	font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	border-top: 0px solid #e0e0e0;
-	padding-top: 10px;
 	padding-bottom: 10px;
 	display: flex;
 }

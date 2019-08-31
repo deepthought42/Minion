@@ -1,4 +1,4 @@
-<md-dialog class="col-sm-8 modal-frame" style="">
+<md-dialog class="modal-frame" style="">
   <div class="row">
     <div class="col-sm-12" >
       <div class="">
@@ -43,14 +43,14 @@
                           <select class="form-control" ng-options="rule as toTitleCase(rule.type) for rule in rule_options" ng-model="new_rule">
                           </select>
                         </div>
-                        <div class="flex-auto fifteen_left">
-                          <div ng-show="new_rule && new_rule.type && (new_rule.type=='MAX_VALUE' || new_rule.type=='MIN_VALUE' || new_rule.type=='MAX_LENGTH' || new_rule.type=='MIN_LENGTH')">
-                            <input type="text" ng-model="new_rule.value"/>
+                        <div class="">
+                          <div class="flex-auto fifteen_left" ng-show="new_rule && new_rule.type && (new_rule.type=='MAX_VALUE' || new_rule.type=='MIN_VALUE' || new_rule.type=='MAX_LENGTH' || new_rule.type=='MIN_LENGTH')">
+                            <input class="rules-input form-control " type="text" ng-model="new_rule.value"/>
                           </div>
                         </div>
-                        <div class="flex-none justify-content-end fifteen_left">
+                        <div class="flex-none justify-content-start fifteen_left" style="justify-content: flex-start;">
                           <button style="margin:0px;" class="btn btn--primary title__edit__buttons" ng-click="addRuleToElement(current_field, new_rule)">
-                          <i class="fal fa-plus fa-1x"></i> Add&nbsp;&nbsp;
+                          <i class="far fa-plus fa-1x"></i>&nbsp;&nbsp;Add
                           </button>
                         </div>
                       </div>
@@ -74,7 +74,7 @@
                           <div class="flex-auto">
                             <span ng-if="!isRuleValueEditable(rule)">{{ rule.value }}</span>
                             <span ng-if="isRuleValueEditable(rule)">
-                               <input type="text" ng-model="rule.value" />
+                               <input class="rules-input form-control " type="text" ng-model="rule.value" />
                             </span>
                           </div>
                           <div class="flex-none form_field_controls justify-content-end">

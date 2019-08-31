@@ -1,6 +1,7 @@
 /*--------------------------- [1. ] -----------------------------------------*/
 .modal-frame{
 	padding:25px 30px 30px 30px;
+  margin: 2%;
 }
 .dialogue-close{
   text-align:right !important;
@@ -14,8 +15,9 @@
 }
 md-dialog {
     opacity: 0;
-    min-width: 240px;
-    max-width: 80%;
+    min-width: 240px  !important;
+    max-width: 96% !important;
+    width: 100% !important;
     max-height: 96% !important;
     position: relative;
     overflow: auto;
