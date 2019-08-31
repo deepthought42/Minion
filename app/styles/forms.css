@@ -1,7 +1,8 @@
 /* Form Styles */
 
 .form__field__profile {
-	padding: 15px;
+	padding-top: 15px;
+  padding-bottom: 15px;
 	min-height: 60px;
 	width: 100%;
   color: #424242;
@@ -13,5 +14,17 @@
   flex-grow: 2;
 }
 .form__field__functions {
-	width:40px;
-}
+		width:50px;
+}	
+.form_field_controls{	
+  width: 60px;	
+      display: flex;	
+    -ms-flex-wrap: wrap;	
+    flex-wrap: wrap;	
+}	
+.form_field_element{	
+  width: 140px;	
+}	
+.form_field_rule{	
+  width: 280px;	
+} 

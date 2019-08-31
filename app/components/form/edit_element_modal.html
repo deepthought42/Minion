@@ -36,22 +36,22 @@
             			<div class="form_label_description_domain">
           				  <h6>Rules</h6>
             			</div>
-
+                  
             			<div class ="domain-dialogue-input" >
-            				<div class="col-sm-12" >
+            				<div class="" >
                       <div ng-repeat="rule in current_field.rules track by $index">
-                        <div class="row form__field__profile">
-                          <div class="col-5">
+                        <div class="form__field__profile form-field-labels">
+                          <div class="flex-none form_field_rule">
                             <span>{{ rule.type }}</span>
                           </div>
-                          <div class="col-6">
+                          <div class="flex-auto">
                             <span ng-if="!isRuleValueEditable(rule)">{{ rule.value }}</span>
                             <span ng-if="isRuleValueEditable(rule)">
                                <input type="text" ng-model="rule.value" />
                             </span>
                           </div>
-                          <div class="col-1">
-                            <span ng-click="removeRule(rule)">
+                          <div class="flex-none form_field_controls justify-content-end">
+                            <span ng-click="removeRule(rule)" class="fifteen_left" >
                               <i class="fa fa-times red"></i>
                             </span>
                           </div>
