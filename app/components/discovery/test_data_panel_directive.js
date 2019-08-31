@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.DiscoveryTestDataPanel', [])
+angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split'])
 .directive("discoveryTestDataPanel",function(){
   return{
     restrict: 'E',

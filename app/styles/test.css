@@ -18,6 +18,7 @@
     /* Standard */
     height: calc(100% - 160px);
 }
+
 .test-container-split{
   border-top: 1px solid #e0e0e0;
     margin:0px 0px;
@@ -136,42 +137,42 @@ width: -webkit-calc(100% - 15px);
   max-width: 800px !important;
 	display: inline-block;
 }
-.empty_state_card{	
-   border-radius: 5px;	
-   border: 1px solid #e0e0e0;	
-  padding: 20px !important;	
-}	
-.empty_state_icon{	
-  color: #6649e4;	
-  padding: 20px !important;	
-  font-size: 72px;	
+.empty_state_card{
+   border-radius: 5px;
+   border: 1px solid #e0e0e0;
+  padding: 20px !important;
 }
-.btn--split--onboard{	
-   min-width: 176px;	
-  margin-top: 20px;	
-}	
-.split--oboard--title{	
-  padding: 60px 15px 30px 15px;	
-}	
-.split--oboard--container{	
-  padding-bottom:15px;	
-}	
-.split--oboard--or{	
-  padding: 175px 0px 30px 0px;	
-      font-size: 22px;	
-    line-height: 22px;	
-    letter-spacing: .1px;	
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;	
-    font-weight: 400;	
-    color: #2d2d2d;	
-    display: flex !important;	
-  align-items: center !important;	
-  justify-content: center !important;	
+.empty_state_icon{
+  color: #6649e4;
+  padding: 20px !important;
+  font-size: 72px;
 }
-@media only screen and (max-width: 767px) {	
-    .split--oboard--or{	
-  padding-top:30px;	
-}	
+.btn--split--onboard{
+   min-width: 176px;
+  margin-top: 20px;
+}
+.split--oboard--title{
+  padding: 60px 15px 30px 15px;
+}
+.split--oboard--container{
+  padding-bottom:15px;
+}
+.split--oboard--or{
+  padding: 175px 0px 30px 0px;
+      font-size: 22px;
+    line-height: 22px;
+    letter-spacing: .1px;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    color: #2d2d2d;
+    display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+@media only screen and (max-width: 767px) {
+    .split--oboard--or{
+  padding-top:30px;
+}
 }
 .error__message{
 	font-weight: 500;
@@ -704,6 +705,7 @@ width: -webkit-calc(100% - 15px);
   flex-direction: column;
 }
 .test__data{
+  display: flex;
 }
 .info-container{
   border-bottom: 0px solid #e0e0e0;

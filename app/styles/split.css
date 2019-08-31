@@ -23,11 +23,22 @@
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCAMAAABl/6zIAAAABlBMVEUAAADMzMzIT8AyAAAAAXRSTlMAQObYZgAAABRJREFUeAFjYGRkwIMJSeMHlBkOABP7AEGzSuPKAAAAAElFTkSuQmCC');
     cursor: ns-resize;
   }
+
 .gutter.gutter-horizontal {
   height: 100%;
   float: left;
 }
 
 .split.split-horizontal {
+  float: left;
+}
+
+.gutter.gutter-vertical {
+  height: 5px !important;
+  width: 100%;
+  float: left;
+}
+
+.split.split-vertical {
   float: left;
 }
