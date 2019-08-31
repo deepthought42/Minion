@@ -3,7 +3,6 @@
 .form__field__profile {
 	padding-top: 15px;
   padding-bottom: 15px;
-	min-height: 60px;
 	width: 100%;
   color: #424242;
   background-color: #ffffff;
@@ -28,3 +27,15 @@
 .form_field_rule{	
   width: 280px;	
 } 
+.rule-input{
+  margin-bottom: 20px; 
+  display: flex;
+}
+.rules-divider{
+  margin-bottom: 20px; 
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+}
+.rule__error__message{
+  margin-bottom: 20px; 
+}

@@ -36,6 +36,33 @@
             			<div class="form_label_description_domain">
           				  <h6>Rules</h6>
             			</div>
+                   <div class="">
+                    <div class="pt-3">
+                      <div class="rule-input">
+                        <div class="flex-none form_field_rule">
+                          <select class="form-control" ng-options="rule as toTitleCase(rule.type) for rule in rule_options" ng-model="new_rule">
+                          </select>
+                        </div>
+                        <div class="flex-auto fifteen_left">
+                          <div ng-show="new_rule && new_rule.type && (new_rule.type=='MAX_VALUE' || new_rule.type=='MIN_VALUE' || new_rule.type=='MAX_LENGTH' || new_rule.type=='MIN_LENGTH')">
+                            <input type="text" ng-model="new_rule.value"/>
+                          </div>
+                        </div>
+                        <div class="flex-none justify-content-end fifteen_left">
+                          <button style="margin:0px;" class="btn btn--primary title__edit__buttons" ng-click="addRuleToElement(current_field, new_rule)">
+                          <i class="fal fa-plus fa-1x"></i> Add&nbsp;&nbsp;
+                          </button>
+                        </div>
+                      </div>
+                      <div id="rule_errors" class="error__message rule__error__message" ng-show="errors.length > 0">
+                        <div ng-repeat="error in errors track by $index">
+                          {{error}}
+                        </div>
+                      </div>
+                        <div class ="rules-divider" >
+                          </div>
+                    </div>
+                  </div>
                   
             			<div class ="domain-dialogue-input" >
             				<div class="" >
@@ -59,30 +86,7 @@
                       </div>
                     </div>
             			</div>
-                  <div class="row no-gutters">
-                    <div class="col-sm-8 pt-3">
-                      <div class="row">
-                        <div class="col-sm-7">
-                          <select class="form-control" ng-options="rule as toTitleCase(rule.type) for rule in rule_options" ng-model="new_rule">
-                          </select>
-                        </div>
-                        <div class="col-sm-5">
-                          <div ng-show="new_rule && new_rule.type && (new_rule.type=='MAX_VALUE' || new_rule.type=='MIN_VALUE' || new_rule.type=='MAX_LENGTH' || new_rule.type=='MIN_LENGTH')">
-                            <input type="text" ng-model="new_rule.value"/>
-                          </div>
-                        </div>
-                      </div>
-                      <button class="btn btn--primary title__edit__buttons" ng-click="addRuleToElement(current_field, new_rule)">
-                        <i class="fal fa-plus fa-1x"></i> Add&nbsp;&nbsp;
-                      </button>
-                    </div>
-                  </div>
               	</div>
-                <div id="rule_errors" class="col-md-12 error__message" ng-show="errors.length > 0">
-                  <div ng-repeat="error in errors track by $index">
-                    {{error}}
-                  </div>
-                </div>
             	</div>
             </div>
           </div>
