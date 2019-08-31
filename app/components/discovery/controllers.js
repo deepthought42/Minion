@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService', 'Qanairy.ElementStateOutline', 'Qanairy.DiscoveryTestDataPanel', 'ng-split'])
+angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService', 'Qanairy.ElementStateOutline', 'Qanairy.DiscoveryTestDataPanel', 'ng-split', 'Qanairy.ExpandablePathToggle'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.discovery', {
@@ -37,7 +37,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.current_domain = store.get('domain');
       $scope.outline = {'x': 0, 'y':0};
       $scope.current_test = null;
-
+      $scope.preview_path = [];
       //ERRORS
       $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
 
@@ -234,9 +234,31 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     $scope.setTestIndex = function(idx, test){
       $scope.current_test = test;
       $scope.test_idx = idx;
+
+      //iterate over keys and load path PathObjects
+      var path_objects = $scope.retrievePathObjectsUsingKeys($scope.current_test.pathKeys);
+      path_objects.push($scope.current_test.result)
+      //create object consisting of a page and it's list of interactions
+      //iterate over path and combine elements and actions into single object named interaction
+      var new_path = [];
+      console.log("path objects :: "+path_objects)
+      for(var i=0; i < path_objects.length; i++){
+        if(path_objects[i].key.includes("pagestate") || path_objects[i].key.includes("redirect") || path_objects[i].key.includes("loadpageanimation")){
+          new_path.push( $scope.loadPageInteraction(path_objects[i]));
+        }
+        else if(path_objects[i].key.includes("elementstate")){
+          var interaction = {element: path_objects[i], action: path_objects[i+1], key: path_objects[i].key};
+          //create interaction object and add it to page interactions
+          new_path[new_path.length-1].interactions.push(interaction);
+        }
+      }
+       $scope.preview_path = new_path;
+       console.log("preview path in controller:: "+$scope.preview_path);
     }
 
     $scope.setCurrentNode = function(node, index){
+      $scope.current_path_idx = index;
+
       if(index > 3){
         index = (index % 3) + 1;
       }
@@ -440,43 +462,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       page_interaction.interactions = [];
       return page_interaction;
     }
-
-    $scope.openPathSlider = function(test, index) {
-      $scope.current_test = test;
-
-      //iterate over keys and load path PathObjects
-      var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-      path_objects.push($scope.test.result)
-      //add result to end of path
-
-      //create object consisting of a page and it's list of interactions
-      //iterate over path and combine elements and actions into single object named interaction
-      var new_path = [];
-      for(var i=0; i < path_objects.length; i++){
-        if(path_objects[i].key.includes("pagestate") || path_objects[i].key.includes("redirect") || path_objects[i].key.includes("animation")){
-          new_path.push( $scope.loadPageInteraction(path_objects[i]));
-        }
-        else if(path_objects[i].key.includes("elementstate")){
-          var interaction = {element: path_objects[i], action: path_objects[i+1], key: path_objects[i].key};
-          //create interaction object and add it to page interactions
-          new_path[new_path.length-1].interactions.push(interaction);
-        }
-      }
-
-       $scope.current_path_idx = index;
-       $scope.preview_path = new_path;
-       $mdDialog.show({
-          clickOutsideToClose: true,
-          scope: $scope,
-          preserveScope: true,
-          templateUrl: "components/test/page_modal.html",
-          controller: function DialogController($scope, $mdDialog) {
-             $scope.closeDialog = function() {
-                $mdDialog.hide();
-             }
-          }
-       });
-    };
 
     $scope.cancelEditingTestName = function(test){
       test.show_test_name_edit_field = false;
