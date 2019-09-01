@@ -185,6 +185,9 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
     }
 
     $scope.toTitleCase = function(str) {
+      if(str == null){
+        return "";
+      }
       str = str.replace(/_/g, " ");
       return str.replace(
           /\w\S*/g,

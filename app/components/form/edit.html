@@ -31,8 +31,7 @@
                  <h6>Form Type</h6>
               </div>
               <div class ="domain-dialogue-input" >
-                <select class="form-control" ng-model="form.type">
-                  <option ng-repeat="type in form.typeOptions"><span>{{toTitleCase(type)}}</span></option>
+                <select class="form-control" ng-options="type as toTitleCase(type) for type in form.typeOptions" ng-model="form.type">
                 </select>
               </div>
           </div>
