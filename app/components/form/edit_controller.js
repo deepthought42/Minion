@@ -202,27 +202,26 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       if($scope.users.length == 0 && (form.type.toLowerCase()==="login" || form.type.toLowerCase()==="registration")){
         $state.go('main.user_form_discovery', {form: form});
       }
-      else{
-        Domain.updateForm({domain_id: $scope.domain.id, key: form.key, name: form.name, form_type: form.type}).$promise
-          .then(function(data){
-            segment.track("Start form discovery", {
-                form_key: form.key,
-              }, function(success){  });
-            $state.go("main.form");
-          })
-          .catch(function(err){
-            if(err.data){
-              $scope.errors.push(err.data);
-            }
-            else{
-              $scope.errors.push({message: $scope.unresponsive_server_err });
-            }
-          });
-          segment.track("Updated form", {
+
+      Domain.updateForm({domain_id: $scope.domain.id, key: form.key, name: form.name, form_type: form.type}).$promise
+        .then(function(data){
+          segment.track("Start form discovery", {
               form_key: form.key,
-              successful : true
             }, function(success){  });
-      }
+          $state.go("main.form");
+        })
+        .catch(function(err){
+          if(err.data){
+            $scope.errors.push(err.data);
+          }
+          else{
+            $scope.errors.push({message: $scope.unresponsive_server_err });
+          }
+        });
+        segment.track("Updated form", {
+            form_key: form.key,
+            successful : true
+          }, function(success){  });
     };
 
     $scope.createRule = function(element_id, type, value){
