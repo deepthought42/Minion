@@ -1,0 +1,106 @@
+<md-dialog class="modal-frame" style="">
+  <div class="row">
+    <div class="col-sm-12" >
+      <div class="">
+      	<div class="settings-page">
+      		<div class="row">
+      	    <div class="col-sm-12 col-xs-12">
+              <h2 class="settings__title">
+      		      Field Settings
+              </h2>
+              <div class="settings_description">
+      		      Qanairy tests all of your text&nbsp;input&nbsp;fields, radio buttons, checkboxes, and dropdowns.
+              </div>
+      		  </div>
+          </div>
+          <div class="row">
+      		  <div class="col-12 col-sm-12">
+      				<div class="row">
+                <div class="col-12 col-sm-12 form_label_description accounts">
+                  <h6>Field Screenshot</h6>
+                  <div>
+                    <img class="form-screenshot" ng-src="{{current_field.screenshot}}" />
+                  </div>
+                </div>
+
+              	<div class ="col-12 col-sm-10 col-lg-8 col-xl-6 form_molecule" >
+              			<div class="form_label_description_domain">
+              				 <h6>Element Name</h6>
+              			</div>
+              			<div class ="domain-dialogue-input" >
+              				{{current_field.name}}
+              			</div>
+              	</div>
+
+                <div class ="col-12 col-sm-12 form_molecule" >
+            			<div class="form_label_description_domain">
+          				  <h6>Rules</h6>
+            			</div>
+                   <div class="">
+                    <div class="pt-3">
+                      <div class="rule-input">
+                        <div class="flex-none form_field_rule">
+                          <select class="form-control" ng-options="rule as toTitleCase(rule.type) for rule in rule_options" ng-model="new_rule">
+                          </select>
+                        </div>
+                        <div class="">
+                          <div class="flex-auto fifteen_left" ng-show="new_rule && new_rule.type && (new_rule.type=='MAX_VALUE' || new_rule.type=='MIN_VALUE' || new_rule.type=='MAX_LENGTH' || new_rule.type=='MIN_LENGTH')">
+                            <input class="rules-input form-control " type="text" ng-model="new_rule.value"/>
+                          </div>
+                        </div>
+                        <div class="flex-none justify-content-start fifteen_left" style="justify-content: flex-start;">
+                          <button style="margin:0px;" class="btn btn--primary title__edit__buttons" ng-disabled="!new_rule.type.length" ng-click="addRuleToElement(current_field, new_rule)">
+                            <i class="far fa-plus fa-1x"></i>&nbsp;&nbsp;Add
+                          </button>
+                        </div>
+                      </div>
+                      <div id="rule_errors" class="error__message rule__error__message" ng-show="errors.length > 0">
+                        <div ng-repeat="error in errors track by $index">
+                          {{error}}
+                        </div>
+                      </div>
+                      <div class ="rules-divider" >
+                      </div>
+                    </div>
+                  </div>
+
+            			<div class ="domain-dialogue-input" >
+            				<div class="" >
+                      <div ng-repeat="rule in current_field.rules track by $index">
+                        <div class="form__field__profile form-field-labels">
+                          <div class="flex-none form_field_rule">
+                            <span>{{ toTitleCase(rule.type) }}</span>
+                          </div>
+                          <div class="flex-auto">
+                            <span ng-if="!isRuleValueEditable(rule)">{{ rule.value }}</span>
+                            <span ng-if="isRuleValueEditable(rule)">
+                               <input class="rules-input form-control " type="text" ng-model="rule.value" />
+                            </span>
+                          </div>
+                          <div class="flex-none form_field_controls justify-content-end">
+                            <span ng-click="removeRule(rule)" class="fifteen_left" >
+                              <i class="fa fa-times red"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+            			</div>
+              	</div>
+            	</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <button class="btn btn--tertiary margin_fifteen_right title__edit__buttons" ng-click="closeDialog()">
+            Cancel
+          </button>
+      		<button class="btn btn--primary title__edit__buttons" ng-click="saveElement(current_field)">
+      			Update Form Field
+      		</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</md-dialog>

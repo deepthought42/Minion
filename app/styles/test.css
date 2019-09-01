@@ -90,16 +90,31 @@
 .test-labels-container{
 	margin-top:10px;
 	background-color: #f4f4f8;
+  padding-top: 10px;	
+	padding-bottom: 10px;	
 }
-
-.test-labels{
+ .test-labels, .form-field-labels{
 	font-family:'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	border-top: 0px solid #e0e0e0;
-	padding-top: 10px;
 	padding-bottom: 10px;
 	display: flex;
 }
+.form-field-labels{	
+   width: 100%;	
+}
 
+.form-field-labels .flex-auto,	
+ .form-field-labels .flex-initial,	
+.form-field-labels .flex-none{	
+	padding-right:15px;	
+	padding-left:15px;	
+}	
+.form-field-labels .flex-auto,	
+.form-field-labels .flex-initial,	
+.form-field-labels .flex-none{	
+	padding-right:15px;	
+	padding-left:15px;	
+}
 .test-labels{
   width: -moz-calc(100% - 15px);
   /* WebKit */
@@ -343,17 +358,16 @@ width: -webkit-calc(100% - 15px);
 .row:before, row:after{
   display: inline-block !important;
 }
-.flex-auto {
-  flex: 1 1 auto;
-}
+
 .flex-auto-no-padding {
   flex: 1;
 }
-
+.flex-auto {
+  flex: 1 1 auto;
+}
 .flex-initial {
   flex: 0 1 auto;
 }
-
 .flex-none {
   flex: 0 0 auto;
 }
@@ -589,7 +603,9 @@ width: -webkit-calc(100% - 15px);
 .path-page {
     padding: 10px 10px -10px 0px !important;
 }
-
+.path-page-node{
+  height:78px;
+}
 .path-node-container {
   height: 100%;
   float: left;

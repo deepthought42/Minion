@@ -14,9 +14,10 @@
 }
 md-dialog {
     opacity: 0;
-    min-width: 240px;
-    max-width: 80%;
-    max-height: 96% !important;
+    min-width: 240px  !important;
+    max-width: 92% !important;
+    width: 100% !important;
+    max-height: 92% !important;
     position: relative;
     overflow: auto;
     box-shadow: 0 7px 8px -4px rgba(0,0,0,.2), 0 13px 19px 2px rgba(0,0,0,.14), 0 5px 24px 4px rgba(0,0,0,.12);
@@ -37,7 +38,8 @@ md-dialog {
 }
 
 .form_molecule {
-    padding-bottom: 15px;
+    padding-top: 8px;
+  padding-bottom: 15px;
 }
 
 .domain_modal_logo{
