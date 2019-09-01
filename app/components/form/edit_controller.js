@@ -137,8 +137,13 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
               }
 
               if(!$scope.bothMinMaxValueRulesExistAndMinIsLessThanMax($scope.current_field.rules, new_rule)){
-                  $scope.addError("Minimum value rule cannot be greater than max value rule");
-                  return;
+                if(new_rule.type == "MAX_VALUE"){
+                  $scope.addError("Maximum value rule cannot be less than minimum value rule");
+                }
+                else{
+                  $scope.addError("Minimum value rule cannot be greater than maximum value rule");
+                }
+                return;
               }
         }
 
@@ -155,7 +160,13 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
             }
 
             if(!$scope.bothMinMaxLengthRulesExistAndMinIsLessThanMax($scope.current_field.rules, new_rule)){
-              $scope.addError("Minimum length rule value cannot be greater than max length rule value");
+              if(new_rule.type == "MAX_LENGTH"){
+                $scope.addError("Maximum length cannot be less than minimum length");
+              }
+              else{
+                $scope.addError("Minimum length rule value cannot be greater than maximum length");
+              }
+
               return;
             }
         }
