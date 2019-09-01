@@ -176,7 +176,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       }
       else{
         //show duplicate record error
-        $scope.addError("Cannot add duplicate rules")
+        $scope.addError("Cannot add duplicate rules");
       }
     }
 
