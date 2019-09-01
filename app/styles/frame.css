@@ -154,7 +154,7 @@
 .search {
   position: relative;
   padding: 0px 0 0px 0;
-	max-width:350px;
+	max-width:300px;
 
 
 }
@@ -374,10 +374,10 @@ width: calc(100% - 70px);
 .stop_button{
   margin-left:15px;
   display: inline;
-  margin-right: 15px;
-  	padding: 0px 0px !important;
+  margin-right:0px;
+  padding: 0px 0px !important;
 	min-height: 40px !important;
-  min-width: 40px !important;
+  min-width: 60px !important;
 }
 .progress_bar{
   display: inline;
