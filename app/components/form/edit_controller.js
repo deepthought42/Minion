@@ -160,7 +160,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
             }
         }
 
-        $scope.current_field.rules.push(new_rule);
+        $scope.current_field.rules.unshift(new_rule);
         $scope.new_rule = $scope.newRule();
       }
       else{

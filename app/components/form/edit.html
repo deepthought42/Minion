@@ -24,20 +24,20 @@
               </div>
           </div>
         </div>
-        <div class="row">	
+        <div class="row">
           <div class ="col-6 col-sm-6 col-md-4 col-lg-6 col-xl-5 form_molecule" >
-            
+
               <div class="form_label_description_domain">
                  <h6>Form Type</h6>
               </div>
               <div class ="domain-dialogue-input" >
                 <select class="form-control" ng-model="form.type">
-                  <option ng-repeat="x in form.typeOptions"><span>{{x}}</span></option>
+                  <option ng-repeat="type in form.typeOptions"><span>{{toTitleCase(type)}}</span></option>
                 </select>
               </div>
           </div>
         </div>
-        <div class="row">	
+        <div class="row">
           <div class ="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 form_molecule" >
             <div class="form_label_description">
               <h6>Form Fields</h6>

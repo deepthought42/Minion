@@ -63,13 +63,13 @@
                           </div>
                     </div>
                   </div>
-                  
+
             			<div class ="domain-dialogue-input" >
             				<div class="" >
                       <div ng-repeat="rule in current_field.rules track by $index">
                         <div class="form__field__profile form-field-labels">
                           <div class="flex-none form_field_rule">
-                            <span>{{ rule.type }}</span>
+                            <span>{{ toTitleCase(rule.type) }}</span>
                           </div>
                           <div class="flex-auto">
                             <span ng-if="!isRuleValueEditable(rule)">{{ rule.value }}</span>
