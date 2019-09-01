@@ -149,7 +149,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
 
 
         //check if rule is min or max length and that both min and max are isDefined and that min is not greater than or equal to max length
-        if( ("MIN_LENGTH" === new_rule.type|| "MAX_LENGTH" === new_rule.type){
+        if( "MIN_LENGTH" === new_rule.type || "MAX_LENGTH" === new_rule.type ){
             if(new_rule.value.length === 0){
               $scope.addError("Value is required for Min/Max length rules");
               return;

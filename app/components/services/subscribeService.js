@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.SubscribeService', ['ngResource', 'Qanairy.serviceConfig']);
+angular.module('Qanairy.SubscribeService', ['ngResource', 'Qanairy.serviceConfig'])
 
 .factory('Subscribe', ['$resource', 'Qanairy.serviceConfig', function ($resource, config) {
   return $resource(config.basePath + '/subscribe', {id: '@id'}, {
