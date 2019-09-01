@@ -274,6 +274,13 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
     }
 
     $scope.addError = function(err){
+      //check for error
+      for(var i=0; i < $scope.errors.length; i++){
+        if(err === $scope.errors[i]){
+          return;
+        }
+      }
+
       $scope.errors.push(err);
       setTimeout(function(){
           $scope.errors.shift();
