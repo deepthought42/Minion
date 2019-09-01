@@ -234,7 +234,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
         })
         .catch(function(err){
           $scope.errors.push("Error occurred while saving rule");
-        })
+        });
     }
 
     $scope.openEditElementDialog  = function(element, idx) {
