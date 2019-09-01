@@ -1,4 +1,7 @@
-  <div class="col-sm-12" style="height: 100% !important;">
+  <div ng-if="!current_path_objects">
+    Select a test to review if it is working as expected or not
+  </div>
+  <div class="col-sm-12" style="height: 100% !important;" ng-if="current_path_objects">
     <div class="row"  style="height: 100% !important;">
       <div class="tabs tabs-style-linemove">
        <nav class="path_tabs">
