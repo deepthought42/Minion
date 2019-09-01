@@ -375,6 +375,9 @@ width: calc(100% - 70px);
   margin-left:15px;
   display: inline;
   margin-right: 15px;
+  	padding: 0px 0px !important;
+	min-height: 40px !important;
+  min-width: 40px !important;
 }
 .progress_bar{
   display: inline;
