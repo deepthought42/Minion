@@ -4,53 +4,6 @@
       {{error.message}}
     </div>
   </div>
-  <div class="secondary-nav vertical__center__int" >
-    <div class="flex-auto">
-      <div class="col-sm-12" ng-show="!isStarted" >
-        <button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
-          Start Discovery
-        </button>
-      </div>
-      <div class="col-sm-12 running_status" ng-if="isStarted">
-        <div class="row">
-          <div class="progress_bar">
-            <div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 | number:1 }}%
-            </div>
-            <md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 }}"></md-progress-linear>
-            <div class="waiting_text">
-            </div>
-          </div>
-          <div class="">
-            <button class="btn btn-danger stop_button"
-                    ng-click="askStopDiscovery()">
-               <i class="fas fa-square"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="flex-auto pull-right right-secondary-nav ">
-      <div class="input-group search">
-        <span class="input-group-addon"><i class="fa fa-search"></i>
-        </span>
-        <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
-      </div>
-    </div>
-  </div>
-  <div class="test-labels-container">
-    <div class="test-labels">
-      <div class="flex-none status__title test__status__frame">
-        Status
-      </div>
-      <div class="flex-auto test_functions">
-        Test Title
-      </div>
-      <div class="flex-none discovery_functions">
-      </div>
-      <div class="flex-none accordion-flex">
-      </div>
-    </div>
-  </div>
   <div class="test-container-split">
     <div class="empty__state vertical__center_empty_state_discovery" ng-show="!isStarted && !waitingOnTests && tests.length==0">
       <div class="col-sm-12 split--oboard--title">
@@ -114,6 +67,53 @@
     </div>
     <split direction="horizontal" ng-transclude ng-if="isStarted && tests.length>0">
       <split-area size="50" ng-transclude >
+        <div class="secondary-nav vertical__center__int" >
+          <div class="flex-auto">
+            <div class="col-sm-12" ng-show="!isStarted" >
+              <button class="btn btn--primary pull-left" ng-click="startDiscovery()" id="start_discovery_button">
+                Start Discovery
+              </button>
+            </div>
+            <div class="col-sm-12 running_status" ng-if="isStarted">
+              <div class="row">
+                <div class="progress_bar">
+                  <div class="percent">{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 | number:1 }}%
+                  </div>
+                  <md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 }}"></md-progress-linear>
+                  <div class="waiting_text">
+                  </div>
+                </div>
+                <div class="">
+                  <button class="btn btn-danger stop_button"
+                          ng-click="askStopDiscovery()">
+                     <i class="fas fa-square"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex-auto pull-right right-secondary-nav ">
+            <div class="input-group search">
+              <span class="input-group-addon"><i class="fa fa-search"></i>
+              </span>
+              <input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
+            </div>
+          </div>
+        </div>
+        <div class="test-labels-container test-labels-container-split">
+          <div class="test-labels test-labels-split">
+            <div class="flex-none status__title test__status__frame">
+              Status
+            </div>
+            <div class="flex-auto test_functions">
+              Test Title
+            </div>
+            <div class="flex-none discovery_functions">
+            </div>
+            <div class="flex-none accordion-flex">
+            </div>
+          </div>
+        </div>
         <div class="">
           <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy:'lastRunTimestamp' track by test.key" ng-show="tests.length>0" >
             <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index, test);visible_tab='nodedata'+$index" ng-class="current_test.key==test.key ? 'active' : ''">
