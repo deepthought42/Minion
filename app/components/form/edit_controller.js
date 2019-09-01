@@ -137,7 +137,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
               }
 
               if(!$scope.bothMinMaxValueRulesExistAndMinIsLessThanMax($scope.current_field.rules, new_rule)){
-                if(new_rule.type == "MAX_VALUE"){
+                if( "MAX_VALUE" === new_rule.type ){
                   $scope.addError("Maximum value rule cannot be less than minimum value rule");
                 }
                 else{
@@ -160,7 +160,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
             }
 
             if(!$scope.bothMinMaxLengthRulesExistAndMinIsLessThanMax($scope.current_field.rules, new_rule)){
-              if(new_rule.type == "MAX_LENGTH"){
+              if( "MAX_LENGTH" === new_rule.type){
                 $scope.addError("Maximum length cannot be less than minimum length");
               }
               else{
@@ -181,7 +181,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
     }
 
     $scope.isRuleValueEditable = function(rule){
-      return "MIN_LENGTH" === new_rule.type || "MAX_LENGTH" === new_rule.type || "MIN_VALUE" === new_rule.type || "MAX_VALUE" === new_rule.type;
+      return "MIN_LENGTH" === rule.type || "MAX_LENGTH" === rule.type || "MIN_VALUE" === rule.type || "MAX_VALUE" === rule.type;
     }
 
     $scope.toTitleCase = function(str) {
@@ -259,7 +259,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
                  })
                  .catch(function(err){
                    $scope.addError("Error occurred while updating element");
-                 })
+                 });
              }
           }
        });
