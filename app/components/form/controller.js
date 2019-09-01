@@ -60,7 +60,7 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
               return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
           }
       );
-    }
+    };
 
     var pusher = new Pusher('77fec1184d841b55919e', {
       cluster: 'us2',
