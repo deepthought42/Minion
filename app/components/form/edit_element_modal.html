@@ -49,8 +49,8 @@
                           </div>
                         </div>
                         <div class="flex-none justify-content-start fifteen_left" style="justify-content: flex-start;">
-                          <button style="margin:0px;" class="btn btn--primary title__edit__buttons" ng-click="addRuleToElement(current_field, new_rule)">
-                          <i class="far fa-plus fa-1x"></i>&nbsp;&nbsp;Add
+                          <button style="margin:0px;" class="btn btn--primary title__edit__buttons" ng-disabled="!new_rule.type.length" ng-click="addRuleToElement(current_field, new_rule)">
+                            <i class="far fa-plus fa-1x"></i>&nbsp;&nbsp;Add
                           </button>
                         </div>
                       </div>
@@ -59,8 +59,8 @@
                           {{error}}
                         </div>
                       </div>
-                        <div class ="rules-divider" >
-                          </div>
+                      <div class ="rules-divider" >
+                      </div>
                     </div>
                   </div>
 
