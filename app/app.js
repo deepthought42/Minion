@@ -42,7 +42,7 @@ angular.module("Qanairy", [
 ]).
 config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptionsProvider", "jwtInterceptorProvider","storeProvider", "StripeCheckoutProvider", "ngOnboardingDefaultsProvider", "$locationProvider", "segmentProvider",
   function($urlRouterProvider, angularAuth0Provider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, storeProvider, StripeCheckoutProvider, ngOnboardingDefaultsProvider, $locationProvider, segmentProvider) {
-    segmentProvider.setKey("DkANikjZ5P3CDa4rahz8PmyawVteNyiX");
+    //segmentProvider.setKey("DkANikjZ5P3CDa4rahz8PmyawVteNyiX");
     $urlRouterProvider.otherwise("/domains");
 
     StripeCheckoutProvider.defaults({
