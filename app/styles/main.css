@@ -476,6 +476,33 @@ h5,
 	border: 1px solid #553fc0;
 }
 
+.btn--screenshot {
+	padding: 5px 12px !important;
+	min-height: 30px;
+  min-width: 30px;
+  background-color: #f6f6fa;
+	border: 1px solid #e0e0e0;
+}
+
+.btn--screenshot img {
+	padding: 5px 5px !important;
+}
+
+.btn--screenshot:focus,
+.btn--screenshot.focus {
+  background-color: #f4f4f8;
+	border: 1px solid #e0e0e0;
+}
+.btn--screenshot:hover {
+  background-color: #f4f4f8;
+	border: 1px solid #e0e0e0;
+}
+.btn--screenshot:active,
+.btn--screenshot.active {
+  background-color: #f4f4f8;
+	border: 1px solid #e0e0e0;
+}
+
 .element-action .btn--tertiary:focus,
 .element-action .btn--tertiary.focus {
 	color: #553fc0;

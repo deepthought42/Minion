@@ -197,13 +197,44 @@
                     </div>
                     <div class="row">
                       <div class="col-sm-12 browser_screenshot_buttons">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                          <button ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn-secondary"><i class="fa fa-chrome"></i>&nbsp;&nbsp;Chrome</button>
-                          <button ng-click="visible_browser_screenshot='firefox'" ng-class="visible_browser_screenshot=='firefox' ? 'tabs-style2_active' : ''" type="button" class="btn btn-secondary"><i class="fa fa-firefox "></i>&nbsp;&nbsp;Firefox</button>
-                          <button type="button" class="btn btn-secondary"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</button>
+                        <div class="btn-group browser-btn-group" role="group" aria-label="Basic example">
+                          <button ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot"><i class="fa fa-chrome"></i>&nbsp;&nbsp;Default Browser for Discovery</button>
                         </div>
                       </div>
                     </div>
+                    <!-- <div class="row">
+                      <div class="col-sm-12 browser_screenshot_buttons">
+                        <div class="btn-group browser-btn-group" role="group" aria-label="Basic example">
+                          <button ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot"><i class="fa fa-chrome"></i>&nbsp;&nbsp;Chrome</button>
+                          <button ng-click="visible_browser_screenshot='firefox'" ng-class="visible_browser_screenshot=='firefox' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot">
+                            <div class="row vertical__center test__status__editable">
+                              <img src="/img/firefox.png" class="browser-icon" alt="Firefox Browser">
+                            </div>
+                            <div class="row vertical__center test__status__editable">
+                              <div class="" ng-if="status == 'RUNNING'">
+                                <i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
+                              </div>
+                              <div class="green vertical__center__int" ng-if="status.toUpperCase() == 'PASSING'">
+                                <div class="" >
+                                  <i class="fa fa-check green status--symbol--browser"></i>
+                                </div>
+                              </div>
+                              <div class="red vertical__center__int" ng-if="status.toUpperCase() == 'FAILING'">
+                                <div class="" >
+                                  <i class="fa fa-times red status--symbol--browser"></i>
+                                </div>
+                              </div>
+                              <div class="red vertical__center__int"	ng-if="status.toUpperCase() == 'UNVERIFIED'">
+                                <div class="" >
+                                  <i class="fa fa-question-circle purple status--symbol--browser"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </button>
+                          <button type="button" class="btn btn--screenshot"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</button>
+                        </div>
+                      </div>
+                    </div> -->
                   </div>  
                 </div>
               </split-area>
