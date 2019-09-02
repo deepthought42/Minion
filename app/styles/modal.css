@@ -297,6 +297,8 @@ md-dialog {
 .toggle-arrow{
   font-size: 44px;
   color: #6649e4;
+  width: 74px;
+  padding: 0px 15px;
 }
 .toggle-arrow:focus,
 .toggle-arrow.focus {

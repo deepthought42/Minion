@@ -172,12 +172,12 @@
              <split direction="vertical" ng-transclude class="test__data" >
                <split-area size="50" ng-transclude class="test-list-container">
                  <!-- Element state screenshot panel -->
-                 <div class="col-sm-12 screenshot-container vertical__center__int">
-                   <div class="row" style="width: 100%;">
+                 <div class="screenshot-container vertical__center__int">
+                   <div class="flex-auto fifteen_left fifteen_right">
                      <div class=" node__screenshots  tabs tabs-style-linemove">
                        <div class="content-wrap screenshot-section">
                          <div id="section-linemove-1">
-                           <div class="element__image col-xs-12">
+                           <div class="element__image">
                              <h5 class="screenshots_title">
                                {{current_node[test_idx].type}}
                              </h5>
@@ -189,7 +189,7 @@
                              <!-- path screenshot panel -->
                              <expandable-path-toggle path="preview_path"
                                                     path-idx="current_path_idx"
-                                                    class="col-md-12 vertical__center__int"
+                                                    class="flex-auto vertical__center__int"
                                                     style="margin-bottom: 5px;"
                                                     ng-if="current_node[test_idx].type != 'ElementState' && current_node[test_idx].type != 'Action'">
                              </expandable-path-toggle>

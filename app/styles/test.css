@@ -558,7 +558,7 @@ width: -webkit-calc(100% - 15px);
 
 
 .screenshots_title{
-  padding: 5px 0px 10px 0px;
+  padding: 5px 13px 10px 13px;
 	margin-bottom: 20px;
 	color:#757575;
 	border-bottom: 3px solid #eee;
@@ -567,7 +567,9 @@ width: -webkit-calc(100% - 15px);
 .screenshot-section > div > div{
 	margin-bottom: 75px !important;
 }
-
+.element__image{
+  float: left;
+}
 
 .browser_screenshot_text{
   padding: 15px 0px 0px 0px;
@@ -597,10 +599,8 @@ width: -webkit-calc(100% - 15px);
   max-width: 100%;
 }
 .screenshot-height{
-  min-height:180px;
 }
 .screenshots{
-	  max-height: 180px;
 }
 
 .form-screenshot{
