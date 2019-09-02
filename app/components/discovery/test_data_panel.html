@@ -195,8 +195,17 @@
                              </expandable-path-toggle>
                            </div>
                          </div>
-
+                         <div class="col-sm-12">
+                          <div class="row">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                              <button ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn-secondary"><i class="fa fa-chrome"></i>&nbsp;&nbsp;Chrome</button>
+                              <button ng-click="visible_browser_screenshot='firefox'" ng-class="visible_browser_screenshot=='firefox' ? 'tabs-style2_active' : ''" type="button" class="btn btn-secondary"><i class="fa fa-firefox "></i>&nbsp;&nbsp;Firefox</button>
+                              <button type="button" class="btn btn-secondary"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</button>
+                            </div>
+                          </div>
+                        </div>
                        </div>
+                      
                        <nav class="col-sm-12">
                          <ul class="row browser_tabs">
                            <li class="tabs-style2" ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''">
