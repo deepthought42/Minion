@@ -270,9 +270,8 @@ width: -webkit-calc(100% - 15px);
 
 .edithover{
   text-align: right !important;
-  position:relative;
   padding-left: 15px;
-  right:0px;
+  float: right;
 }
 
 .test__profile__center,

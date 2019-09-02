@@ -9,7 +9,7 @@
             <h3 class="test__title" >
               {{test.name || "Test #"+($index+1)}}
             </h3>
-            <i class="fa fa-pencil edithover" ng-click="test.show_test_name_edit_field = true" ng-click="editTest(test)" ></i>
+            <i class="fa fa-pencil edithover fifteen_left " ng-click="test.show_test_name_edit_field = true" ng-click="editTest(test)" ></i>
           </div>
         </div>
         <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="test.show_test_name_edit_field">
@@ -172,8 +172,8 @@
              <split direction="vertical" ng-transclude class="test__data" >
                <split-area size="50" ng-transclude class="test-list-container">
                  <!-- Element state screenshot panel -->
-                 <div class="screenshot-container vertical__center__int">
-                   <div class="flex-auto fifteen_left fifteen_right">
+                 <div class="col-sm-12 screenshot-container vertical__center__int">
+                     <div class="flex-auto fifteen_left fifteen_right">
                      <div class=" node__screenshots  tabs tabs-style-linemove">
                        <div class="content-wrap screenshot-section">
                          <div id="section-linemove-1">
@@ -214,6 +214,7 @@
                          </ul>
                        </nav>
                      </div><!-- /tabs -->
+                   </div>
                    </div>
                  </div>
                </split-area>
