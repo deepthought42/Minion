@@ -172,29 +172,37 @@
                 <!-- Element state screenshot panel -->
                 <div class="screenshot-container vertical__center__int">
                   <div class="col-sm-12">
-                   <div id="section-linemove-1">
-                     <div class="element__image">
-                       <h5 class="screenshots_title">
-                         {{current_node[test_idx].type}}
-                       </h5>
-                       <div class="screenshot-height"  ng-if="current_node[test_idx].type == 'ElementState' || current_node[test_idx].type == 'Action'" >
-                         <img class="path-node-image"
-                             data-toggle="modal" data-target="#exampleModal"
-                             src="{{current_path_objects[current_node_idx].screenshot}}"/>
+                    <div class="row">
+                      <div class="col-sm-12">
+                       <div id="section-linemove-1">
+                         <div class="element__image">
+                           <h5 class="screenshots_title">
+                             {{current_node[test_idx].type}}
+                           </h5>
+                           <div class="screenshot-height"  ng-if="current_node[test_idx].type == 'ElementState' || current_node[test_idx].type == 'Action'" >
+                             <img class="path-node-image"
+                                 data-toggle="modal" data-target="#exampleModal"
+                                 src="{{current_path_objects[current_node_idx].screenshot}}"/>
+                           </div>
+                           <!-- path screenshot panel -->
+                           <expandable-path-toggle path="preview_path"
+                                                  path-idx="current_path_idx"
+                                                  class="flex-auto vertical__center__int"
+                                                  style="margin-bottom: 5px;"
+                                                  ng-if="current_node[test_idx].type != 'ElementState' && current_node[test_idx].type != 'Action'">
+                           </expandable-path-toggle>
+                         </div>
                        </div>
-                       <!-- path screenshot panel -->
-                       <expandable-path-toggle path="preview_path"
-                                              path-idx="current_path_idx"
-                                              class="flex-auto vertical__center__int"
-                                              style="margin-bottom: 5px;"
-                                              ng-if="current_node[test_idx].type != 'ElementState' && current_node[test_idx].type != 'Action'">
-                       </expandable-path-toggle>
-                     </div>
-                   </div>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                      <button ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn-secondary"><i class="fa fa-chrome"></i>&nbsp;&nbsp;Chrome</button>
-                      <button ng-click="visible_browser_screenshot='firefox'" ng-class="visible_browser_screenshot=='firefox' ? 'tabs-style2_active' : ''" type="button" class="btn btn-secondary"><i class="fa fa-firefox "></i>&nbsp;&nbsp;Firefox</button>
-                      <button type="button" class="btn btn-secondary"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 browser_screenshot_buttons">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                          <button ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn-secondary"><i class="fa fa-chrome"></i>&nbsp;&nbsp;Chrome</button>
+                          <button ng-click="visible_browser_screenshot='firefox'" ng-class="visible_browser_screenshot=='firefox' ? 'tabs-style2_active' : ''" type="button" class="btn btn-secondary"><i class="fa fa-firefox "></i>&nbsp;&nbsp;Firefox</button>
+                          <button type="button" class="btn btn-secondary"><i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit</button>
+                        </div>
+                      </div>
                     </div>
                   </div>  
                 </div>
