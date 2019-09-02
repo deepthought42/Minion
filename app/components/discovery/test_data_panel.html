@@ -3,7 +3,7 @@
   </div>
   <div class="col-sm-12" style="height: 100% !important;" ng-if="current_path_objects">
     <div class="row">
-      <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index, test);visible_tab='nodedata'+$index" ng-class="current_test.key==test.key ? 'active' : ''">         
+      <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index, test);visible_tab='nodedata'+$index" ng-class="current_test.key==test.key ? 'active' : ''">
         <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
           <div class="" ng-show="!test.show_test_name_edit_field">
             <h3 class="test__title" >
@@ -170,7 +170,7 @@
              </div>
 
              <split direction="vertical" ng-transclude class="test__data" >
-               <split-area size="50" ng-transclude>
+               <split-area size="50" ng-transclude class="test-list-container">
                  <!-- Element state screenshot panel -->
                  <div class="col-sm-12 screenshot-container vertical__center__int">
                    <div class="row">
