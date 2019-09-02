@@ -33,14 +33,13 @@
 .test-list-container{
     margin:0px 0px;
 	background-color: #ffffff;
-	border-top: 1px solid #e0e0e0;
-	height: -moz-calc(100% - 160px) !important;
+	height: -moz-calc(100% - 145px) !important;
     /* WebKit */
-    height: -webkit-calc(100% - 160px) !important;
+    height: -webkit-calc(100% - 145px) !important;
     /* Opera */
-    height: -o-calc(100% - 160px) !important;
+    height: -o-calc(100% - 145px) !important;
     /* Standard */
-    height: calc(100% - 160px) !important;
+    height: calc(100% - 145px) !important;
   overflow-y: scroll !important;
 }
 
@@ -90,8 +89,6 @@
 .test-labels-container{
 	margin-top:10px;
 	background-color: #f4f4f8;
-  padding-top: 10px;
-	padding-bottom: 10px;
 }
 .test-labels-container-split{
 	margin-top:40px;
