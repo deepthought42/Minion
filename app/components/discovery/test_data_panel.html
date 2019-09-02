@@ -169,8 +169,9 @@
                </div>
              </div>
 
-             <split direction="vertical" ng-transclude class="test__data" >
-               <split-area size="50" ng-transclude class="test-container-split-right">
+             <split direction="vertical" ng-transclude class="test__data " >
+              
+                 <split-area size="50" ng-transclude >
                  <!-- Element state screenshot panel -->
                  <div class="col-sm-12 screenshot-container vertical__center__int">
                      <div class="flex-auto">
@@ -225,8 +226,8 @@
                      </div><!-- /tabs -->
                    </div>
                    </div>
-                 </div>
-               </split-area>
+                  </split-area>
+    
                <split-area size="50" ng-transclude>
                  <!-- ELement State data -->
                  <div class="col-sm-12 info-container" ng-if="current_node[test_idx].type == 'ElementState' || current_node[test_idx].type == 'Action'" >
