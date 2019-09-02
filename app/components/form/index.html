@@ -28,7 +28,7 @@
     </div>
 
 		<div class="test-container">
-			
+
 			<div class="empty__state vertical__center_empty_state_busy" ng-show="forms.length == 0">
       <div>
       <br><br>
@@ -48,21 +48,19 @@
     <div class="test"
          ng-repeat="form in (filteredForms = forms) | filter:searchText track by $index"
          ng-show="forms.length > 0">
-      <div class="test__profile vertical__left__profile"">
-
-        <div class="flex-auto test__title test_functions test__profile_stretch"">
+      <div class="test__profile vertical__left__profile">
+        <div class="flex-auto test__title test_functions test__profile_stretch">
           <div class="">
             <h5 class="test__title">
                {{form.name || "Form #"+($index+1)}}
              </h5>
           </div>
         </div>
-
         <div class="flex-initial text-left date_stats test__profile_stretch">
-          {{form.type}}
+          {{toTitleCase(form.type)}}
         </div>
         <div class="flex-initial text-left date_stats test__profile_stretch">
-          {{form.status  || "Unknown"}}
+          {{toTitleCase(form.status)  || "Unknown"}}
         </div>
         <div class="flex-initial text-right date_stats test__profile_stretch">
           {{( form.dateDiscovered | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
