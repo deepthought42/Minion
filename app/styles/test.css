@@ -622,7 +622,11 @@ width: -webkit-calc(100% - 15px);
 }
 .screenshots{
 }
-
+.screenshot-container{
+    align-items: stretch !important;
+    height: 100%;
+    display: flex;
+}
 .form-screenshot{
 	  max-height: 400px;
 }
@@ -755,8 +759,8 @@ width: -webkit-calc(100% - 15px);
 }
 .info-container{
   border-bottom: 0px solid #e0e0e0;
-  height: 100% !important;
   overflow-y: auto;
+    height: 100%;
 }
 
 .path__data{
