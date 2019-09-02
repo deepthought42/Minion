@@ -595,6 +595,11 @@ width: -webkit-calc(100% - 15px);
 .browser-btn-group{
    height: 60px;
 }
+.default_browser_indicator{
+    padding: 5px 12px !important;
+    min-height: 32px;
+    min-width: 32px;
+}
 .expand {
 	position: absolute;
 	font-size:14px;
