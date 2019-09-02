@@ -57,7 +57,7 @@
          </ul>
        </nav>
        <div class="content-data">
-         <div id="section-linemove-1"  style="height: 100% !important;" ng-if="visible_test_nav1=='section-linemove-1'">
+         <div id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
 
              <div class="col-xs-12 test__path vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
                <div ng-repeat="node in current_path_objects track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
@@ -170,10 +170,10 @@
              </div>
 
              <split direction="vertical" ng-transclude class="test__data" >
-               <split-area size="50" ng-transclude class="test-list-container">
+               <split-area size="50" ng-transclude class="test-container-split-right">
                  <!-- Element state screenshot panel -->
                  <div class="col-sm-12 screenshot-container vertical__center__int">
-                     <div class="flex-auto fifteen_left fifteen_right">
+                     <div class="flex-auto">
                      <div class=" node__screenshots  tabs tabs-style-linemove">
                        <div class="content-wrap screenshot-section">
                          <div id="section-linemove-1">

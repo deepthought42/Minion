@@ -114,7 +114,7 @@
             </div>
           </div>
         </div>
-        <div class="test-list-container">
+        <div class="test-container-split-left">
           <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy:'lastRunTimestamp' track by test.key" ng-show="tests.length>0" >
             <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index, test);visible_tab='nodedata'+$index" ng-class="current_test.key==test.key ? 'active' : ''">
               <div class="test__status test__profile_stretch flex-none text--shadow"  id="{{'test'+$index+'_status'}}" >
