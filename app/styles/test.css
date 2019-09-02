@@ -41,6 +41,7 @@
     /* Standard */
     height: calc(100% - 145px) !important;
   overflow-y: scroll !important;
+      width: 100%;
 }
 
 .standard-container{
