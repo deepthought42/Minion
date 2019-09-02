@@ -42,16 +42,6 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
     $scope.$location = $location;
     $scope.current_path = $location.path();
 
-    if (Auth.getCachedProfile()) {
-      $scope.profile = Auth.getCachedProfile();
-      $scope.getAccount($scope.profile.email);
-    } else {
-      Auth.getProfile(function(err, profile) {
-        $scope.profile = profile;
-        $scope.getAccount(profile.email);
-      });
-    }
-
     $scope.getAccount = function(email){
       Account.getAccount().$promise
         .then(function(data){
@@ -66,6 +56,18 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
           }
         })
     }
+
+    if (Auth.getCachedProfile()) {
+      $scope.profile = Auth.getCachedProfile();
+      $scope.getAccount($scope.profile.email);
+    } else {
+      Auth.getProfile(function(err, profile) {
+        $scope.profile = profile;
+        $scope.getAccount(profile.email);
+      });
+    }
+
+
 
     $scope.navToggledOpen = true;
 

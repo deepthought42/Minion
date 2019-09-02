@@ -90,6 +90,8 @@
 .test-labels-container{
 	margin-top:10px;
 	background-color: #f4f4f8;
+  padding-top: 10px;
+	padding-bottom: 10px;
 }
 .test-labels-container-split{
 	margin-top:40px;
