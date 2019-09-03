@@ -117,7 +117,7 @@
       </div>
     </div>
 
-    <split direction="horizontal" ng-transclude ng-if="isStarted && tests.length>0">
+    <split direction="horizontal" ng-transclude ng-if="tests.length>0">
       <split-area size="50" ng-transclude >
         <div class="">
           <div class="test" ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy:'lastRunTimestamp' track by test.key" ng-show="tests.length>0" >
