@@ -54,7 +54,7 @@
             </li>
           </ul>
         </nav>
-        
+
         <div class="col-xs-12">
           <div class="row" id="section-linemove-1" ng-if="visible_test_nav1=='section-linemove-1'">
             <div class="test__path__section vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
@@ -166,10 +166,10 @@
                  </div>
                </div>
              </div>
-            
-            
-                 
-      <div class="test__screenshot__data__section__wrap  test-container-split-right" ng-if="visible_test_nav1==='section-linemove-1'">            
+
+
+
+      <div class="test__screenshot__data__section__wrap  test-container-split-right" ng-if="visible_test_nav1==='section-linemove-1'">
         <split direction="vertical" class="test__screenshot__data__section" ng-transclude style="display:flex;">
           <split-area size="70" class="test__screenshot__section" ng-transclude>
                   <div class="col-sm-12">
@@ -178,7 +178,7 @@
                     Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
                     </button>
                    <h5 class="screenshots_title">
-                     {{current_node[test_idx].type}}
+                     {{translateObjectType(current_node[test_idx].type)}}
                    </h5>
                   <div class="flex-auto">
                    <div class="element__image">
@@ -233,7 +233,7 @@
                       </div>
                     </div>-->
                     </div>
-                  </split-area> 
+                  </split-area>
                   <split-area size="30" class="test__data__section" ng-transclude>
                    <div class="" ng-if="current_node[test_idx].type == 'ElementState' || current_node[test_idx].type == 'Action'" >
                     <div class="col-xs-12">
@@ -335,11 +335,11 @@
                        </div>
                      </div>
                   </div>
-                </split-area> 
+                </split-area>
               </split>
-            </div>                
-                 
-      
+            </div>
+
+
         </div>
         </div><!-- /section-1 -->
         <div id="section-linemove-2" ng-if="visible_test_nav1==='section-linemove-2'">
@@ -371,6 +371,6 @@
            </div>
          </div>
        </div><!-- /section-2 -->
-   </div><!-- /tabs -->
+    </div><!-- /tabs -->
   </div>
 </div>

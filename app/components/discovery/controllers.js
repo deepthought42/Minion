@@ -37,7 +37,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.current_domain = store.get('domain');
       $scope.outline = {'x': 0, 'y':0};
       $scope.current_test = null;
-      $scope.preview_path = [];
+      $scope.path = [];
       //ERRORS
       $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
 
@@ -241,7 +241,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       //create object consisting of a page and it's list of interactions
       //iterate over path and combine elements and actions into single object named interaction
       var new_path = [];
-      console.log("path objects :: "+path_objects)
       for(var i=0; i < path_objects.length; i++){
         if(path_objects[i].key.includes("pagestate") || path_objects[i].key.includes("redirect") || path_objects[i].key.includes("loadpageanimation")){
           new_path.push( $scope.loadPageInteraction(path_objects[i]));
@@ -252,8 +251,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           new_path[new_path.length-1].interactions.push(interaction);
         }
       }
-       $scope.preview_path = new_path;
-       console.log("preview path in controller:: "+$scope.preview_path);
+       $scope.path = new_path;
+       console.log("preview path in controller:: "+$scope.path);
     }
 
     $scope.setCurrentNode = function(node, index){
@@ -578,8 +577,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       return onboard;
     }
 
-    this._init();
-
     /* EVENTS */
     $rootScope.$on('reload_tests', function(e){
 
@@ -640,5 +637,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     $scope.$on("$destroy", function() {
       $scope.pusher.unsubscribe($scope.extractHostname($scope.current_domain.url));
     });
+
+
+    this._init();    
   }
 ]);
