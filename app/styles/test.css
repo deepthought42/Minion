@@ -739,9 +739,10 @@ width: -webkit-calc(100% - 15px);
   flex-direction: column;
 }
 .test__path__section{
-  padding:10px 13px 10px 13px;
+  padding:10px 15px 10px 15px;
   overflow-y: hidden;
   height: 120px;
+  width: 100%;
   border-bottom: 1px solid #e0e0e0;
 }
 .test__screenshot__section{
