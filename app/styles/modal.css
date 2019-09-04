@@ -286,12 +286,14 @@ md-dialog {
   background-color: #f4f4f8;
 }
 .page_modal_image {
+  height:100%;
+  width:auto;
   position: relative;
 }
 
 .page_modal_image img {
 	width:100%;
-	height: auto;
+	height:auto;
   position: relative;
 }
 .toggle-arrow{
