@@ -597,7 +597,7 @@ width: -webkit-calc(100% - 15px);
 	font-size:16px;
 	padding:7px 10px 0px 10px;
 	top: 0px;
-	right:0px;
+	right:-15px;
 }
 
 .page__image img{
@@ -740,18 +740,18 @@ width: -webkit-calc(100% - 15px);
 .test__path__section{
   padding:10px 13px 10px 13px;
   overflow-y: hidden;
-  overflow-x: scroll;
   height: 120px;
   border-bottom: 1px solid #e0e0e0;
 }
 .test__screenshot__section{
 }
 .test__screenshot__data__section{
+  position: relative;
 }
 .test__data__section{
   border-bottom: 0px solid #e0e0e0;
-  overflow-y: auto;
-height: 100%;
+  overflow-y: auto !important;
+  padding:10px 0px 20px 0px;
 }
 .box--shadow{
 	border-radius: 5px;
@@ -766,9 +766,6 @@ height: 100%;
 .node__screenshots nav{
 	position: absolute;
   bottom:0;
-}
-.node__data{
-   padding:10px 0px 20px 0px;
 }
 .node__title{
 	font-size: 13px;
