@@ -557,14 +557,15 @@ width: -webkit-calc(100% - 15px);
 	margin-bottom: 20px;
 	color:#757575;
 	border-bottom: 3px solid #eee;
+  width: 100%;
 }
 
 .screenshot-section > div > div{
 	margin-bottom: 75px !important;
 }
 .element__image{
-  float: left;
   width: 100%;
+  padding: 0px 15px;
 }
 
 .browser_screenshot_text{
@@ -743,13 +744,11 @@ width: -webkit-calc(100% - 15px);
 }
 .test__screenshot__section{
     overflow-y: scroll;
-  padding: 2em;
   flex: 2;
   background: #f0eeee ;
 }
 .test__data__section{
   overflow-y: scroll;
-  padding: 2em;
   flex: 1; 
   border-bottom: 0px solid #e0e0e0;
   padding:10px 0px 20px 0px;
