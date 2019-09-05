@@ -4,7 +4,6 @@
   </div>
   <div class="flex-auto" >
     <div ng-repeat="page_interaction in path track by $index"
-         ng-init="page_idx = $index"
          ng-show="pathIdx == $index"
          class="page_modal_image"
          id="{{'interaction'+$index}}"
@@ -13,7 +12,7 @@
           ng-init="redirect_idx = $index"
           ng-show="pathIdx == $index && page_interaction.page_key.includes('redirect') "
           class="page_modal_image"
-          id="{{'redirect'+page_idx+$index}}"
+          id="{{'redirect'+$index}}"
           style="position:relative">
         <img src="{{url}}"
              ng-click="openPathSlider(path)" />
@@ -22,7 +21,7 @@
           ng-init="redirect_idx = $index"
           ng-show="pathIdx == $index && page_interaction.page_key.includes('PageLoadAnimation') "
           class="page_modal_image"
-          id="{{'redirect'+page_idx+$index}}"
+          id="{{'redirect'+$index}}"
           style="position:relative">
         <img src="{{url}}"
              ng-click="openPathSlider(path)" />
@@ -31,7 +30,7 @@
        <img src="{{page_interaction.page.screenshotUrl}}"
             ng-click="openPathSlider(path)"/>
        <div ng-repeat="interaction in page_interaction.interactions track by $index"
-            id="{{'element-outline'+page_idx+$index}}"
+            id="{{'element-outline'+$index}}"
             class="element__outline"
             style="top: {{interaction.outline.top}}px;left: {{interaction.outline.left}}px; width: {{interaction.outline.width}}px; height:{{interaction.outline.height}}px">
        </div>

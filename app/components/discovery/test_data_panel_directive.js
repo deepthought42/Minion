@@ -67,8 +67,8 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
         test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
         $scope.visible_browser_screenshot = $scope.default_browser;
 
-        $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-        $scope.setCurrentNode($scope.current_path_objects[0], 0);
+        $scope.path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
+        $scope.setCurrentNode($scope.path_objects[0], 0);
 
         if(test.visible){
           $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
@@ -116,8 +116,8 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
         var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
         path_objects.push(test.result)
         $scope.path_objects = path_objects;
+        $scope.pathIdx = 0;
         $scope.path = $scope.convertToIterativePath(path_objects);
-        $rootScope.$broadcast("updateDiscoveryPath", path_objects);
       });
 
     }],

@@ -90,10 +90,7 @@ angular.module('Qanairy.ExpandablePathToggle', [])
         }
       }
     },
-    scope: {
-      path: '=',
-      pathIdx: '='
-    },
+    scope: false,
     transclude: true,
     templateUrl: 'components/organisms/expandablePathToggle/path_toggle_panel.html'
   }
