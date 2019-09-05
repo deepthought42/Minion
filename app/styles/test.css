@@ -750,14 +750,14 @@ width: -webkit-calc(100% - 15px);
 .test__data__section{
   overflow-y: scroll;
   padding: 2em;
-  flex: 1;
-  background: #f7f7f7 ; 
+  flex: 1; 
   border-bottom: 0px solid #e0e0e0;
   padding:10px 0px 20px 0px;
 }
 .test__screenshot__data__section__wrap{
     height: calc(100vh - 261px);
   display: flex;
+   background: #fff; 
 }
 .content-data-list{
 }
