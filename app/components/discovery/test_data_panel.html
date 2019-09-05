@@ -1,7 +1,7 @@
   <div ng-if="!current_path_objects">
     Select a test to review if it is working as expected or not
   </div>
-  <div class="col-sm-12" style="height: 100% !important;" ng-if="current_path_objects">
+  <div class="col-sm-12"  ng-if="current_path_objects">
     <div class="row test__details__section">
       <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index, test);visible_tab='nodedata'+$index" ng-class="current_test.key==test.key ? 'active' : ''">
         <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="row" style="height: 100% !important;">
+    <div class="row" >
       <div class="tabs tabs-style-linemove">
         <nav class="path_tabs">
           <ul>
@@ -167,8 +167,8 @@
                </div>
              </div>
             
-    
-          <div class="col-xs-12 test__screenshot__data__section">
+    <div class="col-xs-12 test__screenshot__data__section__wrap  test-container-split-right">
+          <div class="test__screenshot__data__section">
                 <!-- Element state screenshot panel -->
             <div class="row test__screenshot__section vertical__center__int">
                   <button class="expand btn btn--screenshot" data-toggle="modal" data-target="#exampleModal"
@@ -235,6 +235,8 @@
              </div>
              <!-- Element State data -->
             <div class="row test__data__section" ng-if="current_node[test_idx].type == 'ElementState' || current_node[test_idx].type == 'Action'" >
+              <div class="col-xs-12">
+                <div class="row">
                <div class="col-xs-12 key--value">
                  <div class="data__key">
                    Xpath
@@ -297,6 +299,8 @@
                    </div>
                  </div>
                </div>
+              </div>
+            </div>
            </div>
 
             <!-- URL data -->
