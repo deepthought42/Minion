@@ -38,6 +38,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.outline = {'x': 0, 'y':0};
       $scope.current_test = null;
       $scope.path = [];
+      $scope.path_objects = [];
       //ERRORS
       $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
 
@@ -234,26 +235,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     $scope.setTestIndex = function(idx, test){
       $scope.current_test = test;
       $scope.test_idx = idx;
-
-      //iterate over keys and load path PathObjects
-      var path_objects = $scope.retrievePathObjectsUsingKeys($scope.current_test.pathKeys);
-      path_objects.push($scope.current_test.result)
-      //create object consisting of a page and it's list of interactions
-      //iterate over path and combine elements and actions into single object named interaction
-      var new_path = [];
-      for(var i=0; i < path_objects.length; i++){
-        if(path_objects[i].key.includes("pagestate") || path_objects[i].key.includes("redirect") || path_objects[i].key.includes("loadpageanimation")){
-          new_path.push( $scope.loadPageInteraction(path_objects[i]));
-        }
-        else if(path_objects[i].key.includes("elementstate")){
-          var interaction = {element: path_objects[i], action: path_objects[i+1], key: path_objects[i].key};
-          //create interaction object and add it to page interactions
-          new_path[new_path.length-1].interactions.push(interaction);
-        }
-      }
-       $scope.path = new_path;
-       console.log("preview path in controller:: "+$scope.path);
+      console.log("test :: "+JSON.stringify(test));
+       $rootScope.$broadcast("updateCurrentDiscoveryTest", test );
+       console.log("preview path in controller:: "+test);
     }
+
 
     $scope.setCurrentNode = function(node, index){
       $scope.current_path_idx = index;
@@ -286,31 +272,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           }
 
         });
-    }
-
-    $scope.getPathObject = function(key){
-      var path_objects = store.get('path_objects').filter(function( path_object ){
-        return path_object.key == key;
-      });
-      return path_objects[0];
-    }
-
-    $scope.toggleTestDataVisibility = function(test, index){
-      if($scope.test && $scope.test_idx != index){
-        $scope.test.visible = false;
-      }
-      $scope.test_idx = index;
-      $scope.test = test;
-      test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
-      $scope.visible_browser_screenshot = $scope.default_browser;
-
-      $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-      $scope.setCurrentNode($scope.current_path_objects[0], 0);
-
-      if(test.visible){
-        $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
-        $scope.testVerificationOnboardingIndex = 0;
-      }
     }
 
     /**
@@ -452,14 +413,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
             $scope.errors.push({message: $scope.unresponsive_server_err });
           }
         });
-    }
-
-    $scope.loadPageInteraction = function(interaction){
-      var page_interaction = {};
-      page_interaction.page = interaction;
-      page_interaction.page_key = interaction.key;
-      page_interaction.interactions = [];
-      return page_interaction;
     }
 
     $scope.cancelEditingTestName = function(test){
@@ -639,6 +592,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     });
 
 
-    this._init();    
+    this._init();
   }
 ]);

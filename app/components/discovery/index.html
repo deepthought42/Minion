@@ -138,7 +138,7 @@
                   </div>
                 </div>
               </div>
-              <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
+              <div class="flex-auto test__title test_functions test__profile_stretch" >
                 <div class="" ng-show="!test.show_test_name_edit_field">
                   <h3 class="test__title" >
                     {{test.name || "Test #"+($index+1)}}
@@ -179,7 +179,7 @@
         </div>
       </split-area>
       <split-area size="50" ng-transclude >
-        <discovery-test-data-panel ></discovery-test-data-panel>
+        <discovery-test-data-panel test="current_test" ></discovery-test-data-panel>
       </split-area>
     </split>
   </div>

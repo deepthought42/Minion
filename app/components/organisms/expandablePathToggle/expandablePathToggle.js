@@ -3,7 +3,7 @@
 angular.module('Qanairy.ExpandablePathToggle', [])
 .directive("expandablePathToggle",['$mdDialog', function($mdDialog){
   return{
-    restrict: 'EA',
+    restrict: 'E',
     controller: function($scope){
       $scope.current_path_idx = 0;
       console.log("getting next "+$scope.path);
@@ -50,6 +50,9 @@ angular.module('Qanairy.ExpandablePathToggle', [])
          });
       };
 
+
+    },
+    link: function($scope, element) {
       $scope.getOutlineStyle = function(element_state, index, page, page_idx){
         console.log('Page idx  :  '+page_idx);
         //var parent_elem =  angular.element( document.querySelector("#testthingy"));
@@ -86,9 +89,6 @@ angular.module('Qanairy.ExpandablePathToggle', [])
           console.log("interaction1    :: "+JSON.stringify($scope.path[i].interactions[j]) );
         }
       }
-    },
-    link: function($scope, element) {
-
     },
     scope: {
       path: '=',
