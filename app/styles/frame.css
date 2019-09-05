@@ -606,6 +606,8 @@ md-progress-linear  .md-bar {
   border-top-left-radius: 0px;
 	border-top-right-radius: 0px;
 	box-shadow: 0 1px 5px 0 hsla(238, 69%, 8%, 0.1);
+  height: 100%;
+  overflow-y: auto;
 }
 
 .ellipses-dropdown > .dropdown-menu {
@@ -629,8 +631,6 @@ md-progress-linear  .md-bar {
 }
 
 .manage_domains {
-	border-bottom-left-radius: 5px !important;
-	border-bottom-right-radius: 5px  !important;
 	background-color:#6649e4  !important;
 	color: #ffffff  !important;
 }
