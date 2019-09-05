@@ -606,7 +606,7 @@ md-progress-linear  .md-bar {
   border-top-left-radius: 0px;
 	border-top-right-radius: 0px;
 	box-shadow: 0 1px 5px 0 hsla(238, 69%, 8%, 0.1);
-  height: 100%;
+  max-height: calc(100vh - 39px);
   overflow-y: auto;
 }
 
@@ -622,6 +622,8 @@ md-progress-linear  .md-bar {
 
 .dropdown-menu.show {
   display: block;
+    height: 100%;
+  max-height: 300px;
 }
 
 .dropdown-header {
