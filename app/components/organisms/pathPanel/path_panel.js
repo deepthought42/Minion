@@ -5,15 +5,9 @@ angular.module('Qanairy.PathPanel', [])
   return{
     restrict: 'E',
     controller: function($scope){
-      $scope.path = {};
-      console.log("scope path :: "+$scope.path);
 
-      $scope.$on("updateDiscoveryPath", function(event, path){
-        console.log("path updated");
-        $scope.path = path;
-      });
     },
-    scope: {},
+    scope: false,
     replace: true,
     templateUrl: 'components/organisms/pathPanel/path_panel.html'
   }

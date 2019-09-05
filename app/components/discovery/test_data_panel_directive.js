@@ -117,7 +117,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
         path_objects.push(test.result)
         $scope.path_objects = path_objects;
         $scope.path = $scope.convertToIterativePath(path_objects);
-        $rootScope.$broadcast("updateDiscoveryPath", $scope.path_objects);
+        $rootScope.$broadcast("updateDiscoveryPath", path_objects);
       });
 
     }],
