@@ -167,6 +167,74 @@
                </div>
              </div>
             
+            
+                 
+      <div class="test__screenshot__data__section__wrap  test-container-split-right" ng-if="visible_test_nav1==='section-linemove-1'">            
+        <split direction="vertical" class="test__screenshot__data__section" ng-transclude style="display:flex;">
+  <split-area size="50" class="test__screenshot__section" ng-transclude>
+    <div class="col-sm-12">
+    <h5 class="screenshots_title fifteen_left">
+                     {{current_node[test_idx].type}}
+                   </h5>
+                  <div class="flex-auto">
+                   <div class="element__image">
+                     <div ng-if="current_node[test_idx].type == 'ElementState' || current_node[test_idx].type == 'Action'" >
+                       <img class="path-node-image"
+                           data-toggle="modal" data-target="#exampleModal"
+                           src="{{current_path_objects[current_node_idx].screenshot}}"/>
+                     </div>
+                     <!-- path screenshot panel -->
+                     <expandable-path-toggle path="preview_path"
+                                            path-idx="current_path_idx"
+                                            class="flex-auto vertical__center__int"
+                                            style="margin-bottom: 5px;"
+                                            ng-if="current_node[test_idx].type != 'ElementState' && current_node[test_idx].type != 'Action'">
+                     </expandable-path-toggle>
+                   </div>
+                  </div>
+                  <div class="" style="width: 100%;">
+                    <div class="browser_screenshot_buttons">
+                      <div class="default_browser_indicator">
+                        <i class="fa fa-chrome"></i><span class="sup">*</span>&nbsp;&nbsp;Default Browser for Discovery
+                      </div>
+                    </div>
+                  </div>
+      </div>
+  </split-area> 
+  <split-area size="50" class="test__data__section" ng-transclude>
+      <div class="col-sm-12">
+    <h5 class="screenshots_title fifteen_left">
+                     {{current_node[test_idx].type}}
+                   </h5>
+                  <div class="flex-auto">
+                   <div class="element__image">
+                     <div ng-if="current_node[test_idx].type == 'ElementState' || current_node[test_idx].type == 'Action'" >
+                       <img class="path-node-image"
+                           data-toggle="modal" data-target="#exampleModal"
+                           src="{{current_path_objects[current_node_idx].screenshot}}"/>
+                     </div>
+                     <!-- path screenshot panel -->
+                     <expandable-path-toggle path="preview_path"
+                                            path-idx="current_path_idx"
+                                            class="flex-auto vertical__center__int"
+                                            style="margin-bottom: 5px;"
+                                            ng-if="current_node[test_idx].type != 'ElementState' && current_node[test_idx].type != 'Action'">
+                     </expandable-path-toggle>
+                   </div>
+                  </div>
+                  <div class="" style="width: 100%;">
+                    <div class="browser_screenshot_buttons">
+                      <div class="default_browser_indicator">
+                        <i class="fa fa-chrome"></i><span class="sup">*</span>&nbsp;&nbsp;Default Browser for Discovery
+                      </div>
+                    </div>
+                  </div>
+        </div>
+  </split-area> 
+</split>
+                  </div>                
+                 
+                 
             <div class="col-xs-12 test__screenshot__data__section__wrap  test-container-split-right">
               <div class="test__screenshot__data__section">
                   <!-- Element state screenshot panel -->
@@ -307,7 +375,6 @@
 
               <!-- URL data -->
               <div class="row test__data__section" ng-if="current_node[test_idx].type == 'PageState'">
-               <div class="node__data   tabs tabs-style-linemove">
                  <div class="col-xs-12">
                    <div class="key--value">
                      <div class="data__key">
@@ -320,12 +387,10 @@
                      </div>
                    </div>
                  </div>
-               </div><!-- /tabs -->
              </div>
 
               <!-- MULTIPLE URL DATA -->
               <div class="row test__data__section" ng-if="current_node[test_idx].type == 'Redirect' || current_node[test_idx].type == 'PageLoadAnimation'">
-               <div class="node__data   tabs tabs-style-linemove">
                  <div class="col-xs-12">
                    <div class="key--value">
                      <div class="data__key">
@@ -338,7 +403,6 @@
                      </div>
                    </div>
                  </div>
-               </div><!-- /tabs -->
               </div>
             </div>
           </div>
