@@ -744,7 +744,8 @@ width: -webkit-calc(100% - 15px);
 }
 .test__screenshot__section{
   flex: 2;
-  background: #f0eeee ;
+  background: #f4f4f8;
+  overflow-y: scroll;
 }
 .test__data__section{
   overflow-y: scroll;
