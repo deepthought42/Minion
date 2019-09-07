@@ -98,10 +98,13 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           $scope.closeDialog();
           created_successfully = true;
           $rootScope.$broadcast("domain_added", successResult);
+          $rootScope.$broadcast("domain_selected", successResult);
           segment.track("Created Domain", {
             domain: host,
             browser: default_browser
           }, function(success){  });
+
+          $state.go("main.discovery");
         },
         function(errorResult){
           created_successfully = false
@@ -181,7 +184,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       }, function(success){  });
 
       $state.go("main.discovery");
-
     }
 
     $scope.openCreateDomainDialog  = function() {
@@ -236,7 +238,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         segment.track("Uploaded Logo", {
           domain : domain
         }, function(success){  });
-        console.log("response :: "+response.filesUploaded[0]);
         $scope.current_domain.logo_url = response.filesUploaded[0].url;
         $scope.$apply();
       })
@@ -272,7 +273,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             else{
               $scope.errors.push({message: $scope.unresponsive_server_err });
             }
-          })
+          });
       }
     }
 
@@ -286,7 +287,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
     $scope.$on('onboardingStepsAcquired', function(){
       $scope.welcomeOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('domain-welcome');
-    })
+    });
 
     /* EVENTS */
     $rootScope.$on('missing_resorce_error', function (e){

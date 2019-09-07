@@ -721,7 +721,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
      */
     $scope.getPathIterations = function(path_size){
       var segment_cnt = Math.trunc(path_size/3);
-      if(segment_cnt == 0 ){
+      if(segment_cnt === 0 ){
         segment_cnt = 1;
       }
 
@@ -764,14 +764,15 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
       //iterate over keys and load path PathObjects
       var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-      path_objects.push($scope.test.result)
+      path_objects.push($scope.test.result);
       //add result to end of path
 
       //create object consisting of a page and it's list of interactions
       //iterate over path and combine elements and actions into single object named interaction
       var new_path = [];
       for(var i=0; i < path_objects.length; i++){
-        if(path_objects[i].key.includes("pagestate") || path_objects[i].key.includes("redirect") || path_objects[i].key.includes("loadpageanimation")){
+        var key = path_objects[i].key;
+        if(key.includes("pagestate") || key.includes("redirect") || key.includes("loadpageanimation")){
           new_path.push( $scope.loadPageInteraction(path_objects[i]));
         }
         else if(path_objects[i].key.includes("elementstate")){

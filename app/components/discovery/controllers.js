@@ -269,7 +269,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
     $scope.getPathObject = function(key){
       var path_objects = store.get('path_objects').filter(function( path_object ){
-        return path_object.key == key;
+        return path_object.key === key;
       });
       return path_objects[0];
     }
@@ -280,7 +280,13 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       }
       $scope.test_idx = index;
       $scope.test = test;
-      test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
+      if(test.visible){
+        test.visible = true;
+      }
+      else{
+        test.visible = !test.visible;
+      }
+
       $scope.visible_browser_screenshot = $scope.default_browser;
 
       $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
@@ -507,9 +513,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     $scope.editTest = function(test){
       test.show_test_name_edit_field = true;
     }
-    /**
-     *
-     */
+
+
     $scope.updateCorrectness = function(test, correctness, idx){
       test.waitingOnStatusChange = true;
       Test.setPassingStatus({key: test.key, status: correctness, browser_name: $scope.default_browser}).$promise
@@ -518,7 +523,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           test.status = data.status;
           //remove from list
           for(var i=0; i<$scope.tests.length; i++){
-            if($scope.tests[i].key == test.key){
+            if($scope.tests[i].key === test.key){
               $scope.tests.splice(i, 1);
               break;
             }

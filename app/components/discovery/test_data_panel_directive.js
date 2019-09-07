@@ -15,4 +15,4 @@ angular.module('Qanairy.DiscoveryTestDataPanel', [])
     templateUrl: 'components/discovery/test_data_panel.html'
   }
 
-})
+});
