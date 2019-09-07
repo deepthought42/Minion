@@ -721,7 +721,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
      */
     $scope.getPathIterations = function(path_size){
       var segment_cnt = Math.trunc(path_size/3);
-      if(segment_cnt == 0 ){
+      if(segment_cnt === 0 ){
         segment_cnt = 1;
       }
 

@@ -54,7 +54,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
           else{
             $scope.errors.push({message: $scope.unresponsive_server_err });
           }
-        })
+        });
     }
 
     if (Auth.getCachedProfile()) {
@@ -121,7 +121,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
         hostname = hostname.split('?')[0];
 
         return hostname;
-    }
+    };
 
     if($scope.domain != null){
       var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
@@ -183,17 +183,16 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
         });
 
       $state.go("main.discovery");
-
-    }
+    };
 
     $scope.showDomainsPage = function(){
       $state.go("main.domains");
-    }
+    };
 
     $scope.login = function(){
       Auth.login();
       $scope.isAuthenticated=true;
-    }
+    };
 
     $scope.logout = function(){
       segment.track("Clicked Logout", {
@@ -202,7 +201,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
       Auth.logout();
       $scope.isAuthenticated=false;
       Auth.login();
-    }
+    };
 
     $scope.$on('domain_updated', function(event, opts){
       $scope.domain = store.get('domain');
