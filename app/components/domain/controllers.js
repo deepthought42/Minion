@@ -98,7 +98,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           $scope.closeDialog();
           created_successfully = true;
           $rootScope.$broadcast("domain_added", successResult);
-          $rootScope.$broadcast("domain_selected", domain);
+          $rootScope.$broadcast("domain_selected", successResult);
           segment.track("Created Domain", {
             domain: host,
             browser: default_browser
