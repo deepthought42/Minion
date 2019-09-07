@@ -5,7 +5,8 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
   return{
     restrict: 'E',
     controller: ["$rootScope", "$scope", "store", function($rootScope, $scope, store){
-      console.log("path :: " +  $scope.path);
+      $scope.current_node = {};
+
       $scope.openPathSlider = function(path, current_node_idx) {
         $scope.path = path;
         $scope.current_idx = current_node_idx;
@@ -40,6 +41,10 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
 
       $scope.visible_test_nav1 = 'section-linemove-1';
 
+      $scope.setCurrentNode = function(node){
+        $scope.current_node = node;
+      }
+
       /**
        * Constructs a list of PathObjects consisting of PageState, PageElement,
        *    and Action objects currently stored in session storage
@@ -57,23 +62,16 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
         return path_objects;
       }
 
-
-      $scope.toggleTestDataVisibility = function(test, index){
-        if($scope.test && $scope.test_idx != index){
-          $scope.test.visible = false;
-        }
+      $scope.toggleTestDataVisibility = function(test){
         $scope.test_idx = index;
         $scope.test = test;
-        test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
         $scope.visible_browser_screenshot = $scope.default_browser;
 
         $scope.path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-        $scope.setCurrentNode($scope.path_objects[0], 0);
+        $scope.setCurrentNode($scope.path_objects[0]);
 
-        if(test.visible){
-          $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
-          $scope.testVerificationOnboardingIndex = 0;
-        }
+        $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
+        $scope.testVerificationOnboardingIndex = 0;
       }
 
 
@@ -120,12 +118,10 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
         $scope.path_objects = path_objects;
         $scope.pathIdx = 0;
         $scope.path = $scope.convertToIterativePath($scope.path_objects);
+        $scope.current_node = path_objects[0];
       });
-
     }],
-    scope: {
-      test: "=test"
-    },
+    scope: {},
     transclude: true,
     templateUrl: 'components/discovery/test_data_panel.html'
   }

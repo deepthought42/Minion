@@ -4,27 +4,25 @@
   </div>
   <div class="flex-auto" >
     <div ng-repeat="page_interaction in path track by $index"
-         ng-show="pathIdx == $index"
+         ng-show="current_node.key == page_interaction.page_key"
          class="page_modal_image"
-         id="{{'interaction'+$index}}"
-         style="position:relative">
+         style="position:relative"
+         id="{{'expandable'+page_interaction.page_key}}">
       <div ng-repeat="url in page_interaction.page.imageUrls track by $index"
           ng-init="redirect_idx = $index"
           ng-show="pathIdx == $index && page_interaction.page_key.includes('redirect') "
           class="page_modal_image"
-          id="{{'redirect'+$index}}"
           style="position:relative">
         <img src="{{url}}"
-             ng-click="openPathSlider(path)" />
+             ng-click="openPathSlider(path)"/>
       </div>
       <div ng-repeat="url in page_interaction.page.imageUrls track by $index"
           ng-init="redirect_idx = $index"
           ng-show="pathIdx == $index && page_interaction.page_key.includes('PageLoadAnimation') "
           class="page_modal_image"
-          id="{{'redirect'+$index}}"
           style="position:relative">
         <img src="{{url}}"
-             ng-click="openPathSlider(path)" />
+             ng-click="openPathSlider(path)"/>
       </div>
       <div ng-show="page_interaction.page_key.includes('pagestate')">
        <img src="{{page_interaction.page.screenshotUrl}}"
@@ -32,7 +30,7 @@
        <div ng-repeat="interaction in page_interaction.interactions track by $index"
             id="{{'element-outline'+$index}}"
             class="element__outline"
-            style="top: {{interaction.outline.top}}px;left: {{interaction.outline.left}}px; width: {{interaction.outline.width}}px; height:{{interaction.outline.height}}px">
+            style="{{generateElementOutline(page_interaction.page, interaction.element)}}">
        </div>
      </div>
     </div>

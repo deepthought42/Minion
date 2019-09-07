@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService', 'Qanairy.ElementStateOutline', 'Qanairy.DiscoveryTestDataPanel', 'ng-split', 'Qanairy.ExpandablePathToggle'])
+angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Qanairy.PathRealtimeService', 'Qanairy.ElementStateOutline', 'Qanairy.DiscoveryTestDataPanel', 'ng-split', 'Qanairy.ExpandablePathToggle', 'Qanairy.PathPanel'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.discovery', {
@@ -20,8 +20,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.errors = [];
       $scope.tests = [];
       $scope.isStarted = false;
-      $scope.current_node = [];
-      $scope.current_node_idx = 0;
       $scope.visible = false;
 			$scope.visible_test_nav1 = 'section-linemove-1';
       $scope.visible_test_nav2 = 'section-linemove-2';
@@ -238,20 +236,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       console.log("test :: "+JSON.stringify(test));
        $rootScope.$broadcast("updateCurrentDiscoveryTest", test );
        console.log("preview path in controller:: "+test);
-    }
-
-
-    $scope.setCurrentNode = function(node, index){
-      $scope.current_path_idx = index;
-
-      if(index > 3){
-        index = (index % 3) + 1;
-      }
-      else{
-        index = (index % 3);
-      }
-      $scope.current_node_idx = index;
-      $scope.current_node[$scope.test_idx] = node;
     }
 
     $scope.setTestName = function(test, new_name){

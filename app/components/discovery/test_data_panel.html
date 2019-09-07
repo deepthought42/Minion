@@ -3,8 +3,8 @@
   </div>
   <div class="col-sm-12"  ng-if="path">
     <div class="row test__details__section">
-      <div class="test__profile vertical__left__profile" ng-click="setTestIndex($index, test);visible_tab='nodedata'+$index" ng-class="current_test.key==test.key ? 'active' : ''">
-        <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="!test.show_test_name_edit_field">
+      <div class="test__profile vertical__left__profile" ng-class="current_test.key==test.key ? 'active' : ''">
+        <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test)" ng-if="!test.show_test_name_edit_field">
           <div class="" ng-show="!test.show_test_name_edit_field">
             <h3 class="test__title" >
               {{test.name || "Test #"+($index+1)}}
@@ -70,21 +70,21 @@
                     Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
                     </button>
                    <h5 class="screenshots_title">
-                     {{translateObjectType(path[test_idx].type)}}
+                     {{translateObjectType(current_node.type)}}
                    </h5>
                   <div class="flex-auto">
                    <div class="element__image">
-                     <div ng-if="current_node[test_idx].type == 'ElementState' || current_node[test_idx].type == 'Action'" >
+                     <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'" >
                        <img class="path-node-image"
                            data-toggle="modal" data-target="#exampleModal"
-                           src="{{current_path_objects[current_node_idx].screenshot}}"/>
+                           src="{{current_node.screenshot}}"/>
                      </div>
                      <!-- path screenshot panel -->
                      <expandable-path-toggle path="preview_path"
                                             path-idx="current_path_idx"
                                             class="flex-auto vertical__center__int"
                                             style="margin-bottom: 5px;"
-                                            ng-if="current_node[test_idx].type != 'ElementState' && current_node[test_idx].type != 'Action'">
+                                            ng-if="current_node.type != 'ElementState' && current_node.type != 'Action'">
                      </expandable-path-toggle>
                    </div>
                   </div>
