@@ -213,15 +213,8 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
       store.set('domains', $scope.domain_list);
     });
 
-    $scope.$on('domain_selected', function(){
+    $scope.$on('domain_selected', function(event, domain){
       $scope.domain = store.get('domain');
-      var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
-
-      channel.bind('path_object', function(data) {
-        var path_objects = store.get('path_objects');
-        path_objects.push( JSON.parse(data));
-        store.set('path_objects', path_objects);
-      });
     });
 
     $scope.$on('updateApprovedTestCnt', function(event, approved_test_cnt){
