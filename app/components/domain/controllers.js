@@ -98,10 +98,13 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           $scope.closeDialog();
           created_successfully = true;
           $rootScope.$broadcast("domain_added", successResult);
+          $rootScope.$broadcast("domain_selected", domain);
           segment.track("Created Domain", {
             domain: host,
             browser: default_browser
           }, function(success){  });
+
+          $state.go("main.discovery");
         },
         function(errorResult){
           created_successfully = false
@@ -181,7 +184,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       }, function(success){  });
 
       $state.go("main.discovery");
-
     }
 
     $scope.openCreateDomainDialog  = function() {
