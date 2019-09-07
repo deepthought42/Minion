@@ -274,7 +274,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
               $scope.errors.push({message: $scope.unresponsive_server_err });
             }
           });
-      };
+      }
     }
 
     this._init();

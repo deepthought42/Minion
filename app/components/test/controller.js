@@ -764,7 +764,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
       //iterate over keys and load path PathObjects
       var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-      path_objects.push($scope.test.result)
+      path_objects.push($scope.test.result);
       //add result to end of path
 
       //create object consisting of a page and it's list of interactions

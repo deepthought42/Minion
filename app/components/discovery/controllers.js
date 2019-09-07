@@ -280,11 +280,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       }
       $scope.test_idx = index;
       $scope.test = test;
-      if(test.visible===undefined){
+      if(test.visible){
         test.visible = true;
       }
       else{
-        test.visible = !test.visible
+        test.visible = !test.visible;
       }
 
       $scope.visible_browser_screenshot = $scope.default_browser;
