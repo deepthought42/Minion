@@ -89,6 +89,17 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     };
 
     $scope.createDomain = function(protocol, host, default_browser, logo_url){
+      if(host.includes("127.0.0.1") || host.toLowerCase().includes("localhost")){
+        segment.track("Create Localhost Failed", {
+          browser: default_browser,
+          domain: host
+        }, function(success){  });
+
+        $scope.domain_creation_err = "Sorry, we don't currently support localhost environments";
+        $scope.show_create_domain_err = true;
+        return;
+      }
+
       var created_successfully = false;
       Domain.save({protocol: protocol, url: host, logoUrl: logo_url, browser_name: default_browser}).$promise
         .then(function(successResult){
