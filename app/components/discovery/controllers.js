@@ -274,23 +274,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
-    /**
-     * Constructs a list of PathObjects consisting of PageState, PageElement,
-     *    and Action objects currently stored in session storage
-     */
-    $scope.retrievePathObjectsUsingKeys = function(path_keys){
-      var path_objects = [];
-      for(var idx = 0; idx < path_keys.length; idx++){
-        //search all elements
-        var path_object  = $scope.getPathObject(path_keys[idx]);
-        if(path_object != null){
-           path_objects.push(path_object);
-        }
-      }
-
-      return path_objects;
-    }
-
     $scope.stopDiscoveryProcess = function(){
       Discovery.stopWork({url:  $scope.current_domain.url}).$promise
         .then(function(){

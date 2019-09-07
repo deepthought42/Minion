@@ -114,10 +114,12 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
         console.log("update current discovery to test  :: "+JSON.stringify(test));
         //iterate over keys and load path PathObjects
         var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-        path_objects.push(test.result)
+        if(path_objects[path_objects.length-1].type !== "PageState"){
+          path_objects.push(test.result)
+        }
         $scope.path_objects = path_objects;
         $scope.pathIdx = 0;
-        $scope.path = $scope.convertToIterativePath(path_objects);
+        $scope.path = $scope.convertToIterativePath($scope.path_objects);
       });
 
     }],

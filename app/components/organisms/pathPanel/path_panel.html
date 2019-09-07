@@ -1,4 +1,4 @@
-<div class="row test__path__section vertical__left__int" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
+<div class="test__path__section" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}">
   <div ng-repeat="node in path_objects track by $index" class="path-node-container vertical__center__int" tooltip-placement="top">
     <div class="node-group element-action vertical__center__int"
         ng-if="node.type == 'Redirect'"
