@@ -771,7 +771,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       //iterate over path and combine elements and actions into single object named interaction
       var new_path = [];
       for(var i=0; i < path_objects.length; i++){
-        if(path_objects[i].key.includes("pagestate") || path_objects[i].key.includes("redirect") || path_objects[i].key.includes("loadpageanimation")){
+        var key = path_objects[i].key;
+        if(key.includes("pagestate") || key.includes("redirect") || key.includes("loadpageanimation")){
           new_path.push( $scope.loadPageInteraction(path_objects[i]));
         }
         else if(path_objects[i].key.includes("elementstate")){
