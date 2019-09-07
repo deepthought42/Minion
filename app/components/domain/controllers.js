@@ -86,11 +86,8 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           });
       }
       return onboard;
-    }
+    };
 
-    /**
-    *
-    */
     $scope.createDomain = function(protocol, host, default_browser, logo_url){
       var created_successfully = false;
       Domain.save({protocol: protocol, url: host, logoUrl: logo_url, browser_name: default_browser}).$promise
@@ -101,9 +98,17 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           $scope.closeDialog();
           created_successfully = true;
           $rootScope.$broadcast("domain_added", successResult);
+          segment.track("Created Domain", {
+            domain: host,
+            browser: default_browser
+          }, function(success){  });
         },
         function(errorResult){
           created_successfully = false
+          segment.track("Create Domain Failed", {
+            browser: default_browser,
+            domain: host
+          }, function(success){  });
 
           if(errorResult.status === 303){
             $scope.closeDialog();
@@ -112,10 +117,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             $scope.show_create_domain_err = true;
           }
         });
-
-        segment.track("Created Domain", {
-          domain: host
-        }, function(success){  });
     }
 
     $scope.updateDomain = function(key, protocol, default_browser, logo_url){
@@ -129,6 +130,9 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
             }
           }
           $scope.closeDialog();
+          segment.track("Updated Domain", {
+            key : key
+          }, function(success){  });
         },
         function(errorResult){
           created_successfully = false
@@ -139,11 +143,13 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
           else{
             $scope.show_edit_domain_err = true;
           }
+
+          segment.track("Updated Domain Failed", {
+            key : key
+          }, function(success){  });
         });
 
-        segment.track("Updated Domain", {
-          key : key
-        }, function(success){  });
+
     }
 
     /**
@@ -178,7 +184,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
 
     }
 
-    $scope.openCreateDomainDialog  = function(domain) {
+    $scope.openCreateDomainDialog  = function() {
       $scope.current_domain = {};
        $mdDialog.show({
           clickOutsideToClose: true,
@@ -192,6 +198,9 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
              }
           }
        });
+
+       segment.track("Clicked Add Domain", {
+       }, function(success){  });
     };
 
     $scope.openEditDomainDialog  = function(domain) {
@@ -208,6 +217,10 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
              }
           }
        });
+
+       segment.track("Clicked Edit Domain", {
+         domain: domain
+       }, function(success){  });
     };
 
 
