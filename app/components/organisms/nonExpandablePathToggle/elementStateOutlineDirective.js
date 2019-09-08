@@ -11,7 +11,8 @@ angular.module('Qanairy.ElementStateOutline', [])
         if($scope.pathIdx >= $scope.path.length){
           $scope.pathIdx = 0;
         }
-      }
+        $scope.setCurrentNode($scope.path[$scope.pathIdx].page);
+      };
 
       $scope.previous = function() {
         console.log("getting previous");
@@ -19,49 +20,42 @@ angular.module('Qanairy.ElementStateOutline', [])
         if($scope.pathIdx < 0){
           $scope.pathIdx = $scope.path.length - 1;
         }
-      }
+        $scope.setCurrentNode($scope.path[$scope.pathIdx].page);
+      };
+
+      $scope.generateElementOutline = function(page, element){
+        return buildElementOutlineStyle(page, element);
+      };
+
+      function buildElementOutlineStyle(page, element){
+        var elem = angular.element(document.getElementById('nonexpandable'+page.key));
+        if($scope.width !== elem.width() && elem.width() !== 0){
+          $scope.width = elem.width();
+        }
+        if($scope.height !== elem.height() && elem.height() !== 0){
+          $scope.height = elem.height();
+        }
+
+        var scale_height = $scope.height/page.viewportHeight;
+        var scale_width = $scope.width/page.viewportWidth;
+
+        if(scale_height === 0){
+          scale_height = scale_width;
+        }
+
+        var element_width = element.width * scale_width;
+        var element_height = element.height * scale_height;
+
+        var x_offset = (element.xlocation - page.scrollXOffset) * scale_width;
+        var y_offset = (element.ylocation - page.scrollYOffset) * scale_height;
+        var outline_style = "top: "+ y_offset +"px;left: "+ x_offset +"px; width: "+ element_width +"px; height:"+ element_height +"px";
+        return outline_style;
+      };
     },
     link: function($scope, element) {
-      $scope.getOutlineStyle = function(element_state, index, page, page_idx){
-        console.log('Page idx  :  '+page_idx);
-        //var parent_elem =  angular.element( document.querySelector("#testthingy"));
-        var parent_elem = element.children().eq(1);
-        var scale_height = parent_elem.height()/page.viewportHeight;
-        var scale_width = parent_elem.width()/page.viewportWidth;
-/*
-        console.log("parent element   ::   "+Object.keys(parent_elem));
-        console.log("parent height   :::   "+parent_elem.height());
-        console.log("parent width   :::   "+parent_elem.width());
-        console.log("page height ::: "+page.viewportHeight);
-        console.log("page width  ::  "+page.viewportWidth);
-        console.log("scale height ::: "+scale_height);
-        console.log("scale width  ::  "+scale_width);
-        console.log("element state y :: "+element_state.element.ylocation);
-        console.log("element state x :: "+element_state.element.xlocation);
-        //add outline styling object to elements
-        console.log("path idx :: "+$scope.pathIdx);
-*/
-        return {
-          top: element_state.element.ylocation * scale_width,
-          left: element_state.element.xlocation * scale_width,
-          width: element_state.element.width * scale_width,
-          height: element_state.element.height * scale_width
-        };
-      }
 
-      for(var i=0; i < $scope.path.length; i++){
-        console.log("preview path in element statel :   "+JSON.stringify($scope.path[i]));
-        for(var j=0; j < $scope.path[i].interactions.length; j++ ){
-          console.log("interaction0 :: "+JSON.stringify($scope.path[i].interactions[j]) );
-          $scope.path[i].interactions[j].outline = $scope.getOutlineStyle($scope.path[i].interactions[j], j, $scope.path[i].page, i);
-          console.log("interaction1    :: "+JSON.stringify($scope.path[i].interactions[j]) );
-        }
-      }
     },
-    scope: {
-      path: '=',
-      pathIdx: '='
-    },
+    scope: false,
     transclude: true,
     templateUrl: 'components/organisms/nonExpandablePathToggle/path_toggle_panel.html'
   }

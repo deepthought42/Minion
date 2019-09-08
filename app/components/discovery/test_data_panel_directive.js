@@ -10,7 +10,9 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
       $scope.path = [];
 
       $scope.openPathSlider = function() {
+        $scope.path = $scope.convertToIterativePath($scope.path_objects);
         console.log("opening path slider :: "+$scope.path);
+
           //add result to end of path
 
           //create object consisting of a page and it's list of interactions
