@@ -52,10 +52,10 @@ angular.module('Qanairy.ExpandablePathToggle', [])
       function buildElementOutlineStyle(page, element){
         var elem = angular.element(document.getElementById('expandable'+page.key));
         console.log("element :: "+Object.keys(elem));
-        if($scope.width != elem.width() && elem.width != 0){
+        if($scope.width !== elem.width() && elem.width() !== 0){
           $scope.width = elem.width();
         }
-        if($scope.height != elem.height() && elem.height != 0){
+        if($scope.height !== elem.height() && elem.height() !== 0){
           $scope.height = elem.height();
         }
 
