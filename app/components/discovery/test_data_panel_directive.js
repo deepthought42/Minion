@@ -4,14 +4,13 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
 .directive("discoveryTestDataPanel",function(){
   return{
     restrict: 'E',
-    controller: ["$rootScope", "$scope", "store", function($rootScope, $scope, store){
+    controller: ["$rootScope", "$scope", "store", "$mdDialog", function($rootScope, $scope, store, $mdDialog){
       $scope.current_node = {};
       $scope.current_node_idx == 0;
-      
-      $scope.openPathSlider = function(path, current_node_idx) {
-        $scope.path = path;
-        $scope.current_idx = current_node_idx;
-        console.log("opening path slider :: "+path);
+      $scope.path = [];
+
+      $scope.openPathSlider = function() {
+        console.log("opening path slider :: "+$scope.path);
           //add result to end of path
 
           //create object consisting of a page and it's list of interactions
