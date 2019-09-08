@@ -127,7 +127,7 @@
                     </div>
                   </split-area>
                   <split-area size="30" class="test__data__section" ng-transclude>
-                   <div class="" ng-if="current_node[test_idx].type == 'ElementState' || current_node[test_idx].type == 'Action'" >
+                   <div class="" ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'" >
                     <div class="col-xs-12">
                       <div class="row">
                      <div class="col-xs-12 key--value">
@@ -135,7 +135,7 @@
                          Xpath
                        </div>
                        <div class="data__value" style="overflow-y: scroll;">
-                         {{current_path_objects[current_node_idx].xpath}}
+                         {{current_node.xpath}}
                        </div>
                      </div>
                      <div class="col-xs-12 key--value">
@@ -143,15 +143,15 @@
                          Action
                        </div>
                        <div class="data__value">
-                         {{current_path_objects[current_node_idx+1].name != 'sendKeys' ? current_path_objects[current_node_idx+1].name : 'Type'}}
+                         {{current_node.name != 'sendKeys' ? current_node.name : 'Type'}}
                        </div>
                      </div>
-                     <div class="col-xs-12 key--value" ng-show="current_path_objects[current_node_idx+1].value || current_path_objects[current_node_idx+1].name=='sendKeys'">
+                     <div class="col-xs-12 key--value" ng-show="current_node.value || current_node.name=='sendKeys'">
                        <div class="data__key">
                          Text Input
                        </div>
                        <div class="data__value">
-                         {{current_path_objects[current_node_idx+1].value}}
+                         {{current_node.value}}
                        </div>
                      </div>
                      <div class="col-xs-12 key--value">
@@ -159,15 +159,15 @@
                          Element Type
                        </div>
                        <div class="data__value">
-                           {{current_node[current_node_idx].name}}
+                           {{current_node.name}}
                        </div>
                      </div>
-                     <div class="col-xs-12 key--value" ng-if="current_path_objects[current_node_idx+1].name=='a'">
+                     <div class="col-xs-12 key--value" ng-if="current_node.name=='a'">
                        <div class="data__key">
                          Element Link
                        </div>
                        <div class="data__value">
-                         {{current_path_objects[current_node_idx].attributes[0].vals[0]}}
+                         {{current_node.attributes[0].vals[0]}}
                        </div>
                      </div>
                      <div class="col-xs-12 key--value">
@@ -175,11 +175,11 @@
                          Text
                        </div>
                        <div class="data__value">
-                         {{current_path_objects[current_node_idx].text}}
+                         {{current_node.text}}
                        </div>
                      </div>
                      <div class="col-xs-12 key--value">
-                       <div class="row" ng-repeat="attribute in current_path_objects[current_node_idx].attributes track by attribute.key">
+                       <div class="row" ng-repeat="attribute in current_node.attributes track by attribute.key">
                          <div class="col-sm-12 data__key">
                            {{attribute.name}}
                          </div>
@@ -197,15 +197,15 @@
                  </div>
 
                   <!-- URL data -->
-                  <div class="" ng-if="current_node[test_idx].type == 'PageState'">
+                  <div class="" ng-if="current_node.type == 'PageState'">
                      <div class="col-xs-12">
                        <div class="key--value">
                          <div class="data__key">
                            URL
                          </div>
                          <div class="data__value">
-                          <a href="{{current_path_objects[current_node_idx].url}}" target="_blank">
-                            {{current_path_objects[current_node_idx].url}}
+                          <a href="{{current_node.url}}" target="_blank">
+                            {{current_node.url}}
                           </a>
                          </div>
                        </div>
@@ -213,13 +213,13 @@
                  </div>
 
                   <!-- MULTIPLE URL DATA -->
-                  <div class="" ng-if="current_node[test_idx].type == 'Redirect' || current_node[test_idx].type == 'PageLoadAnimation'">
+                  <div class="" ng-if="current_node.type == 'Redirect' || current_node.type == 'PageLoadAnimation'">
                      <div class="col-xs-12">
                        <div class="key--value">
                          <div class="data__key">
                            URL
                          </div>
-                         <div class="data__value" ng-repeat="url in current_path_objects[current_node_idx].urls">
+                         <div class="data__value" ng-repeat="url in current_node.urls">
                           <a href="{{url}}" target="_blank">
                             {{url}}
                           </a>

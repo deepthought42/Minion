@@ -6,7 +6,8 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
     restrict: 'E',
     controller: ["$rootScope", "$scope", "store", function($rootScope, $scope, store){
       $scope.current_node = {};
-
+      $scope.current_node_idx == 0;
+      
       $scope.openPathSlider = function(path, current_node_idx) {
         $scope.path = path;
         $scope.current_idx = current_node_idx;

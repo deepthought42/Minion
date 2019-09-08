@@ -4,18 +4,13 @@ angular.module('Qanairy.ExpandablePathToggle', [])
 .directive("expandablePathToggle",['$mdDialog', '$timeout', function($mdDialog, $timeout){
   return{
     restrict: 'E',
-    controller: function($scope){
-      $scope.current_path_idx = 0;
-
-      console.log("current node key  ::  "+$scope.current_node.key);
+    controller: function($scope, $element){
       $scope.next = function() {
         $scope.pathIdx = $scope.pathIdx + 1;
         if($scope.pathIdx >= $scope.path.length){
           $scope.pathIdx = 0;
         }
-        $scope.current_node = $scope.path[$scope.pathIdx].page;
-
-        $scope.current_path_idx = $scope.pathIdx;
+        $scope.setCurrentNode($scope.path[$scope.pathIdx].page);
       }
 
       $scope.previous = function() {
@@ -24,8 +19,7 @@ angular.module('Qanairy.ExpandablePathToggle', [])
         if($scope.pathIdx < 0){
           $scope.pathIdx = $scope.path.length - 1;
         }
-        $scope.current_node = $scope.path[$scope.pathIdx].page;
-        $scope.current_path_idx = $scope.pathIdx;
+        $scope.setCurrentNode($scope.path[$scope.pathIdx].page);
       }
 
       $scope.openPathSlider = function(path) {
@@ -48,15 +42,25 @@ angular.module('Qanairy.ExpandablePathToggle', [])
          });
       };
 
+
       $scope.generateElementOutline = function(page, element){
-        console.log("generating new outline for element :: "+page.key);
-        console.log("generating new outline for element :: "+element.key);
+        console.log("element1 :: "+JSON.stringify($element[0].style));
+
+        return buildElementOutlineStyle(page, element);
+      };
+
+      function buildElementOutlineStyle(page, element){
         var elem = angular.element(document.getElementById('expandable'+page.key));
         console.log("element :: "+Object.keys(elem));
-        var width = elem.width();
-        var height = elem.height();
-        var scale_height = height/page.viewportHeight;
-        var scale_width = width/page.viewportWidth;
+        if($scope.width != elem.width() && elem.width != 0){
+          $scope.width = elem.width();
+        }
+        if($scope.height != elem.height() && elem.height != 0){
+          $scope.height = elem.height();
+        }
+
+        var scale_height = $scope.height/page.viewportHeight;
+        var scale_width = $scope.width/page.viewportWidth;
 
         if(scale_height === 0){
           scale_height = scale_width;
@@ -67,8 +71,8 @@ angular.module('Qanairy.ExpandablePathToggle', [])
 
         var x_offset = (element.xlocation - page.scrollXOffset) * scale_width;
         var y_offset = (element.ylocation - page.scrollYOffset) * scale_height;
-        console.log("parent height   :::   "+height);
-        console.log("parent width   :::   "+width);
+        console.log("parent height   :::   "+$scope.height);
+        console.log("parent width   :::   "+$scope.width);
         console.log("page height ::: "+page.viewportHeight);
         console.log("page width  ::  "+page.viewportWidth);
         console.log("scale height ::: "+scale_height);
@@ -78,10 +82,23 @@ angular.module('Qanairy.ExpandablePathToggle', [])
         console.log("page state y :: "+page.scrollXOffset);
         console.log("page state x :: "+page.scrollYOffset);
 
-        return "top: "+ y_offset +"px;left: "+ x_offset +"px; width: "+ element_width +"px; height:"+ element_height +"px";
-      }
+        var outline_style = "top: "+ y_offset +"px;left: "+ x_offset +"px; width: "+ element_width +"px; height:"+ element_height +"px";
+        return outline_style;
+      };
+
+      $scope.$watch($scope.current_node, function(newValue, oldValue) {
+        console.log("curent node value cane");
+      }, true);
+
+      $scope.$watch(function () {
+        console.log("element size ::  "+$element[0].style);
+        return $element[0].style.width;
+       }, function(newVal, oldVal) {
+        console.log('Width changed');
+      });
     },
     link: function($scope, element) {
+
     },
     scope: false,
     transclude: true,

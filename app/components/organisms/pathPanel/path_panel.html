@@ -3,7 +3,7 @@
     <div class="node-group element-action vertical__center__int"
         ng-if="node.type == 'Redirect'"
         ng-class="current_node.key == node.key ? 'active' : ''"
-        ng-click="setCurrentNode(node, $index)">
+        ng-click="setCurrentNode(node)">
       <button class="btn btn--tertiary button--sacnite" ng-class="current_node.key == node.key ? 'active' : ''">
         <div class="node__title" >
           Redirect
@@ -18,7 +18,7 @@
    <div class="node-group path-node-container vertical__center__int"
         ng-if="node.type == 'PageLoadAnimation'"
         ng-class="current_node.key == node.key ? 'active' : ''"
-        ng-click="setCurrentNode(node, $index)">
+        ng-click="setCurrentNode(node)">
      <button class="btn btn--tertiary button--sacnite" ng-class="current_node.key == node.key ? 'active' : ''">
        <div class="node__title" >
          Animation
@@ -31,7 +31,7 @@
    <div class="node-group path-node-container vertical__center__int"
         ng-if="node.type == 'PageState'"
         ng-class="current_node.key == node.key ? 'active' : ''"
-        ng-click="setCurrentNode(node, $index)">
+        ng-click="setCurrentNode(node)">
      <button class="btn btn--tertiary button--sacnite" ng-class="current_node.key == node.key ? 'active' : ''">
        <div class="path-page path-node">
          <img src="{{node.screenshotUrl}}" class="path-node-image"/>
@@ -40,7 +40,7 @@
    </div>
    <div ng-if="node.type == 'ElementState'" class="element-action node-group vertical__center__int"
         ng-class="current_node.key == node.key ? 'active' : ''"
-        ng-click="setCurrentNode(node, $index)">
+        ng-click="setCurrentNode(node)">
      <button class="btn btn--tertiary button--sacnite" ng-class="current_node.key == node.key ? 'active' : ''">
        <div class="node__title" >
            Html Tag
