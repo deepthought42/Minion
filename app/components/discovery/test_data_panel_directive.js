@@ -4,10 +4,16 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
 .directive("discoveryTestDataPanel",function(){
   return{
     restrict: 'E',
-    controller: ["$rootScope", "$scope", "store", "$mdDialog", function($rootScope, $scope, store, $mdDialog){
+    controller: ["$rootScope", "$scope", "store", "$mdDialog", "Test", function($rootScope, $scope, store, $mdDialog, Test){
       $scope.current_node = {};
       $scope.current_node_idx == 0;
       $scope.path = [];
+      $scope.test = {};
+      $scope.errors = [];
+
+      $scope.editTest = function(test){
+        test.show_test_name_edit_field = true;
+      };
 
       $scope.openPathSlider = function() {
         $scope.path = $scope.convertToIterativePath($scope.path_objects);
@@ -65,17 +71,36 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
       }
 
       $scope.toggleTestDataVisibility = function(test){
-        $scope.test_idx = index;
         $scope.test = test;
         $scope.visible_browser_screenshot = $scope.default_browser;
 
         $scope.path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
         $scope.setCurrentNode($scope.path_objects[0]);
-
-        $scope.testVerificationOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-verification');
-        $scope.testVerificationOnboardingIndex = 0;
       }
 
+      $scope.cancelEditingTestName = function(test){
+        test.show_test_name_edit_field = false;
+      }
+
+      $scope.setTestName = function(new_name){
+        $scope.test.show_waiting_icon = true;
+        Test.updateName({key: $scope.test.key, name: new_name}).$promise
+          .then(function(data){
+            $scope.test.show_waiting_icon = false;
+            $scope.test.show_test_name_edit_field=false;
+            $scope.test.name = new_name;
+          })
+          .catch(function(err){
+            $scope.test.show_waiting_icon = false;
+            $scope.test.show_test_name_edit_field = false;
+            if(err.data){
+              $scope.errors.push("An error occurred while trying to update the test name");          }
+            else{
+              $scope.errors.push({message: $scope.unresponsive_server_err });
+            }
+
+          });
+      }
 
       $scope.getPathObject = function(key){
         var path_objects = store.get('path_objects').filter(function( path_object ){
@@ -112,11 +137,13 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
       //EVENTS
       $scope.$on("updateCurrentDiscoveryTest", function(event, test){
         console.log("update current discovery to test  :: "+JSON.stringify(test));
+        $scope.test = test;
         //iterate over keys and load path PathObjects
         var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
         if(path_objects[path_objects.length-1].type !== "PageState"){
           path_objects.push(test.result)
         }
+
         $scope.path_objects = path_objects;
         $scope.pathIdx = 0;
         $scope.path = $scope.convertToIterativePath($scope.path_objects);

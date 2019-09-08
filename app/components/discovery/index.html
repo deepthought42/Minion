@@ -139,33 +139,9 @@
                 </div>
               </div>
               <div class="flex-auto test__title test_functions test__profile_stretch" >
-                <div class="" ng-show="!test.show_test_name_edit_field">
-                  <h3 class="test__title" >
-                    {{test.name || "Test #"+($index+1)}}
-                  </h3>
-                  <i class="fa fa-pencil edithover" ng-click="test.show_test_name_edit_field = true" ng-click="editTest(test)" ></i>
-                </div>
-              </div>
-              <div class="test_name flex-auto time_stats test__profile_stretch" ng-if="test.show_test_name_edit_field">
-                <div class="row">
-                  <div class="flex-auto">
-                    <div class="">
-                      <input class="form-control title__edit title__edit__margin" type="text" ng-model="new_name" ng-value="test.name" ng-trim="false"/>
-                    </div>
-                  </div>
-                  <div class="flex-none test_name_edit">
-                    <div class="title__edit__buttons margin_fifteen_left btn--secondary" ng-click="cancelEditingTestName(test)" ng-show="!test.show_waiting_icon">
-                      Cancel
-                    </div>
-                    <div class="title__edit__buttons margin_fifteen_left btn--primary " ng-click="setTestName(test, new_name)" ng-show="!test.show_waiting_icon">
-                      Save
-                    </div>
-                    <div class="" ng-show="test.show_waiting_icon">
-                      <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-                    </div>
-                  </div>
-                </div>
-
+                <h3 class="test__title" >
+                  {{test.name || "Test #"+($index+1)}}
+                </h3>
               </div>
       			  <div class="flex-none discovery_functions text-right test__btns" aria-label="Test Functions">
                 <!---ARCHIVE TEST BUTTON IS HERE -->

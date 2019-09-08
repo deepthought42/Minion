@@ -238,26 +238,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
        console.log("preview path in controller:: "+test);
     }
 
-    $scope.setTestName = function(test, new_name){
-      test.show_waiting_icon = true;
-      Test.updateName({key: test.key, name: new_name}).$promise
-        .then(function(data){
-          test.show_waiting_icon = false;
-          test.show_test_name_edit_field=false;
-          test.name = new_name;
-        })
-        .catch(function(err){
-          test.show_waiting_icon = false;
-          test.show_test_name_edit_field = false;
-          if(err.data){
-            $scope.errors.push("An error occurred while trying to update the test name");          }
-          else{
-            $scope.errors.push({message: $scope.unresponsive_server_err });
-          }
-
-        });
-    }
-
     $scope.stopDiscoveryProcess = function(){
       Discovery.stopWork({url:  $scope.current_domain.url}).$promise
         .then(function(){
@@ -382,11 +362,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         });
     }
 
-    $scope.cancelEditingTestName = function(test){
-      test.show_test_name_edit_field = false;
-    }
-
-
     $scope.timeSinceLastTest = function(){
       return (Date.now() - (new Date($scope.discovery_status.last_path_ran_at)));
     }
@@ -408,9 +383,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         }
     }
 
-    $scope.editTest = function(test){
-      test.show_test_name_edit_field = true;
-    }
     /**
      *
      */
