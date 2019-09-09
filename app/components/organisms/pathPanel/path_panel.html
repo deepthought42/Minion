@@ -1,5 +1,5 @@
 <div class="test__path__section" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}" style="display: flex;">
-  <div ng-repeat="node in path_objects track by $index" class=" vertical__center__int" tooltip-placement="top">
+  <div ng-repeat="node in path_objects track by $index" class="test__path vertical__center__int" tooltip-placement="top">
     <div class="node-group path-node-container vertical__center__int"
         ng-if="node.type == 'Redirect'"
         ng-class="current_node.key == node.key ? 'active' : ''"

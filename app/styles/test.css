@@ -603,11 +603,6 @@ width: -webkit-calc(100% - 15px);
 .form-screenshot{
 	  max-height: 400px;
 }
-
-.path-bar .display_none_right{
-  display: none !important;
-}
-
 .path-page {
     padding: 10px 10px -10px 0px !important;
 }
@@ -726,6 +721,12 @@ width: -webkit-calc(100% - 15px);
 .equal-height {
    display: flex;
   flex-direction: column;
+}
+.test__path:last-child > .path-bar{
+  display: none !important;
+}
+.test__path:last-child{
+  padding-right:15px;
 }
 .test__path__section{
   padding:10px 15px 10px 15px;
