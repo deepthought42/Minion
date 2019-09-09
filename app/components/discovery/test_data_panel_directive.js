@@ -155,4 +155,4 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
     templateUrl: 'components/discovery/test_data_panel.html'
   }
 
-})
+});

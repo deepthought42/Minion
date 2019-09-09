@@ -20,8 +20,7 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
 
           getProfile(function(err, profile) {
             sessionStorage.setItem('profile', JSON.stringify(profile));
-
-            segment.identify(profile.id, {
+            segment.identify(profile.sub, {
               name : profile.name,
               nickname : profile.nickname,
               email : profile.email
@@ -63,7 +62,6 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
       // Check whether the current time is past the
       // access token's expiry time
       let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-      console.log("is authenticated???   "+(new Date().getTime() < expiresAt));
       return new Date().getTime() < expiresAt;
     }
 

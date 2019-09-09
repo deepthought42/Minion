@@ -394,7 +394,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           test.status = data.status;
           //remove from list
           for(var i=0; i<$scope.tests.length; i++){
-            if($scope.tests[i].key == test.key){
+            if($scope.tests[i].key === test.key){
               $scope.tests.splice(i, 1);
               break;
             }
