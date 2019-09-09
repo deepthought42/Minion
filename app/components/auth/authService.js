@@ -20,8 +20,7 @@ authService.factory('Auth', ['$state', 'angularAuth0', '$timeout', 'store', 'seg
 
           getProfile(function(err, profile) {
             sessionStorage.setItem('profile', JSON.stringify(profile));
-            var user_id = profile.sub.substring(profile.sub.indexOf("|")+1);
-            segment.identify(user_id, {
+            segment.identify(profile.sub, {
               name : profile.name,
               nickname : profile.nickname,
               email : profile.email
