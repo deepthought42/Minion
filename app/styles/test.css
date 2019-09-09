@@ -560,8 +560,6 @@ width: -webkit-calc(100% - 15px);
 	margin-bottom: 75px !important;
 }
 .element__image{
-  width: 100%;
-  padding: 0px 15px;
 }
 .browser_screenshot_selector{
 	margin: 20px 0px 0px 0px;
@@ -732,8 +730,9 @@ width: -webkit-calc(100% - 15px);
 .test__path__section{
   padding:10px 15px 10px 15px;
   overflow-y: hidden;
+  overflow-x: scroll;
   height: 120px;
-  width: 100%;
+  width: 100% !important;
   border-bottom: 1px solid #e0e0e0;
 }
 .test__screenshot__data__section{
