@@ -107,7 +107,8 @@
               </div>
                 <div class="browser_screenshot_buttons">
                   <div class="default_browser_indicator">
-                    <i class="fa fa-chrome"></i><span class="sup">*</span>&nbsp;&nbsp;Default Browser for Discovery
+                    <i class="fa fa-chrome" ng-if="test.result.browser==='chrome'"></i>
+                    <i class="fa fa-firefox" ng-if="test.result.browser==='firefox'"></i>
                   </div>
                 </div>
                 <!-- <div class="browser_screenshot_buttons">
