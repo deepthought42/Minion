@@ -549,14 +549,16 @@ width: -webkit-calc(100% - 15px);
 
 
 .screenshots_title{
-  padding: 5px 15px;
+  padding: 8px 15px 6px 15px;
 	color:#757575;
   width: 100%;
   font-size: 18px;
   line-height: 20px;
   letter-spacing: .1px;
   border-bottom: 1px solid #e0e0e0;
-  height: 31px;
+  height: 35px;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
 }
 
 .screenshot-section > div > div{
