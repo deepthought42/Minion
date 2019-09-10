@@ -63,34 +63,35 @@
         </div>
         <div class="test__screenshot__data__section__wrap  test-container-split-right" ng-if="visible_test_nav1==='section-linemove-1'">
           <split direction="vertical" class="test__screenshot__data__section" ng-transclude style="display:flex;">
-            <split-area size="70" class="test__screenshot__section" ng-transclude>
-              <div class="col-sm-12">
-                <button class="expand btn btn--screenshot" data-toggle="modal" data-target="#exampleModal"
-                ng-click="openPathSlider()">
-                Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
-                </button>
-              <div class="flex-auto">
-               <div class="element__image">
-                 <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'" >
-                   <img class="path-node-image"
-                       data-toggle="modal" data-target="#exampleModal"
-                       src="{{current_node.screenshot}}"/>
-                 </div>
-                 <!-- path screenshot panel -->
-                 <expandable-path-toggle path="preview_path"
-                                        path-idx="current_path_idx"
-                                        class="flex-auto vertical__center__int"
-                                        style="margin-bottom: 5px;"
-                                        ng-if="current_node.type != 'ElementState' && current_node.type != 'Action'">
-                 </expandable-path-toggle>
-               </div>
-              </div>
+            <split-area size="70" class="test__screenshot__section" style="position:relative;" ng-transclude>
                 <div class="browser_screenshot_buttons">
                   <div class="default_browser_indicator">
                     <i class="fa fa-chrome" ng-if="test.result.browser==='chrome'"></i>
                     <i class="fa fa-firefox" ng-if="test.result.browser==='firefox'"></i>
                   </div>
                 </div>
+              <div class="col-sm-12">
+                <button class="expand btn btn--screenshot" data-toggle="modal" data-target="#exampleModal"
+                ng-click="openPathSlider()">
+                Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
+                </button>
+                <div class="flex-auto">
+                 <div class="element__image">
+                   <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'" >
+                     <img class="path-node-image"
+                         data-toggle="modal" data-target="#exampleModal"
+                         src="{{current_node.screenshot}}"/>
+                   </div>
+                   <!-- path screenshot panel -->
+                   <expandable-path-toggle path="preview_path"
+                                          path-idx="current_path_idx"
+                                          class="flex-auto vertical__center__int"
+                                          style="margin-bottom: 5px;"
+                                          ng-if="current_node.type != 'ElementState' && current_node.type != 'Action'">
+                   </expandable-path-toggle>
+                 </div>
+                </div>
+                
                 <!-- <div class="browser_screenshot_buttons">
                   <div class="btn-group browser-btn-group" role="group" aria-label="Basic example">
                     <button ng-click="visible_browser_screenshot='chrome'" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot"><i class="fa fa-chrome"></i>&nbsp;&nbsp;Chrome</button>
