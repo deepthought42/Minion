@@ -58,6 +58,9 @@
         <div class="">
           <path-panel class="" path="path"></path-panel>
         </div>
+        <div class="screenshots_title">
+          {{translateObjectType(current_node.type)}}
+        </div>
         <div class="test__screenshot__data__section__wrap  test-container-split-right" ng-if="visible_test_nav1==='section-linemove-1'">
           <split direction="vertical" class="test__screenshot__data__section" ng-transclude style="display:flex;">
             <split-area size="70" class="test__screenshot__section" ng-transclude>
@@ -66,9 +69,6 @@
                 ng-click="openPathSlider()">
                 Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
                 </button>
-               <h5 class="screenshots_title">
-                 {{translateObjectType(current_node.type)}}
-               </h5>
               <div class="flex-auto">
                <div class="element__image">
                  <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'" >

@@ -549,11 +549,14 @@ width: -webkit-calc(100% - 15px);
 
 
 .screenshots_title{
-  padding: 15px 0px 10px 0px;
-	margin-bottom: 20px;
+  padding: 5px 15px;
 	color:#757575;
-	border-bottom: 3px solid #eee;
   width: 100%;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: .1px;
+  border-bottom: 1px solid #e0e0e0;
+  height: 31px;
 }
 
 .screenshot-section > div > div{
@@ -734,7 +737,6 @@ width: -webkit-calc(100% - 15px);
   overflow-x: scroll;
   height: 120px;
   width: 100% !important;
-  border-bottom: 1px solid #e0e0e0;
 }
 .test__screenshot__data__section{
     flex: 1;

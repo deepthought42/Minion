@@ -286,15 +286,11 @@ md-dialog {
   background-color: #f4f4f8;
 }
 .page_modal_image {
-  height:100%;
-  width:auto;
-  position: relative;
+  position: relative;  padding-top: 56.25%; /* 16:9 Aspect Ratio */
 }
 
 .page_modal_image img {
-	width:100%;
-	height:auto;
-  position: relative;
+  position: absolute;  left: 0;  top: 0;  width: 100%;  height: auto;
 }
 .toggle-arrow{
   font-size: 44px;
