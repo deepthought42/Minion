@@ -573,13 +573,26 @@ width: -webkit-calc(100% - 15px);
   padding: 15px 0px 0px 0px;
 	justify-content: center !important;
 }
-.browser_screenshot_buttons{
+.screenshot_comparison_buttons{
   padding: 15px 15px;
  	width: 100%;
   display:flex; 
   align-items: stretch; 
   position:absolute; 
+  top: 0;
+  z-index: 100;
+}
+.screenshot-comparison-btn-group{
+   height: 40px;
+}
+.browser_screenshot_buttons{
+  padding: 5px 15px;
+ 	width: 100%;
+  display:flex; 
+  align-items: stretch; 
+  position:absolute; 
   bottom: 0;
+  z-index: 100;
 }
 .browser-btn-group{
    height: 60px;
@@ -595,7 +608,7 @@ width: -webkit-calc(100% - 15px);
 	padding:7px 10px 0px 10px;
 	top: 0px;
 	float: right;
-  z-index: 100;
+  z-index: 101;
   margin-right: -15px;
 }
 
