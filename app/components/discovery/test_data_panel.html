@@ -73,10 +73,12 @@
                   <button ng-click="" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot">Overlay</button>
                 </div> -->
               </div>
-              <button class="expand btn btn--screenshot" data-toggle="modal" data-target="#exampleModal"
+              <div class="expand_button">
+                <button class="expand btn btn--screenshot" data-toggle="modal" data-target="#exampleModal"
                 ng-click="openPathSlider()">
                 Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
-              </button>
+                </button>
+              </div>
               <div class="browser_screenshot_buttons">
                 <div class="default_browser_indicator">
                   <i class="fa fa-chrome" ng-if="test.result.browser==='chrome'"></i>
