@@ -24,6 +24,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       $scope.errors = [];
       $scope.new_rule = $scope.newRule();
 
+      $scope.typeOptions = ["LOGIN", "REGISTRATION", "CONTACT_COMPANY", "SUBSCRIBE", "LEAD", "SEARCH", "PASSWORD_RESET", "PAYMENT", "UNKNOWN"];
       if($stateParams.form){
         $scope.form = $stateParams.form;
         store.set('current_form', $scope.form);
@@ -205,8 +206,8 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       if($scope.users.length === 0 && (form.type.toLowerCase()==="login" || form.type.toLowerCase()==="registration")){
         $state.go('main.user_form_discovery', {form: form});
       }
-
-      Domain.updateForm({domain_id: $scope.domain.id, key: form.key, name: form.name, form_type: form.type}).$promise
+      console.log('form key :: '+form.key);
+      Domain.updateForm({domain_id: $scope.domain.id, id: form.id, name: form.name, form_type: form.type}).$promise
         .then(function(data){
           segment.track("Start form discovery", {
               form_key: form.key,
