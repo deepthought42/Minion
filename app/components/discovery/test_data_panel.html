@@ -73,29 +73,29 @@
                   <button ng-click="" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot">Overlay</button>
                 </div> -->
               </div>
+              <button class="expand btn btn--screenshot" data-toggle="modal" data-target="#exampleModal"
+                ng-click="openPathSlider()">
+                Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
+              </button>
               <div class="browser_screenshot_buttons">
                 <div class="default_browser_indicator">
                   <i class="fa fa-chrome" ng-if="test.result.browser==='chrome'"></i>
                   <i class="fa fa-firefox" ng-if="test.result.browser==='firefox'"></i>
                 </div>
               </div>
-              <div class="col-sm-12">
-                <button class="expand btn btn--screenshot" data-toggle="modal" data-target="#exampleModal"
-                ng-click="openPathSlider()">
-                Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
-                </button>
-                <div class="flex-auto">
+              <div class="">
+                <div class="">
                  <div class="element__image">
                    <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'" >
-                     <img class="path-node-image"
-                         data-toggle="modal" data-target="#exampleModal"
-                         src="{{current_node.screenshot}}"/>
+                     <img class=""
+                      data-toggle="modal" data-target="#exampleModal"
+                      src="{{current_node.screenshot}}"/>
                    </div>
                    <!-- path screenshot panel -->
                    <expandable-path-toggle path="preview_path"
                                           path-idx="current_path_idx"
-                                          class="flex-auto vertical__center__int"
-                                          style="margin-bottom: 5px;"
+                                          class="vertical__center__int"
+                                          style="margin:0px auto;"
                                           ng-if="current_node.type != 'ElementState' && current_node.type != 'Action'">
                    </expandable-path-toggle>
                  </div>
