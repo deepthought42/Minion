@@ -294,7 +294,7 @@ md-dialog {
 }
 
 .browser_viewport{
-  box-shadow: inset 1vh 1vh 10vh 0 rgba(0,0,0,0.5);
+  box-shadow: inset 1vh 1vh 10vh 0 rgba(0,0,0,0.3);
   position: absolute;
   top: 0;
   bottom: 0;
