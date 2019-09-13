@@ -310,6 +310,7 @@ md-dialog {
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 .browser_view > img{
   height: 100%;
