@@ -6,14 +6,14 @@
        ng-show="current_node.key == page_interaction.page_key"
        id="{{'nonexpandable'+page_interaction.page_key}}">
     <div ng-show="current_node.key == page_interaction.page_key && page_interaction.page_key.includes('redirect') "
-        class="page_modal_image">
+        class="browser_view">
       <img src="{{ page_interaction.page.imageUrls[0]}}" />
     </div>
     <div ng-show="current_node.key == page_interaction.page_key && page_interaction.page_key.includes('PageLoadAnimation') "
-        class="page_modal_image">
+        class="browser_view">
       <img src="{{page_interaction.page.imageUrls[0]}}" />
     </div>
-    <div class="page_modal_image" ng-show="current_node.key == page_interaction.page_key && page_interaction.page_key.includes('pagestate')">
+    <div class="browser_view" ng-show="current_node.key == page_interaction.page_key && page_interaction.page_key.includes('pagestate')">
        <img src="{{page_interaction.page.screenshotUrl}}"/>
        <div ng-repeat="interaction in page_interaction.interactions track by $index"
             id="{{'element-outline'+$index}}"
