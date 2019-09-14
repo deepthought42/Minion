@@ -96,7 +96,7 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
         if(form.status === "DISCOVERED"){
           discovered_form_count += 1;
         }
-      })
+      });
 
       $rootScope.$broadcast("updateFormDiscoveredCountAlert", discovered_form_count);
       $scope.waiting_on_forms = false;

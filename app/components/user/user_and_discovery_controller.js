@@ -50,7 +50,7 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
               }, function(success){});
 
               alert("error occurred while initiating login/registration form discovery");
-            })
+            });
         })
         .catch(function(err){
           segment.track("Created user", {
@@ -61,7 +61,7 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
 
           alert("Error occurred while creating user");
         });
-    }
+    };
 
     this._init();
   }
