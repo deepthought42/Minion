@@ -23,8 +23,9 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       $scope.current_field = null;
       $scope.errors = [];
       $scope.new_rule = $scope.newRule();
-
+      $scope.waiting_for_response = false;
       $scope.typeOptions = ["LOGIN", "REGISTRATION", "CONTACT_COMPANY", "SUBSCRIBE", "LEAD", "SEARCH", "PASSWORD_RESET", "PAYMENT", "UNKNOWN"];
+
       if($stateParams.form){
         $scope.form = $stateParams.form;
         store.set('current_form', $scope.form);
@@ -206,15 +207,19 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       if($scope.users.length === 0 && (form.type.toLowerCase()==="login" || form.type.toLowerCase()==="registration")){
         $state.go('main.user_form_discovery', {form: form});
       }
-      console.log('form key :: '+form.key);
+
+      $scope.waiting_for_response = true;
       Domain.updateForm({domain_id: $scope.domain.id, id: form.id, name: form.name, form_type: form.type}).$promise
         .then(function(data){
+          $scope.waiting_for_response = false;
+
           segment.track("Start form discovery", {
               form_key: form.key,
             }, function(success){  });
           $state.go("main.form");
         })
         .catch(function(err){
+          $scope.waiting_for_response = false;
           if(err.data){
             $scope.errors.push(err.data);
           }
@@ -231,7 +236,11 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
     $scope.createRule = function(element_id, type, value){
       Element.addRule({id: element_id, type: type, value: value}).$promise
         .then(function(data){
-          //$scope.successes.push("Successfully saved rule");
+          segment.track("Added rule", {
+              element_id: element_id,
+              type: type,
+              value: value
+            }, function(success){  });
         })
         .catch(function(err){
           $scope.errors.push("Error occurred while saving rule");
@@ -253,6 +262,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
              };
 
              $scope.saveElement = function(elementstate){
+               $scope.errors = [];
                Element.update(elementstate).$promise
                  .then(function(data){
                    $scope.form.formFields[$scope.selected_element_idx] = data;
