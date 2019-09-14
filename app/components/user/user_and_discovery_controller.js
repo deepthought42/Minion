@@ -32,7 +32,7 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
           }, function(success){});
 
           store.set('current_user', null);
-          Domain.updateForm({domain_id: $scope.domain.id, key: $scope.form.key, name: $scope.form.name, form_type: $scope.form.type}).$promise
+          Domain.updateForm({domain_id: $scope.domain.id, id: $scope.form.id, name: $scope.form.name, form_type: $scope.form.type}).$promise
             .then(function(data){
               segment.track("Updated form", {
                 form_key: $scope.form.key,
