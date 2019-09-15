@@ -586,7 +586,7 @@ width: -webkit-calc(100% - 15px);
    height: 40px;
 }
 .browser_screenshot_buttons{
-  padding: 5px 15px;
+  padding: 6px 15px;
  	width: 100%;
   display:flex; 
   align-items: stretch; 
@@ -598,9 +598,6 @@ width: -webkit-calc(100% - 15px);
    height: 60px;
 }
 .default_browser_indicator{
-    padding: 5px 12px !important;
-    min-height: 32px;
-    min-width: 32px;
 }
 .expand {
 	font-size:16px;
