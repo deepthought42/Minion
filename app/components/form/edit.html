@@ -31,7 +31,7 @@
                  <h6>Form Type</h6>
               </div>
               <div class ="domain-dialogue-input" >
-                <select class="form-control" ng-options="type as toTitleCase(type) for type in form.typeOptions" ng-model="form.type">
+                <select class="form-control" ng-options="type as toTitleCase(type) for type in typeOptions" ng-model="form.type">
                 </select>
               </div>
           </div>
@@ -95,10 +95,11 @@
     <button class="btn btn--tertiary margin_fifteen_right title__edit__buttons" ng-click="cancel()">
       Cancel
     </button>
-		<button class="btn btn--primary title__edit__buttons" ng-click="discoverTests(form)">
-			<span  ng-show="form.status!='CLASSIFIED' && (!users.length && (form.type.toLowerCase()==='login' || form.type.toLowerCase()==='registration'))" >Save &amp; Add User</span>
-			<span  ng-show="form.status!='CLASSIFIED' && (users.length || (form.type.toLowerCase()!=='login' && form.type.toLowerCase()!=='registration'))">Save &amp; Continue Discovery</span>
-			<span  ng-show="form.status=='CLASSIFIED'">Update Form</span>
+		<button class="btn btn--primary title__edit__buttons" ng-click="discoverTests(form)" ng-disabled="waiting_for_response">
+			<i ng-if="waiting_for_response" class="fa fa-circle-o-notch fa-spin fa-fw" aria-hidden="true"></i>
+			<span  ng-show="!waiting_for_response && form.status!='CLASSIFIED' && (!users.length && (form.type.toLowerCase()==='login' || form.type.toLowerCase()==='registration'))" >Save &amp; Add User</span>
+			<span  ng-show="!waiting_for_response && form.status!='CLASSIFIED' && (users.length || (form.type.toLowerCase()!=='login' && form.type.toLowerCase()!=='registration'))">Save &amp; Continue Discovery</span>
+			<span  ng-show="!waiting_for_response && form.status=='CLASSIFIED'">Update Form</span>
 		</button>
 
   </div>

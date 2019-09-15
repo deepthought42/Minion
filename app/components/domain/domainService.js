@@ -12,7 +12,7 @@ domainService.factory('Domain', ['$resource', 'Qanairy.serviceConfig', function 
     deleteUser: { url: config.basePath + '/domains/test_users/:user_id', method: 'DELETE', params: {domain_key: '@domain_key', username: '@username'}},
     getUsers: {url: config.basePath + '/domains/:domain_id/users', method: 'GET',  params: {key: '@key'}, isArray: true},
     getForms: {url: config.basePath + '/domains/:domain_id/forms', method: 'GET', isArray: true},
-    updateForm: {url: config.basePath + '/domains/:domain_id/forms', method: 'PUT', params: {key: '@key',name: '@name', type: '@form_type'}},
+    updateForm: {url: config.basePath + '/domains/:domain_id/forms', method: 'PUT', params: {id: '@id',name: '@name', type: '@form_type'}},
     getAllPageStates: {url: config.basePath + '/domains/page_states', method: 'GET', isArray: true, params: {host: '@host'}},
     getAllPageElements: {url: config.basePath + '/domains/page_elements', method: 'GET', isArray: true, params: {host: '@host'}},
     getAllPathObjects: {url: config.basePath + '/domains/path', method: 'GET', isArray: true, params: {host: '@host'}}
