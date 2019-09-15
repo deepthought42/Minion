@@ -20,7 +20,7 @@ angular.module('Qanairy.user_form_discovery', ['ui.router', 'Qanairy.TestUserSer
       };
       $scope.domain = store.get('domain');
       $scope.form = $stateParams.form;
-    }
+    };
 
     $scope.save_user = function(user){
       Domain.addUser({domain_id: $scope.domain.id, username: user.username, password: user.password, role: user.role, enabled: user.enabled}).$promise
