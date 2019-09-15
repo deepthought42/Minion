@@ -86,7 +86,9 @@
                 </div>
               </div>
                <div class="element__image" style="">
-                 <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'" >
+                 <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'" 
+                      class="flex-auto vertical__center__int"
+                      style="margin:0px auto; height: 100% !important;" >
                    <img class="" 
                     data-toggle="modal" data-target="#exampleModal"
                     src="{{current_node.screenshot}}"/>
