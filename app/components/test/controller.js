@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordService'])
+angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordService', 'Qanairy.TestDataPanel', 'Qanairy.ExpandablePathComparisonToggle'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.tests', {
@@ -15,6 +15,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
     this._init= function(){
       $scope.errors = [];
       $scope.sortLastRun = false;
+      $scope.current_test = null;
 
       $scope.tests = [];
       $scope.groups = [];
@@ -85,6 +86,14 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         width: 400
       }
     ];
+
+    $scope.setTestIndex = function(idx, test){
+      $scope.current_test = test;
+      $scope.test_idx = idx;
+      console.log("test :: "+JSON.stringify(test));
+       $rootScope.$broadcast("updateCurrentDiscoveryTest", test );
+       console.log("preview path in controller:: "+test);
+    }
 
     $scope.getScreenshot = function(record){
       var browser_idx = 0;
@@ -459,6 +468,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         $scope.test.visible = false;
       }
 
+      $scope.current_test = test;
       $scope.test_idx = index || 0;
       $scope.test = test;
       test.new_name = test.name;
