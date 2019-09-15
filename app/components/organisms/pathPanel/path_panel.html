@@ -1,0 +1,100 @@
+<div class="test__path__section" ng-click="visible_tab='nodedata'+$index" id="{{'test'+$index+'_data'}}" style="display: flex;">
+  <div ng-repeat="node in path_objects track by $index" class="test__path vertical__center__int" tooltip-placement="top">
+    <div class="node-group path-node-container vertical__center__int"
+        ng-if="node.type == 'Redirect'"
+        ng-class="current_node.key == node.key ? 'active' : ''"
+        ng-click="setCurrentNode(node)">
+      <button class="btn btn--tertiary button--sacnite" ng-class="current_node.key == node.key ? 'active' : ''">
+        <div class="node__title" >
+          Redirect
+        </div>
+        <div class="path-node path-element vertical__center__int" tooltip-placement="top">
+          <i class="fa fa-repeat fa-2x"></i>
+       </div>
+     </button>
+   </div>
+   <div class="node-group path-node-container vertical__center__int"
+        ng-if="node.type == 'PageLoadAnimation'"
+        ng-class="current_node.key == node.key ? 'active' : ''"
+        ng-click="setCurrentNode(node)">
+     <button class="btn btn--tertiary button--sacnite" ng-class="current_node.key == node.key ? 'active' : ''">
+       <div class="node__title" >
+         Animation
+       </div>
+       <div class="path-node path-element vertical__center__int">
+         <i class="fas fa-rabbit-fast fa-2x"></i>
+       </div>
+     </button>
+   </div>
+   <div class="node-group path-node-container vertical__center__int"
+        ng-if="node.type == 'PageState'"
+        ng-class="current_node.key == node.key ? 'active' : ''"
+        ng-click="setCurrentNode(node)">
+     <button class="btn btn--tertiary button--sacnite" ng-class="current_node.key == node.key ? 'active' : ''">
+       <div class="path-page path-node">
+         <img src="{{node.screenshotUrl}}" class="path-node-image"/>
+       </div>
+     </button>
+   </div>
+   <div ng-if="node.type == 'ElementState'" class="element-action node-group vertical__center__int"
+        ng-class="current_node.key == node.key ? 'active' : ''"
+        ng-click="setCurrentNode(node)">
+     <button class="btn btn--tertiary button--sacnite" ng-class="current_node.key == node.key ? 'active' : ''">
+       <div class="node__title" >
+           Html Tag
+       </div>
+       <div class="path-node path-element vertical__center__int" tooltip-placement="top">
+         <div class="" >
+           {{node.name}}
+         </div>
+       </div>
+     </button>
+     <div class="path-bar">
+     </div>
+     <button class="btn btn--tertiary button--sacnite" ng-class="current_node.key == node.key ? 'active' : ''">
+       <div class="node__title" >
+           <span ng-if="path_objects[$index+1].name=='click'" class="vertical__center__int">
+             Click
+           </span>
+           <span ng-if="path_objects[$index+1].name=='doubleClick'" class="vertical__center__int">
+             <i class="fa fa-mouse-pointer fa-1x"></i>
+             Double Click
+           </span>
+           <span ng-if="path_objects[$index+1].name=='mouseover'" class="vertical__center__int">
+             Mouseover
+           </span>
+           <span ng-if="path_objects[$index+1].name=='scroll'" class="vertical__center__int">
+             Scroll
+           </span>
+           <span ng-if="path_objects[$index+1].name=='sendKeys'" class="vertical__center__int">
+             Type
+           </span>
+       </div>
+       <div  class="path-action">
+         <div class="path-node path-action-content" tooltip-placement="top">
+           <span ng-if="path_objects[$index+1].name=='click'" class="vertical__center__int">
+             <i class="fa fa-mouse-pointer fa-2x"></i>
+           </span>
+           <span ng-if="path_objects[$index+1].name=='doubleClick'" class="vertical__center__int">
+             <i class="fa fa-mouse-pointer fa-1x"></i>
+             <div class="doubleclick" >
+                 x2
+             </div>
+           </span>
+           <span ng-if="path_objects[$index+1].name=='mouseover'" class="vertical__center__int">
+             <i class="fa fa-hand-pointer-o fa-1x"></i>
+           </span>
+           <span ng-if="path_objects[$index+1].name=='scroll'" class="vertical__center__int">
+             <i class="fa fa-arrows-v fa-1x"></i>
+           </span>
+           <span ng-if="path_objects[$index+1].name=='sendKeys'" class="vertical__center__int">
+             <i class="fa fa-i-cursor fa-1x"></i>
+           </span>
+         </div>
+       </div>
+     </button>
+   </div>
+   <div ng-if="path.length > 1 && node.type != 'Action'" class="path-bar">
+   </div>
+ </div>
+</div>

@@ -56,7 +56,6 @@
 .tabs nav ul li {
 	text-decoration: none !important;
 	position: relative;
-	z-index: 1;
 	display: block;
 	margin: 0;
 	text-align: center;

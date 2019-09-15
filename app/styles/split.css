@@ -3,7 +3,7 @@
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 
-  overflow-y: auto;
+  overflow-y: none;
 }
 
 .gutter {
@@ -11,18 +11,21 @@
 
   background-repeat: no-repeat;
   background-position: 50%;
-  height: 100% !important;
+    height: 100% !important;
 }
 
 .gutter.gutter-horizontal {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
   cursor: ew-resize;
+
 }
 
 .gutter.gutter-vertical {
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCAMAAABl/6zIAAAABlBMVEUAAADMzMzIT8AyAAAAAXRSTlMAQObYZgAAABRJREFUeAFjYGRkwIMJSeMHlBkOABP7AEGzSuPKAAAAAElFTkSuQmCC');
     cursor: ns-resize;
+
   }
+
 .gutter.gutter-horizontal {
   height: 100%;
   float: left;
@@ -30,4 +33,15 @@
 
 .split.split-horizontal {
   float: left;
+}
+
+.gutter.gutter-vertical {
+  height: 5px !important;
+  width: 100%  !important;
+  float: left;
+}
+
+.split.split-vertical {
+  float: left;
+  width: 100%;
 }
