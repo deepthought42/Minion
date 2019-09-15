@@ -16,17 +16,24 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
 
     this._init = function(){
       var domain_id = store.get('domain').id;
+      $scope.waiting_on_forms = true;
+
       Domain.getForms({domain_id: domain_id}).$promise.
         then(function(response){
+          $scope.waiting_on_forms = false;
           $scope.forms = response;
           var needs_attention = false;
-          $scope.forms.forEach(form => {
+          $scope.forms.forEach((form) => {
             if(form.status === "DISCOVERED"){
               needs_attention = true;
             }
           });
 
           $rootScope.$broadcast("updateFormClassificationAlert", needs_attention);
+        })
+        .catch(function(err){
+          $scope.waiting_on_forms = false;
+          $scope.errors.push(err.data);
         });
 
       $scope.domain_id = store.get('domain').id;
@@ -89,10 +96,10 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
         if(form.status === "DISCOVERED"){
           discovered_form_count += 1;
         }
-      })
+      });
 
       $rootScope.$broadcast("updateFormDiscoveredCountAlert", discovered_form_count);
-      $scope.waitingOnForms = false;
+      $scope.waiting_on_forms = false;
       $scope.$apply();
     });
 

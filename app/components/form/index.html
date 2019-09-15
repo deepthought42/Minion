@@ -4,47 +4,46 @@
 
 <div class="content">
 
-		<div class="secondary-nav vertical__center__int" >
+	<div class="secondary-nav vertical__center__int" >
 
+	</div>
+
+  <div class="test-labels-container">
+    <div class="test-labels">
+      <div class="flex-auto test_functions">
+        Form Title
+      </div>
+      <div class="flex-initial date_stats text-left">
+        Form Type
+      </div>
+      <div class="flex-initial date_stats text-left">
+        Status
+      </div>
+      <div class="flex-initial date_stats text-right">
+        Date Discovered
+      </div>
+      <div class="flex-none discovery_functions">
 		</div>
+    </div>
+  </div>
 
-    <div class="test-labels-container">
-      <div class="test-labels">
-        <div class="flex-auto test_functions">
-          Form Title
-        </div>
-        <div class="flex-initial date_stats text-left">
-          Form Type
-        </div>
-        <div class="flex-initial date_stats text-left">
-          Status
-        </div>
-        <div class="flex-initial date_stats text-right">
-          Date Discovered
-        </div>
-        <div class="flex-none discovery_functions">
-			</div>
+	<div class="test-container">
+		<div class="empty__state vertical__center_empty_state_busy" ng-if="forms.length == 0 && !waiting_on_forms">
+      <div>
+      	<br/><br/>
+        <h2>No forms have been discovered yet.</h2>
+				<h2>Sites that contain forms will need to classify discovered forms to continue the discovery.</h2>
       </div>
     </div>
 
-		<div class="test-container">
-
-			<div class="empty__state vertical__center_empty_state_busy" ng-show="forms.length == 0">
+    <div class="empty__state vertical__center_empty_state_busy" ng-if="waiting_on_forms">
       <div>
-      <br><br>
-        <h2>No forms have been discovered yet. </h2><h2>
-					Sites that contain forms will need to classify discovered forms to continue the discovery.</h2>
-      </div>
-    </div>
-
-    <div class="empty__state vertical__center_empty_state_busy" ng-show="waitingOnForms">
-      <div>
-        <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw"></i>
+				<i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
         <br><br><br>
-        <h2>Sorry, we haven't found any forms yet. </h2>
-        <p class="empty__state__p">Please be patient, I'm sure we will find one shortly.<br><br>Please contact <a href="mailto:support@qanairy.com?subject=Excessive%20Load%20Times">support@qanairy.com</a> if this message is still active after 24 hrs.<br>If you would like to see this run faster contact us about a paid subscription.</p>
+        <h2>Please wait while we retrieve your forms</h2>
       </div>
     </div>
+
     <div class="test"
          ng-repeat="form in (filteredForms = forms) | filter:searchText track by $index"
          ng-show="forms.length > 0">
@@ -73,5 +72,5 @@
          </div>
        </div>
     </div>
-  </div>
+	</div>
 </div>
