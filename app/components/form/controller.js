@@ -23,7 +23,7 @@ angular.module('Qanairy.form', ['ui.router', 'Qanairy.FormService', 'Qanairy.Dom
           $scope.waiting_on_forms = false;
           $scope.forms = response;
           var needs_attention = false;
-          $scope.forms.forEach(form => {
+          $scope.forms.forEach((form) => {
             if(form.status === "DISCOVERED"){
               needs_attention = true;
             }
