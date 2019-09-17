@@ -95,17 +95,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
        console.log("preview path in controller:: "+test);
     }
 
-    $scope.getScreenshot = function(record){
-      var browser_idx = 0;
-      for(var i=0; i < record.result.screenshots.length; i++){
-        if(record.result.screenshots[i].browser === "firefox"){
-          browser_idx = i;
-          break;
-        }
-      }
-      $scope.openPageModal(record.result.screenshots[browser_idx].screenshotUrl);
-    }
-
     /**
      *  Checks if onboarding step has already been experienced. if not, it adds
      *    it to the user account via API call
@@ -177,10 +166,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       return browser_count==test.browserStatuses.length;
     }
 
-    $scope.setCurrentNodeKey = function(key){
-      $scope.node_key=key;
-    }
-
     $scope.getTestsByUrl = function(url) {
       $scope.waitingOnTests = true;
       Test.query({url: url}).$promise
@@ -209,20 +194,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         .catch(function(err){
           if(err.data){
             $scope.errors.push({message: "An error occurred while retrieving test groups"});
-          }
-          else{
-            $scope.errors.push({message: $scope.unresponsive_server_err });
-          }
-        });
-    };
-
-    $scope.getTestByName = function(name) {
-      Test.query({name: name}).$promise
-        .then(function(data){
-        })
-        .catch(function(err){
-          if(err.data){
-            $scope.errors.push({message:  "An error occurred while retrieving tests"});
           }
           else{
             $scope.errors.push({message: $scope.unresponsive_server_err });
@@ -463,26 +434,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         });
     }
 
-    $scope.toggleTestDataVisibility = function(test, index){
-      if($scope.test && $scope.test_idx != index){
-        $scope.test.visible = false;
-      }
-
-      $scope.current_test = test;
-      $scope.test_idx = index || 0;
-      $scope.test = test;
-      test.new_name = test.name;
-      test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
-      $scope.visible_browser_screenshot = $scope.default_browser;
-      $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-      $scope.setCurrentNode($scope.current_path_objects[0], index);
-
-      if(test.visible){
-        $scope.visible_test_nav1 = 'section-linemove-1';
-        $scope.visible_test_nav2 = 'section-linemove-1';
-      }
-    }
-
     /**
      * Constructs a list of PathObjects consisting of PageState, PageElement,
      *    and Action objects currently stored in session storage
@@ -500,40 +451,22 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       return path_objects;
     }
 
-     /**
-      * Constructs a list of PathObjects consisting of PageState, PageElement,
-      *    and Action objects currently stored in session storage
-      */
-     $scope.retrievePathObjectsUsingKeys = function(path_keys){
-       var path_objects = [];
-       for(var idx = 0; idx < path_keys.length; idx++){
-         //search all elements
-         var path_object  = $scope.getPathObject(path_keys[idx]);
-         if(path_object != null){
-            path_objects.push(path_object);
-         }
-       }
-
-       return path_objects;
-     }
-
-    $scope.setCurrentNode = function(node, index){
-      if(index > 3){
-        index = (index % 3) + 1;
+    $scope.toggleTestDataVisibility = function(test, index){
+      if($scope.test && $scope.test_idx != index){
+        $scope.test.visible = false;
       }
-      else{
-        index = (index % 3);
-      }
-      $scope.current_node_idx = index;
-      $scope.current_node[$scope.test_idx] = node;
-    }
 
-    $scope.getDate = function(value){
-      if(value == null){
-        return null;
-      }
-      else{
-        return new Date(value).toLocaleString();
+      $scope.current_test = test;
+      $scope.test_idx = index || 0;
+      $scope.test = test;
+      test.new_name = test.name;
+      test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
+      $scope.visible_browser_screenshot = $scope.default_browser;
+      $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
+
+      if(test.visible){
+        $scope.visible_test_nav1 = 'section-linemove-1';
+        $scope.visible_test_nav2 = 'section-linemove-1';
       }
     }
 
@@ -696,17 +629,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
     $scope.sendTestToIde = function(test){
       //get first url in test
-      /*
-      var url = "";
-      for(var idx=0; idx< test.pathKeys.length; idx++){
-        var path_obj = $scope.getPathObject(test.pathKeys[idx]);
-        if(path_obj.url && !url.length){
-          url = path_obj.url;
-          break;
-        }
-      }
-      const new_tab = $window.open(url, "_blank");
-      */
       Test.sendTestToIde({test_key: test.key}).$promise
         .then(function(returned_test){
           var url = "";
@@ -726,86 +648,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         });
     }
 
-    /**
-     *  Returns an array containing the start index values for partitioning a path
-     */
-    $scope.getPathIterations = function(path_size){
-      var segment_cnt = Math.trunc(path_size/3);
-      if(segment_cnt === 0 ){
-        segment_cnt = 1;
-      }
-
-      var arr = new Array(segment_cnt);
-      for(var i=0; i < arr.length; i++){
-        arr[i] = i*3;
-      }
-
-      return arr;
-    }
-
     this._init();
-
-    $scope.getPathObject = function(key){
-      var path_objecs = store.get("path_objects").filter(function( path_object ){
-        return path_object.key === key;
-      });
-      return path_objecs[0];
-    }
-
-    $scope.doesScreenshotExistForBrowser = function(browser,  screenshots){
-      for(var idx=0; idx< screenshots.length; idx++){
-        if( screenshots[idx].browser === browser){
-          return  true;
-        }
-      }
-      return false;
-    }
-
-    $scope.loadPageInteraction = function(interaction){
-      var page_interaction = {};
-      page_interaction.page = interaction;
-      page_interaction.page_key = interaction.key;
-      page_interaction.interactions = [];
-      return page_interaction;
-    }
-
-    $scope.openPathSlider = function(test, index) {
-      $scope.current_test = test;
-
-      //iterate over keys and load path PathObjects
-      var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-      path_objects.push($scope.test.result);
-      //add result to end of path
-
-      //create object consisting of a page and it's list of interactions
-      //iterate over path and combine elements and actions into single object named interaction
-      var new_path = [];
-      for(var i=0; i < path_objects.length; i++){
-        var key = path_objects[i].key;
-        if(key.includes("pagestate") || key.includes("redirect") || key.includes("loadpageanimation")){
-          new_path.push( $scope.loadPageInteraction(path_objects[i]));
-        }
-        else if(path_objects[i].key.includes("elementstate")){
-          var interaction = {element: path_objects[i], action: path_objects[i+1], key: path_objects[i].key};
-          //create interaction object and add it to page interactions
-          new_path[new_path.length-1].interactions.push(interaction);
-        }
-      }
-
-       $scope.current_path_idx = index;
-       $scope.preview_path = new_path;
-       $mdDialog.show({
-          clickOutsideToClose: true,
-          scope: $scope,
-          preserveScope: true,
-          templateUrl: "components/test/page_modal.html",
-          controller: function DialogController($scope, $mdDialog) {
-             $scope.closeDialog = function() {
-                $mdDialog.hide();
-             }
-          }
-       });
-    };
 
     /* EVENTS */
     $rootScope.$on("reload_tests", function(e){

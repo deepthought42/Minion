@@ -26,13 +26,11 @@
               style="{{generateElementOutline(page_interaction.page, interaction.element)}}">
          </div>
 
-         <img src="{{page_interaction.page.screenshotUrl}}"
+      </div>
+
+      <div class="browser_view" ng-show="pathIdx === $index && test.records[1]">
+         <img src="{{test_baseline.screenshotUrl}}"
               ng-click="openPathSlider(path)"/>
-         <div ng-repeat="interaction in page_interaction.interactions track by $index"
-              id="{{'element-outline'+$index}}"
-              class="element__outline"
-              style="{{generateElementOutline(page_interaction.page, interaction.element)}}">
-         </div>
       </div>
     </div>
   </div>

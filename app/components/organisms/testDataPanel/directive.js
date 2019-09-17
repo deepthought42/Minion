@@ -10,7 +10,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
       $scope.path = [];
       $scope.test = {};
       $scope.errors = [];
-
+      $scope.test_baseline = [];
       $scope.editTest = function(test){
         test.show_test_name_edit_field = true;
       };
@@ -70,6 +70,16 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
         return path_objects;
       }
 
+      $scope.getSecondToLastTest = function(test){
+        var record = test.records[1];
+        if(record === undefined){
+          record = test.records[0];
+        }
+        var baseline_path = $scope.retrievePathObjectsUsingKeys(record.pathKeys);
+        baseline_path.push(record.result);
+        return baseline_path;
+      }
+
       $scope.toggleTestDataVisibility = function(test){
         $scope.test = test;
         $scope.visible_browser_screenshot = $scope.default_browser;
@@ -100,6 +110,17 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
             }
 
           });
+      }
+
+      $scope.getScreenshot = function(record){
+        var browser_idx = 0;
+        for(var i=0; i < record.result.screenshots.length; i++){
+          if(record.result.screenshots[i].browser === "firefox"){
+            browser_idx = i;
+            break;
+          }
+        }
+        $scope.openPageModal(record.result.screenshots[browser_idx].screenshotUrl);
       }
 
       $scope.getPathObject = function(key){
@@ -138,6 +159,8 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
       $scope.$on("updateCurrentDiscoveryTest", function(event, test){
         console.log("update current discovery to test  :: "+JSON.stringify(test));
         $scope.test = test;
+        $scope.test_baseline = $scope.getSecondToLastTest(test);
+
         //iterate over keys and load path PathObjects
         var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
         if(path_objects[path_objects.length-1].type !== "PageState"){

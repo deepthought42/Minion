@@ -42,7 +42,6 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
          });
       };
 
-
       $scope.generateElementOutline = function(page, element){
         return buildElementOutlineStyle(page, element);
       };

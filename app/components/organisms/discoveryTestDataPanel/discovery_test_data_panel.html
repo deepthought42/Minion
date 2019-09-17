@@ -65,7 +65,7 @@
           <split direction="vertical" class="test__screenshot__data__section" ng-transclude style="display:flex;">
             <split-area size="54" class="test__screenshot__section" style="overflow-y: hidden; position:relative;" ng-transclude>
               <div class="screenshot_comparison_buttons">
-                <!-- 
+                <!--
                 <div class="btn-group screenshot-comparison-btn-group" role="group" aria-label="Basic example">
                   <button ng-click="" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot">Actual</button>
                   <button ng-click="" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot">Expected</button>
@@ -86,10 +86,10 @@
                 </div>
               </div>
                <div class="element__image" style="">
-                 <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'" 
+                 <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'"
                       class="flex-auto vertical__center__int"
                       style="margin:0px auto; height: 100% !important;" >
-                   <img class="" 
+                   <img class=""
                     data-toggle="modal" data-target="#exampleModal"
                     src="{{current_node.screenshot}}"/>
                  </div>

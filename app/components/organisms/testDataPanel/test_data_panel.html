@@ -83,7 +83,7 @@
               </div>
               <div class="expand_button">
                 <button class="expand btn btn--screenshot" data-toggle="modal" data-target="#exampleModal"
-                ng-click="openPathSlider()">
+                        ng-click="openPathSlider()" ng-show="!current_node.key.includes('elementstate')">
                 Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
                 </button>
               </div>
