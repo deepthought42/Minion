@@ -6,7 +6,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
     restrict: 'E',
     controller: ["$rootScope", "$scope", "store", "$mdDialog", "Test", function($rootScope, $scope, store, $mdDialog, Test){
       $scope.current_node = {};
-      $scope.current_node_idx == 0;
+      $scope.current_baseline_node = {};
       $scope.path = [];
       $scope.test = {};
       $scope.errors = [];
@@ -17,7 +17,6 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
 
       $scope.openPathSlider = function() {
         $scope.path = $scope.convertToIterativePath($scope.path_objects);
-        console.log("opening path slider :: "+$scope.path);
 
           //add result to end of path
 
@@ -51,6 +50,10 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
 
       $scope.setCurrentNode = function(node){
         $scope.current_node = node;
+      }
+
+      $scope.setBaselineCurrentNode = function(node){
+        $scope.current_baseline_node = node;
       }
 
       /**
@@ -157,7 +160,6 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
 
       //EVENTS
       $scope.$on("updateCurrentDiscoveryTest", function(event, test){
-        console.log("update current discovery to test  :: "+JSON.stringify(test));
         $scope.test = test;
         $scope.test_baseline = $scope.getSecondToLastTest(test);
 
@@ -167,10 +169,32 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
           path_objects.push(test.result)
         }
 
+        //get last passing test from test records
+        var last_passing_record = {};
+
+        if(test.records.length == 1 && test.records[0].status === "PASSING"){
+          last_passing_record = test.records[0];
+        }
+        else{
+          for(var idx = 1; idx < test.records.length; idx++){
+            if(test.records[idx].status === "PASSING"){
+              last_passing_record = test.records[idx];
+              break;
+            }
+          }
+        }
+
+        var test_record_path_objects = $scope.retrievePathObjectsUsingKeys(last_passing_record.pathKeys);
+        if(test_record_path_objects[test_record_path_objects.length-1].type !== "PageState"){
+          test_record_path_objects.push(last_passing_record.result);
+        }
+
         $scope.path_objects = path_objects;
         $scope.pathIdx = 0;
         $scope.path = $scope.convertToIterativePath($scope.path_objects);
+        $scope.last_test_record_path = $scope.convertToIterativePath(test_record_path_objects);
         $scope.current_node = path_objects[0];
+        $scope.current_baseline_node = test_record_path_objects[0];
       });
     }],
     scope: {},

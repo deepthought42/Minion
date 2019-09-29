@@ -4,13 +4,14 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
 .directive("expandablePathComparisonToggle",['$mdDialog', '$timeout', function($mdDialog, $timeout){
   return{
     restrict: 'E',
-    controller: function($scope, $element){
+    controller: function($scope, $element, store){
       $scope.next = function() {
         $scope.pathIdx = $scope.pathIdx + 1;
         if($scope.pathIdx >= $scope.path.length){
           $scope.pathIdx = 0;
         }
         $scope.setCurrentNode($scope.path[$scope.pathIdx].page);
+        $scope.setBaselineCurrentNode($scope.last_test_record_path[$scope.pathIdx].page);
       }
 
       $scope.previous = function() {
@@ -20,6 +21,7 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
           $scope.pathIdx = $scope.path.length - 1;
         }
         $scope.setCurrentNode($scope.path[$scope.pathIdx].page);
+        $scope.setBaselineCurrentNode($scope.last_test_record_path[$scope.pathIdx].page);
       }
 
       $scope.openPathSlider = function(path) {

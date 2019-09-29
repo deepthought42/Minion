@@ -29,12 +29,14 @@
 							</button>
 						</div>
 					</div>
-						<div class="flex-auto pull-right right-secondary-nav ">
-							<div class="input-group search">
-								<span class="input-group-addon"><i class="fa fa-search"></i></span>
-									<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search">
-							</div>
+					<div class="flex-auto pull-right right-secondary-nav ">
+						<div class="input-group search">
+							<span class="input-group-addon">
+								<i class="fa fa-search"></i>
+							</span>
+							<input type="text" class="form-control pull-right" ng-model="searchText" placeholder="Search Tests" aria-describedby="search" />
 						</div>
+					</div>
 				</div>
 
 				<div class="test-labels-container">
@@ -45,26 +47,28 @@
 						<div class="flex-auto test_functions">
 							Test Title
 						</div>
-						<div class="flex-none test_browsers_edit">
+						<div class="flex-auto test_browsers_edit">
 							Browsers
 						</div>
-						<div class="flex-none time_stats text-right">
+						<div class="flex-auto time_stats text-right">
 							Time (minutes)
 						</div>
-						<div class="flex-none date_stats text-right"  ng-click="sortLastRun=!sortLastRun">
+						<div class="flex-auto date_stats text-right"  ng-click="sortLastRun=!sortLastRun">
 							Date Last Run
 						</div>
 						<div class="flex-none test_functions">
 						</div>
 					</div>
 				</div>
-				<div class="test"
+
+				<onboarding-popover ng-if="$index==0" enabled="testRunOnboardingEnabled" steps="testRunOnboardingSteps" step-index="testRunOnboardingIndex"></onboarding-popover>
+				<div id="test-{{$index}}"
+						 class="test"
 						 ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy: ['status','lastRunTimestamp'] track by $index"
 						 ng-show="tests.length > 0">
-				  <onboarding-popover ng-if="$index==0" enabled="testRunOnboardingEnabled" steps="testRunOnboardingSteps" step-index="testRunOnboardingIndex"></onboarding-popover>
 
 					<div class="test__profile vertical__left__profile" ng-click="setTestIndex($index, test)"  ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass, 'active': current_test.key==test.key}">
-						<div class="tests__test__status test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+						<div class="tests__test__status test__profile_stretch">
 							<div class="test__status " ng-if="isTestRunning(test)">
 								<i class="fa fa-circle-o-notch fa-spin status--symbol fa-3x green fa-fw"></i>
 							</div>
@@ -81,7 +85,7 @@
 								</span>
 							</div>
 						</div>
-						<div class="flex-auto test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
+						<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx!=$index">
 							<div class="row">
 								<div class="col-xs-12 " ng-if="editing_test_idx!=$index" >
 									<h3 class="test__title">
@@ -99,7 +103,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="flex-none test_browsers_edit test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)" ng-if="editing_test_idx!=$index">
+						<div class="test_browsers_edit test__profile_stretch" ng-if="editing_test_idx!=$index">
 							<div class="">
 								<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
 									<div class="row vertical__center test__status__editable">
@@ -130,7 +134,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="flex-none test_browsers_edit test__profile_stretch" ng-if="editing_test_idx==$index">
+						<div class="flex-auto test_browsers_edit test__profile_stretch" ng-if="editing_test_idx==$index">
 							<div class="">
 								<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
 									<div class="row vertical__center test__status__edit">
@@ -161,19 +165,19 @@
 							</div>
 						</div>
 
-						<div class="flex-none text-right time_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+						<div class="flex-auto text-right time_stats test__profile_stretch">
 							<div class="">
 								{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 							</div>
 						</div>
-						<div class="flex-none text-right date_stats test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
+						<div class="flex-auto text-right date_stats test__profile_stretch">
 							<div class="">
-								{{ (test.lastRunTimestamp | date: 'MM/dd/yy h:mm a' | lowercase) || "Unknown / Not since discovery"}}
+								{{ (test.lastRunTimestamp | date: 'MM/dd/yy' | lowercase) || "Unknown / Not since discovery"}}
 							</div>
 						</div>
 
 		        <div class="flex-none test_functions test__btns" aria-label="Test Functions">
-		          <div class="margin_fifteen_right btn-group pull-left" role="group" ng-show="!isTestRunningInAllBrowsers(test) && editing_test_idx!=$index"  >
+		          <div class="margin_fifteen_right btn-group pull-left" ng-show="!isTestRunningInAllBrowsers(test) && editing_test_idx!=$index"  >
 		            <button class="btn btn--primary" ng-click="runTest(test, default_browser==='firefox', default_browser==='chrome')" id="{{'run_test_button-'+$index}}">
 		               Run
 		            </button>
@@ -208,9 +212,6 @@
 		            <div class="" ng-show="test.show_waiting_icon">
 		              <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
 		            </div>
-		          </div>
-		          <div class="accordion" aria-label="open/close accordion" ng-click="toggleTestDataVisibility(test, $index)">
-		            <i class="fa fa-2x" ng-class="test.visible ? 'fa-angle-down' : 'fa-angle-right'" />
 		          </div>
 		        </div>
 		      </div>

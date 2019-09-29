@@ -97,7 +97,7 @@
             <div class="col-sm-12">
               <div class=" dashboard_card_med vertical__center">
                 <div class="dashboard__stats">
-                  {{usage.domainDiscoveryCount}}
+                  {{usage.domainDiscoveryCount  || '-'}}
                 </div>
               </div>
             </div>
@@ -119,7 +119,7 @@
             <div class="col-sm-12">
               <div class=" dashboard_card_med vertical__center">
                 <div class="dashboard__stats">
-                  {{usage.domainTotalTestsRun}}
+                  {{usage.domainTotalTestsRun || '-'}}
                 </div>
               </div>
             </div>

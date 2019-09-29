@@ -74,7 +74,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       {
         position: "left",
         description: "Run tests to compare the new run record to the last time the test was ran. If the test fails, but the expected outcome is now correct, you can update the test status by editing the selected test. Otherwise continue to run your test until your engineers have fixed the problem.",
-        attachTo:"#run_test_button-0",
+        attachTo:"#test-0",
         top: 125,
         right: 280,
         width: 400
@@ -90,9 +90,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
     $scope.setTestIndex = function(idx, test){
       $scope.current_test = test;
       $scope.test_idx = idx;
-      console.log("test :: "+JSON.stringify(test));
        $rootScope.$broadcast("updateCurrentDiscoveryTest", test );
-       console.log("preview path in controller:: "+test);
     }
 
     /**
@@ -311,13 +309,14 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
       //get keys for tests and put
       var keys = [];
-      $scope.filteredTests.forEach(function(test){
+      $scope.tests.forEach(function(test){
         browsers.forEach(function(browser){
           test.browserStatuses[browser] = 'RUNNING';
           test.status = "RUNNING";
         });
         keys.push(test.key);
       });
+
 
       //$scope.closeDialog();
 
@@ -432,42 +431,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
             $scope.errors.push({message: $scope.unresponsive_server_err });
           }
         });
-    }
-
-    /**
-     * Constructs a list of PathObjects consisting of PageState, PageElement,
-     *    and Action objects currently stored in session storage
-     */
-    $scope.retrievePathObjectsUsingKeys = function(path_keys){
-      var path_objects = [];
-      for(var idx = 0; idx < path_keys.length; idx++){
-        //search all elements
-        var path_object  = $scope.getPathObject(path_keys[idx]);
-        if(path_object != null){
-           path_objects.push(path_object);
-        }
-      }
-
-      return path_objects;
-    }
-
-    $scope.toggleTestDataVisibility = function(test, index){
-      if($scope.test && $scope.test_idx != index){
-        $scope.test.visible = false;
-      }
-
-      $scope.current_test = test;
-      $scope.test_idx = index || 0;
-      $scope.test = test;
-      test.new_name = test.name;
-      test.visible===undefined ? test.visible = true : test.visible = !test.visible ;
-      $scope.visible_browser_screenshot = $scope.default_browser;
-      $scope.current_path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
-
-      if(test.visible){
-        $scope.visible_test_nav1 = 'section-linemove-1';
-        $scope.visible_test_nav2 = 'section-linemove-1';
-      }
     }
 
     $scope.saveTest = function(test){

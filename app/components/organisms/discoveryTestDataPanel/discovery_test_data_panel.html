@@ -1,7 +1,9 @@
-<div ng-if="!path">
-  Select a test to review if it is working as expected or not
+<div ng-if="!path.length" class="valign-middle-container"> 
+  <div class="valign-middle">
+    Select a test to review if it is working as expected or not
+  </div>
 </div>
-<div class="col-sm-12"  ng-if="path">
+<div class="col-sm-12"  ng-if="path.length">
   <div class="row test__details__section">
     <div class="test__profile vertical__left__profile" ng-class="current_test.key==test.key ? 'active' : ''">
       <div class="flex-auto test__title test_functions test__profile_stretch" ng-click="toggleTestDataVisibility(test)" ng-if="!test.show_test_name_edit_field">
