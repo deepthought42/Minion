@@ -15,7 +15,6 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
       }
 
       $scope.previous = function() {
-        console.log("getting previous");
         $scope.pathIdx -= 1;
         if($scope.pathIdx < 0){
           $scope.pathIdx = $scope.path.length - 1;
@@ -26,7 +25,6 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
 
       $scope.openPathSlider = function(path) {
         $scope.path = path;
-        console.log("opening path slider :: "+path);
           //add result to end of path
 
         //create object consisting of a page and it's list of interactions
@@ -42,10 +40,6 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
                }
             }
          });
-      };
-
-      $scope.generateElementOutline = function(page, element){
-        return buildElementOutlineStyle(page, element);
       };
 
       function buildElementOutlineStyle(page, element){
@@ -72,6 +66,10 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
         var outline_style = "top: "+ y_offset +"px;left: "+ x_offset +"px; width: "+ element_width +"px; height:"+ element_height +"px";
         return outline_style;
       };
+
+      $scope.generateElementOutline = function(page, element){
+        return buildElementOutlineStyle(page, element);
+      };
     },
     link: function($scope, element) {
 
@@ -79,6 +77,6 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
     scope: false,
     transclude: true,
     templateUrl: 'components/organisms/expandablePathComparisonToggle/path_comparison.html'
-  }
+  };
 
-}])
+}]);

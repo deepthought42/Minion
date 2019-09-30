@@ -6,7 +6,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
     restrict: 'E',
     controller: ["$rootScope", "$scope", "store", "$mdDialog", "Test", function($rootScope, $scope, store, $mdDialog, Test){
       $scope.current_node = {};
-      $scope.current_node_idx == 0;
+      $scope.current_node_idx = 0;
       $scope.path = [];
       $scope.test = {};
       $scope.errors = [];
@@ -17,8 +17,6 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
 
       $scope.openPathSlider = function() {
         $scope.path = $scope.convertToIterativePath($scope.path_objects);
-        console.log("opening path slider :: "+$scope.path);
-
           //add result to end of path
 
           //create object consisting of a page and it's list of interactions
@@ -38,10 +36,10 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
       };
 
       $scope.translateObjectType = function(type){
-        if(type == "PageState"){
+        if(type === "PageState"){
           return "Page";
         }
-        else if(type == "ElementState"){
+        else if(type === "ElementState"){
           return "Element";
         }
         return type;
@@ -104,7 +102,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
 
       $scope.getPathObject = function(key){
         var path_objects = store.get('path_objects').filter(function( path_object ){
-          return path_object.key == key;
+          return path_object.key === key;
         });
         return path_objects[0];
       }
@@ -136,12 +134,11 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
 
       //EVENTS
       $scope.$on("updateCurrentDiscoveryTest", function(event, test){
-        console.log("update current discovery to test  :: "+JSON.stringify(test));
         $scope.test = test;
         //iterate over keys and load path PathObjects
         var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
         if(path_objects[path_objects.length-1].type !== "PageState"){
-          path_objects.push(test.result)
+          path_objects.push(test.result);
         }
 
         $scope.path_objects = path_objects;
@@ -153,6 +150,5 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
     scope: {},
     transclude: true,
     templateUrl: 'components/organisms/discoveryTestDataPanel/discovery_test_data_panel.html'
-  }
-
+  };
 });

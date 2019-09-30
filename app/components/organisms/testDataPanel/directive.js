@@ -37,10 +37,10 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
       };
 
       $scope.translateObjectType = function(type){
-        if(type == "PageState"){
+        if(type === "PageState"){
           return "Page";
         }
-        else if(type == "ElementState"){
+        else if(type === "ElementState"){
           return "Element";
         }
         return type;
@@ -128,7 +128,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
 
       $scope.getPathObject = function(key){
         var path_objects = store.get('path_objects').filter(function( path_object ){
-          return path_object.key == key;
+          return path_object.key === key;
         });
         return path_objects[0];
       }
@@ -166,13 +166,13 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
         //iterate over keys and load path PathObjects
         var path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
         if(path_objects[path_objects.length-1].type !== "PageState"){
-          path_objects.push(test.result)
+          path_objects.push(test.result);
         }
 
         //get last passing test from test records
         var last_passing_record = {};
 
-        if(test.records.length == 1 && test.records[0].status === "PASSING"){
+        if(test.records.length === 1 && test.records[0].status === "PASSING"){
           last_passing_record = test.records[0];
         }
         else{
@@ -200,6 +200,5 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
     scope: {},
     transclude: true,
     templateUrl: 'components/organisms/testDataPanel/test_data_panel.html'
-  }
-
+  };
 });
