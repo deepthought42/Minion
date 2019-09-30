@@ -37,7 +37,7 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
             controller: function DialogController($scope, $mdDialog) {
                $scope.closeDialog = function() {
                   $mdDialog.hide();
-               }
+               };
             }
          });
       };
@@ -65,7 +65,7 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
         var y_offset = (element.ylocation - page.scrollYOffset) * scale_height;
         var outline_style = "top: "+ y_offset +"px;left: "+ x_offset +"px; width: "+ element_width +"px; height:"+ element_height +"px";
         return outline_style;
-      };
+      }
 
       $scope.generateElementOutline = function(page, element){
         return buildElementOutlineStyle(page, element);

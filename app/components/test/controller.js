@@ -90,7 +90,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
     $scope.setTestIndex = function(idx, test){
       $scope.current_test = test;
       $scope.test_idx = idx;
-       $rootScope.$broadcast("updateCurrentDiscoveryTest", test );
+       $rootScope.$broadcast("updateCurrentTest", test );
     }
 
     /**

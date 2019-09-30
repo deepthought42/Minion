@@ -130,7 +130,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
         page_interaction.page_key = interaction.key;
         page_interaction.interactions = [];
         return page_interaction;
-      }
+      };
 
       //EVENTS
       $scope.$on("updateCurrentDiscoveryTest", function(event, test){
