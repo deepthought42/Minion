@@ -43,7 +43,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
           return "Element";
         }
         return type;
-      }
+      };
 
       $scope.visible_test_nav1 = 'section-linemove-1';
 
