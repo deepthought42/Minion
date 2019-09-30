@@ -30,7 +30,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
             controller: function DialogController($scope, $mdDialog) {
                $scope.closeDialog = function() {
                   $mdDialog.hide();
-               }
+               };
             }
          });
       };
