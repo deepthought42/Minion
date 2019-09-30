@@ -12,7 +12,7 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
         }
         $scope.setCurrentNode($scope.path[$scope.pathIdx].page);
         $scope.setBaselineCurrentNode($scope.last_test_record_path[$scope.pathIdx].page);
-      }
+      };
 
       $scope.previous = function() {
         $scope.pathIdx -= 1;
@@ -21,7 +21,7 @@ angular.module('Qanairy.ExpandablePathComparisonToggle', [])
         }
         $scope.setCurrentNode($scope.path[$scope.pathIdx].page);
         $scope.setBaselineCurrentNode($scope.last_test_record_path[$scope.pathIdx].page);
-      }
+      };
 
       $scope.openPathSlider = function(path) {
         $scope.path = path;

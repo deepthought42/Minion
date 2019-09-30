@@ -49,7 +49,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
 
       $scope.setCurrentNode = function(node){
         $scope.current_node = node;
-      }
+      };
 
       /**
        * Constructs a list of PathObjects consisting of PageState, PageElement,
@@ -66,7 +66,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
         }
 
         return path_objects;
-      }
+      };
 
       $scope.toggleTestDataVisibility = function(test){
         $scope.test = test;
@@ -74,11 +74,11 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
 
         $scope.path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
         $scope.setCurrentNode($scope.path_objects[0]);
-      }
+      };
 
       $scope.cancelEditingTestName = function(test){
         test.show_test_name_edit_field = false;
-      }
+      };
 
       $scope.setTestName = function(new_name){
         $scope.test.show_waiting_icon = true;
@@ -98,14 +98,14 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
             }
 
           });
-      }
+      };
 
       $scope.getPathObject = function(key){
         var path_objects = store.get('path_objects').filter(function( path_object ){
           return path_object.key === key;
         });
         return path_objects[0];
-      }
+      };
 
       $scope.convertToIterativePath = function(path_objects){
         //create object consisting of a page and it's list of interactions
@@ -122,7 +122,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
           }
         }
         return new_path;
-      }
+      };
 
       $scope.loadPageInteraction = function(interaction){
         var page_interaction = {};

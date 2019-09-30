@@ -50,11 +50,11 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
 
       $scope.setCurrentNode = function(node){
         $scope.current_node = node;
-      }
+      };
 
       $scope.setBaselineCurrentNode = function(node){
         $scope.current_baseline_node = node;
-      }
+      };
 
       /**
        * Constructs a list of PathObjects consisting of PageState, PageElement,
@@ -71,7 +71,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
         }
 
         return path_objects;
-      }
+      };
 
       $scope.getSecondToLastTest = function(test){
         //get last passing test from test records
@@ -91,7 +91,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
         var baseline_path = $scope.retrievePathObjectsUsingKeys(last_passing_record.pathKeys);
         baseline_path.push(last_passing_record.result);
         return baseline_path;
-      }
+      };
 
       $scope.toggleTestDataVisibility = function(test){
         $scope.test = test;
@@ -99,11 +99,11 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
 
         $scope.path_objects = $scope.retrievePathObjectsUsingKeys(test.pathKeys);
         $scope.setCurrentNode($scope.path_objects[0]);
-      }
+      };
 
       $scope.cancelEditingTestName = function(test){
         test.show_test_name_edit_field = false;
-      }
+      };
 
       $scope.setTestName = function(new_name){
         $scope.test.show_waiting_icon = true;
@@ -123,7 +123,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
             }
 
           });
-      }
+      };
 
       $scope.getScreenshot = function(record){
         var browser_idx = 0;
@@ -134,14 +134,14 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
           }
         }
         $scope.openPageModal(record.result.screenshots[browser_idx].screenshotUrl);
-      }
+      };
 
       $scope.getPathObject = function(key){
         var path_objects = store.get('path_objects').filter(function( path_object ){
           return path_object.key === key;
         });
         return path_objects[0];
-      }
+      };
 
       $scope.convertToIterativePath = function(path_objects){
         //create object consisting of a page and it's list of interactions
@@ -158,7 +158,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
           }
         }
         return new_path;
-      }
+      };
 
       $scope.loadPageInteraction = function(interaction){
         var page_interaction = {};
@@ -166,7 +166,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
         page_interaction.page_key = interaction.key;
         page_interaction.interactions = [];
         return page_interaction;
-      }
+      };
 
       //EVENTS
       $scope.$on("updateCurrentTest", function(event, test){
@@ -184,7 +184,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
         $scope.path = $scope.convertToIterativePath($scope.path_objects);
         $scope.last_test_record_path = $scope.convertToIterativePath($scope.test_baseline);
         $scope.current_node = path_objects[0];
-        $scope.current_baseline_node = test_record_path_objects[0];
+        $scope.current_baseline_node = $scope.test_baseline;
       });
     }],
     scope: {},
