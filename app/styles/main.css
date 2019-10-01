@@ -219,10 +219,15 @@ html {
   justify-content: left !important;
 }
 
-.valign-middle{
+.valign-middle-container{
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.valign-middle {
+  max-width: 50%;
 }
 /*--------------------------- [1. Links] -------------------------------------------------------------------------------------*/
 
@@ -362,7 +367,7 @@ h5,
 	padding:10px 12px !important;
 }
 
-.toggle-on {  
+.toggle-on {
 	color: #fff;
   background-color: #6649e4  !important;
 }
@@ -572,7 +577,7 @@ h5,
 	color: #fff;
 	border-color: #553fc0;
 }
-}
+
 .button--ujarak:hover::before {
 	opacity: 1;
 	-webkit-transform: translate3d(0, 0, 0);
