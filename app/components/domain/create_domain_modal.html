@@ -21,7 +21,9 @@
             <div class ="col-sm-12 form_molecule" >
               <div class="form_label_description_domain">
                 <h6>Domain</h6>
-                Running a discovery will send a large amount of temporary traffic to your domain in the form of testing bots. Using a staging environment is recommended.
+                 When you run a discovery our servers will send a large amount of test bots to your domain. This will impact your analytics in production environments.
+                 <br />
+                 <b class="error__text"><p>Using a staging environment is recommended.</p></b> 
               </div>
               <div class="domain-dialogue-input" >
                 <select ng-model="current_domain.protocol">
@@ -33,6 +35,9 @@
                 <div>
                   <input id="domain_input" class="form-control" ng-model="current_domain.url" placeholder="www.yourdomain.com" required/>
                 </div>
+              </div>
+              <div ng-if="current_domain.url.length && !current_domain.url.toLowerCase().includes('demo') && !current_domain.url.toLowerCase().includes('staging')  && !current_domain.url.toLowerCase().includes('stage')" class="row error__message">
+                We suggest using a a&nbsp; <b><u>staging environment</u></b> a&nbsp; to prevent any impacts on your site analytics
               </div>
             </div>
             <div class="col-sm-12 form_molecule">
