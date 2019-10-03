@@ -50,7 +50,7 @@ angular.module('Qanairy.ElementStateOutline', [])
         var y_offset = (element.ylocation - page.scrollYOffset) * scale_height;
         var outline_style = "top: "+ y_offset +"px;left: "+ x_offset +"px; width: "+ element_width +"px; height:"+ element_height +"px";
         return outline_style;
-      };
+      }
     },
     link: function($scope, element) {
 

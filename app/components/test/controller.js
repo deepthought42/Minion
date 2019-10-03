@@ -587,4 +587,4 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       $scope.pusher.unsubscribe($scope.extractHostname($scope.domain_url));
     });
   }
-]);
+])
