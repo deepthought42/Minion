@@ -213,7 +213,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
            test_key: test.key,
            success : !$scope.errors.length
          }, function(success){});
-      }
+      };
 
       $scope.removeGroup = function(test, group, $index){
         Test.removeGroup({group_key: group.key, test_key: test.key}).$promise

@@ -179,7 +179,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
                      success : false
                    }, function(success){});
                  });
-      }
+      };
 
       $scope.removeGroup = function(test, group, $index){
         Test.removeGroup({group_key: group.key, test_key: test.key}).$promise
