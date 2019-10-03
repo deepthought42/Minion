@@ -228,7 +228,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
               $scope.errors.push({message: $scope.unresponsive_server_err });
             }
           });
-      }
+      };
     }],
     scope: {},
     transclude: true,
