@@ -310,6 +310,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
        });
     };
 
+    $scope.trackRecorderSelection = function(){
+      segment.track("Selected Recorder", {
+      
+      }, function(success){});
+    }
     $scope.addGroup = function(test, group){
       if(!group.name.length){
          $scope.errors.push("Group name cannot be empty");
