@@ -40,6 +40,11 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       //ERRORS
       $scope.unresponsive_server_err = "Qanairy servers are currently unresponsive. Please try again in a few minutes.";
 
+      //check if path objects exist in storage. If not then send message to select current domain and load data
+      if(!store.get('path_objects')){
+        $rootScope.$broadcast("domain_selected", $scope.current_domain);
+      }
+
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
         Discovery.getStatus({url: $scope.current_domain.url}).$promise

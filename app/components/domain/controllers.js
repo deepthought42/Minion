@@ -101,39 +101,37 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         return;
       }
 
-        var created_successfully = false;
-        Domain.save({protocol: protocol, url: host, logoUrl: logo_url, browser_name: default_browser}).$promise
-          .then(function(successResult){
-            $scope.show_create_domain_err = false;
-            store.set('domain', successResult);
-            $scope.domains.push(successResult);
+      var created_successfully = false;
+      Domain.save({protocol: protocol, url: host, logoUrl: logo_url, browser_name: default_browser}).$promise
+        .then(function(successResult){
+          $scope.show_create_domain_err = false;
+          store.set('domain', successResult);
+          $scope.domains.push(successResult);
+          $scope.closeDialog();
+          created_successfully = true;
+          $rootScope.$broadcast("domain_added", successResult);
+          $rootScope.$broadcast("domain_selected", successResult);
+          segment.track("Created Domain", {
+            domain: host,
+            browser: default_browser
+          }, function(success){  });
+
+          $state.go("main.discovery");
+        },
+        function(errorResult){
+          created_successfully = false
+          segment.track("Create Domain Failed", {
+            browser: default_browser,
+            domain: host
+          }, function(success){  });
+
+          if(errorResult.status === 303){
             $scope.closeDialog();
-            created_successfully = true;
-            $rootScope.$broadcast("domain_added", successResult);
-            $rootScope.$broadcast("domain_selected", successResult);
-            segment.track("Created Domain", {
-              domain: host,
-              browser: default_browser
-            }, function(success){  });
-
-            $state.go("main.discovery");
-          },
-          function(errorResult){
-            created_successfully = false
-            segment.track("Create Domain Failed", {
-              browser: default_browser,
-              domain: host
-            }, function(success){  });
-
-            if(errorResult.status === 303){
-              $scope.closeDialog();
-            }
-            else{
-              $scope.show_create_domain_err = true;
-            }
-          });
-      }
-
+          }
+          else{
+            $scope.show_create_domain_err = true;
+          }
+        });
     }
 
     $scope.updateDomain = function(key, protocol, default_browser, logo_url){
@@ -177,21 +175,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       //get default browser for domain
       //if default browser is not set then show default browser selection dialog box
       $rootScope.$broadcast("domain_selected", domain);
-
-      //Load all page states
-
-      Domain.getAllPathObjects({host: domain.url}).$promise
-                .then(function(data){
-                    store.set('path_objects', data);
-                })
-                .catch(function(err){
-                  if(err.data){
-                    $scope.errors.push("An error occurred retrieving domains");
-                  }
-                  else{
-                    $scope.errors.push({message: $scope.unresponsive_server_err });
-                  }
-                });
 
       segment.track("Selected Domain", {
         domain: domain.url
