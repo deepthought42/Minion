@@ -67,6 +67,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           .then(function(data){
             $scope.tests = data
             $scope.waitingOnTests = false;
+            $scope.setTestIndex(0, data[0]);
             if(data.length > 0){
               $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
               $scope.discoveredTestOnboardingIndex = 0;
@@ -134,17 +135,9 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
     $scope.testVerificationSteps = [
       {
-        title: "Review your test",
-        description: "Tests paths are comprised of three parts: page, element, and action. Single page tests like this one here indicate that the page has successfully loaded.",
-        attachTo:"#test0_data",
-        position: "top",
-        top: 120,
-        left: 10,
-        width: 400
-      },
-      {
         position: "right",
-        description: "Examine the test details to determine whether the status of a test is passing or failing. Select passing or failing to teach Qanairy the expected outcome of each test. Once a status is selected the test will move to the 'Tests' page where it can be run.",
+        title: "Classify your test",
+        description: "Click on a test to review it. After you examine the test details you can tell Qanairy the test if is working as expected or not by clicking on either the passing or failing buttons. After you select a status the test will move to the 'Tests' page where you can run and manage your reviewed tests.",
         attachTo:"#test0_status",
         width: 430,
         top: 125,
@@ -233,9 +226,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     $scope.setTestIndex = function(idx, test){
       $scope.current_test = test;
       $scope.test_idx = idx;
-      console.log("test :: "+JSON.stringify(test));
-       $rootScope.$broadcast("updateCurrentDiscoveryTest", test );
-       console.log("preview path in controller:: "+test);
+      $rootScope.$broadcast("updateCurrentDiscoveryTest", test );
     }
 
     $scope.stopDiscoveryProcess = function(){
@@ -469,6 +460,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         .then(function(data){
           $scope.tests = data
           $scope.waitingOnTests = false;
+          console.log("Data length :: "+data.length);
           if(data.length > 0){
             $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
             $scope.discoveredTestOnboardingIndex = 0;
