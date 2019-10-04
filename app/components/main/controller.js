@@ -150,38 +150,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
       //get default browser for domain
       //if default browser is not set then show default browser selection dialog box
       $rootScope.$broadcast("domain_selected", domain);
-
       //$rootScope.$broadcast("reload_tests", domain);
-
-      //Load all page states
-
-      Domain.getAllPathObjects({host: domain.url}).$promise
-                .then(function(data){
-                    store.set('path_objects', data);
-                })
-                .catch(function(err){
-                  if(err.data){
-                    $scope.errors.push("Error occurred retrieving test data");
-                  }
-                  else{
-                    $scope.errors.push({message: $scope.unresponsive_server_err });
-                  }
-                });
-
-      //get all forms
-      Domain.getForms({domain_id: domain.id}).$promise.
-        then(function(response){
-          $scope.forms = response;
-          var form_count = 0;
-          $scope.forms.forEach((form) => {
-            if(form.status === "DISCOVERED"){
-              form_count += 1;
-            }
-          });
-
-          $rootScope.$broadcast("updateFormDiscoveredCountAlert", form_count);
-        });
-
       $state.go("main.discovery");
     };
 
@@ -214,6 +183,31 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
 
     $scope.$on('domain_selected', function(event, domain){
       $scope.domain = store.get('domain');
+      Domain.getAllPathObjects({host: domain.url}).$promise
+                .then(function(data){
+                    store.set('path_objects', data);
+                })
+                .catch(function(err){
+                  if(err.data){
+                    $scope.errors.push("Error occurred retrieving test data");
+                  }
+                  else{
+                    $scope.errors.push({message: $scope.unresponsive_server_err });
+                  }
+                });
+
+      Domain.getForms({domain_id: domain.id}).$promise.
+        then(function(response){
+          $scope.forms = response;
+          var form_count = 0;
+          $scope.forms.forEach((form) => {
+            if(form.status === "DISCOVERED"){
+              form_count += 1;
+            }
+          });
+
+          $rootScope.$broadcast("updateFormDiscoveredCountAlert", form_count);
+        });
     });
 
     $scope.$on('updateApprovedTestCnt', function(event, approved_test_cnt){

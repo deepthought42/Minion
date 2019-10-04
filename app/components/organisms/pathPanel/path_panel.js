@@ -10,6 +10,5 @@ angular.module('Qanairy.PathPanel', [])
     scope: false,
     transclude: true,
     templateUrl: 'components/organisms/pathPanel/path_panel.html'
-  }
-
+  };
 }])

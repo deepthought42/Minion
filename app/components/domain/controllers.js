@@ -89,6 +89,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     };
 
     $scope.createDomain = function(protocol, host, default_browser, logo_url){
+      //check if host is a localhost and prevent creation
       if(host.includes("127.0.0.1") || host.toLowerCase().includes("localhost")){
         segment.track("Create Localhost Failed", {
           browser: default_browser,
@@ -174,21 +175,6 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
       //get default browser for domain
       //if default browser is not set then show default browser selection dialog box
       $rootScope.$broadcast("domain_selected", domain);
-
-      //Load all page states
-
-      Domain.getAllPathObjects({host: domain.url}).$promise
-                .then(function(data){
-                    store.set('path_objects', data);
-                })
-                .catch(function(err){
-                  if(err.data){
-                    $scope.errors.push("An error occurred retrieving domains");
-                  }
-                  else{
-                    $scope.errors.push({message: $scope.unresponsive_server_err });
-                  }
-                });
 
       segment.track("Selected Domain", {
         domain: domain.url
