@@ -460,7 +460,6 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
         .then(function(data){
           $scope.tests = data
           $scope.waitingOnTests = false;
-          console.log("Data length :: "+data.length);
           if(data.length > 0){
             $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
             $scope.discoveredTestOnboardingIndex = 0;

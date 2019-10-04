@@ -154,7 +154,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
             });
         }
         return onboard;
-      }
+      };
 
       //EVENTS
       $scope.$on("updateCurrentDiscoveryTest", function(event, test){
