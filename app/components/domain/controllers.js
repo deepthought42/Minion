@@ -89,6 +89,7 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
     };
 
     $scope.createDomain = function(protocol, host, default_browser, logo_url){
+      //check if host is a localhost and prevent creation
       if(host.includes("127.0.0.1") || host.toLowerCase().includes("localhost")){
         segment.track("Create Localhost Failed", {
           browser: default_browser,
@@ -100,37 +101,39 @@ angular.module('Qanairy.domain', ['ui.router', 'Qanairy.DomainService'])
         return;
       }
 
-      var created_successfully = false;
-      Domain.save({protocol: protocol, url: host, logoUrl: logo_url, browser_name: default_browser}).$promise
-        .then(function(successResult){
-          $scope.show_create_domain_err = false;
-          store.set('domain', successResult);
-          $scope.domains.push(successResult);
-          $scope.closeDialog();
-          created_successfully = true;
-          $rootScope.$broadcast("domain_added", successResult);
-          $rootScope.$broadcast("domain_selected", successResult);
-          segment.track("Created Domain", {
-            domain: host,
-            browser: default_browser
-          }, function(success){  });
-
-          $state.go("main.discovery");
-        },
-        function(errorResult){
-          created_successfully = false
-          segment.track("Create Domain Failed", {
-            browser: default_browser,
-            domain: host
-          }, function(success){  });
-
-          if(errorResult.status === 303){
+        var created_successfully = false;
+        Domain.save({protocol: protocol, url: host, logoUrl: logo_url, browser_name: default_browser}).$promise
+          .then(function(successResult){
+            $scope.show_create_domain_err = false;
+            store.set('domain', successResult);
+            $scope.domains.push(successResult);
             $scope.closeDialog();
-          }
-          else{
-            $scope.show_create_domain_err = true;
-          }
-        });
+            created_successfully = true;
+            $rootScope.$broadcast("domain_added", successResult);
+            $rootScope.$broadcast("domain_selected", successResult);
+            segment.track("Created Domain", {
+              domain: host,
+              browser: default_browser
+            }, function(success){  });
+
+            $state.go("main.discovery");
+          },
+          function(errorResult){
+            created_successfully = false
+            segment.track("Create Domain Failed", {
+              browser: default_browser,
+              domain: host
+            }, function(success){  });
+
+            if(errorResult.status === 303){
+              $scope.closeDialog();
+            }
+            else{
+              $scope.show_create_domain_err = true;
+            }
+          });
+      }
+
     }
 
     $scope.updateDomain = function(key, protocol, default_browser, logo_url){

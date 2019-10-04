@@ -68,7 +68,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         $scope.waitingOnTests = false;
         $scope.$apply();
       });
-    }
+    };
 
     $scope.testRunOnboardingSteps = [
       {
@@ -91,7 +91,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       $scope.current_test = test;
       $scope.test_idx = idx;
        $rootScope.$broadcast("updateCurrentTest", test );
-    }
+    };
 
     /**
      *  Checks if onboarding step has already been experienced. if not, it adds
@@ -120,7 +120,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       }
       return onboard;
       //return false;
-    }
+    };
 
     /**
      * Extracts host name from a given url
@@ -142,7 +142,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         hostname = hostname.split('?')[0];
 
         return hostname;
-    }
+    };
 
     $scope.isTestRunning = function(test){
       for(var browser in test.browserStatuses){
@@ -151,7 +151,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         }
       }
       return false;
-    }
+    };
 
     $scope.isTestRunningInAllBrowsers = function(test){
       var browser_count = 0;
@@ -162,7 +162,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         //test.browserStatuses['chrome']!=null || test.browserStatuses['firefox']!=null
       }
       return browser_count==test.browserStatuses.length;
-    }
+    };
 
     $scope.getTestsByUrl = function(url) {
       $scope.waitingOnTests = true;

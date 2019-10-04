@@ -58,6 +58,6 @@ angular.module('Qanairy.ElementStateOutline', [])
     scope: false,
     transclude: true,
     templateUrl: 'components/organisms/nonExpandablePathToggle/path_toggle_panel.html'
-  }
+  };
 
 })

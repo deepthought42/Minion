@@ -54,7 +54,7 @@ config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptio
       domain: "staging-qanairy.auth0.com",
       responseType: "token id_token",
       audience: "https://staging-api.qanairy.com",
-      redirectUri: "http://localhost:8001/#/authenticate", //"https://staging-app.qanairy.com/authenticate",
+      redirectUri: "https://staging-app.qanairy.com/authenticate", //"http://localhost:8001/#/authenticate", //
       scope: "openid profile email read:domains delete:domains update:domains create:domains create:accounts read:accounts delete:accounts update:accounts read:tests update:tests read:groups update:groups create:groups delete:groups run:tests start:discovery read:actions create:test_user"
     });
 
@@ -123,13 +123,11 @@ config(["$urlRouterProvider", "angularAuth0Provider", "$httpProvider", "jwtOptio
     });
 
     $rootScope.$on("auth:unauthorized", function (e, toState, toParams, fromState, fromParams) {
-      if(!Auth.isAuthenticated()){
-        Auth.login();
-      }
+      Auth.login();
     });
 
     $rootScope.$on("auth:forbidden", function (e, toState, toParams, fromState, fromParams) {
-
+      Auth.login();
     });
 
     $rootScope.$on("resource_conflict", function (e, toState, toParams, fromState, fromParams) {
