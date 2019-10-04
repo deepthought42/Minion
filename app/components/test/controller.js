@@ -390,49 +390,6 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       });
     }
 
-    $scope.addGroup = function(test, group){
-      if(!group.name.length){
-         $scope.errors.push("Group name cannot be empty");
-         return;
-      }
-      Test.addGroup({name: group.name,
-                     description: group.description,
-                     key: test.key}).$promise
-              .then(function(data){
-                 $scope.group.name = null;
-                 test.groups.push(data);
-               })
-               .catch(function(err){
-                 if(err.data){
-                   $scope.errors.push({message:"An error occurred while adding group"});
-                 }
-                 else{
-                   $scope.errors.push({message: $scope.unresponsive_server_err });
-                 }
-               });
-
-       segment.track("Added Group", {
-         group_key: group.key,
-         test_key: test.key,
-         success : !$scope.errors.length
-       }, function(success){});
-    }
-
-    $scope.removeGroup = function(test, group, $index){
-      Test.removeGroup({group_key: group.key, test_key: test.key}).$promise
-        .then(function(data){
-          test.groups.splice($index,1);
-        })
-        .catch(function(err){
-          if(err.data){
-            $scope.errors.push({message:"An error occurred while removing group"});
-          }
-          else{
-            $scope.errors.push({message: $scope.unresponsive_server_err });
-          }
-        });
-    }
-
     $scope.saveTest = function(test){
       var status_arr = [];
       for (var key in test.browserStatuses) {

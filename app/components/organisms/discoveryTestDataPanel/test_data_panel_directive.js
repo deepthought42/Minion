@@ -4,7 +4,7 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
 .directive("discoveryTestDataPanel",function(){
   return{
     restrict: 'E',
-    controller: ["$rootScope", "$scope", "store", "$mdDialog", "Test", function($rootScope, $scope, store, $mdDialog, Test){
+    controller: ['$rootScope', '$scope', 'store', '$mdDialog', 'Test', 'segment', function($rootScope, $scope, store, $mdDialog, Test, segment){
       $scope.current_node = {};
       $scope.current_node_idx = 0;
       $scope.path = [];
@@ -146,6 +146,55 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
         $scope.path = $scope.convertToIterativePath($scope.path_objects);
         $scope.current_node = path_objects[0];
       });
+
+      $scope.addGroup = function(test, group){
+        if(!group.name.length){
+           $scope.errors.push("Group name cannot be empty");
+           return;
+        }
+
+        Test.addGroup({name: group.name,
+                       description: group.description,
+                       key: test.key}).$promise
+                .then(function(data){
+                   group.name = null;
+
+                   test.groups.push(data);
+                   segment.track("Added Group", {
+                     group_key: group.key,
+                     test_key: test.key,
+                     success : true
+                   }, function(success){});
+                 })
+                 .catch(function(err){
+                   if(err.data){
+                     $scope.errors.push("An error occurred while adding group ");
+                   }
+                   else{
+                     $scope.errors.push({message: $scope.unresponsive_server_err });
+                   }
+                   segment.track("Added Group", {
+                     group_key: group.key,
+                     test_key: test.key,
+                     success : false
+                   }, function(success){});
+                 });
+      };
+
+      $scope.removeGroup = function(test, group, $index){
+        Test.removeGroup({group_key: group.key, test_key: test.key}).$promise
+          .then(function(data){
+            test.groups.splice($index,1);
+          })
+          .catch(function(err){
+            if(err.data){
+              $scope.errors.push("An error occurred deleting group "+group.key);
+            }
+            else{
+              $scope.errors.push({message: $scope.unresponsive_server_err });
+            }
+          });
+      };
     }],
     scope: {},
     transclude: true,
