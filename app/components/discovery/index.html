@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="test-container-split">
-    <div class="empty__state vertical__center_empty_state_discovery" ng-show="!isStarted && tests.length==0">
+    <div class="empty__state vertical__center_empty_state_discovery" ng-show="!isStarted && tests.length==0 && !waitingOnTests">
       <div class="col-sm-12 split--oboard--title">
         <h1>Choose a way to start building&nbsp;tests.</h1>
       </div>
@@ -65,7 +65,7 @@
         </p>
       </div>
     </div>
-    <split direction="horizontal" ng-transclude ng-if="tests.length>0 || !waitingOnTests">
+    <split direction="horizontal" ng-transclude ng-if="tests.length && !waitingOnTests">
       <split-area size="50" height="10" ng-transclude >
         <div class="secondary-nav vertical__center__int" >
           <div class="flex-auto">
@@ -162,4 +162,4 @@
   </div>
 </div>
 <onboarding-popover enabled="discoveryOnboardingEnabled" steps="discoveryOnboardingSteps" step-index="discoveryOnboardingIndex"></onboarding-popover>
-<onboarding-popover enabled="testVerificationOnboardingEnabled" steps="testVerificationSteps" step-index="testVerificationOnboardingIndex"></onboarding-popover>
+<onboarding-popover enabled="discoveredTestOnboardingEnabled" steps="testVerificationSteps" step-index="discoveredTestOnboardingIndex"></onboarding-popover>

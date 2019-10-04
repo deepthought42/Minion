@@ -4,7 +4,8 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
 .directive("discoveryTestDataPanel",function(){
   return{
     restrict: 'E',
-    controller: ['$rootScope', '$scope', 'store', '$mdDialog', 'Test', 'segment', function($rootScope, $scope, store, $mdDialog, Test, segment){
+    controller: ['$rootScope', '$scope', 'store', '$mdDialog', 'Test', 'segment', 'Account',
+     function($rootScope, $scope, store, $mdDialog, Test, segment, Account){
       $scope.current_node = {};
       $scope.current_node_idx = 0;
       $scope.path = [];
@@ -132,6 +133,29 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
         return page_interaction;
       };
 
+      $scope.hasUserAlreadyOnboarded = function(onboard_step_name){
+        var onboard = null;
+        if(store.get("onboard")){
+          onboard = store.get("onboard").indexOf(onboard_step_name) > -1;
+        }
+        //check if discovery onboarding has already been seen
+        if(!onboard  || onboard == null){
+          Account.addOnboardingStep({step_name: onboard_step_name}).$promise
+            .then(function(data){
+              store.set("onboard", data);
+            })
+            .catch(function(err){
+              if(err.data){
+                $scope.errors.push("An error occurred updating onboarding step");
+              }
+              else{
+                $scope.errors.push({message: $scope.unresponsive_server_err });
+              }
+            });
+        }
+        return onboard;
+      };
+
       //EVENTS
       $scope.$on("updateCurrentDiscoveryTest", function(event, test){
         $scope.test = test;
@@ -145,6 +169,8 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
         $scope.pathIdx = 0;
         $scope.path = $scope.convertToIterativePath($scope.path_objects);
         $scope.current_node = path_objects[0];
+        $scope.testPathReviewOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test-path');
+        $scope.testPathReviewOnboardingIndex = 0;
       });
 
       $scope.addGroup = function(test, group){
@@ -195,6 +221,19 @@ angular.module('Qanairy.DiscoveryTestDataPanel', ['ng-split', 'Qanairy.PathPanel
             }
           });
       };
+
+      $scope.testPathReviewSteps = [
+        {
+          title: "Review your test",
+          description: "Tests paths are comprised of three parts: page, element, and action. Single page tests indicate that the page has successfully loaded.",
+          attachTo:"#path_panel",
+          position: "bottom",
+          top: 150,
+          left: 10,
+          width: 400
+        }
+      ];
+
     }],
     scope: {},
     transclude: true,

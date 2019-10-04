@@ -173,6 +173,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
           //check if discovery onboarding has already been seen
           $scope.testRunOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('test-run');
           $scope.testRunOnboardingIndex = 0;
+          $scope.setTestIndex(0, data[0]);
         })
         .catch(function(err){
           $scope.tests = [];
