@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-    <div class="empty__state vertical__center_empty_state_busy" ng-if="waitingOnTests || !tests.length">
+    <div class="empty__state vertical__center_empty_state_busy" ng-if="waitingOnTests || (!tests.length && isStarted)">
       <div class="col-sm-12" style="text-align:center; margin: 0px auto;">
         <i class="fa fa-circle-o-notch fa-spin fa-3x green fa-fw" aria-hidden="true"></i>
         <br><br><br>
@@ -82,6 +82,7 @@
                   <md-progress-linear md-mode="determinate" value="{{((discovery_status.examinedPathCount/discovery_status.totalPathCount)*100) || 0 }}"></md-progress-linear>
                   <div class="waiting_text">
                     searching for tests
+                    <i class="fa fa-circle-o-notch fa-spin fa green fa-fw" aria-hidden="true"></i>
                   </div>
                 </div>
                 <div class="">
