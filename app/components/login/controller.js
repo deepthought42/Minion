@@ -13,7 +13,6 @@ angular.module('Qanairy.login', ['ui.router', 'Qanairy.AuthService'])
 .controller('LoginController', ['$rootScope', '$scope',
   function($rootScope, $scope) {
     this._init = function(){
-      console.log("HELP");
       //var vm = this;
       //vm.auth = authService;
     }
