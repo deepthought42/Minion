@@ -567,7 +567,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         .catch(function(err){
           $scope.errors.push({message: "Oops something went wrong while sending test to the test recorder. Please try again."});
         });
-    }
+    };
 
     this._init();
 

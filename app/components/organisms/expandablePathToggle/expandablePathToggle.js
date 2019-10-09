@@ -14,7 +14,6 @@ angular.module('Qanairy.ExpandablePathToggle', [])
       }
 
       $scope.previous = function() {
-        console.log("getting previous");
         $scope.pathIdx -= 1;
         if($scope.pathIdx < 0){
           $scope.pathIdx = $scope.path.length - 1;
@@ -24,7 +23,6 @@ angular.module('Qanairy.ExpandablePathToggle', [])
 
       $scope.openPathSlider = function(path) {
         $scope.path = path;
-        console.log("opening path slider :: "+path);
           //add result to end of path
 
         //create object consisting of a page and it's list of interactions

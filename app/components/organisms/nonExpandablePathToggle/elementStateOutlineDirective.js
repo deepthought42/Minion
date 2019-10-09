@@ -6,7 +6,6 @@ angular.module('Qanairy.ElementStateOutline', [])
     restrict: 'E',
     controller: function($scope){
       $scope.next = function() {
-        console.log("getting next");
         $scope.pathIdx = $scope.pathIdx + 1;
         if($scope.pathIdx >= $scope.path.length){
           $scope.pathIdx = 0;
@@ -15,7 +14,6 @@ angular.module('Qanairy.ElementStateOutline', [])
       };
 
       $scope.previous = function() {
-        console.log("getting previous");
         $scope.pathIdx -= 1;
         if($scope.pathIdx < 0){
           $scope.pathIdx = $scope.path.length - 1;

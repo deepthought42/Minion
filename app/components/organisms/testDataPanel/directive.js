@@ -75,18 +75,18 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
 
       $scope.getSecondToLastTest = function(test){
         //get last passing test from test records
-        var last_passing_record = {};
+        var last_passing_record = null;
 
-        if(test.records.length === 1 && test.records[0].status === "PASSING"){
-          last_passing_record = test.records[0];
-        }
-        else{
-          for(var idx = 1; idx < test.records.length; idx++){
-            if(test.records[idx].status === "PASSING"){
-              last_passing_record = test.records[idx];
-              break;
-            }
+
+        for(var idx = test.length-1; idx >= 0; idx--){
+          if(test.records[idx].status === "PASSING"){
+            last_passing_record = test.records[idx];
+            break;
           }
+        }
+
+        if(!last_passing_record){
+          last_passing_record = test.records[test.records.length-1];
         }
         var baseline_path = $scope.retrievePathObjectsUsingKeys(last_passing_record.pathKeys);
         baseline_path.push(last_passing_record.result);
