@@ -79,15 +79,15 @@
           </div>
           <div class="domain-link dropdown pull-right flex-initial text-right test__profile_stretch" ng-click="toggleTestDataVisibility(test, $index)">
             <div class="dropdown-toggle" id="domainsDropdownMenuButton"  dropdown-toggle>
-              {{domain.url || "www.yourdomain.com"}}
+              {{domain.host || "www.yourdomain.com"}}
               <i class="fa fa-caret-down fa-fw"></i>
             </div>
             <ul class="dropdown-menu" aria-labelledby="domainsDropdownMenuButton">
               <li class="manage_domains dropdown-item" ng-click="showDomainsPage()">
                 Manage Domains
               </li>
-              <li class="dropdown-item" ng-repeat="domain in domain_list" ng-if="domain_item.url != domain.url" ng-click="selectDomain(domain)">
-                {{domain.url}}
+              <li class="dropdown-item" ng-repeat="domain in domain_list" ng-if="domain_item.url != domain.host" ng-click="selectDomain(domain)">
+                {{domain.host}}
               </li>
             </ul>
           </div>

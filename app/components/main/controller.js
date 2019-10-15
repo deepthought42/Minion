@@ -108,11 +108,11 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
         var hostname;
         var domain = store.get('domain');
         //find & remove protocol (http, ftp, etc.) and get hostname
-        if (domain.url.indexOf("://") > -1) {
-            hostname = domain.url.split('/')[2];
+        if (domain.host.indexOf("://") > -1) {
+            hostname = domain.host.split('/')[2];
         }
         else {
-            hostname = domain.url.split('/')[0];
+            hostname = domain.host.split('/')[0];
         }
 
         //find & remove port number
@@ -124,7 +124,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
     };
 
     if($scope.domain != null){
-      var channel = pusher.subscribe($scope.extractHostname($scope.domain.url));
+      var channel = pusher.subscribe($scope.extractHostname($scope.domain.host));
 
       channel.bind('discovery_status', function(data) {
         store.set('discovery_status', JSON.parse(data));
@@ -183,7 +183,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
 
     $scope.$on('domain_selected', function(event, domain){
       $scope.domain = store.get('domain');
-      Domain.getAllPathObjects({host: domain.url}).$promise
+      Domain.getAllPathObjects({host: domain.host}).$promise
                 .then(function(data){
                     store.set('path_objects', data);
                 })

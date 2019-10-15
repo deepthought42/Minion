@@ -95,7 +95,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           encrypted: true
         });
 
-        var channel = $scope.pusher.subscribe($scope.extractHostname($scope.current_domain.url));
+        var channel = $scope.pusher.subscribe($scope.extractHostname($scope.current_domain.host));
         channel.bind('test-discovered', function(data) {
           $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
           $scope.discoveredTestOnboardingIndex = 0;
@@ -199,7 +199,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
       $scope.discoveryOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovery');
       $scope.discoveryRunningOnboardingIndex = 0;
 
-      Discovery.startWork({url:  $scope.current_domain.url}).$promise
+      Discovery.startWork({url:  $scope.current_domain.host}).$promise
         .then(function(value){
           $scope.discovery_status = value;
           segment.track("Started Discovery", {
@@ -218,7 +218,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
               $scope.errors.push(err.data);
             }
             segment.track("Started Discovery", {
-              domain : $scope.current_domain.url,
+              domain : $scope.current_domain.host,
               success : false
             }, function(success){});
           }
@@ -235,17 +235,17 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.stopDiscoveryProcess = function(){
-      Discovery.stopWork({url:  $scope.current_domain.url}).$promise
+      Discovery.stopWork({url:  $scope.current_domain.host}).$promise
         .then(function(){
            $scope.isStarted = false;
            segment.track("Stop Discovery", {
-             domain : $scope.current_domain.url,
+             domain : $scope.current_domain.host,
              success : true
            }, function(success){});
         })
         .catch(function(err){
           segment.track("Stop Discovery", {
-            domain : $scope.current_domain.url,
+            domain : $scope.current_domain.host,
             success : false
           }, function(success){});
           if(err.data){
@@ -434,13 +434,13 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
     $scope.$on('domain_selected', function(domain){
       //close previous pusher subscript
-      $scope.pusher.unsubscribe($scope.extractHostname($scope.current_domain.url));
+      $scope.pusher.unsubscribe($scope.extractHostname($scope.current_domain.host));
       $scope.current_domain =  store.get('domain');
-      $scope.pusher.subscribe($scope.extractHostname($scope.current_domain.url));
+      $scope.pusher.subscribe($scope.extractHostname($scope.current_domain.host));
 
       $scope.default_browser = $scope.current_domain.discoveryBrowserName;
 
-      Discovery.getStatus({url: $scope.current_domain.url}).$promise
+      Discovery.getStatus({url: $scope.current_domain.host}).$promise
         .then (function(data){
           $scope.discovery_status = data;
 
@@ -477,7 +477,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     });
 
     $scope.$on("$destroy", function() {
-      $scope.pusher.unsubscribe($scope.extractHostname($scope.current_domain.url));
+      $scope.pusher.unsubscribe($scope.extractHostname($scope.current_domain.host));
     });
 
 
