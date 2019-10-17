@@ -47,7 +47,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
 
       if($scope.current_domain != null){
         $scope.waitingOnTests = true;
-        Discovery.getStatus({url: $scope.current_domain.url}).$promise
+        Discovery.getStatus({url: $scope.current_domain.host}).$promise
           .then (function(data){
             $scope.discovery_status = data;
 
@@ -68,7 +68,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
             $scope.isStarted = false;
           });
 
-        Test.getUnverified({url: $scope.current_domain.url}).$promise
+        Test.getUnverified({url: $scope.current_domain.host}).$promise
           .then(function(data){
             $scope.tests = data
             $scope.waitingOnTests = false;
@@ -461,7 +461,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           $scope.isStarted = false;
         });
 
-      Test.getUnverified({url: $scope.current_domain.url}).$promise
+      Test.getUnverified({url: $scope.current_domain.host}).$promise
         .then(function(data){
           $scope.tests = data
           $scope.waitingOnTests = false;
