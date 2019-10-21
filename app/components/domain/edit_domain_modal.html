@@ -29,7 +29,7 @@
 									<option ng-repeat="x in protocols" value="{{x}}" class="dropdown-item">{{x}}</option>
 								</select>
 								<div class ="domain-dialogue-input" >
-									{{"://"+ current_domain.url }}
+									://{{current_domain.url || current_domain.host }}
 								</div>
 							</div>
 							<div class="col-sm-12 form_molecule">

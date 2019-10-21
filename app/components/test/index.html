@@ -62,161 +62,163 @@
 				</div>
 
 				<onboarding-popover ng-if="$index==0" enabled="testRunOnboardingEnabled" steps="testRunOnboardingSteps" step-index="testRunOnboardingIndex"></onboarding-popover>
-				<div id="test-{{$index}}"
-						 class="test"
-						 ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy: ['status','lastRunTimestamp'] track by $index"
-						 ng-show="tests.length > 0">
+				<div class="test-container-split-left">
+						<div id="test-{{$index}}"
+							 class="test"
+							 ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy: ['status','lastRunTimestamp'] track by $index"
+							 ng-show="tests.length > 0">
 
-					<div class="test__profile vertical__left__profile" ng-click="setTestIndex($index, test)"  ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass, 'active': current_test.key==test.key}">
-						<div class="tests__test__status test__profile_stretch">
-							<div class="test__status " ng-if="isTestRunning(test)">
-								<i class="fa fa-circle-o-notch fa-spin status--symbol fa-3x green fa-fw"></i>
-							</div>
+						<div class="test__profile vertical__left__profile" ng-click="setTestIndex($index, test)"  ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass, 'active': current_test.key==test.key}">
+							<div class="tests__test__status test__profile_stretch">
+								<div class="test__status " ng-if="isTestRunning(test)">
+									<i class="fa fa-circle-o-notch fa-spin status--symbol fa-3x green fa-fw"></i>
+								</div>
 
-							<div class="test__status vertical__center" ng-if="!isTestRunning(test)">
-								<span ng-show="test.status.toUpperCase() == 'PASSING'">
-									<i class="fa fa-check-circle green status--symbol"></i>
-								</span>
-								<span ng-show="test.status.toUpperCase() == 'FAILING'">
-									<i  class="fa fa-times-circle red status--symbol"></i>
-								</span>
-								<span ng-show="test.status.toUpperCase() == 'UNVERIFIED'">
-									<i class="fa fa-question-circle status--symbol--browser purple fa-fw" aria-hidden="true"></i>
-								</span>
-							</div>
-						</div>
-						<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx!=$index">
-							<div class="row">
-								<div class="col-xs-12 " ng-if="editing_test_idx!=$index" >
-									<h3 class="test__title">
-										{{test.name || "Test #"+($index+1)}}
-									</h3>
+								<div class="test__status vertical__center" ng-if="!isTestRunning(test)">
+									<span ng-show="test.status.toUpperCase() == 'PASSING'">
+										<i class="fa fa-check-circle green status--symbol"></i>
+									</span>
+									<span ng-show="test.status.toUpperCase() == 'FAILING'">
+										<i  class="fa fa-times-circle red status--symbol"></i>
+									</span>
+									<span ng-show="test.status.toUpperCase() == 'UNVERIFIED'">
+										<i class="fa fa-question-circle status--symbol--browser purple fa-fw" aria-hidden="true"></i>
+									</span>
 								</div>
 							</div>
-						</div>
-						<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx==$index">
-							<div class="row">
-								<div class="vertical__left__profile test_name_edit_tests" ng-if="editing_test_idx==$index">
-									<div class="input-group">
-										<input class="form-control title__edit" type="text" ng-model="test.new_name" ng-value="test.name" ng-trim="false"/>
+							<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx!=$index">
+								<div class="row">
+									<div class="col-xs-12 " ng-if="editing_test_idx!=$index" >
+										<h3 class="test__title">
+											{{test.name || "Test #"+($index+1)}}
+										</h3>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="test_browsers_edit test__profile_stretch" ng-if="editing_test_idx!=$index">
-							<div class="">
-								<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
-									<div class="row vertical__center test__status__editable">
-										<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
-										<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
-									</div>
-
-									<div class="row vertical__center test__status__editable">
-										<div class="" ng-if="status == 'RUNNING'">
-											<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
-										</div>
-										<div class="green vertical__center__int" ng-if="status.toUpperCase() == 'PASSING'">
-											<div class="" >
-												<i class="fa fa-check green status--symbol--browser"></i>
-											</div>
-										</div>
-										<div class="red vertical__center__int" ng-if="status.toUpperCase() == 'FAILING'">
-											<div class="" >
-												<i class="fa fa-times red status--symbol--browser"></i>
-											</div>
-										</div>
-										<div class="red vertical__center__int"	ng-if="status.toUpperCase() == 'UNVERIFIED'">
-											<div class="" >
-												<i class="fa fa-question-circle purple status--symbol--browser"></i>
-											</div>
+							<div class="flex-auto test_functions test__profile_stretch" ng-if="editing_test_idx==$index">
+								<div class="row">
+									<div class="vertical__left__profile test_name_edit_tests" ng-if="editing_test_idx==$index">
+										<div class="input-group">
+											<input class="form-control title__edit" type="text" ng-model="test.new_name" ng-value="test.name" ng-trim="false"/>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="flex-auto test_browsers_edit test__profile_stretch" ng-if="editing_test_idx==$index">
-							<div class="">
-								<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
-									<div class="row vertical__center test__status__edit">
-										<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
-										<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
-									</div>
-									<div class="row vertical__center test__status__edit">
-										<div class="" ng-if="status == 'RUNNING'">
-											<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
-										</div>
-										<div class="btn--green select__neutral status-passing status--browser vertical__center__int"
-													style="{{status.toUpperCase() =='PASSING' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
-													ng-click="updateBrowserPassingStatus(test, browser, 'PASSING')" ng-if="status!='RUNNING'">
-											<div class="" >
-												<i class="fa fa-check status--symbol--browser white"></i>
-											</div>
+							<div class="test_browsers_edit test__profile_stretch" ng-if="editing_test_idx!=$index">
+								<div class="">
+									<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
+										<div class="row vertical__center test__status__editable">
+											<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
+											<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
 										</div>
 
-										<div class="btn--red select__neutral status--browser status-failing  vertical__center__int"
-													style="{{status.toUpperCase()=='FAILING' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
-													ng-click="updateBrowserPassingStatus(test, browser, 'FAILING')" ng-if="status!='RUNNING'">
-											<div class="" >
-												<i  class="fa fa-times status--symbol--browser white"></i>
+										<div class="row vertical__center test__status__editable">
+											<div class="" ng-if="status == 'RUNNING'">
+												<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
+											</div>
+											<div class="green vertical__center__int" ng-if="status.toUpperCase() == 'PASSING'">
+												<div class="" >
+													<i class="fa fa-check green status--symbol--browser"></i>
+												</div>
+											</div>
+											<div class="red vertical__center__int" ng-if="status.toUpperCase() == 'FAILING'">
+												<div class="" >
+													<i class="fa fa-times red status--symbol--browser"></i>
+												</div>
+											</div>
+											<div class="red vertical__center__int"	ng-if="status.toUpperCase() == 'UNVERIFIED'">
+												<div class="" >
+													<i class="fa fa-question-circle purple status--symbol--browser"></i>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+							<div class="flex-auto test_browsers_edit test__profile_stretch" ng-if="editing_test_idx==$index">
+								<div class="">
+									<div class="flex-none browser__test__status" ng-repeat="(browser, status) in test.browserStatuses">
+										<div class="row vertical__center test__status__edit">
+											<img src="/img/Chrome.ico" class="browser-icon"  ng-if="browser=='chrome'">
+											<img src="/img/firefox.png" class="browser-icon"  ng-if="browser=='firefox'" >
+										</div>
+										<div class="row vertical__center test__status__edit">
+											<div class="" ng-if="status == 'RUNNING'">
+												<i class="fa fa-circle-o-notch status--symbol--browser fa-spin green fa-fw" aria-hidden="true"></i>
+											</div>
+											<div class="btn--green select__neutral status-passing status--browser vertical__center__int"
+														style="{{status.toUpperCase() =='PASSING' ? 'background-color:green' : 'background-color:#bfbfbf'}}"
+														ng-click="updateBrowserPassingStatus(test, browser, 'PASSING')" ng-if="status!='RUNNING'">
+												<div class="" >
+													<i class="fa fa-check status--symbol--browser white"></i>
+												</div>
+											</div>
 
-						<div class="flex-auto text-right time_stats test__profile_stretch">
-							<div class="">
-								{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
-							</div>
-						</div>
-						<div class="flex-auto text-right date_stats test__profile_stretch">
-							<div class="">
-								{{ (test.lastRunTimestamp | date: 'MM/dd/yy' | lowercase) || "Unknown / Not since discovery"}}
-							</div>
-						</div>
-
-		        <div class="flex-none test_functions test__btns" aria-label="Test Functions">
-		          <div class="margin_fifteen_right btn-group pull-left" ng-show="!isTestRunningInAllBrowsers(test) && editing_test_idx!=$index"  >
-		            <button class="btn btn--primary" ng-click="runTest(test, default_browser==='firefox', default_browser==='chrome')" id="{{'run_test_button-'+$index}}"
-												ng-disabled="test.runStatus">
-		               Run
-		            </button>
-		          </div>
-
-							 <div class="ellipses-dropdown  margin_fifteen_right pull-right dropdown text-right" ng-if="editing_test_idx!=$index">
-		            <button class="btn btn--tertiary dropdown-toggle" id="userDropdownMenuButton" dropdown-toggle>
-		               <i class="fa fa-ellipsis-h" ></i>
-		            </button>
-								 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdownMenuButton">
-		                <li class="dropdown-item" ng-click="editTest(test, $index)">
-		                  Edit
-		                </li>
-		                <li class="dropdown-item" ng-click="sendTestToIde(test)">
-		                  Open in Test Recorder
-		                </li>
-									 <div class="dropdown-divider"></div>
-									  <!---ARCHIVE TEST BUTTON IS HERE -->
-		                <li class="dropdown-item" ng-click="askDelete(test)">
-		                  Delete
-		                </li>
-									 <!---ARCHIVE TEST BUTTON ENDS HERE -->
-		              </ul>
-		          </div>
-		          <div class="" ng-if="editing_test_idx==$index">
-		            <div class="title__edit__buttons margin_fifteen_right btn--secondary" ng-click="cancelEditingTest($index)" ng-show="!test.show_waiting_icon">
-									Cancel
+											<div class="btn--red select__neutral status--browser status-failing  vertical__center__int"
+														style="{{status.toUpperCase()=='FAILING' ? 'background-color:red' : 'background-color:#bfbfbf'}}"
+														ng-click="updateBrowserPassingStatus(test, browser, 'FAILING')" ng-if="status!='RUNNING'">
+												<div class="" >
+													<i  class="fa fa-times status--symbol--browser white"></i>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div class="title__edit__buttons margin_fifteen_right btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">
-									Save
+							</div>
+
+							<div class="flex-auto text-right time_stats test__profile_stretch">
+								<div class="">
+									{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
 								</div>
-		            <div class="" ng-show="test.show_waiting_icon">
-		              <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
-		            </div>
-		          </div>
-		        </div>
-		      </div>
-				 </div>
+							</div>
+							<div class="flex-auto text-right date_stats test__profile_stretch">
+								<div class="">
+									{{ (test.lastRunTimestamp | date: 'MM/dd/yy' | lowercase) || "Unknown / Not since discovery"}}
+								</div>
+							</div>
+
+			        <div class="flex-none test_functions test__btns" aria-label="Test Functions">
+			          <div class="margin_fifteen_right btn-group pull-left" ng-show="!isTestRunningInAllBrowsers(test) && editing_test_idx!=$index"  >
+			            <button class="btn btn--primary" ng-click="runTest(test, default_browser==='firefox', default_browser==='chrome')" id="{{'run_test_button-'+$index}}"
+													ng-disabled="test.runStatus">
+			               Run
+			            </button>
+			          </div>
+
+								 <div class="ellipses-dropdown  margin_fifteen_right pull-right dropdown text-right" ng-if="editing_test_idx!=$index">
+			            <button class="btn btn--tertiary dropdown-toggle" id="userDropdownMenuButton" dropdown-toggle>
+			               <i class="fa fa-ellipsis-h" ></i>
+			            </button>
+									 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdownMenuButton">
+			                <li class="dropdown-item" ng-click="editTest(test, $index)">
+			                  Edit
+			                </li>
+			                <li class="dropdown-item" ng-click="sendTestToIde(test)">
+			                  Open in Test Recorder
+			                </li>
+										 <div class="dropdown-divider"></div>
+										  <!---ARCHIVE TEST BUTTON IS HERE -->
+			                <li class="dropdown-item" ng-click="askDelete(test)">
+			                  Delete
+			                </li>
+										 <!---ARCHIVE TEST BUTTON ENDS HERE -->
+			              </ul>
+			          </div>
+			          <div class="" ng-if="editing_test_idx==$index">
+			            <div class="title__edit__buttons margin_fifteen_right btn--secondary" ng-click="cancelEditingTest($index)" ng-show="!test.show_waiting_icon">
+										Cancel
+									</div>
+									<div class="title__edit__buttons margin_fifteen_right btn--primary " ng-click="saveTest(test)" ng-if="!test.show_waiting_icon">
+										Save
+									</div>
+			            <div class="" ng-show="test.show_waiting_icon">
+			              <i class="fa fa-circle-notch fa-spin fa-2x green fa-fw"  aria-hidden="true"></i>
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+					</div>
+				</div>
 			</split-area>
 			<split-area size="50" ng-transclude >
 			  <test-data-panel test="current_test" ></test-data-panel>
