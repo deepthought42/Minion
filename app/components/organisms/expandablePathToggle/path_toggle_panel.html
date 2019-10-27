@@ -9,7 +9,7 @@
          class="browser_viewport">
       <div ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('redirect') "
           class="browser_view">
-        <img src="{{ page_interaction.page.imageUrls[0]}}"
+        <img src="{{ page_interaction.page.imageUrls[0] }}"
              ng-click="openPathSlider(path)"/>
       </div>
       <div ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('PageLoadAnimation') "
