@@ -620,9 +620,9 @@ width: -webkit-calc(100% - 15px);
   z-index: 101;
 	opacity: 0.8;
 }
-.expand_button{
-	background-color: Transparent;
- 	background-repeat:no-repeat;
+
+.expand:hover{
+	background-color: #D9D9F6;
 }
 
 .page__image img{
