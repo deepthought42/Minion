@@ -1,58 +1,113 @@
 
-  <div ng-click="previous()" class="flex-none toggle-arrow">
+<div class="col-sm-1" style="height:100%">
+  <div ng-click="previous()" class="col-sm-1 toggle-arrow vertical__center__int">
     <i class="fas fa-chevron-circle-left"></i>
   </div>
-  <div class="browser_viewport_container" >
-    <div ng-repeat="page_interaction in path track by $index"
-         ng-show="current_node.key === page_interaction.page_key"
-         id="{{'expandable'+page_interaction.page_key}}"
-         class="browser_viewport">
-      <div ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('redirect') "
-          class="browser_view">
-        <img src="{{ page_interaction.page.imageUrls[0]}}"
-             ng-click="openPathSlider(path)"/>
-      </div>
-      <div ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('PageLoadAnimation') "
-          class="browser_view">
-        <img src="{{page_interaction.page.imageUrls[0]}}"
-             ng-click="openPathSlider(path)"/>
-      </div>
-      <div class="browser_view" ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('pagestate')">
-         <img src="{{page_interaction.page.screenshotUrl}}"
-              ng-click="openPathSlider(path)"/>
-         <div ng-repeat="interaction in page_interaction.interactions track by $index"
-              id="{{'element-outline'+$index}}"
-              class="element__outline"
-              style="{{generateElementOutline(page_interaction.page, interaction.element)}}">
-         </div>
-      </div>
+</div>
+<div class="viewport_container col-sm-10" >
+  <div ng-repeat="page_interaction in path track by $index"
+       ng-show="current_node.key === page_interaction.page_key"
+       id="{{'expandable'+page_interaction.page_key}}"
+       class="viewport_screenshot col-sm-6">
+    <div ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('redirect') "
+        class="viewport_screenshot">
+      <img src="{{ page_interaction.page.imageUrls[0]}}"
+           ng-click="openPathSlider(path)"/>
     </div>
-
-    <div ng-repeat="page_interaction in last_test_record_path track by $index"
-         ng-show="current_baseline_node.key === page_interaction.page_key"
-         id="{{'expandable_record'+page_interaction.page_key}}"
-         class="browser_viewport">
-      <div ng-show="current_baseline_node.key === page_interaction.page_key && page_interaction.page_key.includes('redirect') "
-          class="browser_view">
-        <img src="{{ page_interaction.page.imageUrls[0]}}"
-             ng-click="openPathSlider(path)"/>
-      </div>
-      <div ng-show="current_baseline_node.key === page_interaction.page_key && page_interaction.page_key.includes('PageLoadAnimation') "
-          class="browser_view">
-        <img src="{{page_interaction.page.imageUrls[0]}}"
-             ng-click="openPathSlider(path)"/>
-      </div>
-      <div class="browser_view" ng-show="current_baseline_node.key === page_interaction.page_key && page_interaction.page_key.includes('pagestate')">
-         <img src="{{page_interaction.page.screenshotUrl}}"
-              ng-click="openPathSlider(path)"/>
-         <div ng-repeat="interaction in page_interaction.interactions track by $index"
-              id="{{'element-outline'+$index}}"
-              class="element__outline"
-              style="{{generateElementOutline(page_interaction.page, interaction.element)}}">
-         </div>
-      </div>
+    <div ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('PageLoadAnimation') "
+        class="browser_view">
+      <img src="{{page_interaction.page.imageUrls[0]}}"
+           ng-click="openPathSlider(path)"/>
+    </div>
+    <div class="browser_view" ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('pagestate')">
+       <img src="{{page_interaction.page.fullPageScreenshotUrl}}"
+            ng-click="openPathSlider(path)"/>
+       <div ng-repeat="interaction in page_interaction.interactions track by $index"
+            id="{{'element-outline'+$index}}"
+            class="element__outline"
+            style="{{generateElementOutline(page_interaction.page, interaction.element)}}">
+       </div>
     </div>
   </div>
-  <div ng-click="next()" class="flex-none toggle-arrow">
+
+  <div ng-repeat="page_interaction in last_test_record_path track by $index"
+       ng-show="current_node.key === page_interaction.page_key"
+       id="{{'expandable'+page_interaction.page_key}}"
+       class="viewport_screenshot col-sm-6">
+    <div ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('redirect') "
+        class="browser_view">
+      <img src="{{ page_interaction.page.imageUrls[0]}}"
+           ng-click="openPathSlider(path)"/>
+    </div>
+    <div ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('PageLoadAnimation') "
+        class="browser_view">
+      <img src="{{page_interaction.page.imageUrls[0]}}"
+           ng-click="openPathSlider(path)"/>
+    </div>
+    <div class="browser_view" ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('pagestate')">
+       <img src="{{page_interaction.page.fullPageScreenshotUrl}}"
+            ng-click="openPathSlider(path)"/>
+       <div ng-repeat="interaction in page_interaction.interactions track by $index"
+            id="{{'element-outline'+$index}}"
+            class="element__outline"
+            style="{{generateElementOutline(page_interaction.page, interaction.element)}}">
+       </div>
+    </div>
+  </div>
+  <!--
+  <div ng-repeat="page_interaction in path track by $index"
+       ng-show="current_node.key === page_interaction.page_key"
+       id="{{'expandable'+page_interaction.page_key}}"
+       class="viewport_screenshot col-sm-6">
+    <div ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('redirect') "
+        class="browser_view">
+      <img src="{{ page_interaction.page.imageUrls[0]}}"
+           ng-click="openPathSlider(path)"/>
+    </div>
+    <div ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('PageLoadAnimation') "
+        class="browser_view">
+      <img src="{{page_interaction.page.imageUrls[0]}}"
+           ng-click="openPathSlider(path)"/>
+    </div>
+    <div class="browser_view" ng-show="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('pagestate')">
+       <img src="{{page_interaction.page.fullPageScreenshotUrl}}"
+            ng-click="openPathSlider(path)"/>
+       <div ng-repeat="interaction in page_interaction.interactions track by $index"
+            id="{{'element-outline'+$index}}"
+            class="element__outline"
+            style="{{generateElementOutline(page_interaction.page, interaction.element)}}">
+       </div>
+    </div>
+  </div>
+
+  <div ng-repeat="page_interaction in last_test_record_path track by $index"
+       ng-show="current_baseline_node.key === page_interaction.page_key"
+       id="{{'expandable_record'+page_interaction.page_key}}"
+       class="viewport_screenshot col-sm-6">
+    <div ng-show="current_baseline_node.key === page_interaction.page_key && page_interaction.page_key.includes('redirect') "
+         class="browser_view">
+      <img src="{{ page_interaction.page.imageUrls[0]}}"
+           ng-click="openPathSlider(path)"/>
+    </div>
+    <div ng-show="current_baseline_node.key === page_interaction.page_key && page_interaction.page_key.includes('PageLoadAnimation') "
+        class="browser_view">
+      <img src="{{page_interaction.page.imageUrls[0]}}"
+           ng-click="openPathSlider(path)"/>
+    </div>
+    <div class="browser_view" ng-show="current_baseline_node.key === page_interaction.page_key && page_interaction.page_key.includes('pagestate')">
+       <img src="{{page_interaction.page.fullPageScreenshotUrl}}"
+            ng-click="openPathSlider(path)"/>
+       <div ng-repeat="interaction in page_interaction.interactions track by $index"
+            id="{{'element-outline'+$index}}"
+            class="element__outline"
+            style="{{generateElementOutline(page_interaction.page, interaction.element)}}">
+       </div>
+    </div>
+  </div>
+  -->
+</div>
+<div class="col-sm-1" style="height:100%">
+  <div ng-click="next()" class="col-sm-1 toggle-arrow vertical__center__int">
     <i class="fas fa-chevron-circle-right"></i>
   </div>
+</div>
