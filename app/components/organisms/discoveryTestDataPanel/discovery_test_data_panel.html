@@ -114,24 +114,13 @@
           </div>
         </div>
         <div class="test__screenshot__data__section__wrap  test-container-split-right" ng-if="visible_test_nav1==='section-linemove-1'">
-          <split direction="vertical" class="test__screenshot__data__section" ng-transclude style="display:flex;">
-            <split-area size="54" class="test__screenshot__section" style="overflow-y: hidden; position:relative;" ng-transclude>
-              <div class="screenshot_comparison_buttons">
-                <!--
-                <div class="btn-group screenshot-comparison-btn-group" role="group" aria-label="Basic example">
-                  <button ng-click="" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot">Actual</button>
-                  <button ng-click="" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot">Expected</button>
-                  <button ng-click="" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot">Side-by-Side</button>
-                  <button ng-click="" ng-class="visible_browser_screenshot=='chrome' ? 'tabs-style2_active' : ''" type="button" class="btn btn--screenshot">Overlay</button>
-                </div> -->
-              </div>
               <div class="expand_button">
                 <button class="expand btn btn--screenshot" data-toggle="modal" data-target="#exampleModal"
                         ng-click="openPathSlider()">
                   Expand&nbsp;&nbsp;<i class="fa fa-plus fa-1x"></i>
                 </button>
               </div>
-               <div class="element__image" style="">
+               <div class="expandable_path_toggle">
                  <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'"
                       class="flex-auto vertical__center__int"
                       style="margin:0px auto; height: 100% !important;" >
@@ -142,13 +131,12 @@
                  <!-- path screenshot panel -->
                  <expandable-path-toggle path="preview_path"
                                         path-idx="current_path_idx"
-                                        class="flex-auto vertical__center__int"
-                                        style="margin:0px auto; height: 100% !important;"
+                                        class="viewport_screenshot"
                                         ng-if="current_node.type != 'ElementState' && current_node.type != 'Action'">
                  </expandable-path-toggle>
                </div>
-
-            </split-area>
+            </div>
+            <!--
             <split-area size="46" class="test__data__section" ng-transclude ng-if="current_node.type != 'PageState'">
               <div class="" ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'" >
                 <div class="col-xs-12">
@@ -221,7 +209,7 @@
 
 
             </split-area>
-          </split>
+          -->
         </div>
       </div><!-- /section-1 -->
       <div id="section-linemove-2" ng-if="visible_test_nav1==='section-linemove-2'">

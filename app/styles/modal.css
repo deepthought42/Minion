@@ -285,8 +285,7 @@ md-dialog {
 .page_modal .dialogue-close{
   background-color: #f4f4f8;
 }
-.browser_viewport_container{  
-  height: 100% !important;
+.browser_viewport_container{
   width: 100%;
   display: flex;
   justify-content: center;
@@ -296,7 +295,6 @@ md-dialog {
   position: relative;
   width: 100%;
   max-height: 100%;
-  max-width: calc((16 / 9) *  100vh);
 }
 .browser_viewport:after{
     content: '';
@@ -319,11 +317,51 @@ md-dialog {
   display: block;
   position: relative;
 }
+
+/* Path viewport toggle panel */
+.expandable_path_toggle{
+	width: 100%;
+  display: flex;
+  align-items: stretch;
+}
+.viewport_screenshot{
+  flex: 1;
+}
+
+.viewport_container {
+	width: 100%;
+  height: 90%;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.browser_viewport:after{
+    content: '';
+    display: block;
+    padding-bottom: calc((9 / 16) * 100%);
+}
+.browser_view{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  box-sizing: border-box;
+}
+.browser_view > img{
+  margin: auto;
+  width: auto;
+  height: 100%;
+  display: block;
+  position: relative;
+}
+/* end */
 .toggle-arrow{
   font-size: 44px;
   color: #6649e4;
-  width: 74px;
-  padding: 0px 15px;
+	top: 40%;
 }
 .toggle-arrow:focus,
 .toggle-arrow.focus {
