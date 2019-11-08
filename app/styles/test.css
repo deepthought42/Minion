@@ -618,8 +618,11 @@ width: -webkit-calc(100% - 15px);
   align-items: stretch;
   position:fixed;
   z-index: 101;
+	opacity: 0.8;
 }
 .expand_button{
+	background-color: Transparent;
+ 	background-repeat:no-repeat;
 }
 
 .page__image img{
