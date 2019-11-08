@@ -1,5 +1,5 @@
-<div class="col-sm-1" style="height:100%">
-  <div ng-click="previous()" class="col-sm-1 toggle-arrow vertical__center__int">
+<div class="col-sm-1" style="width:100%;height:100%">
+  <div ng-click="previous()" class="modal-toggle-arrow">
     <i class="fas fa-chevron-circle-left"></i>
   </div>
 </div>
@@ -7,9 +7,9 @@
   <div ng-repeat="page_interaction in path track by $index"
        ng-show="current_node.key == page_interaction.page_key"
        id="{{'nonexpandable'+page_interaction.page_key}}"
-       class="viewport_screenshot">
+       class="modal_viewport_screenshot">
     <div ng-if="current_node.key == page_interaction.page_key && page_interaction.page_key.includes('redirect') "
-        class="viewport_screenshot">
+        class="modal_viewport_screenshot">
       <img src="{{ page_interaction.page.imageUrls[0]}}" />
     </div>
     <div ng-if="current_node.key == page_interaction.page_key && page_interaction.page_key.includes('PageLoadAnimation') "
@@ -17,7 +17,7 @@
       <img src="{{page_interaction.page.imageUrls[0]}}" />
     </div>
     <div class="" ng-if="current_node.key == page_interaction.page_key && page_interaction.page_key.includes('pagestate')">
-       <img src="{{page_interaction.page.fullPageScreenshotUrl}}" class="viewport_screenshot"/>
+       <img src="{{page_interaction.page.fullPageScreenshotUrl}}" class="modal_viewport_screenshot"/>
        <div ng-repeat="interaction in page_interaction.interactions track by $index"
             id="{{'element-outline'+$index}}"
             class="element__outline"
@@ -27,7 +27,7 @@
   </div>
 </div>
 <div class="col-sm-1" style="height:100%">
-  <div ng-click="next()" class="col-sm-1 toggle-arrow vertical__center__int">
+  <div ng-click="next()" class="modal-toggle-arrow">
     <i class="fas fa-chevron-circle-right"></i>
   </div>
 </div>

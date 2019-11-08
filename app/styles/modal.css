@@ -326,6 +326,14 @@ md-dialog {
 	align-items: stretch;
 }
 
+.modal_viewport_screenshot{
+  flex: 1;
+	max-width:100%;
+	max-height:100%;
+	object-fit:contain
+}
+/* end modal classes */
+
 /* Path viewport toggle panel */
 .expandable_path_toggle{
 	width: 100%;
@@ -383,6 +391,27 @@ md-dialog {
 }
 .toggle-arrow:active,
 .toggle-arrow.active,
+.open > .dropdown-toggle.btn--primary {
+  color: #553fc0;
+}
+
+
+/* arrow toggle button in modal */
+.modal-toggle-arrow{
+	position: fixed;
+  font-size: 44px;
+  color: #6649e4;
+	top: 40%;
+}
+.modal-toggle-arrow:focus,
+.modal-toggle-arrow.focus {
+  color: #553fc0;
+}
+.modal-toggle-arrow:hover {
+  color: #553fc0;
+}
+.modal-toggle-arrow:active,
+.modal-toggle-arrow.active,
 .open > .dropdown-toggle.btn--primary {
   color: #553fc0;
 }
