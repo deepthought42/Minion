@@ -73,25 +73,6 @@ angular.module('Qanairy.ExpandablePathToggle', [])
         var outline_style = "top: "+ y_offset +"px;left: "+ x_offset +"px; width: "+ element_width +"px; height:"+ element_height +"px";
         return outline_style;
       }
-
-      /***
-       * get live runtime value of an element's css style
-       *   http://robertnyman.com/2006/04/24/get-the-rendered-style-of-an-element
-       *     note: "styleName" is in CSS form (i.e. 'font-size', not 'fontSize').
-       ***/
-      function getStyle(e, styleName) {
-          var styleValue = "";
-          if(document.defaultView && document.defaultView.getComputedStyle) {
-              styleValue = document.defaultView.getComputedStyle(e, "").getPropertyValue(styleName);
-          }
-          else if(e.currentStyle) {
-              styleName = styleName.replace(/\-(\w)/g, function (strMatch, p1) {
-                  return p1.toUpperCase();
-              });
-              styleValue = e.currentStyle[styleName];
-          }
-          return styleValue;
-      }
     },
     link: function($scope, element) {
 
