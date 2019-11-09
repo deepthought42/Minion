@@ -66,9 +66,6 @@ angular.module('Qanairy.ExpandablePathToggle', [])
         }
 
         var marginRight = web_elem.offsetLeft;
-
-        //var marginRight = $("#expandablePageState"+page.key).css("margin-right");
-
         var scale_height = $scope.height/page.fullPageHeight;
         var scale_width = ($scope.width)/page.fullPageWidth;
 
@@ -80,7 +77,8 @@ angular.module('Qanairy.ExpandablePathToggle', [])
         console.log("scale width  ::   "+scale_width);
         console.log("scale height  ::   "+scale_height);
 
-        var element_width = element.width * scale_width;
+        var element_width = element.width * (scale_width);
+        element_width = element_width + (element_width/5)
         var element_height = element.height * scale_height;
 
         console.log("element outline width ::  " +element_width);
