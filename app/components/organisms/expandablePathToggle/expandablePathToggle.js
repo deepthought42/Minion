@@ -80,7 +80,7 @@ angular.module('Qanairy.ExpandablePathToggle', [])
         console.log("scale width  ::   "+scale_width);
         console.log("scale height  ::   "+scale_height);
 
-        var element_width = element.width * (scale_width*(($scope.width-(marginRight*2))/$scope.width);
+        var element_width = element.width * scale_width;
         var element_height = element.height * scale_height;
 
         console.log("element outline width ::  " +element_width);
