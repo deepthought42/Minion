@@ -48,15 +48,8 @@ angular.module('Qanairy.ExpandablePathToggle', [])
 
 
       function buildElementOutlineStyle(page, element){
-
         var web_elem = document.getElementById('expandablePageState'+page.key);
-
-        var web_elem1 = document.getElementById('expandable'+page.key);
         var elem = angular.element(web_elem);
-        console.log("element width :: "+elem.parent().width());
-        console.log("element height :: " +elem.parent().height());
-        console.log("page viewport height :: "+page.fullPageHeight);
-        console.log("page viewport width :: "+page.fullPageWidth);
 
         if($scope.width !== elem.width() && elem.width() !== 0){
           $scope.width = elem.width();
@@ -72,24 +65,11 @@ angular.module('Qanairy.ExpandablePathToggle', [])
         if(scale_height === 0){
           scale_height = scale_width;
         }
-        console.log("margin right ::  "+marginRight);
-
-        console.log("scale width  ::   "+scale_width);
-        console.log("scale height  ::   "+scale_height);
 
         var element_width = element.width * (scale_width);
-        element_width = element_width + (element_width/5)
         var element_height = element.height * scale_height;
-
-        console.log("element outline width ::  " +element_width);
-        console.log("element outline height :: "+element_height);
-        console.log("element xlocation  :: " +element.xlocation);
-        console.log("element ylocation :: " + element.ylocation);
         var x_offset = Math.abs((element.xlocation )  * scale_width) + marginRight;
         var y_offset = (element.ylocation) * scale_height;
-
-        console.log("element xlocation  :: " +x_offset);
-        console.log("element ylocation :: " + y_offset);
         var outline_style = "top: "+ y_offset +"px;left: "+ x_offset +"px; width: "+ element_width +"px; height:"+ element_height +"px";
         return outline_style;
       }
