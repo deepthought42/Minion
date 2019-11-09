@@ -47,20 +47,20 @@ angular.module('Qanairy.ElementStateOutline', [])
         if(scale_height === 0){
           scale_height = scale_width;
         }
-        console.log("margin right ::  "+marginRight);
 
+
+        console.log("margin right ::  "+marginRight);
         console.log("scale width  ::   "+scale_width);
         console.log("scale height  ::   "+scale_height);
 
         var element_width = element.width * (scale_width);
-        element_width = element_width + (element_width/5)
+        element_width = element_width + (element_width/5);
         var element_height = element.height * scale_height;
-
         console.log("element outline width ::  " +element_width);
         console.log("element outline height :: "+element_height);
         console.log("element xlocation  :: " +element.xlocation);
         console.log("element ylocation :: " + element.ylocation);
-        var x_offset = Math.abs((element.xlocation )  * scale_width) + marginRight;
+        var x_offset = element.xlocation * scale_width + marginRight;
         var y_offset = (element.ylocation) * scale_height;
 
         console.log("element xlocation  :: " +x_offset);

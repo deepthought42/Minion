@@ -49,6 +49,7 @@ angular.module('Qanairy.ExpandablePathToggle', [])
 
       function buildElementOutlineStyle(page, element){
         var web_elem = document.getElementById('expandablePageState'+page.key);
+
         var elem = angular.element(web_elem);
 
         if($scope.width !== elem.width() && elem.width() !== 0){
@@ -67,8 +68,9 @@ angular.module('Qanairy.ExpandablePathToggle', [])
         }
 
         var element_width = element.width * (scale_width);
+        element_width = element_width + (element_width/5);
         var element_height = element.height * scale_height;
-        var x_offset = Math.abs((element.xlocation )  * scale_width) + marginRight;
+        var x_offset = element.xlocation * scale_width + marginRight;
         var y_offset = (element.ylocation) * scale_height;
         var outline_style = "top: "+ y_offset +"px;left: "+ x_offset +"px; width: "+ element_width +"px; height:"+ element_height +"px";
         return outline_style;
