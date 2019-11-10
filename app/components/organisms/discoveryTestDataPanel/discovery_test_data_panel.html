@@ -114,27 +114,27 @@
           </div>
         </div>
         <div class="test__screenshot__data__section__wrap  test-container-split-right" ng-if="visible_test_nav1==='section-linemove-1'">
-              <div class="expand_button">
-                <button class="expand btn btn--screenshot" data-toggle="modal" data-target="#exampleModal"
-                        ng-click="openPathSlider()">
-                  Expand
-                </button>
-              </div>
-               <div class="expandable_path_toggle">
-                 <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'"
-                      class="flex-auto vertical__center__int"
-                      style="margin:0px auto; height: 100% !important;" >
-                   <img data-toggle="modal" data-target="#exampleModal"
-                        src="{{current_node.screenshot}}"/>
-                 </div>
-                 <!-- path screenshot panel -->
-                 <expandable-path-toggle path="preview_path"
-                                        path-idx="current_path_idx"
-                                        class="viewport_screenshot"
-                                        ng-if="current_node.type != 'ElementState' && current_node.type != 'Action'">
-                 </expandable-path-toggle>
-               </div>
+            <div class="expand_button">
+              <button class="expand btn btn--screenshot" data-toggle="modal" data-target="#exampleModal"
+                      ng-click="openPathSlider()">
+                Expand
+              </button>
             </div>
+             <div class="expandable_path_toggle">
+               <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'"
+                    class="flex-auto vertical__center__int"
+                    style="margin:0px auto; height: 100% !important;" >
+                 <img data-toggle="modal" data-target="#exampleModal"
+                      src="{{current_node.screenshot}}"/>
+               </div>
+               <!-- path screenshot panel -->
+               <expandable-path-toggle path="preview_path"
+                                      path-idx="current_path_idx"
+                                      class="viewport_screenshot"
+                                      ng-if="current_node.type != 'ElementState' && current_node.type != 'Action'">
+               </expandable-path-toggle>
+             </div>
+          </div>
             <!--
             <split-area size="46" class="test__data__section" ng-transclude ng-if="current_node.type != 'PageState'">
               <div class="" ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'" >
