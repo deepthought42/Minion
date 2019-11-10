@@ -50,9 +50,6 @@
 						<div class="flex-auto test_browsers_edit">
 							Browsers
 						</div>
-						<div class="flex-auto time_stats text-right">
-							Time (minutes)
-						</div>
 						<div class="flex-auto date_stats text-right"  ng-click="sortLastRun=!sortLastRun">
 							Date Last Run
 						</div>
@@ -166,11 +163,6 @@
 								</div>
 							</div>
 
-							<div class="flex-auto text-right time_stats test__profile_stretch">
-								<div class="">
-									{{test.runTime | date: 'm'}}:{{test.runTime | date: 'ss'}} m
-								</div>
-							</div>
 							<div class="flex-auto text-right date_stats test__profile_stretch">
 								<div class="">
 									{{ (test.lastRunTimestamp | date: 'MM/dd/yy' | lowercase) || "Unknown / Not since discovery"}}
