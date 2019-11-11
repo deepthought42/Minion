@@ -204,8 +204,10 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
     }
 
     $scope.discoverTests = function(form){
+      var user_bypass = false;
       if($scope.users.length === 0 && (form.type.toLowerCase()==="login" || form.type.toLowerCase()==="registration")){
         $state.go('main.user_form_discovery', {form: form});
+        user_bypass = true;
       }
 
       $scope.waiting_for_response = true;
@@ -216,7 +218,10 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
           segment.track("Start form discovery", {
               form_key: form.key,
             }, function(success){  });
-          $state.go("main.form");
+
+          if(!user_bypass){
+            $state.go("main.form");
+          }
         })
         .catch(function(err){
           $scope.waiting_for_response = false;
