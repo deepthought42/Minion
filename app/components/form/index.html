@@ -1,7 +1,6 @@
 <div class="error__message" ng-repeat="error in errors track by $index">
 	{{error.message}}
 </div>
-
 <div class="content">
 
 	<div class="secondary-nav vertical__center__int" >
@@ -13,6 +12,8 @@
       <div class="flex-auto test_functions">
         Form Title
       </div>
+			<div class="flex-none discovery_functions">
+			</div>
       <div class="flex-initial date_stats text-left">
         Form Type
       </div>
@@ -23,7 +24,7 @@
         Date Discovered
       </div>
       <div class="flex-none discovery_functions">
-		</div>
+			</div>
     </div>
   </div>
 
@@ -55,13 +56,16 @@
              </h5>
           </div>
         </div>
+				<div class="flex-none discovery_functions vertical__center__int">
+					<i ng-if="form.bugMessages.length" class="fad fa-bug fa-2x error_icon"></i>
+				</div>
         <div class="flex-initial text-left date_stats test__profile_stretch">
           {{toTitleCase(form.type)}}
         </div>
         <div class="flex-initial text-left date_stats test__profile_stretch">
           {{toTitleCase(form.status)  || "Unknown"}}
         </div>
-        <div class="flex-initial text-right date_stats test__profile_stretch">
+				<div class="flex-initial text-right date_stats test__profile_stretch">
           {{( form.dateDiscovered | date : 'MM/dd/yy h:mm a')  || "Unknown"}}
         </div>
         <div class="flex-none discovery_functions text-right test__btns" aria-label="Form Functions">

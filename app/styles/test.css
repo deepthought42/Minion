@@ -133,12 +133,12 @@
 .test-labels{
   width: -moz-calc(100% - 15px);
   /* WebKit */
-width: -webkit-calc(100% - 15px);
+	width: -webkit-calc(100% - 15px);
   /* Opera */
- width: -o-calc(100% - 15px);
+ 	width: -o-calc(100% - 15px);
   /* Standard */
- width: calc(100% - 15px);
-	 left: 15px;
+ 	width: calc(100% - 15px);
+	left: 15px;
 }
 
 .empty__state{
@@ -199,10 +199,14 @@ width: -webkit-calc(100% - 15px);
   justify-content: center !important;
 }
 @media only screen and (max-width: 767px) {
-    .split--oboard--or{
-  padding-top:30px;
+  .split--oboard--or{
+  	padding-top:30px;
+	}
 }
+.error_icon {
+	color: #FF0000 !important;
 }
+
 .error__message{
 	font-weight: 500;
 	color: #ffffff;
