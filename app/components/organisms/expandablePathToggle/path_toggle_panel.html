@@ -19,7 +19,7 @@
            ng-click="openPathSlider(path)"/>
     </div>
     <div class="browser_view" ng-if="current_node.key === page_interaction.page_key && page_interaction.page_key.includes('pagestate')">
-       <img src="{{page_interaction.page.fullPageScreenshotUrl}}"
+       <img src="{{page_interaction.page.fullPageScreenshotUrl || page_interaction.page.screenshotUrl}}"
             ng-click="openPathSlider(path)"
             id="{{'expandablePageState'+page_interaction.page_key}}"/>
        <div ng-repeat="interaction in page_interaction.interactions track by $index"
