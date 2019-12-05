@@ -43,7 +43,8 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         encrypted: true
       });
 
-      var channel = $scope.pusher.subscribe($scope.extractHostname($scope.domain_url));
+      var user_id = $scope.profile.sub.substring(6);
+      var channel = $scope.pusher.subscribe($scope.extractHostname(user_id + $scope.domain_url));
       channel.bind('test-run', function(data) {
         var reported_test = JSON.parse(data);
         for(var idx=0; idx<$scope.tests.length; idx++){

@@ -94,8 +94,8 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           cluster: 'us2',
           encrypted: true
         });
-
-        var channel = $scope.pusher.subscribe($scope.extractHostname($scope.current_domain.host));
+        var user_id = $scope.profile.sub.substring(6);
+        var channel = $scope.pusher.subscribe($scope.extractHostname(user_id + $scope.current_domain.host));
         channel.bind('test-discovered', function(data) {
           $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
           $scope.discoveredTestOnboardingIndex = 0;

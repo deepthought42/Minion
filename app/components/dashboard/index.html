@@ -77,9 +77,18 @@
       -->
       <div class="col-sm-12">
         <div class="domain-dialogue-header">
-          <h2 class="standard__title"><div class="row"> <div class="col-sm-12"><div class="float-left">Monthly Domain Usage for: {{domain.url || "www.yourdomain.com"}}</div><div class="float-right">
+          <h2 class="standard__title">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="float-left">
+                  Monthly Domain Usage for: {{domain.url || "www.yourdomain.com"}}
+                </div>
+                <div class="float-right">
 
-                </div></div></div></h2>
+                </div>
+              </div>
+            </div>
+          </h2>
         </div>
       </div>
       <div class="col-sm-12 col-md-6 col-lg-4">
@@ -119,7 +128,7 @@
             <div class="col-sm-12">
               <div class=" dashboard_card_med vertical__center">
                 <div class="dashboard__stats">
-                  {{usage.domainTotalTestsRun || '-'}}
+                  {{usage.domainTotalDiscoveredTestCount || '-'}}
                 </div>
               </div>
             </div>
@@ -141,7 +150,7 @@
             <div class="col-sm-12">
               <div class=" dashboard_card_med vertical__center">
                 <div class="dashboard__stats">
-                  -
+                  {{usage.domainTotalTestsRun || '-'}}
                 </div>
               </div>
             </div>
