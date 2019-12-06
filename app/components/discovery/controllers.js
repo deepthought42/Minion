@@ -94,7 +94,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
           cluster: 'us2',
           encrypted: true
         });
-        var user_id = $scope.profile.sub.substring(6);
+        var user_id = store.get("profile").sub.substring(6);
         var channel = $scope.pusher.subscribe($scope.extractHostname(user_id + $scope.current_domain.host));
         channel.bind('test-discovered', function(data) {
           $scope.discoveredTestOnboardingEnabled = !$scope.hasUserAlreadyOnboarded('discovered-test');
@@ -258,7 +258,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
     }
 
     $scope.archiveTest = function(test){
-      Test.archive({key: test.key} ).$promise.
+      Test.archive({key: test.key, url: $scope.current_domain.host} ).$promise.
         then(function(resp){
           test.archived = true;
         })
@@ -338,7 +338,7 @@ angular.module('Qanairy.discovery', ['ui.router', 'Qanairy.DiscoveryService', 'Q
      */
     $scope.updateCorrectness = function(test, correctness, idx){
       test.waitingOnStatusChange = true;
-      Test.setPassingStatus({key: test.key, status: correctness, browser_name: $scope.default_browser}).$promise
+      Test.setPassingStatus({key: test.key, status: correctness, browser_name: $scope.default_browser, url: $scope.current_domain.host}).$promise
         .then(function(data){
           test.waitingOnStatusChange = false;
           test.status = data.status;

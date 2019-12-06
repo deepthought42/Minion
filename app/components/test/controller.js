@@ -43,7 +43,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         encrypted: true
       });
 
-      var user_id = $scope.profile.sub.substring(6);
+      var user_id = store.get("profile").sub.substring(6);
       var channel = $scope.pusher.subscribe($scope.extractHostname(user_id + $scope.domain_url));
       channel.bind('test-run', function(data) {
         var reported_test = JSON.parse(data);
@@ -324,7 +324,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
       var url = store.get("domain").url;
       for(var i=0; i < browsers.length; i++){
-        Test.runTests({test_keys: keys, browser: browsers[i], host_url: store.get("domain").url}).$promise
+        Test.runTests({test_keys: keys, browser: browsers[i], host_url: $scope.domain_url}).$promise
           .then(function(data){
 
               //iterate over tests and set status based on if test key is present in data
@@ -405,7 +405,15 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       else{
         test.new_name = test.name;
       }
-      Test.update({key: test.key, name: test.new_name, firefox:  test.browserStatuses.firefox, chrome:  test.browserStatuses.chrome}).$promise
+      Test.update(
+          {
+            key: test.key,
+            name: test.new_name,
+            firefox: test.browserStatuses.firefox,
+            chrome: test.browserStatuses.chrome,
+            url: $scope.domain_url
+          }
+        ).$promise
         .then(function(data){
           test.waitingOnStatusChange = false;
 
@@ -484,7 +492,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
     };
 
     $scope.archiveTest = function(test){
-      Test.archive({key: test.key} ).$promise.
+      Test.archive({key: test.key, url: $scope.domain_url} ).$promise.
         then(function(resp){
           test.archived = true;
         })
@@ -551,7 +559,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
     $scope.sendTestToIde = function(test){
       //get first url in test
-      Test.sendTestToIde({test_key: test.key}).$promise
+      Test.sendTestToIde({test_key: test.key, url: $scope.domain_url}).$promise
         .then(function(returned_test){
           var url = "";
           for(var idx=0; idx< returned_test.path.length; idx++){
