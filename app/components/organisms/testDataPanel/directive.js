@@ -108,7 +108,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
 
       $scope.setTestName = function(new_name){
         $scope.test.show_waiting_icon = true;
-        Test.updateName({key: $scope.test.key, name: new_name}).$promise
+        Test.updateName({key: $scope.test.key, name: new_name, url: $scope.domain_url}).$promise
           .then(function(data){
             $scope.test.show_waiting_icon = false;
             $scope.test.show_test_name_edit_field=false;
