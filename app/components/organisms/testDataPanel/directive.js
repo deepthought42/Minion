@@ -14,6 +14,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
       $scope.editTest = function(test){
         test.show_test_name_edit_field = true;
       };
+      $scope.domain_url = store.get("domain").url
 
       $scope.openPathSlider = function() {
         $scope.path = $scope.convertToIterativePath($scope.path_objects);
@@ -194,7 +195,9 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
         }
         Test.addGroup({name: group.name,
                        description: group.description,
-                       key: test.key}).$promise
+                       key: test.key,
+                       url: $scope.domain_url
+                }).$promise
                 .then(function(data){
                    group.name = null;
                    test.groups.push(data);

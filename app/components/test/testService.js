@@ -4,7 +4,7 @@ var testerService = angular.module('Qanairy.TestService', ['ngResource', 'Qanair
 
 testerService.factory('Test', ['$resource', 'Qanairy.serviceConfig', function ($resource, config) {
   return $resource(config.basePath + '/tests', {key: '@key'}, {
-    update: { method: 'PUT', params:  {key: '@key', name: '@name', firefox: '@firefox', chrome: '@chrome'}},
+    update: { method: 'PUT', params:  {key: '@key', name: '@name', firefox: '@firefox', chrome: '@chrome', url: '@url'}},
     findByName: {url : config.basePath + '/tests/name', method: 'GET', isArray: true},
     setPassingStatus: {url : config.basePath + '/tests/setPassingStatus', method: 'PUT', params: {key: '@key', status: '@status', browser: '@browser_name', url: '@url'}},
     archive: {url : config.basePath + '/tests/archive', method: 'PUT', params: { key: '@key', url: '@url'}},
