@@ -14,7 +14,7 @@ angular.module('Qanairy.TestDataPanel', ['ng-split', 'Qanairy.PathPanel'])
       $scope.editTest = function(test){
         test.show_test_name_edit_field = true;
       };
-      $scope.domain_url = store.get("domain").url
+      $scope.domain_url = store.get("domain").url;
 
       $scope.openPathSlider = function() {
         $scope.path = $scope.convertToIterativePath($scope.path_objects);
