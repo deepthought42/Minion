@@ -40,13 +40,6 @@ angular.module('Qanairy.ExpandablePathToggle', [])
          });
       };
 
-
-      $scope.generateElementOutline = function(page, element){
-        return buildElementOutlineStyle(page, element);
-      };
-
-
-
       function buildElementOutlineStyle(page, element){
         var web_elem = document.getElementById('expandablePageState'+page.key);
 
@@ -77,6 +70,10 @@ angular.module('Qanairy.ExpandablePathToggle', [])
         var outline_style = "top: "+ y_offset +"px;left: "+ x_offset +"px; width: "+ element_width +"px; height:"+ element_height +"px";
         return outline_style;
       }
+
+      $scope.generateElementOutline = function(page, element){
+        return buildElementOutlineStyle(page, element);
+      };
     },
     link: function($scope, element) {
 
@@ -84,6 +81,6 @@ angular.module('Qanairy.ExpandablePathToggle', [])
     scope: false,
     transclude: true,
     templateUrl: 'components/organisms/expandablePathToggle/path_toggle_panel.html'
-  }
+  };
 
-}])
+}]);
