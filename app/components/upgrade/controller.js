@@ -29,7 +29,7 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
     $scope.getFreeAccess = function() {
       Subscribe.update({plan : "free", "source_token": ""}).$promise
         .then(function(){
-          $scope.current_plan = "Basic - $99";
+          $scope.current_plan = "Pro - $199";
           $scope.$broadcast("updateAccount");
         })
         .catch(function(){
@@ -39,12 +39,12 @@ angular.module('Qanairy.upgrade', ['ui.router', 'Qanairy.AccountService', 'Qanai
 
     $scope.updateSubscription = function(plan_name) {
       //set package name based on #-disc-#-test
-      var package_name = "Basic";
+      var package_name = "Pro";
 
       var options = {
         email: $scope.user_email,
         description: package_name,
-        amount: 9900
+        amount: 19900
       };
       // The default handler API is enhanced by having open()
       // return a promise. This promise can be used in lieu of or
