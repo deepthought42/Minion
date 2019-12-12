@@ -45,8 +45,6 @@ angular.module('Qanairy.ExpandablePathToggle', [])
         return buildElementOutlineStyle(page, element);
       };
 
-
-
       function buildElementOutlineStyle(page, element){
         var web_elem = document.getElementById('expandablePageState'+page.key);
 
