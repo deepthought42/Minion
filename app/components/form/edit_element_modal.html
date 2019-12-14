@@ -44,17 +44,26 @@
                           </select>
                         </div>
                         <div class="">
-                          <div class="flex-auto fifteen_left" ng-show="new_rule && new_rule.type && (new_rule.type=='MAX_VALUE' || new_rule.type=='MIN_VALUE' || new_rule.type=='MAX_LENGTH' || new_rule.type=='MIN_LENGTH')">
+                          <div class="flex-auto fifteen_left" ng-show="new_rule && new_rule.type.length && (new_rule.type=='MAX_VALUE' || new_rule.type=='MIN_VALUE' || new_rule.type=='MAX_LENGTH' || new_rule.type=='MIN_LENGTH')">
                             <input class="rules-input form-control " type="text" ng-model="new_rule.value"/>
                           </div>
                         </div>
                         <div class="flex-none justify-content-start fifteen_left" style="justify-content: flex-start;">
-                          <button style="margin:0px;" class="btn btn--primary title__edit__buttons" ng-disabled="!new_rule.type.length" ng-click="addRuleToElement(current_field, new_rule)">
+                          <button style="margin:0px;" class="btn btn--primary title__edit__buttons" ng-disabled="!new_rule.type.length" ng-click="addRuleToElement(current_field.key, new_rule)">
                             <i class="far fa-plus fa-1x"></i>&nbsp;&nbsp;Add
                           </button>
                         </div>
                       </div>
                       <div id="rule_errors" class="error__message rule__error__message" ng-show="errors.length > 0">
+                        <div ng-repeat="success_msg in messages track by $index">
+                          {{success_msg}}
+                        </div>
+                      </div>
+                      <div class ="rules-divider" >
+                      </div>
+
+                      <div id="rule_errors" class="error__message rule__error__message" ng-show="errors.length > 0">
+
                         <div ng-repeat="error in errors track by $index">
                           {{error}}
                         </div>
@@ -78,7 +87,7 @@
                             </span>
                           </div>
                           <div class="flex-none form_field_controls justify-content-end">
-                            <span ng-click="removeRule(rule)" class="fifteen_left" >
+                            <span ng-click="removeRule(current_field.key, rule)" class="fifteen_left" >
                               <i class="fa fa-times red"></i>
                             </span>
                           </div>

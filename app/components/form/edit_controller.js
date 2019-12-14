@@ -92,13 +92,28 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       ];
     };
 
-    $scope.removeRule = function(rule) {
+    $scope.removeRule = function(element_id, rule) {
+      //call Element.removeRule(rule.key)
+      Element.removeRule({id: element_id, rule_key: rule.key}).$promise
+        .then(function(data){
+          $scope.current_field = data;
+          segment.track("Removed rule", {
+              element_id: element_id,
+              rule_key: rule.key
+            }, function(success){  });
+        })
+        .catch(function(err){
+          $scope.errors.push("An error occurred while removing rule "+rule.type);
+        });
+
+/*
       for(var i = 0; i< $scope.current_field.rules.length; i++){
         if($scope.current_field.rules[i].type === rule.type){
             //remove rule at idx
             $scope.current_field.rules.splice(i, 1);
         }
       }
+      */
     };
 
     $scope.newRule = function(){
@@ -173,8 +188,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
             }
         }
 
-        $scope.current_field.rules.unshift(new_rule);
-        $scope.new_rule = $scope.newRule();
+        $scope.createRule(current_field, new_rule.type, new_rule.value);
       }
       else{
         //show duplicate record error
@@ -238,14 +252,22 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
           }, function(success){  });
     };
 
+    /*
+      Makes call to API endpoint to add rule to element
+    */
     $scope.createRule = function(element_id, type, value){
+      console.log("type :: "+type);
       Element.addRule({id: element_id, type: type, value: value}).$promise
         .then(function(data){
+          $scope.current_field = data;
+          $scope.new_rule = $scope.newRule();
+
           segment.track("Added rule", {
               element_id: element_id,
               type: type,
               value: value
-            }, function(success){  });
+            }, function(success){
+            });
         })
         .catch(function(err){
           $scope.errors.push("Error occurred while saving rule");
@@ -268,7 +290,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
 
              $scope.saveElement = function(elementstate){
                $scope.errors = [];
-               Element.update(elementstate).$promise
+               Element.updateFormElement($scope.form.key, elementstate).$promise
                  .then(function(data){
                    $scope.form.formFields[$scope.selected_element_idx] = data;
                    $scope.closeDialog();
