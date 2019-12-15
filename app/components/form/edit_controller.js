@@ -259,7 +259,6 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
       Makes call to API endpoint to add rule to element
     */
     $scope.createRule = function(element_id, type, value){
-      console.log("type :: "+type);
       Element.addRule({id: element_id, type: type, value: value}).$promise
         .then(function(data){
           $scope.current_field = data;
@@ -291,7 +290,7 @@ angular.module('Qanairy.form_edit', ['ui.router', 'Qanairy.FormService', 'Qanair
              $scope.show_edit_element_err = false;
              $scope.closeDialog = function() {
                 $mdDialog.hide();
-                $scope.form.formFields[$scope.selected_element_idx] = data;
+                $scope.form.formFields[$scope.selected_element_idx] = $scope.current_field;
              };
 
              $scope.saveElement = function(elementstate){
