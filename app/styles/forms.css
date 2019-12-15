@@ -14,31 +14,31 @@
 }
 .form__field__functions {
 		width:50px;
-}	
-.form_field_controls{	
-  width: 60px;	
-      display: flex;	
-    -ms-flex-wrap: wrap;	
-    flex-wrap: wrap;	
-}	
-.form_field_element{	
-  width: 140px;	
-}	
-.form_field_rule{	
-  width: 280px;	
-} 
+}
+.form_field_controls{
+  width: 60px;
+      display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.form_field_element{
+  width: 140px;
+}
+.form_field_rule{
+  width: 280px;
+}
 .rule-input{
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
   display: flex;
 }
 .rules-divider{
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
   display: flex;
   border-bottom: 1px solid #e0e0e0;
 }
-.rule__error__message{
-  margin-bottom: 20px; 
+.rule__message{
+  margin-bottom: 20px;
 }
 .rules-input{
-  
+
 }
