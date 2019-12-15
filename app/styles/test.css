@@ -215,6 +215,14 @@
 	background-color:#F44336;
 }
 
+.success__message{
+	font-weight: 500;
+	color: #ffffff;
+	text-align: center;
+	padding: 5px;
+	background-color: green;
+}
+
 .error__text {
 	text-align: right !important;
 	background-color:#ffffff !important;

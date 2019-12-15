@@ -54,20 +54,18 @@
                           </button>
                         </div>
                       </div>
-                      <div id="rule_errors" class="error__message rule__error__message" ng-show="errors.length > 0">
+                      <div id="rule_successes" class="success__message rule__message" ng-show="messages.length > 0">
                         <div ng-repeat="success_msg in messages track by $index">
                           {{success_msg}}
                         </div>
                       </div>
-                      <div class ="rules-divider" >
-                      </div>
 
-                      <div id="rule_errors" class="error__message rule__error__message" ng-show="errors.length > 0">
-
+                      <div id="rule_errors" class="error__message rule__message" ng-show="errors.length > 0">
                         <div ng-repeat="error in errors track by $index">
                           {{error}}
                         </div>
                       </div>
+
                       <div class ="rules-divider" >
                       </div>
                     </div>
