@@ -183,7 +183,7 @@ angular.module('Qanairy.main', ['ui.router', 'Qanairy.ActionService', "Qanairy.f
 
     $scope.$on('domain_selected', function(event, domain){
       $scope.domain = store.get('domain');
-      Domain.getAllPathObjects({host: domain.host}).$promise
+      Domain.getAllPathObjects({url: domain.url}).$promise
                 .then(function(data){
                     store.set('path_objects', data);
                 })

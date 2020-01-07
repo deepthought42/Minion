@@ -64,7 +64,9 @@
 							 ng-repeat="test in (filteredTests = tests) | filter:searchText | filter:{archived: false}:true | orderBy: ['status','lastRunTimestamp'] track by $index"
 							 ng-show="tests.length > 0">
 
-						<div class="test__profile vertical__left__profile" ng-click="setTestIndex($index, test)"  ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass, 'active': current_test.key==test.key}">
+						<div class="test__profile vertical__left__profile"
+                 ng-click="setTestIndex($index, test)"
+                 ng-class="{'greenBg': test.passingStatusClass, 'redBg': test.failingStatusClass, 'active': current_test.key==test.key}">
 							<div class="tests__test__status test__profile_stretch">
 								<div class="test__status " ng-if="isTestRunning(test)">
 									<i class="fa fa-circle-o-notch fa-spin status--symbol fa-3x green fa-fw"></i>

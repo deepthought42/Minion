@@ -49,7 +49,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
         var reported_test = JSON.parse(data);
         for(var idx=0; idx<$scope.tests.length; idx++){
           var test = $scope.tests[idx];
-          if(test.key == reported_test.testKey){
+          if(test.key === reported_test.testKey){
             $scope.tests[idx].records.unshift(reported_test);
             $scope.tests[idx].browserStatuses[reported_test.browser] = reported_test.status.toUpperCase();
 
@@ -105,7 +105,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
       }
 
       //check if discovery onboarding has already been seen
-      if(!onboard || onboard == null){
+      if(!onboard || onboard === null){
         Account.addOnboardingStep({step_name: onboard_step_name}).$promise
           .then(function(data){
             store.set("onboard", data);
@@ -374,11 +374,11 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
     $scope.runGroupTests = function(url, group){
       segment.track("Run Tests By Group", {
-        group : group,
+        group,
         domain : url
       }, function(success){});
 
-      Test.runTestsByGroup({url: url, group: group}).$promise
+      Test.runTestsByGroup({url, group}).$promise
         .then(function(data){
 
         })
@@ -554,7 +554,7 @@ angular.module('Qanairy.tests', ['Qanairy.TestService', 'Qanairy.TestRecordServi
 
     $scope.editTest = function(test, $index){
       $scope.editing_test_idx = $index;
-      $scope.test_copy = JSON.parse(JSON.stringify(test));;
+      $scope.test_copy = JSON.parse(JSON.stringify(test));
     }
 
     $scope.sendTestToIde = function(test){
