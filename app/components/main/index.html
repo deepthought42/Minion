@@ -12,8 +12,14 @@
       <ul class="sidebar-nav">
         <li>
           <a ui-sref="main.dashboard"  style="{{$location.path() == '/dashboard' ? 'color: #fff;' : 'color:#9794d5'}}">
-          <i class="fa fa-dashboard sidebar-nav-icons" aria-hidden="true"></i>
-          <span class="sidebar_remove_title">Dashboard</span>
+            <i class="fa fa-dashboard sidebar-nav-icons" aria-hidden="true"></i>
+            <span class="sidebar_remove_title">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a ui-sref="main.insights"  style="{{$location.path() == '/insights' ? 'color: #fff;' : 'color:#9794d5'}}">
+            <i class="fa fa-dashboard sidebar-nav-icons" aria-hidden="true"></i>
+            <span class="sidebar_remove_title">Insights</span>
           </a>
         </li>
         <li id="notification_li">

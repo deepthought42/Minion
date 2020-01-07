@@ -13,8 +13,9 @@ domainService.factory('Domain', ['$resource', 'Qanairy.serviceConfig', function 
     getUsers: {url: config.basePath + '/domains/:domain_id/users', method: 'GET',  params: {key: '@key'}, isArray: true},
     getForms: {url: config.basePath + '/domains/:domain_id/forms', method: 'GET', isArray: true},
     updateForm: {url: config.basePath + '/domains/:domain_id/forms', method: 'PUT', params: {id: '@id',name: '@name', type: '@form_type'}},
-    getAllPageStates: {url: config.basePath + '/domains/page_states', method: 'GET', isArray: true, params: {host: '@host'}},
+    getAllPageStates: {url: config.basePath + '/domains/page_states', method: 'GET', isArray: true, params: {url: '@url'}},
     getAllPageElements: {url: config.basePath + '/domains/page_elements', method: 'GET', isArray: true, params: {url: '@url'}},
-    getAllPathObjects: {url: config.basePath + '/domains/path', method: 'GET', isArray: true, params: {url: '@url'}}
+    getAllPathObjects: {url: config.basePath + '/domains/path', method: 'GET', isArray: true, params: {url: '@url'}},
+    getPages: {url: config.basePath + '/domains/pages', method: 'GET', isArray: true, params: {url: '@url'}},
   });
 }]);
