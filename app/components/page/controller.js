@@ -27,5 +27,8 @@ angular.module('Qanairy.page', ['ui.router', 'Qanairy.DomainService', 'Qanairy.i
     };
 
     this._init();
+
+    //navigate to page insights view and pass page_key as a stateParams variable
+    
   }
 ]);

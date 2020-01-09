@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Qanairy.insights', ['ui.router', 'Qanairy.DomainService'])
+angular.module('Qanairy.insights', ['ui.router', 'Qanairy.PageService'])
 
 .config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('main.insights', {
@@ -13,13 +13,13 @@ angular.module('Qanairy.insights', ['ui.router', 'Qanairy.DomainService'])
   });
 }])
 
-.controller('InsightCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state',
-  function($rootScope, $scope, Domain,  $mdDialog, store, $state) {
+.controller('InsightCtrl', ['$rootScope', '$scope', 'Page',  '$mdDialog', 'store', '$state',
+  function($rootScope, $scope, Page,  $mdDialog, store, $state) {
     this._init = function(){
       $scope.errors = [];
-      Domain.getPages({url: store.get("domain").url}).$promise.
+      Page.getInsights({page_key: $stateParams.page_key}).$promise.
         then(function(data){
-          $scope.pages = data;
+          $scope.insights = data;
         })
         .catch(function(err){
           $scope.errors.push(err);
