@@ -1,19 +1,19 @@
 'use strict';
 
-angular.module('Qanairy.insights', ['ui.router', 'Qanairy.DomainService'])
+angular.module('Qanairy.page', ['ui.router', 'Qanairy.DomainService', 'Qanairy.insights'])
 
 .config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('main.insights', {
-    url: "/insights",
-    templateUrl: 'components/insights/index.html',
-    controller: 'InsightCtrl',
+  $stateProvider.state('main.page', {
+    url: "/page",
+    templateUrl: 'components/page/index.html',
+    controller: 'PageCtrl',
     data: {
       requiresLogin: true
     }
   });
 }])
 
-.controller('InsightCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state',
+.controller('PageCtrl', ['$rootScope', '$scope', 'Domain',  '$mdDialog', 'store', '$state',
   function($rootScope, $scope, Domain,  $mdDialog, store, $state) {
     this._init = function(){
       $scope.errors = [];

@@ -1,0 +1,27 @@
+<div class="standard-container">
+	<div class="error__message" ng-repeat="error in errors track by $index">
+		{{error.message}}
+	</div>
+
+	<div class="domain__button box--shadow" ng-repeat="page in pages track by $index">
+		<div class="row">
+			<div class="col-sm-12" style="position: relative; display: flex;">
+         <div class="flex-none" style="justify-content: flex-end; display: flex;" >
+          <div class="fifteen_left" ng-click="removePage(page, $index)"  style="text-align:right !important; position: relative;">
+             <i class="fa fa-times domain_card_action" ></i>
+          </div>
+        </div>
+      </div>
+		</div>
+		<div class="row vertical__center domain__icon" ng-click="selectPage(page)">
+			<div class="domain__logo vertical__center">
+					<img class="" src="{{domain.logoUrl}}" />
+			</div>
+		</div>
+		<div class="domain__title" ng-click="selectPage(page)">
+			<h6>
+					{{page.path || "home"}}
+			</h6>
+		</div>
+	</div>
+</div>
