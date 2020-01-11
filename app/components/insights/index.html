@@ -2,42 +2,44 @@
 	<div class="error__message" ng-repeat="error in errors track by $index">
 		{{error.message}}
 	</div>
-	<div class="row test" ng-repeat="audit in insight.audits track by $index" style="position: relative; display: flex;" ng-if="audit.scoreDisplayMode !== 'notApplicable' && audit.scoreDisplayMode !== 'manual'">
-    <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode === 'binary'">
-      <div class="insight-percent">
-        <span ng-show="audit.score == 1">
-          <i class="fa fa-check-circle green status--symbol"></i>
-        </span>
-        <span ng-show="audit.score == 0">
-          <i  class="fa fa-times-circle red status--symbol"></i>
-        </span>
+  <div class="row" ng-repeat="audit in insight.audits track by $index" style="position: relative; display: flex;" ng-if="audit.scoreDisplayMode !== 'notApplicable' && audit.scoreDisplayMode !== 'manual'">
+  	<div class="col-sm-12 test" >
+      <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode === 'binary'">
+        <div class="insight-percent">
+          <span ng-show="audit.score == 1">
+            <i class="fa fa-check-circle green status--symbol"></i>
+          </span>
+          <span ng-show="audit.score == 0">
+            <i  class="fa fa-times-circle red status--symbol"></i>
+          </span>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode !== 'binary' && audit.scoreDisplayMode !== 'informative'">
-      <md-progress-circular  class="insight-progress" md-mode="determinate" value="{{audit.score*100}}" ></md-progress-circular>
-      <div class="insight-percent">
-        {{audit.score*100 || 0 | number:0 }}%
+      <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode !== 'binary' && audit.scoreDisplayMode !== 'informative'">
+        <md-progress-circular  class="insight-progress" md-mode="determinate" value="{{audit.score*100}}" ></md-progress-circular>
+        <div class="insight-percent">
+          {{audit.score*100 || 0 | number:0 }}%
+        </div>
       </div>
-    </div>
-    <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode === 'informative'">
-      <i class="far fa-info-circle fa-3x insight-percent"></i>
-    </div>
+      <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode === 'informative'">
+        <i class="far fa-info-circle fa-3x insight-percent"></i>
+      </div>
 
-    <div class="col-sm-6 insight-audit" >
-      {{audit.name}}
-    </div>
+      <div class="col-sm-6 insight-audit" >
+        {{audit.name}}
+      </div>
 
-    <div class="col-sm-5 insight-audit">
-      {{audit.displayValue}}
-		</div>
-	</div>
+      <div class="col-sm-5 insight-audit">
+        {{audit.displayValue}}
+  		</div>
+  	</div>
 
-  <div ng-show="false">
-    <div class="col-sm-7" >
-     {{audit.title}}
-    </div>
-    <div >
-      {{audit.details}}
+    <div class="col-sm-12" ng-show="true">
+      <div class="col-sm-7" >
+       {{audit.title}}
+      </div>
+      <div >
+        {{audit.details}}
+      </div>
     </div>
   </div>
 </div>
