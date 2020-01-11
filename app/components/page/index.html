@@ -3,19 +3,22 @@
 		{{error.message}}
 	</div>
 
-	<div class="domain__button box--shadow" ng-repeat="page in pages track by $index">
+	<div class="domain__button box--shadow" ng-repeat="page in pages track by $index" ng-click="showInsights(page.key)">
 		<div class="row">
 			<div class="col-sm-12" style="position: relative; display: flex;">
-         <div class="flex-none" style="justify-content: flex-end; display: flex;" >
-          <div class="fifteen_left" ng-click="removePage(page, $index)"  style="text-align:right !important; position: relative;">
-             <i class="fa fa-times domain_card_action" ></i>
+        <div class="flex-none" style="justify-content: flex-end; display: flex;" >
+          <div class="fifteen_left"   style="text-align:right !important; position: relative;">
           </div>
         </div>
       </div>
 		</div>
 		<div class="row vertical__center domain__icon" ng-click="selectPage(page)">
 			<div class="domain__logo vertical__center">
-					<img class="" src="{{domain.logoUrl}}" />
+				<span ng-if="page.score >= 0.9"> A </span>
+        <span ng-if="page.score >= 0.8 && page.score < 0.9"> B </span>
+        <span ng-if="page.score >= 0.7 && page.score < 0.8"> C </span>
+        <span ng-if="page.score >= 0.6 && page.score < 0.7"> D </span>
+        <span ng-if="page.score < 0.6"> F </span>
 			</div>
 		</div>
 		<div class="domain__title" ng-click="selectPage(page)">
