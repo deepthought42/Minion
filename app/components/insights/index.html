@@ -3,14 +3,18 @@
 		{{error.message}}
 	</div>
 	<div class="row test" ng-repeat="audit in insight.audits track by $index" style="position: relative; display: flex;">
-    <div class="col-sm-2" >
-      {{audit.score}}
+    <div class="col-sm-1 insight-audit">
+      <md-progress-circular  class="insight-progress" md-mode="determinate" value="{{audit.score*100}}"></md-progress-circular>
+      <div class="insight-percent">
+        {{audit.score*100 || 0 | number:0 }}%
+      </div>
     </div>
-    <div class="col-sm-7" >
-     {{audit.id}}
+    
+    <div class="col-sm-6 insight-audit" >
+      {{audit.name}}
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm-5 insight-audit">
       {{audit.displayValue}}
 		</div>
 	</div>
