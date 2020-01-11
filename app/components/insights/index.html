@@ -2,26 +2,25 @@
 	<div class="error__message" ng-repeat="error in errors track by $index">
 		{{error.message}}
 	</div>
+	<div class="row test" ng-repeat="audit in insight.audits track by $index" style="position: relative; display: flex;">
+    <div class="col-sm-2" >
+      {{audit.score}}
+    </div>
+    <div class="col-sm-7" >
+     {{audit.id}}
+    </div>
 
-	<div class="domain__button box--shadow" ng-repeat="insight in insights track by $index">
-		<div class="row">
-			<div class="col-sm-12" style="position: relative; display: flex;">
-         <div class="flex-none" style="justify-content: flex-end; display: flex;" >
-          <div class="fifteen_left" ng-click="removePage(page, $index)"  style="text-align:right !important; position: relative;">
-             <i class="fa fa-times domain_card_action" ></i>
-          </div>
-        </div>
-      </div>
-		</div>
-		<div class="row vertical__center domain__icon" ng-click="selectPage(page)">
-			<div class="domain__logo vertical__center">
-					<img class="" src="{{domain.logoUrl}}" />
-			</div>
-		</div>
-		<div class="domain__title" ng-click="selectPage(page)">
-			<h6>
-					{{page.path || "home"}}
-			</h6>
+    <div class="col-sm-3">
+      {{audit.displayValue}}
 		</div>
 	</div>
+
+  <div ng-show="false">
+    <div class="col-sm-7" >
+     {{audit.title}}
+    </div>
+    <div >
+      {{audit.details}}
+    </div>
+  </div>
 </div>

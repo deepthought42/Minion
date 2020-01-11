@@ -24,7 +24,7 @@ angular.module('Qanairy.insights', ['ui.router', 'Qanairy.PageService'])
       Page.getInsights({page_key: $stateParams.page_key}).$promise.
         then(function(data){
           console.log("data returned");
-          $scope.insights = data;
+          $scope.insight = data;
         })
         .catch(function(err){
           console.log("error returned")
