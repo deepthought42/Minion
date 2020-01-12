@@ -5,7 +5,7 @@
 
   <h1><b>Performance</b></h1>
 
-  <div class="row" ng-repeat="audit in insight.audits | filter:{type:'PERFORMANCE'}" style="position: relative; display: flex;" ng-if="audit.scoreDisplayMode !== 'notApplicable' && audit.scoreDisplayMode !== 'manual'">
+  <div class="row" ng-repeat="audit in insight.audits | filter:{type:'PERFORMANCE', scoreDisplayMode: '!informative'}" style="position: relative; display: flex;" ng-if="audit.scoreDisplayMode !== 'notApplicable' && audit.scoreDisplayMode !== 'manual'">
   	<div class="col-sm-12 test" >
       <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode === 'binary'">
         <div class="insight-percent">
@@ -22,9 +22,6 @@
         <div class="insight-percent">
           {{audit.score*100 || 0 | number:0 }}%
         </div>
-      </div>
-      <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode === 'informative'">
-        <i class="far fa-info-circle fa-3x insight-percent"></i>
       </div>
 
       <div class="col-sm-5 insight-audit vertical__center" >
