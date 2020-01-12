@@ -2,7 +2,10 @@
 	<div class="error__message" ng-repeat="error in errors track by $index">
 		{{error.message}}
 	</div>
-  <div class="row" ng-repeat="audit in insight.audits track by $index" style="position: relative; display: flex;" ng-if="audit.scoreDisplayMode !== 'notApplicable' && audit.scoreDisplayMode !== 'manual'">
+
+  <h1><b>Performance</b></h1>
+
+  <div class="row" ng-repeat="audit in insight.audits | filter:{type:'PERFORMANCE'}" style="position: relative; display: flex;" ng-if="audit.scoreDisplayMode !== 'notApplicable' && audit.scoreDisplayMode !== 'manual'">
   	<div class="col-sm-12 test" >
       <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode === 'binary'">
         <div class="insight-percent">
@@ -24,21 +27,87 @@
         <i class="far fa-info-circle fa-3x insight-percent"></i>
       </div>
 
-      <div class="col-sm-6 insight-audit" >
+      <div class="col-sm-5 insight-audit vertical__center" >
         {{audit.name}}
       </div>
 
-      <div class="col-sm-5 insight-audit">
+      <div class="col-sm-5 insight-audit vertical__center">
         {{audit.displayValue}}
   		</div>
+
+      <div class="col-sm-1 insight-audit vertical__center" >
+        <i class="fas fa-tachometer-alt fa-2x" ng-if="audit.type==='PERFORMANCE'"></i>
+        <i class="fab fa-accessible-icon fa-2x" ng-if="audit.type==='ACCESSIBILITY'"></i>
+      </div>
   	</div>
 
-    <div class="col-sm-12" ng-show="true">
-      <div class="col-sm-7" >
+    <div class="col-sm-12 audit-details-container">
+      <div class="col-sm-12"  >
        {{audit.title}}
       </div>
-      <div >
-        {{audit.details}}
+      <div class="col-sm-12">
+        <div ng-repeat="header in audit.details.headers track by $index">
+            <b><u>{{ header }}</u></b>
+        </div>
+        <div ng-repeat="item in audit.details.items track by $index" ng-class-even="'even'" ng-class-odd="'odd'">
+          <div ng-repeat="(key, value) in item track by $index">
+            {{key}} : {{value}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1><b>Accessibility</b></h1>
+  <div class="row" ng-repeat="audit in insight.audits | filter:{type:'ACCESSIBILITY'}" style="position: relative; display: flex;" ng-if="audit.scoreDisplayMode !== 'notApplicable' && audit.scoreDisplayMode !== 'manual'">
+  	<div class="col-sm-12 test" >
+      <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode === 'binary'">
+        <div class="insight-percent">
+          <span ng-show="audit.score == 1">
+            <i class="fa fa-check-circle green status--symbol"></i>
+          </span>
+          <span ng-show="audit.score == 0">
+            <i  class="fa fa-times-circle red status--symbol"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode !== 'binary' && audit.scoreDisplayMode !== 'informative'">
+        <md-progress-circular  class="insight-progress" md-mode="determinate" value="{{audit.score*100}}" ></md-progress-circular>
+        <div class="insight-percent">
+          {{audit.score*100 || 0 | number:0 }}%
+        </div>
+      </div>
+      <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode === 'informative'">
+        <i class="far fa-info-circle fa-3x insight-percent"></i>
+      </div>
+
+      <div class="col-sm-5 insight-audit vertical__center" >
+        {{audit.name}}
+      </div>
+
+      <div class="col-sm-5 insight-audit vertical__center">
+        {{audit.displayValue}}
+  		</div>
+
+      <div class="col-sm-1 insight-audit vertical__center" >
+        <i class="fas fa-tachometer-alt fa-2x" ng-if="audit.type==='PERFORMANCE'"></i>
+        <i class="fab fa-accessible-icon fa-2x" ng-if="audit.type==='ACCESSIBILITY'"></i>
+      </div>
+  	</div>
+
+    <div class="col-sm-12 audit-details-container">
+      <div class="col-sm-12"  >
+       {{audit.title}}
+      </div>
+      <div class="col-sm-12">
+        <div ng-repeat="header in audit.details.headers track by $index">
+            <b><u>{{ header }}</u></b>
+        </div>
+        <div ng-repeat="item in audit.details.items track by $index" ng-class-even="'even'" ng-class-odd="'odd'">
+          <div ng-repeat="(key, value) in item track by $index">
+            {{key}} : {{value}}
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -427,6 +427,19 @@ width: calc(100% - 70px);
   transform: translate(-50%, -50%);
 }
 
+.insight-percent{
+  position:absolute;
+  top: 50%;
+  left: 50%;
+	color: #6649e4;
+	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+	font-weight: 450 !important;
+	letter-spacing: .5px;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+}
+
 .waiting_text{
 	display: inline-block;
 	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -679,3 +692,18 @@ md-progress-linear .md-accent .md-dashed:before {
 }
 
 /*--------------------------- [5. footer] ------------------------------------------------------------------------------*/
+
+
+.even {
+  background: #EAEFFF;
+}
+
+.odd {
+  background: yellow;
+}
+
+/* ----------------- Audit details -----------------------------*/
+.audit-details-container {
+  border-style: solid;
+  border-width: 1px;
+}
