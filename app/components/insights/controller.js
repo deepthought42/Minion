@@ -25,6 +25,18 @@ angular.module('Qanairy.insights', ['ui.router', 'Qanairy.PageService'])
         then(function(data){
           console.log("data returned");
           $scope.insight = data;
+
+          $scope.insight.audits.forEach(function(part, index) {
+            var details = JSON.stringify(this[index].details).replace('\\"', '');
+            details = JSON.parse(details);
+            if(details.headers !== undefined){
+              details.headers = JSON.parse(details.headers);
+            }
+            if(details.items !== undefined){
+              details.items = JSON.parse(details.items);
+            }
+            this[index].details = details;
+          }, $scope.insight.audits);
         })
         .catch(function(err){
           console.log("error returned")
