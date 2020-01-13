@@ -14,11 +14,17 @@
 		</div>
 		<div class="row vertical__center domain__icon" ng-click="selectPage(page)">
 			<div class="domain__logo vertical__center">
-				<span ng-if="page.score >= 0.9"> A </span>
-        <span ng-if="page.score >= 0.8 && page.score < 0.9"> B </span>
-        <span ng-if="page.score >= 0.7 && page.score < 0.8"> C </span>
-        <span ng-if="page.score >= 0.6 && page.score < 0.7"> D </span>
-        <span ng-if="page.score < 0.6"> F </span>
+        <div class="col-sm-1 insight-audit">
+          <md-progress-circular  class="insight-progress" md-mode="determinate" value="{{page.score*100}}" ></md-progress-circular>
+          <div class="insight-percent">
+            <span ng-if="page.score >= 0.9"> A </span>
+            <span ng-if="page.score >= 0.8 && page.score < 0.9"> B </span>
+            <span ng-if="page.score >= 0.7 && page.score < 0.8"> C </span>
+            <span ng-if="page.score >= 0.6 && page.score < 0.7"> D </span>
+            <span ng-if="page.score >= 0.5 && page.score < 0.6"> E </span>
+            <span ng-if="page.score < 0.5"> F </span>
+          </div>
+        </div>
 			</div>
 		</div>
 		<div class="domain__title" ng-click="selectPage(page)">

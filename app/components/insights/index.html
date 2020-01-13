@@ -34,7 +34,7 @@
 
       <div class="col-sm-1 insight-audit vertical__center" >
         <i class="fas fa-tachometer-alt fa-2x" ng-if="audit.type==='PERFORMANCE'"></i>
-        <i class="fab fa-accessible-icon fa-2x" ng-if="audit.type==='ACCESSIBILITY'"></i>
+        <i class="fal fa-universal-access fa-2x" ng-if="audit.type==='ACCESSIBILITY'"></i>
       </div>
   	</div>
 
@@ -47,8 +47,35 @@
             <b><u>{{ header }}</u></b>
         </div>
         <div ng-repeat="item in audit.details.items track by $index" ng-class-even="'even'" ng-class-odd="'odd'">
-          <div ng-repeat="(key, value) in item track by $index">
-            {{key}} : {{value}}
+
+          <div ng-if="audit.name === 'font-display'">
+            <div class="col-sm-9">
+              {{item.url}}
+            </div>
+            <div class="col-sm-3 pull-right">
+              {{item.wastedMs | number:0}} ms
+            </div>
+          </div>
+
+          <div ng-if="audit.name === 'unminified-css' || audit.name === 'unused-css-rules'">
+            <div class="col-sm-6">
+              {{item.url}}
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{item.wastedBytes | number:0}} bytes
+            </div>
+            <div class="col-sm-2 pull-right">
+              {{item.wastedPercent | number:0}} % wasted
+            </div>
+            <div class="col-sm-2 pull-right">
+              {{item.totalBytes | number:0}} bytes
+            </div>
+          </div>
+
+          <div ng-if="audit.name != 'font-display' && audit.name != 'unminified-css' && audit.name != 'unused-css-rules'">
+            <div ng-repeat="(key, value) in item track by $index">
+              {{key}} : {{value}}
+            </div>
           </div>
         </div>
       </div>
@@ -88,7 +115,7 @@
 
       <div class="col-sm-1 insight-audit vertical__center" >
         <i class="fas fa-tachometer-alt fa-2x" ng-if="audit.type==='PERFORMANCE'"></i>
-        <i class="fab fa-accessible-icon fa-2x" ng-if="audit.type==='ACCESSIBILITY'"></i>
+        <i class="fal fa-universal-access fa-2x" ng-if="audit.type==='ACCESSIBILITY'"></i>
       </div>
   	</div>
 
