@@ -18,17 +18,17 @@
         </div>
       </div>
       <div class="col-sm-1 insight-audit" ng-if="audit.scoreDisplayMode !== 'binary' && audit.scoreDisplayMode !== 'informative'">
-        <md-progress-circular  class="insight-progress" md-mode="determinate" value="{{audit.score*100}}" ></md-progress-circular>
+        <md-progress-circular ng-class="getColorClass(audit.score)" class="insight-progress" md-mode="determinate" value="{{audit.score*100}}" ></md-progress-circular>
         <div class="insight-percent">
           {{audit.score*100 || 0 | number:0 }}%
         </div>
       </div>
 
-      <div class="col-sm-5 insight-audit vertical__center" >
-        {{audit.name}}
+      <div class="col-sm-7 insight-audit vertical__left" >
+        {{audit.title}}
       </div>
 
-      <div class="col-sm-5 insight-audit vertical__center">
+      <div class="col-sm-3 insight-audit vertical__left">
         {{audit.displayValue}}
   		</div>
 
@@ -40,7 +40,7 @@
 
     <div class="col-sm-12 audit-details-container">
       <div class="col-sm-12"  >
-       {{audit.title}}
+       {{audit.description}}
       </div>
       <div class="col-sm-12">
         <div ng-repeat="header in audit.details.headers track by $index">
@@ -48,16 +48,21 @@
         </div>
         <div ng-repeat="item in audit.details.items track by $index" ng-class-even="'even'" ng-class-odd="'odd'">
 
-          <div ng-if="audit.name === 'font-display'">
+          <div ng-if="audit.name === 'font-display' || audit.name === 'render-blocking-resources'">
             <div class="col-sm-9">
               {{item.url}}
             </div>
-            <div class="col-sm-3 pull-right">
+            <div class="col-sm-2 pull-right">
               {{item.wastedMs | number:0}} ms
+            </div>
+            <div ng-if="item.wastedBytes" class="col-sm-1 pull-right">
+              {{item.wastedBytes | number:0}} bytes
+            </div>
+            <div ng-if="!item.wastedBytes" class="col-sm-1">
             </div>
           </div>
 
-          <div ng-if="audit.name === 'unminified-css' || audit.name === 'unused-css-rules'">
+          <div ng-if="audit.name === 'unminified-css' || audit.name === 'unused-css-rules' || audit.name === 'uses-responsive-images'">
             <div class="col-sm-6">
               {{item.url}}
             </div>
@@ -72,11 +77,79 @@
             </div>
           </div>
 
-          <div ng-if="audit.name != 'font-display' && audit.name != 'unminified-css' && audit.name != 'unused-css-rules'">
+          <div ng-if="audit.name === 'uses-long-cache-ttl'">
+            <div class="col-sm-5">
+              {{item.url}}
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{item.wastedBytes | number:0}} bytes
+            </div>
+            <div class="col-sm-1 pull-left">
+              {{item.totalBytes | number:0}} bytes
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{item.cacheLifetimeMs | number:0}}
+            </div>
+            <div class="col-sm-2 pull-right">
+              {{item.cacheHitProbability*100 | number:0}} %
+            </div>
+          </div>
+
+          <div ng-if="audit.name === 'total-byte-weight'">
+            <div class="col-sm-10">
+              {{item.url}}
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{item.totalBytes | number:0}} bytes
+            </div>
+          </div>
+
+          <div ng-if="audit.name === 'uses-webp-images'">
+            <div class="col-sm-7">
+              {{item.url}}
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{item.wastedBytes | number:0}} bytes
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{item.totalBytes | number:0}} bytes
+            </div>
+            <div class="col-sm-1 pull-left">
+              {{item.isCrossOrigin}}
+            </div>
+          </div>
+
+          <div ng-if="audit.name === 'uses-webp-images'">
+            <div class="col-sm-7">
+              {{item.url}}
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{item.wastedBytes | number:0}} bytes
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{item.totalBytes | number:0}} bytes
+            </div>
+            <div class="col-sm-1 pull-left">
+              {{item.isCrossOrigin}}
+            </div>
+          </div>
+
+          <div ng-if="audit.name === 'mainthread-work-breakdown'">
+            <div class="col-sm-10">
+              {{item.groupLabel}}
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{item.duration | number:0}} ms
+            </div>
+          </div>
+
+
+          <div ng-if="audit.name != 'font-display' && audit.name != 'unminified-css' && audit.name != 'unused-css-rules' && audit.name != 'uses-long-cache-ttl' && audit.name != 'total-byte-weight' && audit.name != 'uses-responsive-images' && audit.name != 'render-blocking-resources' && audit.name != 'uses-webp-images' && audit.name != 'mainthread-work-breakdown'">
             <div ng-repeat="(key, value) in item track by $index">
               {{key}} : {{value}}
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -105,11 +178,11 @@
         <i class="far fa-info-circle fa-3x insight-percent"></i>
       </div>
 
-      <div class="col-sm-5 insight-audit vertical__center" >
-        {{audit.name}}
+      <div class="col-sm-5 insight-audit vertical__left" >
+        {{audit.title}}
       </div>
 
-      <div class="col-sm-5 insight-audit vertical__center">
+      <div class="col-sm-5 insight-audit vertical__left">
         {{audit.displayValue}}
   		</div>
 
@@ -121,7 +194,7 @@
 
     <div class="col-sm-12 audit-details-container">
       <div class="col-sm-12"  >
-       {{audit.title}}
+       {{audit.description}}
       </div>
       <div class="col-sm-12">
         <div ng-repeat="header in audit.details.headers track by $index">

@@ -167,12 +167,28 @@ html {
   color: white !important;
 }
 
-.green{
-  color: #43a047 !important;
+.green {
+  color: #43a047;
 }
 
-.red{
-  color: #e53935 !important;
+.red {
+  color: #e53935;
+}
+
+md-progress-circular.green svg path {
+  stroke: #43a047;
+}
+
+md-progress-circular.red svg path {
+  stroke: #e53935;
+}
+
+md-progress-circular.orange svg path {
+  stroke: #F9AA0C;
+}
+
+md-progress-circular.yellow svg path {
+  stroke: #ffef00;
 }
 
 .text--shadow{

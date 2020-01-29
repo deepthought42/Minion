@@ -34,5 +34,20 @@ angular.module('Qanairy.page', ['ui.router', 'Qanairy.DomainService', 'Qanairy.i
         page_key: page_key
       });
     }
+
+    $scope.getColorClass = function(score){
+      if(score >= 0.85){
+        return 'green';
+      }
+      else if(score >= 0.7 && score < 0.85 ){
+        return 'yellow';
+      }
+      else if(score >= 0.5 && score < 0.7 ){
+        return 'orange';
+      }
+      else {
+        return 'red';
+      }
+    }
   }
 ]);

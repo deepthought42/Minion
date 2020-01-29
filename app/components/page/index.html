@@ -25,41 +25,24 @@
         </div>
       </div>
 			<div class="col-sm-12 domain__logo vertical__center">
-        <div class="col-sm-4 insight-audit">
-          <md-progress-circular  class="insight-progress" md-mode="determinate" value="{{page.performanceScore*100}}" ></md-progress-circular>
+        <div class="col-sm-4 insight-audit" >
+          <md-progress-circular  ng-class="getColorClass(page.performanceScore)" class="insight-progress" md-mode="determinate" value="{{page.performanceScore*100}}" ></md-progress-circular>
           <div class="insight-percent">
-            <span ng-if="page.performanceScore >= 0.9"> A </span>
-            <span ng-if="page.performanceScore >= 0.8 && page.performanceScore < 0.9"> B </span>
-            <span ng-if="page.performanceScore >= 0.7 && page.performanceScore < 0.8"> C </span>
-            <span ng-if="page.performanceScore >= 0.6 && page.performanceScore < 0.7"> D </span>
-            <span ng-if="page.performanceScore >= 0.5 && page.performanceScore < 0.6"> E </span>
-            <span ng-if="page.performanceScore < 0.5"> F </span>
+            <span > {{page.performanceScore * 100}} </span>
           </div>
-
         </div>
 
         <div class="col-sm-4 insight-audit">
-          <md-progress-circular  class="insight-progress" md-mode="determinate" value="{{page.accessibilityScore*100}}" ></md-progress-circular>
+          <md-progress-circular ng-class="getColorClass(page.accessibilityScore)" class="insight-progress" md-mode="determinate" value="{{page.accessibilityScore*100}}" ></md-progress-circular>
           <div class="insight-percent">
-            <span ng-if="page.accessibilityScore >= 0.9"> A </span>
-            <span ng-if="page.accessibilityScore >= 0.8 && page.accessibilityScore < 0.9"> B </span>
-            <span ng-if="page.accessibilityScore >= 0.7 && page.accessibilityScore < 0.8"> C </span>
-            <span ng-if="page.accessibilityScore >= 0.6 && page.accessibilityScore < 0.7"> D </span>
-            <span ng-if="page.accessibilityScore >= 0.5 && page.accessibilityScore < 0.6"> E </span>
-            <span ng-if="page.accessibilityScore < 0.5"> F </span>
+            <span > {{page.accessibilityScore * 100}} </span>
           </div>
-
         </div>
 
         <div class="col-sm-4 insight-audit">
-          <md-progress-circular  class="insight-progress" md-mode="determinate" value="{{page.seoScore*100}}" ></md-progress-circular>
+          <md-progress-circular  ng-class="getColorClass(page.seoScore)" class="insight-progress" md-mode="determinate" value="{{page.seoScore*100}}" ></md-progress-circular>
           <div class="insight-percent">
-            <span ng-if="page.seoScore >= 0.9"> A </span>
-            <span ng-if="page.seoScore >= 0.8 && page.seoScore < 0.9"> B </span>
-            <span ng-if="page.seoScore >= 0.7 && page.seoScore < 0.8"> C </span>
-            <span ng-if="page.seoScore >= 0.6 && page.seoScore < 0.7"> D </span>
-            <span ng-if="page.seoScore >= 0.5 && page.seoScore < 0.6"> E </span>
-            <span ng-if="page.seoScore < 0.5"> F </span>
+            <span > {{page.seoScore * 100}} </span>
           </div>
         </div>
 			</div>

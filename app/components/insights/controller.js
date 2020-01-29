@@ -45,5 +45,20 @@ angular.module('Qanairy.insights', ['ui.router', 'Qanairy.PageService'])
     };
 
     this._init();
+
+    $scope.getColorClass = function(score){
+      if(score >= 0.85){
+        return 'green';
+      }
+      else if(score >= 0.7 && score < 0.85 ){
+        return 'yellow';
+      }
+      else if(score >= 0.5 && score < 0.7 ){
+        return 'orange';
+      }
+      else {
+        return 'red';
+      }
+    }
   }
 ]);
