@@ -29,11 +29,13 @@ angular.module('Qanairy.insights', ['ui.router', 'Qanairy.PageService'])
           $scope.insight.audits.forEach(function(part, index) {
             var details = JSON.stringify(this[index].details).replace('\\"', '');
             details = JSON.parse(details);
-            if(details.headers !== undefined){
-              details.headers = JSON.parse(details.headers);
-            }
-            if(details.items !== undefined){
-              details.items = JSON.parse(details.items);
+            if(details != null){
+              if(details.headers !== undefined){
+                details.headers = JSON.parse(details.headers);
+              }
+              if(details.items !== undefined){
+                details.items = JSON.parse(details.items);
+              }
             }
             this[index].details = details;
           }, $scope.insight.audits);
@@ -58,6 +60,25 @@ angular.module('Qanairy.insights', ['ui.router', 'Qanairy.PageService'])
       }
       else {
         return 'red';
+      }
+    }
+
+    $scope.formatBytes = function(bytes){
+      if(bytes < 1024){
+        return Math.trunc(bytes) + " Bytes";
+      }
+      else if(bytes >= 1024  && bytes < (1024*1024)){
+        //kilobytes
+        return Math.trunc((bytes/1024)) + " KB";
+      }
+      else if(bytes >= (1024*1024)  && bytes < (1024*1024*1024)){
+        //megabytes
+        return Math.trunc((bytes/1024)/1024) + " MB";
+
+      }
+      else if(bytes >= (1024*1024*1024)  && bytes < (1024*1024*1024*1024)){
+        //gigabytes
+        return Math.trunc(((bytes/1024)/1024)/1024) + " GB";
       }
     }
   }

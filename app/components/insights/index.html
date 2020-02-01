@@ -46,7 +46,7 @@
         <div ng-repeat="header in audit.details.headers track by $index">
             <b><u>{{ header }}</u></b>
         </div>
-        <div ng-repeat="item in audit.details.items track by $index" ng-class-even="'even'" ng-class-odd="'odd'">
+        <div ng-repeat="item in audit.details track by $index" ng-class-even="'even'" ng-class-odd="'odd'">
 
           <div ng-if="audit.name === 'font-display' || audit.name === 'render-blocking-resources'">
             <div class="col-sm-9">
@@ -56,7 +56,7 @@
               {{item.wastedMs | number:0}} ms
             </div>
             <div ng-if="item.wastedBytes" class="col-sm-1 pull-right">
-              {{item.wastedBytes | number:0}} bytes
+              {{formatBytes(item.wastedBytes)}}
             </div>
             <div ng-if="!item.wastedBytes" class="col-sm-1">
             </div>
@@ -67,31 +67,40 @@
               {{item.url}}
             </div>
             <div class="col-sm-2 pull-left">
-              {{item.wastedBytes | number:0}} bytes
+              {{formatBytes(item.wastedBytes)}}
             </div>
             <div class="col-sm-2 pull-right">
               {{item.wastedPercent | number:0}} % wasted
             </div>
             <div class="col-sm-2 pull-right">
-              {{item.totalBytes | number:0}} bytes
+              {{formatBytes(item.totalBytes)}}
             </div>
           </div>
 
           <div ng-if="audit.name === 'uses-long-cache-ttl'">
-            <div class="col-sm-5">
+            <div class="col-sm-8">
               {{item.url}}
             </div>
-            <div class="col-sm-2 pull-left">
-              {{item.wastedBytes | number:0}} bytes
+            <div class="col-sm-1 pull-left">
+              {{formatBytes(item.wastedBytes)}}
             </div>
             <div class="col-sm-1 pull-left">
-              {{item.totalBytes | number:0}} bytes
+              {{formatBytes(item.totalBytes)}}
             </div>
-            <div class="col-sm-2 pull-left">
+            <div class="col-sm-1 pull-left">
               {{item.cacheLifetimeMs | number:0}}
             </div>
-            <div class="col-sm-2 pull-right">
+            <div class="col-sm-1 pull-right">
               {{item.cacheHitProbability*100 | number:0}} %
+            </div>
+          </div>
+
+          <div ng-if="audit.name === 'dom-size'">
+            <div class="col-sm-9">
+              {{item.statistic}}
+            </div>
+            <div class="col-sm-3 pull-left">
+              {{item.value}}
             </div>
           </div>
 
@@ -100,7 +109,7 @@
               {{item.url}}
             </div>
             <div class="col-sm-2 pull-left">
-              {{item.totalBytes | number:0}} bytes
+              {{formatBytes(item.totalBytes)}}
             </div>
           </div>
 
@@ -109,28 +118,43 @@
               {{item.url}}
             </div>
             <div class="col-sm-2 pull-left">
-              {{item.wastedBytes | number:0}} bytes
+              {{formatBytes(item.wastedBytes)}}
             </div>
             <div class="col-sm-2 pull-left">
-              {{item.totalBytes | number:0}} bytes
+              {{formatBytes(item.totalBytes)}}
             </div>
             <div class="col-sm-1 pull-left">
               {{item.isCrossOrigin}}
             </div>
           </div>
 
-          <div ng-if="audit.name === 'uses-webp-images'">
-            <div class="col-sm-7">
+          <div ng-if="audit.name === 'third-party-summary'">
+            <div class="col-sm-6">
+              <a href="{{item.entity.url}}" target="_blank">{{item.entity.text}}</a>
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{item.mainThreadTime | number:0}} ms
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{item.blockingTime | number:0}} ms
+            </div>
+            <div class="col-sm-2 pull-left">
+              {{formatBytes(item.transferSize)}}
+            </div>
+          </div>
+
+          <div ng-if="audit.name === 'bootup-time'">
+            <div class="col-sm-6">
               {{item.url}}
             </div>
             <div class="col-sm-2 pull-left">
-              {{item.wastedBytes | number:0}} bytes
+              {{item.scriptLoadTime | number:1}} ms
             </div>
             <div class="col-sm-2 pull-left">
-              {{item.totalBytes | number:0}} bytes
+              {{item.scriptParseTime | number:1}} ms
             </div>
-            <div class="col-sm-1 pull-left">
-              {{item.isCrossOrigin}}
+            <div class="col-sm-2 pull-left">
+              {{item.totalTime | number:1}} ms
             </div>
           </div>
 
@@ -144,7 +168,7 @@
           </div>
 
 
-          <div ng-if="audit.name != 'font-display' && audit.name != 'unminified-css' && audit.name != 'unused-css-rules' && audit.name != 'uses-long-cache-ttl' && audit.name != 'total-byte-weight' && audit.name != 'uses-responsive-images' && audit.name != 'render-blocking-resources' && audit.name != 'uses-webp-images' && audit.name != 'mainthread-work-breakdown'">
+          <div ng-if="audit.name != 'dom-size' && audit.name != 'bootup-time' && audit.name != 'font-display' && audit.name != 'unminified-css' && audit.name != 'unused-css-rules' && audit.name != 'uses-long-cache-ttl' && audit.name != 'total-byte-weight' && audit.name != 'uses-responsive-images' && audit.name != 'render-blocking-resources' && audit.name != 'uses-webp-images' && audit.name != 'mainthread-work-breakdown' &&  audit.name != 'third-party-summary'">
             <div ng-repeat="(key, value) in item track by $index">
               {{key}} : {{value}}
             </div>
@@ -200,9 +224,20 @@
         <div ng-repeat="header in audit.details.headers track by $index">
             <b><u>{{ header }}</u></b>
         </div>
-        <div ng-repeat="item in audit.details.items track by $index" ng-class-even="'even'" ng-class-odd="'odd'">
-          <div ng-repeat="(key, value) in item track by $index">
-            {{key}} : {{value}}
+        <div ng-repeat="item in audit.details track by $index" ng-class-even="'even'" ng-class-odd="'odd'">
+          <div>
+            <div class="col-sm-4">
+              <img src="{{item.element.screenshot}}" style="height:50px"/>
+            </div>
+            <div class="col-sm-8">
+              {{item.element.xpath}}
+            </div>
+          </div>
+          <div ng-repeat="message in item.optionalChangeMessages" class="col-sm-12">
+            {{message}}
+          </div>
+          <div ng-repeat="message in item.requiredChangeMessages" class="col-sm-12">
+            {{message}}
           </div>
         </div>
       </div>
