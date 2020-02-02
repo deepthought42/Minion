@@ -695,11 +695,11 @@ md-progress-linear .md-accent .md-dashed:before {
 
 
 .even {
-  background: #EAEFFF;
+  background: #E6E3FF;
 }
 
 .odd {
-  background: white;
+  background: #f4f2ff;
 }
 
 /* ----------------- Audit details -----------------------------*/

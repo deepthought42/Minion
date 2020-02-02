@@ -46,9 +46,9 @@
         <div ng-repeat="header in audit.details.headers track by $index">
             <b><u>{{ header }}</u></b>
         </div>
-        <div ng-repeat="item in audit.details track by $index" ng-class-even="'even'" ng-class-odd="'odd'">
+        <div ng-repeat="item in audit.details track by $index" ng-class-even="'even'" ng-class-odd="'odd'" class="row">
 
-          <div ng-if="audit.name === 'font-display' || audit.name === 'render-blocking-resources'">
+          <div ng-if="audit.name === 'font-display' || audit.name === 'render-blocking-resources'" class="col-sm-12">
             <div class="col-sm-9">
               {{item.url}}
             </div>
@@ -62,7 +62,7 @@
             </div>
           </div>
 
-          <div ng-if="audit.name === 'unminified-css' || audit.name === 'unused-css-rules' || audit.name === 'uses-responsive-images'">
+          <div ng-if="audit.name === 'unminified-css' || audit.name === 'unused-css-rules' || audit.name === 'uses-responsive-images'"  class="col-sm-12">
             <div class="col-sm-6">
               {{item.url}}
             </div>
@@ -77,7 +77,7 @@
             </div>
           </div>
 
-          <div ng-if="audit.name === 'uses-long-cache-ttl'">
+          <div ng-if="audit.name === 'uses-long-cache-ttl'"  class="col-sm-12">
             <div class="col-sm-8">
               {{item.url}}
             </div>
@@ -95,7 +95,7 @@
             </div>
           </div>
 
-          <div ng-if="audit.name === 'dom-size'">
+          <div ng-if="audit.name === 'dom-size'"  class="col-sm-12">
             <div class="col-sm-9">
               {{item.statistic}}
             </div>
@@ -104,7 +104,7 @@
             </div>
           </div>
 
-          <div ng-if="audit.name === 'total-byte-weight'">
+          <div ng-if="audit.name === 'total-byte-weight'"  class="col-sm-12">
             <div class="col-sm-10">
               {{item.url}}
             </div>
@@ -113,7 +113,7 @@
             </div>
           </div>
 
-          <div ng-if="audit.name === 'uses-webp-images'">
+          <div ng-if="audit.name === 'uses-webp-images'" class="col-sm-12">
             <div class="col-sm-7">
               {{item.url}}
             </div>
@@ -128,7 +128,7 @@
             </div>
           </div>
 
-          <div ng-if="audit.name === 'third-party-summary'">
+          <div ng-if="audit.name === 'third-party-summary'" class="col-sm-12">
             <div class="col-sm-6">
               <a href="{{item.entity.url}}" target="_blank">{{item.entity.text}}</a>
             </div>
@@ -143,7 +143,7 @@
             </div>
           </div>
 
-          <div ng-if="audit.name === 'bootup-time'">
+          <div ng-if="audit.name === 'bootup-time'" class="col-sm-12">
             <div class="col-sm-6">
               {{item.url}}
             </div>
@@ -158,7 +158,7 @@
             </div>
           </div>
 
-          <div ng-if="audit.name === 'mainthread-work-breakdown'">
+          <div ng-if="audit.name === 'mainthread-work-breakdown'" class="col-sm-12">
             <div class="col-sm-10">
               {{item.groupLabel}}
             </div>
@@ -168,7 +168,7 @@
           </div>
 
 
-          <div ng-if="audit.name != 'dom-size' && audit.name != 'bootup-time' && audit.name != 'font-display' && audit.name != 'unminified-css' && audit.name != 'unused-css-rules' && audit.name != 'uses-long-cache-ttl' && audit.name != 'total-byte-weight' && audit.name != 'uses-responsive-images' && audit.name != 'render-blocking-resources' && audit.name != 'uses-webp-images' && audit.name != 'mainthread-work-breakdown' &&  audit.name != 'third-party-summary'">
+          <div  class="col-sm-12" ng-if="audit.name != 'dom-size' && audit.name != 'bootup-time' && audit.name != 'font-display' && audit.name != 'unminified-css' && audit.name != 'unused-css-rules' && audit.name != 'uses-long-cache-ttl' && audit.name != 'total-byte-weight' && audit.name != 'uses-responsive-images' && audit.name != 'render-blocking-resources' && audit.name != 'uses-webp-images' && audit.name != 'mainthread-work-breakdown' &&  audit.name != 'third-party-summary'">
             <div ng-repeat="(key, value) in item track by $index">
               {{key}} : {{value}}
             </div>
@@ -224,12 +224,12 @@
         <div ng-repeat="header in audit.details.headers track by $index">
             <b><u>{{ header }}</u></b>
         </div>
-        <div ng-repeat="item in audit.details track by $index" ng-class-even="'even'" ng-class-odd="'odd'">
-          <div>
-            <div class="col-sm-4">
+        <div ng-repeat="item in audit.details track by $index" ng-class-even="'even'" ng-class-odd="'odd'" class="row">
+          <div class="col-sm-12">
+            <div class="col-sm-8">
               <img src="{{item.element.screenshot}}" style="height:50px"/>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-4">
               {{item.element.xpath}}
             </div>
           </div>
