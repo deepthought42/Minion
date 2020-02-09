@@ -121,12 +121,14 @@
               </button>
             </div>
              <div class="expandable_path_toggle">
-               <div ng-if="current_node.type == 'ElementState' || current_node.type == 'Action'"
+               <div ng-if="(current_node.type == 'ElementState' || current_node.type == 'Action' )"
                     class="flex-auto vertical__center__int"
                     style="margin:0px auto; height: 100% !important;" >
+
                  <img data-toggle="modal" data-target="#exampleModal"
-                      src="{{current_node.screenshot}}"/>
+                      src="{{current_node.screenshotUrl}}"/>
                </div>
+
                <!-- path screenshot panel -->
                <expandable-path-toggle path="preview_path"
                                       path-idx="current_path_idx"
